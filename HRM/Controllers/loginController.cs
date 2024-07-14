@@ -35,11 +35,12 @@ namespace HRM.Controllers
         public List<ReturnUserModelHead> login(LogdataModel logdata)
         {
 
-            List<ReturnUserModel> objUserSList = new List<ReturnUserModel>();
             List<ReturnUserModelHead> objUserHeadList = new List<ReturnUserModelHead>();
 
             try
             {
+                return new List<ReturnUserModelHead>();
+
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, logdata);
 
                 objUserHeadList = login_BL.login(logdata);
