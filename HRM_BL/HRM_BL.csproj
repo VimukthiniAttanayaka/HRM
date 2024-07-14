@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="BusinessUnit_BL.cs" />
+    <Compile Remove="ContainerDT_BL.cs" />
+    <Compile Remove="Container_BL.cs" />
+    <Compile Remove="DayEndProcess_BL.cs" />
+    <Compile Remove="DeliveryCourierCompany_BL.cs" />
+    <Compile Remove="DepartmentDevicebox_BL.cs" />
+    <Compile Remove="DepartmentPaymentChargeCode_BL.cs" />
+    <Compile Remove="DeviceType_BL.cs" />
+    <Compile Remove="Device_BL.cs" />
+    <Compile Remove="KioskVendor_BL.cs" />
+    <Compile Remove="MailTracker_BL.cs" />
+    <Compile Remove="MailTypeController.cs" />
+    <Compile Remove="MailType_BL.cs" />
+    <Compile Remove="OutgoingMailExceptionHandling_BL.cs" />
+    <Compile Remove="PCCode_BL.cs" />
+    <Compile Remove="Process_BL.cs" />
+    <Compile Remove="Recieve_BL.cs" />
+    <Compile Remove="SystemParameterController.cs" />
+    <Compile Remove="SystemsSettingsController.cs" />
+    <Compile Remove="UserController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\error_handler\error_handler.csproj" />
+    <ProjectReference Include="..\HRM_DAL\HRM_DAL.csproj" />
+    <ProjectReference Include="..\utility_handler_core\utility_handler_core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,137 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+<ItemGroup>
+    <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
+    <PackageReference Include="IronXL.Excel" Version="2024.6.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1001" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.6" />
+    <PackageReference Include="System.Data.OleDb" Version="7.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="FilePathReference_Processing_ItemLevel_Local\**" />
+    <Compile Remove="GeneratedPDF\**" />
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="FilePathReference_Processing_ItemLevel_Local\**" />
+    <EmbeddedResource Remove="GeneratedPDF\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="FilePathReference_Processing_ItemLevel_Local\**" />
+    <None Remove="GeneratedPDF\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\BusinessUnit_Data.cs" />
+    <Compile Remove="Data\ContainerDT_Data.cs" />
+    <Compile Remove="Data\Container_Data.cs" />
+    <Compile Remove="Data\DayEndProcess_Data.cs" />
+    <Compile Remove="Data\DeliveryCourierCompany_Data.cs" />
+    <Compile Remove="Data\DepartmentDevicebox_Data.cs" />
+    <Compile Remove="Data\DepartmentPaymentChargeCode_Data.cs" />
+    <Compile Remove="Data\DeviceTypeController.cs" />
+    <Compile Remove="Data\DeviceType_Data.cs" />
+    <Compile Remove="Data\Device_Data.cs" />
+    <Compile Remove="Data\DropDownController.cs" />
+    <Compile Remove="Data\KioskVendorMasterController.cs" />
+    <Compile Remove="Data\KioskVendor_Data.cs" />
+    <Compile Remove="Data\LocationController.cs" />
+    <Compile Remove="Data\MailTracker_Data.cs" />
+    <Compile Remove="Data\MailTypeController.cs" />
+    <Compile Remove="Data\mailtype_Data.cs" />
+    <Compile Remove="Data\OutgoingMailExceptionHandling_Data.cs" />
+    <Compile Remove="Data\PCCode_Data.cs" />
+    <Compile Remove="Data\Process_Data.cs" />
+    <Compile Remove="Data\Recieve_Data.cs" />
+    <Compile Remove="Data\user_Data - Copy.cs" />
+    <Compile Remove="Utility\IntegrationContext.cs" />
+    <Compile Remove="Utility\Misc.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\AuthenticateModel.cs" />
+    <Compile Include="Models\CustomerDepartment.cs" />
+    <Compile Include="Models\CustomerLocation.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\DashboardModel.cs" />
+    <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\DepartmentData.cs" />
+    <Compile Include="Models\DepartmentDto.cs" />
+    <Compile Include="Models\DepartmentModel.cs" />
+    <Compile Include="Models\DropDownModel.cs" />
+    <Compile Include="Models\EnquiryModel.cs" />
+    <Compile Include="Models\ExcelUploadsModel.cs" />
+    <Compile Include="Models\ExceptionsModel.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\LocationDto.cs" />
+    <Compile Include="Models\LocationModel.cs" />
+    <Compile Include="Models\ReponceModels\HRM_ReturnResponce.cs" />
+    <Compile Include="Models\ReponceModels\HRMToken.cs" />
+    <Compile Include="Models\ReponceModels\OZeroToken.cs" />
+    <Compile Include="Models\ReponceModels\OZero_ReturnResponce.cs" />
+    <Compile Include="Models\ReportsRequestResponse.cs" />
+    <Compile Include="Models\ReportsReturnResponse.cs" />
+    <Compile Include="Models\RequestBaseModel.cs" />
+    <Compile Include="Models\RequestModels\Get_OAuthToken_RequestModel.cs" />
+    <Compile Include="Models\RequestModels\Get_UserGroups_ResponceModel.cs" />
+    <Compile Include="Models\ResetPassword.cs" />
+    <Compile Include="Models\ReturnResponse.cs" />
+    <Compile Include="Models\ReturnResponseGridViewBaseModel.cs" />
+    <Compile Include="Models\SPStatus.cs" />
+    <Compile Include="Models\SystemParameterModel.cs" />
+    <Compile Include="Models\SystemsSettingsModel.cs" />
+    <Compile Include="Models\UserAccessGroupModel.cs" />
+    <Compile Include="Models\UserGroupDto.cs" />
+    <Compile Include="Models\UserGroupMasterModel.cs" />
+    <Compile Include="Models\UserGroups.cs" />
+    <Compile Include="Models\UserGroupsResult.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserOtpModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
+    <PackageReference Include="ExcelDataReader" Version="3.6.0" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.4.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WebForms" Version="150.1537.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="QRCoder" Version="1.4.3" />
+    <PackageReference Include="System.CodeDom" Version="7.0.0" />
+    <PackageReference Include="System.Data.OleDb" Version="7.0.0" />
+    <PackageReference Include="System.IO.Ports" Version="7.0.0" />
+    <PackageReference Include="System.Web.Mvc.Extensions" Version="1.1.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--<ProjectReference Include="..\EmailReader\EmailReader.csproj" />-->
+    <ProjectReference Include="..\email_sender\email_sender.csproj" />
+    <ProjectReference Include="..\error_handler\error_handler.csproj" />
+    <ProjectReference Include="..\sms_core\sms_core.csproj" />
+    <ProjectReference Include="..\utility_handler_core\utility_handler_core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Web.Extensions">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Web.Extensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Report1.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="EmailTemplates\" />
+    <Folder Include="Images\" />
+  </ItemGroup>
+
+</Project>

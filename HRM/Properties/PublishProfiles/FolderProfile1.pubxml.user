@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\DC\Documents\MAILTRAK</_PublishTargetUrl>
+    <History>False|2023-01-12T08:47:45.5846547Z;False|2023-01-12T14:16:59.8293953+05:30;False|2023-01-12T14:05:05.9693480+05:30;False|2023-01-12T14:04:37.1727230+05:30;False|2023-01-12T14:04:10.3083147+05:30;True|2023-01-11T10:37:57.7951446+05:30;</History>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>server= 172.32.44.3%3b database=MailTrak_Dev%3b uid=sa%3b Password=Tts%40123%3bMultipleActiveResultSets=true%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>
