@@ -48,8 +48,24 @@
     <Compile Remove="Data\Process_Data.cs" />
     <Compile Remove="Data\Recieve_Data.cs" />
     <Compile Remove="Data\user_Data - Copy.cs" />
+    <Compile Remove="ReportModels\CourierExpensesModel.cs" />
+    <Compile Remove="ReportModels\KioskActivityModel.cs" />
+    <Compile Remove="ReportModels\MailbagSummaryMonthlyModel.cs" />
+    <Compile Remove="ReportModels\OutgoingMailExpensesModel.cs" />
+    <Compile Remove="ReportModels\PortalExpensesModel.cs" />
     <Compile Remove="Utility\IntegrationContext.cs" />
     <Compile Remove="Utility\Misc.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ReportDefinitions\CourierExpenses.rdlc" />
+    <None Remove="ReportDefinitions\KioskActivityReport.rdlc" />
+    <None Remove="ReportDefinitions\MailbagDailyActivityReports.rdlc" />
+    <None Remove="ReportDefinitions\MailbagDailyActivityReports_V1.rdlc" />
+    <None Remove="ReportDefinitions\MailbagSummaryReportMonthly.rdlc" />
+    <None Remove="ReportDefinitions\MailbagSummaryReportMonthly_V1.rdlc" />
+    <None Remove="ReportDefinitions\OutgoingMailExpensesbyPCCodes.rdlc" />
+    <None Remove="ReportDefinitions\PortalExpenses.rdlc" />
   </ItemGroup>
 
   <ItemGroup>

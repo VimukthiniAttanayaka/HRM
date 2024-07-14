@@ -63,54 +63,6 @@ namespace HRM.Controllers
             return objUserHeadList;
         }
      
-        //private void SyncWithHRMKiosk()
-        //{
-        //    try
-        //    {
-        //        int maxTransCount = ConfigCaller.SyncWithHRMKiosk_maxTransCount;
-        //        string userId = ConfigCaller.SyncWithHRMKiosk_UserID;
-        //        int syncStatus = 1;
-        //        string reqTransType = "Get_MailBagTrans";
-
-        //        HRMToken.Rootobject tok = HRM_APICaller_Data.GetToken();
-        //        HRM_MailBag.Rootobject bag = HRM_APICaller_Data.GetMailbagTransactions(tok, maxTransCount);
-
-        //        MailBagTransDto MailBagTransData = new MailBagTransDto()
-        //        {
-        //            message = bag.message,
-        //            messageId = bag.messageId,
-        //            result = new MailBagTransResult()
-        //            {
-        //                reqTransReferenceId = bag.result.reqTransReferenceId,
-        //                mailBagTrans = bag.result.mailBagTrans
-        //            }
-        //        };
-
-        //        List<MailBagTransDto> response = HRM_BL.HRM_BL.add_new_mailbag_trans(userId, MailBagTransData);
-
-        //        Ack_MailBagTrans_RequestModel model_Ack = new Ack_MailBagTrans_RequestModel()
-        //        {
-        //            reqTransReferenceId = MailBagTransData.result.reqTransReferenceId,
-        //            maxTransCount = maxTransCount,
-        //            reqTransType = reqTransType,
-        //            syncStatus = syncStatus
-        //        };
-        //        var respResult = HRM_APICaller_Data.AckMailbagTransactions(tok, model_Ack);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        objError.WriteLog(0, "ReportsController", "SyncWithHRMKiosk", "Stack Track: " + ex.StackTrace);
-        //        objError.WriteLog(0, "ReportsController", "SyncWithHRMKiosk", "Error Message: " + ex.Message);
-        //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-        //        {
-        //            objError.WriteLog(0, "ReportsController", "SyncWithHRMKiosk", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-        //            objError.WriteLog(0, "ReportsController", "SyncWithHRMKiosk", "Inner Exception Message: " + ex.InnerException.Message);
-        //        }
-        //    }
-        //}
-
-        //Mailbag Summary Report – Monthly
-        //POST api/<UserController>
     }
 
 }
