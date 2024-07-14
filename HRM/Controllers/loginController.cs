@@ -39,7 +39,8 @@ namespace HRM.Controllers
 
             try
             {
-                return new List<ReturnUserModelHead>();
+                objUserHeadList.Add(new ReturnUserModelHead() { resp = true, msg = "Welcome To HRM" });
+                return objUserHeadList;
 
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, logdata);
 
