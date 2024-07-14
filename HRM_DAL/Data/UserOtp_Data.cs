@@ -88,7 +88,7 @@ namespace HRM_DAL.Data
                                                 cmdsmtp.CommandText = "sp_get_business_unit_single";
                                                 cmdsmtp.CommandType = CommandType.StoredProcedure;
 
-                                                cmdsmtp.Parameters.AddWithValue("@BU_ID", rdrUdata["UT_BusinessUnit"].ToString());
+                                                cmdsmtp.Parameters.AddWithValue("@BU_ID", rdrUdata["UD_BusinessUnit"].ToString());
                                                 cmdsmtp.Parameters["@BU_ID"].Direction = ParameterDirection.Input;
 
                                                 SqlDataAdapter dtasmtp = new SqlDataAdapter();
@@ -102,7 +102,7 @@ namespace HRM_DAL.Data
                                                     {
 
                                                         string from = rdrsmtp["BU_EMAIL_SMTP_UID"].ToString();
-                                                        string to = rdrUdata["UT_EmailAddress"].ToString(); ;
+                                                        string to = rdrUdata["UD_EmailAddress"].ToString(); ;
                                                         string smtpServer = rdrsmtp["BU_EMAIL_SMTP_HOST_IP"].ToString();
                                                         int smtpPort = Convert.ToInt32(rdrsmtp["BU_EMAIL_SMTP_HOST_PORT"]);
                                                         Boolean security = Convert.ToBoolean(rdrsmtp["BU_EMAIL_SMTP_SSL_ENABLE"]);
@@ -155,7 +155,7 @@ namespace HRM_DAL.Data
                                                         }
                                                         else
                                                         {
-                                                            var rtn = SMS_Sender_Preperation.SMSgateway(saveotp.USER_MOBILE, body, rdrUdata["UT_BusinessUnit"].ToString(), true);
+                                                            var rtn = SMS_Sender_Preperation.SMSgateway(saveotp.USER_MOBILE, body, rdrUdata["UD_BusinessUnit"].ToString(), true);
 
                                                             if (rtn.resp == false)
                                                             {

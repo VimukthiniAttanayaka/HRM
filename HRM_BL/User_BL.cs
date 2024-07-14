@@ -13,24 +13,24 @@ namespace HRM_BL
     {
         private static LogError objError = new LogError();
 
-        public static List<ReturnCustomerUserModelHead> get_c_user_single(CUser CUser) //ok
+        public static List<ReturnCustomerUserModelHead> get_user_single(CUser CUser) //ok
         {
-            return HRM_DAL.Data.User_Data.get_c_user_single(CUser);
+            return HRM_DAL.Data.User_Data.get_user_single(CUser);
         }
 
-        public static List<ReturnCustomerUserAllModelHead> get_c_user_all(GetCustomerUserAllModel CUserall)//ok
+        public static List<ReturnCustomerUserAllModelHead> get_user_all(GetCustomerUserAllModel CUserall)//ok
         {
-            return HRM_DAL.Data.User_Data.get_c_user_all(CUserall);
+            return HRM_DAL.Data.User_Data.get_user_all(CUserall);
         }
 
-        public static List<ReturnCustomerUserAllModelHead> get_c_user_all_unique(GetCustomerUserAllModel CUserall)//ok
+        public static List<ReturnCustomerUserAllModelHead> get_user_all_unique(GetCustomerUserAllModel CUserall)//ok
         {
-            return HRM_DAL.Data.User_Data.get_c_user_all_unique(CUserall);
+            return HRM_DAL.Data.User_Data.get_user_all_unique(CUserall);
         }
 
-        public static List<ReturnResponse> inactivate_c_user(InactiveCUserModel item)//ok
+        public static List<ReturnResponse> inactivate_user(InactiveCUserModel item)//ok
         {
-            return HRM_DAL.Data.User_Data.inactivate_c_user(item);
+            return HRM_DAL.Data.User_Data.inactivate_user(item);
         }
 
         public static List<ReturnLoadUserDataModel> load_user_data()//ok
@@ -38,19 +38,14 @@ namespace HRM_BL
             return HRM_DAL.Data.User_Data.load_user_data();
         }
 
-        public static List<ReturnResponse> add_new_c_user(CUserModel item)//ok
+        public static List<ReturnResponse> add_new_user(CUserModel item)//ok
         {
-            return HRM_DAL.Data.User_Data.add_new_c_user(item);
+            return HRM_DAL.Data.User_Data.add_new_user(item);
         }
 
-        public static List<ReturnResponse> modify_c_user(CUserModel item)//ok
+        public static List<ReturnResponse> modify_user(CUserModel item)//ok
         {
-            return HRM_DAL.Data.User_Data.modify_c_user(item);
-        }
-
-        public static List<ReturnUserDropModelHead> get_transuser_dropdown(User getuserdrop)//ok
-        {
-            return HRM_DAL.Data.User_Data.get_transuser_dropdown(getuserdrop);
+            return HRM_DAL.Data.User_Data.modify_user(item);
         }
 
         public static List<ReturnResponse> change_password(NewpwModel item)
@@ -58,7 +53,7 @@ namespace HRM_BL
             return HRM_DAL.Data.User_Data.change_password(item);
         }
 
-        public static List<ReturnResponse> update_notification_token(NotTokModel UpNotTokModel, string userId)
+        public static List<ReturnResponse> update_notification_token(NotificationTokenModel UpNotTokModel, string userId)
         {
             return HRM_DAL.Data.User_Data.update_notification_token(UpNotTokModel, userId);
         }

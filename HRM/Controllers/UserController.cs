@@ -32,7 +32,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnCustomerUserModelHead> get_c_user_single(CUser CUser)//ok
+        public List<ReturnCustomerUserModelHead> get_user_single(CUser CUser)//ok
         {
             List<ReturnCustomerUserModelHead> objCusUserHeadList = new List<ReturnCustomerUserModelHead>();
 
@@ -40,7 +40,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, CUser);
 
-                objCusUserHeadList = user_BL.get_c_user_single(CUser);
+                objCusUserHeadList = user_BL.get_user_single(CUser);
                 return objCusUserHeadList;
             }
             catch (Exception ex)
@@ -53,12 +53,12 @@ namespace HRM.Controllers
                 };
                 objCusUserHeadList.Add(objCusUserHead);
 
-                objError.WriteLog(0, "UserController", "get_c_user_single", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "get_c_user_single", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserController", "get_user_single", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserController", "get_user_single", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserController", "get_c_user_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "get_c_user_single", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserController", "get_user_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserController", "get_user_single", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -71,7 +71,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnCustomerUserAllModelHead> get_c_user_all(GetCustomerUserAllModel CUserall)//ok
+        public List<ReturnCustomerUserAllModelHead> get_user_all(GetCustomerUserAllModel CUserall)//ok
         {
             List<ReturnCustomerUserAllModelHead> objCusUserHeadList = new List<ReturnCustomerUserAllModelHead>();
 
@@ -79,7 +79,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, CUserall);
 
-                objCusUserHeadList = user_BL.get_c_user_all(CUserall);
+                objCusUserHeadList = user_BL.get_user_all(CUserall);
                 return objCusUserHeadList;
             }
             catch (Exception ex)
@@ -92,12 +92,12 @@ namespace HRM.Controllers
                 };
                 objCusUserHeadList.Add(objCusUserHead);
 
-                objError.WriteLog(0, "UserController", "get_c_user_all", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "get_c_user_all", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserController", "get_user_all", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserController", "get_user_all", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserController", "get_c_user_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "get_c_user_all", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserController", "get_user_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserController", "get_user_all", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -110,7 +110,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnCustomerUserAllModelHead> get_c_user_all_unique(GetCustomerUserAllModel CUserall)//ok
+        public List<ReturnCustomerUserAllModelHead> get_user_all_unique(GetCustomerUserAllModel CUserall)//ok
         {
             List<ReturnCustomerUserAllModelHead> objCusUserHeadList = new List<ReturnCustomerUserAllModelHead>();
 
@@ -118,7 +118,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, CUserall);
 
-                objCusUserHeadList = user_BL.get_c_user_all_unique(CUserall);
+                objCusUserHeadList = user_BL.get_user_all_unique(CUserall);
                 return objCusUserHeadList;
             }
             catch (Exception ex)
@@ -131,12 +131,12 @@ namespace HRM.Controllers
                 };
                 objCusUserHeadList.Add(objCusUserHead);
 
-                objError.WriteLog(0, "UserController", "get_c_user_all_unique", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "get_c_user_all_unique", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserController", "get_user_all_unique", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserController", "get_user_all_unique", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserController", "get_c_user_all_unique", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "get_c_user_all_unique", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserController", "get_user_all_unique", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserController", "get_user_all_unique", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -149,7 +149,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnResponse> inactivate_c_user(InactiveCUserModel item)//ok
+        public List<ReturnResponse> inactivate_user(InactiveCUserModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
 
@@ -157,7 +157,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
 
-                objUserHeadList = user_BL.inactivate_c_user(item);
+                objUserHeadList = user_BL.inactivate_user(item);
                 return objUserHeadList;
             }
             catch (Exception ex)
@@ -169,12 +169,12 @@ namespace HRM.Controllers
                 };
                 objUserHeadList.Add(objUserHead);
 
-                objError.WriteLog(0, "UserController", "inactivate_c_user", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "inactivate_c_user", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserController", "inactivate_user", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserController", "inactivate_user", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserController", "inactivate_c_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "inactivate_c_user", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserController", "inactivate_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserController", "inactivate_user", "Inner Exception Message: " + ex.InnerException.Message);
                 }
                 return objUserHeadList;
             }
@@ -233,7 +233,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnResponse> add_new_c_user(CUserModel item)//ok
+        public List<ReturnResponse> add_new_user(CUserModel item)//ok
         {
             List<ReturnResponse> objCUserHeadList = new List<ReturnResponse>();
 
@@ -241,7 +241,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
 
-                objCUserHeadList = user_BL.add_new_c_user(item);
+                objCUserHeadList = user_BL.add_new_user(item);
                 return objCUserHeadList;
             }
             catch (Exception ex)
@@ -253,85 +253,16 @@ namespace HRM.Controllers
                 };
                 objCUserHeadList.Add(objCusUserHead);
 
-                objError.WriteLog(0, "UserController", "add_new_c_user", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "add_new_c_user", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserController", "add_new_user", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserController", "add_new_user", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserController", "add_new_c_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "add_new_c_user", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserController", "add_new_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserController", "add_new_user", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }
             return objCUserHeadList;
-        }
-
-
-        //POST api/<UserController>
-        [HttpPost]
-        [Route("[action]")]
-        //[Authorize]
-        public List<ReturnResponse> add_new_c_user_Bulk(CUserBulkModel model)//ok
-        {
-            List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
-
-            try
-            {
-                if (model == null)
-                {
-                    ReturnResponse objHead = new ReturnResponse
-                    {
-                        resp = false,
-                        msg = "value cannot be null"
-                    };
-                    objUserHeadList.Add(objHead);
-                    return objUserHeadList;
-                }
-                if (model.userlist == null)
-                {
-                    ReturnResponse objHead = new ReturnResponse
-                    {
-                        resp = false,
-                        msg = "value list cannot be null"
-                    };
-                    objUserHeadList.Add(objHead);
-                    return objUserHeadList;
-                }
-
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
-
-                foreach (var item in model.userlist)
-                {
-                    List<ReturnCustomerUserModelHead> temp = HRM_BL.user_BL.get_c_user_single(new CUser() { USER_ID = item.USER_ID, TABLE = item.TABLE });
-                    if (temp != null && temp.Count > 0 && temp[0].User != null && temp[0].User.Count > 0)
-                    {
-                        objUserHeadList.Add(user_BL.modify_c_user(item).FirstOrDefault());
-                    }
-                    else
-                    {
-                        objUserHeadList.Add(user_BL.add_new_c_user(item).FirstOrDefault());
-                    }
-                }
-                return objUserHeadList;
-            }
-            catch (Exception ex)
-            {
-                ReturnResponse objUserHead = new ReturnResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "UserController", "add_new_c_user_Bulk", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "add_new_c_user_Bulk", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserController", "add_new_c_user_Bulk", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "add_new_c_user_Bulk", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-            }
-            return objUserHeadList;
         }
 
         #region moved to ecelupload by V2
@@ -458,7 +389,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnResponse> modify_c_user(CUserModel item)//ok
+        public List<ReturnResponse> modify_user(CUserModel item)//ok
         {
             List<ReturnResponse> objCUserHeadList = new List<ReturnResponse>();
 
@@ -466,7 +397,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
 
-                objCUserHeadList = user_BL.modify_c_user(item);
+                objCUserHeadList = user_BL.modify_user(item);
                 return objCUserHeadList;
             }
             catch (Exception ex)
@@ -478,58 +409,17 @@ namespace HRM.Controllers
                 };
                 objCUserHeadList.Add(objCusUserHead);
 
-                objError.WriteLog(0, "UserController", "modify_c_user", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "modify_c_user", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserController", "modify_user", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserController", "modify_user", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserController", "modify_c_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "modify_c_user", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserController", "modify_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserController", "modify_user", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }
             return objCUserHeadList;
         }
-
-        [HttpPost]
-        [Route("[action]")]
-        //[Authorize]
-        public List<ReturnUserDropModelHead> get_transuser_dropdown(User getuserdrop)//ok
-        {
-            List<ReturnUserDropModelHead> objUserHeadList = new List<ReturnUserDropModelHead>();
-            List<GetTuserdropdownModel> objUserSList = new List<GetTuserdropdownModel>();
-
-            List<SPResponse> objResponseList = new List<SPResponse>();
-
-            try
-            {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, getuserdrop);
-
-                objUserHeadList = user_BL.get_transuser_dropdown(getuserdrop);
-                return objUserHeadList;
-            }
-            catch (Exception ex)
-            {
-
-                ReturnUserDropModelHead objUserHead = new ReturnUserDropModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "UserController", "get_transuser_dropdown", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "get_transuser_dropdown", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserController", "get_transuser_dropdown", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "get_transuser_dropdown", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-
-            }
-            return objUserHeadList;
-        }
-
 
 
         // POST api/<BankController>
@@ -572,7 +462,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         [Authorize]
-        public List<ReturnResponse> update_notification_token(NotTokModel UpNotTokModel)
+        public List<ReturnResponse> update_notification_token(NotificationTokenModel UpNotTokModel)
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
 

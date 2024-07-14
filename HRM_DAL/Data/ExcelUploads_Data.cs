@@ -452,7 +452,7 @@ namespace HRM_DAL.Data
                                     //    List<ReturnResponse> retlist = new List<ReturnResponse>();
                                     //(bool IsSMSFailed, bool IsEmailFailed) res = User_Data.SendEmailSMS_CustomerUser(model, retlist, NotEncryptedPassword, CUS_PinOrPwd, cust, expired_date, BU_ID, SMSOk, EmailOk);
 
-                                    //retlist.AddRange(User_Data.sync_c_user_kioski(new CUser()
+                                    //retlist.AddRange(User_Data.sync_user_kioski(new CUser()
                                     //{
                                     //    USER_ID = model.USR_StaffID,
                                     //    TABLE = model.TABLE

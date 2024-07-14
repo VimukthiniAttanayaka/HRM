@@ -10,9 +10,9 @@ namespace HRM_DAL.Models
     }
     public class AuthenticationRequestBaseModel
     {
-        public string AUT_StaffID { get; set; }
-        public string AUT_UserTableID { get; set; }
-        public string AUT_notificationToken { get; set; }
+        public string AUD_StaffID { get; set; }
+        public string AUD_UserTableID { get; set; }
+        public string AUD_notificationToken { get; set; }
     }
 
     public class RequestGridBaseModel : RequestBaseModel

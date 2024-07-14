@@ -46,9 +46,9 @@ namespace HRM_DAL.Models
 
         public string PAGE_NO { get; set; }
         public string PAGE_RECORDS_COUNT { get; set; }
-        public string UT_StaffID { get; set; }
-        public string UT_FirstName { get; set; }
-        public string UT_LastName { get; set; }
+        public string UD_StaffID { get; set; }
+        public string UD_FirstName { get; set; }
+        public string UD_LastName { get; set; }
         public string UGM_Name { get; set; }
         public string BU_CompanyName { get; set; }
         public string CUS_CompanyName { get; set; }
@@ -97,9 +97,9 @@ namespace HRM_DAL.Models
     public class ReturnUAGModel
     {
         [Key]
-        public string UT_StaffID { get; set; }
-        public string UT_FirstName { get; set; }
-        public string UT_LastName { get; set; }
+        public string UD_StaffID { get; set; }
+        public string UD_FirstName { get; set; }
+        public string UD_LastName { get; set; }
         public string UAG_GroupID { get; set; }
         public string UGM_Name { get; set; }
         public string UAG_BusinessUnit { get; set; }

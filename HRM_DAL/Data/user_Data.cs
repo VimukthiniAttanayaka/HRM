@@ -92,7 +92,7 @@ namespace HRM_DAL.Data
             }
         }
 
-        public static List<ReturnCustomerUserModelHead> get_c_user_single(CUser CUser)//ok
+        public static List<ReturnCustomerUserModelHead> get_user_single(CUser CUser)//ok
         {
             List<ReturnCustomerUserModelHead> objCusUserHeadList = new List<ReturnCustomerUserModelHead>();
 
@@ -177,7 +177,7 @@ namespace HRM_DAL.Data
                                 {
                                     cmdGrp.Connection = lconn;
 
-                                    cmdGrp.CommandText = "sp_get_c_user_groups_with_select";
+                                    cmdGrp.CommandText = "sp_get_user_groups_with_select";
                                     cmdGrp.CommandType = CommandType.StoredProcedure;
 
                                     cmdGrp.Parameters.AddWithValue("@USER_ID", CUser.USER_ID);
@@ -225,7 +225,7 @@ namespace HRM_DAL.Data
                                 {
                                     cmdGrpK.Connection = lconn;
 
-                                    cmdGrpK.CommandText = "sp_get_c_user_groups_with_select_kioski";
+                                    cmdGrpK.CommandText = "sp_get_user_groups_with_select_kioski";
                                     cmdGrpK.CommandType = CommandType.StoredProcedure;
 
                                     cmdGrpK.Parameters.AddWithValue("@USER_ID", CUser.USER_ID);
@@ -285,7 +285,7 @@ namespace HRM_DAL.Data
                             objCusUserHeadList.Add(objCusUserHead);
                         }
                     }
-                    objError.WriteLog(0, "User_Data", "get_c_user_single", "Log Track: " + JsonConvert.SerializeObject(objCusUserHeadList));
+                    objError.WriteLog(0, "User_Data", "get_user_single", "Log Track: " + JsonConvert.SerializeObject(objCusUserHeadList));
                     return objCusUserHeadList;
 
                 }
@@ -300,12 +300,12 @@ namespace HRM_DAL.Data
                 };
                 objCusUserHeadList.Add(objCusUserHead);
 
-                objError.WriteLog(0, "User_Data", "get_c_user_single", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "User_Data", "get_c_user_single", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "User_Data", "get_user_single", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "User_Data", "get_user_single", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "User_Data", "get_c_user_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "User_Data", "get_c_user_single", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "User_Data", "get_user_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "User_Data", "get_user_single", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -315,7 +315,7 @@ namespace HRM_DAL.Data
 
         }
 
-        public static List<ReturnCustomerUserAllModelHead> get_c_user_all(GetCustomerUserAllModel CUserall)//ok
+        public static List<ReturnCustomerUserAllModelHead> get_user_all(GetCustomerUserAllModel CUserall)//ok
         {
             List<ReturnCustomerUserAllModelHead> objCusUserHeadList = new List<ReturnCustomerUserAllModelHead>();
             List<ReturnCusUserAllModel> objCusUserSList = new List<ReturnCusUserAllModel>();
@@ -447,12 +447,12 @@ namespace HRM_DAL.Data
                 };
                 objCusUserHeadList.Add(objCusUserHead);
 
-                objError.WriteLog(0, "User_Data", "get_c_user_all", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "User_Data", "get_c_user_all", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "User_Data", "get_user_all", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "User_Data", "get_user_all", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "User_Data", "get_c_user_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "User_Data", "get_c_user_all", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "User_Data", "get_user_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "User_Data", "get_user_all", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -462,7 +462,7 @@ namespace HRM_DAL.Data
 
         }
 
-        public static List<ReturnCustomerUserAllModelHead> get_c_user_all_unique(GetCustomerUserAllModel CUserall)//ok
+        public static List<ReturnCustomerUserAllModelHead> get_user_all_unique(GetCustomerUserAllModel CUserall)//ok
         {
             List<ReturnCustomerUserAllModelHead> objCusUserHeadList = new List<ReturnCustomerUserAllModelHead>();
             List<ReturnCusUserAllModel> objCusUserSList = new List<ReturnCusUserAllModel>();
@@ -595,12 +595,12 @@ namespace HRM_DAL.Data
                 };
                 objCusUserHeadList.Add(objCusUserHead);
 
-                objError.WriteLog(0, "User_Data", "get_c_user_all_unique", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "User_Data", "get_c_user_all_unique", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "User_Data", "get_user_all_unique", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "User_Data", "get_user_all_unique", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "User_Data", "get_c_user_all_unique", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "User_Data", "get_c_user_all_unique", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "User_Data", "get_user_all_unique", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "User_Data", "get_user_all_unique", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -610,7 +610,7 @@ namespace HRM_DAL.Data
 
         }
 
-        public static List<ReturnResponse> inactivate_c_user(InactiveCUserModel item)//ok
+        public static List<ReturnResponse> inactivate_user(InactiveCUserModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
 
@@ -651,7 +651,7 @@ namespace HRM_DAL.Data
                                 };
                                 objUserHeadList.Add(objUserHead);
                             }
-                            objError.WriteLog(0, "User_Data", "inactivate_c_user", "Stack Track: " + objUserHeadList + item);
+                            objError.WriteLog(0, "User_Data", "inactivate_user", "Stack Track: " + objUserHeadList + item);
 
                             return objUserHeadList;
                         }
@@ -669,12 +669,12 @@ namespace HRM_DAL.Data
                 };
                 objUserHeadList.Add(objUserHead);
 
-                objError.WriteLog(0, "User_Data", "inactivate_c_user", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "User_Data", "inactivate_c_user", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "User_Data", "inactivate_user", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "User_Data", "inactivate_user", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "User_Data", "inactivate_c_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "User_Data", "inactivate_c_user", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "User_Data", "inactivate_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "User_Data", "inactivate_user", "Inner Exception Message: " + ex.InnerException.Message);
                 }
                 return objUserHeadList;
             }
@@ -868,7 +868,7 @@ namespace HRM_DAL.Data
             public string UAG_Type { get; set; }
         }
 
-        public static List<ReturnResponse> add_new_c_user(CUserModel item)//ok
+        public static List<ReturnResponse> add_new_user(CUserModel item)//ok
         {
             List<ReturnResponse> objCUserHeadList = new List<ReturnResponse>();
 
@@ -882,7 +882,7 @@ namespace HRM_DAL.Data
 
                 string logobject = JsonConvert.SerializeObject(objCUserHeadList);
 
-                objError.WriteLog(0, "User_Data", "add_new_c_user", "Stack Track: " + logobject + item);
+                objError.WriteLog(0, "User_Data", "add_new_user", "Stack Track: " + logobject + item);
 
                 return objCUserHeadList;
             }
@@ -1101,7 +1101,7 @@ namespace HRM_DAL.Data
 
                         string logobject = JsonConvert.SerializeObject(objCUserHeadList);
                         string logitem = JsonConvert.SerializeObject(item);
-                        objError.WriteLog(0, "User_Data", "add_new_c_user", "Stack Track: " + logobject + "   " + logitem);
+                        objError.WriteLog(0, "User_Data", "add_new_user", "Stack Track: " + logobject + "   " + logitem);
 
                     }
                 }
@@ -1115,12 +1115,12 @@ namespace HRM_DAL.Data
                 };
                 objCUserHeadList.Add(objCusUserHead);
 
-                objError.WriteLog(0, "User_Data", "add_new_c_user", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "User_Data", "add_new_c_user", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "User_Data", "add_new_user", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "User_Data", "add_new_user", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "User_Data", "add_new_c_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "User_Data", "add_new_c_user", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "User_Data", "add_new_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "User_Data", "add_new_user", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }
@@ -1258,7 +1258,7 @@ namespace HRM_DAL.Data
             return (IsSMSFailed, IsEmailFailed);
         }
 
-        public static List<ReturnResponse> modify_c_user(CUserModel item)//ok
+        public static List<ReturnResponse> modify_user(CUserModel item)//ok
         {
             List<ReturnResponse> objCUserHeadList = new List<ReturnResponse>();
 
@@ -1272,7 +1272,7 @@ namespace HRM_DAL.Data
 
                 string logobject = JsonConvert.SerializeObject(objCUserHeadList);
 
-                objError.WriteLog(0, "User_Data", "modify_c_user", "Stack Track: " + logobject + item);
+                objError.WriteLog(0, "User_Data", "modify_user", "Stack Track: " + logobject + item);
 
                 return objCUserHeadList;
             }
@@ -1464,9 +1464,9 @@ namespace HRM_DAL.Data
 
                     string logobject = JsonConvert.SerializeObject(objCUserHeadList);
                     string logitem = JsonConvert.SerializeObject(item);
-                    objError.WriteLog(0, "User_Data", "modify_c_user", "Stack Track: " + logobject + "   " + logitem);
+                    objError.WriteLog(0, "User_Data", "modify_user", "Stack Track: " + logobject + "   " + logitem);
 
-                    //objError.WriteLog(0, "User_Data", "modify_c_user", "Stack Track: " + objCUserHeadList + item);
+                    //objError.WriteLog(0, "User_Data", "modify_user", "Stack Track: " + objCUserHeadList + item);
                 }
             }
             catch (Exception ex)
@@ -1478,102 +1478,16 @@ namespace HRM_DAL.Data
                 };
                 objCUserHeadList.Add(objCusUserHead);
 
-                objError.WriteLog(0, "User_Data", "modify_c_user", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "User_Data", "modify_c_user", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "User_Data", "modify_user", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "User_Data", "modify_user", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "User_Data", "modify_c_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "User_Data", "modify_c_user", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "User_Data", "modify_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "User_Data", "modify_user", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }
             return objCUserHeadList;
-        }
-
-        public static List<ReturnUserDropModelHead> get_transuser_dropdown(User getuserdrop)//ok
-        {
-            List<ReturnUserDropModelHead> objUserHeadList = new List<ReturnUserDropModelHead>();
-            List<GetTuserdropdownModel> objUserSList = new List<GetTuserdropdownModel>();
-
-            List<SPResponse> objResponseList = new List<SPResponse>();
-            SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString);
-            try
-            {
-
-
-                if (lconn.State == ConnectionState.Closed)
-                {
-                    lconn.Open();
-                }
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.Connection = lconn;
-
-                    cmd.CommandText = "sp_get_transnational_user_dropdown";
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.AddWithValue("@USER_ID", getuserdrop.USER_ID);
-                    cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
-
-                    ReturnUserDropModelHead objUserHead = new ReturnUserDropModelHead
-                    {
-                        resp = true,
-                        msg = "Get Dropdown"
-                    };
-
-                    SqlDataAdapter dta = new SqlDataAdapter();
-                    dta.SelectCommand = cmd;
-                    DataSet Ds = new DataSet();
-                    dta.Fill(Ds);
-
-                    if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
-                    {
-                        foreach (DataRow rdr in Ds.Tables[0].Rows)
-                        {
-                            GetTuserdropdownModel objUserdrop = new GetTuserdropdownModel
-                            {
-                                UT_StaffID = rdr["UT_StaffID"].ToString(),
-                                UT_Name = rdr["UT_Name"].ToString()
-                            };
-
-                            objUserSList.Add(objUserdrop);
-
-                            if (objUserHead.userdrop == null)
-                            {
-                                objUserHead.userdrop = new List<GetTuserdropdownModel>();
-                            }
-                            objUserHead.userdrop.Add(objUserdrop);
-                            //objUserHead.userdrop.Add(objUserdrop);
-                            //objUserHead.Tocken = objUser.notificationToken = token;
-
-
-                        }
-                        objUserHeadList.Add(objUserHead);
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-                ReturnUserDropModelHead objUserHead = new ReturnUserDropModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "User_Data", "get_transuser_dropdown", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "User_Data", "get_transuser_dropdown", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "User_Data", "get_transuser_dropdown", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "User_Data", "get_transuser_dropdown", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-
-            }
-            return objUserHeadList;
         }
 
         public static List<ReturnResponse> change_password(NewpwModel item)//set use need to apply - all person
@@ -1737,7 +1651,7 @@ namespace HRM_DAL.Data
                                     IsEmailOk = mod.FirstOrDefault().Customer.FirstOrDefault().CUS_OTP_By_Email;
                                 }
 
-                                List<ReturnCustomerUserModelHead> mod1 = User_Data.get_c_user_single(new CUser() { USER_ID = item.USER_ID, TABLE = item.USER_TABLE });
+                                List<ReturnCustomerUserModelHead> mod1 = User_Data.get_user_single(new CUser() { USER_ID = item.USER_ID, TABLE = item.USER_TABLE });
 
                                 if (mod1.FirstOrDefault().User != null)
                                 {
@@ -1792,7 +1706,7 @@ namespace HRM_DAL.Data
             }
         }
 
-        public static List<ReturnResponse> update_notification_token(NotTokModel UpNotTokModel, string userId)
+        public static List<ReturnResponse> update_notification_token(NotificationTokenModel UpNotTokModel, string userId)
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
             List<SPResponse> objResponseList = new List<SPResponse>();

@@ -13,9 +13,9 @@ namespace HRM_DAL.Models
     public class UserOtpSmsModel
     {
         //public string USER_ID { get; set; }
-        public string UT_MobileNumber { get; set; }
-        // public string UT_EmailAddress { get; set; }
-        public int UT_Otp { get; set; }
+        public string UD_MobileNumber { get; set; }
+        // public string UD_EmailAddress { get; set; }
+        public int UD_Otp { get; set; }
     }
     public class SaveUserOtpModel
     {

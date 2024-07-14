@@ -9,48 +9,23 @@ namespace HRM_DAL.Models
     public class UserModel
     {
 
-        public string UT_StaffID { get; set; }
-        public string UT_FirstName { get; set; }
-        public string UT_LastName { get; set; }
-        public string UT_EmailAddress { get; set; }
-        public string UT_MobileNumber { get; set; }
-        public string UT_PhoneNumber { get; set; }
-        public string UT_BusinessUnit { get; set; }
-        public bool UT_IsHRMUser { get; set; }
-        public bool UT_IsKioskUser { get; set; }
-        public string UT_Remarks { get; set; }
-        public string UT_ActiveFrom { get; set; }
-        public string UT_ActiveTo { get; set; }
-        public bool UT_Status { get; set; }
-        public string UAG_VendorID { get; set; }
-        public string USER_ID { get; set; }
+        public string UD_StaffID { get; set; }
+        public string UD_FirstName { get; set; }
+        public string UD_LastName { get; set; }
+        public string UD_EmailAddress { get; set; }
+        public string UD_MobileNumber { get; set; }
+        public string UD_PhoneNumber { get; set; }
+        public string UD_Remarks { get; set; }
+        public string authorizationToken { get; set; }
+        public string UD_UserName { get; set; }
+        public string UD_Password { get; set; }
         public List<UserGroupModel> UserGroup { get; set; }
         public List<UserBuModel> UserBU { get; set; }
         public List<UserCustModel> UserCustomer { get; set; }
 
 
     }
-    public class CUserBulkModel
-    {
-        public List<CUserModel> userlist { get; set; }
-    }
-
-    public class GetTuserdropdownModel
-    {
-
-        public string UT_StaffID { get; set; }
-        public string UT_Name { get; set; }
-
-
-    }
-    public class ReturnUserDropModelHead : ReturnResponse
-    {
-        //public bool resp { get; set; }
-        //public string msg { get; set; }
-        public List<GetTuserdropdownModel> userdrop { get; set; }
-
-    }
-
+   
     public class LogdataModel
     {
         [Key]
@@ -62,44 +37,33 @@ namespace HRM_DAL.Models
     public class ReturnUserDataModel
     {
         [Key]
-        public string UT_StaffID { get; set; }
-        public string UT_FirstName { get; set; }
-        public string UT_LastName { get; set; }
-        public string UT_EmailAddress { get; set; }
-        public string UT_MobileNumber { get; set; }
-        public string UT_PhoneNumber { get; set; }
-        public bool UT_Status { get; set; }
-        public string UT_ActiveFrom { get; set; }
-        public string UT_ActiveTo { get; set; }
-        public string UT_Remarks { get; set; }
-        public bool UT_IsHRMUser { get; set; }
-        public bool UT_IsKioskUser { get; set; }
-
-        public string UT_BusinessUnit { get; set; }
+        public string UD_StaffID { get; set; }
+        public string UD_FirstName { get; set; }
+        public string UD_LastName { get; set; }
+        public string UD_EmailAddress { get; set; }
+        public string UD_MobileNumber { get; set; }
+        public string UD_PhoneNumber { get; set; }
+        public string UD_Remarks { get; set; }
+        public string authorizationToken { get; set; }
+        public string UD_UserName { get; set; }
+        public string UD_Password { get; set; }
         public string RC { get; set; }
         public List<ReturnUserGroupModel> UserGroup { get; set; }
         public List<ReturnUserBuModel> UserBU { get; set; }
         public List<ReturnUserCustModel> UserCustomer { get; set; }
-        public string UT_Pwd { get; internal set; }
-        public string UT_PwdSalt { get; internal set; }
-        public string UT_PCCode { get; internal set; }
-        public string UT_MailBagCPCode { get; internal set; }
-        public string UT_OutgoingMailCPCode { get; internal set; }
-        public string UT_OutgoingMailLocationCode { get; internal set; }
-        public string UT_CreatedDateTime { get; internal set; }
-        public string UT_ModifiedDateTime { get; internal set; }
     }
+
     public class ReturnUserallDataModel
     {
         [Key]
-        public string UT_StaffID { get; set; }
-        public string UT_FirstName { get; set; }
-        public string UT_LastName { get; set; }
+        public string UD_StaffID { get; set; }
+        public string UD_FirstName { get; set; }
+        public string UD_LastName { get; set; }
         public string UGM_Name { get; set; }
         public bool UAG_Status { get; set; }
         public string BU_CompanyName { get; set; }
         public string CUS_CompanyName { get; set; }
-        public bool UT_Status { get; set; }
+        public bool UD_Status { get; set; }
         public string RC { get; set; }
 
 
@@ -108,13 +72,13 @@ namespace HRM_DAL.Models
     public class ReturnUserall_SingleDataModel
     {
         [Key]
-        public string UT_StaffID { get; set; }
-        public string UT_FirstName { get; set; }
-        public string UT_LastName { get; set; }
+        public string UD_StaffID { get; set; }
+        public string UD_FirstName { get; set; }
+        public string UD_LastName { get; set; }
         public bool UAG_Status { get; set; }
         public string BU_CompanyName { get; set; }
         public string CUS_CompanyName { get; set; }
-        public bool UT_Status { get; set; }
+        public bool UD_Status { get; set; }
         public string RC { get; set; }
 
 
@@ -193,7 +157,7 @@ namespace HRM_DAL.Models
     }
     public class InactiveUserModel
     {
-        public string UT_StaffID { get; set; }
+        public string UD_StaffID { get; set; }
         public string USER_ID { get; set; }
     }
     public class InactiveCUserModel
@@ -208,16 +172,16 @@ namespace HRM_DAL.Models
 
         public string PAGE_NO { get; set; }
         public string PAGE_RECORDS_COUNT { get; set; }
-        public string UT_StaffID { get; set; }
-        public string UT_FirstName { get; set; }
-        public string UT_LastName { get; set; }
+        public string UD_StaffID { get; set; }
+        public string UD_FirstName { get; set; }
+        public string UD_LastName { get; set; }
         public string UGM_Name { get; set; }
         //public string BU_CompanyName { get; set; }
         //public string CUS_CompanyName { get; set; }
 
         public string BU_ID { get; set; }
         public string CUS_ID { get; set; }
-        public string UT_Status { get; set; }
+        public string UD_Status { get; set; }
 
 
     }
@@ -256,33 +220,25 @@ namespace HRM_DAL.Models
     public class RequestUserAccessModel
     {
         [Key]
-        public string UT_StaffID { get; set; }
-        public string UT_BusinessUnit { get; set; }
-        public string UT_CustomerCode { get; set; }
+        public string UD_StaffID { get; set; }
+        public string UD_BusinessUnit { get; set; }
+        public string UD_CustomerCode { get; set; }
     }
 
     public class ReturnUserModel
     {
         [Key]
-        public string UT_StaffID { get; set; }
-
-        public string UT_FirstName { get; set; }
-        public string UT_LastName { get; set; }
-
-        public string UT_EmailAddress { get; set; }
-        public string UT_MobileNumber { get; set; }
-        public string UT_PhoneNumber { get; set; }
-        public string UT_BusinessUnit { get; set; }
-        public string BU_CompanyName { get; set; }
-        public bool UT_IsHRMUser { get; set; }
-        public bool UT_IsKioskUser { get; set; }
-        public string UT_Remarks { get; set; }
-        public string UPM_UserTableID { get; set; }
-
-        public string notificationToken { get; set; }
+        public string UD_StaffID { get; set; }
+        public string UD_FirstName { get; set; }
+        public string UD_LastName { get; set; }
+        public string UD_EmailAddress { get; set; }
+        public string UD_MobileNumber { get; set; }
+        public string UD_PhoneNumber { get; set; }
+        public string UD_Remarks { get; set; }
         public string authorizationToken { get; set; }
-        public bool BU_ChangeProcessDate { get; set; }
-        //public List<ReturnUserAccessModel> UserAccessList { get; set; }
+        public string UD_UserName { get; set; }
+        public string UD_Password { get; set; }
+        public List<ReturnUserAccessModel> UserAccessList { get; set; }
     }
     public class ReturnUserAccessModelHead : ReturnResponse
     {
@@ -290,37 +246,14 @@ namespace HRM_DAL.Models
     }
     public class ReturnUserAccessModel
     {
-        public string USER_ID { get; set; }
+        public string UD_StaffID { get; set; }
         public string Menu_Code { get; set; }
         public string Menu_Description { get; set; }
         public string Menu_Item_Type { get; set; }
         public string UAG_GroupID { get; set; }
     }
 
-    public class LoadCustomerModel
-    {
-        public string USER_ID { get; set; }
-
-
-    }
-
-    public class ReturnLoadCustomerModel
-    {
-        public string UAG_CustomerID { get; set; }
-        public string CUS_CompanyName { get; set; }
-
-    }
-    public class ReturnLoadCustomerModelHead : ReturnResponse
-    {
-        //public bool resp { get; set; }
-        //public string msg { get; set; }
-        public List<ReturnLoadCustomerModel> Customer { get; set; }
-
-    }
-
-
-
-    public class NotTokModel
+    public class NotificationTokenModel
     {
         [Key]
         public Int32 ID { get; set; }
@@ -332,7 +265,7 @@ namespace HRM_DAL.Models
     {
         [Key]
 
-        public List<NotTokModel> objUpNotTokList { get; set; }
+        public List<NotificationTokenModel> objUpNotTokList { get; set; }
 
 
     }

@@ -21,14 +21,10 @@ namespace HRM.Controllers
     [ApiVersion("1.0")]
     [Route("api/[controller]")]
     [ApiController]
-    //[BasicAuthorization]
-    //[Authorize]
 
     public class loginController : ControllerBase
     {
         private LogError objError = new LogError();
-        private SendMail sendMail = new SendMail();
-        private SendSMS sendSMS = new SendSMS();
 
         [HttpPost]
         [Route("[action]")]
@@ -71,48 +67,6 @@ namespace HRM.Controllers
             return objUserHeadList;
         }
 
-        [HttpPost]
-        [Route("[action]")]
-        //[Authorize]
-        public List<ReturnLoadCustomerModelHead> load_customer(LoadCustomerModel LoadCust)
-        {
-
-            List<ReturnLoadCustomerModel> objCustSList = new List<ReturnLoadCustomerModel>();
-            List<ReturnLoadCustomerModelHead> objCustHeadList = new List<ReturnLoadCustomerModelHead>();
-
-            SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString);
-            try
-            {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, LoadCust);
-
-                objCustHeadList = login_BL.load_customer(LoadCust);
-                return objCustHeadList;
-            }
-            catch (Exception ex)
-            {
-                ReturnLoadCustomerModelHead objCustHead = new ReturnLoadCustomerModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objCustHeadList.Add(objCustHead);
-
-                objError.WriteLog(0, "loginController", "load_customer", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "loginController", "load_customer", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "loginController", "load_customer", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "loginController", "load_customer", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-
-            }
-            return objCustHeadList;
-        }
-
-
-
-
         private bool SendOTP(string From, string to, string cc, int OTP, string smtpServer, int smtpPort, Boolean security, string userName, string password)
         {
             try
@@ -130,47 +84,6 @@ namespace HRM.Controllers
 
 
         }
-
-
-        [HttpPost]
-        [Route("[action]")]
-        public List<ReturnUserAccessModelHead> LoadUserAccessList(RequestUserAccessModel logdata)
-        {
-
-            List<ReturnUserAccessModelHead> objUserHeadList = new List<ReturnUserAccessModelHead>();
-
-            try
-            {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, logdata);
-
-                objUserHeadList = login_BL.LoadUserAccessList(logdata);
-
-                return objUserHeadList;
-            }
-            catch (Exception ex)
-            {
-
-                ReturnUserAccessModelHead objUserHead = new ReturnUserAccessModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "loginController", "userAccessList", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "loginController", "userAccessList", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "loginController", "userAccessList", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "loginController", "userAccessList", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-
-            }
-            return objUserHeadList;
-        }
-
-
 
     }
 

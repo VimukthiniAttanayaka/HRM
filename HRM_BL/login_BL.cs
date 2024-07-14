@@ -8,21 +8,11 @@ using System;
 
 namespace HRM_BL
 {
-    public class login_BL 
+    public class login_BL
     {
         public static List<ReturnUserModelHead> login(LogdataModel logdata)
         {
             return HRM_DAL.Data.login_Data.login(logdata);
-        }
-               
-        public static List<ReturnLoadCustomerModelHead> load_customer(LoadCustomerModel LoadCust)
-        {
-            return HRM_DAL.Data.login_Data.load_customer(LoadCust);
-        }
-
-        public static List<ReturnUserAccessModelHead> LoadUserAccessList(RequestUserAccessModel logdata)
-        {
-            return HRM_DAL.Data.login_Data.LoadUserAccessList(logdata);
         }
     }
 

@@ -42,9 +42,9 @@ namespace HRM.Controllers
                 //objOtpHead.resp = true;
                 //objOtpHead.msg = "Verify OTP";
 
-                string dst = otp.UT_MobileNumber;
+                string dst = otp.UD_MobileNumber;
 
-                string msg = "Dear User,Please use this OTP to verify your HRM login." + otp.UT_Otp + " This OTP will be valid for the next 5 mins.";
+                string msg = "Dear User,Please use this OTP to verify your HRM login." + otp.UD_Otp + " This OTP will be valid for the next 5 mins.";
 
 
                 ReturnResponse smsrtn = SMS_Sender_Preperation.SMSgateway(dst, msg, "", true);
