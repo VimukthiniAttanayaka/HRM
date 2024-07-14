@@ -167,9 +167,6 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@BU_ID", item.BU_ID);
-                        cmd.Parameters["@BU_ID"].Direction = ParameterDirection.Input;
-
                         cmd.Parameters.AddWithValue("@CUS_Status", item.CUS_Status);
                         cmd.Parameters["@CUS_Status"].Direction = ParameterDirection.Input;
 

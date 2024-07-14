@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -53,6 +53,7 @@
     <Compile Remove="ReportModels\MailbagSummaryMonthlyModel.cs" />
     <Compile Remove="ReportModels\OutgoingMailExpensesModel.cs" />
     <Compile Remove="ReportModels\PortalExpensesModel.cs" />
+    <Compile Remove="Utility\AuditActionMap.cs" />
     <Compile Remove="Utility\IntegrationContext.cs" />
     <Compile Remove="Utility\Misc.cs" />
   </ItemGroup>
@@ -80,7 +81,7 @@
     <Compile Include="Models\DepartmentDto.cs" />
     <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\DropDownModel.cs" />
-    <Compile Include="Models\EnquiryModel.cs" />
+    <Compile Include="Models\AttendanceModel.cs" />
     <Compile Include="Models\ExcelUploadsModel.cs" />
     <Compile Include="Models\ExceptionsModel.cs" />
     <Compile Include="Models\Location.cs" />

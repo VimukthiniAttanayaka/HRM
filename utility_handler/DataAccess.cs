@@ -188,7 +188,7 @@ namespace EmailReader_DL
 
         public static OutgoingmailBatchModel get_batchno_details_ExceptionEmail(string BatchNo)
         {
-            OutgoingmailBatchModel objEnquiryDetail = new OutgoingmailBatchModel();
+            OutgoingmailBatchModel objAttendanceDetail = new OutgoingmailBatchModel();
 
             try
             {
@@ -223,7 +223,7 @@ namespace EmailReader_DL
                                 //decimal recQty = 0;
                                 //decimal.TryParse(rdr["PostageTotal"].ToString(), out recQty);
 
-                                objEnquiryDetail = new OutgoingmailBatchModel()
+                                objAttendanceDetail = new OutgoingmailBatchModel()
                                 {
                                     BatchNo = rdr["BatchNumber"].ToString(),
                                     TransactionDate = trdate,
@@ -243,7 +243,7 @@ namespace EmailReader_DL
                 EmailReader_DL.DataAccess.WriteLog("get_batchno_details_ExceptionEmail", "Fail " + ex.Message + " - " + ex.StackTrace);
             }
 
-            return objEnquiryDetail;
+            return objAttendanceDetail;
         }
 
         public static bool WriteLog(string LogText, string Action)

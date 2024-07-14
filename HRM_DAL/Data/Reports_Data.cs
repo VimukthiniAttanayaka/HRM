@@ -56,7 +56,7 @@ namespace HRM_DAL.Data
 
                 var returnString = _reportService.PrintReport(rep, dic, model.ExportMode);
                 //   _reportService.GenerateReportAsync(reportName);
-                string rdlcFilePath = ConfigCaller.PDFReportPath + "\\" + GetSavingFineName(reportName, model.CUS_ID) + "." + ReportService.GetFileFormat(model.ExportMode);
+                string rdlcFilePath = ConfigCaller.PDFReportPath + "\\" + GetSavingFineName(reportName, model.UD_StaffID) + "." + ReportService.GetFileFormat(model.ExportMode);
 
                 if (!Directory.Exists(ConfigCaller.PDFReportPath))
                 {
@@ -206,7 +206,7 @@ namespace HRM_DAL.Data
 
             string reportName = "MailbagDailyActivityReports_V1";
             //create new folder
-            string newfolder = ConfigCaller.PDFReportPath + "\\" + GetSavingFineName(reportName, model.CUS_ID);
+            string newfolder = ConfigCaller.PDFReportPath + "\\" + GetSavingFineName(reportName, model.UD_StaffID);
 
             if (!Directory.Exists(newfolder))
             {
@@ -273,7 +273,7 @@ namespace HRM_DAL.Data
 
                 }
 
-                string rdlcFilePath = ConfigCaller.PDFReportPath + "\\" + GetSavingFineName(reportName, model.CUS_ID) + "." + ReportService.GetFileFormat(model.ExportMode);
+                string rdlcFilePath = ConfigCaller.PDFReportPath + "\\" + GetSavingFineName(reportName, model.UD_StaffID) + "." + ReportService.GetFileFormat(model.ExportMode);
                 PrimaryWB.SaveAs(rdlcFilePath);
 
                 var returnString = File.ReadAllBytes(rdlcFilePath);
@@ -465,7 +465,7 @@ namespace HRM_DAL.Data
                     }
                 }
 
-                string rdlcFilePath = FilePathReference_QR_Print + "\\" + GetSavingFineName(reportName, model.CUS_ID) /*+ "_" + model.CN_ID */+ "." + ReportService.GetFileFormat(model.ExportMode);
+                string rdlcFilePath = FilePathReference_QR_Print + "\\" + GetSavingFineName(reportName, model.UD_StaffID) /*+ "_" + model.CN_ID */+ "." + ReportService.GetFileFormat(model.ExportMode);
                 System.IO.File.WriteAllBytes(rdlcFilePath, returnString);
                 string base64String = Convert.ToBase64String(returnString, 0, returnString.Length);
 

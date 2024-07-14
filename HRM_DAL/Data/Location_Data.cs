@@ -66,8 +66,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@LOC_Status", item.LOC_Status);
                         cmd.Parameters["@LOC_Status"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
-                        cmd.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
+                        //cmd.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
 
                         string RC;
                         using (SqlCommand cmdrc = new SqlCommand())

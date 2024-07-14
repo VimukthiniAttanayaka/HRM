@@ -74,8 +74,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@CreatedBy", item.CreatedBy);
                         cmd.Parameters["@CreatedBy"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
-                        cmd.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
+                        //cmd.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
 
 
                         SqlDataAdapter dta = new SqlDataAdapter();
@@ -271,8 +271,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@BatchNo", item.BatchNo);
                         cmd.Parameters["@BatchNo"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
-                        cmd.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
+                        //cmd.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -403,8 +403,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@ExceptionStatus", item.ExceptionStatus);
                         cmd.Parameters["@ExceptionStatus"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
-                        cmd.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
+                        //cmd.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@PAGE_NO", item.PAGE_NO);
                         cmd.Parameters["@PAGE_NO"].Direction = ParameterDirection.Input;
@@ -428,8 +428,8 @@ namespace HRM_DAL.Data
                                 cmdrc.CommandText = "sp_get_OutgoingMailTransactionDetail_count";
                                 cmdrc.CommandType = CommandType.StoredProcedure;
 
-                                cmdrc.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
-                                cmdrc.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
+                                //cmdrc.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
+                                //cmdrc.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
 
                                 SqlDataReader rdrrc = cmdrc.ExecuteReader();
                                 rdrrc.Read();

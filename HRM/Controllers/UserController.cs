@@ -26,8 +26,6 @@ namespace HRM.Controllers
     public class userController : ControllerBase
     {
         private LogError objError = new LogError();
-        private SendMail sendMail = new SendMail();
-        private SendSMS sendSMS = new SendSMS();
 
         [HttpPost]
         [Route("[action]")]

@@ -212,11 +212,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_set_AuthenticationKeyValidateWithDB";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_USERID", objUser.AUD_StaffID);
+                        cmd.Parameters.AddWithValue("@UD_USERID", objUser.UD_StaffID);
                         cmd.Parameters["@UD_USERID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UPM_USERTABLEID", objUser.AUD_UserTableID);
-                        cmd.Parameters["@UPM_USERTABLEID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@NOTIFICATIONTOKEN", objUser.AUD_notificationToken);
                         cmd.Parameters["@NOTIFICATIONTOKEN"].Direction = ParameterDirection.Input;
