@@ -109,7 +109,7 @@ namespace HRM_DAL.Data
                                     objUser.UD_PhoneNumber = rdr["UD_PhoneNumber"].ToString();
                                     objUser.UD_Remarks = rdr["UD_Remarks"].ToString();
 
-                                    objUser.authorizationToken = token;
+                                    objUser.UD_AuthorizationToken = token;
 
                                     AuthenticationKeySetupWithDB(objUser);
 
@@ -175,7 +175,7 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_USERID", objUser.UD_StaffID);
                         cmd.Parameters["@UD_USERID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@NOTIFICATIONTOKEN", objUser.authorizationToken);
+                        cmd.Parameters.AddWithValue("@NOTIFICATIONTOKEN", objUser.UD_AuthorizationToken);
                         cmd.Parameters["@NOTIFICATIONTOKEN"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();

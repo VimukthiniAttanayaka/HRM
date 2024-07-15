@@ -8,7 +8,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace MailTrak_DAL.Utility
+namespace HRM_DAL.Utility
 {
     public static class Misc
     {

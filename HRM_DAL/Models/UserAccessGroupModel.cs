@@ -70,12 +70,12 @@ namespace HRM_DAL.Models
 
         public string PAGE_NO { get; set; }
         public string PAGE_RECORDS_COUNT { get; set; }
-        public string USR_StaffID { get; set; }
-        public string USR_FirstName { get; set; }
-        public string USR_LastName { get; set; }
+        public string UD_StaffID { get; set; }
+        public string UD_FirstName { get; set; }
+        public string UD_LastName { get; set; }
         public string UGM_Name { get; set; }
         public string BU_CompanyName { get; set; }
-        public string USR_DepartmentID { get; set; }
+        public string UD_DepartmentID { get; set; }
         public string UAG_Status { get; set; }
         public string TABLE { get; set; }
     }
@@ -114,9 +114,9 @@ namespace HRM_DAL.Models
     public class ReturnUAGUsrModel
     {
         [Key]
-        public string USR_StaffID { get; set; }
-        public string USR_FirstName { get; set; }
-        public string USR_LastName { get; set; }
+        public string UD_StaffID { get; set; }
+        public string UD_FirstName { get; set; }
+        public string UD_LastName { get; set; }
         public string UAG_GroupID { get; set; }
         public string UGM_Name { get; set; }
         public string UAG_BusinessUnit { get; set; }

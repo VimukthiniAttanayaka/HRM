@@ -79,9 +79,8 @@ namespace HRM.Controllers
                     foreach (var item in tempObj.users)
                     {
                         item.USER_ID = model.USER_ID;
-                        item.USR_CustomerID = model.DPT_CustomerID;
-                        item.TABLE = model.TABLE;
-                        item.USR_Status = true;
+                        item.UD_CustomerID = model.DPT_CustomerID;
+                        item.UD_Status = true;
                         //item.UAG_BusinessUnit = model.UAG_BusinessUnit;
 
                         retList.Add(HRM_BL.ExcelUploads_BL.User_Related.add_update_user_excel(item).FirstOrDefault());
@@ -112,10 +111,10 @@ namespace HRM.Controllers
                     objHeadList.FileNameWithPath = tempObj.FileNameWithPath;
                     objHeadList.FileName = tempObj.FileName;
 
-                    var tmeps = retList.Where(b => !b.msg.Contains("kiosk") && b.resp == true).Select(a => new userresponcemodel_return() { StaffID = a.users.FirstOrDefault().USR_StaffID, Message = a.msg }).ToList();
+                    var tmeps = retList.Where(b => !b.msg.Contains("kiosk") && b.resp == true).Select(a => new userresponcemodel_return() { StaffID = a.users.FirstOrDefault().UD_StaffID, Message = a.msg }).ToList();
                     objHeadList.success_users = tmeps;
 
-                    var tmepsC = retList.Where(b => !b.msg.Contains("kiosk") && b.resp == false).Select(a => new userresponcemodel_return() { StaffID = a.users.FirstOrDefault().USR_StaffID, Message = a.msg }).ToList();
+                    var tmepsC = retList.Where(b => !b.msg.Contains("kiosk") && b.resp == false).Select(a => new userresponcemodel_return() { StaffID = a.users.FirstOrDefault().UD_StaffID, Message = a.msg }).ToList();
                     objHeadList.failed_users = tmepsC;
                 }
 

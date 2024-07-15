@@ -13,7 +13,7 @@ namespace HRM_BL
     {
         private static LogError objError = new LogError();
 
-        public static List<ReturnCustomerUserModelHead> get_user_single(CUser CUser) //ok
+        public static List<ReturnCustomerUserModelHead> get_user_single(GetUserSingleModel CUser) //ok
         {
             return HRM_DAL.Data.User_Data.get_user_single(CUser);
         }

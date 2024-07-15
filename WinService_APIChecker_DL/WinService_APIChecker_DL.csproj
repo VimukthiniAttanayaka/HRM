@@ -66,13 +66,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CallAPI_UserPasswordAutoReset.cs" />
-    <Compile Include="CallAPI_DayEndProcess.cs" />
-    <Compile Include="CallAPI_ExceptionEmail.cs" />
-    <Compile Include="CallAPI_OutlookEmail.cs" />
     <Compile Include="Common\Messages.cs" />
     <Compile Include="Models\Ack_MailBagTrans_RequestModel.cs" />
-    <Compile Include="CallAPI.cs" />
     <Compile Include="ConfigCaller.cs" />
     <Compile Include="Models\OutGoingMailDto.cs" />
     <Compile Include="Models\MailBagTransDto.cs" />

@@ -14,7 +14,6 @@ namespace HRM_DAL.Models
 
     public class UserExcelUploadModel : ExcelUploadBaseModel
     {
-        public string TABLE { get; set; }
         public string UAG_BusinessUnit { get; set; }
     }
 

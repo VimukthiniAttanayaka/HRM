@@ -163,7 +163,7 @@ namespace HRM_DAL.Models
     public class InactiveCUserModel
     {
 
-        public string USR_StaffID { get; set; }
+        public string UD_StaffID { get; set; }
         public string TABLE { get; set; }
         public string USER_ID { get; set; }
     }
@@ -235,7 +235,7 @@ namespace HRM_DAL.Models
         public string UD_MobileNumber { get; set; }
         public string UD_PhoneNumber { get; set; }
         public string UD_Remarks { get; set; }
-        public string authorizationToken { get; set; }
+        public string UD_AuthorizationToken { get; set; }
         public string UD_UserName { get; set; }
         public string UD_Password { get; set; }
         public List<ReturnUserAccessModel> UserAccessList { get; set; }
@@ -274,10 +274,9 @@ namespace HRM_DAL.Models
     public class NewpwModel
     {
 
-        public string USER_ID { get; set; }
-        public string USER_TABLE { get; set; }
-        public string USER_PW { get; set; }
-
+        public string UD_StaffID { get; set; }
+        public string UD_Password { get; set; }
+        public string UD_CusID { get; set; }
 
     }
 
@@ -286,153 +285,9 @@ namespace HRM_DAL.Models
     {
         [Key]
         public Int32 ID { get; set; }
-        public string USER_NAME { get; set; }
+        public string UD_StaffID { get; set; }
         public string ACTIVITY_DESCRIPTION { get; set; }
-        public string DATE { get; set; }
-    }
-
-    //=================================================CUSTOMER=================================
-    public class ReturnCustomerUserModel
-    {
-        [Key]
-        public string USR_CustomerID { get; set; }
-        public string CUS_CompanyName { get; set; }
-        public string USR_DepartmentID { get; set; }
-        public string DPT_Name { get; set; }
-        public string USR_StaffID { get; set; }
-        public string USR_FirstName { get; set; }
-        public string USR_LastName { get; set; }
-        public string USR_PrefferedName { get; set; }
-        public string USR_OrgStructuralLevel1 { get; set; }
-        public string USR_OrgStructuralLevel2 { get; set; }
-        public string USR_DepartmentDetail1 { get; set; }
-        public string USR_DepartmentDetail2 { get; set; }
-        public string USR_DepartmentDetail3 { get; set; }
-        public string USR_JobCodeDescription { get; set; }
-        public string USR_Address { get; set; }
-        public string USR_EmailAddress { get; set; }
-        public string USR_MobileNumber { get; set; }
-        public string USR_PhoneNumber1 { get; set; }
-        public string USR_PhoneNumber2 { get; set; }
-        public string USR_RankDescription { get; set; }
-        public string USR_StaffLocation { get; set; }
-        public string USR_PCCode { get; set; }
-        public string USR_PCDescription { get; set; }
-        public string USR_Remarks { get; set; }
-        public bool USR_OutgoingMailFlag { get; set; }
-        public bool USR_HRMAccessFlag { get; set; }
-        public bool USR_ChangePCCodeFlag { get; set; }
-        public string USR_MailBagCPCode { get; set; }
-        public string USR_OutgoingMailCPCode { get; set; }
-        public string USR_OutgoingMailLocationCode { get; set; }
-        public string USR_PostageUsageReportFrequency { get; set; }
-        public string USR_Status { get; set; }
-        public string USR_Pwd { get; set; }
-        public string USR_PwdSalt { get; set; }
-        public string USR_CreatedDateTime { get; set; }
-        public string USR_ModifiedDateTime { get; set; }
-        public string USR_ActiveFrom { get; set; }
-        public string USR_ActiveTo { get; set; }
-        public string BU_ID { get; set; }
-        public string RC { get; set; }
-        public List<ReturnCusUserGroupModel> cususergroup { get; set; }
-        public List<ReturnCusUserGroupModel> cususergroupKioski { get; set; }
-    }
-
-    public class ReturnCusUserAllModel
-    {
-
-        public string USR_StaffID { get; set; }
-        public string USR_FirstName { get; set; }
-        public string USR_LastName { get; set; }
-        public string UGM_Name { get; set; }
-        public string DPT_Name { get; set; }
-        public string CUS_CompanyName { get; set; }
-        public string USR_Status { get; set; }
-        public string RC { get; set; }
-        public string BU_ID { get; set; }
-        public string DPT_ID { get; set; }
-        public string DPCC_PCCode { get; set; }
-    }
-
-
-    public class ReturnCusUserGroupModel
-    {
-        public string UGM_ID { get; set; }
-        public string IndexNo { get; set; }
-        public string UGM_Name { get; set; }
-        public bool UAG_Select { get; set; }
-        public string UAG_CustomerID { get; set; }
-    }
-
-    public class ReturnCustomerUserModelHead : ReturnResponse
-    {
-        public List<ReturnCustomerUserModel> User { get; set; }
-    }
-
-    public class ReturnCustomerUserAllModelHead : ReturnResponse
-    {
-        //public bool resp { get; set; }
-        //public string msg { get; set; }
-        public List<ReturnCusUserAllModel> User { get; set; }
-
-    }
-
-    public class CUser
-    {
-        public string USER_ID { get; set; }
-        public string TABLE { get; set; }
-
-    }
-
-    public class GetCustomerUserAllModel
-    {
-        public string PAGE_NO { get; set; }
-        public string PAGE_RECORDS_COUNT { get; set; }
-        public string USR_StaffID { get; set; }
-        public string USR_FirstName { get; set; }
-        public string USR_LastName { get; set; }
-        public string UGM_Name { get; set; }
-        public string USR_Status { get; set; }
-        public string TABLE { get; set; }
-        public string BU_ID { get; set; }
-        public string CUS_ID { get; set; }
-        public string DPT_ID { get; set; }
-    }
-    public class CUserModel
-    {
-        public string USR_CustomerID { get; set; }
-        public string USR_DepartmentID { get; set; }
-        public string USR_StaffID { get; set; }
-        public string USR_FirstName { get; set; }
-        public string USR_LastName { get; set; }
-        public string USR_PrefferedName { get; set; }
-        public string USR_OrgStructuralLevel1 { get; set; }
-        public string USR_OrgStructuralLevel2 { get; set; }
-        public string USR_DepartmentDetail1 { get; set; }
-        public string USR_DepartmentDetail2 { get; set; }
-        public string USR_DepartmentDetail3 { get; set; }
-        public string USR_JobCodeDescription { get; set; }
-        public string USR_Address { get; set; }
-        public string USR_EmailAddress { get; set; }
-        public string USR_MobileNumber { get; set; }
-        public string USR_PhoneNumber1 { get; set; }
-        public string USR_PhoneNumber2 { get; set; }
-        public string USR_RankDescription { get; set; }
-        public string USR_StaffLocation { get; set; }
-        public string USR_PCCode { get; set; }
-        public string USR_PCDescription { get; set; }
-        public string USR_Remarks { get; set; }
-        public string USR_ActiveFrom { get; set; }
-        public string USR_ActiveTo { get; set; }
-        public bool USR_Status { get; set; }
-        public string USER_ID { get; set; }
-        public string TABLE { get; set; }
-        public List<ReturnCusUserGroupModel> cususergroup { get; set; }
-        public string UAG_BusinessUnit { get; set; }
-        public string USR_EmployeeID { get; set; }
-        public string USR_PwdSalt { get; set; }
-        public string USR_Pwd { get; set; }
+        public DateTime LogTime { get; set; }
     }
 
 }

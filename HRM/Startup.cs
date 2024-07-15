@@ -14,6 +14,13 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System;
+using System.Collections.Generic;
+using HRM.Api.Extensions;
+//using HRM.Api.Middleware;
+//using HRM.Api.Util.Email;
+//using HRM.Api.Util.Options;
 
 namespace HRM
 {
@@ -110,20 +117,76 @@ namespace HRM
                  //options.JsonSerializerOptions.IgnoreNullValues = true;
              });
 
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo
+            //    {
+            //        Title = "HRM_API",
+            //        Version = "v1",
+            //        Description = ""
+            //    });
+            //});
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "HRM_API",
+                    Title = "HRM API Documentation",
                     Version = "v1",
-                    Description = ""
+                    Contact = new OpenApiContact
+                    {
+                        Name = "SDDRIT",
+                        Email = "info@sddrit.com"
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Apache 2.0",
+                        Url = new Uri("http://www.apache.org/licenses/LICENSE-2.0.html")
+                    }
                 });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Scheme = "Bearer",
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+
+                        },
+                        new List<string>()
+                    }
+                });
+
+
+
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if (env.IsEnvironment("DevelopmentLk") || env.IsEnvironment("DevelopmentId") || env.IsEnvironment("UatId") || env.IsEnvironment("UatLk") || env.IsEnvironment("TestLk") || env.IsEnvironment("TestId"))
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HRM.Api v1 " + env.EnvironmentName));
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

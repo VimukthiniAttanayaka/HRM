@@ -1,6 +1,6 @@
 ﻿//using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace MailTrak.Common
+namespace HRM.Common
 {
     public static class Messages
     {

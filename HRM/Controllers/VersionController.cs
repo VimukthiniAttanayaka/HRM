@@ -31,35 +31,24 @@ namespace HRM.Controllers
             _logger = logger;
         }
 
-        public async Task Login(string returnUrl = "/")
-        {
-            await HttpContext.ChallengeAsync("Auth0", new AuthenticationProperties() { RedirectUri = returnUrl });
-        }
+        //public async Task Login(string returnUrl = "/")
+        //{
+        //    await HttpContext.ChallengeAsync("Auth0", new AuthenticationProperties() { RedirectUri = returnUrl });
+        //}
 
-        public async Task Logout()
-        {
-            await HttpContext.SignOutAsync("Auth0", new AuthenticationProperties()
-            {
-                RedirectUri = Url.Action("Index", "Home")
-            });
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        }
+        //public async Task Logout()
+        //{
+        //    await HttpContext.SignOutAsync("Auth0", new AuthenticationProperties()
+        //    {
+        //        RedirectUri = Url.Action("Index", "Home")
+        //    });
+        //    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        //}
 
         [HttpGet]
         public IEnumerable<version> Get()
         {
-            //    public UAGModel Get()
-            //{
-            //UAGModel um = new UAGModel();
-            //um.ExistingUAG = new List<ExistingUAGModel>();
-            //um.KioskAG = new List<KioskAGModel>();
-
-            //um.ExistingUAG.Add(new ExistingUAGModel() { });
-            //um.KioskAG.Add(new KioskAGModel() { });
-
             var rng = new Random();
-
-            //LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, "");
 
             return Enumerable.Range(1, 1).Select(index => new version
             {
@@ -131,6 +120,8 @@ namespace HRM.Controllers
             return templist;
         }
         public class EmailChecker { public string EmailAddress { get; set; } }
+
+        [NonAction]
         public ReturnResponse WriteLog(LogType logType, string ModuleName, string FunctionName, string LogText)
         {
             ReturnResponse templist = new ReturnResponse();

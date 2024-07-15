@@ -68,9 +68,9 @@ namespace HRM_DAL.Data
                                 objUserHead.resp = true;
                                 objUserHead.msg = "Get User";
 
-                                objData.USR_StaffID = rdr["USR_StaffID"].ToString();
-                                objData.USR_FirstName = rdr["USR_FirstName"].ToString();
-                                objData.USR_LastName = rdr["USR_LastName"].ToString();
+                                objData.UD_StaffID = rdr["UD_StaffID"].ToString();
+                                objData.UD_FirstName = rdr["UD_FirstName"].ToString();
+                                objData.UD_LastName = rdr["UD_LastName"].ToString();
                                 objData.UGM_Name = rdr["UGM_Name"].ToString();
                                 objData.BU_CompanyName = rdr["BU_CompanyName"].ToString();
                                 objData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
@@ -186,9 +186,9 @@ namespace HRM_DAL.Data
                                 objUserHead.resp = true;
                                 objUserHead.msg = "Get User";
 
-                                objData.USR_StaffID = rdr["USR_StaffID"].ToString();
-                                objData.USR_FirstName = rdr["USR_FirstName"].ToString();
-                                objData.USR_LastName = rdr["USR_LastName"].ToString();
+                                objData.UD_StaffID = rdr["UD_StaffID"].ToString();
+                                objData.UD_FirstName = rdr["UD_FirstName"].ToString();
+                                objData.UD_LastName = rdr["UD_LastName"].ToString();
                                 objData.UGM_Name = rdr["UGM_Name"].ToString();
                                 objData.BU_CompanyName = rdr["BU_CompanyName"].ToString();
                                 objData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
@@ -307,9 +307,9 @@ namespace HRM_DAL.Data
                                 objUserHead.resp = true;
                                 objUserHead.msg = "Get User";
 
-                                objData.USR_StaffID = rdr["USR_StaffID"].ToString();
-                                objData.USR_FirstName = rdr["USR_FirstName"].ToString();
-                                objData.USR_LastName = rdr["USR_LastName"].ToString();
+                                objData.UD_StaffID = rdr["UD_StaffID"].ToString();
+                                objData.UD_FirstName = rdr["UD_FirstName"].ToString();
+                                objData.UD_LastName = rdr["UD_LastName"].ToString();
                                 objData.UGM_Name = rdr["UGM_Name"].ToString();
                                 objData.BU_CompanyName = rdr["BU_CompanyName"].ToString();
                                 objData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
@@ -400,14 +400,14 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@PAGE_RECORDS_COUNT", Userall.PAGE_RECORDS_COUNT);
                         cmd.Parameters["@PAGE_RECORDS_COUNT"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@USR_StaffID", Userall.USR_StaffID);
-                        cmd.Parameters["@USR_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_StaffID", Userall.UD_StaffID);
+                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@USR_FirstName", Userall.USR_FirstName);
-                        cmd.Parameters["@USR_FirstName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_FirstName", Userall.UD_FirstName);
+                        cmd.Parameters["@UD_FirstName"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@USR_LastName", Userall.USR_LastName);
-                        cmd.Parameters["@USR_LastName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_LastName", Userall.UD_LastName);
+                        cmd.Parameters["@UD_LastName"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UGM_Name", Userall.UGM_Name);
                         cmd.Parameters["@UGM_Name"].Direction = ParameterDirection.Input;
@@ -415,8 +415,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@BU_CompanyName", Userall.BU_CompanyName);
                         cmd.Parameters["@BU_CompanyName"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@USR_DepartmentID", Userall.USR_DepartmentID);
-                        cmd.Parameters["@USR_DepartmentID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_DepartmentID", Userall.UD_DepartmentID);
+                        cmd.Parameters["@UD_DepartmentID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UAG_Status", Userall.UAG_Status);
                         cmd.Parameters["@UAG_Status"].Direction = ParameterDirection.Input;
@@ -456,9 +456,9 @@ namespace HRM_DAL.Data
                                 objUserHead.resp = true;
                                 objUserHead.msg = "Get User";
 
-                                objData.USR_StaffID = rdr["USR_StaffID"].ToString();
-                                objData.USR_FirstName = rdr["USR_FirstName"].ToString();
-                                objData.USR_LastName = rdr["USR_LastName"].ToString();
+                                objData.UD_StaffID = rdr["UD_StaffID"].ToString();
+                                objData.UD_FirstName = rdr["UD_FirstName"].ToString();
+                                objData.UD_LastName = rdr["UD_LastName"].ToString();
                                 objData.UGM_Name = rdr["UGM_Name"].ToString();
                                 objData.BU_CompanyName = rdr["BU_CompanyName"].ToString();
                                 objData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();

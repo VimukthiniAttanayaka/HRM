@@ -67,10 +67,6 @@ namespace HRM_DAL.Data
                                 objcustomer.CUS_Adrs_PostalCode = rdr["CUS_Adrs_PostalCode"].ToString();
                                 objcustomer.CUS_ContactPerson = rdr["CUS_ContactPerson"].ToString();
                                 objcustomer.CUS_ContactNumber = rdr["CUS_ContactNumber"].ToString();
-                                objcustomer.CUS_BusinessUnit = rdr["CUS_BusinessUnit"].ToString();
-                                objcustomer.BU_CompanyName = rdr["BU_CompanyName"].ToString();
-                                objcustomer.CUS_InputCourierShipmentCost = Convert.ToBoolean(rdr["CUS_InputCourierShipmentCost"]);
-                                objcustomer.CUS_InputCountryOverseasMail = Convert.ToBoolean(rdr["CUS_InputCountryOverseasMail"]);
                                 objcustomer.CUS_PinOrPwd = rdr["CUS_PinOrPwd"].ToString();
                                 objcustomer.CUS_OTP_By_SMS = Convert.ToBoolean(rdr["CUS_OTP_By_SMS"]);
                                 objcustomer.CUS_OTP_By_Email = Convert.ToBoolean(rdr["CUS_OTP_By_Email"]);
@@ -170,8 +166,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@CUS_Status", item.CUS_Status);
                         cmd.Parameters["@CUS_Status"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@USER_ID", item.USER_ID);
-                        cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
+                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
                         string RC;
                         using (SqlCommand cmdrc = new SqlCommand())
@@ -213,10 +209,6 @@ namespace HRM_DAL.Data
                                 objcustomer.CUS_Adrs_PostalCode = rdr["CUS_Adrs_PostalCode"].ToString();
                                 objcustomer.CUS_ContactPerson = rdr["CUS_ContactPerson"].ToString();
                                 objcustomer.CUS_ContactNumber = rdr["CUS_ContactNumber"].ToString();
-                                objcustomer.CUS_BusinessUnit = rdr["CUS_BusinessUnit"].ToString();
-                                objcustomer.BU_CompanyName = rdr["BU_CompanyName"].ToString();
-                                objcustomer.CUS_InputCourierShipmentCost = Convert.ToBoolean(rdr["CUS_InputCourierShipmentCost"]);
-                                objcustomer.CUS_InputCountryOverseasMail = Convert.ToBoolean(rdr["CUS_InputCountryOverseasMail"]);
                                 objcustomer.CUS_PinOrPwd = rdr["CUS_PinOrPwd"].ToString();
                                 objcustomer.CUS_OTP_By_SMS = Convert.ToBoolean(rdr["CUS_OTP_By_SMS"]);
                                 objcustomer.CUS_OTP_By_Email = Convert.ToBoolean(rdr["CUS_OTP_By_Email"]);
@@ -274,54 +266,6 @@ namespace HRM_DAL.Data
 
         }
 
-        public static List<ReturnCustomerModel> get_customers_for_kioski_sync()
-        {
-            List<ReturnCustomerModel> objCustHeadList = new List<ReturnCustomerModel>();
-            try
-            {
-                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
-                {
-
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        cmd.Connection = lconn;
-
-                        cmd.CommandText = "sp_get_customers_for_kioski_sync";
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        SqlDataAdapter dta = new SqlDataAdapter();
-                        dta.SelectCommand = cmd;
-                        DataSet Ds = new DataSet();
-                        dta.Fill(Ds);
-
-                        if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
-                        {
-                            foreach (DataRow rdr in Ds.Tables[0].Rows)
-                            {
-                                objCustHeadList.Add(new ReturnCustomerModel
-                                {
-                                    CUS_ID = rdr["CUS_ID"].ToString()
-                                });
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-                objError.WriteLog(0, "Customer_Data", "get_customers_for_kioski_sync", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "Customer_Data", "get_customers_for_kioski_sync", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "Customer_Data", "get_customers_for_kioski_sync", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "Customer_Data", "get_customers_for_kioski_sync", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-            }
-            return objCustHeadList;
-
-        }
-
         public static List<ReturncustResponse> add_new_customer(CustomerModel item)//ok
         {
             List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
@@ -348,8 +292,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_insert_customer";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@USER_ID", item.USER_ID);
-                        cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
+                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
                         cmd.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
@@ -384,15 +328,6 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
                         cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@CUS_BusinessUnit", item.CUS_BusinessUnit);
-                        cmd.Parameters["@CUS_BusinessUnit"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@CUS_InputCourierShipmentCost", item.CUS_InputCourierShipmentCost);
-                        cmd.Parameters["@CUS_InputCourierShipmentCost"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@CUS_InputCountryOverseasMail", item.CUS_InputCountryOverseasMail);
-                        cmd.Parameters["@CUS_InputCountryOverseasMail"].Direction = ParameterDirection.Input;
-
                         cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
                         cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
 
@@ -403,7 +338,7 @@ namespace HRM_DAL.Data
                         cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
 
                         string mailtypes = "";
-                      
+
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
                         DataSet Ds = new DataSet();
@@ -474,8 +409,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_modify_customer";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@USER_ID", item.USER_ID);
-                        cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
+                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
                         cmd.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
@@ -510,15 +445,6 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
                         cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@CUS_BusinessUnit", item.CUS_BusinessUnit);
-                        cmd.Parameters["@CUS_BusinessUnit"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@CUS_InputCourierShipmentCost", item.CUS_InputCourierShipmentCost);
-                        cmd.Parameters["@CUS_InputCourierShipmentCost"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@CUS_InputCountryOverseasMail", item.CUS_InputCountryOverseasMail);
-                        cmd.Parameters["@CUS_InputCountryOverseasMail"].Direction = ParameterDirection.Input;
-
                         cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
                         cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
 
@@ -531,7 +457,7 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@CUS_Status", item.CUS_Status);
                         cmd.Parameters["@CUS_Status"].Direction = ParameterDirection.Input;
 
-                                              SqlDataAdapter dta = new SqlDataAdapter();
+                        SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
                         DataSet Ds = new DataSet();
                         dta.Fill(Ds);
@@ -604,8 +530,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
                         cmd.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@USER_ID", item.USER_ID);
-                        cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
+                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
 
 
@@ -654,109 +580,6 @@ namespace HRM_DAL.Data
 
 
         }
-
-        public static List<ReturnBUCustomerModelHead> get_customers_for_user_with_select(TCustomerUserModel item)
-        {
-            List<ReturnBUCustomerModelHead> objUserHeadList = new List<ReturnBUCustomerModelHead>();
-            List<ReturnUserCustModel> objCustList = new List<ReturnUserCustModel>();
-            ReturnBUCustomerModelHead objUserHead = new ReturnBUCustomerModelHead();
-
-            if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
-            {
-                objUserHead.resp = false;
-                objUserHead.IsAuthenticated = false;
-                objUserHeadList.Add(objUserHead);
-                return objUserHeadList;
-            }
-
-            try
-            {
-                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
-                {
-                    using (SqlCommand cmdCust = new SqlCommand())
-                    {
-                        cmdCust.Connection = lconn;
-
-                        cmdCust.CommandText = "sp_get_t_user_customers_with_select";
-                        cmdCust.CommandType = CommandType.StoredProcedure;
-
-                        cmdCust.Parameters.AddWithValue("@USER_ID", item.USER_ID);
-                        cmdCust.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
-
-                        cmdCust.Parameters.AddWithValue("@BU_ID", item.BU_ID);
-                        cmdCust.Parameters["@BU_ID"].Direction = ParameterDirection.Input;
-
-                        SqlDataAdapter dtaCust = new SqlDataAdapter();
-                        dtaCust.SelectCommand = cmdCust;
-                        DataSet DsCust = new DataSet();
-                        dtaCust.Fill(DsCust);
-
-                        if (DsCust != null && DsCust.Tables.Count > 0 && DsCust.Tables[0].Rows.Count > 0)
-                        {
-                            objUserHead.resp = true;
-                            objUserHead.msg = "Customer";
-
-                            foreach (DataRow rdrCust in DsCust.Tables[0].Rows)
-                            {
-                                ReturnUserCustModel objCustData = new ReturnUserCustModel
-                                {
-                                    CUS_ID = rdrCust["CUS_ID"].ToString(),
-                                    IndexNo = rdrCust["IndexNo"].ToString(),
-                                    CUS_CompanyName = rdrCust["CUS_CompanyName"].ToString(),
-                                    BU_CompanyName = rdrCust["BU_CompanyName"].ToString(),
-                                    UAG_Select = Convert.ToBoolean(rdrCust["UAG_Select"])
-                                };
-
-                                if (objUserHead.Customer == null)
-                                {
-                                    objUserHead.Customer = new List<ReturnUserCustModel>();
-                                }
-
-                                objUserHead.Customer.Add(objCustData);
-
-                            }
-
-                            objUserHeadList.Add(objUserHead);
-                        }
-                        else
-                        {
-                            objUserHead.resp = true;
-                            objUserHead.msg = "";
-                            objUserHeadList.Add(objUserHead);
-                        }
-                    }
-                }
-
-                return objUserHeadList;
-
-            }
-            catch (Exception ex)
-            {
-
-                objUserHead = new ReturnBUCustomerModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "UserController", "get_customers_for_user_with_select", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "get_customers_for_user_with_select", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserController", "get_customers_for_user_with_select", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "get_customers_for_user_with_select", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-
-            }
-
-            return objUserHeadList;
-
-        }
-
-
-
     }
 
 }

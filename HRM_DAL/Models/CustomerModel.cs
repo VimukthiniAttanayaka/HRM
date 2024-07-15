@@ -3,16 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HRM_DAL.Models
 {
-    public class TCustomerUserModel : RequestBaseModel
-    {
-        public string USER_ID { get; set; }
-        public string BU_ID { get; set; }
-    }
-
     public class ReturnBUCustomerModelHead : ReturnResponse
     {
-        //public bool resp { get; set; }
-        //public string msg { get; set; }
         public List<ReturnUserCustModel> Customer { get; set; }
 
 
@@ -20,7 +12,6 @@ namespace HRM_DAL.Models
 
     public class CustomerModel : RequestBaseModel
     {
-        public string USER_ID { get; set; }
         public string CUS_ID { get; set; }
         public string CUS_CompanyName { get; set; }
         public string CUS_Adrs_BlockBuildingNo { get; set; }
@@ -32,9 +23,6 @@ namespace HRM_DAL.Models
         public string CUS_Adrs_PostalCode { get; set; }
         public string CUS_ContactPerson { get; set; }
         public string CUS_ContactNumber { get; set; }
-        public string CUS_BusinessUnit { get; set; }
-        public bool CUS_InputCourierShipmentCost { get; set; }
-        public bool CUS_InputCountryOverseasMail { get; set; }
         public string CUS_PinOrPwd { get; set; }
         public bool CUS_OTP_By_SMS { get; set; }
         public bool CUS_OTP_By_Email { get; set; }
@@ -63,10 +51,6 @@ namespace HRM_DAL.Models
         public string CUS_Adrs_PostalCode { get; set; }
         public string CUS_ContactPerson { get; set; }
         public string CUS_ContactNumber { get; set; }
-        public string CUS_BusinessUnit { get; set; }
-        public string BU_CompanyName { get; set; }
-        public bool CUS_InputCourierShipmentCost { get; set; }
-        public bool CUS_InputCountryOverseasMail { get; set; }
         public string CUS_PinOrPwd { get; set; }
         public bool CUS_OTP_By_SMS { get; set; }
         public bool CUS_OTP_By_Email { get; set; }
@@ -86,10 +70,7 @@ namespace HRM_DAL.Models
         public string PAGE_RECORDS_COUNT { get; set; }
         public string CUS_ID { get; set; }
         public string CUS_CompanyName { get; set; }
-        public string BU_CompanyName { get; set; }
         public string CUS_Status { get; set; }
-        public string USER_ID { get; set; }
-
 
     }
 
@@ -99,7 +80,6 @@ namespace HRM_DAL.Models
 
         public string CUS_ID { get; set; }
         public string CUS_CompanyName { get; set; }
-        public string BU_CompanyName { get; set; }
         public string CUS_Status { get; set; }
         public string RC { get; set; }
     }
@@ -132,7 +112,6 @@ namespace HRM_DAL.Models
     {
 
         public string CUS_ID { get; set; }
-        public string USER_ID { get; set; }
     }
 
     public class ReturnCustomerSelectModel

@@ -11,11 +11,6 @@ namespace HRM_BL
     {
         private static LogError objError = new LogError();
 
-        public static List<ReturnBUCustomerModelHead> get_customers_for_user_with_select(TCustomerUserModel item)
-        {
-            return HRM_DAL.Data.Customer_Data.get_customers_for_user_with_select(item);
-        }
-
         public static List<ReturnCustomerModelHead> get_customers_single(Customer CUS_ID)//ok
         {
             return HRM_DAL.Data.Customer_Data.get_customers_single(CUS_ID);

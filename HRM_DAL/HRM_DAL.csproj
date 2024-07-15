@@ -74,6 +74,7 @@
     <Compile Include="Models\AuthenticateModel.cs" />
     <Compile Include="Models\CustomerDepartment.cs" />
     <Compile Include="Models\CustomerLocation.cs" />
+    <Compile Include="Models\UserDetailsModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\Department.cs" />
