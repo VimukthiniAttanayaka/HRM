@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using utility_handler.Data;
 using email_sender;
 using System.Linq;
-using System.Web.Script.Serialization;
+//using System.Web.Script.Serialization;
 using System.Text.Json;
 using utility_handler.Utility;
 //using Newtonsoft.Json;
