@@ -6,6 +6,7 @@ import calender from '../../assets/images/calendar.svg';
 import cources from '../../assets/images/cources.svg';
 import marks from '../../assets/images/marks.svg';
 import { getRole } from '../../StaticClasses';
+import { gettutorial1 } from '../../MenuActivation';
 
 type LeftNavbarProps = {
     calendar: () => void,
@@ -19,6 +20,8 @@ const LeftNavbar: React.FC<LeftNavbarProps> = (props) => {
     const user = getRole();
     var hide;
     user === 'Teacher' ? hide = 'hide' : hide = '';
+    console.log("dctfvgbhnjlkm");
+    console.log(gettutorial1());
 
     return (
         <Row className='left-navbar'>
