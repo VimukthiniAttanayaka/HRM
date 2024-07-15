@@ -5,6 +5,7 @@ import dashboard from '../../assets/images/dashboard.svg';
 import calender from '../../assets/images/calendar.svg';
 import cources from '../../assets/images/cources.svg';
 import marks from '../../assets/images/marks.svg';
+import { getRole } from '../../StaticClasses';
 
 type LeftNavbarProps = {
     calendar: () => void,
@@ -14,7 +15,8 @@ const LeftNavbar: React.FC<LeftNavbarProps> = (props) => {
 
     const { calendar, course } = props;
 
-    const user = localStorage.getItem('role');
+    // const user = localStorage.getItem('role');
+    const user = getRole();
     var hide;
     user === 'Teacher' ? hide = 'hide' : hide = '';
 
@@ -77,17 +79,17 @@ const LeftNavbar: React.FC<LeftNavbarProps> = (props) => {
                         <Image src={marks} alt='marks' className='icon' />
                     </Row>
                 </a>
-                <a href='/home'>
+                <a href='/user'>
                     <Row>
                         <Image src={home} alt='home' className='icon' />
                     </Row>
                 </a>
-                <a href='/home'>
+                <a href='/employee'>
                     <Row>
                         <Image src={home} alt='home' className='icon' />
                     </Row>
                 </a>
-                <a href='/home'>
+                <a href='/customer'>
                     <Row>
                         <Image src={home} alt='home' className='icon' />
                     </Row>

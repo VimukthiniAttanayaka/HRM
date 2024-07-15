@@ -116,7 +116,7 @@ const User = () => {
                         <Col xs={12} className='profile-content ps-5'>
                             <Row>
                                 <Col xs={12} className='pb-5'>
-                                    <h4>PMAT 22213 - Mathematical Modules For Computing</h4>
+                                    <h4>User</h4>
                                 </Col>
                             </Row>
                             <Row>
