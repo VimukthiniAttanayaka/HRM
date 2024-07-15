@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col, Image } from 'react-bootstrap';
 import logo from "../../assets/images/logo.png";
 import profile from "../../assets/images/profile.svg";
+import { getProductTitle } from '../../StaticClasses';
 
 const TopNavbar = () => {
     return (
@@ -13,7 +14,8 @@ const TopNavbar = () => {
             </Col>
             <Col xs={9} className="px-0">
                 <a href='/home'>
-                    <h1 className='logo-text'>Virtual Learning Environment</h1>
+                    <h1 className='logo-text'>{getProductTitle()}</h1>
+                    {/* <h1 className='logo-text'>Virtual Learning Environment</h1> */}
                 </a>
             </Col>
             <Col xs={2} className="px-0">

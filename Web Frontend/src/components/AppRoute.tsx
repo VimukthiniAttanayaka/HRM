@@ -9,6 +9,10 @@ import Profile from "./pages/Profile";
 import CoursesMarks from "./pages/CoursesMarks";
 import TutorialMarks from "./pages/TutorialMarks";
 import CoursesTeachers from "./pages/CoursesTeachers";
+import Attendance from "./pages/Attendance";
+import Customer from "./pages/Customer";
+import Employee from "./pages/Employee";
+import User from "./pages/User";
 
 const AppRoute: React.FC = () => {
   return (
@@ -23,6 +27,10 @@ const AppRoute: React.FC = () => {
         <Route path="/coursemarks" element={<CoursesMarks />} />
         <Route path="/tutorialmarks" element={<TutorialMarks />} />
         <Route path="/coursesteachers" element={<CoursesTeachers />} />
+        <Route path="/attendance" element={<Attendance />} />
+        <Route path="/customer" element={<Customer />} />
+        <Route path="/employee" element={<Employee />} />
+        <Route path="/user" element={<User />} />
       </Routes>
     </BrowserRouter>
   );
