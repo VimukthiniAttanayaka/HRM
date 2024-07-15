@@ -246,11 +246,8 @@ namespace HRM_DAL.Models
     }
     public class ReturnUserAccessModel
     {
-        public string UD_StaffID { get; set; }
-        public string Menu_Code { get; set; }
-        public string Menu_Description { get; set; }
-        public string Menu_Item_Type { get; set; }
-        public string UAG_GroupID { get; set; }
+        public string MNU_MenuName { get; set; }
+        public bool MNU_Active { get; set; }
     }
 
     public class NotificationTokenModel

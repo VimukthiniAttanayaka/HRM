@@ -35,7 +35,12 @@ namespace HRM.Controllers
 
             try
             {
-                objUserHeadList.Add(new ReturnUserModelHead() { resp = true, msg = "Welcome To HRM" });
+                List<ReturnUserModel> user = new List<ReturnUserModel>();
+                List<ReturnUserAccessModel> UserAccessList = new List<ReturnUserAccessModel>();
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active=true,MNU_MenuName="HRM_Customer"});
+                user.Add(new ReturnUserModel() { UserAccessList= UserAccessList });
+
+                objUserHeadList.Add(new ReturnUserModelHead() { resp = true, msg = "Welcome To HRM", user = user});
                 return objUserHeadList;
 
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, logdata);
