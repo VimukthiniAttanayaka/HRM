@@ -78,6 +78,7 @@ namespace HRM.Controllers
             public string LogText { get; set; }
         }
 
+        [NonAction]
         public ReturnResponse WriteLog(LogType logType, string ModuleName, string FunctionName, string LogText)
         {
             ReturnResponse templist = new ReturnResponse();

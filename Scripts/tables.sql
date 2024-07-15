@@ -1,26 +1,13 @@
-USE [HRM_Portal]
-GO
 
-/****** Object:  Table [dbo].[tblAttributeDetail]    Script Date: 7/15/2024 12:13:39 AM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[tblAttributeDetail](
-	[AttributeCode] [varchar](10) NOT NULL,
-	[AttributeName] [varchar](100) NOT NULL,
-	[AttributeValue] [varchar](255) NOT NULL,
-	[AttributeIsActive] [bit] NOT NULL,
-	[AttributeDataType] [varchar](45) NOT NULL,
-	[AttributeModifyDate] [datetime] NOT NULL,
- CONSTRAINT [PK_attributedetail] PRIMARY KEY CLUSTERED 
+CREATE TABLE [dbo].[tbl_country](
+	[COU_Code] [varchar](3) NOT NULL,
+	[COU_Name] [varchar](100) NOT NULL,
+	[COU_ISO_AlphaCode] [varchar](3) NOT NULL,
+	[COU_ISO_NumericCode] [decimal](3, 0) NOT NULL,
+	[COU_TimeZoneDifferenceInMinutes] [int] NULL DEFAULT ((0)),
+PRIMARY KEY CLUSTERED 
 (
-	[AttributeCode] ASC
+	[COU_Code] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
@@ -29,113 +16,15 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-/****** Object:  Table [dbo].[tblAuditLog]    Script Date: 7/15/2024 12:13:39 AM ******/
-SET ANSI_NULLS ON
-GO
 
-SET QUOTED_IDENTIFIER ON
-GO
 
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[tblAuditLog](
-	[AuditLogId] [bigint] IDENTITY(1,1) NOT NULL,
-	[AuditDes] [text] NOT NULL,
-	[AuditUserId] [varchar](8) NOT NULL,
-	[AutditTransType] [varchar](45) NOT NULL,
-	[AuditCreateTime] [datetime] NOT NULL,
-	[AuditRef] [varchar](255) NULL,
- CONSTRAINT [PK_auditlog] PRIMARY KEY CLUSTERED 
+CREATE TABLE [dbo].[tbl_currency](
+	[CUR_Code] [varchar](3) NOT NULL,
+	[CUR_Name] [varchar](100) NOT NULL,
+	[CUR_ISO_Code] [varchar](3) NOT NULL,
+PRIMARY KEY CLUSTERED 
 (
-	[AuditLogId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-/****** Object:  Table [dbo].[tblErrorLog]    Script Date: 7/15/2024 12:13:39 AM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[tblErrorLog](
-	[ErrorLogId] [bigint] IDENTITY(1,1) NOT NULL,
-	[ErrorDescription] [text] NULL,
-	[ErrorUserId] [varchar](8) NULL,
-	[ErrorDatetime] [datetime] NULL,
-	[ErrorLoggedIp] [varchar](45) NULL,
-	[ErrorRef] [text] NULL,
-	[ErrorPage] [text] NULL,
- CONSTRAINT [PK_errorlog] PRIMARY KEY CLUSTERED 
-(
-	[ErrorLogId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-/****** Object:  Table [dbo].[tblUserDetails]    Script Date: 7/15/2024 12:13:39 AM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[tblUserDetails](
-	[UD_StaffID] [varchar](10) NOT NULL,
-	[UD_FirstName] [varchar](100) NULL,
-	[UD_LastName] [varchar](100) NULL,
-	[UD_EmailAddress] [varchar](100) NULL,
-	[UD_MobileNumber] [varchar](100) NULL,
-	[UD_PhoneNumber] [varchar](100) NULL,
-	[UD_Remarks] [varchar](max) NULL,
-	[authorizationToken] [varchar](max) NULL,
-	[UD_UserName] [varchar](100) NULL,
-	[UD_Password] [varchar](100) NULL,
- CONSTRAINT [PK_tblUserDetails] PRIMARY KEY CLUSTERED 
-(
-	[UD_StaffID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-/****** Object:  Table [dbo].[tblUserLog]    Script Date: 7/15/2024 12:13:39 AM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[tblUserLog](
-	[UserLogId] [bigint] IDENTITY(1,1) NOT NULL,
-	[UserUserId] [varchar](8) NULL,
-	[UserLogTime] [datetime] NULL,
-	[UserLogOffTime] [datetime] NULL,
- CONSTRAINT [PK_userlog] PRIMARY KEY CLUSTERED 
-(
-	[UserLogId] ASC
+	[CUR_Code] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
@@ -144,25 +33,71 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-/****** Object:  Table [dbo].[tblUserMenuItem]    Script Date: 7/15/2024 12:13:39 AM ******/
-SET ANSI_NULLS ON
-GO
 
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[tblUserMenuItem](
-	[UserMenuItemCode] [varchar](8) NOT NULL,
-	[UserMenuItemDes] [varchar](100) NOT NULL,
-	[UserMenuItemIsActive] [bit] NOT NULL,
-	[UserMenuItemModifyDate] [datetime] NOT NULL,
-	[UserMenuItemIsFiltered] [bit] NULL,
- CONSTRAINT [PK_usermenuitem] PRIMARY KEY CLUSTERED 
+CREATE TABLE [dbo].[tbl_customer](
+	[CUS_ID] [varchar](20) NOT NULL,
+	[CUS_CompanyName] [varchar](100) NOT NULL,
+	[CUS_Adrs_BlockBuildingNo] [varchar](100) NOT NULL,
+	[CUS_Adrs_BuildingName] [varchar](100) NOT NULL,
+	[CUS_Adrs_UnitNumber] [varchar](20) NOT NULL,
+	[CUS_Adrs_StreetName] [varchar](50) NOT NULL,
+	[CUS_Adrs_City] [varchar](50) NOT NULL,
+	[CUS_Adrs_CountryCode] [varchar](5) NOT NULL,
+	[CUS_Adrs_PostalCode] [varchar](10) NOT NULL,
+	[CUS_ContactPerson] [varchar](200) NOT NULL,
+	[CUS_ContactNumber] [varchar](20) NOT NULL,
+	[CUS_PinOrPwd] [varchar](3) NULL CONSTRAINT [DF__tbl_custo__CUS_P__7B5B524B]  DEFAULT ('PWD'),
+	[CUS_OTP_By_SMS] [bit] NOT NULL,
+	[CUS_OTP_By_Email] [bit] NOT NULL,
+	[CUS_Status] [bit] NOT NULL,
+	[CUS_CreatedBy] [varchar](100) NOT NULL,
+	[CUS_CreatedDateTime] [datetime] NULL CONSTRAINT [DF__tbl_custo__CUS_C__7C4F7684]  DEFAULT (NULL),
+	[CUS_ModifiedBy] [varchar](100) NULL CONSTRAINT [DF__tbl_custo__CUS_M__7D439ABD]  DEFAULT (NULL),
+	[CUS_ModifiedDateTime] [datetime] NULL CONSTRAINT [DF__tbl_custo__CUS_M__7E37BEF6]  DEFAULT (NULL),
+ CONSTRAINT [PK__tbl_cust__373A37B74CC50148] PRIMARY KEY CLUSTERED 
 (
-	[UserMenuItemCode] ASC
+	[CUS_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+CREATE TABLE [dbo].[tbl_Employee](
+	[USR_CustomerID] [varchar](20) NOT NULL,
+	[USR_DepartmentID] [varchar](20) NOT NULL,
+	[USR_EmployeeID] [varchar](50) NOT NULL,
+	[USR_FirstName] [varchar](100) NOT NULL,
+	[USR_LastName] [varchar](100) NOT NULL,
+	[USR_PrefferedName] [varchar](100) NOT NULL,
+	[USR_OrgStructuralLevel1] [varchar](20) NULL CONSTRAINT [DF__tbl_user___USR_O__0FA2421A]  DEFAULT (NULL),
+	[USR_OrgStructuralLevel2] [varchar](20) NULL CONSTRAINT [DF__tbl_user___USR_O__10966653]  DEFAULT (NULL),
+	[USR_DepartmentDetail1] [varchar](50) NULL CONSTRAINT [DF__tbl_user___USR_D__118A8A8C]  DEFAULT (NULL),
+	[USR_DepartmentDetail2] [varchar](50) NULL CONSTRAINT [DF__tbl_user___USR_D__127EAEC5]  DEFAULT (NULL),
+	[USR_DepartmentDetail3] [varchar](50) NULL CONSTRAINT [DF__tbl_user___USR_D__1372D2FE]  DEFAULT (NULL),
+	[USR_JobCodeDescription] [varchar](200) NULL CONSTRAINT [DF__tbl_user___USR_J__1466F737]  DEFAULT (NULL),
+	[USR_Address] [varchar](200) NOT NULL,
+	[USR_EmailAddress] [varchar](100) NULL,
+	[USR_MobileNumber] [varchar](20) NULL,
+	[USR_PhoneNumber1] [varchar](20) NOT NULL,
+	[USR_PhoneNumber2] [varchar](20) NULL CONSTRAINT [DF__tbl_user___USR_P__155B1B70]  DEFAULT (NULL),
+	[USR_RankDescription] [varchar](100) NULL CONSTRAINT [DF__tbl_user___USR_R__164F3FA9]  DEFAULT (NULL),
+	[USR_StaffLocation] [varchar](50) NOT NULL,
+	[USR_Remarks] [varchar](200) NOT NULL,
+	[USR_Pwd] [varchar](500) NULL CONSTRAINT [DF__tbl_user___USR_P__1CFC3D38]  DEFAULT (NULL),
+	[USR_LastResetDateTime] [datetime] NULL CONSTRAINT [DF__tbl_user___USR_L__1EE485AA]  DEFAULT (NULL),
+	[USR_SyncedDateTime] [datetime] NULL CONSTRAINT [DF__tbl_user___USR_S__1FD8A9E3]  DEFAULT (NULL),
+	[USR_ActiveFrom] [date] NOT NULL,
+	[USR_ActiveTo] [date] NOT NULL,
+	[USR_Status] [bit] NULL,
+	[USR_CreatedBy] [varchar](50) NOT NULL,
+	[USR_CreatedDateTime] [datetime] NULL CONSTRAINT [DF__tbl_user___USR_C__20CCCE1C]  DEFAULT (NULL),
+	[USR_ModifiedBy] [varchar](50) NULL CONSTRAINT [DF__tbl_user___USR_M__21C0F255]  DEFAULT (NULL),
+	[USR_ModifiedDateTime] [datetime] NULL CONSTRAINT [DF__tbl_user___USR_M__22B5168E]  DEFAULT (NULL),
+ CONSTRAINT [PK__tbl_user__3C52D4B2B768577C] PRIMARY KEY CLUSTERED 
+(
+	[USR_EmployeeID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
@@ -171,75 +106,6 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-/****** Object:  Table [dbo].[tblUserRole]    Script Date: 7/15/2024 12:13:39 AM ******/
-SET ANSI_NULLS ON
-GO
 
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[tblUserRole](
-	[UserRoleCode] [varchar](4) NOT NULL,
-	[UserRoleName] [varchar](50) NOT NULL,
-	[UserRoleIsActive] [bit] NOT NULL,
-	[UserRoleModifiedDate] [datetime] NOT NULL,
-	[UserRoleModifiedBy] [varchar](50) NOT NULL,
-	[UserRoleCreatedDate] [datetime] NOT NULL,
-	[UserRoleCreatedBy] [varchar](50) NOT NULL,
- CONSTRAINT [PK_userrole] PRIMARY KEY CLUSTERED 
-(
-	[UserRoleCode] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-/****** Object:  Table [dbo].[tblUserRoleMenu]    Script Date: 7/15/2024 12:13:39 AM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[tblUserRoleMenu](
-	[UserRMRoleCode] [varchar](4) NOT NULL,
-	[UserRMMenuCode] [varchar](8) NOT NULL,
-	[UserRMIsActive] [bit] NOT NULL,
-	[UserRMModifyDate] [datetime] NOT NULL,
-	[UserRMLoggedUserId] [varchar](8) NOT NULL,
-	[UserRMId] [bigint] IDENTITY(1,1) NOT NULL,
- CONSTRAINT [PK_userrolemenu] PRIMARY KEY CLUSTERED 
-(
-	[UserRMId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-ALTER TABLE [dbo].[tblUserRoleMenu]  WITH CHECK ADD  CONSTRAINT [FK_userrolemenu_usermenuitem] FOREIGN KEY([UserRMMenuCode])
-REFERENCES [dbo].[tblUserMenuItem] ([UserMenuItemCode])
-GO
-
-ALTER TABLE [dbo].[tblUserRoleMenu] CHECK CONSTRAINT [FK_userrolemenu_usermenuitem]
-GO
-
-ALTER TABLE [dbo].[tblUserRoleMenu]  WITH CHECK ADD  CONSTRAINT [FK_userrolemenu_userrole] FOREIGN KEY([UserRMRoleCode])
-REFERENCES [dbo].[tblUserRole] ([UserRoleCode])
-GO
-
-ALTER TABLE [dbo].[tblUserRoleMenu] CHECK CONSTRAINT [FK_userrolemenu_userrole]
-GO
 
 
