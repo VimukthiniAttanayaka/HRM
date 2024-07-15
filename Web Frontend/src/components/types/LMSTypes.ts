@@ -53,3 +53,7 @@ export interface IUser {
     userName: string;
     userPassword: string;
 }
+export interface IMenuAccess {
+    name: string;
+    active: boolean;
+}
