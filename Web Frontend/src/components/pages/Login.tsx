@@ -5,6 +5,8 @@ import logo from "../../assets/images/logo.png";
 import Swal from "sweetalert2";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { IMenuAccess } from '../types/LMSTypes';
+import { setMenu } from '../../MenuActivation';
 
 const Login = () => {
 
@@ -38,6 +40,13 @@ const Login = () => {
 
         axios.post('http://localhost:8080/authenticate', data).then(res => {
 
+            const courses: IMenuAccess[] = [
+                { name: "HRM_employee", active: true},
+                { name: "HRM_customer", active: true},
+                { name: "HRM_user", active: false},
+                { name: "Attendance", active: true},
+            ];
+            setMenu(courses);
             localStorage.setItem('role', res.data.user.role[0].roleName)
             //localStorage.setItem('role', 'Student')
             localStorage.setItem('token', res.data.jwtToken)
