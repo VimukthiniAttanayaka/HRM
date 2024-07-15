@@ -15,7 +15,6 @@
     <Compile Remove="Controllers\DeviceController.cs" />
     <Compile Remove="Controllers\DeviceTypeController.cs" />
     <Compile Remove="Controllers\ExcelUploadsController.cs" />
-    <Compile Remove="Controllers\ExceptionsController.cs" />
     <Compile Remove="Controllers\KioskiController.cs" />
     <Compile Remove="Controllers\KioskUserAccessGroupsController.cs" />
     <Compile Remove="Controllers\KioskVendorController.cs" />

@@ -84,7 +84,7 @@
     <Compile Include="Models\DropDownModel.cs" />
     <Compile Include="Models\AttendanceModel.cs" />
     <Compile Include="Models\ExcelUploadsModel.cs" />
-    <Compile Include="Models\ExceptionsModel.cs" />
+    <Compile Include="Models\LeaveModel.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\LocationDto.cs" />
     <Compile Include="Models\LocationModel.cs" />
