@@ -57,12 +57,12 @@ namespace HRM.Controllers
                 };
                 objUserHeadList.Add(objUserHead);
 
-                objError.WriteLog(0, "logTracersController", "userAccessList", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "logTracersController", "userAccessList", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "logTracersController", "CreateUILogs", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "logTracersController", "CreateUILogs", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "logTracersController", "userAccessList", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "logTracersController", "userAccessList", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "logTracersController", "CreateUILogs", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "logTracersController", "CreateUILogs", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 

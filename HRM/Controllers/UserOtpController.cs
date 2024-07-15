@@ -22,8 +22,6 @@ namespace HRM.Controllers
     public class UserOtpController : ControllerBase
     {
         private LogError objError = new LogError();
-        private SendMail sendMail = new SendMail();
-        //private SendSMS sendSMS = new SendSMS();
 
         // GET: api/<UserOtpController>
         [HttpPost]
@@ -159,7 +157,6 @@ namespace HRM.Controllers
                     objError.WriteLog(0, "UserOtpController", "VerifyOTP", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
-                //return objResponseList;
             }
 
             return objVerifyOTPList;
