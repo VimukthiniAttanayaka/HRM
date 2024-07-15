@@ -29,7 +29,6 @@ namespace HRM.Controllers
     {
         private LogError objError = new LogError();
 
-        //Kiosk Activity Report
         //POST api/<UserController>
         [HttpPost]
         [Route("[action]")]

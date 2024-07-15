@@ -62,18 +62,6 @@ namespace HRM_DAL.Models
         public string RC { get; set; }
     }
 
-    public class GetReturnCustomerAllModel : RequestBaseModel
-    {
-        [Key]
-
-        public string PAGE_NO { get; set; }
-        public string PAGE_RECORDS_COUNT { get; set; }
-        public string CUS_ID { get; set; }
-        public string CUS_CompanyName { get; set; }
-        public string CUS_Status { get; set; }
-
-    }
-
     public class ReturnCustomerAllModel
     {
         [Key]
@@ -120,15 +108,4 @@ namespace HRM_DAL.Models
         public string CUS_CompanyName { get; set; }
 
     }
-
-    public class ReturnCustomerSelectModelHead
-    {
-        public bool resp { get; set; }
-        public string msg { get; set; }
-        public List<ReturnCustomerSelectModel> Customer { get; set; }
-
-
-    }
-
-
 }

@@ -8,21 +8,17 @@
     <Compile Remove="Controllers\BusinessUnitController.cs" />
     <Compile Remove="Controllers\ContainerController.cs" />
     <Compile Remove="Controllers\ContainerDTController.cs" />
-    <Compile Remove="Controllers\DashboardController.cs" />
     <Compile Remove="Controllers\DayEndProcessController.cs" />
     <Compile Remove="Controllers\DeliveryCourierCompanyController.cs" />
-    <Compile Remove="Controllers\DepartmentController.cs" />
     <Compile Remove="Controllers\DepartmentDeviceboxController.cs" />
     <Compile Remove="Controllers\DepartmentPaymentChargeCodeController.cs" />
     <Compile Remove="Controllers\DeviceController.cs" />
     <Compile Remove="Controllers\DeviceTypeController.cs" />
-    <Compile Remove="Controllers\DropDownController.cs" />
     <Compile Remove="Controllers\ExcelUploadsController.cs" />
     <Compile Remove="Controllers\ExceptionsController.cs" />
     <Compile Remove="Controllers\KioskiController.cs" />
     <Compile Remove="Controllers\KioskUserAccessGroupsController.cs" />
     <Compile Remove="Controllers\KioskVendorController.cs" />
-    <Compile Remove="Controllers\LocationController.cs" />
     <Compile Remove="Controllers\LogExcelUploadTracerController.cs" />
     <Compile Remove="Controllers\MailTrackerController.cs" />
     <Compile Remove="Controllers\MailTypeController.cs" />
@@ -30,12 +26,9 @@
     <Compile Remove="Controllers\PCCodeController.cs" />
     <Compile Remove="Controllers\ProcessController.cs" />
     <Compile Remove="Controllers\RecieveController.cs" />
-    <Compile Remove="Controllers\ReportsController.cs" />
     <Compile Remove="Controllers\SMSTesterController.cs" />
-    <Compile Remove="Controllers\SystemParameterController.cs" />
     <Compile Remove="Controllers\SystemsSettingsController.cs" />
     <Compile Remove="Controllers\UserAccessGroupController.cs" />
-    <Compile Remove="Controllers\UserGroupMasterController.cs" />
     <Compile Remove="Controllers\UserPasswordAutoResetController.cs" />
   </ItemGroup>
 <ItemGroup>

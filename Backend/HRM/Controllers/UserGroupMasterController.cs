@@ -13,7 +13,6 @@ using System.Reflection;
 
 namespace HRM.Controllers
 {
-    //Unfinalized codes, cause of abnormal shut off of project!!!!!
     [ApiVersion("1.0")]
     [Route("api/[controller]")]
     [ApiController]

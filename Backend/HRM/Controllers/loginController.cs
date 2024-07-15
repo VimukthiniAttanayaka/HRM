@@ -39,7 +39,7 @@ namespace HRM.Controllers
                 List<ReturnUserAccessModel> UserAccessList = new List<ReturnUserAccessModel>();
                 UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_Customer" });
                 string token = JwToken.Authenticate(logdata.username);
-                user.Add(new ReturnUserModel() {UD_AuthorizationToken= token, UserAccessList = UserAccessList });
+                user.Add(new ReturnUserModel() { UD_AuthorizationToken = token, UserAccessList = UserAccessList });
 
                 objUserHeadList.Add(new ReturnUserModelHead() { resp = true, msg = "Welcome To HRM", user = user });
                 return objUserHeadList;

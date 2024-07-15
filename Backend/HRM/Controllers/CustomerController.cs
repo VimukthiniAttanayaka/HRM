@@ -60,45 +60,6 @@ namespace HRM.Controllers
 
         }
 
-        [HttpPost]
-        [Route("[action]")]
-        //[Authorize]
-        public List<ReturnCustomerModelHead> get_customers_all(GetReturnCustomerAllModel item)//ok
-        {
-            List<ReturnCustomerModelHead> objCustomerHeadList = new List<ReturnCustomerModelHead>();
-
-            try
-            {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
-
-                return HRM_BL.Customer_BL.get_customers_all(item);
-
-            }
-            catch (Exception ex)
-            {
-
-                ReturnCustomerModelHead objcustomerHead = new ReturnCustomerModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objCustomerHeadList.Add(objcustomerHead);
-
-                objError.WriteLog(0, "CustomerController", "get_customers_all", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "CustomerController", "get_customers_all", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "CustomerController", "get_customers_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "CustomerController", "get_customers_all", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-
-            }
-
-            return objCustomerHeadList;
-
-        }
-
         //POST api/<UserController>
         [HttpPost]
         [Route("[action]")]
@@ -216,8 +177,6 @@ namespace HRM.Controllers
             }
             return objUserHeadList;
         }
-
-
     }
 
 }

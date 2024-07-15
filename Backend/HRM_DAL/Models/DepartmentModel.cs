@@ -192,20 +192,4 @@ namespace HRM_DAL.Models
 
 
     }
-
-    public class ReturDepartmentAllModelHead : ReturnResponse
-    {
-        //public bool resp { get; set; }
-        //public string msg { get; set; }
-        public List<ReturnDepartmentAllModel> departmentall { get; set; }
-
-
-    }
-
-
-
-
-
-
-
 }

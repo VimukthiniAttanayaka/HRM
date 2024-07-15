@@ -12,8 +12,6 @@ namespace HRM_DAL.Data
     {
         private static LogError objError = new LogError();
 
-
-        //[Authorize]
         public static List<ReturnLocationAllModelHead> get_location_all(GetLocationAllModel item)//ok
         {
             List<ReturnLocationAllModelHead> objHeadList = new List<ReturnLocationAllModelHead>();
@@ -261,18 +259,7 @@ namespace HRM_DAL.Data
             return objHeadList;
 
         }
-
-
-
     }
-
-
-
-
-
-
-
-
 }
 
 

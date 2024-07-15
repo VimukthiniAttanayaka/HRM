@@ -13,11 +13,6 @@ namespace HRM_BL
     {
         private static LogError objError = new LogError();
 
-        public static List<ReturnCustomerSelectModelHead> get_customer_with_select()//ok
-        {
-            return HRM_DAL.Data.Department_Data.get_customer_with_select();
-        }
-      
         public static List<ReturnResponse> add_new_department(DepartmentModel item)//ok
         {
             return HRM_DAL.Data.Department_Data.add_new_department(item);
@@ -41,16 +36,6 @@ namespace HRM_BL
         public static List<ReturDepartmentModelHead> get_department_single(GetDepartmentSingleModel item)
         {
             return HRM_DAL.Data.Department_Data.get_department_single(item);
-        }
-
-        public static List<ReturnResponse> assign_boxnos(List<DepartmentDeviceBox> itemlist)
-        {
-            return HRM_DAL.Data.Department_Data.assign_boxnos(itemlist);
-        }
-
-        public static List<ReturDepartmentAllModelHead> get_department_by_customer_id(GetDepartmentSingleModel item)
-        {
-            return HRM_DAL.Data.Department_Data.get_department_by_customer_id(item);
         }
 
     }

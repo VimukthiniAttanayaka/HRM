@@ -9,7 +9,6 @@ using utility_handler.Data;
 using static error_handler.ErrorLog;
 using System.Reflection;
 using HRM_BL;
-//using static error_handler.InformationLog;
 
 namespace HRM.Controllers
 {

@@ -13,7 +13,6 @@ using System.Reflection;
 
 namespace HRM.Controllers
 {
-    //Unfinalized codes, cause of abnormal shut off of project!!!!!
     [ApiVersion("1.0")]
     [Route("api/[controller]")]
     [ApiController]
@@ -111,7 +110,6 @@ namespace HRM.Controllers
         public List<ReturnResponse> modify_system_parameter(SystemPMModel item)//ok
         {
             List<ReturnResponse> objMTHeadList = new List<ReturnResponse>();
-            List<SPResponse> objResponseList = new List<SPResponse>();
 
 
             try
@@ -141,12 +139,6 @@ namespace HRM.Controllers
             }
             return objMTHeadList;
         }
-
-
-
-
-
-
     }
 
 }
