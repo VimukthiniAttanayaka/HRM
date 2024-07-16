@@ -4,21 +4,21 @@ import { CFooter } from '@coreui/react-pro'
 const AppFooter = () => {
   return (
     <CFooter className="px-4">
-      <div>
-        <a href="https://coreui.io" target="_blank" rel="noopener noreferrer">
-          CoreUI
+      {/* <div>
+        <a href="" target="_blank" rel="noopener noreferrer">
+          Doashait
         </a>
-        <span className="ms-1">&copy; 2024 creativeLabs.</span>
-      </div>
+        <span className="ms-1">&copy; 2024 .</span>
+      </div> */}
       <div className="ms-auto">
-        <span className="me-1">Powered by</span>
         <a
           href="https://coreui.io/product/react-dashboard-template/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          CoreUI React Admin &amp; Dashboard Template
+          Doashait
         </a>
+        <span className="me-1"> &copy; 2024 .</span>
       </div>
     </CFooter>
   )
