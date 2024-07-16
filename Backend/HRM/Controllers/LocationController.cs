@@ -7,13 +7,11 @@ using System.Collections.Generic;
 using System.Data;
 using utility_handler.Data;
 using static error_handler.ErrorLog;
-//using static error_handler.InformationLog;
 using HRM_BL;
 using System.Reflection;
 
 namespace HRM.Controllers
 {
-    //Unfinalized codes, cause of abnormal shut off of project!!!!!
     [ApiVersion("1.0")]
     [Route("api/[controller]")]
     [ApiController]

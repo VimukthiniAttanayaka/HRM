@@ -44,17 +44,11 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_insert_department";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@DPT_CustomerID", item.DPT_CustomerID);
-                        cmd.Parameters["@DPT_CustomerID"].Direction = ParameterDirection.Input;
-
                         cmd.Parameters.AddWithValue("@DPT_ID", item.DPT_ID);
                         cmd.Parameters["@DPT_ID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@DPT_Name", item.DPT_Name);
                         cmd.Parameters["@DPT_Name"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@DPT_CPCode", item.DPT_CPCode);
-                        cmd.Parameters["@DPT_CPCode"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@DPT_LocationCode", item.DPT_LocationCode);
                         cmd.Parameters["@DPT_LocationCode"].Direction = ParameterDirection.Input;
@@ -78,95 +72,10 @@ namespace HRM_DAL.Data
                         cmd.Parameters["@DPT_Adrs_CountryCode"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@DPT_Adrs_PostalCode", item.DPT_Adrs_PostalCode);
-                        cmd.Parameters["@DPT_Adrs_PostalCode"].Direction = ParameterDirection.Input;
+                        cmd.Parameters["@DPT_Adrs_PostalCode"].Direction = ParameterDirection.Input;                  
 
-                        //cmd.Parameters.AddWithValue("@DPT_Contact1_StaffName", item.DPT_Contact1_StaffName);
-                        //cmd.Parameters["@DPT_Contact1_StaffName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact1_DeskContactNumber", item.DPT_Contact1_DeskContactNumber);
-                        //cmd.Parameters["@DPT_Contact1_DeskContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact1_MobileNo", item.DPT_Contact1_MobileNo);
-                        //cmd.Parameters["@DPT_Contact1_MobileNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact1_EmailAddress", item.DPT_Contact1_EmailAddress);
-                        //cmd.Parameters["@DPT_Contact1_EmailAddress"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact1_Comments", item.DPT_Contact1_Comments);
-                        //cmd.Parameters["@DPT_Contact1_Comments"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact2_StaffName", item.DPT_Contact2_StaffName);
-                        //cmd.Parameters["@DPT_Contact2_StaffName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact2_DeskContactNumber", item.DPT_Contact2_DeskContactNumber);
-                        //cmd.Parameters["@DPT_Contact2_DeskContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact2_MobileNo", item.DPT_Contact2_MobileNo);
-                        //cmd.Parameters["@DPT_Contact2_MobileNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact2_EmailAddress", item.DPT_Contact2_EmailAddress);
-                        //cmd.Parameters["@DPT_Contact2_EmailAddress"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact2_Comments", item.DPT_Contact2_Comments);
-                        //cmd.Parameters["@DPT_Contact2_Comments"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact3_StaffName", item.DPT_Contact3_StaffName);
-                        //cmd.Parameters["@DPT_Contact3_StaffName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact3_DeskContactNumber", item.DPT_Contact3_DeskContactNumber);
-                        //cmd.Parameters["@DPT_Contact3_DeskContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact3_MobileNo", item.DPT_Contact3_MobileNo);
-                        //cmd.Parameters["@DPT_Contact3_MobileNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact3_EmailAddress", item.DPT_Contact3_EmailAddress);
-                        //cmd.Parameters["@DPT_Contact3_EmailAddress"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact3_Comments", item.DPT_Contact3_Comments);
-                        //cmd.Parameters["@DPT_Contact3_Comments"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact4_StaffName", item.DPT_Contact4_StaffName);
-                        //cmd.Parameters["@DPT_Contact4_StaffName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact4_DeskContactNumber", item.DPT_Contact4_DeskContactNumber);
-                        //cmd.Parameters["@DPT_Contact4_DeskContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact4_MobileNo", item.DPT_Contact4_MobileNo);
-                        //cmd.Parameters["@DPT_Contact4_MobileNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact4_EmailAddress", item.DPT_Contact4_EmailAddress);
-                        //cmd.Parameters["@DPT_Contact4_EmailAddress"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact4_Comments", item.DPT_Contact4_Comments);
-                        //cmd.Parameters["@DPT_Contact4_Comments"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact5_StaffName", item.DPT_Contact5_StaffName);
-                        //cmd.Parameters["@DPT_Contact5_StaffName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact5_DeskContactNumber", item.DPT_Contact5_DeskContactNumber);
-                        //cmd.Parameters["@DPT_Contact5_DeskContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact5_MobileNo", item.DPT_Contact5_MobileNo);
-                        //cmd.Parameters["@DPT_Contact5_MobileNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact5_EmailAddress", item.DPT_Contact5_EmailAddress);
-                        //cmd.Parameters["@DPT_Contact5_EmailAddress"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact5_Comments", item.DPT_Contact5_Comments);
-                        //cmd.Parameters["@DPT_Contact5_Comments"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@USER_ID", item.USER_ID);
+                        cmd.Parameters.AddWithValue("@USER_ID", item.UD_StaffID);
                         cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
-
-                        string pccodes = "";
-                        if (item.pccodes != null)
-                        {
-                            pccodes = JsonConvert.SerializeObject(item.pccodes);
-                        }
-
-                        cmd.Parameters.AddWithValue("@DetailScript", pccodes);
-                        cmd.Parameters["@DetailScript"].Direction = ParameterDirection.Input;
-
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -237,17 +146,11 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_modify_department";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@DPT_CustomerID", item.DPT_CustomerID);
-                        cmd.Parameters["@DPT_CustomerID"].Direction = ParameterDirection.Input;
-
                         cmd.Parameters.AddWithValue("@DPT_ID", item.DPT_ID);
                         cmd.Parameters["@DPT_ID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@DPT_Name", item.DPT_Name);
                         cmd.Parameters["@DPT_Name"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@DPT_CPCode", item.DPT_CPCode);
-                        cmd.Parameters["@DPT_CPCode"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@DPT_LocationCode", item.DPT_LocationCode);
                         cmd.Parameters["@DPT_LocationCode"].Direction = ParameterDirection.Input;
@@ -273,83 +176,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@DPT_Adrs_PostalCode", item.DPT_Adrs_PostalCode);
                         cmd.Parameters["@DPT_Adrs_PostalCode"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@DPT_Contact1_StaffName", item.DPT_Contact1_StaffName);
-                        //cmd.Parameters["@DPT_Contact1_StaffName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact1_DeskContactNumber", item.DPT_Contact1_DeskContactNumber);
-                        //cmd.Parameters["@DPT_Contact1_DeskContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact1_MobileNo", item.DPT_Contact1_MobileNo);
-                        //cmd.Parameters["@DPT_Contact1_MobileNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact1_EmailAddress", item.DPT_Contact1_EmailAddress);
-                        //cmd.Parameters["@DPT_Contact1_EmailAddress"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact1_Comments", item.DPT_Contact1_Comments);
-                        //cmd.Parameters["@DPT_Contact1_Comments"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact2_StaffName", item.DPT_Contact2_StaffName);
-                        //cmd.Parameters["@DPT_Contact2_StaffName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact2_DeskContactNumber", item.DPT_Contact2_DeskContactNumber);
-                        //cmd.Parameters["@DPT_Contact2_DeskContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact2_MobileNo", item.DPT_Contact2_MobileNo);
-                        //cmd.Parameters["@DPT_Contact2_MobileNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact2_EmailAddress", item.DPT_Contact2_EmailAddress);
-                        //cmd.Parameters["@DPT_Contact2_EmailAddress"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact2_Comments", item.DPT_Contact2_Comments);
-                        //cmd.Parameters["@DPT_Contact2_Comments"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact3_StaffName", item.DPT_Contact3_StaffName);
-                        //cmd.Parameters["@DPT_Contact3_StaffName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact3_DeskContactNumber", item.DPT_Contact3_DeskContactNumber);
-                        //cmd.Parameters["@DPT_Contact3_DeskContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact3_MobileNo", item.DPT_Contact3_MobileNo);
-                        //cmd.Parameters["@DPT_Contact3_MobileNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact3_EmailAddress", item.DPT_Contact3_EmailAddress);
-                        //cmd.Parameters["@DPT_Contact3_EmailAddress"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact3_Comments", item.DPT_Contact3_Comments);
-                        //cmd.Parameters["@DPT_Contact3_Comments"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@USER_ID", item.USER_ID);
+                        cmd.Parameters.AddWithValue("@USER_ID", item.UD_StaffID);
                         cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact4_StaffName", item.DPT_Contact4_StaffName);
-                        //cmd.Parameters["@DPT_Contact4_StaffName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact4_DeskContactNumber", item.DPT_Contact4_DeskContactNumber);
-                        //cmd.Parameters["@DPT_Contact4_DeskContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact4_MobileNo", item.DPT_Contact4_MobileNo);
-                        //cmd.Parameters["@DPT_Contact4_MobileNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact4_EmailAddress", item.DPT_Contact4_EmailAddress);
-                        //cmd.Parameters["@DPT_Contact4_EmailAddress"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact4_Comments", item.DPT_Contact4_Comments);
-                        //cmd.Parameters["@DPT_Contact4_Comments"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact5_StaffName", item.DPT_Contact5_StaffName);
-                        //cmd.Parameters["@DPT_Contact5_StaffName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact5_DeskContactNumber", item.DPT_Contact5_DeskContactNumber);
-                        //cmd.Parameters["@DPT_Contact5_DeskContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact5_MobileNo", item.DPT_Contact5_MobileNo);
-                        //cmd.Parameters["@DPT_Contact5_MobileNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact5_EmailAddress", item.DPT_Contact5_EmailAddress);
-                        //cmd.Parameters["@DPT_Contact5_EmailAddress"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Contact5_Comments", item.DPT_Contact5_Comments);
-                        //cmd.Parameters["@DPT_Contact5_Comments"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@DPT_Status", item.DPT_Status);
                         cmd.Parameters["@DPT_Status"].Direction = ParameterDirection.Input;
@@ -428,11 +256,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@DPT_ID", item.DPT_ID);
                         cmd.Parameters["@DPT_ID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@DPT_CustomerID", item.DPT_CustomerID);
-                        cmd.Parameters["@DPT_CustomerID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@USER_ID", item.USER_ID);
-                        cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
+                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
 
                         SqlDataAdapter dta = new SqlDataAdapter();
@@ -516,15 +341,6 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@DPT_Name", item.DPT_Name);
                         cmd.Parameters["@DPT_Name"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@DPT_CPCode", item.DPT_CPCode);
-                        cmd.Parameters["@DPT_CPCode"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
-                        cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@BU_CompanyName", item.BU_CompanyName);
-                        cmd.Parameters["@BU_CompanyName"].Direction = ParameterDirection.Input;
-
                         cmd.Parameters.AddWithValue("@DPT_Status", item.DPT_Status);
                         cmd.Parameters["@DPT_Status"].Direction = ParameterDirection.Input;
 
@@ -558,7 +374,6 @@ namespace HRM_DAL.Data
                                 objData.DPT_ID = rdr["DPT_ID"].ToString();
                                 objData.DPT_CustomerID = rdr["DPT_CustomerID"].ToString();
                                 objData.DPT_Name = rdr["DPT_Name"].ToString();
-                                objData.DPT_CPCode = rdr["DPT_CPCode"].ToString();
                                 objData.DPT_Adrs_BlockBuildingNo = rdr["DPT_Adrs_BlockBuildingNo"].ToString();
                                 objData.DPT_Adrs_BuildingName = rdr["DPT_Adrs_BuildingName"].ToString();
                                 objData.DPT_Adrs_UnitNumber = rdr["DPT_Adrs_UnitNumber"].ToString();
@@ -566,21 +381,6 @@ namespace HRM_DAL.Data
                                 objData.DPT_Adrs_City = rdr["DPT_Adrs_City"].ToString();
                                 objData.DPT_Adrs_CountryCode = rdr["DPT_Adrs_CountryCode"].ToString();
                                 objData.DPT_Adrs_PostalCode = rdr["DPT_Adrs_PostalCode"].ToString();
-                                objData.DPT_Contact1_StaffName = rdr["DPT_Contact1_StaffName"].ToString();
-                                objData.DPT_Contact1_DeskContactNumber = rdr["DPT_Contact1_DeskContactNumber"].ToString();
-                                objData.DPT_Contact1_MobileNo = rdr["DPT_Contact1_MobileNo"].ToString();
-                                objData.DPT_Contact1_EmailAddress = rdr["DPT_Contact1_EmailAddress"].ToString();
-                                objData.DPT_Contact1_Comments = rdr["DPT_Contact1_Comments"].ToString();
-                                objData.DPT_Contact1_StaffName = rdr["DPT_Contact1_StaffName"].ToString();
-                                objData.DPT_Contact2_DeskContactNumber = rdr["DPT_Contact2_DeskContactNumber"].ToString();
-                                objData.DPT_Contact2_MobileNo = rdr["DPT_Contact2_MobileNo"].ToString();
-                                objData.DPT_Contact2_EmailAddress = rdr["DPT_Contact2_EmailAddress"].ToString();
-                                objData.DPT_Contact2_Comments = rdr["DPT_Contact2_Comments"].ToString();
-                                objData.DPT_Contact3_StaffName = rdr["DPT_Contact3_StaffName"].ToString();
-                                objData.DPT_Contact3_DeskContactNumber = rdr["DPT_Contact3_DeskContactNumber"].ToString();
-                                objData.DPT_Contact3_MobileNo = rdr["DPT_Contact3_MobileNo"].ToString();
-                                objData.DPT_Contact3_EmailAddress = rdr["DPT_Contact3_EmailAddress"].ToString();
-                                objData.DPT_Contact3_Comments = rdr["DPT_Contact3_Comments"].ToString();
                                 objData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
                                 objData.DPT_Status = Convert.ToBoolean(rdr["DPT_Status"].ToString());
 
@@ -668,9 +468,6 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@DPT_ID", item.DPT_ID);
                         cmd.Parameters["@DPT_ID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@DPT_CustomerID", item.DPT_CustomerID);
-                        cmd.Parameters["@DPT_CustomerID"].Direction = ParameterDirection.Input;
-
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
                         DataSet Ds = new DataSet();
@@ -689,7 +486,6 @@ namespace HRM_DAL.Data
                                 objData.DPT_ID = rdr["DPT_ID"].ToString();
                                 objData.DPT_CustomerID = rdr["DPT_CustomerID"].ToString();
                                 objData.DPT_Name = rdr["DPT_Name"].ToString();
-                                objData.DPT_CPCode = rdr["DPT_CPCode"].ToString();
                                 objData.DPT_Adrs_BlockBuildingNo = rdr["DPT_Adrs_BlockBuildingNo"].ToString();
                                 objData.DPT_Adrs_BuildingName = rdr["DPT_Adrs_BuildingName"].ToString();
                                 objData.DPT_Adrs_UnitNumber = rdr["DPT_Adrs_UnitNumber"].ToString();
@@ -697,21 +493,6 @@ namespace HRM_DAL.Data
                                 objData.DPT_Adrs_City = rdr["DPT_Adrs_City"].ToString();
                                 objData.DPT_Adrs_CountryCode = rdr["DPT_Adrs_CountryCode"].ToString();
                                 objData.DPT_Adrs_PostalCode = rdr["DPT_Adrs_PostalCode"].ToString();
-                                objData.DPT_Contact1_StaffName = rdr["DPT_Contact1_StaffName"].ToString();
-                                objData.DPT_Contact1_DeskContactNumber = rdr["DPT_Contact1_DeskContactNumber"].ToString();
-                                objData.DPT_Contact1_MobileNo = rdr["DPT_Contact1_MobileNo"].ToString();
-                                objData.DPT_Contact1_EmailAddress = rdr["DPT_Contact1_EmailAddress"].ToString();
-                                objData.DPT_Contact1_Comments = rdr["DPT_Contact1_Comments"].ToString();
-                                objData.DPT_Contact1_StaffName = rdr["DPT_Contact1_StaffName"].ToString();
-                                objData.DPT_Contact2_DeskContactNumber = rdr["DPT_Contact2_DeskContactNumber"].ToString();
-                                objData.DPT_Contact2_MobileNo = rdr["DPT_Contact2_MobileNo"].ToString();
-                                objData.DPT_Contact2_EmailAddress = rdr["DPT_Contact2_EmailAddress"].ToString();
-                                objData.DPT_Contact2_Comments = rdr["DPT_Contact2_Comments"].ToString();
-                                objData.DPT_Contact3_StaffName = rdr["DPT_Contact3_StaffName"].ToString();
-                                objData.DPT_Contact3_DeskContactNumber = rdr["DPT_Contact3_DeskContactNumber"].ToString();
-                                objData.DPT_Contact3_MobileNo = rdr["DPT_Contact3_MobileNo"].ToString();
-                                objData.DPT_Contact3_EmailAddress = rdr["DPT_Contact3_EmailAddress"].ToString();
-                                objData.DPT_Contact3_Comments = rdr["DPT_Contact3_Comments"].ToString();
                                 objData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
                                 objData.DPT_ModifiedDateTime = rdr["DPT_ModifiedDateTime"].ToString();
                                 objData.DPT_CreatedDateTime = rdr["DPT_CreatedDateTime"].ToString();

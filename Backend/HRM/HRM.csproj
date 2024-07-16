@@ -27,7 +27,6 @@
     <Compile Remove="Controllers\RecieveController.cs" />
     <Compile Remove="Controllers\SMSTesterController.cs" />
     <Compile Remove="Controllers\SystemsSettingsController.cs" />
-    <Compile Remove="Controllers\UserAccessGroupController.cs" />
     <Compile Remove="Controllers\UserPasswordAutoResetController.cs" />
   </ItemGroup>
 <ItemGroup>
