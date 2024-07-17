@@ -7,7 +7,7 @@ using utility_handler.Data;
 
 namespace HRM_BL
 {
-    public class Customer_BL 
+    public class Customer_BL
     {
         private static LogError objError = new LogError();
 
@@ -16,7 +16,7 @@ namespace HRM_BL
             return HRM_DAL.Data.Customer_Data.get_customers_single(CUS_ID);
         }
 
-                public static List<ReturncustResponse> add_new_customer(CustomerModel item)//ok
+        public static List<ReturncustResponse> add_new_customer(CustomerModel item)//ok
         {
             return HRM_DAL.Data.Customer_Data.add_new_customer(item);
         }
