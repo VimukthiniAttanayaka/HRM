@@ -146,10 +146,10 @@ const Customer = () => {
     if (response.ok) {
       console.log(response);
       // Handle successful submission (e.g., display a success message)
-      console.log('Customer data submitted successfully!')
+      console.log('Company data submitted successfully!')
     } else {
       // Handle submission errors
-      console.error('Error submitting customer data:', response.statusText)
+      console.error('Error submitting Company data:', response.statusText)
     }
   }
 
@@ -213,7 +213,7 @@ const Customer = () => {
                     {/* <CInputGroupText>
                       <CIcon icon={cilUser} />
                     </CInputGroupText> */}
-                    <CFormInput placeholder="Customer Id" name="customerId" value={customerId} onChange={handleChangeId} />
+                    <CFormInput placeholder="Company Id" name="customerId" value={customerId} onChange={handleChangeId} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     {/* <CInputGroupText>
