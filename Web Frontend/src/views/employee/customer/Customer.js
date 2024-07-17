@@ -116,30 +116,31 @@ const Customer = () => {
 
     // Prepare form data
     const formData = {
-      customerId,
-      companyName,
-      blockBuildingNumber,
-      addressBuildingName,
-      addressUnitNumber,
-      addressStreetName,
-      addressCity,
-      addressCountryCode,
-      addressPostalCode,
-      contactPerson,
-      contactNumber,
-      pinOrPassword,
-      isOtpSms,
-      isOtpEmail,
-      isActive,
+      CUS_ID : customerId,
+      CUS_CompanyName:companyName,
+      CUS_Adrs_BlockBuildingNo:blockBuildingNumber,
+      CUS_Adrs_BuildingName: addressBuildingName,
+      CUS_Adrs_UnitNumber: addressUnitNumber,
+      CUS_Adrs_StreetName: addressStreetName,
+      CUS_Adrs_City: addressCity,
+      CUS_Adrs_CountryCode: addressCountryCode,
+      CUS_Adrs_PostalCode: addressPostalCode,
+      CUS_ContactPerson: contactPerson,
+      CUS_ContactNumber: contactNumber,
+      CUS_PinOrPwd: pinOrPassword,
+      CUS_OTP_By_SMS: isOtpSms,
+      CUS_OTP_By_Email: isOtpEmail,
+      CUS_Status: isActive,
     }
     // Submit the form data to your backend API
-    const response = await fetch('/api/customers', {
+    const response = await fetch('https://localhost:5001/api/customer/add_new_customer', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
     })
 
     if (response.ok) {
+      console.log(response);
       // Handle successful submission (e.g., display a success message)
       console.log('Customer data submitted successfully!')
     } else {
