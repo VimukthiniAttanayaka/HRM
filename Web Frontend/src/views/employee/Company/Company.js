@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   CButton,
   CCard,
@@ -15,6 +15,7 @@ import {
 } from '@coreui/react-pro'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass';
 
 const Customer = () => {
   const [customerId, setCustomerId] = useState('')
@@ -149,7 +150,55 @@ const Customer = () => {
     }
   }
 
-  
+  const auth = localStorage.getItem('token');
+
+  const [courses, setCourses] = useState ([]);
+
+  async function requestdata() {
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+    // const config = {
+    //   headers: { Authorization: `Bearer ${auth}` }
+    // };
+    const formData = {
+      UD_StaffID: staffId,
+      AUD_notificationToken: token,
+      CUS_ID: 'cus1'
+    }
+    const apiUrl = process.env.REACT_APP_API_URL;
+    console.log(apiUrl);
+    const res = await fetch('https://localhost:5001/api/customer/get_customers_single', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+      .then(response => response.json())
+      .then(json => {
+        let res1 = JSON.parse(JSON.stringify(json))
+        console.log(res1[0].Customer[0]);
+        setCustomerId(res1[0].Customer[0].CUS_ID);
+        setCompanyName(res1[0].Customer[0].CUS_CompanyName);
+        setBlockBuildingNumber(res1[0].Customer[0].CUS_Adrs_BlockBuildingNo);
+        setAddressBuildingName(res1[0].Customer[0].CUS_Adrs_BuildingName);
+        setAddressUnitNumber(res1[0].Customer[0].CUS_Adrs_UnitNumber);
+        setAddressStreetName(res1[0].Customer[0].CUS_Adrs_StreetName);
+        setAddressCity(res1[0].Customer[0].CUS_Adrs_City);
+        setAddressCountryCode(res1[0].Customer[0].CUS_Adrs_CountryCode);
+        setAddressPostalCode(res1[0].Customer[0].CUS_Adrs_PostalCode);
+        setContactPerson(res1[0].Customer[0].CUS_ContactPerson);
+        setContactNumber(res1[0].Customer[0].CUS_ContactNumber);
+        setPinOrPassword(res1[0].Customer[0].CUS_PinOrPwd);
+        setIsOtpSms(res1[0].Customer[0].CUS_OTP_By_SMS);
+        setIsOtpEmail(res1[0].Customer[0].CUS_OTP_By_Email);
+        setIsActive(res1[0].Customer[0].CUS_Status);
+      })
+  }
+  useEffect(() => {
+
+    requestdata();
+  }, [auth]);
+
   return (
     <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
