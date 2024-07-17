@@ -63,12 +63,12 @@ const _nav = [
   },{
     component: CNavItem,
     name: <Translation>{(t) => t('Leave Entitlement')}</Translation>,
-    to: '/leave/leaves',
+    to: '/leave/leaveshedule',
     // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },{
     component: CNavItem,
     name: <Translation>{(t) => t('Leave Type')}</Translation>,
-    to: '/leave/leavetypes',
+    to: '/leave/leavetype',
     // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {
