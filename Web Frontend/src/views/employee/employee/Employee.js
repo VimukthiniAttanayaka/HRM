@@ -9,7 +9,7 @@ const Employee = () => {
     <>
       <CCard className="mb-4">
         <CCardHeader>
-          <strong>CoreUI Smart Table</strong> <small>React Table Component</small>
+          <strong>Employee List</strong>
         </CCardHeader>
         <CCardBody>
           <DocsExample href="components/smart-table/">
