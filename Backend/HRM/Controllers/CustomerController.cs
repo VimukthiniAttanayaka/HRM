@@ -27,8 +27,8 @@ namespace HRM.Controllers
         public List<ReturnCustomerModelHead> get_customers_single(Customer CUS_ID)//ok
         {
             List<ReturnCustomerModelHead> objCustomerHeadList = new List<ReturnCustomerModelHead>();
-            //objCustomerHeadList.Add(new ReturnCustomerModelHead() { resp = true, msg = "saved" });
-            //return objCustomerHeadList;
+            objCustomerHeadList.Add(new ReturnCustomerModelHead() { resp = true, msg = "saved" });
+            return objCustomerHeadList;
 
             try
             {

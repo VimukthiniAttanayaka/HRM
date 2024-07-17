@@ -15,8 +15,11 @@ import {
 } from '@coreui/react-pro'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import { setMenu } from '../../../menuActivation'
 
 const Login = () => {
+
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +31,7 @@ const Login = () => {
       password: password
     }
     // Submit the form data to your backend API
-    const res = await fetch('https://localhost:5001/api/login/login', {
+    const res = await fetch(apiUrl + 'login/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -40,10 +43,19 @@ const Login = () => {
         localStorage.setItem('token', res1.user[0].UD_AuthorizationToken)
         localStorage.setItem('staff_id', 'res1.user[0].UD_AuthorizationToken')
         localStorage.setItem('customer_id', 'cus1')
+
+        const courses = [
+          { name: "HRM_employee", active: true },
+          { name: "HRM_customer", active: true },
+          { name: "HRM_user", active: false },
+          { name: "Attendance", active: true },
+        ];
+        setMenu(courses);
       })
+
     // if (response.ok) {
 
-      // Handle successful submission (e.g., display a success message)
+    // Handle successful submission (e.g., display a success message)
     //   console.log('Customer data submitted successfully!')
     // } else {
     //   // Handle submission errors

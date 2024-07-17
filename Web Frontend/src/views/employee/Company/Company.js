@@ -18,6 +18,9 @@ import { cilLockLocked, cilUser } from '@coreui/icons'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass';
 
 const Customer = () => {
+
+  const apiUrl = process.env.REACT_APP_API_URL;
+
   const [customerId, setCustomerId] = useState('')
   const [companyName, setCompanyName] = useState('')
   const [blockBuildingNumber, setBlockBuildingNumber] = useState('')
@@ -134,7 +137,7 @@ const Customer = () => {
       CUS_Status: isActive,
     }
     // Submit the form data to your backend API
-    const response = await fetch('https://localhost:5001/api/customer/add_new_customer', {
+    const response = await fetch(apiUrl +'customer/add_new_customer', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -166,9 +169,7 @@ const Customer = () => {
       AUD_notificationToken: token,
       CUS_ID: 'cus1'
     }
-    const apiUrl = process.env.REACT_APP_API_URL;
-    console.log(apiUrl);
-    const res = await fetch('https://localhost:5001/api/customer/get_customers_single', {
+    const res = await fetch(apiUrl + 'customer/get_customers_single', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -195,7 +196,6 @@ const Customer = () => {
       })
   }
   useEffect(() => {
-
     requestdata();
   }, [auth]);
 
