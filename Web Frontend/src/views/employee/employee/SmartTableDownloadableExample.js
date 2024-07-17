@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass';
-
+import data from './_data.js'
 const SmartTableDownloadableExample = () => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -14,9 +14,9 @@ const SmartTableDownloadableExample = () => {
     //   headers: { Authorization: `Bearer ${auth}` }
     // };
     const formData = {
-      UD_StaffID: staffId,
-      AUD_notificationToken: token,
-      CUS_ID: 'cus1'
+      // UD_StaffID: staffId,
+      // AUD_notificationToken: token,
+      USR_EmployeeID: 'sedcx'
     }
     const res = await fetch(apiUrl + 'enployee/get_employee_all', {
       method: 'POST',
@@ -26,8 +26,8 @@ const SmartTableDownloadableExample = () => {
       .then(response => response.json())
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
-        console.log(res1[0].Customer[0]);
-        setCustomerId(res1[0].Customer[0].CUS_ID);
+        console.log(res1);
+        // setCustomerId(res1[0].Customer[0].CUS_ID);
       })
   }
   useEffect(() => {
