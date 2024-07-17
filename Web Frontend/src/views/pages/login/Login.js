@@ -37,6 +37,9 @@ const Login = () => {
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
         console.log(res1.user[0].UD_AuthorizationToken);
+        localStorage.setItem('token', res1.user[0].UD_AuthorizationToken)
+        localStorage.setItem('staff_id', 'res1.user[0].UD_AuthorizationToken')
+        localStorage.setItem('customer_id', 'cus1')
       })
     // if (response.ok) {
 
