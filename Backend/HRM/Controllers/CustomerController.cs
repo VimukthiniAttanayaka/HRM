@@ -27,7 +27,7 @@ namespace HRM.Controllers
         public List<ReturnCustomerModelHead> get_customers_single(Customer CUS_ID)//ok
         {
             List<ReturnCustomerModelHead> objCustomerHeadList = new List<ReturnCustomerModelHead>();
-            objCustomerHeadList.Add(new ReturnCustomerModelHead());
+            objCustomerHeadList.Add(new ReturnCustomerModelHead() { resp = true, msg = "saved" });
             return objCustomerHeadList;
 
             try
@@ -69,7 +69,7 @@ namespace HRM.Controllers
         public List<ReturncustResponse> add_new_customer(CustomerModel item)//ok
         {
             List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
-            objCustHeadList.Add(new ReturncustResponse());
+            objCustHeadList.Add(new ReturncustResponse() { resp = true, msg = "saved" });
             return objCustHeadList;
 
             try
@@ -110,7 +110,7 @@ namespace HRM.Controllers
         public List<ReturncustResponse> modify_customer(CustomerModel item)//ok
         {
             List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
-            objCustHeadList.Add(new ReturncustResponse());
+            objCustHeadList.Add(new ReturncustResponse() { resp = true, msg = "saved" });
             return objCustHeadList;
 
             try
@@ -150,7 +150,7 @@ namespace HRM.Controllers
         public List<ReturnResponse> inactivate_customer(InactiveCusModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
-            objUserHeadList.Add(new ReturnResponse());
+            objUserHeadList.Add(new ReturnResponse() { resp = true, msg = "saved" });
             return objUserHeadList;
 
             try
