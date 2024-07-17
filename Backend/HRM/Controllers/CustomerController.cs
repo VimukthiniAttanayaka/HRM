@@ -27,7 +27,9 @@ namespace HRM.Controllers
         public List<ReturnCustomerModelHead> get_customers_single(Customer CUS_ID)//ok
         {
             List<ReturnCustomerModelHead> objCustomerHeadList = new List<ReturnCustomerModelHead>();
-           
+            objCustomerHeadList.Add(new ReturnCustomerModelHead());
+            return objCustomerHeadList;
+
             try
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, CUS_ID);
@@ -67,8 +69,8 @@ namespace HRM.Controllers
         public List<ReturncustResponse> add_new_customer(CustomerModel item)//ok
         {
             List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
-            //List<SPResponse> objResponseList = new List<SPResponse>();
-
+            objCustHeadList.Add(new ReturncustResponse());
+            return objCustHeadList;
 
             try
             {
@@ -108,7 +110,8 @@ namespace HRM.Controllers
         public List<ReturncustResponse> modify_customer(CustomerModel item)//ok
         {
             List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
-
+            objCustHeadList.Add(new ReturncustResponse());
+            return objCustHeadList;
 
             try
             {
@@ -147,6 +150,8 @@ namespace HRM.Controllers
         public List<ReturnResponse> inactivate_customer(InactiveCusModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
+            objUserHeadList.Add(new ReturnResponse());
+            return objUserHeadList;
 
             try
             {
