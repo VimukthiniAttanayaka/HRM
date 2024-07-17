@@ -150,6 +150,7 @@ namespace utility_handler.Data
 
         public static void AuditLogRequest<T>(string module, string controler, string action,/* int identity,*/ T obj) where T : class
         {
+            return;
             LogError objError = new LogError();
             DateTime CreatedOn = DateTime.Now;
 

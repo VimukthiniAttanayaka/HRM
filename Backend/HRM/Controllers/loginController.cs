@@ -28,10 +28,10 @@ namespace HRM.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public List<ReturnUserModelHead> login(LogdataModel logdata)
+        public ReturnUserModelHead login(LogdataModel logdata)
         {
 
-            List<ReturnUserModelHead> objUserHeadList = new List<ReturnUserModelHead>();
+            ReturnUserModelHead objUserHead = new ReturnUserModelHead();
 
             try
             {
@@ -41,24 +41,23 @@ namespace HRM.Controllers
                 string token = JwToken.Authenticate(logdata.username);
                 user.Add(new ReturnUserModel() { UD_AuthorizationToken = token, UserAccessList = UserAccessList });
 
-                objUserHeadList.Add(new ReturnUserModelHead() { resp = true, msg = "Welcome To HRM", user = user });
-                return objUserHeadList;
+                objUserHead = new ReturnUserModelHead() { resp = true, msg = "Welcome To HRM", user = user };
+                return objUserHead;
 
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, logdata);
 
-                objUserHeadList = login_BL.login(logdata);
+                //objUserHead = login_BL.login(logdata);
 
-                return objUserHeadList;
+                return objUserHead;
             }
             catch (Exception ex)
             {
 
-                ReturnUserModelHead objUserHead = new ReturnUserModelHead
+                objUserHead = new ReturnUserModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
                 };
-                objUserHeadList.Add(objUserHead);
 
                 objError.WriteLog(0, "loginController", "login", "Stack Track: " + ex.StackTrace);
                 objError.WriteLog(0, "loginController", "login", "Error Message: " + ex.Message);
@@ -70,7 +69,7 @@ namespace HRM.Controllers
 
 
             }
-            return objUserHeadList;
+            return objUserHead;
         }
 
         private bool SendOTP(string From, string to, string cc, int OTP, string smtpServer, int smtpPort, Boolean security, string userName, string password)
