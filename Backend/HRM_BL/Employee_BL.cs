@@ -11,10 +11,15 @@ namespace HRM_BL
     {
         private static LogError objError = new LogError();
 
-        public static List<ReturnEmployeeModelHead> get_employees_single(Employee USR_EmployeeID)//ok
+        public static List<ReturnEmployeeModelHead> get_employees_single(Employee model)//ok
         {
-            return HRM_DAL.Data.Employee_Data.get_employees_single(USR_EmployeeID);
+            return HRM_DAL.Data.Employee_Data.get_employees_single(model);
         }
+        public static List<ReturnEmployeeModelHead> get_employee_all(EmployeeSearchModel model)//ok
+        {
+            return HRM_DAL.Data.Employee_Data.get_employee_all(model);
+        }
+
 
         public static List<ReturncustResponse> add_new_employee(EmployeeModel item)//ok
         {

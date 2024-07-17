@@ -120,6 +120,11 @@ namespace HRM_DAL.Models
 
     }
 
+    public class EmployeeSearchModel : RequestBaseModel
+    {
+        public string USR_EmployeeID { get; set; }
+    }
+
     public class InactiveEmpModel : RequestBaseModel
     {
 

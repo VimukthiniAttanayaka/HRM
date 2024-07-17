@@ -13,12 +13,12 @@ namespace HRM_DAL.Data
     {
         private static LogError objError = new LogError();
 
-        public static List<ReturnEmployeeModelHead> get_employees_single(Employee USR_EmployeeID)//ok
+        public static List<ReturnEmployeeModelHead> get_employees_single(Employee model)//ok
         {
             List<ReturnEmployeeModelHead> objEmployeeHeadList = new List<ReturnEmployeeModelHead>();
             ReturnEmployeeModelHead objemployeeHead = new ReturnEmployeeModelHead();
 
-            if (login_Data.AuthenticationKeyValidateWithDB(USR_EmployeeID) == false)
+            if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
                 objemployeeHead.resp = false;
                 objemployeeHead.IsAuthenticated = false;
@@ -39,7 +39,7 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_employees_single";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@USR_EmployeeID", USR_EmployeeID.USR_EmployeeID);
+                        cmd.Parameters.AddWithValue("@USR_EmployeeID" , model.USR_EmployeeID);
                         cmd.Parameters["@USR_EmployeeID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
@@ -57,21 +57,31 @@ namespace HRM_DAL.Data
                                 objemployeeHead.msg = "Get Employee";
 
                                 objemployee.USR_EmployeeID = rdr["USR_EmployeeID"].ToString();
-                                //objemployee.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
-                                //objemployee.CUS_Adrs_BlockBuildingNo = rdr["CUS_Adrs_BlockBuildingNo"].ToString();
-                                //objemployee.CUS_Adrs_BuildingName = rdr["CUS_Adrs_BuildingName"].ToString();
-                                //objemployee.CUS_Adrs_UnitNumber = rdr["CUS_Adrs_UnitNumber"].ToString();
-                                //objemployee.CUS_Adrs_StreetName = rdr["CUS_Adrs_StreetName"].ToString();
-                                //objemployee.CUS_Adrs_City = rdr["CUS_Adrs_City"].ToString();
-                                //objemployee.CUS_Adrs_CountryCode = rdr["CUS_Adrs_CountryCode"].ToString();
-                                //objemployee.CUS_Adrs_PostalCode = rdr["CUS_Adrs_PostalCode"].ToString();
-                                //objemployee.CUS_ContactPerson = rdr["CUS_ContactPerson"].ToString();
-                                //objemployee.CUS_ContactNumber = rdr["CUS_ContactNumber"].ToString();
-                                //objemployee.CUS_PinOrPwd = rdr["CUS_PinOrPwd"].ToString();
-                                //objemployee.CUS_OTP_By_SMS = Convert.ToBoolean(rdr["CUS_OTP_By_SMS"]);
-                                //objemployee.CUS_OTP_By_Email = Convert.ToBoolean(rdr["CUS_OTP_By_Email"]);
-                                //objemployee.CUS_Status = rdr["CUS_Status"].ToString();
-                                //objemployee.RC = "1";
+                                objemployee.USR_CustomerID = rdr["USR_CustomerID"].ToString();
+                                objemployee.USR_DepartmentID = rdr["USR_DepartmentID"].ToString();
+                                objemployee.USR_FirstName = rdr["USR_FirstName"].ToString();
+                                objemployee.USR_LastName = rdr["USR_LastName"].ToString();
+                                objemployee.USR_PrefferedName = rdr["USR_PrefferedName"].ToString();
+                                objemployee.USR_OrgStructuralLevel1 = rdr["USR_OrgStructuralLevel1"].ToString();
+                                objemployee.USR_OrgStructuralLevel2 = rdr["USR_OrgStructuralLevel2"].ToString();
+                                objemployee.USR_DepartmentDetail1 = rdr["USR_DepartmentDetail1"].ToString();
+                                objemployee.USR_DepartmentDetail2 = rdr["USR_DepartmentDetail2"].ToString();
+                                objemployee.USR_DepartmentDetail3 = rdr["USR_DepartmentDetail3"].ToString();
+                                objemployee.USR_JobCodeDescription = rdr["USR_JobCodeDescription"].ToString();
+                                objemployee.USR_Address = rdr["USR_Address"].ToString();
+                                objemployee.USR_EmailAddress = rdr["USR_EmailAddress"].ToString();
+                                objemployee.USR_MobileNumber = rdr["USR_MobileNumber"].ToString();
+                                objemployee.USR_PhoneNumber1 = rdr["USR_PhoneNumber1"].ToString();
+                                objemployee.USR_PhoneNumber2 = rdr["USR_PhoneNumber2"].ToString();
+                                objemployee.USR_RankDescription = rdr["USR_RankDescription"].ToString();
+                                objemployee.USR_StaffLocation = rdr["USR_StaffLocation"].ToString();
+                                objemployee.USR_Remarks = rdr["USR_Remarks"].ToString();
+                                objemployee.USR_Pwd = rdr["USR_Pwd"].ToString();
+                                //objemployee.USR_LastResetDateTime = rdr["USR_LastResetDateTime"].ToString();
+                                //objemployee.USR_SyncedDateTime = rdr["USR_SyncedDateTime"].ToString();
+                                //objemployee.USR_ActiveFrom = rdr["USR_ActiveFrom"].ToString();
+                                //objemployee.USR_ActiveTo = rdr["USR_ActiveTo"].ToString();
+                                objemployee.USR_Status = Convert.ToBoolean(rdr["USR_Status"].ToString());
 
                                 if (objemployeeHead.Employee == null)
                                 {
@@ -116,8 +126,125 @@ namespace HRM_DAL.Data
                     objError.WriteLog(0, "Employee_Data", "get_employees_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
                     objError.WriteLog(0, "Employee_Data", "get_employees_single", "Inner Exception Message: " + ex.InnerException.Message);
                 }
+           }
+
+            return objEmployeeHeadList;
+
+        }
+
+        public static List<ReturnEmployeeModelHead> get_employee_all(EmployeeSearchModel model)//ok
+        {
+            List<ReturnEmployeeModelHead> objEmployeeHeadList = new List<ReturnEmployeeModelHead>();
+            ReturnEmployeeModelHead objemployeeHead = new ReturnEmployeeModelHead();
+
+            if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
+            {
+                objemployeeHead.resp = false;
+                objemployeeHead.IsAuthenticated = false;
+                objEmployeeHeadList.Add(objemployeeHead);
+                return objEmployeeHeadList;
+            }
+
+            try
+            {
+                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
+                {
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = lconn;
+                        lconn.Open();
+
+                        cmd.CommandText = "get_employee_all";
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@USR_EmployeeID", model.USR_EmployeeID);
+                        cmd.Parameters["@USR_EmployeeID"].Direction = ParameterDirection.Input;
+
+                        SqlDataAdapter dta = new SqlDataAdapter();
+                        dta.SelectCommand = cmd;
+                        DataSet Ds = new DataSet();
+                        dta.Fill(Ds);
+
+                        if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
+                        {
+                            foreach (DataRow rdr in Ds.Tables[0].Rows)
+                            {
+                                ReturnEmployeeModel objemployee = new ReturnEmployeeModel();
+
+                                objemployeeHead.resp = true;
+                                objemployeeHead.msg = "Get Employee";
+
+                                objemployee.USR_EmployeeID = rdr["USR_EmployeeID"].ToString();
+                                objemployee.USR_CustomerID = rdr["USR_CustomerID"].ToString();
+                                objemployee.USR_DepartmentID = rdr["USR_DepartmentID"].ToString();
+                                objemployee.USR_FirstName = rdr["USR_FirstName"].ToString();
+                                objemployee.USR_LastName = rdr["USR_LastName"].ToString();
+                                objemployee.USR_PrefferedName = rdr["USR_PrefferedName"].ToString();
+                                objemployee.USR_OrgStructuralLevel1 = rdr["USR_OrgStructuralLevel1"].ToString();
+                                objemployee.USR_OrgStructuralLevel2 = rdr["USR_OrgStructuralLevel2"].ToString();
+                                objemployee.USR_DepartmentDetail1 = rdr["USR_DepartmentDetail1"].ToString();
+                                objemployee.USR_DepartmentDetail2 = rdr["USR_DepartmentDetail2"].ToString();
+                                objemployee.USR_DepartmentDetail3 = rdr["USR_DepartmentDetail3"].ToString();
+                                objemployee.USR_JobCodeDescription = rdr["USR_JobCodeDescription"].ToString();
+                                objemployee.USR_Address = rdr["USR_Address"].ToString();
+                                objemployee.USR_EmailAddress = rdr["USR_EmailAddress"].ToString();
+                                objemployee.USR_MobileNumber = rdr["USR_MobileNumber"].ToString();
+                                objemployee.USR_PhoneNumber1 = rdr["USR_PhoneNumber1"].ToString();
+                                objemployee.USR_PhoneNumber2 = rdr["USR_PhoneNumber2"].ToString();
+                                objemployee.USR_RankDescription = rdr["USR_RankDescription"].ToString();
+                                objemployee.USR_StaffLocation = rdr["USR_StaffLocation"].ToString();
+                                objemployee.USR_Remarks = rdr["USR_Remarks"].ToString();
+                                objemployee.USR_Pwd = rdr["USR_Pwd"].ToString();
+                                //objemployee.USR_LastResetDateTime = rdr["USR_LastResetDateTime"].ToString();
+                                //objemployee.USR_SyncedDateTime = rdr["USR_SyncedDateTime"].ToString();
+                                //objemployee.USR_ActiveFrom = rdr["USR_ActiveFrom"].ToString();
+                                //objemployee.USR_ActiveTo = rdr["USR_ActiveTo"].ToString();
+                                objemployee.USR_Status = Convert.ToBoolean(rdr["USR_Status"].ToString());
+
+                                if (objemployeeHead.Employee == null)
+                                {
+                                    objemployeeHead.Employee = new List<ReturnEmployeeModel>();
+                                }
+
+                                objemployeeHead.Employee.Add(objemployee);
+
+                                objEmployeeHeadList.Add(objemployeeHead);
+                            }
+
+                        }
+                        else
+                        {
+                            ReturnEmployeeModel objemployee = new ReturnEmployeeModel();
+                            objemployeeHead.resp = true;
+                            objemployeeHead.msg = "";
+                            objEmployeeHeadList.Add(objemployeeHead);
 
 
+                        }
+
+
+                    }
+                    return objEmployeeHeadList;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                objemployeeHead = new ReturnEmployeeModelHead
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objEmployeeHeadList.Add(objemployeeHead);
+
+                objError.WriteLog(0, "Employee_Data", "get_employee_all", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "Employee_Data", "get_employee_all", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "Employee_Data", "get_employee_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "Employee_Data", "get_employee_all", "Inner Exception Message: " + ex.InnerException.Message);
+                }
             }
 
             return objEmployeeHeadList;

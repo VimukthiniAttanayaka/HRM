@@ -63,15 +63,15 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnEmployeeModelHead> get_employee_all(Employee USR_EmployeeID)//ok
+        public List<ReturnEmployeeModelHead> get_employee_all(EmployeeSearchModel model)//ok
         {
             List<ReturnEmployeeModelHead> objemployeeHeadList = new List<ReturnEmployeeModelHead>();
 
             try
             {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, USR_EmployeeID);
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
 
-                return HRM_BL.Employee_BL.get_employees_single(USR_EmployeeID);
+                return HRM_BL.Employee_BL.get_employee_all(model);
 
             }
             catch (Exception ex)
