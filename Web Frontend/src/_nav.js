@@ -51,10 +51,20 @@ const _nav = [
   {
     component: CNavTitle,
     name: <Translation>{(t) => t('Attendance')}</Translation>,
+  },{
+    component: CNavItem,
+    name: <Translation>{(t) => t('Attendance Search')}</Translation>,
+    to: '/attendance/attendance',
+    // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {
     component: CNavTitle,
     name: <Translation>{(t) => t('leave')}</Translation>,
+  },{
+    component: CNavItem,
+    name: <Translation>{(t) => t('Leave Entitlement')}</Translation>,
+    to: '/leave/leaves',
+    // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {
     component: CNavTitle,
@@ -87,6 +97,10 @@ const _nav = [
   {
     component: CNavTitle,
     name: <Translation>{(t) => t('Master Data')}</Translation>,
+  },
+  {
+    component: CNavTitle,
+    name: <Translation>{(t) => t('Templates')}</Translation>,
   },
   {
     component: CNavGroup,
