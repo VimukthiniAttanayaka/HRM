@@ -2,7 +2,7 @@ import React from 'react'
 import { Translation } from 'react-i18next'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
-const Customer = React.lazy(() => import('./views/employee/customer/Customer'))
+const Company = React.lazy(() => import('./views/employee/Company/Company'))
 const Employee = React.lazy(() => import('./views/employee/employee/Employee'))
 
 // Base
@@ -71,15 +71,15 @@ const routes = [
     element: Dashboard,
   },
   {
-    path: '/theme',
-    name: <Translation>{(t) => t('Employee')}</Translation>,
-    element: Customer,
+    path: '/Company',
+    name: <Translation>{(t) => t('Company')}</Translation>,
+    element: Company,
     exact: true,
   },
   {
-    path: '/employee/customer',
-    name: <Translation>{(t) => t('customer')}</Translation>,
-    element: Customer,
+    path: '/employee/Company',
+    name: <Translation>{(t) => t('Company')}</Translation>,
+    element: Company,
   },
   {
     path: '/employee/employee',
