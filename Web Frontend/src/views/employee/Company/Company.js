@@ -155,8 +155,6 @@ const Customer = () => {
 
   const auth = localStorage.getItem('token');
 
-  const [courses, setCourses] = useState ([]);
-
   async function requestdata() {
     const token = getJWTToken();
     const staffId = getStaffID();
