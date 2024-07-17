@@ -2,7 +2,7 @@ import React from 'react'
 import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
 import { DocsExample } from 'src/components'
 
-import SmartTableBasixExample from '../../smart-table/SmartTableBasixExample'
+import SmartTableDownloadableExample from './SmartTableDownloadableExample'
 
 const Employee = () => {
   return (
@@ -12,9 +12,7 @@ const Employee = () => {
           <strong>Employee List</strong>
         </CCardHeader>
         <CCardBody>
-          <DocsExample href="components/smart-table/">
-            <SmartTableBasixExample />
-          </DocsExample>
+            <SmartTableDownloadableExample />
         </CCardBody>
       </CCard>
     </>
