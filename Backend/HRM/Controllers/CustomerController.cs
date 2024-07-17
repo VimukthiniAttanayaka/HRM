@@ -67,8 +67,6 @@ namespace HRM.Controllers
         public List<ReturncustResponse> add_new_customer(CustomerModel item)//ok
         {
             List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
-            objCustHeadList.Add(new ReturncustResponse() { resp = true, msg = "saved" });
-            return objCustHeadList;
 
             try
             {
@@ -108,8 +106,6 @@ namespace HRM.Controllers
         public List<ReturncustResponse> modify_customer(CustomerModel item)//ok
         {
             List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
-            objCustHeadList.Add(new ReturncustResponse() { resp = true, msg = "saved" });
-            return objCustHeadList;
 
             try
             {
