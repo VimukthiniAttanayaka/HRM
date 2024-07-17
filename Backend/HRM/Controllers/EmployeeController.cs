@@ -24,7 +24,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnEmployeeModelHead> get_employee_single(Employee USR_EmployeeID)//ok
+        public List<ReturnEmployeeModelHead> get_employee_single(Employee model)//ok
         {
             List<ReturnEmployeeModelHead> objemployeeHeadList = new List<ReturnEmployeeModelHead>();
 
@@ -32,7 +32,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, USR_EmployeeID);
 
-                return HRM_BL.Employee_BL.get_employees_single(USR_EmployeeID);
+                return HRM_BL.Employee_BL.get_employees_single(model);
 
             }
             catch (Exception ex)
