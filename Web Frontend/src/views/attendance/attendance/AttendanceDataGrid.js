@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse ,CCol} from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
+import AttendancePopup from './AttendancePopup'
 
 const AttendanceDataGrid = () => {
 
@@ -56,9 +57,24 @@ const AttendanceDataGrid = () => {
       newDetails.splice(position, 1)
     } else {
       newDetails = [...details, index]
+      // alert(newDetails[newDetails.length - 1])
+      console.log(newDetails)
+      handleOpenPopup()
     }
-    setDetails(newDetails)
+    // setDetails(newDetails)
   }
+
+  const handleOpenPopup = () => {
+    setVisible(true);
+  };
+
+  const handleClosePopup = () => {
+    setVisible(false);
+  };
+
+
+  const [visible, setVisible] = useState(false);
+
   const apiUrl = process.env.REACT_APP_API_URL;
 
   async function requestdata() {
@@ -98,7 +114,7 @@ const AttendanceDataGrid = () => {
 
   return (
     <CCardBody>
-      <CButton
+      <CCol><CButton
         color="primary"
         className="mb-2"
         href={csvCode}
@@ -107,6 +123,10 @@ const AttendanceDataGrid = () => {
       >
         Download current items (.csv)
       </CButton>
+      </CCol>
+       <CCol className='d-flex justify-content-end'>
+        <AttendancePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} />
+      </CCol>  
       <CSmartTable
         cleaner
         clickableRows

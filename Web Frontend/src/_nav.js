@@ -56,6 +56,11 @@ const _nav = [
     name: <Translation>{(t) => t('Attendance Search')}</Translation>,
     to: '/attendance/attendance',
     // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+  },{
+    component: CNavItem,
+    name: <Translation>{(t) => t('Mark Attendance')}</Translation>,
+    to: '/attendance/markattendance',
+    // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {
     component: CNavTitle,
@@ -64,12 +69,12 @@ const _nav = [
   {
     component: CNavItem,
     name: <Translation>{(t) => t('Leave Entitlement')}</Translation>,
-    to: '/leave/leaveshedule',
+    to: '/leaves/leaveshedule',
     // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },{
     component: CNavItem,
     name: <Translation>{(t) => t('Leave Type')}</Translation>,
-    to: '/leave/leavetype',
+    to: '/leaves/leavetype',
     // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {

@@ -12,8 +12,8 @@ const Attendance = () => {
           <strong>Attendance List</strong>
         </CCardHeader>
         <CCardBody>
-          {/* <AttendancePopup/> */}
-            <AttendanceDataGrid />
+          <AttendancePopup />
+          <AttendanceDataGrid />
         </CCardBody>
       </CCard>
     </>

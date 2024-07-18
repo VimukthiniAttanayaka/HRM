@@ -114,21 +114,21 @@ const EmployeeDataGrid = () => {
 
   return (
     <CCardBody>
-<CRow>
-  <CCol>
-      <CButton
-        color="primary"
-        className="mb-2"
-        href={csvCode}
-        download="coreui-table-data.csv"
-        target="_blank"
-      >
-        Download current items (.csv)
-      </CButton>
-      </CCol>
-      <CCol className='d-flex justify-content-end'>
+      <CRow>
+        <CCol>
+          <CButton
+            color="primary"
+            className="mb-2"
+            href={csvCode}
+            download="coreui-table-data.csv"
+            target="_blank"
+          >
+            Download current items (.csv)
+          </CButton>
+        </CCol>
+        <CCol className='d-flex justify-content-end'>
           <EmployeePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} />
-      </CCol>
+        </CCol>
       </CRow>
       <CSmartTable
         cleaner
