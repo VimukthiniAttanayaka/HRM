@@ -79,7 +79,7 @@ const EmployeeDataGrid = () => {
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
         console.log(res1);
-        // setCustomerId(res1[0].Customer[0].CUS_ID);
+        // setCustomerId(  res1[0].Customer[0].CUS_ID);
       })
   }
   useEffect(() => {
