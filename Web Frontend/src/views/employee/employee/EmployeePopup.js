@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CButton, CModal,CModalBody,CModalTitle,CModalFooter,CModalHeader,CPopover,CLink } from '@coreui/react-pro'
+import { CTooltip, CButton, CModal, CModalBody, CModalTitle, CModalFooter, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 const EmployeePopup = () => {
   const [visible, setVisible] = useState(false)
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+  };
   return (
     <>
       <CButton color="primary" onClick={() => setVisible(!visible)}>New Employee</CButton>
@@ -18,31 +23,71 @@ const EmployeePopup = () => {
           <CModalTitle id="TooltipsAndPopoverExample">Create New Employee</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <h5>Popover in a modal</h5>
-          <p>
-            This
-            <CPopover title="Popover title" content="Popover body content is set in this property.">
-              <CButton color="primary">button</CButton>
-            </CPopover> triggers a popover on click.
-          </p>
-          <hr />
-          <h5>Tooltips in a modal</h5>
-          <p>
-            <CTooltip content="Tooltip">
-              <CLink>This link</CLink>
-            </CTooltip>{' '}
-            and
-            <CTooltip content="Tooltip">
-              <CLink>that link</CLink>
-            </CTooltip> have tooltips on hover.
-          </p>
+          <CCard className="mx-4">
+            <CCardBody className="p-4">
+              <CForm onSubmit={handleSubmit}>
+                <CInputGroup className="mb-3">
+                  <CFormInput placeholder="Company Id" name="customerId"
+                  // value={customerId} onChange={handleChangeId}
+                  />
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CFormInput placeholder="Company Name" name="companyName"
+                  // value={companyName} onChange={handleChangeName}
+                  />
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CFormInput placeholder="Block Building Number" name="blockBuildingNumber"
+                  // value={blockBuildingNumber} onChange={handleChangeBlockBuildingNumber}
+                  />
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CFormInput placeholder="Address Building Name" name="addressBuildingName"
+                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  />
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CFormInput placeholder="Address Unit Number" name="addressUnitNumber"
+                  // value={addressUnitNumber} onChange={handleChangeAddressUnitNumber}
+                  />
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CFormInput placeholder="Address Street Name" name="addressStreetName"
+                  // value={addressStreetName} onChange={handleChangeAddressStreetName}
+                  />
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CFormInput placeholder="Address City" name="addressCity"
+                  // value={addressCity} onChange={handleChangeAddressCity}
+                  />
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CFormInput placeholder="Address Country Code" name="addressCountryCode"
+                  // value={addressCountryCode} onChange={handleChangeAddressCountryCode}
+                  />
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CFormInput placeholder="Address Postal Code" name="addressPostalCode"
+                  // value={addressPostalCode} onChange={handleChangeAddressPostalCode}
+                  />
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CFormInput placeholder="Contact Person" name="contactPerson"
+                  // value={contactPerson} onChange={handleChangeContactPerson}
+                  />
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CFormInput placeholder="Contact Number" name="contactNumber"
+                  // value={contactNumber} onChange={handleChangeContactNumber}
+                  />
+                </CInputGroup>
+                <div className="d-grid">
+                  <CButton color="success" type='submit'>Submit</CButton>
+                </div>
+              </CForm>
+            </CCardBody>
+          </CCard>
         </CModalBody>
-        <CModalFooter>
-          <CButton color="secondary" onClick={() => setVisible(false)}>
-            Close
-          </CButton>
-          <CButton color="primary">Save changes</CButton>
-        </CModalFooter>
       </CModal>
     </>
   )
