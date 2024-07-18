@@ -3,8 +3,7 @@ import { CTooltip, CButton, CModal, CModalBody, CModalTitle, CModalFooter, CModa
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
-const LeaveSchedulePopup = () => {
-  const [visible, setVisible] = useState(false)
+const LeaveSchedulePopup = ({ visible, onClose, onOpen }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -12,15 +11,16 @@ const LeaveSchedulePopup = () => {
   };
   return (
     <>
-      <CButton color="primary" onClick={() => setVisible(!visible)}>New Employee</CButton>
-      <CModal
+      <CButton color="primary" onClick={onOpen}>New LeaveSchedule</CButton>
+      <CModal size='lg'
+        scrollable="true"
         alignment="center"
         visible={visible}
-        onClose={() => setVisible(false)}
+        onClose={onClose}
         aria-labelledby="TooltipsAndPopoverExample"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New Employee</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">Create New LeaveSchedule</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">

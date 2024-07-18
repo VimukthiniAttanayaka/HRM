@@ -12,8 +12,8 @@ const LeaveType = () => {
           <strong>LeaveType List</strong>
         </CCardHeader>
         <CCardBody>
-          {/* <LeaveTypePopup/> */}
-            {/* <LeaveTypeDataGrid /> */}
+          {/* <LeaveTypePopup /> */}
+          <LeaveTypeDataGrid  onOpen={() => handleOpenPopup}/>
         </CCardBody>
       </CCard>
     </>
