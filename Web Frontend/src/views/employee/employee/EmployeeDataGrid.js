@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CBadge, CCollapse, } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
-const SmartTableDownloadableExample = () => {
+import { Modal } from '@coreui/coreui-pro';
+const EmployeeDataGrid = () => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -26,7 +27,7 @@ const SmartTableDownloadableExample = () => {
       .then(response => response.json())
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
-        console.log(res1);
+        console.log(res1[0].Employee[0]);
         // setCustomerId(res1[0].Customer[0].CUS_ID);
       })
   }
@@ -129,4 +130,4 @@ const SmartTableDownloadableExample = () => {
   )
 }
 
-export default SmartTableDownloadableExample
+export default EmployeeDataGrid
