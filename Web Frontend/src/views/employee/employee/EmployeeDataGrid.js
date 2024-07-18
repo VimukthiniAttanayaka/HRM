@@ -32,7 +32,7 @@ const SmartTableDownloadableExample = () => {
       })
   }
   useEffect(() => {
-    // requestdata();
+    requestdata();
   }, []);
 
 
