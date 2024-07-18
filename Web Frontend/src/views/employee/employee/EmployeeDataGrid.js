@@ -83,7 +83,7 @@ const EmployeeDataGrid = () => {
       })
   }
   useEffect(() => {
-    // requestdata();
+    requestdata();
   }, []);
 
 
