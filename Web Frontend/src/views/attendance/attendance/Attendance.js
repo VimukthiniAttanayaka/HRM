@@ -13,7 +13,7 @@ const Attendance = () => {
         </CCardHeader>
         <CCardBody>
           {/* <AttendancePopup/> */}
-            {/* <AttendanceDataGrid /> */}
+            <AttendanceDataGrid />
         </CCardBody>
       </CCard>
     </>

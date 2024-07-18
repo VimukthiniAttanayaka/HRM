@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable,CCollapse } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 
 const AttendanceDataGrid = () => {
- 
-const [details, setDetails] = useState([])
 
-const columns = [
+  const [details, setDetails] = useState([])
+
+  const columns = [
     {
       key: 'id',
       label: '',
@@ -19,11 +19,11 @@ const columns = [
       _style: { width: '20%' },
     },
     'registered',
-    { 
+    {
       key: 'role',
       _style: { width: '20%' }
     },
-    { 
+    {
       key: 'status',
       _style: { width: '20%' }
     },
@@ -108,15 +108,15 @@ const columns = [
         Download current items (.csv)
       </CButton>
       <CSmartTable
-       cleaner
-       clickableRows
-       columns={columns}
-       columnFilter
-       columnSorter
-       footer
-       items={data}
-       itemsPerPageSelect
-       itemsPerPage={5}
+        cleaner
+        clickableRows
+        columns={columns}
+        columnFilter
+        columnSorter
+        footer
+        items={data}
+        itemsPerPageSelect
+        itemsPerPage={5}
         onFilteredItemsChange={setCurrentItems}
         pagination
         // onFilteredItemsChange={(items) => {

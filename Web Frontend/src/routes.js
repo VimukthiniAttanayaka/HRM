@@ -90,17 +90,17 @@ const routes = [
     element: Employee,
   },
   {
-    path: '/leaves/leaveschedule',
+    path: '/leave/leaveshedule',
     name: <Translation>{(t) => t('LeaveSchedule')}</Translation>,
     element: LeaveSchedule,
   },
   {
-    path: '/leaves/leavetype',
+    path: '/leave/leavetype',
     name: <Translation>{(t) => t('LeaveType')}</Translation>,
     element: LeaveType,
   },
   {
-    path: '/Attendance/Attendance',
+    path: '/attendance/attendance',
     name: <Translation>{(t) => t('Attendance')}</Translation>,
     element: Attendance,
   },
