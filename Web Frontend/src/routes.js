@@ -6,7 +6,7 @@ const Company = React.lazy(() => import('./views/employee/Company/Company'))
 const Employee = React.lazy(() => import('./views/employee/employee/Employee'))
 const LeaveSchedule = React.lazy(() => import('./views/leaves/leaveshedule/LeaveSchedule'))
 const LeaveType = React.lazy(() => import('./views/leaves/leavetype/LeaveType'))
-// const Employee = React.lazy(() => import('./views/employee/employee/Employee'))
+const Attendance = React.lazy(() => import('./views/attendance/attendance/Attendance'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -98,6 +98,11 @@ const routes = [
     path: '/leaves/leavetype',
     name: <Translation>{(t) => t('LeaveType')}</Translation>,
     element: LeaveType,
+  },
+  {
+    path: '/Attendance/Attendance',
+    name: <Translation>{(t) => t('Attendance')}</Translation>,
+    element: Attendance,
   },
   {
     path: '/base',

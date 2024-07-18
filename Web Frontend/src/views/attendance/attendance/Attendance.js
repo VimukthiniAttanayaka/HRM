@@ -1,10 +1,10 @@
 import React from 'react'
 import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
 
-import LeaveTypeDataGrid from './LeaveTypeDataGrid'
-import LeaveTypePopup from './LeaveTypePopup'
+import AttendanceDataGrid from './AttendanceDataGrid'
+import AttendancePopup from './AttendancePopup'
 
-const LeaveType = () => {
+const Attendance = () => {
   return (
     <>
       <CCard className="mb-4">
@@ -12,12 +12,12 @@ const LeaveType = () => {
           <strong>LeaveType List</strong>
         </CCardHeader>
         <CCardBody>
-          {/* <LeaveTypePopup/> */}
-            {/* <LeaveTypeDataGrid /> */}
+          {/* <AttendancePopup/> */}
+            {/* <AttendanceDataGrid /> */}
         </CCardBody>
       </CCard>
     </>
   )
 }
 
-export default LeaveType
+export default Attendance

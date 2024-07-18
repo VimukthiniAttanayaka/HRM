@@ -1,8 +1,8 @@
 import React from 'react'
 import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
-import { DocsExample } from 'src/components'
 
-import SmartTableBasixExample from '../../smart-table/SmartTableBasixExample'
+import LeaveScheduleDataGrid from './LeaveScheduleDataGrid'
+import LeaveSchedulePopup from './LeaveSchedulePopup'
 
 const LeaveSchedule = () => {
   return (
@@ -12,9 +12,9 @@ const LeaveSchedule = () => {
           <strong>LeaveSchedule List</strong>
         </CCardHeader>
         <CCardBody>
-          <DocsExample href="components/smart-table/">
-            <SmartTableBasixExample />
-          </DocsExample>
+  <LeaveSchedulePopup/>
+            <LeaveScheduleDataGrid />
+          
         </CCardBody>
       </CCard>
     </>
