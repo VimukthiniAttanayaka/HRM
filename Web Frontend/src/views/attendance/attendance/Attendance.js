@@ -9,7 +9,7 @@ const Attendance = () => {
     <>
       <CCard className="mb-4">
         <CCardHeader>
-          <strong>LeaveType List</strong>
+          <strong>Attendance List</strong>
         </CCardHeader>
         <CCardBody>
           {/* <AttendancePopup/> */}

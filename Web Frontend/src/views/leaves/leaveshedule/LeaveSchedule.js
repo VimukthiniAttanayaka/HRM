@@ -12,8 +12,8 @@ const LeaveSchedule = () => {
           <strong>LeaveSchedule List</strong>
         </CCardHeader>
         <CCardBody>
-  <LeaveSchedulePopup/>
-            <LeaveScheduleDataGrid />
+  {/* <LeaveSchedulePopup/> */}
+            {/* <LeaveScheduleDataGrid /> */}
           
         </CCardBody>
       </CCard>
