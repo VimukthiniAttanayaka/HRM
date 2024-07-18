@@ -206,14 +206,14 @@ const Customer = () => {
               <CCardBody className="p-4">
                 <CForm onSubmit={handleSubmit}>
                   <h1>{customerId ? "Edit" : "Add"}</h1>
-                  <p className="text-body-secondary">Edit Your Company Details</p>
+                  <p className="text-body-secondary">{customerId ? "Edit" : "Add"} Your Company Details</p>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
                       <CInputGroupText>
                         <h6>Company Id</h6>
                       </CInputGroupText>
                     </CCol>
-                    <CFormInput placeholder="Company Id" name="customerId" value={customerId} onChange={handleChangeId} />
+                    <CFormInput maxLength={20} placeholder="Company Id" name="customerId" value={customerId} onChange={handleChangeId} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -221,7 +221,7 @@ const Customer = () => {
                         <h6>Company Name</h6>
                       </CInputGroupText>
                     </CCol>
-                    <CFormInput placeholder="Company Name" name="companyName" value={companyName} onChange={handleChangeName} />
+                    <CFormInput maxLength={20} placeholder="Company Name" name="companyName" value={companyName} onChange={handleChangeName} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -229,7 +229,7 @@ const Customer = () => {
                         <h6>Block Building Number</h6>
                       </CInputGroupText>
                     </CCol>
-                    <CFormInput placeholder="Block Building Number" name="blockBuildingNumber" value={blockBuildingNumber} onChange={handleChangeBlockBuildingNumber} />
+                    <CFormInput maxLength={20} placeholder="Block Building Number" name="blockBuildingNumber" value={blockBuildingNumber} onChange={handleChangeBlockBuildingNumber} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -237,7 +237,7 @@ const Customer = () => {
                         <h6>Address Building Name</h6>
                       </CInputGroupText>
                     </CCol>
-                    <CFormInput placeholder="Address Building Name" name="addressBuildingName" value={addressBuildingName} onChange={handleChangeAddressBuildingName} />
+                    <CFormInput maxLength={20} placeholder="Address Building Name" name="addressBuildingName" value={addressBuildingName} onChange={handleChangeAddressBuildingName} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -245,7 +245,7 @@ const Customer = () => {
                         <h6>Address Unit Number</h6>
                       </CInputGroupText>
                     </CCol>
-                    <CFormInput placeholder="Address Unit Number" name="addressUnitNumber" value={addressUnitNumber} onChange={handleChangeAddressUnitNumber} />
+                    <CFormInput maxLength={20} placeholder="Address Unit Number" name="addressUnitNumber" value={addressUnitNumber} onChange={handleChangeAddressUnitNumber} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -253,7 +253,7 @@ const Customer = () => {
                         <h6>Address Street Name</h6>
                       </CInputGroupText>
                     </CCol>
-                    <CFormInput placeholder="Address Street Name" name="addressStreetName" value={addressStreetName} onChange={handleChangeAddressStreetName} />
+                    <CFormInput maxLength={20} placeholder="Address Street Name" name="addressStreetName" value={addressStreetName} onChange={handleChangeAddressStreetName} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -261,7 +261,7 @@ const Customer = () => {
                         <h6>Address City</h6>
                       </CInputGroupText>
                     </CCol>
-                    <CFormInput placeholder="Address City" name="addressCity" value={addressCity} onChange={handleChangeAddressCity} />
+                    <CFormInput maxLength={20} placeholder="Address City" name="addressCity" value={addressCity} onChange={handleChangeAddressCity} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -269,7 +269,7 @@ const Customer = () => {
                         <h6>Address Country Code</h6>
                       </CInputGroupText>
                     </CCol>
-                    <CFormInput placeholder="Address Country Code" name="addressCountryCode" value={addressCountryCode} onChange={handleChangeAddressCountryCode} />
+                    <CFormInput maxLength={20} placeholder="Address Country Code" name="addressCountryCode" value={addressCountryCode} onChange={handleChangeAddressCountryCode} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -277,7 +277,7 @@ const Customer = () => {
                         <h6>Address Postal Code</h6>
                       </CInputGroupText>
                     </CCol>
-                    <CFormInput placeholder="Address Postal Code" name="addressPostalCode" value={addressPostalCode} onChange={handleChangeAddressPostalCode} />
+                    <CFormInput maxLength={20} placeholder="Address Postal Code" name="addressPostalCode" value={addressPostalCode} onChange={handleChangeAddressPostalCode} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -285,7 +285,7 @@ const Customer = () => {
                         <h6>Contact Person</h6>
                       </CInputGroupText>
                     </CCol>
-                    <CFormInput placeholder="Contact Person" name="contactPerson" value={contactPerson} onChange={handleChangeContactPerson} />
+                    <CFormInput maxLength={20} placeholder="Contact Person" name="contactPerson" value={contactPerson} onChange={handleChangeContactPerson} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -293,7 +293,7 @@ const Customer = () => {
                         <h6>Contact Number</h6>
                       </CInputGroupText>
                     </CCol>
-                    <CFormInput placeholder="Contact Number" name="contactNumber" value={contactNumber} onChange={handleChangeContactNumber} />
+                    <CFormInput maxLength={10} placeholder="Contact Number" name="contactNumber" value={contactNumber} onChange={handleChangeContactNumber} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -306,15 +306,23 @@ const Customer = () => {
                       <option value="PWD">Password</option>
                     </CFormSelect>
                   </CInputGroup>
-                  <CInputGroup className="mb-4">
-                    <CFormCheck label="OTP by sms" defaultChecked />
-                  </CInputGroup>
-                  <CInputGroup className="mb-4">
-                    <CFormCheck label="OTP by email" defaultChecked />
-                  </CInputGroup>
-                  <CInputGroup className="mb-4">
-                    <CFormCheck label="Status" defaultChecked />
-                  </CInputGroup>
+                  <CRow>
+                    <CCol md={4}>
+                      <CInputGroup className="mb-4">
+                        <CFormCheck label="OTP by sms" defaultChecked />
+                      </CInputGroup>
+                    </CCol>
+                    <CCol md={4}>
+                      <CInputGroup className="mb-4">
+                        <CFormCheck label="OTP by email" defaultChecked />
+                      </CInputGroup>
+                    </CCol>
+                    <CCol md={4}>
+                      <CInputGroup className="mb-4">
+                        <CFormCheck label="Status" defaultChecked />
+                      </CInputGroup>
+                    </CCol>
+                  </CRow>
                   <div className="d-grid">
                     <CButton color="success" type='submit'>Submit</CButton>
                   </div>
