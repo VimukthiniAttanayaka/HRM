@@ -30,7 +30,7 @@ namespace HRM.Controllers
 
             try
             {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, USR_EmployeeID);
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
 
                 return HRM_BL.Employee_BL.get_employees_single(model);
 

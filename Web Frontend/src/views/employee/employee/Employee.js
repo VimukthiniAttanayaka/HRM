@@ -2,7 +2,7 @@ import React from 'react'
 import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
 import { DocsExample } from 'src/components'
 
-import SmartTableDownloadableExample from './SmartTableDownloadableExample'
+import EmployeeDataGrid from './EmployeeDataGrid'
 
 const Employee = () => {
   return (
@@ -12,7 +12,7 @@ const Employee = () => {
           <strong>Employee List</strong>
         </CCardHeader>
         <CCardBody>
-            <SmartTableDownloadableExample />
+            <EmployeeDataGrid />
         </CCardBody>
       </CCard>
     </>

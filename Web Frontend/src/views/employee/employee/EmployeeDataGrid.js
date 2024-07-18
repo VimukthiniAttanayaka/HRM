@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable } from '@coreui/react-pro'
-import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass';
+import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 const SmartTableDownloadableExample = () => {
 
@@ -18,7 +18,7 @@ const SmartTableDownloadableExample = () => {
       // AUD_notificationToken: token,
       USR_EmployeeID: 'sedcx'
     }
-    const res = await fetch(apiUrl + 'enployee/get_employee_all', {
+    const res = await fetch(apiUrl + 'employee/get_employee_all', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
