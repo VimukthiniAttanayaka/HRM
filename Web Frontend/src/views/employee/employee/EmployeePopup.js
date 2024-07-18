@@ -3,8 +3,8 @@ import { CTooltip, CButton, CModal, CModalBody, CModalTitle, CModalFooter, CModa
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
-const EmployeePopup = () => {
-  const [visible, setVisible] = useState(false)
+
+const EmployeePopup = ({ visible, onClose, onOpen }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -12,11 +12,11 @@ const EmployeePopup = () => {
   };
   return (
     <>
-      <CButton color="primary" onClick={() => setVisible(!visible)}>New Employee</CButton>
+      <CButton color="primary" onClick={onOpen}>New Employee</CButton>
       <CModal
         alignment="center"
         visible={visible}
-        onClose={() => setVisible(false)}
+        onClose={onClose}
         aria-labelledby="TooltipsAndPopoverExample"
       >
         <CModalHeader>
