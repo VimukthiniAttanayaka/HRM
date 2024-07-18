@@ -1,5 +1,5 @@
-import React from 'react'
-import { CCard, CCardHeader, CCardBody,CModal } from '@coreui/react-pro'
+import React, { useState } from 'react'
+import { CCard, CCardHeader, CCardBody, CModal } from '@coreui/react-pro'
 import { DocsExample } from 'src/components'
 
 import EmployeeDataGrid from './EmployeeDataGrid'
@@ -13,8 +13,7 @@ const Employee = () => {
           <strong>Employee List</strong>
         </CCardHeader>
         <CCardBody>
-        <EmployeePopup />
-            <EmployeeDataGrid />
+          <EmployeeDataGrid onOpen={() => handleOpenPopup} />
         </CCardBody>
       </CCard>
     </>
