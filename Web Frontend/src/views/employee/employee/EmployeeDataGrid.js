@@ -4,9 +4,12 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 
 const EmployeeDataGrid = () => {
-  const columns = [
+ 
+const [details, setDetails] = useState([])
+
+const columns = [
     {
-      key: 'avatar',
+      key: 'id',
       label: '',
       filter: false,
       sorter: false,
@@ -70,17 +73,17 @@ const EmployeeDataGrid = () => {
       // AUD_notificationToken: token,
       USR_EmployeeID: 'sedcx'
     }
-    const res = await fetch(apiUrl + 'employee/get_employee_all', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-      .then(response => response.json())
-      .then(json => {
-        let res1 = JSON.parse(JSON.stringify(json))
-        console.log(res1);
-        // setCustomerId(  res1[0].Customer[0].CUS_ID);
-      })
+    // const res = await fetch(apiUrl + 'employee/get_employee_all', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(formData),
+    // })
+    //   .then(response => response.json())
+    //   .then(json => {
+    //     let res1 = JSON.parse(JSON.stringify(json))
+    //     console.log(res1);
+    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
+    //   })
   }
   useEffect(() => {
     requestdata();
@@ -111,7 +114,7 @@ const EmployeeDataGrid = () => {
        columnFilter
        columnSorter
        footer
-       items={data.usersData}
+       items={data}
        itemsPerPageSelect
        itemsPerPage={5}
         onFilteredItemsChange={setCurrentItems}
