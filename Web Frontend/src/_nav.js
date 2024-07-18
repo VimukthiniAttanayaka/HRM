@@ -60,7 +60,8 @@ const _nav = [
   {
     component: CNavTitle,
     name: <Translation>{(t) => t('leave')}</Translation>,
-  },{
+  },
+  {
     component: CNavItem,
     name: <Translation>{(t) => t('Leave Entitlement')}</Translation>,
     to: '/leave/leaveshedule',
