@@ -308,11 +308,7 @@ const Customer = () => {
                   </CInputGroup>
                   <CInputGroup className="mb-4">
                     <CFormCheck label="OTP by sms" defaultChecked />
-                  </CInputGroup>
-                  <CInputGroup className="mb-4">
                     <CFormCheck label="OTP by email" defaultChecked />
-                  </CInputGroup>
-                  <CInputGroup className="mb-4">
                     <CFormCheck label="Status" defaultChecked />
                   </CInputGroup>
                   <div className="d-grid">
