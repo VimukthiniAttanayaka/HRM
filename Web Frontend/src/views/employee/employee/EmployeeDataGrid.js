@@ -63,7 +63,7 @@ const EmployeeDataGrid = () => {
       console.log(newDetails)
       handleOpenPopup()
     }
-    setDetails(newDetails)
+    // setDetails(newDetails)
   }
   const apiUrl = process.env.REACT_APP_API_URL;
 
