@@ -70,7 +70,7 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: <Translation>{(t) => t('leave')}</Translation>,
+    name: <Translation>{(t) => t('Leave Management')}</Translation>,
     items: [
       {
         component: CNavItem,

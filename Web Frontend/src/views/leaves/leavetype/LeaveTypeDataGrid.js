@@ -1,30 +1,26 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable,CCollapse,CRow,CCol } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import LeaveTypePopup from './LeaveTypePopup.js';
 
 const LeaveTypeDataGrid = () => {
- 
-const [details, setDetails] = useState([])
 
-const columns = [
+  const [details, setDetails] = useState([])
+  const [data, setData] = useState([])
+
+  const columns = [
     {
       key: 'id',
-      label: '',
-      filter: false,
-      sorter: false,
+      // label: '',
+      // filter: false,
+      // sorter: false,
     },
     {
-      key: 'name',
+      key: 'leavetype',
       _style: { width: '20%' },
     },
-    'registered',
-    { 
-      key: 'role',
-      _style: { width: '20%' }
-    },
-    { 
+    {
       key: 'status',
       _style: { width: '20%' }
     },
@@ -79,17 +75,37 @@ const columns = [
       // AUD_notificationToken: token,
       USR_EmployeeID: 'sedcx'
     }
-    // const res = await fetch(apiUrl + 'employee/get_employee_all', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-    //     console.log(res1);
-    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
-    //   })
+    const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+      .then(response => response.json())
+      .then(json => {
+        let res1 = JSON.parse(JSON.stringify(json))
+        console.log(res1);
+
+        const cars = [];
+        class Car {
+          constructor(id, leavetype, status) {
+            this.leavetype = leavetype;
+            this.id = id;
+            if (status == true) { this.status = "Active"; }
+            else { this.status = "Inactive"; }
+          }
+        }
+
+        for (let index = 0; index < res1[0].LeaveType.length; index++) {
+          let element = res1[0].LeaveType[index];
+
+          cars[index] = new Car(element.LVT_LeaveTypeID, element.LVT_LeaveType, element.LVT_Status);
+        }
+
+        console.log(cars[1]);
+        setData(cars);
+        // setCustomerId(  res1[0].Customer[0].CUS_ID);
+      })
+
   }
   useEffect(() => {
     requestdata();
@@ -114,7 +130,7 @@ const columns = [
 
   return (
     <CCardBody>
-       <CRow>
+      <CRow>
         <CCol>
           <CButton
             color="primary"
@@ -131,15 +147,15 @@ const columns = [
         </CCol>
       </CRow>
       <CSmartTable
-       cleaner
-       clickableRows
-       columns={columns}
-       columnFilter
-       columnSorter
-       footer
-       items={data}
-       itemsPerPageSelect
-       itemsPerPage={5}
+        cleaner
+        clickableRows
+        columns={columns}
+        columnFilter
+        columnSorter
+        footer
+        items={data}
+        itemsPerPageSelect
+        itemsPerPage={5}
         onFilteredItemsChange={setCurrentItems}
         pagination
         // onFilteredItemsChange={(items) => {
@@ -149,16 +165,16 @@ const columns = [
           console.log(items)
         }}
         scopedColumns={{
-          avatar: (item) => (
-            <td>
-              {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-            </td>
-          ),
-          status: (item) => (
-            <td>
-              {/* <CBadge color={getBadge(item.status)}>{item.status}</CBadge> */}
-            </td>
-          ),
+          // avatar: (item) => (
+          //   <td>
+          //     {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
+          //   </td>
+          // ),
+          // status: (item) => (
+          //   <td>
+          //     {/* <CBadge color={getBadge(item.status)}>{item.status}</CBadge> */}
+          //   </td>
+          // ),
           show_details: (item) => {
             return (
               <td className="py-2">
@@ -193,7 +209,7 @@ const columns = [
             )
           },
         }}
-        selectable
+        // selectable
         sorterValue={{ column: 'status', state: 'asc' }}
         tableFilter
         tableProps={{

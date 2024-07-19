@@ -13,7 +13,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen }) => {
     <>
       <CButton color="primary" onClick={onOpen}>New LeaveType</CButton>
       <CModal size='lg'
-        scrollable="true"
+        scrollable
         alignment="center"
         visible={visible}
         onClose={onClose}
