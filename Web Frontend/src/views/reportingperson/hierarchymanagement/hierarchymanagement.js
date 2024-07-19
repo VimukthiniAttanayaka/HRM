@@ -16,8 +16,9 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass';
+// import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 
-const Customer = () => {
+const HierarchyManagement = () => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -231,98 +232,7 @@ const Customer = () => {
                     </CCol>
                     <CFormInput maxLength={20} placeholder="Block Building Number" name="blockBuildingNumber" value={blockBuildingNumber} onChange={handleChangeBlockBuildingNumber} />
                   </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CCol md={4}>
-                      <CInputGroupText>
-                        <h6>Address Building Name</h6>
-                      </CInputGroupText>
-                    </CCol>
-                    <CFormInput maxLength={20} placeholder="Address Building Name" name="addressBuildingName" value={addressBuildingName} onChange={handleChangeAddressBuildingName} />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CCol md={4}>
-                      <CInputGroupText>
-                        <h6>Address Unit Number</h6>
-                      </CInputGroupText>
-                    </CCol>
-                    <CFormInput maxLength={20} placeholder="Address Unit Number" name="addressUnitNumber" value={addressUnitNumber} onChange={handleChangeAddressUnitNumber} />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CCol md={4}>
-                      <CInputGroupText>
-                        <h6>Address Street Name</h6>
-                      </CInputGroupText>
-                    </CCol>
-                    <CFormInput maxLength={20} placeholder="Address Street Name" name="addressStreetName" value={addressStreetName} onChange={handleChangeAddressStreetName} />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CCol md={4}>
-                      <CInputGroupText>
-                        <h6>Address City</h6>
-                      </CInputGroupText>
-                    </CCol>
-                    <CFormInput maxLength={20} placeholder="Address City" name="addressCity" value={addressCity} onChange={handleChangeAddressCity} />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CCol md={4}>
-                      <CInputGroupText>
-                        <h6>Address Country Code</h6>
-                      </CInputGroupText>
-                    </CCol>
-                    <CFormInput maxLength={20} placeholder="Address Country Code" name="addressCountryCode" value={addressCountryCode} onChange={handleChangeAddressCountryCode} />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CCol md={4}>
-                      <CInputGroupText>
-                        <h6>Address Postal Code</h6>
-                      </CInputGroupText>
-                    </CCol>
-                    <CFormInput maxLength={20} placeholder="Address Postal Code" name="addressPostalCode" value={addressPostalCode} onChange={handleChangeAddressPostalCode} />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CCol md={4}>
-                      <CInputGroupText>
-                        <h6>Contact Person</h6>
-                      </CInputGroupText>
-                    </CCol>
-                    <CFormInput maxLength={20} placeholder="Contact Person" name="contactPerson" value={contactPerson} onChange={handleChangeContactPerson} />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CCol md={4}>
-                      <CInputGroupText>
-                        <h6>Contact Number</h6>
-                      </CInputGroupText>
-                    </CCol>
-                    <CFormInput maxLength={10} placeholder="Contact Number" name="contactNumber" value={contactNumber} onChange={handleChangeContactNumber} />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
-                    <CCol md={4}>
-                      <CInputGroupText>
-                        <h6>Pin or Password</h6>
-                      </CInputGroupText>
-                    </CCol>
-                    <CFormSelect>
-                      <option value="PIN">Pin</option>
-                      <option value="PWD">Password</option>
-                    </CFormSelect>
-                  </CInputGroup>
-                  <CRow>
-                    <CCol md={4}>
-                      <CInputGroup className="mb-4">
-                        <CFormCheck label="OTP by sms" defaultChecked />
-                      </CInputGroup>
-                    </CCol>
-                    <CCol md={4}>
-                      <CInputGroup className="mb-4">
-                        <CFormCheck label="OTP by email" defaultChecked />
-                      </CInputGroup>
-                    </CCol>
-                    <CCol md={4}>
-                      <CInputGroup className="mb-4">
-                        <CFormCheck label="Status" defaultChecked />
-                      </CInputGroup>
-                    </CCol>
-                  </CRow>
+                
                   <div className="d-grid">
                     <CButton color="success" type='submit'>Submit</CButton>
                   </div>
@@ -336,4 +246,4 @@ const Customer = () => {
   )
 }
 
-export default Customer
+export default HierarchyManagement

@@ -18,7 +18,7 @@ import {
   cilSpreadsheet,
   cilStar,
 } from '@coreui/icons'
-import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react-pro'
+import { CNavbarToggler, CNavGroup, CNavItem, CNavTitle } from '@coreui/react-pro'
 import { Translation } from 'react-i18next'
 
 const _nav = [
@@ -31,69 +31,77 @@ const _nav = [
     //   color: 'info-gradient',
     //   text: 'NEW',
     // },
+  }, {
+    component: CNavGroup,
+    name: <Translation>{(t) => t('Employee Information')}</Translation>,
+    // to: '/buttons',
+    // icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: <Translation>{(t) => t('Company')}</Translation>,
+        to: '/employee/Company',
+      },
+      {
+        component: CNavItem,
+        name: <Translation>{(t) => t('Employee')}</Translation>,
+        to: '/employee/employee',
+      },
+    ],
   },
   {
-    component: CNavTitle,
-    name: <Translation>{(t) => t('employee Information')}</Translation>,
-  },
-  {
-    component: CNavItem,
-    name: <Translation>{(t) => t('Company')}</Translation>,
-    to: '/employee/Company',
-    // icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: <Translation>{(t) => t('Employee')}</Translation>,
-    to: '/employee/employee',
-    // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavTitle,
+    component: CNavGroup,
     name: <Translation>{(t) => t('Attendance')}</Translation>,
-  },{
-    component: CNavItem,
-    name: <Translation>{(t) => t('Attendance Search')}</Translation>,
-    to: '/attendance/attendance',
-    // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-  },{
-    component: CNavItem,
-    name: <Translation>{(t) => t('Mark Attendance')}</Translation>,
-    to: '/attendance/markattendance',
-    // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    // to: '/buttons',
+    // icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: <Translation>{(t) => t('Attendance Search')}</Translation>,
+        to: '/attendance/attendance',
+        // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      }, {
+        component: CNavItem,
+        name: <Translation>{(t) => t('Mark Attendance')}</Translation>,
+        to: '/attendance/markattendance',
+        // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      },
+    ],
   },
   {
-    component: CNavTitle,
+    component: CNavGroup,
     name: <Translation>{(t) => t('leave')}</Translation>,
-  },
-  {
-    component: CNavItem,
-    name: <Translation>{(t) => t('Leave Entitlement')}</Translation>,
-    to: '/leaves/leaveshedule',
-    // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-  },{
-    component: CNavItem,
-    name: <Translation>{(t) => t('Leave Type')}</Translation>,
-    to: '/leaves/leavetype',
-    // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: <Translation>{(t) => t('Leave Entitlement')}</Translation>,
+        to: '/leaves/leaveshedule',
+        // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      }, {
+        component: CNavItem,
+        name: <Translation>{(t) => t('Leave Type')}</Translation>,
+        to: '/leaves/leavetype',
+        // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      },],
   },
   {
     component: CNavTitle,
     name: <Translation>{(t) => t('performance appraiisals')}</Translation>,
   },
   {
-    component: CNavTitle,
+    component: CNavGroup,
     name: <Translation>{(t) => t('Reporting person')}</Translation>,
-  },{
-    component: CNavItem,
-    name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
-    to: '/reportingperson/hierarchymanagement',
-    // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-  },{
-    component: CNavItem,
-    name: <Translation>{(t) => t('Reporting Person')}</Translation>,
-    to: '/reportingperson/reportingperson',
-    // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    items: [{
+      component: CNavItem,
+      name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
+      to: '/reportingperson/hierarchymanagement',
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    }, {
+      component: CNavItem,
+      name: <Translation>{(t) => t('Reporting Person')}</Translation>,
+      to: '/reportingperson/reportingperson',
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    },],
   },
   {
     component: CNavTitle,
