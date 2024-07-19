@@ -48,7 +48,7 @@ const LeaveTypeDataGrid = () => {
     }
   }
 
-  const [leaveTypeDetails, setLeaveTypeDetails] = useState('')
+  const [leaveTypeDetails, setLeaveTypeDetails] = useState([])
   // const [leaveTypeId, setLeaveTypeId] = useState('')
   const handleChangeId = (event) => {
     setLeaveTypeId(event.target.value)
@@ -78,10 +78,8 @@ const LeaveTypeDataGrid = () => {
       .then(response => response.json())
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
-        console.log(res1);
         setLeaveTypeDetails(res1[0].LeaveType[0]);
-        // setLeaveTypeId(res1[0].LeaveType[0].LVT_LeaveTypeID);
-        // setLeaveTypeValue(res1[0].LeaveType[0].LVT_LeaveType);
+        handleOpenPopup()
       })
   }
   const toggleDetails = (index) => {
@@ -95,7 +93,6 @@ const LeaveTypeDataGrid = () => {
       newDetails = [...details, index]
       // alert(newDetails[newDetails.length - 1])
       loadDetails(newDetails[0])
-      handleOpenPopup()
     }
     // setDetails(newDetails)
   }
