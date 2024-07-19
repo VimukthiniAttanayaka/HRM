@@ -21,11 +21,16 @@ const LeaveTypeDataGrid = () => {
       key: 'leavetype',
       _style: { width: '20%' },
     },
+   
     {
+      key: 'alotment',
+      _style: { width: '20%' }
+    }, {
       key: 'status',
       _style: { width: '20%' }
     },
-    {
+
+     {
       key: 'show_details',
       label: '',
       _style: { width: '1%' },
@@ -121,11 +126,12 @@ const LeaveTypeDataGrid = () => {
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
 
-        const cars = [];
-        class Car {
-          constructor(id, leavetype, status) {
+        const LeaveTypeDetails = [];
+        class LeaveTypeDetail {
+          constructor(id, leavetype, status, Alotment) {
             this.leavetype = leavetype;
             this.id = id;
+            this.alotment = Alotment
             if (status == true) { this.status = "Active"; }
             else { this.status = "Inactive"; }
           }
@@ -133,11 +139,11 @@ const LeaveTypeDataGrid = () => {
 
         for (let index = 0; index < res1[0].LeaveType.length; index++) {
           let element = res1[0].LeaveType[index];
-
-          cars[index] = new Car(element.LVT_LeaveTypeID, element.LVT_LeaveType, element.LVT_Status);
+console.log(element)
+          LeaveTypeDetails[index] = new LeaveTypeDetail(element.LVT_LeaveTypeID, element.LVT_LeaveType, element.LVT_Status, element.LVT_LeaveAlotment);
         }
 
-        setData(cars);
+        setData(LeaveTypeDetails);
         // setCustomerId(  res1[0].Customer[0].CUS_ID);
       })
 
