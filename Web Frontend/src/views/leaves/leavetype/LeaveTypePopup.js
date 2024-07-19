@@ -3,12 +3,54 @@ import { CTooltip, CButton, CModal, CModalBody,CCol,CInputGroupText, CModalTitle
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
+
+export const loadDetails = (item) => {
+  
+  const token = getJWTToken();
+  const staffId = getStaffID();
+  const customerId = getCustomerID();
+  console.log(item[item.length-1])
+
+  // const config = {
+  //   headers: { Authorization: `Bearer ${auth}` }
+  // };
+  const formData = {
+    // UD_StaffID: staffId,
+    // AUD_notificationToken: token,
+    LVT_LeaveTypeID: item.id
+  }
+
+  const res = fetch(apiUrl + 'leavetype/get_leavetype_single', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+  })
+    .then(response => response.json())
+    .then(json => {
+      let res1 = JSON.parse(JSON.stringify(json))
+      console.log(res1);
+      setLeaveTypeId(res1[0].LeaveType[0].LVT_LeaveTypeID);
+    })
+}
+
 const LeaveTypePopup = ({ visible, onClose, onOpen }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
   };
+  const [leaveAlotmentId, setLeaveAlotmentId] = useState('')
+  const [leaveType, setLeaveType] = useState('')
+  const [leaveTypeId, setLeaveTypeId] = useState('')
+  const handleChangeAlotment = (event) => {
+    setLeaveAlotmentId(event.target.value)
+  }
+  const handleChangeLeaveType = (event) => {
+    setLeaveType(event.target.value)
+  }
+  const handleChangeId = (event) => {
+    setLeaveTypeId(event.target.value)
+  }
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New LeaveType</CButton>
@@ -31,7 +73,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>LeaveTypeID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="LeaveTypeID" name="LeaveTypeID"
+                  </CCol>   <CFormInput placeholder="LeaveTypeID" name="LeaveTypeID" value={leaveTypeId} onChange={handleChangeId}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -40,7 +82,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>LeaveType</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="LeaveType" name="LeaveType"
+                  </CCol>    <CFormInput placeholder="LeaveType" name="LeaveType" value={leaveType} onChange={handleChangeLeaveType}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -49,9 +91,10 @@ const LeaveTypePopup = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>LeaveAlotment</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment"
+                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={leaveAlotmentId} onChange={handleChangeAlotment}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
+                  
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
@@ -59,7 +102,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen }) => {
                       <h6>Status</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck label="Status" defaultChecked />
+                  <CFormCheck label="Status" defaultChecked/>
                 </CInputGroup>
                 <div className="d-grid">
                   <CButton color="success" type='submit'>Submit</CButton>

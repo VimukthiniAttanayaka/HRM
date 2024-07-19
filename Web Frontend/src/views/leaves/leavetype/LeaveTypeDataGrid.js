@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import LeaveTypePopup from './LeaveTypePopup.js';
-
+import loadDetails from './LeaveTypePopup.js';
 const LeaveTypeDataGrid = () => {
 
   const [details, setDetails] = useState([])
@@ -58,9 +58,12 @@ const LeaveTypeDataGrid = () => {
       // alert(newDetails[newDetails.length - 1])
       console.log(newDetails)
       handleOpenPopup()
+      loadDetails(newDetails)
     }
     // setDetails(newDetails)
   }
+
+  // setCustomerId(res1[0].Customer[0].CUS_ID);}
   const apiUrl = process.env.REACT_APP_API_URL;
 
   async function requestdata() {
@@ -170,11 +173,11 @@ const LeaveTypeDataGrid = () => {
           //     {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
           //   </td>
           // ),
-          // status: (item) => (
-          //   <td>
-          //     {/* <CBadge color={getBadge(item.status)}>{item.status}</CBadge> */}
-          //   </td>
-          // ),
+          status: (item) => (
+            <td>
+              <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
+            </td>
+          ),
           show_details: (item) => {
             return (
               <td className="py-2">

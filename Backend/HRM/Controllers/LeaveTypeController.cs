@@ -27,6 +27,15 @@ namespace HRM.Controllers
         public List<ReturnLeaveTypeModelHead> get_leavetype_single(LeaveType model)//ok
         {
             List<ReturnLeaveTypeModelHead> objleavetypeHeadList = new List<ReturnLeaveTypeModelHead>();
+            ReturnLeaveTypeModelHead obj = new ReturnLeaveTypeModelHead() { resp = false, msg = "sfsf" };
+            obj.LeaveType = new List<ReturnLeaveTypeModel>();
+            if (model.LVT_LeaveTypeID == "CAS")
+            obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "CAS", LVT_LeaveType = "Casual", LVT_Status = true });
+            if (model.LVT_LeaveTypeID == "ANU") obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "ANU", LVT_LeaveType = "Annual", LVT_Status = true });
+            if (model.LVT_LeaveTypeID == "MED") obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "MED", LVT_LeaveType = "Medical", LVT_Status = true });
+            if (model.LVT_LeaveTypeID == "MAT") obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "MAT", LVT_LeaveType = "Matrinaty", LVT_Status = true });
+            objleavetypeHeadList.Add(obj);
+            return objleavetypeHeadList;
 
             try
             {
