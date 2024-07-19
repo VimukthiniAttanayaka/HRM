@@ -3,7 +3,8 @@ import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import LeaveTypePopup from './LeaveTypePopup.js';
-import loadDetails from './LeaveTypePopup.js';
+// import loadDetails from './LeaveTypePopup.js';
+
 const LeaveTypeDataGrid = () => {
 
   const [details, setDetails] = useState([])
@@ -46,6 +47,42 @@ const LeaveTypeDataGrid = () => {
         return 'primary'
     }
   }
+
+  const [leaveTypeValue, setLeaveTypeValue] = useState('')
+  const [leaveTypeId, setLeaveTypeId] = useState('')
+  const handleChangeId = (event) => {
+    setLeaveTypeId(event.target.value)
+  }
+
+  const loadDetails = (item) => {
+
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+
+    // const config = {
+    //   headers: { Authorization: `Bearer ${auth}` }
+    // };
+
+    const formData = {
+      // UD_StaffID: staffId,
+      // AUD_notificationToken: token,
+      LVT_LeaveTypeID: item
+    }
+
+    const res = fetch(apiUrl + 'leavetype/get_leavetype_single', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+      .then(response => response.json())
+      .then(json => {
+        let res1 = JSON.parse(JSON.stringify(json))
+        console.log(res1);
+        setLeaveTypeId(res1[0].LeaveType[0].LVT_LeaveTypeID);
+        setLeaveTypeValue(res1[0].LeaveType[0].LVT_LeaveType);
+      })
+  }
   const toggleDetails = (index) => {
 
 
@@ -56,9 +93,8 @@ const LeaveTypeDataGrid = () => {
     } else {
       newDetails = [...details, index]
       // alert(newDetails[newDetails.length - 1])
-      console.log(newDetails)
+      loadDetails(newDetails[0])
       handleOpenPopup()
-      loadDetails(newDetails)
     }
     // setDetails(newDetails)
   }
@@ -86,7 +122,6 @@ const LeaveTypeDataGrid = () => {
       .then(response => response.json())
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
-        console.log(res1);
 
         const cars = [];
         class Car {
@@ -104,7 +139,6 @@ const LeaveTypeDataGrid = () => {
           cars[index] = new Car(element.LVT_LeaveTypeID, element.LVT_LeaveType, element.LVT_Status);
         }
 
-        console.log(cars[1]);
         setData(cars);
         // setCustomerId(  res1[0].Customer[0].CUS_ID);
       })
@@ -146,7 +180,7 @@ const LeaveTypeDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <LeaveTypePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} />
+          <LeaveTypePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} handleChangeId={handleChangeId} leaveTypeId={leaveTypeId} leaveTypeValue={leaveTypeValue}/>
         </CCol>
       </CRow>
       <CSmartTable
