@@ -161,6 +161,7 @@ const LeaveTypeDataGrid = () => {
 
   const handleClosePopup = () => {
     setVisible(false);
+    setLeaveTypeDetails([]);
   };
 
   return (
