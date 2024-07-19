@@ -4,12 +4,13 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 
-const LeaveTypePopup = ({ visible, onClose, onOpen, handleChangeId, leaveTypeId, leaveTypeValue }) => {
+const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
   };
+  const[leaveTypeId, setLeaveTypeId] = useState('')
   const [leaveAlotmentId, setLeaveAlotmentId] = useState('')
   const [leaveType, setLeaveType] = useState('')
 
@@ -19,6 +20,11 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, handleChangeId, leaveTypeId,
   const handleChangeLeaveType = (event) => {
     setLeaveType(event.target.value)
   }
+  const handleChangeId= (event) => {
+    setLeaveTypeId(event.target.value)
+  }
+
+  console.log(leaveTypeDetails)
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New LeaveType</CButton>
@@ -41,7 +47,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, handleChangeId, leaveTypeId,
                     <CInputGroupText>
                       <h6>LeaveTypeID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="LeaveTypeID" name="LeaveTypeID" value={leaveTypeId} onChange={handleChangeId}
+                  </CCol>   <CFormInput placeholder="LeaveTypeID" name="LeaveTypeID" value={leaveTypeDetails.LVT_LeaveTypeID} onChange={handleChangeId}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -50,7 +56,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, handleChangeId, leaveTypeId,
                     <CInputGroupText>
                       <h6>LeaveType</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="LeaveType" name="LeaveType" value={leaveTypeValue} onChange={handleChangeLeaveType}
+                  </CCol>    <CFormInput placeholder="LeaveType" name="LeaveType" value={leaveTypeDetails.LVT_LeaveType} onChange={handleChangeLeaveType}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -59,7 +65,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, handleChangeId, leaveTypeId,
                     <CInputGroupText>
                       <h6>LeaveAlotment</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={leaveAlotmentId} onChange={handleChangeAlotment}
+                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={leaveTypeDetails.LVT_LeaveAlotment} onChange={handleChangeAlotment}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
 

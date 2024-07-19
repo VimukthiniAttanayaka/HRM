@@ -48,8 +48,8 @@ const LeaveTypeDataGrid = () => {
     }
   }
 
-  const [leaveTypeValue, setLeaveTypeValue] = useState('')
-  const [leaveTypeId, setLeaveTypeId] = useState('')
+  const [leaveTypeDetails, setLeaveTypeDetails] = useState('')
+  // const [leaveTypeId, setLeaveTypeId] = useState('')
   const handleChangeId = (event) => {
     setLeaveTypeId(event.target.value)
   }
@@ -79,8 +79,9 @@ const LeaveTypeDataGrid = () => {
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
         console.log(res1);
-        setLeaveTypeId(res1[0].LeaveType[0].LVT_LeaveTypeID);
-        setLeaveTypeValue(res1[0].LeaveType[0].LVT_LeaveType);
+        setLeaveTypeDetails(res1[0].LeaveType[0]);
+        // setLeaveTypeId(res1[0].LeaveType[0].LVT_LeaveTypeID);
+        // setLeaveTypeValue(res1[0].LeaveType[0].LVT_LeaveType);
       })
   }
   const toggleDetails = (index) => {
@@ -180,7 +181,7 @@ const LeaveTypeDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <LeaveTypePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} handleChangeId={handleChangeId} leaveTypeId={leaveTypeId} leaveTypeValue={leaveTypeValue}/>
+          <LeaveTypePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveTypeDetails={leaveTypeDetails} />
         </CCol>
       </CRow>
       <CSmartTable
