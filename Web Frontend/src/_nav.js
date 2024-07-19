@@ -84,6 +84,16 @@ const _nav = [
   {
     component: CNavTitle,
     name: <Translation>{(t) => t('Reporting person')}</Translation>,
+  },{
+    component: CNavItem,
+    name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
+    to: '/reportingperson/hierarchymanagement',
+    // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+  },{
+    component: CNavItem,
+    name: <Translation>{(t) => t('Reporting Person')}</Translation>,
+    to: '/reportingperson/reportingperson',
+    // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {
     component: CNavTitle,

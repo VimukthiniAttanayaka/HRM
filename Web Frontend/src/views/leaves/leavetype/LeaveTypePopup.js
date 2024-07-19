@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CButton, CModal, CModalBody, CModalTitle, CModalFooter, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CButton, CModal, CModalBody,CCol,CInputGroupText, CModalTitle, CModalFooter, CModalHeader,CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
@@ -58,7 +58,8 @@ const LeaveTypePopup = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>Status</h6>
                     </CInputGroupText>
-                  </CCol><CFormCheck label="Status" defaultChecked />
+                  </CCol>
+                  <CFormCheck label="Status" defaultChecked />
                 </CInputGroup>
                 <div className="d-grid">
                   <CButton color="success" type='submit'>Submit</CButton>

@@ -8,6 +8,8 @@ const LeaveSchedule = React.lazy(() => import('./views/leaves/leaveshedule/Leave
 const LeaveType = React.lazy(() => import('./views/leaves/leavetype/LeaveType'))
 const Attendance = React.lazy(() => import('./views/attendance/attendance/Attendance'))
 const MarkAttendance = React.lazy(() => import('./views/attendance/markattendance/MarkAttendance'))
+const HeirarchyManagement= React.lazy(() => import('./views/reportingperson/hierarchymanagement/hierarchymanagement'))
+const ReportingPerson= React.lazy(() => import('./views/reportingperson/reportingperson/reportingperson'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -109,6 +111,16 @@ const routes = [
     path: '/attendance/markattendance',
     name: <Translation>{(t) => t('MarkAttendance')}</Translation>,
     element: MarkAttendance,
+  },
+  {
+    path: '/reportingperson/hierarchymanagement',
+    name: <Translation>{(t) => t('HeirarchyManagement')}</Translation>,
+    element: HeirarchyManagement,
+  },
+  {
+    path: '/reportingperson/reportingperson',
+    name: <Translation>{(t) => t('ReportingPerson')}</Translation>,
+    element: ReportingPerson,
   },
   {
     path: '/base',
