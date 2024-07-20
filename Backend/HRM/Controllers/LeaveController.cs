@@ -60,7 +60,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<LeaveGridViewHeaderModel> get_leave_grid_details(LeaveGridRequestModel item)//ok
+        public List<LeaveGridViewHeaderModel> get_leave_all(LeaveGridRequestModel item)//ok
         {
             List<LeaveGridViewHeaderModel> objCountryHeadList = new List<LeaveGridViewHeaderModel>();
             try

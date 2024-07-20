@@ -79,17 +79,38 @@ const columns = [
       // AUD_notificationToken: token,
       USR_EmployeeID: 'sedcx'
     }
-    // const res = await fetch(apiUrl + 'employee/get_employee_all', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-    //     console.log(res1);
-    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
-    //   })
+    const res = await fetch(apiUrl + 'leave/get_leave_all', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+      .then(response => response.json())
+      .then(json => {
+        let res1 = JSON.parse(JSON.stringify(json))
+        console.log(res1);
+        // setCustomerId(  res1[0].Customer[0].CUS_ID);
+        
+        const LeaveScheduleDetails = [];
+        class LeaveScheduleDetail {
+          constructor(id, leavetype, status, Alotment) {
+            this.leavetype = leavetype;
+            this.id = id;
+            this.alotment = Alotment
+            if (status == true) { this.status = "Active"; }
+            else { this.status = "Inactive"; }
+          }
+        }
+
+        // console.log( res1[0].LeaveEntitlement)
+        for (let index = 0; index < res1[0].LeaveScheduleDetail.length; index++) {
+          let element = res1[0].LeaveScheduleDetail[index];
+          // console.log(element)
+          LeaveScheduleDetails[index] = new LeaveScheduleDetail(element.LVE_LeaveEntitlementID, element.LVE_LeaveType, element.LVE_Status, element.LVE_LeaveAlotment);
+        }
+
+        setData(LeaveScheduleDetails);
+        // setCustomerId(  res1[0].Customer[0].CUS_ID);
+      })
   }
   useEffect(() => {
     requestdata();
