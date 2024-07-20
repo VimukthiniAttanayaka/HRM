@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CDropdown, CDropdownItem, CDropdownMenu, CDropdownToggle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CFormSelect, CModalTitle, CDropdown, CDropdownItem, CDropdownMenu, CDropdownToggle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 
 const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetails }) => {
+
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -65,7 +67,34 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
     }
   }
 
-  console.log(leaveEntitlementDetails)
+  // console.log(leaveEntitlementDetails)
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [options, setOptions] = useState([]);
+  const colors = ["red", "green", "blue"];
+  async function requestdata() {
+    const formData = {
+      USR_EmployeeID: 'sedcx'
+    }
+    const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+      .then(response => response.json())
+      .then(json => {
+        let res1 = JSON.parse(JSON.stringify(json))
+
+        for (let index = 0; index < res1[0].LeaveType.length; index++) {
+          options[index] = res1[0].LeaveType[index].LVT_LeaveType
+        }
+
+      })
+
+  }
+  useEffect(() => {
+    requestdata();
+  }, []);
+
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New LeaveEntitlement</CButton>
@@ -86,36 +115,30 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>EmployeeID</h6>
+                      <h6>Employees</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="EmployeeID" name="EmployeeID" value={leaveEntitlementDetails.LVE_EmployeeID} onChange={handleChangeEmployeeID}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  /><CDropdown variant="nav-item">
-                    <CDropdownToggle color="secondary">Dropdown button</CDropdownToggle>
-                    <CDropdownMenu>
-                      <CDropdownItem href="#">Action</CDropdownItem>
-                      <CDropdownItem href="#">Another action</CDropdownItem>
-                      <CDropdownItem href="#">Something else here</CDropdownItem>
-                    </CDropdownMenu>
-                  </CDropdown>
+                  </CCol>
+                  <CFormSelect>
+                    {/* {options.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))} */}
+                  </CFormSelect>
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>LeaveTypeID</h6>
+                      <h6>Leave Type</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="LeaveTypeID" name="LeaveTypeID" value={leaveEntitlementDetails.LVE_LeaveTypeID} onChange={handleChangeLeaveTypeId}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>LeaveType</h6>
-                    </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="LeaveType" name="LeaveType" value={leaveEntitlementDetails.LVE_LeaveType} onChange={handleChangeLeaveType}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
+                  </CCol>
+                  <CFormSelect value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
+                    {options.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </CFormSelect>
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
