@@ -30,10 +30,10 @@ namespace HRM.Controllers
             ReturnLeaveEntitlementModelHead obj = new ReturnLeaveEntitlementModelHead() { resp = false, msg = "sfsf" };
             obj.LeaveEntitlement = new List<ReturnLeaveEntitlementModel>();
             if (model.LVE_LeaveEntitlementID == 1)
-                obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 1, LVE_LeaveTypeID = "CAS", LVE_LeaveType = "Casual", LVE_Status = true });
-            if (model.LVE_LeaveEntitlementID == 2) obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 2, LVE_LeaveTypeID = "ANU", LVE_LeaveType = "Annual", LVE_Status = true, LVE_LeaveAlotment = 10 });
-            if (model.LVE_LeaveEntitlementID == 3) obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 3, LVE_LeaveTypeID = "MED", LVE_LeaveType = "Medical", LVE_Status = true, LVE_LeaveAlotment = 10 });
-            if (model.LVE_LeaveEntitlementID == 4) obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 4, LVE_LeaveTypeID = "MAT", LVE_LeaveType = "Matrinaty", LVE_Status = true, LVE_LeaveAlotment = 10 });
+                obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 1, LVE_LeaveTypeID = "CAS", LVE_LeaveType = "Casual", LVE_Status = true, LVE_LeaveAlotment = 10, LVE_EmployeeID = "1" });
+            if (model.LVE_LeaveEntitlementID == 2) obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 2, LVE_LeaveTypeID = "ANU", LVE_LeaveType = "Annual", LVE_Status = true, LVE_LeaveAlotment = 10, LVE_EmployeeID = "1" });
+            if (model.LVE_LeaveEntitlementID == 3) obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 3, LVE_LeaveTypeID = "MED", LVE_LeaveType = "Medical", LVE_Status = true, LVE_LeaveAlotment = 10, LVE_EmployeeID = "1" });
+            if (model.LVE_LeaveEntitlementID == 4) obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 4, LVE_LeaveTypeID = "MAT", LVE_LeaveType = "Matrinaty", LVE_Status = true, LVE_LeaveAlotment = 10, LVE_EmployeeID = "1" });
             objLeaveEntitlementHeadList.Add(obj);
             return objLeaveEntitlementHeadList;
 

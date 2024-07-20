@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CButton, CModal, CCol, CInputGroupText, CModalBody, CModalTitle, CModalFooter,CFormCheck,CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CButton, CModal, CCol, CInputGroupText, CModalBody, CModalTitle, CModalFooter,CFormCheck,CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
@@ -231,7 +231,7 @@ const EmployeePopup = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>SyncedDateTime</h6>
                     </CInputGroupText>
-                  </CCol> <CFormInput placeholder="SyncedDateTime" name="SyncedDateTime"
+                  </CCol> <CDatePicker placeholder="SyncedDateTime" name="SyncedDateTime"
                   // value={customerId} onChange={handleChangeId}
                   />
                 </CInputGroup>
@@ -240,7 +240,7 @@ const EmployeePopup = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>ActiveFrom</h6>
                     </CInputGroupText>
-                  </CCol> <CFormInput placeholder="ActiveFrom" name="ActiveFrom"
+                  </CCol> <CDatePicker placeholder="ActiveFrom" name="ActiveFrom"
                   // value={customerId} onChange={handleChangeId}
                   />
                 </CInputGroup>
@@ -249,7 +249,7 @@ const EmployeePopup = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>ActiveTo</h6>
                     </CInputGroupText>
-                  </CCol> <CFormInput placeholder="ActiveTo" name="ActiveTo"
+                  </CCol> <CDatePicker placeholder="ActiveTo" name="ActiveTo"
                   // value={customerId} onChange={handleChangeId}
                   />
                 </CInputGroup>

@@ -83,6 +83,7 @@ const LeaveEntitlementDataGrid = () => {
       .then(response => response.json())
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
+        console.log(res1[0])
         setLeaveEntitlementDetails(res1[0].LeaveEntitlement[0]);
         handleOpenPopup()
       })

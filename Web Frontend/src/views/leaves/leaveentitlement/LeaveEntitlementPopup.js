@@ -14,15 +14,23 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
   const [leaveAlotmentId, setLeaveAlotmentId] = useState('')
   const [leaveType, setLeaveType] = useState('')
   const [isActive, setIsActive] = useState(true)
+  const [leaveEntitlementId, setLeaveEntitlementId] = useState(0)  
+  const [employeeID, setEmployeeID] = useState('')
 
+  const  handleChangeEmployeeID = (event) => {
+    setEmployeeID(event.target.value)
+  }
   const handleChangeAlotment = (event) => {
     setLeaveAlotmentId(event.target.value)
+  }  
+  const handleChangeLeaveTypeId = (event) => {
+    setLeaveTypeId(event.target.value)
   }
   const handleChangeLeaveType = (event) => {
     setLeaveType(event.target.value)
   }
   const handleChangeId= (event) => {
-    setLeaveTypeId(event.target.value)
+    setLeaveEntitlementId(event.target.value)
   }
   const handleChangeIsActive = (event) => { }
 
@@ -35,7 +43,9 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
     // Prepare form data
     const formData = {
       LVE_LeaveTypeID: leaveTypeId,
+      LVE_EmployeeID: employeeID,
       LVE_LeaveAlotment: leaveAlotmentId,
+      LVE_LeaveEntitlementID: leaveEntitlementId,
       LVE_LeaveType: leaveType,
       LVE_Status: isActive,
     }
@@ -59,7 +69,7 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
   console.log(leaveEntitlementDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New LeaveType</CButton>
+      <CButton color="primary" onClick={onOpen}>New LeaveEntitlement</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -68,19 +78,28 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
         aria-labelledby="TooltipsAndPopoverExample"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New LeaveType</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">Create New LeaveEntitlement</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">
             <CCardBody className="p-4">
               <CForm onSubmit={handleSubmit}>
-                <CInputGroup className="mb-3">
+              <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>EmployeeID</h6>
+                    </CInputGroupText>
+                  </CCol>   <CFormInput placeholder="EmployeeID" name="EmployeeID" value={leaveEntitlementDetails.LVE_EmployeeID} onChange={handleChangeEmployeeID}
+                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  />
+                </CInputGroup>
+                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>LeaveTypeID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="LeaveTypeID" name="LeaveTypeID" value={leaveEntitlementDetails.LVE_LeaveTypeID} onChange={handleChangeId}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  </CCol>   <CFormInput placeholder="LeaveTypeID" name="LeaveTypeID" value={leaveEntitlementDetails.LVE_LeaveTypeID} onChange={handleChangeLeaveTypeId}
+                                 // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
