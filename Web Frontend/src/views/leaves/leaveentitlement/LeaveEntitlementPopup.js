@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CButton, CModal, CModalBody,CCol,CInputGroupText, CModalTitle, CModalFooter, CModalHeader,CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CButton, CModal, CModalBody,CCol,CInputGroupText, CModalTitle,CDropdown,CDropdownItem,CDropdownMenu,CDropdownToggle, CModalFooter, CModalHeader,CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
@@ -91,7 +91,14 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
                     </CInputGroupText>
                   </CCol>   <CFormInput placeholder="EmployeeID" name="EmployeeID" value={leaveEntitlementDetails.LVE_EmployeeID} onChange={handleChangeEmployeeID}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
+                  /><CDropdown variant="nav-item">
+                  <CDropdownToggle color="secondary">Dropdown button</CDropdownToggle>
+                  <CDropdownMenu>
+                    <CDropdownItem href="#">Action</CDropdownItem>
+                    <CDropdownItem href="#">Another action</CDropdownItem>
+                    <CDropdownItem href="#">Something else here</CDropdownItem>
+                  </CDropdownMenu>
+                </CDropdown>
                 </CInputGroup>
                  <CInputGroup className="mb-3">
                   <CCol md={4}>
