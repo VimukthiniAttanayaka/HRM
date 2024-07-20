@@ -66,7 +66,8 @@ namespace HRM_DAL.Models
     public class LeaveEntitlementSearchModel : RequestBaseModel
     {
         public int LVE_LeaveEntitlementID { get; set; }
-    }
+        public string LVE_EmployeeID { get; set; }
+}
 
     public class ReturnLeaveEntitlementSelectModel
     {

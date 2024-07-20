@@ -77,10 +77,28 @@ namespace HRM.Controllers
             List<ReturnLeaveEntitlementModelHead> objLeaveEntitlementHeadList = new List<ReturnLeaveEntitlementModelHead>();
             ReturnLeaveEntitlementModelHead obj = new ReturnLeaveEntitlementModelHead() { resp = false, msg = "sfsf" };
             obj.LeaveEntitlement = new List<ReturnLeaveEntitlementModel>();
-            obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 1, LVE_LeaveTypeID = "CAS", LVE_LeaveType = "Casual", LVE_Status = true });
-            obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 2, LVE_LeaveTypeID = "ANU", LVE_LeaveType = "Annual", LVE_Status = true, LVE_LeaveAlotment = 10 });
-            obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 3, LVE_LeaveTypeID = "MED", LVE_LeaveType = "Medical", LVE_Status = true, LVE_LeaveAlotment = 10 });
-            obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 4, LVE_LeaveTypeID = "MAT", LVE_LeaveType = "Matrinaty", LVE_Status = true, LVE_LeaveAlotment = 10 });
+            if (model.LVE_EmployeeID == "test")
+            {
+                obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 1, LVE_LeaveTypeID = "CAS", LVE_LeaveType = "Casual", LVE_Status = true });
+                obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 2, LVE_LeaveTypeID = "ANU", LVE_LeaveType = "Annual", LVE_Status = true, LVE_LeaveAlotment = 10 });
+            }
+            if (model.LVE_EmployeeID == "test1")
+            {
+                obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 2, LVE_LeaveTypeID = "ANU", LVE_LeaveType = "Annual", LVE_Status = true, LVE_LeaveAlotment = 10 });
+                obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 3, LVE_LeaveTypeID = "MED", LVE_LeaveType = "Medical", LVE_Status = true, LVE_LeaveAlotment = 10 });
+            }
+            if (model.LVE_EmployeeID == "test2")
+            {
+                obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 3, LVE_LeaveTypeID = "MED", LVE_LeaveType = "Medical", LVE_Status = true, LVE_LeaveAlotment = 10 });
+                obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 4, LVE_LeaveTypeID = "MAT", LVE_LeaveType = "Matrinaty", LVE_Status = true, LVE_LeaveAlotment = 10 });
+            }
+            else
+            {
+                obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 1, LVE_LeaveTypeID = "CAS", LVE_LeaveType = "Casual", LVE_Status = true });
+                obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 2, LVE_LeaveTypeID = "ANU", LVE_LeaveType = "Annual", LVE_Status = true, LVE_LeaveAlotment = 10 });
+                obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 3, LVE_LeaveTypeID = "MED", LVE_LeaveType = "Medical", LVE_Status = true, LVE_LeaveAlotment = 10 });
+                obj.LeaveEntitlement.Add(new ReturnLeaveEntitlementModel() { LVE_LeaveEntitlementID = 4, LVE_LeaveTypeID = "MAT", LVE_LeaveType = "Matrinaty", LVE_Status = true, LVE_LeaveAlotment = 10 });
+            }
             objLeaveEntitlementHeadList.Add(obj);
             return objLeaveEntitlementHeadList;
 

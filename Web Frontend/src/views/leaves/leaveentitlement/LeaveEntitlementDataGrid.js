@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CFormSelect } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import LeaveTypePopup from './LeaveEntitlementPopup.js';
 // import loadDetails from './LeaveTypePopup.js';
+import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
 
 const LeaveEntitlementDataGrid = () => {
 
@@ -107,7 +108,11 @@ const LeaveEntitlementDataGrid = () => {
   // setCustomerId(res1[0].Customer[0].CUS_ID);}
   const apiUrl = process.env.REACT_APP_API_URL;
 
-  async function requestdata() {
+  const [selectedOptionEmployee, setSelectedOptionEmployee] = useState(null);
+  const [optionsEmployee, setOptionsEmployee] = useState([]);
+
+  async function requestdata(employeeID) {
+
     const token = getJWTToken();
     const staffId = getStaffID();
     const customerId = getCustomerID();
@@ -117,7 +122,7 @@ const LeaveEntitlementDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      USR_EmployeeID: 'sedcx'
+      LVE_EmployeeID: employeeID
     }
     const res = await fetch(apiUrl + 'LeaveEntitlement/get_LeaveEntitlement_all', {
       method: 'POST',
@@ -151,8 +156,34 @@ const LeaveEntitlementDataGrid = () => {
       })
 
   }
+
+  async function SearchOnClick() {
+
+  }
+
+  async function requestdataLoad() {
+
+
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+    // const config = {
+    //   headers: { Authorization: `Bearer ${auth}` }
+    // };
+    const formData = {
+      // UD_StaffID: staffId,
+      // AUD_notificationToken: token,
+      USR_EmployeeID: 'sedcx'
+    }
+
+    const EmployeeDetails = await requestdata_Employee_DropDowns_All(formData)
+
+    setOptionsEmployee(EmployeeDetails);
+  }
+
   useEffect(() => {
     requestdata();
+    requestdataLoad();
   }, []);
 
 
@@ -186,11 +217,28 @@ const LeaveEntitlementDataGrid = () => {
           >
             Download current items (.csv)
           </CButton>
+
         </CCol>
         <CCol className='d-flex justify-content-end'>
           <LeaveTypePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveEntitlementDetails={leaveEntitlementDetails} />
         </CCol>
-      </CRow>
+      </CRow><CRow> <CFormSelect value={selectedOptionEmployee} onChange={(e) => setSelectedOptionEmployee(e.target.value)}>
+        {optionsEmployee.map((option) => (
+          <option key={option.key} value={option.key}>
+            {option.value}
+          </option>
+        ))}
+      </CFormSelect>
+        <CButton
+          color="primary"
+          className="mb-2"
+          // href={csvCode}
+          // download="coreui-table-data.csv"
+          target="_blank"
+          onClick={SearchOnClick}
+        >
+          Search
+        </CButton></CRow>
       <CSmartTable
         cleaner
         clickableRows
