@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CButton, CModal, CModalBody,CCol,CInputGroupText, CModalTitle,CDropdown,CDropdownItem,CDropdownMenu,CDropdownToggle, CModalFooter, CModalHeader,CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CDropdown, CDropdownItem, CDropdownMenu, CDropdownToggle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
@@ -8,28 +8,27 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
-
   // };
-  const[leaveTypeId, setLeaveTypeId] = useState('')
+  const [leaveTypeId, setLeaveTypeId] = useState('')
   const [leaveAlotmentId, setLeaveAlotmentId] = useState('')
   const [leaveType, setLeaveType] = useState('')
   const [isActive, setIsActive] = useState(true)
-  const [leaveEntitlementId, setLeaveEntitlementId] = useState(0)  
+  const [leaveEntitlementId, setLeaveEntitlementId] = useState(0)
   const [employeeID, setEmployeeID] = useState('')
 
-  const  handleChangeEmployeeID = (event) => {
+  const handleChangeEmployeeID = (event) => {
     setEmployeeID(event.target.value)
   }
   const handleChangeAlotment = (event) => {
     setLeaveAlotmentId(event.target.value)
-  }  
+  }
   const handleChangeLeaveTypeId = (event) => {
     setLeaveTypeId(event.target.value)
   }
   const handleChangeLeaveType = (event) => {
     setLeaveType(event.target.value)
   }
-  const handleChangeId= (event) => {
+  const handleChangeId = (event) => {
     setLeaveEntitlementId(event.target.value)
   }
   const handleChangeIsActive = (event) => { }
@@ -84,7 +83,7 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
           <CCard className="mx-4">
             <CCardBody className="p-4">
               <CForm onSubmit={handleSubmit}>
-              <CInputGroup className="mb-3">
+                <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>EmployeeID</h6>
@@ -92,21 +91,21 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
                   </CCol>   <CFormInput placeholder="EmployeeID" name="EmployeeID" value={leaveEntitlementDetails.LVE_EmployeeID} onChange={handleChangeEmployeeID}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   /><CDropdown variant="nav-item">
-                  <CDropdownToggle color="secondary">Dropdown button</CDropdownToggle>
-                  <CDropdownMenu>
-                    <CDropdownItem href="#">Action</CDropdownItem>
-                    <CDropdownItem href="#">Another action</CDropdownItem>
-                    <CDropdownItem href="#">Something else here</CDropdownItem>
-                  </CDropdownMenu>
-                </CDropdown>
+                    <CDropdownToggle color="secondary">Dropdown button</CDropdownToggle>
+                    <CDropdownMenu>
+                      <CDropdownItem href="#">Action</CDropdownItem>
+                      <CDropdownItem href="#">Another action</CDropdownItem>
+                      <CDropdownItem href="#">Something else here</CDropdownItem>
+                    </CDropdownMenu>
+                  </CDropdown>
                 </CInputGroup>
-                 <CInputGroup className="mb-3">
+                <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>LeaveTypeID</h6>
                     </CInputGroupText>
                   </CCol>   <CFormInput placeholder="LeaveTypeID" name="LeaveTypeID" value={leaveEntitlementDetails.LVE_LeaveTypeID} onChange={handleChangeLeaveTypeId}
-                                 // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -134,7 +133,7 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
                       <h6>Status</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck label="Status" defaultChecked/>
+                  <CFormCheck label="Status" defaultChecked />
                 </CInputGroup>
                 <div className="d-grid">
                   <CButton color="success" type='submit'>Submit</CButton>
