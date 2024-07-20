@@ -232,7 +232,7 @@ const HierarchyManagement = () => {
                     </CCol>
                     <CFormInput maxLength={20} placeholder="Block Building Number" name="blockBuildingNumber" value={blockBuildingNumber} onChange={handleChangeBlockBuildingNumber} />
                   </CInputGroup>
-                
+
                   <div className="d-grid">
                     <CButton color="success" type='submit'>Submit</CButton>
                   </div>
