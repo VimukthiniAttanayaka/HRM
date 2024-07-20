@@ -8,7 +8,7 @@ using utility_handler.Data;
 
 namespace HRM_DAL.Data
 {
-    public class Leave_Data
+    public class LeaveSchedule_Data
     {
         private static LogError objError = new LogError();
 
@@ -77,7 +77,7 @@ namespace HRM_DAL.Data
                                         LV_Approve = Convert.ToBoolean(rdr["LV_Approve"].ToString()),
                                         LV_ApprovedBy = rdr["LV_ApprovedBy"].ToString(),
                                         LV_ApprovedDate = approveddate,
-                                        LV_Status = rdr["LV_Status"].ToString(),
+                                        LV_Status = Convert.ToBoolean(rdr["LV_Status"].ToString()),
                                     };
                                     objLeaveHead.obj = objLeaveDetail;
                                 }
@@ -101,12 +101,12 @@ namespace HRM_DAL.Data
 
                 objLeaveHeadList.Add(objLeaveHead);
 
-                objError.WriteLog(0, "Leave_Data", "get_leave_details", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "Leave_Data", "get_leave_details", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "Leave_Data", "get_leave_details", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "Leave_Data", "get_leave_details", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }
@@ -184,7 +184,7 @@ namespace HRM_DAL.Data
                                         LV_Approve = Convert.ToBoolean(rdr["LV_Approve"].ToString()),
                                         LV_ApprovedBy = rdr["LV_ApprovedBy"].ToString(),
                                         LV_ApprovedDate = approveddate,
-                                        LV_Status = rdr["LV_Status"].ToString(),
+                                        LV_Status = Convert.ToBoolean(rdr["LV_Status"].ToString()),
                                     };
                                     objLeaveHead.obj = objLeaveDetail;
                                 }
@@ -208,12 +208,12 @@ namespace HRM_DAL.Data
 
                 objLeaveHeadList.Add(objLeaveHead);
 
-                objError.WriteLog(0, "Leave_Data", "get_leave_details", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "Leave_Data", "get_leave_details", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "Leave_Data", "get_leave_details", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "Leave_Data", "get_leave_details", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }
@@ -293,7 +293,7 @@ namespace HRM_DAL.Data
                                         LV_Approve = Convert.ToBoolean(rdr["LV_Approve"].ToString()),
                                         LV_ApprovedBy = rdr["LV_ApprovedBy"].ToString(),
                                         LV_ApprovedDate = approveddate,
-                                        LV_Status = rdr["LV_Status"].ToString(),
+                                        LV_Status = Convert.ToBoolean(rdr["LV_Status"].ToString()),
                                     };
                                     objLeaveHead.obj = objLeaveDetail;
                                 }
@@ -317,12 +317,12 @@ namespace HRM_DAL.Data
 
                 objLeaveHeadList.Add(objLeaveHead);
 
-                objError.WriteLog(0, "Leave_Data", "get_leave_details", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "Leave_Data", "get_leave_details", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "Leave_Data", "get_leave_details", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "Leave_Data", "get_leave_details", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }
@@ -391,7 +391,7 @@ namespace HRM_DAL.Data
                                         LV_Approve = Convert.ToBoolean(rdr["LV_Approve"].ToString()),
                                         LV_ApprovedBy = rdr["LV_ApprovedBy"].ToString(),
                                         LV_ApprovedDate = approveddate,
-                                        LV_Status = rdr["LV_Status"].ToString(),
+                                        LV_Status = Convert.ToBoolean(rdr["LV_Status"].ToString()),
                                     };
                                     objLeaveHead.LeaveResponceModelList.Add(objLeaveDetail);
                                 }
@@ -415,12 +415,12 @@ namespace HRM_DAL.Data
 
                 objLeaveHeadList.Add(objLeaveHead);
 
-                objError.WriteLog(0, "Leave_Data", "get_leave_details", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "Leave_Data", "get_leave_details", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "Leave_Data", "get_leave_details", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "Leave_Data", "get_leave_details", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_details", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }
@@ -494,7 +494,7 @@ namespace HRM_DAL.Data
                                         LV_Approve = Convert.ToBoolean(rdr["LV_Approve"].ToString()),
                                         LV_ApprovedBy = rdr["LV_ApprovedBy"].ToString(),
                                         LV_ApprovedDate = approveddate,
-                                        LV_Status = rdr["LV_Status"].ToString(),
+                                        LV_Status = Convert.ToBoolean(rdr["LV_Status"].ToString()),
                                         RC = RC,
                                     };
                                     objLeaveHead.LeaveGridViewModelList.Add(objLeaveDetail);
@@ -519,12 +519,12 @@ namespace HRM_DAL.Data
 
                 objLeaveHeadList.Add(objLeaveHead);
 
-                objError.WriteLog(0, "Leave_Data", "get_leave_grid_details", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "Leave_Data", "get_leave_grid_details", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_grid_details", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_grid_details", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "Leave_Data", "get_leave_grid_details", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "Leave_Data", "get_leave_grid_details", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_grid_details", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "LeaveSchedule_Data", "get_leave_grid_details", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }

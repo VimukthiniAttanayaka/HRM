@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable,CCollapse,CRow,CCol } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import LeaveSchedulePopup from './LeaveSchedulePopup.js';
 
 const LeaveScheduleDataGrid = () => {
- 
-const [details, setDetails] = useState([])
 
-const columns = [
+  const [details, setDetails] = useState([])
+  const [data, setData] = useState([])
+  const [leaveScheduleDetails, setLeaveScheduleDetails] = useState([])
+
+  const columns = [
     {
       key: 'id',
       label: '',
@@ -16,15 +18,21 @@ const columns = [
       sorter: false,
     },
     {
-      key: 'name',
+      key: 'entitlement',
       _style: { width: '20%' },
     },
-    'registered',
-    { 
-      key: 'role',
+    // 'leavetype',
+    {
+      key: 'leavetype',
+      _style: { width: '20%' }
+    }, {
+      key: 'startdate',
+      _style: { width: '20%' }
+    }, {
+      key: 'enddate',
       _style: { width: '20%' }
     },
-    { 
+    {
       key: 'status',
       _style: { width: '20%' }
     },
@@ -50,6 +58,37 @@ const columns = [
         return 'primary'
     }
   }
+
+  async function loadDetails(item) {
+
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+
+    // const config = {
+    //   headers: { Authorization: `Bearer ${auth}` }
+    // };
+
+    const formData = {
+      // UD_StaffID: staffId,
+      // AUD_notificationToken: token,
+      LV_LeaveID: item
+    }
+
+    const res = fetch(apiUrl + 'leaveschedule/get_leave_single', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+      .then(response => response.json())
+      .then(json => {
+        let res1 = JSON.parse(JSON.stringify(json))
+        console.log(res1)
+        setLeaveScheduleDetails(res1[0].LeaveResponceModelList[0]);
+        handleOpenPopup()
+      })
+  }
+
   const toggleDetails = (index) => {
 
 
@@ -61,7 +100,8 @@ const columns = [
       newDetails = [...details, index]
       // alert(newDetails[newDetails.length - 1])
       console.log(newDetails)
-      handleOpenPopup()
+      // handleOpenPopup()
+      loadDetails(newDetails[0])
     }
     // setDetails(newDetails)
   }
@@ -79,7 +119,7 @@ const columns = [
       // AUD_notificationToken: token,
       USR_EmployeeID: 'sedcx'
     }
-    const res = await fetch(apiUrl + 'leave/get_leave_all', {
+    const res = await fetch(apiUrl + 'leaveschedule/get_leave_all', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -87,25 +127,27 @@ const columns = [
       .then(response => response.json())
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
-        console.log(res1);
+        // console.log(res1);
         // setCustomerId(  res1[0].Customer[0].CUS_ID);
-        
+
         const LeaveScheduleDetails = [];
         class LeaveScheduleDetail {
-          constructor(id, leavetype, status, Alotment) {
+          constructor(id, entitlement, leavetype, status, startdate, enddate) {
             this.leavetype = leavetype;
             this.id = id;
-            this.alotment = Alotment
+            this.entitlement = entitlement;
+            this.startdate = startdate;
+            this.enddate = enddate;
             if (status == true) { this.status = "Active"; }
             else { this.status = "Inactive"; }
           }
         }
 
-        // console.log( res1[0].LeaveEntitlement)
-        for (let index = 0; index < res1[0].LeaveScheduleDetail.length; index++) {
-          let element = res1[0].LeaveScheduleDetail[index];
+        // console.log(res1[0].LeaveGridViewModelList)
+        for (let index = 0; index < res1[0].LeaveGridViewModelList.length; index++) {
+          let element = res1[0].LeaveGridViewModelList[index];
           // console.log(element)
-          LeaveScheduleDetails[index] = new LeaveScheduleDetail(element.LVE_LeaveEntitlementID, element.LVE_LeaveType, element.LVE_Status, element.LVE_LeaveAlotment);
+          LeaveScheduleDetails[index] = new LeaveScheduleDetail(element.LV_LeaveID, element.LV_LeaveEntitlementID, element.LV_LeaveTypeID, element.LVE_Status, element.LV_LeaveStartDate, element.LV_LeaveEndDate);
         }
 
         setData(LeaveScheduleDetails);
@@ -131,11 +173,12 @@ const columns = [
 
   const handleClosePopup = () => {
     setVisible(false);
+    setLeaveScheduleDetails([]);
   };
 
   return (
     <CCardBody>
-       <CRow>
+      <CRow>
         <CCol>
           <CButton
             color="primary"
@@ -148,19 +191,19 @@ const columns = [
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <LeaveSchedulePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} />
+          <LeaveSchedulePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveScheduleDetails={leaveScheduleDetails} />
         </CCol>
       </CRow>
       <CSmartTable
-       cleaner
-       clickableRows
-       columns={columns}
-       columnFilter
-       columnSorter
-       footer
-       items={data}
-       itemsPerPageSelect
-       itemsPerPage={5}
+        cleaner
+        clickableRows
+        columns={columns}
+        columnFilter
+        columnSorter
+        footer
+        items={data}
+        itemsPerPageSelect
+        itemsPerPage={5}
         onFilteredItemsChange={setCurrentItems}
         pagination
         // onFilteredItemsChange={(items) => {

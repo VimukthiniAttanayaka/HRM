@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CButton, CModal, CModalBody,CCol,CInputGroupText, CModalTitle, CModalFooter, CModalHeader,CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
@@ -10,7 +10,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
   //   event.preventDefault();
 
   // };
-  const[leaveTypeId, setLeaveTypeId] = useState('')
+  const [leaveTypeId, setLeaveTypeId] = useState('')
   const [leaveAlotmentId, setLeaveAlotmentId] = useState('')
   const [leaveType, setLeaveType] = useState('')
   const [isActive, setIsActive] = useState(true)
@@ -21,7 +21,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
   const handleChangeLeaveType = (event) => {
     setLeaveType(event.target.value)
   }
-  const handleChangeId= (event) => {
+  const handleChangeId = (event) => {
     setLeaveTypeId(event.target.value)
   }
   const handleChangeIsActive = (event) => { }
@@ -66,6 +66,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
         visible={visible}
         onClose={onClose}
         aria-labelledby="TooltipsAndPopoverExample"
+        backdrop="static"
       >
         <CModalHeader>
           <CModalTitle id="TooltipsAndPopoverExample">Create New LeaveType</CModalTitle>
@@ -108,7 +109,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
                       <h6>Status</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck label="Status" defaultChecked/>
+                  <CFormCheck label="Status" defaultChecked />
                 </CInputGroup>
                 <div className="d-grid">
                   <CButton color="success" type='submit'>Submit</CButton>

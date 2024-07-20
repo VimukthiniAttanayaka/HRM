@@ -4,6 +4,8 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import LeaveTypePopup from './LeaveTypePopup.js';
 // import loadDetails from './LeaveTypePopup.js';
+import { getLeaveTypeAll } from '../../../apicalls/leavetype/get_all_list.js';
+import { getLeaveTypeSingle } from '../../../apicalls/leavetype/get_leavetype_single.js';
 
 const LeaveTypeDataGrid = () => {
 
@@ -59,7 +61,7 @@ const LeaveTypeDataGrid = () => {
     setLeaveTypeId(event.target.value)
   }
 
-  const loadDetails = (item) => {
+  async function loadDetails(item) {
 
     const token = getJWTToken();
     const staffId = getStaffID();
@@ -75,17 +77,21 @@ const LeaveTypeDataGrid = () => {
       LVT_LeaveTypeID: item
     }
 
-    const res = fetch(apiUrl + 'leavetype/get_leavetype_single', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-      .then(response => response.json())
-      .then(json => {
-        let res1 = JSON.parse(JSON.stringify(json))
-        setLeaveTypeDetails(res1[0].LeaveType[0]);
-        handleOpenPopup()
-      })
+    // const res = fetch(apiUrl + 'leavetype/get_leavetype_single', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(formData),
+    // })
+    //   .then(response => response.json())
+    //   .then(json => {
+    //     let res1 = JSON.parse(JSON.stringify(json))
+    //     setLeaveTypeDetails(res1[0].LeaveType[0]);
+    //     handleOpenPopup()
+    //   })
+    const LeaveTypeDetails = await getLeaveTypeSingle(formData)
+    // setLeaveTypeDetails(res1[0].LeaveType[0]);
+    setLeaveTypeDetails(LeaveTypeDetails);
+    handleOpenPopup()
   }
   const toggleDetails = (index) => {
 
@@ -117,35 +123,40 @@ const LeaveTypeDataGrid = () => {
       // AUD_notificationToken: token,
       USR_EmployeeID: 'sedcx'
     }
-    const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-      .then(response => response.json())
-      .then(json => {
-        let res1 = JSON.parse(JSON.stringify(json))
 
-        const LeaveTypeDetails = [];
-        class LeaveTypeDetail {
-          constructor(id, leavetype, status, Alotment) {
-            this.leavetype = leavetype;
-            this.id = id;
-            this.alotment = Alotment
-            if (status == true) { this.status = "Active"; }
-            else { this.status = "Inactive"; }
-          }
-        }
+    const LeaveTypeDetails = await getLeaveTypeAll(formData)
+    // console.log(LeaveTypeDetails)
+    setData(LeaveTypeDetails);
 
-        for (let index = 0; index < res1[0].LeaveType.length; index++) {
-          let element = res1[0].LeaveType[index];
-          console.log(element)
-          LeaveTypeDetails[index] = new LeaveTypeDetail(element.LVT_LeaveTypeID, element.LVT_LeaveType, element.LVT_Status, element.LVT_LeaveAlotment);
-        }
+    // const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(formData),
+    // })
+    //   .then(response => response.json())
+    //   .then(json => {
+    //     let res1 = JSON.parse(JSON.stringify(json))
 
-        setData(LeaveTypeDetails);
-        // setCustomerId(  res1[0].Customer[0].CUS_ID);
-      })
+    //     const LeaveTypeDetails = [];
+    //     class LeaveTypeDetail {
+    //       constructor(id, leavetype, status, Alotment) {
+    //         this.leavetype = leavetype;
+    //         this.id = id;
+    //         this.alotment = Alotment
+    //         if (status == true) { this.status = "Active"; }
+    //         else { this.status = "Inactive"; }
+    //       }
+    //     }
+
+    //     for (let index = 0; index < res1[0].LeaveType.length; index++) {
+    //       let element = res1[0].LeaveType[index];
+    //       console.log(element)
+    //       LeaveTypeDetails[index] = new LeaveTypeDetail(element.LVT_LeaveTypeID, element.LVT_LeaveType, element.LVT_Status, element.LVT_LeaveAlotment);
+    //     }
+
+    //     setData(LeaveTypeDetails);
+    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
+    //   })
 
   }
   useEffect(() => {

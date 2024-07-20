@@ -33,6 +33,7 @@ namespace HRM_DAL.Models
         public string LV_Approve { get; set; }
         public string LV_ApprovedBy { get; set; }
         public string LV_ApprovedDate { get; set; }
+        public string LV_Reason { get; set; }
         public string LV_Status { get; set; }
     }
 
@@ -47,12 +48,17 @@ namespace HRM_DAL.Models
         public int LV_LeaveID { get; set; }
         public DateTime LV_LeaveEndDate { get; set; }
         public DateTime LV_LeaveStartDate { get; set; }
+        public TimeSpan LV_LeaveEndTime { get; set; }
+        public TimeSpan LV_LeaveStartTime { get; set; }
         public string LV_StaffID { get; set; }
         public string LV_LeaveTypeID { get; set; }
         public bool LV_Approve { get; set; }
         public string LV_ApprovedBy { get; set; }
         public DateTime LV_ApprovedDate { get; set; }
-        public string LV_Status { get; set; }
+
+        public string LV_Reason { get; set; }
+        public bool LV_Status { get; set; }
+        public int LV_LeaveEntitlementID { get; set; }
     }
 
     public class LeaveHeaderResponceModel : ReturnResponse
@@ -77,12 +83,15 @@ namespace HRM_DAL.Models
         public int LV_LeaveID { get; set; }
         public DateTime LV_LeaveEndDate { get; set; }
         public DateTime LV_LeaveStartDate { get; set; }
+        public TimeSpan LV_LeaveEndTime { get; set; }
+        public TimeSpan LV_LeaveStartTime { get; set; }
         public string LV_StaffID { get; set; }
         public string LV_LeaveTypeID { get; set; }
         public bool LV_Approve { get; set; }
         public string LV_ApprovedBy { get; set; }
         public DateTime LV_ApprovedDate { get; set; }
-        public string LV_Status { get; set; }
+        public bool LV_Status { get; set; }
+      public int LV_LeaveEntitlementID { get; set; }
     }
 
     public class LeaveGridViewHeaderModel : ReturnResponse

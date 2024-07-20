@@ -104,6 +104,7 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
         visible={visible}
         onClose={onClose}
         aria-labelledby="TooltipsAndPopoverExample"
+        backdrop="static"
       >
         <CModalHeader>
           <CModalTitle id="TooltipsAndPopoverExample">Create New LeaveEntitlement</CModalTitle>

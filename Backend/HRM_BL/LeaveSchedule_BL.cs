@@ -8,33 +8,33 @@ using System;
 
 namespace HRM_BL
 {
-    public class Leave_BL
+    public class LeaveSchedule_BL
     {
         private static LogError objError = new LogError();
 
         public static List<LeaveHeaderResponceModel> get_leave_details(LeaveRequestModel item)
         {
-            return HRM_DAL.Data.Leave_Data.get_leave_details(item);
+            return HRM_DAL.Data.LeaveSchedule_Data.get_leave_details(item);
         }
 
         public static List<LeaveGridViewHeaderModel> get_leave_grid_details(LeaveGridRequestModel gridmodel)
         {
-            return HRM_DAL.Data.Leave_Data.get_leave_grid_details(gridmodel);
+            return HRM_DAL.Data.LeaveSchedule_Data.get_leave_grid_details(gridmodel);
         }
 
         public static List<LeaveSubmitResponceModel> applyleave(LeaveSubmitModel model)
         {
-            return HRM_DAL.Data.Leave_Data.applyleave(model);
+            return HRM_DAL.Data.LeaveSchedule_Data.applyleave(model);
         }
 
         public static List<LeaveSubmitResponceModel> cancelleave(LeaveCancelSubmitModel model)
         {
-            return HRM_DAL.Data.Leave_Data.cancelleave(model);
+            return HRM_DAL.Data.LeaveSchedule_Data.cancelleave(model);
         }
 
         public static List<LeaveSubmitResponceModel> approveleave(LeaveApproveSubmitModel model)
         {
-            return HRM_DAL.Data.Leave_Data.approveleave(model);
+            return HRM_DAL.Data.LeaveSchedule_Data.approveleave(model);
         }
 
     }
