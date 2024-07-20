@@ -4,7 +4,7 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 
-const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
+const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetails }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -34,13 +34,13 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
 
     // Prepare form data
     const formData = {
-      LVT_LeaveTypeID: leaveTypeId,
-      LVT_LeaveAlotment: leaveAlotmentId,
-      LVT_LeaveType: leaveType,
-      LVT_Status: isActive,
+      LVE_LeaveTypeID: leaveTypeId,
+      LVE_LeaveAlotment: leaveAlotmentId,
+      LVE_LeaveType: leaveType,
+      LVE_Status: isActive,
     }
     // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'leavetype/add_new_leavetype', {
+    const response = await fetch(apiUrl + 'leavetype/add_new_LeaveEntitlement', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -49,14 +49,14 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
     if (response.ok) {
       console.log(response);
       // Handle successful submission (e.g., display a success message)
-      console.log('Leave Type data submitted successfully!')
+      console.log('Leave Entitlement data submitted successfully!')
     } else {
       // Handle submission errors
-      console.error('Error submitting Leave Type data:', response.statusText)
+      console.error('Error submitting Leave Entitlement data:', response.statusText)
     }
   }
 
-  console.log(leaveTypeDetails)
+  console.log(leaveEntitlementDetails)
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New LeaveType</CButton>
@@ -79,7 +79,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
                     <CInputGroupText>
                       <h6>LeaveTypeID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="LeaveTypeID" name="LeaveTypeID" value={leaveTypeDetails.LVT_LeaveTypeID} onChange={handleChangeId}
+                  </CCol>   <CFormInput placeholder="LeaveTypeID" name="LeaveTypeID" value={leaveEntitlementDetails.LVE_LeaveTypeID} onChange={handleChangeId}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -88,7 +88,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
                     <CInputGroupText>
                       <h6>LeaveType</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="LeaveType" name="LeaveType" value={leaveTypeDetails.LVT_LeaveType} onChange={handleChangeLeaveType}
+                  </CCol>    <CFormInput placeholder="LeaveType" name="LeaveType" value={leaveEntitlementDetails.LVE_LeaveType} onChange={handleChangeLeaveType}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -97,7 +97,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
                     <CInputGroupText>
                       <h6>LeaveAlotment</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={leaveTypeDetails.LVT_LeaveAlotment} onChange={handleChangeAlotment}
+                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={leaveEntitlementDetails.LVE_LeaveAlotment} onChange={handleChangeAlotment}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
 
@@ -121,4 +121,4 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
     </>
   )
 }
-export default LeaveTypePopup
+export default LeaveEntitlementPopup

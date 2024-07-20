@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
-import LeaveTypePopup from './LeaveTypePopup.js';
+import LeaveTypePopup from './LeaveEntitlementPopup.js';
 // import loadDetails from './LeaveTypePopup.js';
 
-const LeaveTypeDataGrid = () => {
+const LeaveEntitlementDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
@@ -53,10 +53,10 @@ const LeaveTypeDataGrid = () => {
     }
   }
 
-  const [leaveTypeDetails, setLeaveTypeDetails] = useState([])
+  const [leaveEntitlementDetails, setLeaveEntitlementDetails] = useState([])
   // const [leaveTypeId, setLeaveTypeId] = useState('')
   const handleChangeId = (event) => {
-    setLeaveTypeId(event.target.value)
+    setLeaveEntitlementId(event.target.value)
   }
 
   const loadDetails = (item) => {
@@ -72,10 +72,10 @@ const LeaveTypeDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_LeaveTypeID: item
+      LVE_LeaveEntitlementID: item
     }
 
-    const res = fetch(apiUrl + 'leavetype/get_leavetype_single', {
+    const res = fetch(apiUrl + 'LeaveEntitlement/get_LeaveEntitlement_single', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -83,7 +83,7 @@ const LeaveTypeDataGrid = () => {
       .then(response => response.json())
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
-        setLeaveTypeDetails(res1[0].LeaveType[0]);
+        setLeaveEntitlementDetails(res1[0].LeaveEntitlement[0]);
         handleOpenPopup()
       })
   }
@@ -97,6 +97,7 @@ const LeaveTypeDataGrid = () => {
     } else {
       newDetails = [...details, index]
       // alert(newDetails[newDetails.length - 1])
+      console.log(newDetails[0])
       loadDetails(newDetails[0])
     }
     // setDetails(newDetails)
@@ -117,7 +118,7 @@ const LeaveTypeDataGrid = () => {
       // AUD_notificationToken: token,
       USR_EmployeeID: 'sedcx'
     }
-    const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
+    const res = await fetch(apiUrl + 'LeaveEntitlement/get_LeaveEntitlement_all', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -126,8 +127,8 @@ const LeaveTypeDataGrid = () => {
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
 
-        const LeaveTypeDetails = [];
-        class LeaveTypeDetail {
+        const LeaveEntitlementDetails = [];
+        class LeaveEntitlementDetail {
           constructor(id, leavetype, status, Alotment) {
             this.leavetype = leavetype;
             this.id = id;
@@ -137,13 +138,14 @@ const LeaveTypeDataGrid = () => {
           }
         }
 
-        for (let index = 0; index < res1[0].LeaveType.length; index++) {
-          let element = res1[0].LeaveType[index];
-          console.log(element)
-          LeaveTypeDetails[index] = new LeaveTypeDetail(element.LVT_LeaveTypeID, element.LVT_LeaveType, element.LVT_Status, element.LVT_LeaveAlotment);
+        // console.log( res1[0].LeaveEntitlement)
+        for (let index = 0; index < res1[0].LeaveEntitlement.length; index++) {
+          let element = res1[0].LeaveEntitlement[index];
+          // console.log(element)
+          LeaveEntitlementDetails[index] = new LeaveEntitlementDetail(element.LVE_LeaveEntitlementID, element.LVE_LeaveType, element.LVE_Status, element.LVE_LeaveAlotment);
         }
 
-        setData(LeaveTypeDetails);
+        setData(LeaveEntitlementDetails);
         // setCustomerId(  res1[0].Customer[0].CUS_ID);
       })
 
@@ -167,7 +169,7 @@ const LeaveTypeDataGrid = () => {
 
   const handleClosePopup = () => {
     setVisible(false);
-    setLeaveTypeDetails([]);
+    setLeaveEntitlementDetails([]);
   };
 
   return (
@@ -185,7 +187,7 @@ const LeaveTypeDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <LeaveTypePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveTypeDetails={leaveTypeDetails} />
+          <LeaveTypePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveEntitlementDetails={leaveEntitlementDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -267,4 +269,4 @@ const LeaveTypeDataGrid = () => {
   )
 }
 
-export default LeaveTypeDataGrid
+export default LeaveEntitlementDataGrid
