@@ -79,6 +79,11 @@ const _nav = [
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       }, {
         component: CNavItem,
+        name: <Translation>{(t) => t('Leave To Approve')}</Translation>,
+        to: '/leaves/leavetoapprove',
+        // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      }, {
+        component: CNavItem,
         name: <Translation>{(t) => t('Leave Entitlement')}</Translation>,
         to: '/leaves/leaveentitlement',
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,

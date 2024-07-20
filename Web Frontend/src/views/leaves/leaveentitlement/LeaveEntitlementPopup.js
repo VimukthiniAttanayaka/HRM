@@ -3,6 +3,8 @@ import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CFormSele
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
+import { requestdata_LeaveTypes_DropDowns_All } from '../../../apicalls/leavetype/get_all_list.js';
+import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
 
 const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetails }) => {
 
@@ -68,27 +70,45 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
   }
 
   // console.log(leaveEntitlementDetails)
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [options, setOptions] = useState([]);
+  const [selectedOptionLeaveType, setSelectedOptionLeaveType] = useState(null);
+  const [optionsLeaveType, setOptionsLeaveType] = useState([]);
+  
+  const [selectedOptionEmployee, setSelectedOptionEmployee] = useState(null);
+  const [optionsEmployee, setOptionsEmployee] = useState([]);
+
   const colors = ["red", "green", "blue"];
   async function requestdata() {
     const formData = {
       USR_EmployeeID: 'sedcx'
     }
-    const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-      .then(response => response.json())
-      .then(json => {
-        let res1 = JSON.parse(JSON.stringify(json))
 
-        for (let index = 0; index < res1[0].LeaveType.length; index++) {
-          options[index] = res1[0].LeaveType[index].LVT_LeaveType
-        }
+    const LeaveTypeDetails = await requestdata_LeaveTypes_DropDowns_All(formData)
+    
+    setOptionsLeaveType(LeaveTypeDetails);
 
-      })
+    
+    const EmployeeDetails = await requestdata_Employee_DropDowns_All(formData)
+    
+    setOptionsEmployee(EmployeeDetails);
+
+    // const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(formData),
+    // })
+    //   .then(response => response.json())
+    //   .then(json => {
+    //     let res1 = JSON.parse(JSON.stringify(json))
+
+    //     for (let index = 0; index < res1[0].LeaveType.length; index++) {
+    //       const LeaveTypeData = {
+    //         key: res1[0].LeaveType[index].LVT_LeaveTypeID,
+    //         value: res1[0].LeaveType[index].LVT_LeaveType
+    //       };
+    //       optionsLeaveType[index] = LeaveTypeData
+    //     }
+    //     // console.log(optionsLeaveType)
+    //   })
 
   }
   useEffect(() => {
@@ -119,12 +139,12 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
                       <h6>Employees</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormSelect>
-                    {/* {options.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                  <CFormSelect value={selectedOptionEmployee} onChange={(e) => setSelectedOptionEmployee(e.target.value)}>
+                    {optionsEmployee.map((option) => (
+                      <option key={option.key} value={option.key}>
+                        {option.value}
                       </option>
-                    ))} */}
+                    ))}
                   </CFormSelect>
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -133,10 +153,10 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
                       <h6>Leave Type</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormSelect value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
-                    {options.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                  <CFormSelect value={selectedOptionLeaveType} onChange={(e) => setSelectedOptionLeaveType(e.target.value)}>
+                    {optionsLeaveType.map((option) => (
+                      <option key={option.key} value={option.key}>
+                        {option.value}
                       </option>
                     ))}
                   </CFormSelect>

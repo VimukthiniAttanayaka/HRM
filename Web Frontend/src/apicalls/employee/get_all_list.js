@@ -10,10 +10,10 @@ export class LeaveScheduleDetail {
   }
 }
 // console.log(apiUrl)
-export const getLeaveTypeAll = async (formData) => {
+export const getEmployeeAll = async (formData) => {
   const LeaveTypeDetails = [];
 
-  const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
+  const res = await fetch(apiUrl + 'employee/get_employee_all', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -44,10 +44,10 @@ export const getLeaveTypeAll = async (formData) => {
   return LeaveTypeDetails;
 };
 
-export const requestdata_LeaveTypes_DropDowns_All = async (formData) => {
+export const requestdata_Employee_DropDowns_All = async (formData) => {
 
-  const optionsLeaveType = [];
-  const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
+  const optionsEmployee = [];
+  const res = await fetch(apiUrl + 'employee/get_employee_all', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -56,14 +56,14 @@ export const requestdata_LeaveTypes_DropDowns_All = async (formData) => {
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
 
-      for (let index = 0; index < res1[0].LeaveType.length; index++) {
-        const LeaveTypeData = {
-          key: res1[0].LeaveType[index].LVT_LeaveTypeID,
-          value: res1[0].LeaveType[index].LVT_LeaveType
+      for (let index = 0; index < res1[0].Employee.length; index++) {
+        const EmployeeData = {
+          key: res1[0].Employee[index].USR_EmployeeID,
+          value: res1[0].Employee[index].USR_PrefferedName
         };
-        optionsLeaveType[index] = LeaveTypeData
+        optionsEmployee[index] = EmployeeData
       }
-      // console.log(optionsLeaveType)
+      console.log(optionsEmployee)
     })
-  return optionsLeaveType;
+  return optionsEmployee;
 }

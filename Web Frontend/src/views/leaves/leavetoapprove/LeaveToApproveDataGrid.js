@@ -1,35 +1,41 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
-import LeaveTypePopup from './LeaveEntitlementPopup.js';
-// import loadDetails from './LeaveTypePopup.js';
+import LeaveToApprovePopup from './LeaveToApprovePopup.js';
 
-const LeaveEntitlementDataGrid = () => {
+const LeaveToApproveDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
+  const [leaveScheduleDetails, setLeaveScheduleDetails] = useState([])
 
   const columns = [
     {
       key: 'id',
-      // label: '',
-      // filter: false,
-      // sorter: false,
+      label: '',
+      filter: false,
+      sorter: false,
     },
     {
-      key: 'leavetype',
+      key: 'entitlement',
       _style: { width: '20%' },
     },
-
+    // 'leavetype',
     {
-      key: 'alotment',
+      key: 'leavetype',
       _style: { width: '20%' }
     }, {
+      key: 'startdate',
+      _style: { width: '20%' }
+    }, {
+      key: 'enddate',
+      _style: { width: '20%' }
+    },
+    {
       key: 'status',
       _style: { width: '20%' }
     },
-
     {
       key: 'show_details',
       label: '',
@@ -53,13 +59,7 @@ const LeaveEntitlementDataGrid = () => {
     }
   }
 
-  const [leaveEntitlementDetails, setLeaveEntitlementDetails] = useState([])
-  // const [leaveTypeId, setLeaveTypeId] = useState('')
-  const handleChangeId = (event) => {
-    setLeaveEntitlementId(event.target.value)
-  }
-
-  const loadDetails = (item) => {
+  async function loadDetails(item) {
 
     const token = getJWTToken();
     const staffId = getStaffID();
@@ -72,10 +72,10 @@ const LeaveEntitlementDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVE_LeaveEntitlementID: item
+      LV_LeaveID: item
     }
 
-    const res = fetch(apiUrl + 'LeaveEntitlement/get_LeaveEntitlement_single', {
+    const res = fetch(apiUrl + 'leaveschedule/get_leave_single', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -83,11 +83,12 @@ const LeaveEntitlementDataGrid = () => {
       .then(response => response.json())
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
-        // console.log(res1[0])
-        setLeaveEntitlementDetails(res1[0].LeaveEntitlement[0]);
+        console.log(res1)
+        setLeaveScheduleDetails(res1[0].LeaveResponceModelList[0]);
         handleOpenPopup()
       })
   }
+
   const toggleDetails = (index) => {
 
 
@@ -98,13 +99,12 @@ const LeaveEntitlementDataGrid = () => {
     } else {
       newDetails = [...details, index]
       // alert(newDetails[newDetails.length - 1])
-      // console.log(newDetails[0])
+      console.log(newDetails)
+      // handleOpenPopup()
       loadDetails(newDetails[0])
     }
     // setDetails(newDetails)
   }
-
-  // setCustomerId(res1[0].Customer[0].CUS_ID);}
   const apiUrl = process.env.REACT_APP_API_URL;
 
   async function requestdata() {
@@ -119,7 +119,7 @@ const LeaveEntitlementDataGrid = () => {
       // AUD_notificationToken: token,
       USR_EmployeeID: 'sedcx'
     }
-    const res = await fetch(apiUrl + 'LeaveEntitlement/get_LeaveEntitlement_all', {
+    const res = await fetch(apiUrl + 'leaveschedule/get_leave_pending_approval_all', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -127,29 +127,32 @@ const LeaveEntitlementDataGrid = () => {
       .then(response => response.json())
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
+        // console.log(res1);
+        // setCustomerId(  res1[0].Customer[0].CUS_ID);
 
-        const LeaveEntitlementDetails = [];
-        class LeaveEntitlementDetail {
-          constructor(id, leavetype, status, Alotment) {
+        const LeaveScheduleDetails = [];
+        class LeaveScheduleDetail {
+          constructor(id, entitlement, leavetype, status, startdate, enddate) {
             this.leavetype = leavetype;
             this.id = id;
-            this.alotment = Alotment
+            this.entitlement = entitlement;
+            this.startdate = startdate;
+            this.enddate = enddate;
             if (status == true) { this.status = "Active"; }
             else { this.status = "Inactive"; }
           }
         }
 
-        // console.log( res1[0].LeaveEntitlement)
-        for (let index = 0; index < res1[0].LeaveEntitlement.length; index++) {
-          let element = res1[0].LeaveEntitlement[index];
+        // console.log(res1[0].LeaveGridViewModelList)
+        for (let index = 0; index < res1[0].LeaveGridViewModelList.length; index++) {
+          let element = res1[0].LeaveGridViewModelList[index];
           // console.log(element)
-          LeaveEntitlementDetails[index] = new LeaveEntitlementDetail(element.LVE_LeaveEntitlementID, element.LVE_LeaveType, element.LVE_Status, element.LVE_LeaveAlotment);
+          LeaveScheduleDetails[index] = new LeaveScheduleDetail(element.LV_LeaveID, element.LV_LeaveEntitlementID, element.LV_LeaveTypeID, element.LVE_Status, element.LV_LeaveStartDate, element.LV_LeaveEndDate);
         }
 
-        setData(LeaveEntitlementDetails);
+        setData(LeaveScheduleDetails);
         // setCustomerId(  res1[0].Customer[0].CUS_ID);
       })
-
   }
   useEffect(() => {
     requestdata();
@@ -170,7 +173,7 @@ const LeaveEntitlementDataGrid = () => {
 
   const handleClosePopup = () => {
     setVisible(false);
-    setLeaveEntitlementDetails([]);
+    setLeaveScheduleDetails([]);
   };
 
   return (
@@ -188,7 +191,7 @@ const LeaveEntitlementDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <LeaveTypePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveEntitlementDetails={leaveEntitlementDetails} />
+          <LeaveToApprovePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveScheduleDetails={leaveScheduleDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -210,14 +213,14 @@ const LeaveEntitlementDataGrid = () => {
           console.log(items)
         }}
         scopedColumns={{
-          // avatar: (item) => (
-          //   <td>
-          //     {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-          //   </td>
-          // ),
+          avatar: (item) => (
+            <td>
+              {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
+            </td>
+          ),
           status: (item) => (
             <td>
-              <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
+              {/* <CBadge color={getBadge(item.status)}>{item.status}</CBadge> */}
             </td>
           ),
           show_details: (item) => {
@@ -254,7 +257,7 @@ const LeaveEntitlementDataGrid = () => {
             )
           },
         }}
-        // selectable
+        selectable
         sorterValue={{ column: 'status', state: 'asc' }}
         tableFilter
         tableProps={{
@@ -270,4 +273,4 @@ const LeaveEntitlementDataGrid = () => {
   )
 }
 
-export default LeaveEntitlementDataGrid
+export default LeaveToApproveDataGrid

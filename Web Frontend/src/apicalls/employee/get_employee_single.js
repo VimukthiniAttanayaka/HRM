@@ -1,14 +1,5 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-// export class LeaveScheduleDetail {
-//   constructor(id, leavetype, status, Alotment) {
-//     this.leavetype = leavetype;
-//     this.id = id;
-//     this.alotment = Alotment
-//     if (status == true) { this.status = "Active"; }
-//     else { this.status = "Inactive"; }
-//   }
-// }
 export class LeaveScheduleDetail  {
   LVT_LeaveTypeID;
   LVT_LeaveType;
@@ -20,10 +11,10 @@ export class LeaveScheduleDetail  {
   LVT_ModifiedDateTime;
 }
 // console.log(apiUrl)
-export const getLeaveTypeSingle = async (formData) => {
+export const getEmployeeSingle = async (formData) => {
    
   let resw=new LeaveScheduleDetail();
-  const res = await fetch(apiUrl + 'leavetype/get_leavetype_single', {
+  const res = await fetch(apiUrl + 'employee/get_employee_single', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -31,9 +22,9 @@ export const getLeaveTypeSingle = async (formData) => {
   .then(response => response.json())
   .then(json => {
     let res1 = JSON.parse(JSON.stringify(json))
-    resw=res1[0].LeaveType[0]
+    resw=res1[0].Employee[0]
     // console.log(res2)
-    // console.log(res1[0].LeaveType[0])
+    // console.log(res1[0].Employee[0])
     // setLeaveTypeDetails(res1[0].LeaveType[0]);
     // handleOpenPopup()
   })

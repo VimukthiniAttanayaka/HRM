@@ -7,6 +7,7 @@ const Employee = React.lazy(() => import('./views/employee/employee/Employee'))
 const LeaveSchedule = React.lazy(() => import('./views/leaves/leaveshedule/LeaveSchedule'))
 const LeaveType = React.lazy(() => import('./views/leaves/leavetype/LeaveType'))
 const LeaveEntitlement = React.lazy(() => import('./views/leaves/leaveentitlement/LeaveEntitlement'))
+const LeaveToApprove = React.lazy(() => import('./views/leaves/leavetoapprove/LeaveToApprove'))
 const Attendance = React.lazy(() => import('./views/attendance/attendance/Attendance'))
 const MarkAttendance = React.lazy(() => import('./views/attendance/markattendance/MarkAttendance'))
 const HeirarchyManagement= React.lazy(() => import('./views/reportingperson/hierarchymanagement/hierarchymanagement'))
@@ -97,6 +98,10 @@ const routes = [
     path: '/leaves/leaveshedule',
     name: <Translation>{(t) => t('LeaveSchedule')}</Translation>,
     element: LeaveSchedule,
+  },{
+    path: '/leaves/leavetoapprove',
+    name: <Translation>{(t) => t('LeaveToApprove')}</Translation>,
+    element: LeaveToApprove,
   },
   {
     path: '/leaves/leaveentitlement',

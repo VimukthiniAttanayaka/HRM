@@ -113,6 +113,48 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
+        public List<LeaveGridViewHeaderModel> get_leave_pending_approval_all(LeaveGridRequestModel item)//ok
+        {
+            List<LeaveGridViewHeaderModel> objCountryHeadList = new List<LeaveGridViewHeaderModel>();
+            LeaveGridViewHeaderModel obj = new LeaveGridViewHeaderModel() { resp = false, msg = "sfsf" };
+            obj.LeaveGridViewModelList = new List<LeaveGridViewModel>();
+            obj.LeaveGridViewModelList.Add(new LeaveGridViewModel() { LV_LeaveID = 1, LV_LeaveEntitlementID = 1, LV_LeaveTypeID = "CAS", LV_LeaveStartDate = DateTime.Now, LV_LeaveEndDate = DateTime.Now, LV_Status = true, LV_StaffID = "fsf" });
+            obj.LeaveGridViewModelList.Add(new LeaveGridViewModel() { LV_LeaveID = 2, LV_LeaveEntitlementID = 2, LV_LeaveTypeID = "ANU", LV_LeaveStartDate = DateTime.Now, LV_LeaveEndDate = DateTime.Now, LV_Status = true, LV_StaffID = "fsf" });
+            obj.LeaveGridViewModelList.Add(new LeaveGridViewModel() { LV_LeaveID = 3, LV_LeaveEntitlementID = 3, LV_LeaveTypeID = "MED", LV_LeaveStartDate = DateTime.Now, LV_LeaveEndDate = DateTime.Now, LV_Status = true, LV_StaffID = "fsf" });
+            obj.LeaveGridViewModelList.Add(new LeaveGridViewModel() { LV_LeaveID = 4, LV_LeaveEntitlementID = 4, LV_LeaveTypeID = "MAT", LV_LeaveStartDate = DateTime.Now, LV_LeaveEndDate = DateTime.Now, LV_Status = true, LV_StaffID = "fsf" });
+            objCountryHeadList.Add(obj);
+            return objCountryHeadList;
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, "");
+
+                return HRM_BL.LeaveSchedule_BL.get_leave_grid_details(item);
+            }
+            catch (Exception ex)
+            {
+                LeaveGridViewHeaderModel objLeaveHead = new LeaveGridViewHeaderModel
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objCountryHeadList.Add(objLeaveHead);
+
+                objError.WriteLog(0, "LeaveScheduleController", "get_leave_pending_approval_all", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "LeaveScheduleController", "get_leave_pending_approval_all", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "LeaveScheduleController", "get_leave_pending_approval_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "LeaveScheduleController", "get_leave_pending_approval_all", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+            }
+            return objCountryHeadList;
+
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
         public List<LeaveSubmitResponceModel> applyleave(LeaveSubmitModel model)
         {
             List<LeaveSubmitResponceModel> objCountryHeadList = new List<LeaveSubmitResponceModel>();

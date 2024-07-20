@@ -68,7 +68,9 @@ namespace HRM.Controllers
             List<ReturnEmployeeModelHead> objemployeeHeadList = new List<ReturnEmployeeModelHead>();
             ReturnEmployeeModelHead obj = new ReturnEmployeeModelHead() { resp = false, msg = "sfsf" };
             obj.Employee = new List<ReturnEmployeeModel>();
-            obj.Employee.Add(new ReturnEmployeeModel() { });
+            obj.Employee.Add(new ReturnEmployeeModel() {USR_PrefferedName="test",USR_EmployeeID="sdf" }); 
+            obj.Employee.Add(new ReturnEmployeeModel() { USR_PrefferedName = "test1", USR_EmployeeID = "sdf1" });
+            obj.Employee.Add(new ReturnEmployeeModel() { USR_PrefferedName = "test2", USR_EmployeeID = "sdf2" });
             objemployeeHeadList.Add(obj);
             return objemployeeHeadList;
 
