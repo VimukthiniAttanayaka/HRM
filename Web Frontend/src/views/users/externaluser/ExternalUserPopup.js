@@ -4,25 +4,25 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 
-const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
+const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
 
   // };
-  const [leaveTypeId, setLeaveTypeId] = useState('')
+  const [ExternalUserId, setExternalUserId] = useState('')
   const [leaveAlotmentId, setLeaveAlotmentId] = useState('')
-  const [leaveType, setLeaveType] = useState('')
+  const [ExternalUser, setExternalUser] = useState('')
   const [isActive, setIsActive] = useState(true)
 
   const handleChangeAlotment = (event) => {
     setLeaveAlotmentId(event.target.value)
   }
-  const handleChangeLeaveType = (event) => {
-    setLeaveType(event.target.value)
+  const handleChangeExternalUser = (event) => {
+    setExternalUser(event.target.value)
   }
   const handleChangeId = (event) => {
-    setLeaveTypeId(event.target.value)
+    setExternalUserId(event.target.value)
   }
   const handleChangeIsActive = (event) => { }
 
@@ -34,13 +34,13 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
 
     // Prepare form data
     const formData = {
-      LVT_LeaveTypeID: leaveTypeId,
+      LVT_ExternalUserID: ExternalUserId,
       LVT_LeaveAlotment: leaveAlotmentId,
-      LVT_LeaveType: leaveType,
+      LVT_ExternalUser: ExternalUser,
       LVT_Status: isActive,
     }
     // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'leavetype/add_new_leavetype', {
+    const response = await fetch(apiUrl + 'ExternalUser/add_new_ExternalUser', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -56,10 +56,10 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
     }
   }
 
-  console.log(leaveTypeDetails)
+  console.log(ExternalUserDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New LeaveType</CButton>
+      <CButton color="primary" onClick={onOpen}>New ExternalUser</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -69,7 +69,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New LeaveType</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">Create New ExternalUser</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">
@@ -78,18 +78,18 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>LeaveTypeID</h6>
+                      <h6>ExternalUserID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="LeaveTypeID" name="LeaveTypeID" value={leaveTypeDetails.LVT_LeaveTypeID} onChange={handleChangeId}
+                  </CCol>   <CFormInput placeholder="ExternalUserID" name="ExternalUserID" value={ExternalUserDetails.LVT_ExternalUserID} onChange={handleChangeId}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>LeaveType</h6>
+                      <h6>ExternalUser</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="LeaveType" name="LeaveType" value={leaveTypeDetails.LVT_LeaveType} onChange={handleChangeLeaveType}
+                  </CCol>    <CFormInput placeholder="ExternalUser" name="ExternalUser" value={ExternalUserDetails.LVT_ExternalUser} onChange={handleChangeExternalUser}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -98,7 +98,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
                     <CInputGroupText>
                       <h6>LeaveAlotment</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={leaveTypeDetails.LVT_LeaveAlotment} onChange={handleChangeAlotment}
+                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={ExternalUserDetails.LVT_LeaveAlotment} onChange={handleChangeAlotment}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
 
@@ -122,4 +122,4 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
     </>
   )
 }
-export default LeaveTypePopup
+export default ExternalUserPopup

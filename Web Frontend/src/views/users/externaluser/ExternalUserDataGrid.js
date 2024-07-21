@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
-import LeaveTypePopup from './LeaveTypePopup.js';
-// import loadDetails from './LeaveTypePopup.js';
-import { getLeaveTypeAll } from '../../../apicalls/leavetype/get_all_list.js';
-import { getLeaveTypeSingle } from '../../../apicalls/leavetype/get_leavetype_single.js';
+import ExternalUserPopup from './ExternalUserPopup.js/index.js';
+// import loadDetails from './ExternalUserPopup.js';
+import { getExternalUserAll } from '../../../apicalls/ExternalUser/get_all_list.js';
+import { getExternalUserSingle } from '../../../apicalls/ExternalUser/get_ExternalUser_single.js';
 
-const LeaveTypeDataGrid = () => {
+const ExternalUserDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
@@ -20,7 +20,7 @@ const LeaveTypeDataGrid = () => {
       // sorter: false,
     },
     {
-      key: 'leavetype',
+      key: 'ExternalUser',
       _style: { width: '20%' },
     },
 
@@ -55,10 +55,10 @@ const LeaveTypeDataGrid = () => {
     }
   }
 
-  const [leaveTypeDetails, setLeaveTypeDetails] = useState([])
-  // const [leaveTypeId, setLeaveTypeId] = useState('')
+  const [ExternalUserDetails, setExternalUserDetails] = useState([])
+  // const [ExternalUserId, setExternalUserId] = useState('')
   const handleChangeId = (event) => {
-    setLeaveTypeId(event.target.value)
+    setExternalUserId(event.target.value)
   }
 
   async function loadDetails(item) {
@@ -74,10 +74,10 @@ const LeaveTypeDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_LeaveTypeID: item
+      LVT_ExternalUserID: item
     }
 
-    // const res = fetch(apiUrl + 'leavetype/get_leavetype_single', {
+    // const res = fetch(apiUrl + 'ExternalUser/get_ExternalUser_single', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify(formData),
@@ -85,12 +85,12 @@ const LeaveTypeDataGrid = () => {
     //   .then(response => response.json())
     //   .then(json => {
     //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setLeaveTypeDetails(res1[0].LeaveType[0]);
+    //     setExternalUserDetails(res1[0].ExternalUser[0]);
     //     handleOpenPopup()
     //   })
-    const LeaveTypeDetails = await getLeaveTypeSingle(formData)
-    // setLeaveTypeDetails(res1[0].LeaveType[0]);
-    setLeaveTypeDetails(LeaveTypeDetails);
+    const ExternalUserDetails = await getExternalUserSingle(formData)
+    // setExternalUserDetails(res1[0].ExternalUser[0]);
+    setExternalUserDetails(ExternalUserDetails);
     handleOpenPopup()
   }
   const toggleDetails = (index) => {
@@ -124,11 +124,11 @@ const LeaveTypeDataGrid = () => {
       USR_EmployeeID: 'sedcx'
     }
 
-    const LeaveTypeDetails = await getLeaveTypeAll(formData)
-    // console.log(LeaveTypeDetails)
-    setData(LeaveTypeDetails);
+    const ExternalUserDetails = await getExternalUserAll(formData)
+    // console.log(ExternalUserDetails)
+    setData(ExternalUserDetails);
 
-    // const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
+    // const res = await fetch(apiUrl + 'ExternalUser/get_ExternalUser_all', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify(formData),
@@ -137,10 +137,10 @@ const LeaveTypeDataGrid = () => {
     //   .then(json => {
     //     let res1 = JSON.parse(JSON.stringify(json))
 
-    //     const LeaveTypeDetails = [];
-    //     class LeaveTypeDetail {
-    //       constructor(id, leavetype, status, Alotment) {
-    //         this.leavetype = leavetype;
+    //     const ExternalUserDetails = [];
+    //     class ExternalUserDetail {
+    //       constructor(id, ExternalUser, status, Alotment) {
+    //         this.ExternalUser = ExternalUser;
     //         this.id = id;
     //         this.alotment = Alotment
     //         if (status == true) { this.status = "Active"; }
@@ -148,13 +148,13 @@ const LeaveTypeDataGrid = () => {
     //       }
     //     }
 
-    //     for (let index = 0; index < res1[0].LeaveType.length; index++) {
-    //       let element = res1[0].LeaveType[index];
+    //     for (let index = 0; index < res1[0].ExternalUser.length; index++) {
+    //       let element = res1[0].ExternalUser[index];
     //       console.log(element)
-    //       LeaveTypeDetails[index] = new LeaveTypeDetail(element.LVT_LeaveTypeID, element.LVT_LeaveType, element.LVT_Status, element.LVT_LeaveAlotment);
+    //       ExternalUserDetails[index] = new ExternalUserDetail(element.LVT_ExternalUserID, element.LVT_ExternalUser, element.LVT_Status, element.LVT_LeaveAlotment);
     //     }
 
-    //     setData(LeaveTypeDetails);
+    //     setData(ExternalUserDetails);
     //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
     //   })
 
@@ -178,7 +178,7 @@ const LeaveTypeDataGrid = () => {
 
   const handleClosePopup = () => {
     setVisible(false);
-    setLeaveTypeDetails([]);
+    setExternalUserDetails([]);
   };
 
   return (
@@ -196,7 +196,7 @@ const LeaveTypeDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <LeaveTypePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveTypeDetails={leaveTypeDetails} />
+          <ExternalUserPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} ExternalUserDetails={ExternalUserDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -278,4 +278,4 @@ const LeaveTypeDataGrid = () => {
   )
 }
 
-export default LeaveTypeDataGrid
+export default ExternalUserDataGrid

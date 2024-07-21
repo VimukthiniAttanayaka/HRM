@@ -1,19 +1,19 @@
 import React from 'react'
 import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
 
-import LeaveTypeDataGrid from './InternalUserDataGrid'
-import LeaveTypePopup from './InternalUserPopup'
+import InternalUserDataGrid from './InternalUserDataGrid'
+import InternalUserPopup from './InternalUserPopup'
 
-const LeaveType = () => {
+const InternalUser = () => {
   return (
     <>
       <CCard className="mb-4">
         <CCardHeader>
-          <strong>LeaveType List</strong>
+          <strong>InternalUser List</strong>
         </CCardHeader>
         <CCardBody>
-          {/* <LeaveTypePopup /> */}
-          <LeaveTypeDataGrid  onOpen={() => handleOpenPopup}/>
+          {/* <InternalUserPopup /> */}
+          <InternalUserDataGrid  onOpen={() => handleOpenPopup}/>
         </CCardBody>
       </CCard>
     </>
