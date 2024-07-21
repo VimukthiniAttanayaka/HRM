@@ -130,8 +130,19 @@ const _nav = [
     name: <Translation>{(t) => t('Reports')}</Translation>,
   },
   {
-    component: CNavTitle,
+    component: CNavGroup,
     name: <Translation>{(t) => t('User Management')}</Translation>,
+    items: [{
+      component: CNavItem,
+      name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
+      to: '/reportingperson/hierarchymanagement',
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    }, {
+      component: CNavItem,
+      name: <Translation>{(t) => t('Reporting Person')}</Translation>,
+      to: '/reportingperson/reportingperson',
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    },],
   },
   {
     component: CNavTitle,
