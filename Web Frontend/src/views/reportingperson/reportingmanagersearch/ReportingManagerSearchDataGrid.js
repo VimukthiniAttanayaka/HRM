@@ -196,7 +196,7 @@ const ReportingManagerSearchDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <InternalUserPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} InternalUserDetails={InternalUserDetails} />
+          <ReportingManagerSearchPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} InternalUserDetails={InternalUserDetails} />
         </CCol>
       </CRow>
       <CSmartTable

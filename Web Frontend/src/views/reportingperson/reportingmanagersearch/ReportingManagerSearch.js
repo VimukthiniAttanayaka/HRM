@@ -9,7 +9,7 @@ const ReportingManagerSearch = () => {
     <>
       <CCard className="mb-4">
         <CCardHeader>
-          <strong>ReportingManagerSearch List</strong>
+          <strong>Reporting Manager Search</strong>
         </CCardHeader>
         <CCardBody>
           {/* <ReportingManagerSearchPopup /> */}
