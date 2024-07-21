@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
-import ExternalUserPopup from './ExternalUserPopup.js/index.js';
+import ExternalUserPopup from './ExternalUserPopup.js';
 // import loadDetails from './ExternalUserPopup.js';
-import { getExternalUserAll } from '../../../apicalls/ExternalUser/get_all_list.js';
-import { getExternalUserSingle } from '../../../apicalls/ExternalUser/get_ExternalUser_single.js';
 
 const ExternalUserDataGrid = () => {
 
@@ -124,9 +122,9 @@ const ExternalUserDataGrid = () => {
       USR_EmployeeID: 'sedcx'
     }
 
-    const ExternalUserDetails = await getExternalUserAll(formData)
+    // const ExternalUserDetails = await getExternalUserAll(formData)
     // console.log(ExternalUserDetails)
-    setData(ExternalUserDetails);
+    // setData(ExternalUserDetails);
 
     // const res = await fetch(apiUrl + 'ExternalUser/get_ExternalUser_all', {
     //   method: 'POST',

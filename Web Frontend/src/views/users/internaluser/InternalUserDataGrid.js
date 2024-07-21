@@ -4,8 +4,8 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import InternalUserPopup from './InternalUserPopup.js';
 // import loadDetails from './InternalUserPopup.js';
-import { getInternalUserAll } from '../../../apicalls/InternalUser/get_all_list.js';
-import { getInternalUserSingle } from '../../../apicalls/InternalUser/get_InternalUser_single.js';
+// import { getInternalUserAll } from '../../../apicalls/InternalUser/get_all_list.js';
+// import { getInternalUserSingle } from '../../../apicalls/InternalUser/get_InternalUser_single.js';
 
 const InternalUserDataGrid = () => {
 
@@ -124,9 +124,9 @@ const InternalUserDataGrid = () => {
       USR_EmployeeID: 'sedcx'
     }
 
-    const InternalUserDetails = await getInternalUserAll(formData)
+    // const InternalUserDetails = await getInternalUserAll(formData)
     // console.log(InternalUserDetails)
-    setData(InternalUserDetails);
+    // setData(InternalUserDetails);
 
     // const res = await fetch(apiUrl + 'InternalUser/get_InternalUser_all', {
     //   method: 'POST',

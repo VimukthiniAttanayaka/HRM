@@ -12,6 +12,8 @@ const Attendance = React.lazy(() => import('./views/attendance/attendance/Attend
 const MarkAttendance = React.lazy(() => import('./views/attendance/markattendance/MarkAttendance'))
 const HeirarchyManagement= React.lazy(() => import('./views/reportingperson/hierarchymanagement/hierarchymanagement'))
 const ReportingPerson= React.lazy(() => import('./views/reportingperson/reportingperson/reportingperson'))
+const InternalUser = React.lazy(() => import('./views/users/internaluser/InternalUser'))
+const ExternalUser = React.lazy(() => import('./views/users/externaluser/ExternalUser'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -135,13 +137,13 @@ const routes = [
   },
   {
     path: '/users/internaluser',
-    name: <Translation>{(t) => t('HeirarchyManagement')}</Translation>,
-    element: HeirarchyManagement,
+    name: <Translation>{(t) => t('InternalUser')}</Translation>,
+    element: InternalUser,
   },
   {
     path: '/users/externaluser',
-    name: <Translation>{(t) => t('ReportingPerson')}</Translation>,
-    element: ReportingPerson,
+    name: <Translation>{(t) => t('ExternalUser')}</Translation>,
+    element: ExternalUser,
   },
   {
     path: '/base',
