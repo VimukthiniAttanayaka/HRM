@@ -133,12 +133,12 @@ const routes = [
   },
   {
     path: '/reportingperson/reportingperson',
-    name: <Translation>{(t) => t('ReportingPerson')}</Translation>,
+    name: <Translation>{(t) => t('Reporting Person')}</Translation>,
     element: ReportingPerson,
   },
   {
     path: '/reportingperson/reportingmanagersearch',
-    name: <Translation>{(t) => t('ReportingManagerSearch')}</Translation>,
+    name: <Translation>{(t) => t('Reporting Manager Search')}</Translation>,
     element: ReportingManagerSearch,
   },
   {

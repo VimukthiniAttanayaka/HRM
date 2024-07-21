@@ -113,7 +113,7 @@ const _nav = [
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     },{
       component: CNavItem,
-      name: <Translation>{(t) => t('ReportingManagerSearch')}</Translation>,
+      name: <Translation>{(t) => t('Reporting Manager Search')}</Translation>,
       to: '/reportingperson/reportingmanagersearch',
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     },],
