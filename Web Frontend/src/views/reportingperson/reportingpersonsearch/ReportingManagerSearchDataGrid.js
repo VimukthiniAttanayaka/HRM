@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
-import InternalUserPopup from './InternalUserPopup.js';
+import ReportingManagerSearchPopup from './ReportingManagerSearchPopup.js';
 // import loadDetails from './InternalUserPopup.js';
 // import { getInternalUserAll } from '../../../apicalls/InternalUser/get_all_list.js';
 // import { getInternalUserSingle } from '../../../apicalls/InternalUser/get_InternalUser_single.js';
 
-const InternalUserDataGrid = () => {
+const ReportingManagerSearchDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
@@ -196,7 +196,7 @@ const InternalUserDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          {/* <InternalUserPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} InternalUserDetails={InternalUserDetails} /> */}
+          <InternalUserPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} InternalUserDetails={InternalUserDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -278,4 +278,4 @@ const InternalUserDataGrid = () => {
   )
 }
 
-export default InternalUserDataGrid
+export default ReportingManagerSearchDataGrid
