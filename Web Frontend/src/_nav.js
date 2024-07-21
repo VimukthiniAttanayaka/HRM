@@ -134,13 +134,13 @@ const _nav = [
     name: <Translation>{(t) => t('User Management')}</Translation>,
     items: [{
       component: CNavItem,
-      name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
-      to: '/reportingperson/hierarchymanagement',
+      name: <Translation>{(t) => t('Internal User')}</Translation>,
+      to: '/users/internaluser',
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
-      name: <Translation>{(t) => t('Reporting Person')}</Translation>,
-      to: '/reportingperson/reportingperson',
+      name: <Translation>{(t) => t('External User')}</Translation>,
+      to: '/users/externaluser',
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     },],
   },

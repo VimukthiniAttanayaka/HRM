@@ -134,6 +134,16 @@ const routes = [
     element: ReportingPerson,
   },
   {
+    path: '/users/internaluser',
+    name: <Translation>{(t) => t('HeirarchyManagement')}</Translation>,
+    element: HeirarchyManagement,
+  },
+  {
+    path: '/users/externaluser',
+    name: <Translation>{(t) => t('ReportingPerson')}</Translation>,
+    element: ReportingPerson,
+  },
+  {
     path: '/base',
     name: <Translation>{(t) => t('base')}</Translation>,
     element: Cards,
