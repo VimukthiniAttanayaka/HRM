@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
-import LeaveTypePopup from './LeaveTypePopup.js';
+import LeaveTypePopup from './InternalUserPopup.js';
 // import loadDetails from './LeaveTypePopup.js';
 import { getLeaveTypeAll } from '../../../apicalls/leavetype/get_all_list.js';
 import { getLeaveTypeSingle } from '../../../apicalls/leavetype/get_leavetype_single.js';

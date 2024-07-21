@@ -1,8 +1,8 @@
 import React from 'react'
 import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
 
-import LeaveTypeDataGrid from './LeaveTypeDataGrid'
-import LeaveTypePopup from './LeaveTypePopup'
+import LeaveTypeDataGrid from './InternalUserDataGrid'
+import LeaveTypePopup from './InternalUserPopup'
 
 const LeaveType = () => {
   return (
@@ -20,4 +20,4 @@ const LeaveType = () => {
   )
 }
 
-export default LeaveType
+export default InternalUser
