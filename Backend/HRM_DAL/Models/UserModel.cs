@@ -9,7 +9,7 @@ namespace HRM_DAL.Models
     public class UserModel
     {
 
-        public string UD_StaffID { get; set; }
+        public string UD_EmployeeID { get; set; }
         public string UD_FirstName { get; set; }
         public string UD_LastName { get; set; }
         public string UD_EmailAddress { get; set; }
@@ -25,7 +25,7 @@ namespace HRM_DAL.Models
 
 
     }
-   
+
     public class LogdataModel
     {
         [Key]
@@ -36,8 +36,8 @@ namespace HRM_DAL.Models
 
     public class ReturnUserDataModel
     {
-        [Key]
-        public string UD_StaffID { get; set; }
+      
+        public string UD_EmployeeID { get; set; }
         public string UD_FirstName { get; set; }
         public string UD_LastName { get; set; }
         public string UD_EmailAddress { get; set; }
@@ -45,6 +45,7 @@ namespace HRM_DAL.Models
         public string UD_PhoneNumber { get; set; }
         public string UD_Remarks { get; set; }
         public string authorizationToken { get; set; }
+        [Key]
         public string UD_UserName { get; set; }
         public string UD_Password { get; set; }
         public string RC { get; set; }

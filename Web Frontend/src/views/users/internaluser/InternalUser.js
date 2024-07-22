@@ -9,7 +9,7 @@ const InternalUser = () => {
     <>
       <CCard className="mb-4">
         <CCardHeader>
-          <strong>InternalUser List</strong>
+          <strong>Internal User List</strong>
         </CCardHeader>
         <CCardBody>
           {/* <InternalUserPopup /> */}

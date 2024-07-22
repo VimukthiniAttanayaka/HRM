@@ -3,9 +3,9 @@ import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import ReportingManagerSearchPopup from './ReportingManagerSearchPopup.js';
-// import loadDetails from './InternalUserPopup.js';
-// import { getInternalUserAll } from '../../../apicalls/InternalUser/get_all_list.js';
-// import { getInternalUserSingle } from '../../../apicalls/InternalUser/get_InternalUser_single.js';
+// import loadDetails from './ReportingManagerPopup.js';
+import { getReportingManagerAll } from '../../../apicalls/reportingmanager/get_all_list.js';
+import { getReportingManagerSingle } from '../../../apicalls/reportingmanager/get_reportingmanager_single.js';
 
 const ReportingManagerSearchDataGrid = () => {
 
@@ -20,12 +20,12 @@ const ReportingManagerSearchDataGrid = () => {
       // sorter: false,
     },
     {
-      key: 'InternalUser',
+      key: 'ReportingManager',
       _style: { width: '20%' },
     },
 
     {
-      key: 'alotment',
+      key: 'employeeId',
       _style: { width: '20%' }
     }, {
       key: 'status',
@@ -55,10 +55,10 @@ const ReportingManagerSearchDataGrid = () => {
     }
   }
 
-  const [InternalUserDetails, setInternalUserDetails] = useState([])
-  // const [InternalUserId, setInternalUserId] = useState('')
+  const [ReportingManagerDetails, setReportingManagerDetails] = useState([])
+  // const [ReportingManagerId, setReportingManagerId] = useState('')
   const handleChangeId = (event) => {
-    setInternalUserId(event.target.value)
+    setReportingManagerId(event.target.value)
   }
 
   async function loadDetails(item) {
@@ -74,10 +74,10 @@ const ReportingManagerSearchDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_InternalUserID: item
+      LVT_ReportingManagerID: item
     }
 
-    // const res = fetch(apiUrl + 'InternalUser/get_InternalUser_single', {
+    // const res = fetch(apiUrl + 'ReportingManager/get_ReportingManager_single', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify(formData),
@@ -85,12 +85,12 @@ const ReportingManagerSearchDataGrid = () => {
     //   .then(response => response.json())
     //   .then(json => {
     //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setInternalUserDetails(res1[0].InternalUser[0]);
+    //     setReportingManagerDetails(res1[0].ReportingManager[0]);
     //     handleOpenPopup()
     //   })
-    const InternalUserDetails = await getInternalUserSingle(formData)
-    // setInternalUserDetails(res1[0].InternalUser[0]);
-    setInternalUserDetails(InternalUserDetails);
+    const ReportingManagerDetails = await getReportingManagerSingle(formData)
+    // setReportingManagerDetails(res1[0].ReportingManager[0]);
+    setReportingManagerDetails(ReportingManagerDetails);
     handleOpenPopup()
   }
   const toggleDetails = (index) => {
@@ -124,11 +124,11 @@ const ReportingManagerSearchDataGrid = () => {
       USR_EmployeeID: 'sedcx'
     }
 
-    // const InternalUserDetails = await getInternalUserAll(formData)
-    // console.log(InternalUserDetails)
-    // setData(InternalUserDetails);
+    const ReportingManagerDetails = await getReportingManagerAll(formData)
+    console.log(ReportingManagerDetails)
+    setData(ReportingManagerDetails);
 
-    // const res = await fetch(apiUrl + 'InternalUser/get_InternalUser_all', {
+    // const res = await fetch(apiUrl + 'ReportingManager/get_ReportingManager_all', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify(formData),
@@ -137,10 +137,10 @@ const ReportingManagerSearchDataGrid = () => {
     //   .then(json => {
     //     let res1 = JSON.parse(JSON.stringify(json))
 
-    //     const InternalUserDetails = [];
-    //     class InternalUserDetail {
-    //       constructor(id, InternalUser, status, Alotment) {
-    //         this.InternalUser = InternalUser;
+    //     const ReportingManagerDetails = [];
+    //     class ReportingManagerDetail {
+    //       constructor(id, ReportingManager, status, Alotment) {
+    //         this.ReportingManager = ReportingManager;
     //         this.id = id;
     //         this.alotment = Alotment
     //         if (status == true) { this.status = "Active"; }
@@ -148,13 +148,13 @@ const ReportingManagerSearchDataGrid = () => {
     //       }
     //     }
 
-    //     for (let index = 0; index < res1[0].InternalUser.length; index++) {
-    //       let element = res1[0].InternalUser[index];
+    //     for (let index = 0; index < res1[0].ReportingManager.length; index++) {
+    //       let element = res1[0].ReportingManager[index];
     //       console.log(element)
-    //       InternalUserDetails[index] = new InternalUserDetail(element.LVT_InternalUserID, element.LVT_InternalUser, element.LVT_Status, element.LVT_LeaveAlotment);
+    //       ReportingManagerDetails[index] = new ReportingManagerDetail(element.LVT_ReportingManagerID, element.LVT_ReportingManager, element.LVT_Status, element.LVT_LeaveAlotment);
     //     }
 
-    //     setData(InternalUserDetails);
+    //     setData(ReportingManagerDetails);
     //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
     //   })
 
@@ -178,7 +178,7 @@ const ReportingManagerSearchDataGrid = () => {
 
   const handleClosePopup = () => {
     setVisible(false);
-    setInternalUserDetails([]);
+    setReportingManagerDetails([]);
   };
 
   return (
@@ -196,7 +196,7 @@ const ReportingManagerSearchDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <ReportingManagerSearchPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} InternalUserDetails={InternalUserDetails} />
+          <ReportingManagerSearchPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} ReportingManagerDetails={ReportingManagerDetails} />
         </CCol>
       </CRow>
       <CSmartTable

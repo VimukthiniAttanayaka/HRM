@@ -9,7 +9,7 @@ const ExternalUser = () => {
     <>
       <CCard className="mb-4">
         <CCardHeader>
-          <strong>ExternalUser List</strong>
+          <strong>Internal User List</strong>
         </CCardHeader>
         <CCardBody>
           {/* <ExternalUserPopup /> */}

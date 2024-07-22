@@ -143,12 +143,12 @@ const routes = [
   },
   {
     path: '/users/internaluser',
-    name: <Translation>{(t) => t('InternalUser')}</Translation>,
+    name: <Translation>{(t) => t('Internal User')}</Translation>,
     element: InternalUser,
   },
   {
     path: '/users/externaluser',
-    name: <Translation>{(t) => t('ExternalUser')}</Translation>,
+    name: <Translation>{(t) => t('External User')}</Translation>,
     element: ExternalUser,
   },
   {

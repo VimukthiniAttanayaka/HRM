@@ -206,7 +206,7 @@ const Customer = () => {
               <CCardBody className="p-4">
                 <CForm onSubmit={handleSubmit}>
                   <h1>Reporting Person Change</h1>
-                  <p className="text-body-secondary">Reporting Person Change</p>
+                  <p className="text-body-secondary">Reporting Person View</p>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
                       <CInputGroupText>
@@ -215,10 +215,10 @@ const Customer = () => {
                     </CCol>
                     <CFormInput maxLength={20} placeholder="Reporting Person Name" name="reportingpersonname" value={customerId} onChange={handleChangeId} />
                   </CInputGroup>
-                 
+                  {/*                  
                   <div className="d-grid">
                     <CButton color="success" type='submit'>Submit</CButton>
-                  </div>
+                  </div> */}
                 </CForm>
               </CCardBody>
             </CCard>

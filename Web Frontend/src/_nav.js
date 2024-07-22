@@ -154,6 +154,10 @@ const _nav = [
     name: <Translation>{(t) => t('Master Data')}</Translation>,
   },
   {
+    component: CNavItem,
+    name: <Translation>{(t) => t('login')}</Translation>,
+    to: '/login',
+  },{
     component: CNavTitle,
     name: <Translation>{(t) => t('Templates')}</Translation>,
   },

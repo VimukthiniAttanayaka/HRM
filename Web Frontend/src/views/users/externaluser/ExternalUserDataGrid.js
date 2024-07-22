@@ -4,6 +4,8 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import ExternalUserPopup from './ExternalUserPopup.js';
 // import loadDetails from './ExternalUserPopup.js';
+import { getExternalUserAll } from '../../../apicalls/externaluser/get_all_list.js';
+import { getExternalUserSingle } from '../../../apicalls/externaluser/get_externaluser_single.js';
 
 const ExternalUserDataGrid = () => {
 
@@ -12,18 +14,21 @@ const ExternalUserDataGrid = () => {
 
   const columns = [
     {
-      key: 'id',
+      key: 'UserName',
       // label: '',
       // filter: false,
       // sorter: false,
     },
     {
-      key: 'ExternalUser',
+      key: 'EmailAddress',
+      _style: { width: '20%' },
+    },{
+      key: 'EmployeeID',
       _style: { width: '20%' },
     },
 
     {
-      key: 'alotment',
+      key: 'MobileNumber',
       _style: { width: '20%' }
     }, {
       key: 'status',
@@ -72,7 +77,7 @@ const ExternalUserDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_ExternalUserID: item
+      UD_UserName: item
     }
 
     // const res = fetch(apiUrl + 'ExternalUser/get_ExternalUser_single', {
@@ -88,6 +93,7 @@ const ExternalUserDataGrid = () => {
     //   })
     const ExternalUserDetails = await getExternalUserSingle(formData)
     // setExternalUserDetails(res1[0].ExternalUser[0]);
+    console.log(ExternalUserDetails)
     setExternalUserDetails(ExternalUserDetails);
     handleOpenPopup()
   }
@@ -122,9 +128,9 @@ const ExternalUserDataGrid = () => {
       USR_EmployeeID: 'sedcx'
     }
 
-    // const ExternalUserDetails = await getExternalUserAll(formData)
-    // console.log(ExternalUserDetails)
-    // setData(ExternalUserDetails);
+    const ExternalUserList = await getExternalUserAll(formData)
+    // console.log(ExternalUserList)
+    setData(ExternalUserList);
 
     // const res = await fetch(apiUrl + 'ExternalUser/get_ExternalUser_all', {
     //   method: 'POST',

@@ -4,8 +4,8 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import InternalUserPopup from './InternalUserPopup.js';
 // import loadDetails from './InternalUserPopup.js';
-// import { getInternalUserAll } from '../../../apicalls/InternalUser/get_all_list.js';
-// import { getInternalUserSingle } from '../../../apicalls/InternalUser/get_InternalUser_single.js';
+import { getInternalUserAll } from '../../../apicalls/internaluser/get_all_list.js';
+import { getInternalUserSingle } from '../../../apicalls/internaluser/get_internaluser_single.js';
 
 const InternalUserDataGrid = () => {
 
@@ -14,18 +14,21 @@ const InternalUserDataGrid = () => {
 
   const columns = [
     {
-      key: 'id',
+      key: 'UserName',
       // label: '',
       // filter: false,
       // sorter: false,
     },
     {
-      key: 'InternalUser',
+      key: 'EmailAddress',
+      _style: { width: '20%' },
+    },{
+      key: 'EmployeeID',
       _style: { width: '20%' },
     },
 
     {
-      key: 'alotment',
+      key: 'MobileNumber',
       _style: { width: '20%' }
     }, {
       key: 'status',
@@ -74,7 +77,7 @@ const InternalUserDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_InternalUserID: item
+      UD_UserName: item
     }
 
     // const res = fetch(apiUrl + 'InternalUser/get_InternalUser_single', {
@@ -124,9 +127,9 @@ const InternalUserDataGrid = () => {
       USR_EmployeeID: 'sedcx'
     }
 
-    // const InternalUserDetails = await getInternalUserAll(formData)
-    // console.log(InternalUserDetails)
-    // setData(InternalUserDetails);
+    const InternalUserDetails = await getInternalUserAll(formData)
+    console.log(InternalUserDetails)
+    setData(InternalUserDetails);
 
     // const res = await fetch(apiUrl + 'InternalUser/get_InternalUser_all', {
     //   method: 'POST',
@@ -196,7 +199,7 @@ const InternalUserDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          {/* <InternalUserPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} InternalUserDetails={InternalUserDetails} /> */}
+          <InternalUserPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} InternalUserDetails={InternalUserDetails} />
         </CCol>
       </CRow>
       <CSmartTable

@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CFormSelect, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 
-const ReportingManagerSearchPopup = ({ visible, onClose, onOpen, InternalUserDetails }) => {
+import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
+
+const ReportingManagerSearchPopup = ({ visible, onClose, onOpen, ReportingManagerDetails }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
 
   // };
-  const [InternalUserId, setInternalUserId] = useState('')
-  const [leaveAlotmentId, setLeaveAlotmentId] = useState('')
-  const [InternalUser, setInternalUser] = useState('')
+  const [ReportingManagerID, setReportingManagerID] = useState('')
+  const [EmployeeID, setEmployeeID] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeAlotment = (event) => {
-    setLeaveAlotmentId(event.target.value)
+  const handleChangeReportingManagerID = (event) => {
+    setReportingManagerID(event.target.value)
   }
-  const handleChangeInternalUser = (event) => {
-    setInternalUser(event.target.value)
-  }
-  const handleChangeId = (event) => {
-    setInternalUserId(event.target.value)
+  const handleChangeEmployeeID = (event) => {
+    setEmployeeID(event.target.value)
   }
   const handleChangeIsActive = (event) => { }
 
@@ -56,10 +54,38 @@ const ReportingManagerSearchPopup = ({ visible, onClose, onOpen, InternalUserDet
     }
   }
 
-  console.log(InternalUserDetails)
+  const [selectedOptionReportingManagerID, setSelectedOptionReportingManagerID] = useState(null);
+
+  const [selectedOptionEmployeeID, setSelectedOptionEmployeeID] = useState(null);
+  
+  const [optionsReportingManagerID, setOptionsReportingManagerID] = useState([]);
+    
+  const [optionsEmployeeID, setOptionsEmployeeID] = useState([]);
+  
+  async function requestdata() {
+    const formData = {
+      USR_EmployeeID: 'sedcx'
+    }
+
+    const ReportingManagerDetails = await requestdata_Employee_DropDowns_All(formData)
+
+    setOptionsReportingManagerID(ReportingManagerDetails);
+
+    const EmployeeDetails = await requestdata_Employee_DropDowns_All(formData)
+
+    setOptionsEmployeeID(EmployeeDetails);
+
+  }
+
+  useEffect(() => {
+    requestdata();
+  }, []);
+
+  console.log(ReportingManagerDetails)
+
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New InternalUser</CButton>
+      <CButton color="primary" onClick={onOpen}>New Reporting Manager</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -69,7 +95,7 @@ const ReportingManagerSearchPopup = ({ visible, onClose, onOpen, InternalUserDet
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New InternalUser</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">Create New Reporting Manager</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">
@@ -78,30 +104,31 @@ const ReportingManagerSearchPopup = ({ visible, onClose, onOpen, InternalUserDet
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>InternalUserID</h6>
+                      <h6>Reporting Manager ID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="InternalUserID" name="InternalUserID" value={InternalUserDetails.LVT_InternalUserID} onChange={handleChangeId}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
+                  </CCol>
+                  <CFormSelect value={selectedOptionReportingManagerID} onChange={(e) => setSelectedOptionReportingManagerID(e.target.value)}>
+                    {optionsEmployeeID.map((option) => (
+                      <option key={option.key} value={option.key}>
+                        {option.value}
+                      </option>
+                    ))}
+                  </CFormSelect>
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>InternalUser</h6>
+                      <h6>Employee ID</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="InternalUser" name="InternalUser" value={InternalUserDetails.LVT_InternalUser} onChange={handleChangeInternalUser}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>LeaveAlotment</h6>
-                    </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={InternalUserDetails.LVT_LeaveAlotment} onChange={handleChangeAlotment}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
+                  </CCol>
 
+                  <CFormSelect value={selectedOptionEmployeeID} onChange={(e) => setSelectedOptionEmployeeID(e.target.value)}>
+                    {optionsEmployeeID.map((option) => (
+                      <option key={option.key} value={option.key}>
+                        {option.value}
+                      </option>
+                    ))}
+                  </CFormSelect>
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>

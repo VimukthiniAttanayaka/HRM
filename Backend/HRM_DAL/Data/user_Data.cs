@@ -110,8 +110,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_customer_user";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", CUser.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserName", CUser.UD_UserName);
+                        cmd.Parameters["@UD_UserName"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -127,36 +127,36 @@ namespace HRM_DAL.Data
                                 objCusUserHead.resp = true;
                                 objCusUserHead.msg = "Get Customer User";
 
-                                objCusUserData.UD_CustomerID = rdr["UD_CustomerID"].ToString();
-                                objCusUserData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
-                                objCusUserData.UD_DepartmentID = rdr["UD_DepartmentID"].ToString();
-                                objCusUserData.DPT_Name = rdr["DPT_Name"].ToString();
-                                objCusUserData.UD_StaffID = rdr["UD_StaffID"].ToString();
-                                objCusUserData.UD_FirstName = rdr["UD_FirstName"].ToString();
-                                objCusUserData.UD_LastName = rdr["UD_LastName"].ToString();
-                                objCusUserData.UD_PrefferedName = rdr["UD_PrefferedName"].ToString();
-                                objCusUserData.UD_OrgStructuralLevel1 = rdr["UD_OrgStructuralLevel1"].ToString();
-                                objCusUserData.UD_OrgStructuralLevel2 = rdr["UD_OrgStructuralLevel2"].ToString();
-                                objCusUserData.UD_DepartmentDetail1 = rdr["UD_DepartmentDetail1"].ToString();
-                                objCusUserData.UD_DepartmentDetail2 = rdr["UD_DepartmentDetail2"].ToString();
-                                objCusUserData.UD_DepartmentDetail3 = rdr["UD_DepartmentDetail3"].ToString();
-                                objCusUserData.UD_JobCodeDescription = rdr["UD_JobCodeDescription"].ToString();
-                                objCusUserData.UD_Address = rdr["UD_Address"].ToString();
-                                objCusUserData.UD_EmailAddress = rdr["UD_EmailAddress"].ToString();
-                                objCusUserData.UD_MobileNumber = rdr["UD_MobileNumber"].ToString();
-                                objCusUserData.UD_PhoneNumber1 = rdr["UD_PhoneNumber1"].ToString();
-                                objCusUserData.UD_PhoneNumber2 = rdr["UD_PhoneNumber2"].ToString();
-                                objCusUserData.UD_StaffLocation = rdr["UD_StaffLocation"].ToString();
-                                objCusUserData.UD_PCCode = rdr["UD_PCCode"].ToString();
-                                objCusUserData.UD_Remarks = rdr["UD_Remarks"].ToString();
-                                objCusUserData.UD_Status = rdr["UD_Status"].ToString();
-                                objCusUserData.UD_Pwd = rdr["UD_Pwd"].ToString();
-                                objCusUserData.UD_CreatedDateTime = rdr["UD_CreatedDateTime"].ToString();
-                                objCusUserData.UD_ModifiedDateTime = rdr["UD_ModifiedDateTime"].ToString();
-                                objCusUserData.UD_ActiveFrom = rdr["UD_ActiveFrom"].ToString();
-                                objCusUserData.UD_ActiveTo = rdr["UD_ActiveTo"].ToString();
+                                //objCusUserData.UD_CustomerID = rdr["UD_CustomerID"].ToString();
+                                //objCusUserData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
+                                //objCusUserData.UD_DepartmentID = rdr["UD_DepartmentID"].ToString();
+                                //objCusUserData.DPT_Name = rdr["DPT_Name"].ToString();
+                                //objCusUserData.UD_StaffID = rdr["UD_StaffID"].ToString();
+                                //objCusUserData.UD_FirstName = rdr["UD_FirstName"].ToString();
+                                //objCusUserData.UD_LastName = rdr["UD_LastName"].ToString();
+                                //objCusUserData.UD_PrefferedName = rdr["UD_PrefferedName"].ToString();
+                                //objCusUserData.UD_OrgStructuralLevel1 = rdr["UD_OrgStructuralLevel1"].ToString();
+                                //objCusUserData.UD_OrgStructuralLevel2 = rdr["UD_OrgStructuralLevel2"].ToString();
+                                //objCusUserData.UD_DepartmentDetail1 = rdr["UD_DepartmentDetail1"].ToString();
+                                //objCusUserData.UD_DepartmentDetail2 = rdr["UD_DepartmentDetail2"].ToString();
+                                //objCusUserData.UD_DepartmentDetail3 = rdr["UD_DepartmentDetail3"].ToString();
+                                //objCusUserData.UD_JobCodeDescription = rdr["UD_JobCodeDescription"].ToString();
+                                //objCusUserData.UD_Address = rdr["UD_Address"].ToString();
+                                //objCusUserData.UD_EmailAddress = rdr["UD_EmailAddress"].ToString();
+                                //objCusUserData.UD_MobileNumber = rdr["UD_MobileNumber"].ToString();
+                                //objCusUserData.UD_PhoneNumber1 = rdr["UD_PhoneNumber1"].ToString();
+                                //objCusUserData.UD_PhoneNumber2 = rdr["UD_PhoneNumber2"].ToString();
+                                //objCusUserData.UD_StaffLocation = rdr["UD_StaffLocation"].ToString();
+                                //objCusUserData.UD_PCCode = rdr["UD_PCCode"].ToString();
+                                //objCusUserData.UD_Remarks = rdr["UD_Remarks"].ToString();
+                                //objCusUserData.UD_Status = rdr["UD_Status"].ToString();
+                                //objCusUserData.UD_Pwd = rdr["UD_Pwd"].ToString();
+                                //objCusUserData.UD_CreatedDateTime = rdr["UD_CreatedDateTime"].ToString();
+                                //objCusUserData.UD_ModifiedDateTime = rdr["UD_ModifiedDateTime"].ToString();
+                                //objCusUserData.UD_ActiveFrom = rdr["UD_ActiveFrom"].ToString();
+                                //objCusUserData.UD_ActiveTo = rdr["UD_ActiveTo"].ToString();
 
-                                objCusUserData.RC = "1";
+                                //objCusUserData.RC = "1";
 
                                 using (SqlCommand cmdGrp = new SqlCommand())
                                 {
@@ -165,8 +165,8 @@ namespace HRM_DAL.Data
                                     cmdGrp.CommandText = "sp_get_user_groups_with_select";
                                     cmdGrp.CommandType = CommandType.StoredProcedure;
 
-                                    cmdGrp.Parameters.AddWithValue("@UD_StaffID", CUser.UD_StaffID);
-                                    cmdGrp.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                                    cmdGrp.Parameters.AddWithValue("@UD_UserName", CUser.UD_UserName);
+                                    cmdGrp.Parameters["@UD_UserName"].Direction = ParameterDirection.Input;
 
                                     SqlDataAdapter dtaGrp = new SqlDataAdapter();
                                     dtaGrp.SelectCommand = cmdGrp;
@@ -304,15 +304,15 @@ namespace HRM_DAL.Data
                                 objCusUserHead.resp = true;
                                 objCusUserHead.msg = "Get Customer User";
 
-                                objCusUserData.UD_StaffID = rdr["UD_StaffID"].ToString();
-                                objCusUserData.UD_FirstName = rdr["UD_FirstName"].ToString();
-                                objCusUserData.UD_LastName = rdr["UD_LastName"].ToString();
-                                objCusUserData.UGM_Name = rdr["UGM_Name"].ToString();
-                                objCusUserData.DPT_Name = rdr["DPT_Name"].ToString();
-                                objCusUserData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
-                                objCusUserData.UD_Status = rdr["UD_Status"].ToString();
+                                //objCusUserData.UD_StaffID = rdr["UD_StaffID"].ToString();
+                                //objCusUserData.UD_FirstName = rdr["UD_FirstName"].ToString();
+                                //objCusUserData.UD_LastName = rdr["UD_LastName"].ToString();
+                                //objCusUserData.UGM_Name = rdr["UGM_Name"].ToString();
+                                //objCusUserData.DPT_Name = rdr["DPT_Name"].ToString();
+                                //objCusUserData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
+                                //objCusUserData.UD_Status = rdr["UD_Status"].ToString();
 
-                                objCusUserData.RC = RC;
+                                //objCusUserData.RC = RC;
 
                                 //objUserData.UserGroup.Add(objUserHead);
 
@@ -421,15 +421,15 @@ namespace HRM_DAL.Data
                                 objCusUserHead.resp = true;
                                 objCusUserHead.msg = "Get Customer User";
 
-                                objCusUserData.UD_StaffID = rdr["UD_StaffID"].ToString();
-                                objCusUserData.UD_FirstName = rdr["UD_FirstName"].ToString();
-                                objCusUserData.UD_LastName = rdr["UD_LastName"].ToString();
-                                objCusUserData.DPT_Name = rdr["DPT_Name"].ToString();
-                                objCusUserData.DPT_ID = rdr["DPT_ID"].ToString();
-                                objCusUserData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
-                                objCusUserData.UD_Status = rdr["UD_Status"].ToString();
+                                //objCusUserData.UD_StaffID = rdr["UD_StaffID"].ToString();
+                                //objCusUserData.UD_FirstName = rdr["UD_FirstName"].ToString();
+                                //objCusUserData.UD_LastName = rdr["UD_LastName"].ToString();
+                                //objCusUserData.DPT_Name = rdr["DPT_Name"].ToString();
+                                //objCusUserData.DPT_ID = rdr["DPT_ID"].ToString();
+                                //objCusUserData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
+                                //objCusUserData.UD_Status = rdr["UD_Status"].ToString();
 
-                                objCusUserData.RC = RC;
+                                //objCusUserData.RC = RC;
 
                                 //objUserData.UserGroup.Add(objUserHead);
 
@@ -1419,7 +1419,7 @@ namespace HRM_DAL.Data
                                     IsEmailOk = mod.FirstOrDefault().Customer.FirstOrDefault().CUS_OTP_By_Email;
                                 }
 
-                                List<ReturnCustomerUserModelHead> mod1 = User_Data.get_user_single(new GetUserSingleModel() { UD_StaffID = item.UD_StaffID });
+                                List<ReturnCustomerUserModelHead> mod1 = User_Data.get_user_single(new GetUserSingleModel() { UD_UserName = item.UD_StaffID });
 
                                 if (mod1.FirstOrDefault().User != null)
                                 {

@@ -56,10 +56,10 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
     }
   }
 
-  console.log(InternalUserDetails)
+  // console.log(InternalUserDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New InternalUser</CButton>
+      <CButton color="primary" onClick={onOpen}>New Internal User</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -69,7 +69,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New InternalUser</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">Create New Internal User</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">
