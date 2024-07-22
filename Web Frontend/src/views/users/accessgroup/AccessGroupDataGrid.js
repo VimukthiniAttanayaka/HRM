@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
-import UserRolePopup from './UserRolePopup.js';
-// import loadDetails from './UserRolePopup.js';
-import { getUserRoleAll } from '../../../apicalls/userrole/get_all_list.js';
-import { getUserRoleSingle } from '../../../apicalls/userrole/get_userrole_single.js';
+import AccessGroupPopup from './AccessGroupPopup.js';
+// import loadDetails from './AccessGroupPopup.js';
+import { getAccessGroupAll } from '../../../apicalls/accessgroup/get_all_list.js';
+import { getAccessGroupSingle } from '../../../apicalls/accessgroup/get_AccessGroup_single.js';
 
-const UserRoleDataGrid = () => {
+const AccessGroupDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
@@ -20,7 +20,7 @@ const UserRoleDataGrid = () => {
       // sorter: false,
     },
     {
-      key: 'userrole',
+      key: 'AccessGroup',
       _style: { width: '20%' },
     },
 
@@ -55,10 +55,10 @@ const UserRoleDataGrid = () => {
     }
   }
 
-  const [leaveTypeDetails, setUserRoleDetails] = useState([])
-  // const [leaveTypeId, setUserRoleId] = useState('')
+  const [leaveTypeDetails, setAccessGroupDetails] = useState([])
+  // const [leaveTypeId, setAccessGroupId] = useState('')
   const handleChangeId = (event) => {
-    setUserRoleId(event.target.value)
+    setAccessGroupId(event.target.value)
   }
 
   async function loadDetails(item) {
@@ -74,7 +74,7 @@ const UserRoleDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_UserRoleID: item
+      LVT_AccessGroupID: item
     }
 
     // const res = fetch(apiUrl + 'leavetype/get_leavetype_single', {
@@ -85,12 +85,12 @@ const UserRoleDataGrid = () => {
     //   .then(response => response.json())
     //   .then(json => {
     //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setUserRoleDetails(res1[0].UserRole[0]);
+    //     setAccessGroupDetails(res1[0].AccessGroup[0]);
     //     handleOpenPopup()
     //   })
-    const UserRoleDetails = await getUserRoleSingle(formData)
-    // setUserRoleDetails(res1[0].UserRole[0]);
-    setUserRoleDetails(UserRoleDetails);
+    const AccessGroupDetails = await getAccessGroupSingle(formData)
+    // setAccessGroupDetails(res1[0].AccessGroup[0]);
+    setAccessGroupDetails(AccessGroupDetails);
     handleOpenPopup()
   }
   const toggleDetails = (index) => {
@@ -124,9 +124,9 @@ const UserRoleDataGrid = () => {
       USR_EmployeeID: 'sedcx'
     }
 
-    const UserRoleDetails = await getUserRoleAll(formData)
-    // console.log(UserRoleDetails)
-    setData(UserRoleDetails);
+    const AccessGroupDetails = await getAccessGroupAll(formData)
+    // console.log(AccessGroupDetails)
+    setData(AccessGroupDetails);
 
     // const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
     //   method: 'POST',
@@ -137,8 +137,8 @@ const UserRoleDataGrid = () => {
     //   .then(json => {
     //     let res1 = JSON.parse(JSON.stringify(json))
 
-    //     const UserRoleDetails = [];
-    //     class UserRoleDetail {
+    //     const AccessGroupDetails = [];
+    //     class AccessGroupDetail {
     //       constructor(id, leavetype, status, Alotment) {
     //         this.leavetype = leavetype;
     //         this.id = id;
@@ -148,13 +148,13 @@ const UserRoleDataGrid = () => {
     //       }
     //     }
 
-    //     for (let index = 0; index < res1[0].UserRole.length; index++) {
-    //       let element = res1[0].UserRole[index];
+    //     for (let index = 0; index < res1[0].AccessGroup.length; index++) {
+    //       let element = res1[0].AccessGroup[index];
     //       console.log(element)
-    //       UserRoleDetails[index] = new UserRoleDetail(element.LVT_UserRoleID, element.LVT_UserRole, element.LVT_Status, element.LVT_LeaveAlotment);
+    //       AccessGroupDetails[index] = new AccessGroupDetail(element.LVT_AccessGroupID, element.LVT_AccessGroup, element.LVT_Status, element.LVT_LeaveAlotment);
     //     }
 
-    //     setData(UserRoleDetails);
+    //     setData(AccessGroupDetails);
     //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
     //   })
 
@@ -178,7 +178,7 @@ const UserRoleDataGrid = () => {
 
   const handleClosePopup = () => {
     setVisible(false);
-    setUserRoleDetails([]);
+    setAccessGroupDetails([]);
   };
 
   return (
@@ -196,7 +196,7 @@ const UserRoleDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <UserRolePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveTypeDetails={leaveTypeDetails} />
+          <AccessGroupPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveTypeDetails={leaveTypeDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -278,4 +278,4 @@ const UserRoleDataGrid = () => {
   )
 }
 
-export default UserRoleDataGrid
+export default AccessGroupDataGrid

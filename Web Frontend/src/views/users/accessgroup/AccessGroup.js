@@ -1,23 +1,23 @@
 import React from 'react'
 import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
 
-import UserRoleDataGrid from './UserRoleDataGrid'
-import UserRolePopup from './UserRolePopup'
+import AccessGroupDataGrid from './AccessGroupDataGrid'
+import AccessGroupPopup from './AccessGroupPopup'
 
-const UserRole = () => {
+const AccessGroup = () => {
   return (
     <>
       <CCard className="mb-4">
         <CCardHeader>
-          <strong>UserRole List</strong>
+          <strong>AccessGroup List</strong>
         </CCardHeader>
         <CCardBody>
-          {/* <UserRolePopup /> */}
-          <UserRoleDataGrid  onOpen={() => handleOpenPopup}/>
+          {/* <AccessGroupPopup /> */}
+          <AccessGroupDataGrid  onOpen={() => handleOpenPopup}/>
         </CCardBody>
       </CCard>
     </>
   )
 }
 
-export default UserRole
+export default AccessGroup
