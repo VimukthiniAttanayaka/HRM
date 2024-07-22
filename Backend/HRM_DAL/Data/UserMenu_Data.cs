@@ -39,8 +39,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_UserMenus_single";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@EUM_UserMenuID", model.EUM_UserMenuID);
-                        cmd.Parameters["@EUM_UserMenuID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UUM_UserMenuID", model.UUM_UserMenuID);
+                        cmd.Parameters["@UUM_UserMenuID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -56,10 +56,10 @@ namespace HRM_DAL.Data
                                 objUserMenuHead.resp = true;
                                 objUserMenuHead.msg = "Get UserMenu";
 
-                                //objUserMenu.EUM_UserMenuID = rdr["EUM_UserMenuID"].ToString();
-                                //objUserMenu.EUM_LeaveAlotment = Convert.ToInt16(rdr["EUM_LeaveAlotment"].ToString());
-                                //objUserMenu.EUM_UserMenu = rdr["EUM_UserMenu"].ToString();
-                                //objUserMenu.EUM_Status = Convert.ToBoolean(rdr["EUM_Status"].ToString());
+                                //objUserMenu.UUM_UserMenuID = rdr["UUM_UserMenuID"].ToString();
+                                //objUserMenu.UUM_LeaveAlotment = Convert.ToInt16(rdr["UUM_LeaveAlotment"].ToString());
+                                //objUserMenu.UUM_UserMenu = rdr["UUM_UserMenu"].ToString();
+                                //objUserMenu.UUM_Status = Convert.ToBoolean(rdr["UUM_Status"].ToString());
 
                                 if (objUserMenuHead.UserMenu == null)
                                 {
@@ -136,8 +136,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "get_UserMenu_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@EUM_UserMenuID", model.EUM_UserMenuID);
-                        cmd.Parameters["@EUM_UserMenuID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UUM_UserMenuID", model.UUM_UserMenuID);
+                        cmd.Parameters["@UUM_UserMenuID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -153,10 +153,10 @@ namespace HRM_DAL.Data
                                 objUserMenuHead.resp = true;
                                 objUserMenuHead.msg = "Get UserMenu";
 
-                                //objUserMenu.EUM_UserMenuID = rdr["EUM_UserMenuID"].ToString();
-                                //objUserMenu.EUM_LeaveAlotment = Convert.ToInt16(rdr["EUM_LeaveAlotment"].ToString());
-                                //objUserMenu.EUM_UserMenu = rdr["EUM_UserMenu"].ToString();
-                                //objUserMenu.EUM_Status = Convert.ToBoolean(rdr["EUM_Status"].ToString());
+                                //objUserMenu.UUM_UserMenuID = rdr["UUM_UserMenuID"].ToString();
+                                //objUserMenu.UUM_LeaveAlotment = Convert.ToInt16(rdr["UUM_LeaveAlotment"].ToString());
+                                //objUserMenu.UUM_UserMenu = rdr["UUM_UserMenu"].ToString();
+                                //objUserMenu.UUM_Status = Convert.ToBoolean(rdr["UUM_Status"].ToString());
 
                                 if (objUserMenuHead.UserMenu == null)
                                 {
@@ -236,8 +236,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
                         cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@EUM_UserMenuID", item.EUM_UserMenuID);
-                        cmd.Parameters["@EUM_UserMenuID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UUM_UserMenuID", item.UUM_UserMenuID);
+                        cmd.Parameters["@UUM_UserMenuID"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
@@ -353,8 +353,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
                         cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@EUM_UserMenuID", item.EUM_UserMenuID);
-                        cmd.Parameters["@EUM_UserMenuID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UUM_UserMenuID", item.UUM_UserMenuID);
+                        cmd.Parameters["@UUM_UserMenuID"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
@@ -440,7 +440,7 @@ namespace HRM_DAL.Data
             return objCustHeadList;
         }
 
-        public static List<ReturnResponse> inactivate_UserMenu(InactiveEUMModel item)//ok
+        public static List<ReturnResponse> inactivate_UserMenu(InactiveUUMModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
             ReturnResponse objUserHead = new ReturnResponse();
@@ -468,8 +468,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_del_UserMenu";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@EUM_UserMenuID", item.EUM_UserMenuID);
-                        cmd.Parameters["@EUM_UserMenuID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UUM_UserMenuID", item.UUM_UserMenuID);
+                        cmd.Parameters["@UUM_UserMenuID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
                         cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;

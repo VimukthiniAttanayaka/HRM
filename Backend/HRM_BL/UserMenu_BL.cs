@@ -31,7 +31,7 @@ namespace HRM_BL
             return HRM_DAL.Data.UserMenu_Data.modify_UserMenu(item);
         }
 
-        public static List<ReturnResponse> inactivate_UserMenu(InactiveEUMModel item)//ok
+        public static List<ReturnResponse> inactivate_UserMenu(InactiveUUMModel item)//ok
         {
             return HRM_DAL.Data.UserMenu_Data.inactivate_UserMenu(item);
         }

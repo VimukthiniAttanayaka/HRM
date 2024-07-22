@@ -11,39 +11,39 @@ namespace HRM_DAL.Models
 
     public class UserMenuModel : RequestBaseModel
     {
-        public string EUM_UserMenuID { get; set; }
-        public string EUM_UserMenu { get; set; }
-        public bool EUM_Status { get; set; }
-        public string EUM_CreatedBy { get; set; }
-        public DateTime EUM_CreatedDateTime { get; set; }
-        public string EUM_ModifiedBy { get; set; }
-        public DateTime EUM_ModifiedDateTime { get; set; }
+        public string UUM_UserMenuID { get; set; }
+        public string UUM_UserMenu { get; set; }
+        public bool UUM_Status { get; set; }
+        public string UUM_CreatedBy { get; set; }
+        public DateTime UUM_CreatedDateTime { get; set; }
+        public string UUM_ModifiedBy { get; set; }
+        public DateTime UUM_ModifiedDateTime { get; set; }
     }
 
     public class ReturnUserMenuModel
     {
         [Key]
-        public string EUM_UserMenuID { get; set; }
-        public string EUM_UserMenu { get; set; }
-        public bool EUM_Status { get; set; }
-        public string EUM_CreatedBy { get; set; }
-        public DateTime EUM_CreatedDateTime { get; set; }
-        public string EUM_ModifiedBy { get; set; }
-        public DateTime EUM_ModifiedDateTime { get; set; }
+        public string UUM_UserMenuID { get; set; }
+        public string UUM_UserMenu { get; set; }
+        public bool UUM_Status { get; set; }
+        public string UUM_CreatedBy { get; set; }
+        public DateTime UUM_CreatedDateTime { get; set; }
+        public string UUM_ModifiedBy { get; set; }
+        public DateTime UUM_ModifiedDateTime { get; set; }
     }
 
     public class ReturnUserMenuAllModel
     {
         [Key]
 
-        public string EUM_UserMenuID { get; set; }
+        public string UUM_UserMenuID { get; set; }
         public string RC { get; set; }
     }
 
 
     public class UserMenu : RequestBaseModel
     {
-        public string EUM_UserMenuID { get; set; }
+        public string UUM_UserMenuID { get; set; }
 
 
     }
@@ -57,18 +57,18 @@ namespace HRM_DAL.Models
 
     public class UserMenuSearchModel : RequestBaseModel
     {
-        public string EUM_UserMenuID { get; set; }
+        public string UUM_UserMenuID { get; set; }
     }
 
     public class ReturnUserMenuSelectModel
     {
-        public string EUM_UserMenuID { get; set; }
+        public string UUM_UserMenuID { get; set; }
 
     }
 
-    public class InactiveEUMModel : RequestBaseModel
+    public class InactiveUUMModel : RequestBaseModel
     {
-        public string EUM_UserMenuID { get; set; }
+        public string UUM_UserMenuID { get; set; }
 
     }
 }
