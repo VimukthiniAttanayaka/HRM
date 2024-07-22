@@ -24,7 +24,9 @@
     <Compile Remove="Recieve_BL.cs" />
     <Compile Remove="SystemParameterController.cs" />
     <Compile Remove="SystemsSettingsController.cs" />
+    <Compile Remove="UserAccessGroup_BL.cs" />
     <Compile Remove="UserController.cs" />
+    <Compile Remove="UserGroupMaster_BL.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,10 +1,9 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export class LeaveScheduleDetail {
-  constructor(id, userrole, status, Alotment) {
+  constructor(id, userrole, status) {
     this.userrole = userrole;
     this.id = id;
-    this.alotment = Alotment
     if (status == true) { this.status = "Active"; }
     else { this.status = "Inactive"; }
   }
@@ -24,10 +23,9 @@ export const getUserRoleAll = async (formData) => {
 
 
       class UserRoleDetail {
-        constructor(id, userrole, status, Alotment) {
+        constructor(id, userrole, status) {
           this.userrole = userrole;
           this.id = id;
-          this.alotment = Alotment
           if (status == true) { this.status = "Active"; }
           else { this.status = "Inactive"; }
         }
@@ -36,7 +34,7 @@ export const getUserRoleAll = async (formData) => {
       for (let index = 0; index < res1[0].UserRole.length; index++) {
         let element = res1[0].UserRole[index];
         // console.log(element)
-        UserRoleDetails[index] = new UserRoleDetail(element.LVT_UserRoleID, element.LVT_UserRole, element.LVT_Status, element.LVT_LeaveAlotment);
+        UserRoleDetails[index] = new UserRoleDetail(element.EUR_UserRoleID, element.EUR_UserRole, element.EUR_Status);
       }
       // console.log(UserRoleDetails)
     })
