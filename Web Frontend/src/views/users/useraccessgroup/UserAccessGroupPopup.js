@@ -4,25 +4,25 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 
-const AccessGroupPopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
+const UserRolePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
 
   // };
-  const [leaveTypeId, setAccessGroupId] = useState('')
+  const [leaveTypeId, setUserRoleId] = useState('')
   const [leaveAlotmentId, setLeaveAlotmentId] = useState('')
-  const [leaveType, setAccessGroup] = useState('')
+  const [leaveType, setUserRole] = useState('')
   const [isActive, setIsActive] = useState(true)
 
   const handleChangeAlotment = (event) => {
     setLeaveAlotmentId(event.target.value)
   }
-  const handleChangeAccessGroup = (event) => {
-    setAccessGroup(event.target.value)
+  const handleChangeUserRole = (event) => {
+    setUserRole(event.target.value)
   }
   const handleChangeId = (event) => {
-    setAccessGroupId(event.target.value)
+    setUserRoleId(event.target.value)
   }
   const handleChangeIsActive = (event) => { }
 
@@ -34,9 +34,9 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
 
     // Prepare form data
     const formData = {
-      LVT_AccessGroupID: leaveTypeId,
+      LVT_UserRoleID: leaveTypeId,
       LVT_LeaveAlotment: leaveAlotmentId,
-      LVT_AccessGroup: leaveType,
+      LVT_UserRole: leaveType,
       LVT_Status: isActive,
     }
     // Submit the form data to your backend API
@@ -59,7 +59,7 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
   console.log(leaveTypeDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New AccessGroup</CButton>
+      <CButton color="primary" onClick={onOpen}>New UserRole</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -69,7 +69,7 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New AccessGroup</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">Create New UserRole</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">
@@ -78,18 +78,18 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>AccessGroupID</h6>
+                      <h6>UserRoleID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="AccessGroupID" name="AccessGroupID" value={leaveTypeDetails.LVT_AccessGroupID} onChange={handleChangeId}
+                  </CCol>   <CFormInput placeholder="UserRoleID" name="UserRoleID" value={leaveTypeDetails.LVT_UserRoleID} onChange={handleChangeId}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>AccessGroup</h6>
+                      <h6>UserRole</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="AccessGroup" name="AccessGroup" value={leaveTypeDetails.LVT_AccessGroup} onChange={handleChangeAccessGroup}
+                  </CCol>    <CFormInput placeholder="UserRole" name="UserRole" value={leaveTypeDetails.LVT_UserRole} onChange={handleChangeUserRole}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -122,4 +122,4 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
     </>
   )
 }
-export default AccessGroupPopup
+export default UserRolePopup
