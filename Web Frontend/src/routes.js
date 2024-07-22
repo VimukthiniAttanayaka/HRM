@@ -16,6 +16,9 @@ const ReportingManagerSearch=React.lazy(() => import('./views/reportingperson/re
 const InternalUser = React.lazy(() => import('./views/users/internaluser/InternalUser'))
 const ExternalUser = React.lazy(() => import('./views/users/externaluser/ExternalUser'))
 const UserRole = React.lazy(() => import('./views/users/userrole/UserRole'))
+const AccessGroup = React.lazy(() => import('./views/users/accessgroup/AccessGroup'))
+const UserAccessGroup = React.lazy(() => import('./views/users/useraccessgroup/UserAccessGroup'))
+const UserMenu = React.lazy(() => import('./views/users/usermenu/UserMenu'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -156,6 +159,26 @@ const routes = [
     path: '/users/userrole',
     name: <Translation>{(t) => t('User Role')}</Translation>,
     element: UserRole,
+  },
+  {
+    path: '/users/accessgroup',
+    name: <Translation>{(t) => t('Access Group')}</Translation>,
+    element: AccessGroup,
+  },
+  {
+    path: '/users/useraccessgroup',
+    name: <Translation>{(t) => t('User Access Group')}</Translation>,
+    element: UserAccessGroup,
+  },
+  {
+    path: '/users/menuaccessgroup',
+    name: <Translation>{(t) => t('Menu Access Group')}</Translation>,
+    element: UserRole,
+  },
+  {
+    path: '/users/usermenu',
+    name: <Translation>{(t) => t('User Menu')}</Translation>,
+    element: UserMenu,
   },
   {
     path: '/base',

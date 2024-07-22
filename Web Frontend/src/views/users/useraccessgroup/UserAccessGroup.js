@@ -1,8 +1,8 @@
 import React from 'react'
 import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
 
-import UserRoleDataGrid from './UserRoleDataGrid'
-import UserRolePopup from './UserRolePopup'
+import UserAccessGroupDataGrid from './UserAccessGroupDataGrid'
+import UserAccessGroupPopup from './UserAccessGroupPopup'
 
 const UserRole = () => {
   return (
@@ -13,7 +13,7 @@ const UserRole = () => {
         </CCardHeader>
         <CCardBody>
           {/* <UserRolePopup /> */}
-          <UserRoleDataGrid  onOpen={() => handleOpenPopup}/>
+          <UserAccessGroupDataGrid  onOpen={() => handleOpenPopup}/>
         </CCardBody>
       </CCard>
     </>

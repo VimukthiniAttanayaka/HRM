@@ -4,8 +4,8 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import AccessGroupPopup from './AccessGroupPopup.js';
 // import loadDetails from './AccessGroupPopup.js';
-import { getAccessGroupAll } from '../../../apicalls/accessgroup/get_all_list.js';
-import { getAccessGroupSingle } from '../../../apicalls/accessgroup/get_AccessGroup_single.js';
+import { getUserRoleAll } from '../../../apicalls/userrole/get_all_list.js';
+import { getUserRoleSingle } from '../../../apicalls/userrole/get_userrole_single.js';
 
 const AccessGroupDataGrid = () => {
 
@@ -124,7 +124,7 @@ const AccessGroupDataGrid = () => {
       USR_EmployeeID: 'sedcx'
     }
 
-    const AccessGroupDetails = await getAccessGroupAll(formData)
+    const AccessGroupDetails = await getUserRoleAll(formData)
     // console.log(AccessGroupDetails)
     setData(AccessGroupDetails);
 

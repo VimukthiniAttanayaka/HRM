@@ -8,7 +8,7 @@ import { getUserRoleAll } from '../../../apicalls/userrole/get_all_list.js';
 import { getUserRoleSingle } from '../../../apicalls/userrole/get_userrole_single.js';
 
 
-const UserRoleDataGrid = () => {
+const MenuAccessGroupDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
@@ -275,4 +275,4 @@ const UserRoleDataGrid = () => {
   )
 }
 
-export default UserRoleDataGrid
+export default MenuAccessGroupDataGrid

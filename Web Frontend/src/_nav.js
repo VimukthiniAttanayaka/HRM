@@ -152,6 +152,27 @@ const _nav = [
       name: <Translation>{(t) => t('User Role')}</Translation>,
       to: '/users/userrole',
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    }, {
+      component: CNavItem,
+      name: <Translation>{(t) => t('Access Group')}</Translation>,
+      to: '/users/accessgroup',
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    }, {
+      component: CNavItem,
+      name: <Translation>{(t) => t('Menu Access Group')}</Translation>,
+      to: '/users/useraccessgroup',
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    }, {
+      component: CNavItem,
+      name: <Translation>{(t) => t('User Access Group')}</Translation>,
+      to: '/users/menuaccessgroup',
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    },
+    {
+      component: CNavItem,
+      name: <Translation>{(t) => t('User menu')}</Translation>,
+      to: '/users/usermenu',
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     },],
   },
   {

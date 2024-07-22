@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
-import UserRolePopup from './UserRolePopup.js';
-// import loadDetails from './UserRolePopup.js';
+// import UserRolePopup from './UserRolePopup.js';
+// // import loadDetails from './UserRolePopup.js';
 import { getUserRoleAll } from '../../../apicalls/userrole/get_all_list.js';
 import { getUserRoleSingle } from '../../../apicalls/userrole/get_userrole_single.js';
+import UserMenuPopup from './UserMenuPopup'
 
-
-const UserRoleDataGrid = () => {
+const UserMenuDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
@@ -193,7 +193,7 @@ const UserRoleDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <UserRolePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveTypeDetails={leaveTypeDetails} />
+          <UserMenuPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveTypeDetails={leaveTypeDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -275,4 +275,4 @@ const UserRoleDataGrid = () => {
   )
 }
 
-export default UserRoleDataGrid
+export default UserMenuDataGrid
