@@ -4,15 +4,14 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 
-const AccessGroupPopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
+const AccessGroupPopup = ({ visible, onClose, onOpen, AccessGroupDetails }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
 
   // };
-  const [leaveTypeId, setAccessGroupId] = useState('')
-  const [leaveAlotmentId, setLeaveAlotmentId] = useState('')
-  const [leaveType, setAccessGroup] = useState('')
+  const [AccessGroupId, setAccessGroupId] = useState('')
+  const [AccessGroup, setAccessGroup] = useState('')
   const [isActive, setIsActive] = useState(true)
 
   const handleChangeAlotment = (event) => {
@@ -34,13 +33,13 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
 
     // Prepare form data
     const formData = {
-      LVT_AccessGroupID: leaveTypeId,
-      LVT_LeaveAlotment: leaveAlotmentId,
-      LVT_AccessGroup: leaveType,
-      LVT_Status: isActive,
+      UAG_AccessGroupID: AccessGroupId,
+      UAG_LeaveAlotment: leaveAlotmentId,
+      UAG_AccessGroup: AccessGroup,
+      UAG_Status: isActive,
     }
     // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'leavetype/add_new_leavetype', {
+    const response = await fetch(apiUrl + 'AccessGroup/add_new_AccessGroup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -56,7 +55,7 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
     }
   }
 
-  console.log(leaveTypeDetails)
+  console.log(AccessGroupDetails)
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New Access Group</CButton>
@@ -80,7 +79,7 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
                     <CInputGroupText>
                       <h6>AccessGroupID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="AccessGroupID" name="AccessGroupID" value={leaveTypeDetails.LVT_AccessGroupID} onChange={handleChangeId}
+                  </CCol>   <CFormInput placeholder="AccessGroupID" name="AccessGroupID" value={AccessGroupDetails.UAG_AccessGroupID} onChange={handleChangeId}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -89,19 +88,9 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
                     <CInputGroupText>
                       <h6>AccessGroup</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="AccessGroup" name="AccessGroup" value={leaveTypeDetails.LVT_AccessGroup} onChange={handleChangeAccessGroup}
+                  </CCol>    <CFormInput placeholder="AccessGroup" name="AccessGroup" value={AccessGroupDetails.UAG_AccessGroup} onChange={handleChangeAccessGroup}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>LeaveAlotment</h6>
-                    </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={leaveTypeDetails.LVT_LeaveAlotment} onChange={handleChangeAlotment}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>

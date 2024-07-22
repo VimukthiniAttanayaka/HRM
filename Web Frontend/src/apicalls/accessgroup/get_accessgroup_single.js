@@ -1,14 +1,13 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export class AccessGroupDetail  {
-  LVT_LeaveTypeID;
-  LVT_LeaveType;
-  LVT_LeaveAlotent;
-  LVT_Status;
-  LVT_CreatedBy;
-  LVT_CreatedDateTime;
-  LVT_ModifiedBy;
-  LVT_ModifiedDateTime;
+  UAG_LeaveTypeID;
+  UAG_LeaveType;
+  UAG_Status;
+  UAG_CreatedBy;
+  UAG_CreatedDateTime;
+  UAG_ModifiedBy;
+  UAG_ModifiedDateTime;
 }
 // console.log(apiUrl)
 export const getAccessGroupSingle = async (formData) => {

@@ -9,7 +9,7 @@ export class AccessGroupDetail {
   }
 }
 // console.log(apiUrl)
-export const getaccessgroupAll = async (formData) => {
+export const getAccessGroupAll = async (formData) => {
   const AccessGroupDetails = [];
 
   const res = await fetch(apiUrl + 'accessgroup/get_accessgroup_all', {
@@ -23,8 +23,8 @@ export const getaccessgroupAll = async (formData) => {
 
 
       class AccessGroupDetail {
-        constructor(id, leavetype, status, Alotment) {
-          this.leavetype = leavetype;
+        constructor(id, AccessGroup, status) {
+          this.AccessGroup = AccessGroup;
           this.id = id;
           if (status == true) { this.status = "Active"; }
           else { this.status = "Inactive"; }
@@ -34,12 +34,12 @@ export const getaccessgroupAll = async (formData) => {
       for (let index = 0; index < res1[0].AccessGroup.length; index++) {
         let element = res1[0].AccessGroup[index];
         // console.log(element)
-        AccessGroupDetails[index] = new AccessGroupDetail(element.LVT_LeaveTypeID, element.LVT_LeaveType, element.LVT_Status, element.LVT_LeaveAlotment);
+        AccessGroupDetails[index] = new AccessGroupDetail(element.UAG_AccessGroupID, element.UAG_AccessGroup, element.UAG_Status);
       }
-      // console.log(LeaveTypeDetails)
+      // console.log(AccessGroupDetails)
     })
 
-  return LeaveTypeDetails;
+  return AccessGroupDetails;
 };
 
 export const requestdata_accessgroup_DropDowns_All = async (formData) => {

@@ -4,8 +4,8 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import AccessGroupPopup from './AccessGroupPopup.js';
 // import loadDetails from './AccessGroupPopup.js';
-import { getUserRoleAll } from '../../../apicalls/userrole/get_all_list.js';
-import { getUserRoleSingle } from '../../../apicalls/userrole/get_userrole_single.js';
+import { getAccessGroupAll } from '../../../apicalls/accessgroup/get_all_list.js';
+import { getAccessGroupSingle } from '../../../apicalls/accessgroup/get_accessgroup_single.js';
 
 const AccessGroupDataGrid = () => {
 
@@ -75,7 +75,7 @@ const AccessGroupDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_AccessGroupID: item
+      UAG_AccessGroupID: item
     }
 
     // const res = fetch(apiUrl + 'leavetype/get_leavetype_single', {
@@ -125,7 +125,7 @@ const AccessGroupDataGrid = () => {
       USR_EmployeeID: 'sedcx'
     }
 
-    const AccessGroupDetails = await getUserRoleAll(formData)
+    const AccessGroupDetails = await getAccessGroupAll(formData)
     // console.log(AccessGroupDetails)
     setData(AccessGroupDetails);
 
@@ -152,7 +152,7 @@ const AccessGroupDataGrid = () => {
     //     for (let index = 0; index < res1[0].AccessGroup.length; index++) {
     //       let element = res1[0].AccessGroup[index];
     //       console.log(element)
-    //       AccessGroupDetails[index] = new AccessGroupDetail(element.LVT_AccessGroupID, element.LVT_AccessGroup, element.LVT_Status, element.LVT_LeaveAlotment);
+    //       AccessGroupDetails[index] = new AccessGroupDetail(element.UAG_AccessGroupID, element.UAG_AccessGroup, element.UAG_Status, element.UAG_LeaveAlotment);
     //     }
 
     //     setData(AccessGroupDetails);
