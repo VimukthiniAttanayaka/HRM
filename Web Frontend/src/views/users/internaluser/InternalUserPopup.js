@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CButton, CFormSelect, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
+import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
 
 const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) => {
 
@@ -10,6 +11,8 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
   //   event.preventDefault();
 
   // };
+  const [selectedOptionEmployeeID, setSelectedOptionEmployeeID] = useState('');
+
   const [FirstName, setFirstName] = useState('')
   const [LastName, setLastName] = useState('')
   const [EmailAddress, setEmailAddress] = useState('')
@@ -76,6 +79,28 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
     }
   }
 
+  const [optionsEmployeeID, setOptionsEmployeeID] = useState([]);
+  const [optionsReportingManagerID, setOptionsReportingManagerID] = useState([]);
+
+  async function requestdata() {
+    const formData = {
+      USR_EmployeeID: 'sedcx'
+    }
+
+    const ReportingManagerDetails = await requestdata_Employee_DropDowns_All(formData)
+
+    setOptionsReportingManagerID(ReportingManagerDetails);
+
+    const EmployeeDetails = await requestdata_Employee_DropDowns_All(formData)
+
+    setOptionsEmployeeID(EmployeeDetails);
+
+  }
+
+  useEffect(() => {
+    requestdata();
+  }, []);
+
   // console.log(InternalUserDetails)
   return (
     <>
@@ -95,24 +120,64 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
           <CCard className="mx-4">
             <CCardBody className="p-4">
               <CForm onSubmit={handleSubmit}>
-                <CInputGroup className="mb-3">
+                {/* <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>EmployeeID</h6>
                     </CInputGroupText>
                   </CCol>
 
-                  <CFormInput placeholder="EmployeeID" name="EmployeeID" value={InternalUserDetails.UD_EmployeeID} onChange={handleChangeEmployeeID}
+                  <CFormInput placeholder="EmployeeID" name="EmployeeID" value={InternalUserDetails.UD_EmployeeID ? InternalUserDetails.UD_EmployeeID:''} onChange={handleChangeEmployeeID}
 
+                  />
+
+                </CInputGroup> */}
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>UserName</h6>
+                    </CInputGroupText>
+                  </CCol>  <CFormInput placeholder="UserName" name="UserName" value={InternalUserDetails.UD_UserName ? InternalUserDetails.UD_UserName : ''} onChange={handleChangeUserName}
+                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
 
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
+                      <h6>User Role</h6>
+                    </CInputGroupText>
+                  </CCol>
+
+                  <CFormSelect value={selectedOptionEmployeeID} onChange={(e) => setSelectedOptionEmployeeID(e.target.value)}>
+                    {optionsEmployeeID.map((option) => (
+                      <option key={option.key} value={option.key}>
+                        {option.value}
+                      </option>
+                    ))}
+                  </CFormSelect>
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>Employee ID</h6>
+                    </CInputGroupText>
+                  </CCol>
+
+                  <CFormSelect value={selectedOptionEmployeeID} onChange={(e) => setSelectedOptionEmployeeID(e.target.value)}>
+                    {optionsEmployeeID.map((option) => (
+                      <option key={option.key} value={option.key}>
+                        {option.value}
+                      </option>
+                    ))}
+                  </CFormSelect>
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
                       <h6>FirstName</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="FirstName" name="FirstName" value={InternalUserDetails.UD_FirstName} onChange={handleChangeFirstName}
+                  </CCol>  <CFormInput placeholder="FirstName" name="FirstName" value={InternalUserDetails.UD_FirstName ? InternalUserDetails.UD_FirstName:''} onChange={handleChangeFirstName}
                   />
 
                 </CInputGroup>
@@ -121,7 +186,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
                     <CInputGroupText>
                       <h6>LastName</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LastName" name="LastName" value={InternalUserDetails.UD_LastName} onChange={handleChangeLastName}
+                  </CCol>  <CFormInput placeholder="LastName" name="LastName" value={InternalUserDetails.UD_LastName ? InternalUserDetails.UD_LastName:''} onChange={handleChangeLastName}
                   />
 
                 </CInputGroup>
@@ -130,7 +195,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
                     <CInputGroupText>
                       <h6>EmailAddress</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="EmailAddress" name="EmailAddress" value={InternalUserDetails.UD_EmailAddress} onChange={handleChangeEmailAddress}
+                  </CCol>  <CFormInput placeholder="EmailAddress" name="EmailAddress" value={InternalUserDetails.UD_EmailAddress ? InternalUserDetails.UD_EmailAddress:''} onChange={handleChangeEmailAddress}
                   />
 
                 </CInputGroup>
@@ -139,7 +204,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
                     <CInputGroupText>
                       <h6>MobileNumber</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="MobileNumber" name="MobileNumber" value={InternalUserDetails.UD_MobileNumber} onChange={handleChangeMobileNumber}
+                  </CCol>  <CFormInput placeholder="MobileNumber" name="MobileNumber" value={InternalUserDetails.UD_MobileNumber ? InternalUserDetails.UD_MobileNumber:''} onChange={handleChangeMobileNumber}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
 
@@ -149,7 +214,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
                     <CInputGroupText>
                       <h6>PhoneNumber</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="PhoneNumber" name="PhoneNumber" value={InternalUserDetails.UD_PhoneNumber} onChange={handleChangePhoneNumber}
+                  </CCol>  <CFormInput placeholder="PhoneNumber" name="PhoneNumber" value={InternalUserDetails.UD_PhoneNumber ? InternalUserDetails.UD_PhoneNumber:''} onChange={handleChangePhoneNumber}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
 
@@ -159,17 +224,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
                     <CInputGroupText>
                       <h6>Remarks</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="Remarks" name="Remarks" value={InternalUserDetails.UD_Remarks} onChange={handleChangeRemarks}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>UserName</h6>
-                    </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="UserName" name="UserName" value={InternalUserDetails.UD_UserName} onChange={handleChangeUserName}
+                  </CCol>  <CFormInput placeholder="Remarks" name="Remarks" value={InternalUserDetails.UD_Remarks ? InternalUserDetails.UD_Remarks:''} onChange={handleChangeRemarks}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
 
