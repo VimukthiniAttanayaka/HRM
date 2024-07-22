@@ -29,11 +29,11 @@ namespace HRM.Controllers
             List<ReturnAccessGroupModelHead> objAccessGroupHeadList = new List<ReturnAccessGroupModelHead>();
             ReturnAccessGroupModelHead obj = new ReturnAccessGroupModelHead() { resp = false, msg = "sfsf" };
             obj.AccessGroup = new List<ReturnAccessGroupModel>();
-            if (model.EUG_AccessGroupID == "CAS")
-                obj.AccessGroup.Add(new ReturnAccessGroupModel() { EUG_AccessGroupID = "CAS", EUG_AccessGroup = "Casual", EUG_Status = true });
-            if (model.EUG_AccessGroupID == "ANU") obj.AccessGroup.Add(new ReturnAccessGroupModel() { EUG_AccessGroupID = "ANU", EUG_AccessGroup = "Annual", EUG_Status = true });
-            if (model.EUG_AccessGroupID == "MED") obj.AccessGroup.Add(new ReturnAccessGroupModel() { EUG_AccessGroupID = "MED", EUG_AccessGroup = "Medical", EUG_Status = true });
-            if (model.EUG_AccessGroupID == "MAT") obj.AccessGroup.Add(new ReturnAccessGroupModel() { EUG_AccessGroupID = "MAT", EUG_AccessGroup = "Matrinaty", EUG_Status = true });
+            if (model.UAG_AccessGroupID == "CAS")
+                obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "CAS", UAG_AccessGroup = "Casual", UAG_Status = true });
+            if (model.UAG_AccessGroupID == "ANU") obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "ANU", UAG_AccessGroup = "Annual", UAG_Status = true });
+            if (model.UAG_AccessGroupID == "MED") obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MED", UAG_AccessGroup = "Medical", UAG_Status = true });
+            if (model.UAG_AccessGroupID == "MAT") obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MAT", UAG_AccessGroup = "Matrinaty", UAG_Status = true });
             objAccessGroupHeadList.Add(obj);
             return objAccessGroupHeadList;
 
@@ -77,10 +77,10 @@ namespace HRM.Controllers
             List<ReturnAccessGroupModelHead> objAccessGroupHeadList = new List<ReturnAccessGroupModelHead>();
             ReturnAccessGroupModelHead obj = new ReturnAccessGroupModelHead() { resp = false, msg = "sfsf" };
             obj.AccessGroup = new List<ReturnAccessGroupModel>();
-            obj.AccessGroup.Add(new ReturnAccessGroupModel() { EUG_AccessGroupID = "CAS", EUG_AccessGroup = "Casual", EUG_Status = true });
-            obj.AccessGroup.Add(new ReturnAccessGroupModel() { EUG_AccessGroupID = "ANU", EUG_AccessGroup = "Annual", EUG_Status = true });
-            obj.AccessGroup.Add(new ReturnAccessGroupModel() { EUG_AccessGroupID = "MED", EUG_AccessGroup = "Medical", EUG_Status = true });
-            obj.AccessGroup.Add(new ReturnAccessGroupModel() { EUG_AccessGroupID = "MAT", EUG_AccessGroup = "Matrinaty", EUG_Status = true });
+            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "CAS", UAG_AccessGroup = "Casual", UAG_Status = true });
+            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "ANU", UAG_AccessGroup = "Annual", UAG_Status = true });
+            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MED", UAG_AccessGroup = "Medical", UAG_Status = true });
+            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MAT", UAG_AccessGroup = "Matrinaty", UAG_Status = true });
             objAccessGroupHeadList.Add(obj);
             return objAccessGroupHeadList;
 

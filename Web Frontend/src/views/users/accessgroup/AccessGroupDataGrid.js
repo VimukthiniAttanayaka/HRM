@@ -24,10 +24,11 @@ const AccessGroupDataGrid = () => {
       _style: { width: '20%' },
     },
 
-    {
-      key: 'alotment',
-      _style: { width: '20%' }
-    }, {
+    // {
+    //   key: 'alotment',
+    //   _style: { width: '20%' }
+    // },
+     {
       key: 'status',
       _style: { width: '20%' }
     },

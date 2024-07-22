@@ -39,8 +39,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_AccessGroups_single";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@EUG_AccessGroupID", model.EUG_AccessGroupID);
-                        cmd.Parameters["@EUG_AccessGroupID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UAG_AccessGroupID", model.UAG_AccessGroupID);
+                        cmd.Parameters["@UAG_AccessGroupID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -56,10 +56,10 @@ namespace HRM_DAL.Data
                                 objAccessGroupHead.resp = true;
                                 objAccessGroupHead.msg = "Get AccessGroup";
 
-                                //objAccessGroup.EUG_AccessGroupID = rdr["EUG_AccessGroupID"].ToString();
+                                //objAccessGroup.UAG_AccessGroupID = rdr["UAG_AccessGroupID"].ToString();
                                 //objAccessGroup.EUG_LeaveAlotment = Convert.ToInt16(rdr["EUG_LeaveAlotment"].ToString());
-                                //objAccessGroup.EUG_AccessGroup = rdr["EUG_AccessGroup"].ToString();
-                                //objAccessGroup.EUG_Status = Convert.ToBoolean(rdr["EUG_Status"].ToString());
+                                //objAccessGroup.UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
+                                //objAccessGroup.UAG_Status = Convert.ToBoolean(rdr["UAG_Status"].ToString());
 
                                 if (objAccessGroupHead.AccessGroup == null)
                                 {
@@ -136,8 +136,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "get_AccessGroup_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@EUG_AccessGroupID", model.EUG_AccessGroupID);
-                        cmd.Parameters["@EUG_AccessGroupID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UAG_AccessGroupID", model.UAG_AccessGroupID);
+                        cmd.Parameters["@UAG_AccessGroupID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -153,10 +153,10 @@ namespace HRM_DAL.Data
                                 objAccessGroupHead.resp = true;
                                 objAccessGroupHead.msg = "Get AccessGroup";
 
-                                //objAccessGroup.EUG_AccessGroupID = rdr["EUG_AccessGroupID"].ToString();
+                                //objAccessGroup.UAG_AccessGroupID = rdr["UAG_AccessGroupID"].ToString();
                                 //objAccessGroup.EUG_LeaveAlotment = Convert.ToInt16(rdr["EUG_LeaveAlotment"].ToString());
-                                //objAccessGroup.EUG_AccessGroup = rdr["EUG_AccessGroup"].ToString();
-                                //objAccessGroup.EUG_Status = Convert.ToBoolean(rdr["EUG_Status"].ToString());
+                                //objAccessGroup.UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
+                                //objAccessGroup.UAG_Status = Convert.ToBoolean(rdr["UAG_Status"].ToString());
 
                                 if (objAccessGroupHead.AccessGroup == null)
                                 {
@@ -236,8 +236,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
                         cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@EUG_AccessGroupID", item.EUG_AccessGroupID);
-                        cmd.Parameters["@EUG_AccessGroupID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UAG_AccessGroupID", item.UAG_AccessGroupID);
+                        cmd.Parameters["@UAG_AccessGroupID"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
@@ -353,8 +353,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
                         cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@EUG_AccessGroupID", item.EUG_AccessGroupID);
-                        cmd.Parameters["@EUG_AccessGroupID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UAG_AccessGroupID", item.UAG_AccessGroupID);
+                        cmd.Parameters["@UAG_AccessGroupID"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
@@ -468,8 +468,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_del_AccessGroup";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@EUG_AccessGroupID", item.EUG_AccessGroupID);
-                        cmd.Parameters["@EUG_AccessGroupID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UAG_AccessGroupID", item.UAG_AccessGroupID);
+                        cmd.Parameters["@UAG_AccessGroupID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
                         cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;

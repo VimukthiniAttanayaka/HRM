@@ -9,7 +9,7 @@ const AccessGroup = () => {
     <>
       <CCard className="mb-4">
         <CCardHeader>
-          <strong>AccessGroup List</strong>
+          <strong>Access Group List</strong>
         </CCardHeader>
         <CCardBody>
           {/* <AccessGroupPopup /> */}

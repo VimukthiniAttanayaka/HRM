@@ -59,7 +59,7 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
   console.log(leaveTypeDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New AccessGroup</CButton>
+      <CButton color="primary" onClick={onOpen}>New Access Group</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -69,7 +69,7 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New AccessGroup</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">Create New Access Group</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">

@@ -11,39 +11,39 @@ namespace HRM_DAL.Models
 
     public class AccessGroupModel : RequestBaseModel
     {
-        public string EUG_AccessGroupID { get; set; }
-        public string EUG_AccessGroup { get; set; }
-        public bool EUG_Status { get; set; }
-        public string EUG_CreatedBy { get; set; }
-        public DateTime EUG_CreatedDateTime { get; set; }
-        public string EUG_ModifiedBy { get; set; }
-        public DateTime EUG_ModifiedDateTime { get; set; }
+        public string UAG_AccessGroupID { get; set; }
+        public string UAG_AccessGroup { get; set; }
+        public bool UAG_Status { get; set; }
+        public string UAG_CreatedBy { get; set; }
+        public DateTime UAG_CreatedDateTime { get; set; }
+        public string UAG_ModifiedBy { get; set; }
+        public DateTime UAG_ModifiedDateTime { get; set; }
     }
 
     public class ReturnAccessGroupModel
     {
         [Key]
-        public string EUG_AccessGroupID { get; set; }
-        public string EUG_AccessGroup { get; set; }
-        public bool EUG_Status { get; set; }
-        public string EUG_CreatedBy { get; set; }
-        public DateTime EUG_CreatedDateTime { get; set; }
-        public string EUG_ModifiedBy { get; set; }
-        public DateTime EUG_ModifiedDateTime { get; set; }
+        public string UAG_AccessGroupID { get; set; }
+        public string UAG_AccessGroup { get; set; }
+        public bool UAG_Status { get; set; }
+        public string UAG_CreatedBy { get; set; }
+        public DateTime UAG_CreatedDateTime { get; set; }
+        public string UAG_ModifiedBy { get; set; }
+        public DateTime UAG_ModifiedDateTime { get; set; }
     }
 
     public class ReturnAccessGroupAllModel
     {
         [Key]
 
-        public string EUG_AccessGroupID { get; set; }
+        public string UAG_AccessGroupID { get; set; }
         public string RC { get; set; }
     }
 
 
     public class AccessGroup : RequestBaseModel
     {
-        public string EUG_AccessGroupID { get; set; }
+        public string UAG_AccessGroupID { get; set; }
 
 
     }
@@ -57,18 +57,18 @@ namespace HRM_DAL.Models
 
     public class AccessGroupSearchModel : RequestBaseModel
     {
-        public string EUG_AccessGroupID { get; set; }
+        public string UAG_AccessGroupID { get; set; }
     }
 
     public class ReturnAccessGroupSelectModel
     {
-        public string EUG_AccessGroupID { get; set; }
+        public string UAG_AccessGroupID { get; set; }
 
     }
 
     public class InactiveEUGModel : RequestBaseModel
     {
-        public string EUG_AccessGroupID { get; set; }
+        public string UAG_AccessGroupID { get; set; }
 
     }
 }
