@@ -212,7 +212,7 @@ namespace HRM.Controllers
             }
             catch (Exception ex)
             {
-
+                ;
                 ReturnResponse objAccessGroupHead = new ReturnResponse
                 {
                     resp = false,
