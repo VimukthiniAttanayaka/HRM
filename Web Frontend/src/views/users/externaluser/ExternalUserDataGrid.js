@@ -79,7 +79,7 @@ const ExternalUserDataGrid = () => {
       // AUD_notificationToken: token,
       UD_UserName: item
     }
-
+console.log(item)
     // const res = fetch(apiUrl + 'ExternalUser/get_ExternalUser_single', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
@@ -107,6 +107,7 @@ const ExternalUserDataGrid = () => {
     } else {
       newDetails = [...details, index]
       // alert(newDetails[newDetails.length - 1])
+      console.log(newDetails)
       loadDetails(newDetails[0])
     }
     // setDetails(newDetails)
@@ -241,7 +242,7 @@ const ExternalUserDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDetails(item.id)
+                    toggleDetails(item.UserName)
                   }}
                 >
                   {details.includes(item.id) ? 'Hide' : 'Show'}

@@ -1,6 +1,6 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export class ExternalUserDetail {
+export class ExternalUserList {
   constructor(EmployeeID,
     FirstName,
     LastName,
@@ -50,7 +50,7 @@ export const getExternalUserAll = async (formData) => {
       for (let index = 0; index < res1[0].User.length; index++) {
         let element = res1[0].User[index];
         // console.log(element)
-        ExternalUserDetails[index] = new ExternalUserDetail(
+        ExternalUserDetails[index] = new ExternalUserList(
           element.UD_EmployeeID,
           element.UD_FirstName,
           element.UD_LastName,
@@ -69,7 +69,7 @@ export const getExternalUserAll = async (formData) => {
 
 export const requestdata_LeaveTypes_DropDowns_All = async (formData) => {
 
-  const optionsLeaveType = [];
+  const optionsUserData = [];
   const res = await fetch(apiUrl + 'internaluser/get_user_all', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -79,14 +79,14 @@ export const requestdata_LeaveTypes_DropDowns_All = async (formData) => {
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
 
-      for (let index = 0; index < res1[0].LeaveType.length; index++) {
-        const LeaveTypeData = {
-          key: res1[0].LeaveType[index].LVT_LeaveTypeID,
-          value: res1[0].LeaveType[index].LVT_LeaveType
+      for (let index = 0; index < res1[0].User.length; index++) {
+        const UserData = {
+          key: res1[0].User[index].UD_UserName,
+          value:res1[0].User[index].UD_FirstName+" "+ res1[0].User[index].UD_LastName
         };
-        optionsLeaveType[index] = LeaveTypeData
+        optionsUserData[index] = UserData
       }
       // console.log(optionsLeaveType)
     })
-  return optionsLeaveType;
+  return optionsUserData;
 }

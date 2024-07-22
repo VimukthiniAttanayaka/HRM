@@ -13,7 +13,7 @@ const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails }) =>
   const [FirstName, setFirstName] = useState('')
   const [LastName, setLastName] = useState('')
   const [EmailAddress, setEmailAddress] = useState('')
-  const [MobileNumber , setMobileNumber] = useState('')
+  const [MobileNumber, setMobileNumber] = useState('')
   const [Remarks, setRemarks] = useState('')
   const [EmployeeID, setEmployeeID] = useState('')
   const [PhoneNumber, setPhoneNumber] = useState('')
@@ -21,28 +21,28 @@ const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails }) =>
   const [isActive, setIsActive] = useState(true)
 
   const handleChangeIsActive = (event) => { }
-	const handleChangeEmployeeID = (event) => {
+  const handleChangeEmployeeID = (event) => {
     setEmployeeID(event.target.value)
   }
-	const handleChangeFirstName = (event) => {
+  const handleChangeFirstName = (event) => {
     setFirstName(event.target.value)
   }
-	const handleChangeLastName = (event) => {
+  const handleChangeLastName = (event) => {
     setLastName(event.target.value)
   }
-	const handleChangeEmailAddress = (event) => {
+  const handleChangeEmailAddress = (event) => {
     setEmailAddress(event.target.value)
   }
-	const handleChangeMobileNumber = (event) => {
+  const handleChangeMobileNumber = (event) => {
     setMobileNumber(event.target.value)
   }
-	const handleChangeRemarks = (event) => {
+  const handleChangeRemarks = (event) => {
     setRemarks(event.target.value)
   }
-	const handleChangePhoneNumber = (event) => {
+  const handleChangePhoneNumber = (event) => {
     setPhoneNumber(event.target.value)
   }
-	const handleChangeUserName = (event) => {
+  const handleChangeUserName = (event) => {
     setUserName(event.target.value)
   }
 
@@ -100,8 +100,10 @@ const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails }) =>
                     <CInputGroupText>
                       <h6>EmployeeID</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="EmployeeID" name="EmployeeID" value={ExternalUserDetails.UD_EmployeeID} onChange={handleChangeEmployeeID}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  </CCol>
+
+                  <CFormInput placeholder="EmployeeID" name="EmployeeID" value={ExternalUserDetails.UD_EmployeeID} onChange={handleChangeEmployeeID}
+
                   />
 
                 </CInputGroup>
