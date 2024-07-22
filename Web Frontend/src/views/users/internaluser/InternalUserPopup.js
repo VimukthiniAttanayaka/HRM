@@ -10,21 +10,41 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
   //   event.preventDefault();
 
   // };
-  const [InternalUserId, setInternalUserId] = useState('')
-  const [leaveAlotmentId, setLeaveAlotmentId] = useState('')
-  const [InternalUser, setInternalUser] = useState('')
+  const [FirstName, setFirstName] = useState('')
+  const [LastName, setLastName] = useState('')
+  const [EmailAddress, setEmailAddress] = useState('')
+  const [MobileNumber, setMobileNumber] = useState('')
+  const [Remarks, setRemarks] = useState('')
+  const [EmployeeID, setEmployeeID] = useState('')
+  const [PhoneNumber, setPhoneNumber] = useState('')
+  const [UserName, setUserName] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeAlotment = (event) => {
-    setLeaveAlotmentId(event.target.value)
-  }
-  const handleChangeInternalUser = (event) => {
-    setInternalUser(event.target.value)
-  }
-  const handleChangeId = (event) => {
-    setInternalUserId(event.target.value)
-  }
   const handleChangeIsActive = (event) => { }
+  const handleChangeEmployeeID = (event) => {
+    setEmployeeID(event.target.value)
+  }
+  const handleChangeFirstName = (event) => {
+    setFirstName(event.target.value)
+  }
+  const handleChangeLastName = (event) => {
+    setLastName(event.target.value)
+  }
+  const handleChangeEmailAddress = (event) => {
+    setEmailAddress(event.target.value)
+  }
+  const handleChangeMobileNumber = (event) => {
+    setMobileNumber(event.target.value)
+  }
+  const handleChangeRemarks = (event) => {
+    setRemarks(event.target.value)
+  }
+  const handleChangePhoneNumber = (event) => {
+    setPhoneNumber(event.target.value)
+  }
+  const handleChangeUserName = (event) => {
+    setUserName(event.target.value)
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -78,27 +98,78 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>InternalUserID</h6>
+                      <h6>EmployeeID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="InternalUserID" name="InternalUserID" value={InternalUserDetails.LVT_InternalUserID} onChange={handleChangeId}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  </CCol>
+
+                  <CFormInput placeholder="EmployeeID" name="EmployeeID" value={InternalUserDetails.UD_EmployeeID} onChange={handleChangeEmployeeID}
+
                   />
+
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>InternalUser</h6>
+                      <h6>FirstName</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="InternalUser" name="InternalUser" value={InternalUserDetails.LVT_InternalUser} onChange={handleChangeInternalUser}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  </CCol>  <CFormInput placeholder="FirstName" name="FirstName" value={InternalUserDetails.UD_FirstName} onChange={handleChangeFirstName}
                   />
+
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>LeaveAlotment</h6>
+                      <h6>LastName</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={InternalUserDetails.LVT_LeaveAlotment} onChange={handleChangeAlotment}
+                  </CCol>  <CFormInput placeholder="LastName" name="LastName" value={InternalUserDetails.UD_LastName} onChange={handleChangeLastName}
+                  />
+
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>EmailAddress</h6>
+                    </CInputGroupText>
+                  </CCol>  <CFormInput placeholder="EmailAddress" name="EmailAddress" value={InternalUserDetails.UD_EmailAddress} onChange={handleChangeEmailAddress}
+                  />
+
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>MobileNumber</h6>
+                    </CInputGroupText>
+                  </CCol>  <CFormInput placeholder="MobileNumber" name="MobileNumber" value={InternalUserDetails.UD_MobileNumber} onChange={handleChangeMobileNumber}
+                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  />
+
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>PhoneNumber</h6>
+                    </CInputGroupText>
+                  </CCol>  <CFormInput placeholder="PhoneNumber" name="PhoneNumber" value={InternalUserDetails.UD_PhoneNumber} onChange={handleChangePhoneNumber}
+                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  />
+
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>Remarks</h6>
+                    </CInputGroupText>
+                  </CCol>  <CFormInput placeholder="Remarks" name="Remarks" value={InternalUserDetails.UD_Remarks} onChange={handleChangeRemarks}
+                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  />
+
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>UserName</h6>
+                    </CInputGroupText>
+                  </CCol>  <CFormInput placeholder="UserName" name="UserName" value={InternalUserDetails.UD_UserName} onChange={handleChangeUserName}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
 

@@ -79,7 +79,7 @@ const InternalUserDataGrid = () => {
       // AUD_notificationToken: token,
       UD_UserName: item
     }
-
+console.log(item)
     // const res = fetch(apiUrl + 'InternalUser/get_InternalUser_single', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
@@ -93,6 +93,7 @@ const InternalUserDataGrid = () => {
     //   })
     const InternalUserDetails = await getInternalUserSingle(formData)
     // setInternalUserDetails(res1[0].InternalUser[0]);
+    console.log(InternalUserDetails)
     setInternalUserDetails(InternalUserDetails);
     handleOpenPopup()
   }
@@ -106,6 +107,7 @@ const InternalUserDataGrid = () => {
     } else {
       newDetails = [...details, index]
       // alert(newDetails[newDetails.length - 1])
+      console.log(newDetails)
       loadDetails(newDetails[0])
     }
     // setDetails(newDetails)
@@ -127,9 +129,9 @@ const InternalUserDataGrid = () => {
       USR_EmployeeID: 'sedcx'
     }
 
-    const InternalUserDetails = await getInternalUserAll(formData)
-    console.log(InternalUserDetails)
-    setData(InternalUserDetails);
+    const InternalUserList = await getInternalUserAll(formData)
+    // console.log(InternalUserList)
+    setData(InternalUserList);
 
     // const res = await fetch(apiUrl + 'InternalUser/get_InternalUser_all', {
     //   method: 'POST',
@@ -240,7 +242,7 @@ const InternalUserDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDetails(item.id)
+                    toggleDetails(item.UserName)
                   }}
                 >
                   {details.includes(item.id) ? 'Hide' : 'Show'}
