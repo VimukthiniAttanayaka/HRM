@@ -4,6 +4,7 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
+import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
 
 const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) => {
 
@@ -12,6 +13,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
 
   // };
   const [selectedOptionEmployeeID, setSelectedOptionEmployeeID] = useState('');
+  const [selectedOptionUserRole, setSelectedOptionUserRole] = useState('');
 
   const [FirstName, setFirstName] = useState('')
   const [LastName, setLastName] = useState('')
@@ -80,16 +82,16 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
   }
 
   const [optionsEmployeeID, setOptionsEmployeeID] = useState([]);
-  const [optionsReportingManagerID, setOptionsReportingManagerID] = useState([]);
+  const [optionsUserRole, setOptionsUserRole] = useState([]);
 
   async function requestdata() {
     const formData = {
       USR_EmployeeID: 'sedcx'
     }
 
-    const ReportingManagerDetails = await requestdata_Employee_DropDowns_All(formData)
+    const UserRoleDetails = await requestdata_UserRoles_DropDowns_All(formData)
 
-    setOptionsReportingManagerID(ReportingManagerDetails);
+    setOptionsUserRole(UserRoleDetails);
 
     const EmployeeDetails = await requestdata_Employee_DropDowns_All(formData)
 
@@ -149,8 +151,8 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
                     </CInputGroupText>
                   </CCol>
 
-                  <CFormSelect value={selectedOptionEmployeeID} onChange={(e) => setSelectedOptionEmployeeID(e.target.value)}>
-                    {optionsEmployeeID.map((option) => (
+                  <CFormSelect value={selectedOptionUserRole} onChange={(e) => setSelectedOptionUserRole(e.target.value)}>
+                    {optionsUserRole.map((option) => (
                       <option key={option.key} value={option.key}>
                         {option.value}
                       </option>

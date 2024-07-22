@@ -147,6 +147,11 @@ const _nav = [
       name: <Translation>{(t) => t('External User')}</Translation>,
       to: '/users/externaluser',
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    }, {
+      component: CNavItem,
+      name: <Translation>{(t) => t('User Role')}</Translation>,
+      to: '/users/userrole',
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     },],
   },
   {

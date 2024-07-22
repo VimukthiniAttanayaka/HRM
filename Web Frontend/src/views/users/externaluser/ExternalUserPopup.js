@@ -3,6 +3,7 @@ import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CCol, CInputGroupTe
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
+import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
 
 const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails }) => {
 
@@ -10,6 +11,7 @@ const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails }) =>
   //   event.preventDefault();
 
   // };
+  const [selectedOptionUserRole, setSelectedOptionUserRole] = useState('');
   const [FirstName, setFirstName] = useState('')
   const [LastName, setLastName] = useState('')
   const [EmailAddress, setEmailAddress] = useState('')
@@ -79,6 +81,23 @@ const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails }) =>
   const [selectedOptionEmployeeID, setSelectedOptionEmployeeID] = useState('');
 
   // console.log(ExternalUserDetails)
+  const [optionsUserRole, setOptionsUserRole] = useState([]);
+
+  async function requestdata() {
+    const formData = {
+      USR_EmployeeID: 'sedcx'
+    }
+
+    const UserRoleDetails = await requestdata_UserRoles_DropDowns_All(formData)
+
+    setOptionsUserRole(UserRoleDetails);
+
+  }
+
+  useEffect(() => {
+    requestdata();
+  }, []);
+
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New Internal User</CButton>
@@ -114,12 +133,12 @@ const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails }) =>
                     </CInputGroupText>
                   </CCol>
 
-                  <CFormSelect value={selectedOptionEmployeeID} onChange={(e) => setSelectedOptionEmployeeID(e.target.value)}>
-                    {/* {optionsEmployeeID.map((option) => (
+                  <CFormSelect value={selectedOptionUserRole} onChange={(e) => setSelectedOptionUserRole(e.target.value)}>
+                    {optionsUserRole.map((option) => (
                       <option key={option.key} value={option.key}>
                         {option.value}
                       </option>
-                    ))} */}
+                    ))}
                   </CFormSelect>
                 </CInputGroup>
                 <CInputGroup className="mb-3">

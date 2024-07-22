@@ -15,6 +15,7 @@ const ReportingPerson= React.lazy(() => import('./views/reportingperson/reportin
 const ReportingManagerSearch=React.lazy(() => import('./views/reportingperson/reportingmanagersearch/ReportingManagerSearch'))
 const InternalUser = React.lazy(() => import('./views/users/internaluser/InternalUser'))
 const ExternalUser = React.lazy(() => import('./views/users/externaluser/ExternalUser'))
+const UserRole = React.lazy(() => import('./views/users/userrole/UserRole'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -150,6 +151,11 @@ const routes = [
     path: '/users/externaluser',
     name: <Translation>{(t) => t('External User')}</Translation>,
     element: ExternalUser,
+  },
+  {
+    path: '/users/userrole',
+    name: <Translation>{(t) => t('User Role')}</Translation>,
+    element: UserRole,
   },
   {
     path: '/base',

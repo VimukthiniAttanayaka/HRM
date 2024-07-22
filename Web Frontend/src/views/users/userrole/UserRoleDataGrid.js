@@ -7,6 +7,7 @@ import UserRolePopup from './UserRolePopup.js';
 import { getUserRoleAll } from '../../../apicalls/userrole/get_all_list.js';
 import { getUserRoleSingle } from '../../../apicalls/userrole/get_userrole_single.js';
 
+
 const UserRoleDataGrid = () => {
 
   const [details, setDetails] = useState([])
@@ -23,11 +24,7 @@ const UserRoleDataGrid = () => {
       key: 'userrole',
       _style: { width: '20%' },
     },
-
     {
-      key: 'alotment',
-      _style: { width: '20%' }
-    }, {
       key: 'status',
       _style: { width: '20%' }
     },

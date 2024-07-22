@@ -58,12 +58,11 @@ export const requestdata_UserRoles_DropDowns_All = async (formData) => {
 
       for (let index = 0; index < res1[0].UserRole.length; index++) {
         const UserRoleData = {
-          key: res1[0].UserRole[index].LVT_UserRoleID,
-          value: res1[0].UserRole[index].LVT_UserRole
+          key: res1[0].UserRole[index].EUR_UserRoleID,
+          value: res1[0].UserRole[index].EUR_UserRole
         };
         optionsUserRole[index] = UserRoleData
       }
-      // console.log(optionsUserRole)
     })
   return optionsUserRole;
 }
