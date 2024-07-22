@@ -47,6 +47,8 @@
     <Compile Remove="Data\PCCode_Data.cs" />
     <Compile Remove="Data\Process_Data.cs" />
     <Compile Remove="Data\Recieve_Data.cs" />
+    <Compile Remove="Data\UserAccessGroup_Data.cs" />
+    <Compile Remove="Data\UserGroupMaster_Data.cs" />
     <Compile Remove="Data\user_Data - Copy.cs" />
     <Compile Remove="ReportModels\CourierExpensesModel.cs" />
     <Compile Remove="ReportModels\KioskActivityModel.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Models\AuthenticateModel.cs" />
     <Compile Include="Models\CustomerDepartment.cs" />
     <Compile Include="Models\CustomerLocation.cs" />
+    <Compile Include="Models\AccessGroupModel.cs" />
     <Compile Include="Models\UserRoleModel.cs" />
     <Compile Include="Models\ReportingManagerModel.cs" />
     <Compile Include="Models\LeaveEntitlementModel.cs" />
@@ -109,10 +112,6 @@
     <Compile Include="Models\SystemParameterModel.cs" />
     <Compile Include="Models\SystemsSettingsModel.cs" />
     <Compile Include="Models\UserAccessGroupModel.cs" />
-    <Compile Include="Models\UserGroupDto.cs" />
-    <Compile Include="Models\UserGroupMasterModel.cs" />
-    <Compile Include="Models\UserGroups.cs" />
-    <Compile Include="Models\UserGroupsResult.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserOtpModel.cs" />
   </ItemGroup>
