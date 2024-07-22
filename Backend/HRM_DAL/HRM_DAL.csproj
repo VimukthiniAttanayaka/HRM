@@ -74,6 +74,7 @@
     <Compile Include="Models\AuthenticateModel.cs" />
     <Compile Include="Models\CustomerDepartment.cs" />
     <Compile Include="Models\CustomerLocation.cs" />
+    <Compile Include="Models\UserRoleModel.cs" />
     <Compile Include="Models\ReportingManagerModel.cs" />
     <Compile Include="Models\LeaveEntitlementModel.cs" />
     <Compile Include="Models\LeaveTypeModel.cs" />
