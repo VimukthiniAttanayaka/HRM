@@ -6,7 +6,7 @@ namespace HRM_DAL.Models
 {
     public class ReturnMenuAccessModelHead : ReturnResponse
     {
-        public List<ReturnMenuAccessModel> MenuAccess { get; set; }
+        public List<ReturnMenuAccessModel> MenuAccessGroup { get; set; }
     }
 
     public class MenuAccessModel : RequestBaseModel

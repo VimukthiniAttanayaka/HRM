@@ -61,12 +61,12 @@ namespace HRM_DAL.Data
                                 //objMenuAccess.UMA_MenuAccess = rdr["UMA_MenuAccess"].ToString();
                                 //objMenuAccess.UMA_Status = Convert.ToBoolean(rdr["UMA_Status"].ToString());
 
-                                if (objMenuAccessHead.MenuAccess == null)
+                                if (objMenuAccessHead.MenuAccessGroup == null)
                                 {
-                                    objMenuAccessHead.MenuAccess = new List<ReturnMenuAccessModel>();
+                                    objMenuAccessHead.MenuAccessGroup = new List<ReturnMenuAccessModel>();
                                 }
 
-                                objMenuAccessHead.MenuAccess.Add(objMenuAccess);
+                                objMenuAccessHead.MenuAccessGroup.Add(objMenuAccess);
 
                                 objMenuAccessHeadList.Add(objMenuAccessHead);
                             }
@@ -158,12 +158,12 @@ namespace HRM_DAL.Data
                                 //objMenuAccess.UMA_MenuAccess = rdr["UMA_MenuAccess"].ToString();
                                 //objMenuAccess.UMA_Status = Convert.ToBoolean(rdr["UMA_Status"].ToString());
 
-                                if (objMenuAccessHead.MenuAccess == null)
+                                if (objMenuAccessHead.MenuAccessGroup == null)
                                 {
-                                    objMenuAccessHead.MenuAccess = new List<ReturnMenuAccessModel>();
+                                    objMenuAccessHead.MenuAccessGroup = new List<ReturnMenuAccessModel>();
                                 }
 
-                                objMenuAccessHead.MenuAccess.Add(objMenuAccess);
+                                objMenuAccessHead.MenuAccessGroup.Add(objMenuAccess);
 
                                 objMenuAccessHeadList.Add(objMenuAccessHead);
                             }

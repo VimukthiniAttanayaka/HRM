@@ -17,7 +17,7 @@ namespace HRM.Controllers
     //[BasicAuthorization]
     //[Authorize]
 
-    public class MenuAccessController : ControllerBase
+    public class MenuAccessGroupController : ControllerBase
     {
         private LogError objError = new LogError();
 
@@ -28,12 +28,12 @@ namespace HRM.Controllers
         {
             List<ReturnMenuAccessModelHead> objMenuAccessHeadList = new List<ReturnMenuAccessModelHead>();
             ReturnMenuAccessModelHead obj = new ReturnMenuAccessModelHead() { resp = false, msg = "sfsf" };
-            obj.MenuAccess = new List<ReturnMenuAccessModel>();
+            obj.MenuAccessGroup = new List<ReturnMenuAccessModel>();
 
-            if (model.UMA_MenuAccessID == "CAS") obj.MenuAccess.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 1, UMA_UserMenuID = "CAS", UMA_AccessGroupID = "CAS", UMA_Status = true });
-            if (model.UMA_MenuAccessID == "ANU") obj.MenuAccess.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 2, UMA_UserMenuID = "ANU", UMA_AccessGroupID = "ANU", UMA_Status = true });
-            if (model.UMA_MenuAccessID == "MED") obj.MenuAccess.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 3, UMA_UserMenuID = "MED", UMA_AccessGroupID = "MED", UMA_Status = true });
-            if (model.UMA_MenuAccessID == "MAT") obj.MenuAccess.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 4, UMA_UserMenuID = "MAT", UMA_AccessGroupID = "MAT", UMA_Status = true });
+            if (model.UMA_MenuAccessID == "CAS") obj.MenuAccessGroup.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 1, UMA_UserMenuID = "CAS", UMA_AccessGroupID = "CAS", UMA_Status = true });
+            if (model.UMA_MenuAccessID == "ANU") obj.MenuAccessGroup.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 2, UMA_UserMenuID = "ANU", UMA_AccessGroupID = "ANU", UMA_Status = true });
+            if (model.UMA_MenuAccessID == "MED") obj.MenuAccessGroup.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 3, UMA_UserMenuID = "MED", UMA_AccessGroupID = "MED", UMA_Status = true });
+            if (model.UMA_MenuAccessID == "MAT") obj.MenuAccessGroup.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 4, UMA_UserMenuID = "MAT", UMA_AccessGroupID = "MAT", UMA_Status = true });
             objMenuAccessHeadList.Add(obj);
             return objMenuAccessHeadList;
 
@@ -76,11 +76,11 @@ namespace HRM.Controllers
         {
             List<ReturnMenuAccessModelHead> objMenuAccessHeadList = new List<ReturnMenuAccessModelHead>();
             ReturnMenuAccessModelHead obj = new ReturnMenuAccessModelHead() { resp = false, msg = "sfsf" };
-            obj.MenuAccess = new List<ReturnMenuAccessModel>();
-            obj.MenuAccess.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 1, UMA_UserMenuID = "CAS", UMA_AccessGroupID = "CAS", UMA_Status = true });
-            obj.MenuAccess.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 2, UMA_UserMenuID = "ANU", UMA_AccessGroupID = "ANU", UMA_Status = true });
-            obj.MenuAccess.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 3, UMA_UserMenuID = "MED", UMA_AccessGroupID = "MED", UMA_Status = true });
-            obj.MenuAccess.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 4, UMA_UserMenuID = "MAT", UMA_AccessGroupID = "MAT", UMA_Status = true });
+            obj.MenuAccessGroup = new List<ReturnMenuAccessModel>();
+            obj.MenuAccessGroup.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 1, UMA_UserMenuID = "CAS", UMA_AccessGroupID = "CAS", UMA_Status = true });
+            obj.MenuAccessGroup.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 2, UMA_UserMenuID = "ANU", UMA_AccessGroupID = "ANU", UMA_Status = true });
+            obj.MenuAccessGroup.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 3, UMA_UserMenuID = "MED", UMA_AccessGroupID = "MED", UMA_Status = true });
+            obj.MenuAccessGroup.Add(new ReturnMenuAccessModel() { UMA_MenuAccessID = 4, UMA_UserMenuID = "MAT", UMA_AccessGroupID = "MAT", UMA_Status = true });
             objMenuAccessHeadList.Add(obj);
             return objMenuAccessHeadList;
 

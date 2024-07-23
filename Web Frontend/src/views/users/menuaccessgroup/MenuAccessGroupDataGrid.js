@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
-import UserRolePopup from './UserRolePopup.js';
-// import loadDetails from './UserRolePopup.js';
-import { getUserRoleAll } from '../../../apicalls/userrole/get_all_list.js';
-import { getUserRoleSingle } from '../../../apicalls/userrole/get_userrole_single.js';
+import MenuAccessGroupPopup from './MenuAccessGroupPopup.js';
+// import loadDetails from './MenuAccessGroupPopup.js';
+import { getMenuAccessGroupAll } from '../../../apicalls/menuaccessgroup/get_all_list.js';
+import { getMenuAccessGroupSingle } from '../../../apicalls/menuaccessgroup/get_menuaccessgroup_single.js';
+import { requestdata_UserMenu_DropDowns_All } from '../../../apicalls/usermenu/get_all_list.js';
+import { requestdata_AccessGroup_DropDowns_All } from '../../../apicalls/accessgroup/get_all_list.js';
 
 
 const MenuAccessGroupDataGrid = () => {
@@ -15,13 +17,17 @@ const MenuAccessGroupDataGrid = () => {
 
   const columns = [
     {
-      key: 'id',
+      key: 'MenuAccessGroupID',
       // label: '',
       // filter: false,
       // sorter: false,
     },
     {
-      key: 'userrole',
+      key: 'UserMenuID',
+      _style: { width: '20%' },
+    },
+    {
+      key: 'AccessGroupID',
       _style: { width: '20%' },
     },
     {
@@ -52,10 +58,10 @@ const MenuAccessGroupDataGrid = () => {
     }
   }
 
-  const [leaveTypeDetails, setUserRoleDetails] = useState([])
-  // const [leaveTypeId, setUserRoleId] = useState('')
+  const [MenuAccessGroupDetails, setMenuAccessGroupDetails] = useState([])
+  // const [MenuAccessGroupId, setMenuAccessGroupId] = useState('')
   const handleChangeId = (event) => {
-    setUserRoleId(event.target.value)
+    setMenuAccessGroupId(event.target.value)
   }
 
   async function loadDetails(item) {
@@ -71,10 +77,10 @@ const MenuAccessGroupDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_UserRoleID: item
+      UMA_MenuAccessID: item
     }
 
-    // const res = fetch(apiUrl + 'leavetype/get_leavetype_single', {
+    // const res = fetch(apiUrl + 'MenuAccessGroup/get_MenuAccessGroup_single', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify(formData),
@@ -82,12 +88,12 @@ const MenuAccessGroupDataGrid = () => {
     //   .then(response => response.json())
     //   .then(json => {
     //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setUserRoleDetails(res1[0].UserRole[0]);
+    //     setMenuAccessGroupDetails(res1[0].MenuAccessGroup[0]);
     //     handleOpenPopup()
     //   })
-    const UserRoleDetails = await getUserRoleSingle(formData)
-    // setUserRoleDetails(res1[0].UserRole[0]);
-    setUserRoleDetails(UserRoleDetails);
+    const MenuAccessGroupDetails = await getMenuAccessGroupSingle(formData)
+    // setMenuAccessGroupDetails(res1[0].MenuAccessGroup[0]);
+    setMenuAccessGroupDetails(MenuAccessGroupDetails);
     handleOpenPopup()
   }
   const toggleDetails = (index) => {
@@ -108,6 +114,9 @@ const MenuAccessGroupDataGrid = () => {
   // setCustomerId(res1[0].Customer[0].CUS_ID);}
   const apiUrl = process.env.REACT_APP_API_URL;
 
+  const [optionsUserMenu, setOptionsUserMenu] = useState([]);
+  const [optionsAccessGroup, setOptionsAccessGroup] = useState([]);
+  
   async function requestdata() {
     const token = getJWTToken();
     const staffId = getStaffID();
@@ -121,11 +130,20 @@ const MenuAccessGroupDataGrid = () => {
       USR_EmployeeID: 'sedcx'
     }
 
-    const UserRoleDetails = await getUserRoleAll(formData)
-    // console.log(UserRoleDetails)
-    setData(UserRoleDetails);
+    const MenuAccessGroupDetails = await getMenuAccessGroupAll(formData)
+    // console.log(MenuAccessGroupDetails)
+    setData(MenuAccessGroupDetails);
 
-    // const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
+
+    const AccessGroupDetails = await requestdata_AccessGroup_DropDowns_All(formData)
+
+    setOptionsAccessGroup(AccessGroupDetails);
+
+    const UserMenuDetails = await requestdata_UserMenu_DropDowns_All(formData)
+
+    setOptionsUserMenu(UserMenuDetails);
+
+    // const res = await fetch(apiUrl + 'MenuAccessGroup/get_MenuAccessGroup_all', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify(formData),
@@ -134,10 +152,10 @@ const MenuAccessGroupDataGrid = () => {
     //   .then(json => {
     //     let res1 = JSON.parse(JSON.stringify(json))
 
-    //     const UserRoleDetails = [];
-    //     class UserRoleDetail {
-    //       constructor(id, leavetype, status, Alotment) {
-    //         this.leavetype = leavetype;
+    //     const MenuAccessGroupDetails = [];
+    //     class MenuAccessGroupDetail {
+    //       constructor(id, MenuAccessGroup, status, Alotment) {
+    //         this.MenuAccessGroup = MenuAccessGroup;
     //         this.id = id;
     //         this.alotment = Alotment
     //         if (status == true) { this.status = "Active"; }
@@ -145,13 +163,13 @@ const MenuAccessGroupDataGrid = () => {
     //       }
     //     }
 
-    //     for (let index = 0; index < res1[0].UserRole.length; index++) {
-    //       let element = res1[0].UserRole[index];
+    //     for (let index = 0; index < res1[0].MenuAccessGroup.length; index++) {
+    //       let element = res1[0].MenuAccessGroup[index];
     //       console.log(element)
-    //       UserRoleDetails[index] = new UserRoleDetail(element.LVT_UserRoleID, element.LVT_UserRole, element.LVT_Status, element.LVT_LeaveAlotment);
+    //       MenuAccessGroupDetails[index] = new MenuAccessGroupDetail(element.LVT_MenuAccessGroupID, element.LVT_MenuAccessGroup, element.LVT_Status, element.LVT_LeaveAlotment);
     //     }
 
-    //     setData(UserRoleDetails);
+    //     setData(MenuAccessGroupDetails);
     //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
     //   })
 
@@ -175,7 +193,7 @@ const MenuAccessGroupDataGrid = () => {
 
   const handleClosePopup = () => {
     setVisible(false);
-    setUserRoleDetails([]);
+    setMenuAccessGroupDetails([]);
   };
 
   return (
@@ -192,8 +210,37 @@ const MenuAccessGroupDataGrid = () => {
             Download current items (.csv)
           </CButton>
         </CCol>
-        <CCol className='d-flex justify-content-end'>
-          <UserRolePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveTypeDetails={leaveTypeDetails} />
+        <CCol>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>User Name</h6>
+              </CInputGroupText>
+            </CCol>
+            <CFormSelect value={optionsUserMenu} onChange={(e) => setOptionsUserMenu(e.target.value)}>
+              {optionsUserMenu.map((option) => (
+                <option key={option.key} value={option.key}>
+                  {option.value}
+                </option>
+              ))}
+            </CFormSelect>
+          </CInputGroup>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>Access Group</h6>
+              </CInputGroupText>
+            </CCol>
+            <CFormSelect value={optionsAccessGroup} onChange={(e) => setOptionsAccessGroup(e.target.value)}>
+              {optionsAccessGroup.map((option) => (
+                <option key={option.key} value={option.key}>
+                  {option.value}
+                </option>
+              ))}
+            </CFormSelect>
+          </CInputGroup>
+        </CCol>  <CCol className='d-flex justify-content-end'>
+          <MenuAccessGroupPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} MenuAccessGroupDetails={MenuAccessGroupDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -246,7 +293,7 @@ const MenuAccessGroupDataGrid = () => {
             return (
               <CCollapse visible={details.includes(item.id)}>
                 <CCardBody className="p-3">
-                  <h4>{item.username}</h4>
+                  <h4>{item.UserMenu}</h4>
                   <p className="text-muted">User since: {item.registered}</p>
                   <CButton size="sm" color="info">
                     User Settings

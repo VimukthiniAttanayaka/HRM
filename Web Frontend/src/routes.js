@@ -173,7 +173,7 @@ const routes = [
   {
     path: '/users/menuaccessgroup',
     name: <Translation>{(t) => t('Menu Access Group')}</Translation>,
-    element: UserRole,
+    element: MenuAccessGroup,
   },
   {
     path: '/users/usermenu',

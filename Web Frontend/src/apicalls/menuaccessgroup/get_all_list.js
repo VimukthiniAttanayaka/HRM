@@ -1,19 +1,19 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export class LeaveScheduleDetail {
-  constructor(id, leavetype, status, Alotment) {
-    this.leavetype = leavetype;
-    this.id = id;
-    this.alotment = Alotment
-    if (status == true) { this.status = "Active"; }
-    else { this.status = "Inactive"; }
-  }
-}
+// export class MenuAccessGroupDetail {
+//   constructor(id, leavetype, status, Alotment) {
+//     this.leavetype = leavetype;
+//     this.id = id;
+//     this.alotment = Alotment
+//     if (status == true) { this.status = "Active"; }
+//     else { this.status = "Inactive"; }
+//   }
+// }
 // console.log(apiUrl)
-export const getEmployeeAll = async (formData) => {
-  const LeaveTypeDetails = [];
+export const getMenuAccessGroupAll = async (formData) => {
+  const MenuAccessGroupDetails = [];
 
-  const res = await fetch(apiUrl + 'employee/get_employee_all', {
+  const res = await fetch(apiUrl + 'MenuAccessGroup/get_MenuAccessGroup_all', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -23,47 +23,47 @@ export const getEmployeeAll = async (formData) => {
       let res1 = JSON.parse(JSON.stringify(json))
 
 
-      class LeaveTypeDetail {
-        constructor(id, leavetype, status, Alotment) {
-          this.leavetype = leavetype;
-          this.id = id;
-          this.alotment = Alotment
+      class MenuAccessGroupDetail {
+        constructor(MenuAccessID, AccessGroupID, status, UserMenuID) {
+          this.MenuAccessID = MenuAccessID;
+          this.AccessGroupID = AccessGroupID;
+          this.UserMenuID = UserMenuID;
           if (status == true) { this.status = "Active"; }
           else { this.status = "Inactive"; }
         }
       }
 
-      for (let index = 0; index < res1[0].LeaveType.length; index++) {
-        let element = res1[0].LeaveType[index];
+      for (let index = 0; index < res1[0].MenuAccessGroup.length; index++) {
+        let element = res1[0].MenuAccessGroup[index];
         // console.log(element)
-        LeaveTypeDetails[index] = new LeaveTypeDetail(element.LVT_LeaveTypeID, element.LVT_LeaveType, element.LVT_Status, element.LVT_LeaveAlotment);
+        MenuAccessGroupDetails[index] = new MenuAccessGroupDetail(element.UMA_MenuAccessID, element.UMA_AccessGroupID, element.UMA_Status, element.UMA_UserMenuID);
       }
       // console.log(LeaveTypeDetails)
     })
 
-  return LeaveTypeDetails;
+  return MenuAccessGroupDetails;
 };
 
-export const requestdata_Employee_DropDowns_All = async (formData) => {
+// export const requestdata_Employee_DropDowns_All = async (formData) => {
 
-  const optionsEmployee = [];
-  const res = await fetch(apiUrl + 'employee/get_employee_all', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  })
-    .then(response => response.json())
-    .then(json => {
-      let res1 = JSON.parse(JSON.stringify(json))
+//   const optionsEmployee = [];
+//   const res = await fetch(apiUrl + 'employee/get_employee_all', {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(formData),
+//   })
+//     .then(response => response.json())
+//     .then(json => {
+//       let res1 = JSON.parse(JSON.stringify(json))
 
-      for (let index = 0; index < res1[0].Employee.length; index++) {
-        const EmployeeData = {
-          key: res1[0].Employee[index].USR_EmployeeID,
-          value: res1[0].Employee[index].USR_PrefferedName
-        };
-        optionsEmployee[index] = EmployeeData
-      }
-      console.log(optionsEmployee)
-    })
-  return optionsEmployee;
-}
+//       for (let index = 0; index < res1[0].Employee.length; index++) {
+//         const EmployeeData = {
+//           key: res1[0].Employee[index].USR_EmployeeID,
+//           value: res1[0].Employee[index].USR_PrefferedName
+//         };
+//         optionsEmployee[index] = EmployeeData
+//       }
+//       console.log(optionsEmployee)
+//     })
+//   return optionsEmployee;
+// }
