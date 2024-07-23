@@ -71,7 +71,7 @@ const UserMenuDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_UserMenuID: item
+      UUM_UserMenuID: item
     }
 
     // const res = fetch(apiUrl + 'UserMenu/get_UserMenu_single', {
@@ -101,6 +101,7 @@ const UserMenuDataGrid = () => {
       newDetails = [...details, index]
       // alert(newDetails[newDetails.length - 1])
       loadDetails(newDetails[0])
+      console.log(newDetails[0])
     }
     // setDetails(newDetails)
   }
@@ -148,7 +149,7 @@ const UserMenuDataGrid = () => {
     //     for (let index = 0; index < res1[0].UserMenu.length; index++) {
     //       let element = res1[0].UserMenu[index];
     //       console.log(element)
-    //       UserMenuDetails[index] = new UserMenuDetail(element.LVT_UserMenuID, element.LVT_UserMenu, element.LVT_Status, element.LVT_LeaveAlotment);
+    //       UserMenuDetails[index] = new UserMenuDetail(element.UUM_UserMenuID, element.UUM_UserMenu, element.UUM_Status, element.UUM_LeaveAlotment);
     //     }
 
     //     setData(UserMenuDetails);

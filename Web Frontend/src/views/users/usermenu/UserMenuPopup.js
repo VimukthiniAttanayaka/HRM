@@ -52,7 +52,7 @@ const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails }) => {
     }
   }
 
-  console.log(UserMenuDetails)
+  // console.log(UserMenuDetails)
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New UserMenu</CButton>
