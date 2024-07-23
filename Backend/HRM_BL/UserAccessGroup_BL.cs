@@ -1,10 +1,9 @@
-using HRM_DAL.Models;
+﻿using HRM_DAL.Models;
 using error_handler;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using utility_handler.Data;
-using System;
 
 namespace HRM_BL
 {
@@ -12,43 +11,33 @@ namespace HRM_BL
     {
         private static LogError objError = new LogError();
 
-
-        public static List<ReturnUAGUsrAllModelHead> get_user_access_group_all(GetUAGUsrAllModel all)
+        public static List<ReturnUserAccessGroupModelHead> get_UserAccessGroups_single(UserAccessGroup model)//ok
         {
-            return HRM_DAL.Data.UserAccessGroup_Data.get_user_access_group_all(all);
+            return HRM_DAL.Data.UserAccessGroup_Data.get_UserAccessGroups_single(model);
+        }
+        public static List<ReturnUserAccessGroupModelHead> get_UserAccessGroup_all(UserAccessGroupSearchModel model)//ok
+        {
+            return HRM_DAL.Data.UserAccessGroup_Data.get_UserAccessGroup_all(model);
         }
 
-        public static List<ReturnResponse> add_new_user_access_group(UAGUsrModel item)
+
+        public static List<ReturncustResponse> add_new_UserAccessGroup(UserAccessGroupModel item)//ok
         {
-            return HRM_DAL.Data.UserAccessGroup_Data.add_new_user_access_group(item);
+            return HRM_DAL.Data.UserAccessGroup_Data.add_new_UserAccessGroup(item);
         }
 
-        public static List<ReturnResponse> inactivate_user_access_group(UAGUsrModel item)
+        public static List<ReturncustResponse> modify_UserAccessGroup(UserAccessGroupModel item)//ok
         {
-            return HRM_DAL.Data.UserAccessGroup_Data.inactivate_user_access_group(item);
+            return HRM_DAL.Data.UserAccessGroup_Data.modify_UserAccessGroup(item);
         }
 
-        public static List<ReturnUAGUsrAllModelHead> get_user_access_group_single(GetUAGSingleModel item)
+        public static List<ReturnResponse> inactivate_UserAccessGroup(InactiveUUMAModel item)//ok
         {
-            return HRM_DAL.Data.UserAccessGroup_Data.get_user_access_group_single(item);
+            return HRM_DAL.Data.UserAccessGroup_Data.inactivate_UserAccessGroup(item);
         }
 
-        public static List<ReturnUAGUsrAllModelHead> get_user_access_group_multiple(GetUAGSingleModel item)
-        {
-            return HRM_DAL.Data.UserAccessGroup_Data.get_user_access_group_multiple(item);
-        }
 
-        public static List<ReturnResponse> modify_user_access_group(UAGModel item)
-        {
-            return HRM_DAL.Data.UserAccessGroup_Data.modify_user_access_group(item);
-        }
     }
+
 }
-
-
-
-
-
-
-
 

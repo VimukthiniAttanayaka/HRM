@@ -160,12 +160,12 @@ const _nav = [
     }, {
       component: CNavItem,
       name: <Translation>{(t) => t('Menu Access Group')}</Translation>,
-      to: '/users/useraccessgroup',
+      to: '/users/menuaccessgroup',
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
       name: <Translation>{(t) => t('User Access Group')}</Translation>,
-      to: '/users/menuaccessgroup',
+      to: '/users/useraccessgroup',
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     },
     {

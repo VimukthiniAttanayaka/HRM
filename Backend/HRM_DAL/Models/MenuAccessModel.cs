@@ -11,8 +11,8 @@ namespace HRM_DAL.Models
 
     public class MenuAccessModel : RequestBaseModel
     {
-        public int UMA_UserMenuAccessID { get; set; }
-        public string UMA_MenuAccessID { get; set; }
+        public int UMA_MenuAccessID { get; set; }
+        public string UMA_UserMenuID { get; set; }
         public string UMA_AccessGroupID { get; set; }
         public bool UMA_Status { get; set; }
         public string UMA_CreatedBy { get; set; }
@@ -24,8 +24,8 @@ namespace HRM_DAL.Models
     public class ReturnMenuAccessModel
     {
         [Key]
-        public int UMA_UserMenuAccessID { get; set; }
-        public string UMA_MenuAccessID { get; set; }
+        public int UMA_MenuAccessID { get; set; }
+        public string UMA_UserMenuID { get; set; }
         public string UMA_AccessGroupID { get; set; }
         public bool UMA_Status { get; set; }
         public string UMA_CreatedBy { get; set; }

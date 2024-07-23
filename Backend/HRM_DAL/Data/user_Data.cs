@@ -276,8 +276,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@PAGE_RECORDS_COUNT", CUserall.PAGE_RECORDS_COUNT);
                         cmd.Parameters["@PAGE_RECORDS_COUNT"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", CUserall.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_StaffID", CUserall.UD_StaffID);
+                        //cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_FirstName", CUserall.UD_FirstName);
                         cmd.Parameters["@UD_FirstName"].Direction = ParameterDirection.Input;
@@ -393,8 +393,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@PAGE_RECORDS_COUNT", CUserall.PAGE_RECORDS_COUNT);
                         cmd.Parameters["@PAGE_RECORDS_COUNT"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", CUserall.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_StaffID", CUserall.UD_StaffID);
+                        //cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_FirstName", CUserall.UD_FirstName);
                         cmd.Parameters["@UD_FirstName"].Direction = ParameterDirection.Input;

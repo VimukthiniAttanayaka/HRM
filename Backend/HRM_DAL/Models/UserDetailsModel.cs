@@ -27,7 +27,7 @@ namespace HRM_DAL.Models
     {
         public string PAGE_NO { get; set; }
         public string PAGE_RECORDS_COUNT { get; set; }
-        public string UD_StaffID { get; set; }
+        public string UD_UserName { get; set; }
         public string UD_FirstName { get; set; }
         public string UD_LastName { get; set; }
         public string UD_Status { get; set; }

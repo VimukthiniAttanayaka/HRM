@@ -1,19 +1,19 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export class LeaveScheduleDetail {
-  constructor(id, leavetype, status, Alotment) {
-    this.leavetype = leavetype;
-    this.id = id;
-    this.alotment = Alotment
-    if (status == true) { this.status = "Active"; }
-    else { this.status = "Inactive"; }
-  }
-}
+// export class UserAccessGroupDetail {
+//   constructor(UserAccessGroupID, MenuAccessID, status, UserName) {
+//     this.UserAccessGroupID = UserAccessGroupID;
+//     this.MenuAccessID = MenuAccessID;
+//     this.UserName = UserName;
+//     if (status == true) { this.status = "Active"; }
+//     else { this.status = "Inactive"; }
+//   }
+// }
 // console.log(apiUrl)
-export const getEmployeeAll = async (formData) => {
-  const LeaveTypeDetails = [];
+export const getUserAccessGroupAll = async (formData) => {
+  const UserAccessGroupDetails = [];
 
-  const res = await fetch(apiUrl + 'employee/get_employee_all', {
+  const res = await fetch(apiUrl + 'UserAccessGroup/get_UserAccessGroup_all', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -21,49 +21,49 @@ export const getEmployeeAll = async (formData) => {
     .then(response => response.json())
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
+      // console.log(res1)
 
-
-      class LeaveTypeDetail {
-        constructor(id, leavetype, status, Alotment) {
-          this.leavetype = leavetype;
-          this.id = id;
-          this.alotment = Alotment
+      class UserAccessGroupDetail {
+        constructor(UserAccessGroupID, MenuAccessID, status, UserName) {
+          this.UserAccessGroupID = UserAccessGroupID;
+          this.MenuAccessID = MenuAccessID;
+          this.UserName = UserName;
           if (status == true) { this.status = "Active"; }
           else { this.status = "Inactive"; }
         }
       }
 
-      for (let index = 0; index < res1[0].LeaveType.length; index++) {
-        let element = res1[0].LeaveType[index];
+      for (let index = 0; index < res1[0].UserAccessGroup.length; index++) {
+        let element = res1[0].UserAccessGroup[index];
         // console.log(element)
-        LeaveTypeDetails[index] = new LeaveTypeDetail(element.LVT_LeaveTypeID, element.LVT_LeaveType, element.LVT_Status, element.LVT_LeaveAlotment);
+        UserAccessGroupDetails[index] = new UserAccessGroupDetail(element.UUAG_UserAccessGroupID, element.UUAG_MenuAccessID, element.UUAG_Status, element.UUAG_UserName);
       }
-      // console.log(LeaveTypeDetails)
+      // console.log(UserAccessGroupDetails)
     })
-
-  return LeaveTypeDetails;
+  // console.log(UserAccessGroupDetails)
+  return UserAccessGroupDetails;
 };
 
-export const requestdata_Employee_DropDowns_All = async (formData) => {
+// export const requestdata_UserAccessGroup_DropDowns_All = async (formData) => {
 
-  const optionsEmployee = [];
-  const res = await fetch(apiUrl + 'employee/get_employee_all', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  })
-    .then(response => response.json())
-    .then(json => {
-      let res1 = JSON.parse(JSON.stringify(json))
+//   const optionsUserAccessGroup = [];
+//   const res = await fetch(apiUrl + 'UserAccessGroup/get_UserAccessGroup_all', {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(formData),
+//   })
+//     .then(response => response.json())
+//     .then(json => {
+//       let res1 = JSON.parse(JSON.stringify(json))
 
-      for (let index = 0; index < res1[0].Employee.length; index++) {
-        const EmployeeData = {
-          key: res1[0].Employee[index].USR_EmployeeID,
-          value: res1[0].Employee[index].USR_PrefferedName
-        };
-        optionsEmployee[index] = EmployeeData
-      }
-      console.log(optionsEmployee)
-    })
-  return optionsEmployee;
-}
+//       for (let index = 0; index < res1[0].UserAccessGroup.length; index++) {
+//         const UserAccessGroupData = {
+//           key: res1[0].UserAccessGroup[index].USR_UserAccessGroupID,
+//           value: res1[0].UserAccessGroup[index].USR_PrefferedName
+//         };
+//         optionsUserAccessGroup[index] = UserAccessGroupData
+//       }
+//       console.log(optionsUserAccessGroup)
+//     })
+//   return optionsUserAccessGroup;
+// }

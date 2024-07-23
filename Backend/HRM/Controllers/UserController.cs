@@ -33,6 +33,14 @@ namespace HRM.Controllers
         public List<ReturnCustomerUserModelHead> get_user_single(GetUserSingleModel CUser)//ok
         {
             List<ReturnCustomerUserModelHead> objCusUserHeadList = new List<ReturnCustomerUserModelHead>();
+            ReturnCustomerUserModelHead obj = new ReturnCustomerUserModelHead() { resp = false, msg = "sfsf" };
+            obj.User = new List<ReturnCustomerUserModel>();
+            if (CUser.UD_UserName == "test")
+                obj.User.Add(new ReturnCustomerUserModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true, UD_FirstName = "test", UD_LastName = "test", UD_EmailAddress = "test" });
+            if (CUser.UD_UserName == "test1") obj.User.Add(new ReturnCustomerUserModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true, UD_FirstName = "test1", UD_LastName = "test1", UD_EmailAddress = "test1" });
+            if (CUser.UD_UserName == "test2") obj.User.Add(new ReturnCustomerUserModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true, UD_FirstName = "test2", UD_LastName = "test2", UD_EmailAddress = "test2" });
+            objCusUserHeadList.Add(obj);
+            return objCusUserHeadList;
 
             try
             {
@@ -69,15 +77,22 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnCustomerUserAllModelHead> get_user_all(GetCustomerUserAllModel CUserall)//ok
+        public List<ReturnCustomerUserModelHead> get_user_all(GetCustomerUserAllModel CUserall)//ok
         {
-            List<ReturnCustomerUserAllModelHead> objCusUserHeadList = new List<ReturnCustomerUserAllModelHead>();
+            List<ReturnCustomerUserModelHead> objCusUserHeadList = new List<ReturnCustomerUserModelHead>();
+            ReturnCustomerUserModelHead obj = new ReturnCustomerUserModelHead() { resp = false, msg = "sfsf" };
+            obj.User = new List<ReturnCustomerUserModel>();
+            obj.User.Add(new ReturnCustomerUserModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true, UD_FirstName = "test", UD_LastName = "test", UD_EmailAddress = "test" });
+            obj.User.Add(new ReturnCustomerUserModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true, UD_FirstName = "test1", UD_LastName = "test1", UD_EmailAddress = "test1" });
+            obj.User.Add(new ReturnCustomerUserModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true, UD_FirstName = "test2", UD_LastName = "test2", UD_EmailAddress = "test2" });
+            objCusUserHeadList.Add(obj);
+            return objCusUserHeadList;
 
             try
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, CUserall);
 
-                objCusUserHeadList = user_BL.get_user_all(CUserall);
+                //objCusUserHeadList = user_BL.get_user_all(CUserall);
                 return objCusUserHeadList;
             }
             catch (Exception ex)
@@ -88,7 +103,7 @@ namespace HRM.Controllers
                     resp = false,
                     msg = ex.Message.ToString()
                 };
-                objCusUserHeadList.Add(objCusUserHead);
+                //objCusUserHeadList.Add(objCusUserHead);
 
                 objError.WriteLog(0, "UserController", "get_user_all", "Stack Track: " + ex.StackTrace);
                 objError.WriteLog(0, "UserController", "get_user_all", "Error Message: " + ex.Message);
@@ -181,244 +196,6 @@ namespace HRM.Controllers
 
 
         }
-
-
-        [HttpPost]
-        [Route("[action]")]
-        //[Authorize]
-        public List<ReturnLoadUserDataModel> load_user_data()//ok
-        {
-            List<ReturnLoadUserDataModel> objUserHeadList = new List<ReturnLoadUserDataModel>();
-            List<ReturnLoadUserDataModel> objUserSList = new List<ReturnLoadUserDataModel>();
-            List<ReturnUserGroupModel> objGrpSList = new List<ReturnUserGroupModel>();
-            List<ReturnUserBuModel> objBUList = new List<ReturnUserBuModel>();
-            List<ReturnUserCustModel> objCustList = new List<ReturnUserCustModel>();
-
-            List<SPResponse> objResponseList = new List<SPResponse>();
-
-            try
-            {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, "");
-
-                objUserHeadList = user_BL.load_user_data();
-                return objUserHeadList;
-            }
-            catch (Exception ex)
-            {
-
-                ReturnLoadUserDataModel objUserHead = new ReturnLoadUserDataModel
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "UserController", "load_user_data", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "load_user_data", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserController", "load_user_data", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "load_user_data", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-
-            }
-
-            return objUserHeadList;
-
-        }
-
-        [HttpPost]
-        [Route("[action]")]
-        //[Authorize]
-        public List<ReturnResponse> add_new_user(CUserModel item)//ok
-        {
-            List<ReturnResponse> objCUserHeadList = new List<ReturnResponse>();
-
-            try
-            {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
-
-                objCUserHeadList = user_BL.add_new_user(item);
-                return objCUserHeadList;
-            }
-            catch (Exception ex)
-            {
-                ReturnResponse objCusUserHead = new ReturnResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objCUserHeadList.Add(objCusUserHead);
-
-                objError.WriteLog(0, "UserController", "add_new_user", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "add_new_user", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserController", "add_new_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "add_new_user", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-            }
-            return objCUserHeadList;
-        }
-
-        #region moved to ecelupload by V2
-        ////POST api/<userController>
-        //[HttpPost]
-        //[Route("[action]")]
-        ////[Authorize]
-        //[Obsolete]
-        //public ReturUserExcelUploadHead user_excelupload(UserExcelUploadModel model)//ok
-        //{
-        //    ReturUserExcelUploadHead objHeadList = new ReturUserExcelUploadHead();
-        //    //List<SPResponse> objResponseList = new List<SPResponse>();
-
-        //    try
-        //    {
-        //        LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
-
-        //        if (model == null)
-        //        {
-        //            objHeadList = new ReturUserExcelUploadHead
-        //            {
-        //                resp = false,
-        //                msg = "value cannot be null"
-        //            };
-        //            return objHeadList;
-        //        }
-
-        //        ReturUserExcelUploadHead tempObj = HRM_BL.user_BL.user_excelupload(model);
-
-        //        if (tempObj.resp == false)
-        //        {
-        //            objHeadList = new ReturUserExcelUploadHead
-        //            {
-        //                resp = false,
-        //                msg = tempObj.msg
-        //            };
-        //            return objHeadList;
-        //        }
-
-        //        List<ReturUserExcelUploadHead> retList = new List<ReturUserExcelUploadHead>();
-
-        //        if (tempObj.users != null)
-        //        {
-        //            if (model.IsCompleteList == true)
-        //            {
-        //                HRM_BL.user_BL.markall_users_excel_inactive(model);
-        //            }
-
-        //            foreach (var item in tempObj.users)
-        //            {
-        //                item.USER_ID = model.USER_ID;
-        //                item.UD_CustomerID = model.DPT_CustomerID;
-        //                item.UD_HRMAccessFlag = false;
-        //                //item.UD_MailBagCPCode = model.UD_MailBagCPCode;
-        //                //item.UD_OutgoingMailCPCode = model.UD_OutgoingMailCPCode;
-        //                //item.UD_OutgoingMailLocationCode = model.UD_OutgoingMailLocationCode;
-        //                //item.UD_PostageUsageReportFrequency = model.UD_PostageUsageReportFrequency;
-        //                item.TABLE = model.TABLE;
-        //                item.UD_Status = true;
-        //                //item.UAG_BusinessUnit = model.UAG_BusinessUnit;
-
-        //                retList.Add(HRM_BL.user_BL.add_update_user_excel(item).FirstOrDefault());
-        //            }
-
-        //            LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, retList);
-
-        //            var temp = retList.Where(a => !a.msg.Contains("kiosk")).Count(a => a.resp == true);
-
-        //            if (temp > 0)
-        //            {
-        //                objHeadList = new ReturUserExcelUploadHead
-        //                {
-        //                    resp = true,
-        //                    msg = "Success"
-        //                };
-        //            }
-        //            else
-        //            {
-        //                objHeadList = new ReturUserExcelUploadHead
-        //                {
-        //                    resp = false,
-        //                    msg = "Failed"
-        //                };
-
-        //            }
-
-        //            objHeadList.FileNameWithPath = tempObj.FileNameWithPath;
-        //            objHeadList.FileName = tempObj.FileName;
-
-        //            var tmeps = retList.Where(b => !b.msg.Contains("kiosk") && b.resp == true).Select(a => new userresponcemodel_return() { StaffID = a.users.FirstOrDefault().UD_StaffID, Message = a.msg }).ToList();
-        //            objHeadList.success_users = tmeps;
-
-        //            var tmepsC = retList.Where(b => !b.msg.Contains("kiosk") && b.resp == false).Select(a => new userresponcemodel_return() { StaffID = a.users.FirstOrDefault().UD_StaffID, Message = a.msg }).ToList();
-        //            objHeadList.failed_users = tmepsC;
-        //        }
-
-        //        LogExcelUploadTracer_Data.User(objHeadList, model);
-
-        //        LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, objHeadList);
-
-        //        return objHeadList;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        objHeadList = new ReturUserExcelUploadHead
-        //        {
-        //            resp = false,
-        //            msg = ex.Message.ToString()
-        //        };
-
-        //        objError.WriteLog(0, "userController", "user_excelupload", "Stack Track: " + ex.StackTrace);
-        //        objError.WriteLog(0, "userController", "user_excelupload", "Error Message: " + ex.Message);
-        //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-        //        {
-        //            objError.WriteLog(0, "userController", "user_excelupload", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-        //            objError.WriteLog(0, "userController", "user_excelupload", "Inner Exception Message: " + ex.InnerException.Message);
-        //        }
-
-        //    }
-        //    return objHeadList;
-        //}
-        #endregion moved to ecelupload by V2
-
-        [HttpPost]
-        [Route("[action]")]
-        //[Authorize]
-        public List<ReturnResponse> modify_user(CUserModel item)//ok
-        {
-            List<ReturnResponse> objCUserHeadList = new List<ReturnResponse>();
-
-            try
-            {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
-
-                objCUserHeadList = user_BL.modify_user(item);
-                return objCUserHeadList;
-            }
-            catch (Exception ex)
-            {
-                ReturnResponse objCusUserHead = new ReturnResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objCUserHeadList.Add(objCusUserHead);
-
-                objError.WriteLog(0, "UserController", "modify_user", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "modify_user", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserController", "modify_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "modify_user", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-            }
-            return objCUserHeadList;
-        }
-
 
         // POST api/<BankController>
         [HttpPost]
@@ -562,8 +339,6 @@ namespace HRM.Controllers
             }
         }
 
-
-
         public static string CreateRandomPassword(int PasswordLength)
         {
             string _allowedChars = "0123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ@#$&%";
@@ -578,10 +353,5 @@ namespace HRM.Controllers
         }
 
     }
-
-    //public class UserExcelSampleModel
-    //{
-    //    public string FileFullPath { get; set; }
-    //}
 }
 

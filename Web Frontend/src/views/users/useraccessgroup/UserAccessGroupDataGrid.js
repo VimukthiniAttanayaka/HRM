@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
-// import UserRolePopup from './UserRolePopup.js';
-// // import loadDetails from './UserRolePopup.js';
-import { getUserRoleAll } from '../../../apicalls/userrole/get_all_list.js';
-import { getUserRoleSingle } from '../../../apicalls/userrole/get_userrole_single.js';
+// import UserAccessGroupPopup from './UserAccessGroupPopup.js';
+// // import loadDetails from './UserAccessGroupPopup.js';
+import { getUserAccessGroupAll } from '../../../apicalls/useraccessgroup/get_all_list.js';
+import { getUserAccessGroupSingle } from '../../../apicalls/useraccessgroup/get_useraccessgroup_single.js';
 import UserAccessGroupPopup from './UserAccessGroupPopup'
-
+import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
 
 const UserAccessGroupDataGrid = () => {
 
@@ -16,20 +16,23 @@ const UserAccessGroupDataGrid = () => {
 
   const columns = [
     {
-      key: 'id',
+      key: 'UserAccessGroupID',
       // label: '',
       // filter: false,
       // sorter: false,
     },
     {
-      key: 'userrole',
+      key: 'MenuAccessID',
+      _style: { width: '20%' },
+    },
+    {
+      key: 'UserName',
       _style: { width: '20%' },
     },
     {
       key: 'status',
       _style: { width: '20%' }
     },
-
     {
       key: 'show_details',
       label: '',
@@ -53,10 +56,10 @@ const UserAccessGroupDataGrid = () => {
     }
   }
 
-  const [leaveTypeDetails, setUserRoleDetails] = useState([])
-  // const [leaveTypeId, setUserRoleId] = useState('')
+  const [UserAccessGroupDetails, setUserAccessGroupDetails] = useState([])
+  // const [UserAccessGroupId, setUserAccessGroupId] = useState('')
   const handleChangeId = (event) => {
-    setUserRoleId(event.target.value)
+    setUserAccessGroupId(event.target.value)
   }
 
   async function loadDetails(item) {
@@ -72,7 +75,7 @@ const UserAccessGroupDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_UserRoleID: item
+      UUAG_UserAccessGroupID: item
     }
 
     // const res = fetch(apiUrl + 'leavetype/get_leavetype_single', {
@@ -83,12 +86,12 @@ const UserAccessGroupDataGrid = () => {
     //   .then(response => response.json())
     //   .then(json => {
     //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setUserRoleDetails(res1[0].UserRole[0]);
+    //     setUserAccessGroupDetails(res1[0].UserAccessGroup[0]);
     //     handleOpenPopup()
     //   })
-    const UserRoleDetails = await getUserRoleSingle(formData)
-    // setUserRoleDetails(res1[0].UserRole[0]);
-    setUserRoleDetails(UserRoleDetails);
+    const UserAccessGroupDetails = await getUserAccessGroupSingle(formData)
+    // setUserAccessGroupDetails(res1[0].UserAccessGroup[0]);
+    setUserAccessGroupDetails(UserAccessGroupDetails);
     handleOpenPopup()
   }
   const toggleDetails = (index) => {
@@ -122,9 +125,9 @@ const UserAccessGroupDataGrid = () => {
       USR_EmployeeID: 'sedcx'
     }
 
-    const UserRoleDetails = await getUserRoleAll(formData)
-    // console.log(UserRoleDetails)
-    setData(UserRoleDetails);
+    const UserAccessGroupDetails = await getUserAccessGroupAll(formData)
+    // console.log(UserAccessGroupDetails)
+    setData(UserAccessGroupDetails);
 
     // const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
     //   method: 'POST',
@@ -135,8 +138,8 @@ const UserAccessGroupDataGrid = () => {
     //   .then(json => {
     //     let res1 = JSON.parse(JSON.stringify(json))
 
-    //     const UserRoleDetails = [];
-    //     class UserRoleDetail {
+    //     const UserAccessGroupDetails = [];
+    //     class UserAccessGroupDetail {
     //       constructor(id, leavetype, status, Alotment) {
     //         this.leavetype = leavetype;
     //         this.id = id;
@@ -146,13 +149,13 @@ const UserAccessGroupDataGrid = () => {
     //       }
     //     }
 
-    //     for (let index = 0; index < res1[0].UserRole.length; index++) {
-    //       let element = res1[0].UserRole[index];
+    //     for (let index = 0; index < res1[0].UserAccessGroup.length; index++) {
+    //       let element = res1[0].UserAccessGroup[index];
     //       console.log(element)
-    //       UserRoleDetails[index] = new UserRoleDetail(element.LVT_UserRoleID, element.LVT_UserRole, element.LVT_Status, element.LVT_LeaveAlotment);
+    //       UserAccessGroupDetails[index] = new UserAccessGroupDetail(element.UUAG_UserAccessGroupID, element.UUAG_UserAccessGroup, element.UUAG_Status, element.UUAG_LeaveAlotment);
     //     }
 
-    //     setData(UserRoleDetails);
+    //     setData(UserAccessGroupDetails);
     //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
     //   })
 
@@ -176,7 +179,7 @@ const UserAccessGroupDataGrid = () => {
 
   const handleClosePopup = () => {
     setVisible(false);
-    setUserRoleDetails([]);
+    setUserAccessGroupDetails([]);
   };
 
   return (
@@ -194,7 +197,7 @@ const UserAccessGroupDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <UserAccessGroupPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveTypeDetails={leaveTypeDetails} />
+          <UserAccessGroupPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} UserAccessGroupDetails={UserAccessGroupDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -248,7 +251,7 @@ const UserAccessGroupDataGrid = () => {
               <CCollapse visible={details.includes(item.id)}>
                 <CCardBody className="p-3">
                   <h4>{item.username}</h4>
-                  <p className="text-muted">User since: {item.registered}</p>
+                  {/* <p className="text-muted">User since: {item.registered}</p> */}
                   <CButton size="sm" color="info">
                     User Settings
                   </CButton>

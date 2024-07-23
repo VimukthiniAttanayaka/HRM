@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CButton, CModal, CModalBody, CCol, CFormSelect, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
-import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
+import { requestdata_UserName_DropDowns_All } from '../../../apicalls/usergeneral/get_all_list.js';
 
-const UserRolePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
+const UserAccessGroupPopup = ({ visible, onClose, onOpen, UserAccessGroupDetails }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
 
   // };
-  const [leaveTypeId, setUserRoleId] = useState('')
+  const [UserAccessGroupId, setUserAccessGroupId] = useState('')
   const [leaveAlotmentId, setLeaveAlotmentId] = useState('')
-  const [leaveType, setUserRole] = useState('')
+  const [UserAccessGroup, setUserAccessGroup] = useState('')
   const [isActive, setIsActive] = useState(true)
 
   const handleChangeAlotment = (event) => {
     setLeaveAlotmentId(event.target.value)
   }
-  const handleChangeUserRole = (event) => {
-    setUserRole(event.target.value)
+  const handleChangeUserAccessGroup = (event) => {
+    setUserAccessGroup(event.target.value)
   }
   const handleChangeId = (event) => {
-    setUserRoleId(event.target.value)
+    setUserAccessGroupId(event.target.value)
   }
   const handleChangeIsActive = (event) => { }
 
@@ -35,10 +35,10 @@ const UserRolePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
 
     // Prepare form data
     const formData = {
-      LVT_UserRoleID: leaveTypeId,
-      LVT_LeaveAlotment: leaveAlotmentId,
-      LVT_UserRole: leaveType,
-      LVT_Status: isActive,
+      UUAG_UserAccessGroupID: UserAccessGroupId,
+      UUAG_LeaveAlotment: leaveAlotmentId,
+      UUAG_UserAccessGroup: UserAccessGroup,
+      UUAG_Status: isActive,
     }
     // Submit the form data to your backend API
     const response = await fetch(apiUrl + 'leavetype/add_new_leavetype', {
@@ -50,17 +50,39 @@ const UserRolePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
     if (response.ok) {
       console.log(response);
       // Handle successful submission (e.g., display a success message)
-      console.log('Leave Type data submitted successfully!')
+      console.log('UserAccessGroup data submitted successfully!')
     } else {
       // Handle submission errors
-      console.error('Error submitting Leave Type data:', response.statusText)
+      console.error('Error submitting UserAccessGroup data:', response.statusText)
     }
   }
 
-  console.log(leaveTypeDetails)
+  const [optionsUserName, setOptionsUserName] = useState([]);
+  const [optionsUserRole, setOptionsUserRole] = useState([]);
+
+  async function requestdata() {
+    const formData = {
+      USR_EmployeeID: 'sedcx'
+    }
+
+    // const UserRoleDetails = await requestdata_UserRoles_DropDowns_All(formData)
+
+    // setOptionsUserRole(UserRoleDetails);
+
+    const UserNameDetails = await requestdata_UserName_DropDowns_All(formData)
+
+    setOptionsUserName(UserNameDetails);
+
+  }
+
+  useEffect(() => {
+    requestdata();
+  }, []);
+
+  console.log(UserAccessGroupDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New UserRole</CButton>
+      <CButton color="primary" onClick={onOpen}>New UserAccessGroup</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -70,7 +92,7 @@ const UserRolePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New UserRole</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">Create New UserAccessGroup</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">
@@ -79,30 +101,29 @@ const UserRolePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>UserRoleID</h6>
+                      <h6>UserName</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="UserRoleID" name="UserRoleID" value={leaveTypeDetails.LVT_UserRoleID} onChange={handleChangeId}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
+                  </CCol>    <CFormSelect value={optionsUserName} onChange={(e) => setOptionsUserName(e.target.value)}>
+                    {optionsUserName.map((option) => (
+                      <option key={option.key} value={option.key}>
+                        {option.value}
+                      </option>
+                    ))}
+                  </CFormSelect>
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>UserRole</h6>
+                      <h6>UserAccessGroup</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="UserRole" name="UserRole" value={leaveTypeDetails.LVT_UserRole} onChange={handleChangeUserRole}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>LeaveAlotment</h6>
-                    </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={leaveTypeDetails.LVT_LeaveAlotment} onChange={handleChangeAlotment}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-
+                  </CCol>
+                  <CFormSelect value={optionsUserName} onChange={(e) => setOptionsUserName(e.target.value)}>
+                    {optionsUserName.map((option) => (
+                      <option key={option.key} value={option.key}>
+                        {option.value}
+                      </option>
+                    ))}
+                  </CFormSelect>
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
@@ -123,4 +144,4 @@ const UserRolePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
     </>
   )
 }
-export default UserRolePopup
+export default UserAccessGroupPopup

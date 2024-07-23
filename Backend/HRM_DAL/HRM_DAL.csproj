@@ -47,7 +47,7 @@
     <Compile Remove="Data\PCCode_Data.cs" />
     <Compile Remove="Data\Process_Data.cs" />
     <Compile Remove="Data\Recieve_Data.cs" />
-    <Compile Remove="Data\UserAccessGroup_Data.cs" />
+    <Compile Remove="Data\UserAccessGroup_Data_Old.cs" />
     <Compile Remove="Data\UserGroupMaster_Data.cs" />
     <Compile Remove="Data\user_Data - Copy.cs" />
     <Compile Remove="ReportModels\CourierExpensesModel.cs" />
@@ -73,7 +73,8 @@
 
   <ItemGroup>
     <Compile Include="Models\MenuAccessModel.cs" />
-    <Compile Include="Models\UserMenuAccessModel.cs" />
+    <Compile Include="Models\UserDetailsModel.cs" />
+    <Compile Include="Models\UserAccessGroupModel.cs" />
     <Compile Include="Models\UserMenuModel.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AuthenticateModel.cs" />
@@ -85,7 +86,6 @@
     <Compile Include="Models\LeaveEntitlementModel.cs" />
     <Compile Include="Models\LeaveTypeModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
-    <Compile Include="Models\UserDetailsModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\Department.cs" />

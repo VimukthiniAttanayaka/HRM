@@ -1,137 +1,76 @@
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace HRM_DAL.Models
 {
-    public class UAGModel : RequestBaseModel
+    public class ReturnUserAccessGroupModelHead : ReturnResponse
     {
-        public string USER_ID { get; set; }
-        public List<ExistingUAGModel> ExistingUAG { get; set; }
-        public List<KioskAGModel> KioskAG { get; set; }
+        public List<ReturnUserAccessGroupModel> UserAccessGroup { get; set; }
     }
 
-    public class UAGUsrModel : RequestBaseModel
+    public class UserAccessGroupModel : RequestBaseModel
     {
-        public string USER_ID { get; set; }
-
-        public string TABLE { get; set; }
-
-        public List<ExistingUAGModel> ExistingUAG { get; set; }
-        public List<KioskAGModel> KioskAG { get; set; }
-        public string UAG_Type { get; set; }
+        public int UUAG_UserAccessGroupID { get; set; }
+        public string UUAG_MenuAccessID { get; set; }
+        public string UUAG_UserName { get; set; }
+        public bool UUAG_Status { get; set; }
+        public string UUAG_CreatedBy { get; set; }
+        public DateTime UUAG_CreatedDateTime { get; set; }
+        public string UUAG_ModifiedBy { get; set; }
+        public DateTime UUAG_ModifiedDateTime { get; set; }
     }
 
-    public class ExistingUAGModel //: RequestBaseModel
-    {
-        public string UAG_UserID { get; set; }
-        public string UAG_GroupID { get; set; }
-        public string UAG_BusinessUnit { get; set; }
-        public string UAG_CustomerID { get; set; }
-        public string UAG_VendorID { get; set; }
-        public bool UAG_Status { get; set; }
-        public string UAG_Type { get; set; }
-        public string TABLE { get; set; }
-        public string USER_ID { get; set; }
-    }
-
-    public class KioskAGModel
-    {
-        public string UAG_GroupID { get; set; }
-        public string UAG_VendorID { get; set; }
-    }
-
-    public class GetUAGAllModel : RequestBaseModel
-    {
-
-        public string PAGE_NO { get; set; }
-        public string PAGE_RECORDS_COUNT { get; set; }
-        public string UD_StaffID { get; set; }
-        public string UD_FirstName { get; set; }
-        public string UD_LastName { get; set; }
-        public string UGM_Name { get; set; }
-        public string BU_CompanyName { get; set; }
-        public string CUS_CompanyName { get; set; }
-        public string UAG_Status { get; set; }
-    }
-
-    public class GetUAGSingleModel : RequestBaseModel
-    {
-        public string UAG_UserID { get; set; }
-        public string UAG_GroupID { get; set; }
-        public string UAG_BusinessUnit { get; set; }
-        public string UAG_CustomerID { get; set; }
-        public string UAG_Type { get; set; }
-        public string TABLE { get; set; }
-    }
-
-    public class GetUAGUsrAllModel : RequestBaseModel
-    {
-
-        public string PAGE_NO { get; set; }
-        public string PAGE_RECORDS_COUNT { get; set; }
-        public string UD_StaffID { get; set; }
-        public string UD_FirstName { get; set; }
-        public string UD_LastName { get; set; }
-        public string UGM_Name { get; set; }
-        public string BU_CompanyName { get; set; }
-        public string UD_DepartmentID { get; set; }
-        public string UAG_Status { get; set; }
-        public string TABLE { get; set; }
-    }
-
-    public class ReturnUAGAllModelHead : ReturnResponse
-    {
-        public bool resp { get; set; }
-        public string msg { get; set; }
-        public List<ReturnUAGModel> User { get; set; }
-    }
-
-    public class ReturnUAGUsrAllModelHead : ReturnResponse
-    {
-        public bool resp { get; set; }
-        public string msg { get; set; }
-        public List<ReturnUAGUsrModel> User { get; set; }
-    }
-
-    public class ReturnUAGModel
+    public class ReturnUserAccessGroupModel
     {
         [Key]
-        public string UD_StaffID { get; set; }
-        public string UD_FirstName { get; set; }
-        public string UD_LastName { get; set; }
-        public string UAG_GroupID { get; set; }
-        public string UGM_Name { get; set; }
-        public string UAG_BusinessUnit { get; set; }
-        public string BU_CompanyName { get; set; }
-        public string UAG_CustomerID { get; set; }
-        public string CUS_CompanyName { get; set; }
-        public string UAG_VendorID { get; set; }
-        public string UAG_Status { get; set; }
-        public string RC { get; set; }
+        public int UUAG_UserAccessGroupID { get; set; }
+        public string UUAG_MenuAccessID { get; set; }
+        public string UUAG_UserName { get; set; }
+        public bool UUAG_Status { get; set; }
+        public string UUAG_CreatedBy { get; set; }
+        public DateTime UUAG_CreatedDateTime { get; set; }
+        public string UUAG_ModifiedBy { get; set; }
+        public DateTime UUAG_ModifiedDateTime { get; set; }
     }
 
-    public class ReturnUAGUsrModel
+    public class ReturnUserAccessGroupAllModel
     {
         [Key]
-        public string UD_StaffID { get; set; }
-        public string UD_FirstName { get; set; }
-        public string UD_LastName { get; set; }
-        public string UAG_GroupID { get; set; }
-        public string UGM_Name { get; set; }
-        public string UAG_BusinessUnit { get; set; }
-        public string BU_CompanyName { get; set; }
-        public string UAG_CustomerID { get; set; }
-        public string CUS_CompanyName { get; set; }
-        public string UAG_VendorID { get; set; }
-        public string UAG_Status { get; set; }
+
+        public string UUAG_UserAccessGroupID { get; set; }
         public string RC { get; set; }
     }
 
 
+    public class UserAccessGroup : RequestBaseModel
+    {
+        public string UUAG_UserAccessGroupID { get; set; }
 
 
+    }
+
+    public class ReturnUserAccessGroupAllModelHead : ReturnResponse
+    {
+        public List<ReturnUserAccessGroupAllModel> UserAccessGroupall { get; set; }
 
 
+    }
 
+    public class UserAccessGroupSearchModel : RequestBaseModel
+    {
+        public string UUAG_UserAccessGroupID { get; set; }
+    }
+
+    public class ReturnUserAccessGroupSelectModel
+    {
+        public string UUAG_UserAccessGroupID { get; set; }
+
+    }
+
+    public class InactiveUUMAModel : RequestBaseModel
+    {
+        public string UUAG_UserAccessGroupID { get; set; }
+
+    }
 }

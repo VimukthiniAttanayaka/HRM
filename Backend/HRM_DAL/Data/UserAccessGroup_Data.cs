@@ -1,4 +1,4 @@
-using HRM_DAL.Models;
+﻿using HRM_DAL.Models;
 using error_handler;
 using System;
 using System.Collections.Generic;
@@ -13,284 +13,34 @@ namespace HRM_DAL.Data
     {
         private static LogError objError = new LogError();
 
-        public static List<ReturnUAGUsrAllModelHead> get_user_access_group_single(GetUAGSingleModel Userall)
+        public static List<ReturnUserAccessGroupModelHead> get_UserAccessGroups_single(UserAccessGroup model)//ok
         {
-            List<ReturnUAGUsrAllModelHead> objHeadList = new List<ReturnUAGUsrAllModelHead>();
-            ReturnUAGUsrAllModelHead objUserHead = new ReturnUAGUsrAllModelHead();
+            List<ReturnUserAccessGroupModelHead> objUserAccessGroupHeadList = new List<ReturnUserAccessGroupModelHead>();
+            ReturnUserAccessGroupModelHead objUserAccessGroupHead = new ReturnUserAccessGroupModelHead();
 
-            if (login_Data.AuthenticationKeyValidateWithDB(Userall) == false)
+            if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
-                objUserHead.resp = false;
-                objUserHead.IsAuthenticated = false;
-                objHeadList.Add(objUserHead);
-                return objHeadList;
+                objUserAccessGroupHead.resp = false;
+                objUserAccessGroupHead.IsAuthenticated = false;
+                objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
+                return objUserAccessGroupHeadList;
             }
+
             try
             {
                 using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
                 {
-                    using (SqlCommand cmd = new SqlCommand())
-                    {                    
-                        lconn.Open();
-                        cmd.Connection = lconn;
 
-                        cmd.CommandText = "sp_get_mtc_user_access_group_single";
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        cmd.Parameters.AddWithValue("@UAG_UserID", Userall.UAG_UserID);
-                        cmd.Parameters["@UAG_UserID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UAG_GroupID", Userall.UAG_GroupID);
-                        cmd.Parameters["@UAG_GroupID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UAG_BusinessUnit", Userall.UAG_BusinessUnit);
-                        cmd.Parameters["@UAG_BusinessUnit"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UAG_CustomerID", Userall.UAG_CustomerID);
-                        cmd.Parameters["@UAG_CustomerID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@TABLE", Userall.TABLE);
-                        cmd.Parameters["@TABLE"].Direction = ParameterDirection.Input;
-
-
-                        SqlDataAdapter dta = new SqlDataAdapter();
-                        dta.SelectCommand = cmd;
-                        DataSet Ds = new DataSet();
-                        dta.Fill(Ds);
-
-                        if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
-                        {
-                            foreach (DataRow rdr in Ds.Tables[0].Rows)
-                            {
-                                ReturnUAGUsrModel objData = new ReturnUAGUsrModel();
-
-
-                                objUserHead.resp = true;
-                                objUserHead.msg = "Get User";
-
-                                objData.UD_StaffID = rdr["UD_StaffID"].ToString();
-                                objData.UD_FirstName = rdr["UD_FirstName"].ToString();
-                                objData.UD_LastName = rdr["UD_LastName"].ToString();
-                                objData.UGM_Name = rdr["UGM_Name"].ToString();
-                                objData.BU_CompanyName = rdr["BU_CompanyName"].ToString();
-                                objData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
-                                objData.UAG_Status = rdr["UAG_Status"].ToString();
-                                objData.UAG_GroupID = rdr["UAG_GroupID"].ToString();
-                                objData.UAG_BusinessUnit = rdr["UAG_BusinessUnit"].ToString();
-                                objData.UAG_CustomerID = rdr["UAG_CustomerID"].ToString();
-                                objData.UAG_VendorID = rdr["UAG_VendorID"].ToString();
-                                objData.RC = "1";
-
-                                if (objUserHead.User == null)
-                                {
-                                    objUserHead.User = new List<ReturnUAGUsrModel>();
-                                }
-
-                                objUserHead.User.Add(objData);
-                            }
-
-                            objHeadList.Add(objUserHead);
-
-                        }
-                        else
-                        {
-                            objUserHead.resp = true;
-                            objUserHead.msg = "";
-                            objHeadList.Add(objUserHead);
-
-                        }
-                    }
-                    lconn.Close();
-                }
-
-                return objHeadList;
-
-            }
-            catch (Exception ex)
-            {
-
-                objUserHead = new ReturnUAGUsrAllModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "UserAccessGroup_Data", "get_user_access_group_single", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroup_Data", "get_user_access_group_single", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserAccessGroup_Data", "get_user_access_group_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroup_Data", "get_user_access_group_single", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-
-            }
-
-            return objHeadList;
-
-        }
-
-        public static List<ReturnUAGUsrAllModelHead> get_user_access_group_multiple(GetUAGSingleModel Userall)
-        {
-            List<ReturnUAGUsrAllModelHead> objHeadList = new List<ReturnUAGUsrAllModelHead>();
-            ReturnUAGUsrAllModelHead objUserHead = new ReturnUAGUsrAllModelHead();
-
-            if (login_Data.AuthenticationKeyValidateWithDB(Userall) == false)
-            {
-                objUserHead.resp = false;
-                objUserHead.IsAuthenticated = false;
-                objHeadList.Add(objUserHead);
-                return objHeadList;
-            }
-            try
-            {
-                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand())
-                    {                    
-                        lconn.Open();
-                        cmd.Connection = lconn;
-
-                        cmd.CommandText = "sp_get_mtc_user_access_group_multiple";
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        cmd.Parameters.AddWithValue("@UAG_UserID", Userall.UAG_UserID);
-                        cmd.Parameters["@UAG_UserID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UAG_GroupID", Userall.UAG_GroupID);
-                        cmd.Parameters["@UAG_GroupID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UAG_BusinessUnit", Userall.UAG_BusinessUnit);
-                        cmd.Parameters["@UAG_BusinessUnit"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UAG_CustomerID", Userall.UAG_CustomerID);
-                        cmd.Parameters["@UAG_CustomerID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@TABLE", Userall.TABLE);
-                        cmd.Parameters["@TABLE"].Direction = ParameterDirection.Input;
-
-
-                        SqlDataAdapter dta = new SqlDataAdapter();
-                        dta.SelectCommand = cmd;
-                        DataSet Ds = new DataSet();
-                        dta.Fill(Ds);
-
-                        if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
-                        {
-                            foreach (DataRow rdr in Ds.Tables[0].Rows)
-                            {
-                                ReturnUAGUsrModel objData = new ReturnUAGUsrModel();
-
-
-                                objUserHead.resp = true;
-                                objUserHead.msg = "Get User";
-
-                                objData.UD_StaffID = rdr["UD_StaffID"].ToString();
-                                objData.UD_FirstName = rdr["UD_FirstName"].ToString();
-                                objData.UD_LastName = rdr["UD_LastName"].ToString();
-                                objData.UGM_Name = rdr["UGM_Name"].ToString();
-                                objData.BU_CompanyName = rdr["BU_CompanyName"].ToString();
-                                objData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
-                                objData.UAG_Status = rdr["UAG_Status"].ToString();
-                                objData.UAG_GroupID = rdr["UAG_GroupID"].ToString();
-                                objData.UAG_BusinessUnit = rdr["UAG_BusinessUnit"].ToString();
-                                objData.UAG_CustomerID = rdr["UAG_CustomerID"].ToString();
-                                objData.UAG_VendorID = rdr["UAG_VendorID"].ToString();
-                                objData.RC = "1";
-
-                                if (objUserHead.User == null)
-                                {
-                                    objUserHead.User = new List<ReturnUAGUsrModel>();
-                                }
-
-                                objUserHead.User.Add(objData);
-                            }
-
-                            objHeadList.Add(objUserHead);
-
-                        }
-                        else
-                        {
-                            objUserHead.resp = true;
-                            objUserHead.msg = "";
-                            objHeadList.Add(objUserHead);
-
-                        }
-                    }
-                    lconn.Close();
-                }
-
-                return objHeadList;
-
-            }
-            catch (Exception ex)
-            {
-
-                objUserHead = new ReturnUAGUsrAllModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "UserAccessGroup_Data", "get_user_access_group_multiple", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroup_Data", "get_user_access_group_multiple", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserAccessGroup_Data", "get_user_access_group_multiple", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroup_Data", "get_user_access_group_multiple", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-
-            }
-
-            return objHeadList;
-
-        }
-
-        public static List<ReturnUAGUsrAllModelHead> get_customer_user_access_group_multiple(GetUAGSingleModel Userall)
-        {
-            List<ReturnUAGUsrAllModelHead> objHeadList = new List<ReturnUAGUsrAllModelHead>();
-            ReturnUAGUsrAllModelHead objUserHead = new ReturnUAGUsrAllModelHead();
-
-            if (login_Data.AuthenticationKeyValidateWithDB(Userall) == false)
-            {
-                objUserHead.resp = false;
-                objUserHead.IsAuthenticated = false;
-                objHeadList.Add(objUserHead);
-                return objHeadList;
-            }
-            try
-            {
-                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
-                {
                     using (SqlCommand cmd = new SqlCommand())
                     {
-                        lconn.Open();
                         cmd.Connection = lconn;
+                        lconn.Open();
 
-                        cmd.CommandText = "sp_get_customer_user_access_group_multiple";
+                        cmd.CommandText = "sp_get_UserAccessGroups_single";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UAG_UserID", Userall.UAG_UserID);
-                        cmd.Parameters["@UAG_UserID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UAG_GroupID", Userall.UAG_GroupID);
-                        cmd.Parameters["@UAG_GroupID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UAG_BusinessUnit", Userall.UAG_BusinessUnit);
-                        cmd.Parameters["@UAG_BusinessUnit"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UAG_CustomerID", Userall.UAG_CustomerID);
-                        cmd.Parameters["@UAG_CustomerID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UAG_Type", Userall.UAG_Type);
-                        cmd.Parameters["@UAG_Type"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@TABLE", Userall.TABLE);
-                        cmd.Parameters["@TABLE"].Direction = ParameterDirection.Input;
-
+                        cmd.Parameters.AddWithValue("@UUAG_UserAccessGroupID", model.UUAG_UserAccessGroupID);
+                        cmd.Parameters["@UUAG_UserAccessGroupID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -301,145 +51,234 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                ReturnUAGUsrModel objData = new ReturnUAGUsrModel();
+                                ReturnUserAccessGroupModel objUserAccessGroup = new ReturnUserAccessGroupModel();
 
+                                objUserAccessGroupHead.resp = true;
+                                objUserAccessGroupHead.msg = "Get UserAccessGroup";
 
-                                objUserHead.resp = true;
-                                objUserHead.msg = "Get User";
+                                //objUserAccessGroup.UUAG_UserAccessGroupID = rdr["UUAG_UserAccessGroupID"].ToString();
+                                //objUserAccessGroup.UUAG_LeaveAlotment = Convert.ToInt16(rdr["UUAG_LeaveAlotment"].ToString());
+                                //objUserAccessGroup.UUAG_UserAccessGroup = rdr["UUAG_UserAccessGroup"].ToString();
+                                //objUserAccessGroup.UUAG_Status = Convert.ToBoolean(rdr["UUAG_Status"].ToString());
 
-                                objData.UD_StaffID = rdr["UD_StaffID"].ToString();
-                                objData.UD_FirstName = rdr["UD_FirstName"].ToString();
-                                objData.UD_LastName = rdr["UD_LastName"].ToString();
-                                objData.UGM_Name = rdr["UGM_Name"].ToString();
-                                objData.BU_CompanyName = rdr["BU_CompanyName"].ToString();
-                                objData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
-                                objData.UAG_Status = rdr["UAG_Status"].ToString();
-                                objData.UAG_GroupID = rdr["UAG_GroupID"].ToString();
-                                objData.UAG_BusinessUnit = rdr["UAG_BusinessUnit"].ToString();
-                                objData.UAG_CustomerID = rdr["UAG_CustomerID"].ToString();
-                                objData.UAG_VendorID = rdr["UAG_VendorID"].ToString();
-                                objData.RC = "1";
-
-                                if (objUserHead.User == null)
+                                if (objUserAccessGroupHead.UserAccessGroup == null)
                                 {
-                                    objUserHead.User = new List<ReturnUAGUsrModel>();
+                                    objUserAccessGroupHead.UserAccessGroup = new List<ReturnUserAccessGroupModel>();
                                 }
 
-                                objUserHead.User.Add(objData);
-                            }
+                                objUserAccessGroupHead.UserAccessGroup.Add(objUserAccessGroup);
 
-                            objHeadList.Add(objUserHead);
+                                objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
+                            }
 
                         }
                         else
                         {
-                            objUserHead.resp = true;
-                            objUserHead.msg = "";
-                            objHeadList.Add(objUserHead);
+                            ReturnUserAccessGroupModel objUserAccessGroup = new ReturnUserAccessGroupModel();
+                            objUserAccessGroupHead.resp = true;
+                            objUserAccessGroupHead.msg = "";
+                            objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
+
 
                         }
+
+
                     }
-                    lconn.Close();
+                    return objUserAccessGroupHeadList;
+
                 }
-
-                return objHeadList;
-
             }
             catch (Exception ex)
             {
-
-                objUserHead = new ReturnUAGUsrAllModelHead
+                objUserAccessGroupHead = new ReturnUserAccessGroupModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
                 };
-                objHeadList.Add(objUserHead);
+                objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
 
-                objError.WriteLog(0, "UserAccessGroup_Data", "get_customer_user_access_group_multiple", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroup_Data", "get_customer_user_access_group_multiple", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroups_single", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroups_single", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserAccessGroup_Data", "get_customer_user_access_group_multiple", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroup_Data", "get_customer_user_access_group_multiple", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroups_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroups_single", "Inner Exception Message: " + ex.InnerException.Message);
                 }
-
-
             }
 
-            return objHeadList;
+            return objUserAccessGroupHeadList;
 
         }
 
-        public static List<ReturnUAGUsrAllModelHead> get_user_access_group_all(GetUAGUsrAllModel Userall)//ok
+        public static List<ReturnUserAccessGroupModelHead> get_UserAccessGroup_all(UserAccessGroupSearchModel model)//ok
         {
-            List<ReturnUAGUsrAllModelHead> objHeadList = new List<ReturnUAGUsrAllModelHead>();
-            ReturnUAGUsrAllModelHead objUserHead = new ReturnUAGUsrAllModelHead();
+            List<ReturnUserAccessGroupModelHead> objUserAccessGroupHeadList = new List<ReturnUserAccessGroupModelHead>();
+            ReturnUserAccessGroupModelHead objUserAccessGroupHead = new ReturnUserAccessGroupModelHead();
 
-            if (login_Data.AuthenticationKeyValidateWithDB(Userall) == false)
+            if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
-                objUserHead.resp = false;
-                objUserHead.IsAuthenticated = false;
-                objHeadList.Add(objUserHead);
-                return objHeadList;
+                objUserAccessGroupHead.resp = false;
+                objUserAccessGroupHead.IsAuthenticated = false;
+                objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
+                return objUserAccessGroupHeadList;
             }
+
             try
             {
                 using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
                 {
+
                     using (SqlCommand cmd = new SqlCommand())
                     {
-                        lconn.Open();
                         cmd.Connection = lconn;
+                        lconn.Open();
 
-                        cmd.CommandText = "sp_get_mtc_user_access_group_all";
+                        cmd.CommandText = "get_UserAccessGroup_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@PAGE_NO", Userall.PAGE_NO);
-                        cmd.Parameters["@PAGE_NO"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UUAG_UserAccessGroupID", model.UUAG_UserAccessGroupID);
+                        cmd.Parameters["@UUAG_UserAccessGroupID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@PAGE_RECORDS_COUNT", Userall.PAGE_RECORDS_COUNT);
-                        cmd.Parameters["@PAGE_RECORDS_COUNT"].Direction = ParameterDirection.Input;
+                        SqlDataAdapter dta = new SqlDataAdapter();
+                        dta.SelectCommand = cmd;
+                        DataSet Ds = new DataSet();
+                        dta.Fill(Ds);
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", Userall.UD_StaffID);
+                        if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
+                        {
+                            foreach (DataRow rdr in Ds.Tables[0].Rows)
+                            {
+                                ReturnUserAccessGroupModel objUserAccessGroup = new ReturnUserAccessGroupModel();
+
+                                objUserAccessGroupHead.resp = true;
+                                objUserAccessGroupHead.msg = "Get UserAccessGroup";
+
+                                //objUserAccessGroup.UUAG_UserAccessGroupID = rdr["UUAG_UserAccessGroupID"].ToString();
+                                //objUserAccessGroup.UUAG_LeaveAlotment = Convert.ToInt16(rdr["UUAG_LeaveAlotment"].ToString());
+                                //objUserAccessGroup.UUAG_UserAccessGroup = rdr["UUAG_UserAccessGroup"].ToString();
+                                //objUserAccessGroup.UUAG_Status = Convert.ToBoolean(rdr["UUAG_Status"].ToString());
+
+                                if (objUserAccessGroupHead.UserAccessGroup == null)
+                                {
+                                    objUserAccessGroupHead.UserAccessGroup = new List<ReturnUserAccessGroupModel>();
+                                }
+
+                                objUserAccessGroupHead.UserAccessGroup.Add(objUserAccessGroup);
+
+                                objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
+                            }
+
+                        }
+                        else
+                        {
+                            ReturnUserAccessGroupModel objUserAccessGroup = new ReturnUserAccessGroupModel();
+                            objUserAccessGroupHead.resp = true;
+                            objUserAccessGroupHead.msg = "";
+                            objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
+
+
+                        }
+
+
+                    }
+                    return objUserAccessGroupHeadList;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                objUserAccessGroupHead = new ReturnUserAccessGroupModelHead
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
+
+                objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroup_all", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroup_all", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroup_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroup_all", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+            }
+
+            return objUserAccessGroupHeadList;
+
+        }
+
+        public static List<ReturncustResponse> add_new_UserAccessGroup(UserAccessGroupModel item)//ok
+        {
+            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
+            ReturncustResponse objCustHead = new ReturncustResponse();
+
+            if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
+            {
+                objCustHead.resp = false;
+                objCustHead.IsAuthenticated = false;
+                objCustHeadList.Add(objCustHead);
+                return objCustHeadList;
+            }
+
+            try
+            {
+                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
+                {
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = lconn;
+
+
+                        cmd.CommandText = "sp_insert_UserAccessGroup";
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
                         cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_FirstName", Userall.UD_FirstName);
-                        cmd.Parameters["@UD_FirstName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UUAG_UserAccessGroupID", item.UUAG_UserAccessGroupID);
+                        cmd.Parameters["@UUAG_UserAccessGroupID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_LastName", Userall.UD_LastName);
-                        cmd.Parameters["@UD_LastName"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
+                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UGM_Name", Userall.UGM_Name);
-                        cmd.Parameters["@UGM_Name"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
+                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@BU_CompanyName", Userall.BU_CompanyName);
-                        cmd.Parameters["@BU_CompanyName"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
+                        //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_DepartmentID", Userall.UD_DepartmentID);
-                        cmd.Parameters["@UD_DepartmentID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@CUS_Adrs_UnitNumber", item.CUS_Adrs_UnitNumber);
+                        //cmd.Parameters["@CUS_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UAG_Status", Userall.UAG_Status);
-                        cmd.Parameters["@UAG_Status"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@CUS_Adrs_StreetName", item.CUS_Adrs_StreetName);
+                        //cmd.Parameters["@CUS_Adrs_StreetName"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@TABLE", Userall.TABLE);
-                        cmd.Parameters["@TABLE"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@CUS_Adrs_City", item.CUS_Adrs_City);
+                        //cmd.Parameters["@CUS_Adrs_City"].Direction = ParameterDirection.Input;
 
-                        string RC;
-                        using (SqlCommand cmdrc = new SqlCommand())
-                        {
-                            cmdrc.Connection = lconn;
+                        //cmd.Parameters.AddWithValue("@CUS_Adrs_CountryCode", item.CUS_Adrs_CountryCode);
+                        //cmd.Parameters["@CUS_Adrs_CountryCode"].Direction = ParameterDirection.Input;
 
-                            cmdrc.CommandText = "sp_get_customer_user_count";
-                            cmdrc.CommandType = CommandType.StoredProcedure;
+                        //cmd.Parameters.AddWithValue("@CUS_Adrs_PostalCode", item.CUS_Adrs_PostalCode);
+                        //cmd.Parameters["@CUS_Adrs_PostalCode"].Direction = ParameterDirection.Input;
 
-                            cmdrc.Parameters.AddWithValue("@TABLE", Userall.TABLE);
-                            cmdrc.Parameters["@TABLE"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@CUS_ContactPerson", item.CUS_ContactPerson);
+                        //cmd.Parameters["@CUS_ContactPerson"].Direction = ParameterDirection.Input;
 
-                            SqlDataReader rdrrc = cmdrc.ExecuteReader();
-                            rdrrc.Read();
-                            RC = rdrrc["RC"].ToString();
-                            rdrrc.Close();
-                        }
+                        //cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
+                        //cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
+                        //cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_SMS", item.CUS_OTP_By_SMS);
+                        //cmd.Parameters["@CUS_OTP_By_SMS"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
+                        //cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
+
+                        string mailtypes = "";
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -450,80 +289,162 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                ReturnUAGUsrModel objData = new ReturnUAGUsrModel();
-
-
-                                objUserHead.resp = true;
-                                objUserHead.msg = "Get User";
-
-                                objData.UD_StaffID = rdr["UD_StaffID"].ToString();
-                                objData.UD_FirstName = rdr["UD_FirstName"].ToString();
-                                objData.UD_LastName = rdr["UD_LastName"].ToString();
-                                objData.UGM_Name = rdr["UGM_Name"].ToString();
-                                objData.BU_CompanyName = rdr["BU_CompanyName"].ToString();
-                                objData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
-                                objData.UAG_Status = rdr["UAG_Status"].ToString();
-                                objData.UAG_GroupID = rdr["UAG_GroupID"].ToString();
-                                objData.UAG_BusinessUnit = rdr["UAG_BusinessUnit"].ToString();
-                                objData.UAG_CustomerID = rdr["UAG_CustomerID"].ToString();
-                                objData.UAG_VendorID = rdr["UAG_VendorID"].ToString();
-                                objData.RC = RC;
-
-                                if (objUserHead.User == null)
+                                objCustHead = new ReturncustResponse
                                 {
-                                    objUserHead.User = new List<ReturnUAGUsrModel>();
-                                }
+                                    resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
+                                    msg = rdr["RTN_MSG"].ToString()
+                                };
+                                objCustHeadList.Add(objCustHead);
 
-                                objUserHead.User.Add(objData);
                             }
-
-                            objHeadList.Add(objUserHead);
-
                         }
-                        else
-                        {
-                            objUserHead.resp = true;
-                            objUserHead.msg = "";
-                            objHeadList.Add(objUserHead);
 
-                        }
+
                     }
-                    lconn.Close();
                 }
-
-                return objHeadList;
-
             }
             catch (Exception ex)
             {
-
-                objUserHead = new ReturnUAGUsrAllModelHead
+                objCustHead = new ReturncustResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
                 };
-                objHeadList.Add(objUserHead);
+                objCustHeadList.Add(objCustHead);
 
-                objError.WriteLog(0, "UserAccessGroup_Data", "get_user_access_group_all", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroup_Data", "get_user_access_group_all", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserAccessGroup_Data", "get_user_access_group_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroup_Data", "get_user_access_group_all", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
-
             }
-
-            return objHeadList;
-
+            return objCustHeadList;
         }
 
-        public static List<ReturnResponse> add_new_user_access_group(UAGUsrModel item)//ok
+        public static List<ReturncustResponse> modify_UserAccessGroup(UserAccessGroupModel item)//ok
+        {
+            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
+            ReturncustResponse objCustHead = new ReturncustResponse();
+
+            if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
+            {
+                objCustHead.resp = false;
+                objCustHead.IsAuthenticated = false;
+                objCustHeadList.Add(objCustHead);
+                return objCustHeadList;
+            }
+
+            try
+            {
+                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
+                {
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = lconn;
+
+
+                        cmd.CommandText = "sp_modify_UserAccessGroup";
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
+                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@UUAG_UserAccessGroupID", item.UUAG_UserAccessGroupID);
+                        cmd.Parameters["@UUAG_UserAccessGroupID"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
+                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
+                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
+                        //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_Adrs_UnitNumber", item.CUS_Adrs_UnitNumber);
+                        //cmd.Parameters["@CUS_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_Adrs_StreetName", item.CUS_Adrs_StreetName);
+                        //cmd.Parameters["@CUS_Adrs_StreetName"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_Adrs_City", item.CUS_Adrs_City);
+                        //cmd.Parameters["@CUS_Adrs_City"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_Adrs_CountryCode", item.CUS_Adrs_CountryCode);
+                        //cmd.Parameters["@CUS_Adrs_CountryCode"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_Adrs_PostalCode", item.CUS_Adrs_PostalCode);
+                        //cmd.Parameters["@CUS_Adrs_PostalCode"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_ContactPerson", item.CUS_ContactPerson);
+                        //cmd.Parameters["@CUS_ContactPerson"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
+                        //cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
+                        //cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_SMS", item.CUS_OTP_By_SMS);
+                        //cmd.Parameters["@CUS_OTP_By_SMS"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
+                        //cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
+
+                        //cmd.Parameters.AddWithValue("@CUS_Status", item.CUS_Status);
+                        //cmd.Parameters["@CUS_Status"].Direction = ParameterDirection.Input;
+
+                        SqlDataAdapter dta = new SqlDataAdapter();
+                        dta.SelectCommand = cmd;
+                        DataSet Ds = new DataSet();
+                        dta.Fill(Ds);
+
+                        if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
+                        {
+                            foreach (DataRow rdr in Ds.Tables[0].Rows)
+                            {
+                                objCustHead = new ReturncustResponse
+                                {
+                                    resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
+                                    msg = rdr["RTN_MSG"].ToString()
+                                };
+                                objCustHeadList.Add(objCustHead);
+
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                objCustHead = new ReturncustResponse
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objCustHeadList.Add(objCustHead);
+
+                objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+            }
+            return objCustHeadList;
+        }
+
+        public static List<ReturnResponse> inactivate_UserAccessGroup(InactiveUUMAModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
             ReturnResponse objUserHead = new ReturnResponse();
-            SqlTransaction trans = null;
+            List<SPResponse> objResponseList = new List<SPResponse>();
 
             if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
             {
@@ -537,85 +458,49 @@ namespace HRM_DAL.Data
             {
                 using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
                 {
-                    lconn.Open();
-                    trans = lconn.BeginTransaction();
 
-                    foreach (var itemGr in item.ExistingUAG)
+                    using (SqlCommand cmd = new SqlCommand())
                     {
-                        foreach (var itemKio in item.KioskAG)
+                        cmd.Connection = lconn;
+
+
+
+                        cmd.CommandText = "sp_del_UserAccessGroup";
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@UUAG_UserAccessGroupID", item.UUAG_UserAccessGroupID);
+                        cmd.Parameters["@UUAG_UserAccessGroupID"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
+                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+
+
+
+                        SqlDataAdapter dta = new SqlDataAdapter();
+                        dta.SelectCommand = cmd;
+                        DataSet Ds = new DataSet();
+                        dta.Fill(Ds);
+
+                        if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
                         {
-                            using (SqlCommand cmdud = new SqlCommand())
+                            foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                cmdud.Connection = lconn;
-                                cmdud.Transaction = trans;
-
-                                cmdud.CommandText = "sp_sav_customer_user_access_group";
-                                cmdud.CommandType = CommandType.StoredProcedure;
-
-                                cmdud.Parameters.AddWithValue("@USER_ID", item.USER_ID);
-                                cmdud.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_UserID", itemGr.UAG_UserID);
-                                cmdud.Parameters["@UAG_UserID"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_GroupID", itemKio.UAG_GroupID);
-                                cmdud.Parameters["@UAG_GroupID"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_CustomerID", itemGr.UAG_CustomerID);
-                                cmdud.Parameters["@UAG_CustomerID"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_Status", true);
-                                cmdud.Parameters["@UAG_Status"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_VendorID", itemKio.UAG_VendorID);
-                                cmdud.Parameters["@UAG_VendorID"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_Type", "MC");
-                                cmdud.Parameters["@UAG_Type"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@TABLE", item.TABLE);
-                                cmdud.Parameters["@TABLE"].Direction = ParameterDirection.Input;
-
-                                SqlDataAdapter dta = new SqlDataAdapter(cmdud);
-                                DataSet Ds = new DataSet();
-                                dta.Fill(Ds);
-
-                                if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
+                                objUserHead = new ReturnResponse
                                 {
-                                    foreach (DataRow rdr in Ds.Tables[0].Rows)
-                                    {
-                                        objUserHeadList.Add(new ReturnResponse { resp = Boolean.Parse(rdr["RTN_RESP"].ToString()), msg = rdr["RTN_MSG"].ToString() });
-                                    }
-                                }
-                                else
-                                {
-                                    objUserHeadList.Add(new ReturnResponse { resp = true, msg = "" });
-                                }
+                                    resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
+                                    msg = rdr["RTN_MSG"].ToString()
+                                };
+                                objUserHeadList.Add(objUserHead);
 
-                                cmdud.Parameters.Clear();
                             }
                         }
+                        return objUserHeadList;
                     }
-
-                    trans.Commit();
-                    trans.Dispose();
-
-                    objUserHead = new ReturnResponse
-                    {
-                        resp = true,
-                        msg = ""
-                    };
-
-                    objUserHeadList.Add(objUserHead);
+                    return objUserHeadList;
                 }
             }
             catch (Exception ex)
             {
-                if (trans != null)
-                {
-                    trans.Rollback();
-                    trans.Dispose();
-                }
                 objUserHead = new ReturnResponse
                 {
                     resp = false,
@@ -623,253 +508,20 @@ namespace HRM_DAL.Data
                 };
                 objUserHeadList.Add(objUserHead);
 
-                objError.WriteLog(0, "UserAccessGroup_Data", "add_new_user_access_group", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroup_Data", "add_new_user_access_group", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserAccessGroup_Data", "inactivate_UserAccessGroup", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserAccessGroup_Data", "inactivate_UserAccessGroup", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserAccessGroup_Data", "add_new_user_access_group", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroup_Data", "add_new_user_access_group", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserAccessGroup_Data", "inactivate_UserAccessGroup", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserAccessGroup_Data", "inactivate_UserAccessGroup", "Inner Exception Message: " + ex.InnerException.Message);
                 }
-
-            }
-            return objUserHeadList;
-        }
-
-        public static List<ReturnResponse> modify_user_access_group(UAGModel item)//ok
-        {
-            List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
-            ReturnResponse objUserHead = new ReturnResponse();
-            SqlTransaction trans = null;
-
-            if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
-            {
-                objUserHead.resp = false;
-                objUserHead.IsAuthenticated = false;
-                objUserHeadList.Add(objUserHead);
                 return objUserHeadList;
             }
 
-            try
-            {
-                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
-                {
-                    lconn.Open();
-                    trans = lconn.BeginTransaction();
 
-                    foreach (var itemGr in item.ExistingUAG)
-                    {
-                        foreach (var itemKio in item.KioskAG)
-                        {
-                            using (SqlCommand cmdud = new SqlCommand())
-                            {
-                                cmdud.Connection = lconn;
-                                cmdud.Transaction = trans;
 
-                                cmdud.CommandText = "sp_sav_customer_user_access_group";
-                                cmdud.CommandType = CommandType.StoredProcedure;
-
-                                cmdud.Parameters.AddWithValue("@USER_ID", item.USER_ID);
-                                cmdud.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_UserID", itemGr.UAG_UserID);
-                                cmdud.Parameters["@UAG_UserID"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_GroupID", itemKio.UAG_GroupID);
-                                cmdud.Parameters["@UAG_GroupID"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_CustomerID", itemGr.UAG_CustomerID);
-                                cmdud.Parameters["@UAG_CustomerID"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_Status", true);
-                                cmdud.Parameters["@UAG_Status"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_VendorID", itemKio.UAG_VendorID);
-                                cmdud.Parameters["@UAG_VendorID"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_Type", "MC");
-                                cmdud.Parameters["@UAG_Type"].Direction = ParameterDirection.Input;
-
-                                SqlDataAdapter dta = new SqlDataAdapter(cmdud);
-                                DataSet Ds = new DataSet();
-                                dta.Fill(Ds);
-
-                                if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
-                                {
-                                    foreach (DataRow rdr in Ds.Tables[0].Rows)
-                                    {
-                                        objUserHeadList.Add(new ReturnResponse { resp = Boolean.Parse(rdr["RTN_RESP"].ToString()), msg = rdr["RTN_MSG"].ToString() });
-                                    }
-                                }
-                                else
-                                {
-                                    objUserHeadList.Add(new ReturnResponse { resp = true, msg = "" });
-                                }
-
-                                cmdud.Parameters.Clear();
-                            }
-                        }
-                    }
-
-                    trans.Commit();
-                    trans.Dispose();
-
-                    objUserHead = new ReturnResponse
-                    {
-                        resp = true,
-                        msg = ""
-                    };
-
-                    objUserHeadList.Add(objUserHead);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (trans != null)
-                {
-                    trans.Rollback();
-                    trans.Dispose();
-                }
-                objUserHead = new ReturnResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "UserAccessGroup_Data", "modify_user_access_group", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroup_Data", "modify_user_access_group", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserAccessGroup_Data", "modify_user_access_group", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroup_Data", "modify_user_access_group", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-            }
-            return objUserHeadList;
         }
-
-        public static List<ReturnResponse> inactivate_user_access_group(UAGUsrModel item)//ok
-        {
-            List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
-            ReturnResponse objUserHead = new ReturnResponse();
-            SqlTransaction trans = null;
-
-            if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
-            {
-                objUserHead.resp = false;
-                objUserHead.IsAuthenticated = false;
-                objUserHeadList.Add(objUserHead);
-                return objUserHeadList;
-            }
-
-            try
-            {
-                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
-                {
-                    lconn.Open();
-                    trans = lconn.BeginTransaction();
-
-                    foreach (var itemGr in item.ExistingUAG)
-                    {
-                        foreach (var itemKio in item.KioskAG)
-                        {
-                            using (SqlCommand cmdud = new SqlCommand())
-                            {
-                                cmdud.Connection = lconn;
-                                cmdud.Transaction = trans;
-
-                                cmdud.CommandText = "sp_sav_customer_user_access_group";
-                                cmdud.CommandType = CommandType.StoredProcedure;
-
-                                cmdud.Parameters.AddWithValue("@USER_ID", item.USER_ID);
-                                cmdud.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_UserID", itemGr.UAG_UserID);
-                                cmdud.Parameters["@UAG_UserID"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_GroupID", itemKio.UAG_GroupID);
-                                cmdud.Parameters["@UAG_GroupID"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_CustomerID", itemGr.UAG_CustomerID);
-                                cmdud.Parameters["@UAG_CustomerID"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_Status", false);
-                                cmdud.Parameters["@UAG_Status"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_VendorID", itemKio.UAG_VendorID);
-                                cmdud.Parameters["@UAG_VendorID"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@UAG_Type", "MC");
-                                cmdud.Parameters["@UAG_Type"].Direction = ParameterDirection.Input;
-
-                                cmdud.Parameters.AddWithValue("@TABLE", item.TABLE);
-                                cmdud.Parameters["@TABLE"].Direction = ParameterDirection.Input;
-
-                                SqlDataAdapter dta = new SqlDataAdapter(cmdud);
-                                DataSet Ds = new DataSet();
-                                dta.Fill(Ds);
-
-                                if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
-                                {
-                                    foreach (DataRow rdr in Ds.Tables[0].Rows)
-                                    {
-                                        objUserHeadList.Add(new ReturnResponse { resp = Boolean.Parse(rdr["RTN_RESP"].ToString()), msg = rdr["RTN_MSG"].ToString() });
-                                    }
-                                }
-                                else
-                                {
-                                    objUserHeadList.Add(new ReturnResponse { resp = true, msg = "" });
-                                }
-
-                                cmdud.Parameters.Clear();
-                            }
-                        }
-                    }
-
-                    trans.Commit();
-                    trans.Dispose();
-
-                    objUserHead = new ReturnResponse
-                    {
-                        resp = true,
-                        msg = ""
-                    };
-                    objUserHeadList.Add(objUserHead);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (trans != null)
-                {
-                    trans.Rollback();
-                    trans.Dispose();
-                }
-                objUserHead = new ReturnResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "UserAccessGroup_Data", "inactivate_user_access_group", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroup_Data", "inactivate_user_access_group", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserAccessGroup_Data", "inactivate_user_access_group", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroup_Data", "inactivate_user_access_group", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-            }
-            return objUserHeadList;
-        }
-
     }
+
 }
-
-
-
-
-
-
-
 
