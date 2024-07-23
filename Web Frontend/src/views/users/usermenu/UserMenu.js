@@ -4,15 +4,15 @@ import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
 import UserMenuDataGrid from './UserMenuDataGrid'
 import UserMenuPopup from './UserMenuPopup'
 
-const UserRole = () => {
+const UserMenu = () => {
   return (
     <>
       <CCard className="mb-4">
         <CCardHeader>
-          <strong>UserRole List</strong>
+          <strong>UserMenu List</strong>
         </CCardHeader>
         <CCardBody>
-          {/* <UserRolePopup /> */}
+          {/* <UserMenuPopup /> */}
           <UserMenuDataGrid  onOpen={() => handleOpenPopup}/>
         </CCardBody>
       </CCard>
@@ -20,4 +20,4 @@ const UserRole = () => {
   )
 }
 
-export default UserRole
+export default UserMenu

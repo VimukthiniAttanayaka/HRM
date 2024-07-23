@@ -34,7 +34,6 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, AccessGroupDetails }) => {
     // Prepare form data
     const formData = {
       UAG_AccessGroupID: AccessGroupId,
-      UAG_LeaveAlotment: leaveAlotmentId,
       UAG_AccessGroup: AccessGroup,
       UAG_Status: isActive,
     }

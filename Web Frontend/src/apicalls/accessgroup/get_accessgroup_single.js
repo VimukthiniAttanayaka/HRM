@@ -1,8 +1,8 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export class AccessGroupDetail  {
-  UAG_LeaveTypeID;
-  UAG_LeaveType;
+  UAG_AccessGroupID;
+  UAG_AccessGroup;
   UAG_Status;
   UAG_CreatedBy;
   UAG_CreatedDateTime;
@@ -24,7 +24,7 @@ export const getAccessGroupSingle = async (formData) => {
     resw=res1[0].AccessGroup[0]
     // console.log(res2)
     // console.log(res1[0].accessgroup[0])
-    // setLeaveTypeDetails(res1[0].LeaveType[0]);
+    // setAccessGroupDetails(res1[0].AccessGroup[0]);
     // handleOpenPopup()
   })
     

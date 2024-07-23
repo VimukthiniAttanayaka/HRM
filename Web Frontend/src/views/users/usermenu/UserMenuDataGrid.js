@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
-// import UserRolePopup from './UserRolePopup.js';
-// // import loadDetails from './UserRolePopup.js';
-import { getUserRoleAll } from '../../../apicalls/userrole/get_all_list.js';
-import { getUserRoleSingle } from '../../../apicalls/userrole/get_userrole_single.js';
+// import UserMenuPopup from './UserMenuPopup.js';
+// // import loadDetails from './UserMenuPopup.js';
+import { getUserMenuAll } from '../../../apicalls/usermenu/get_all_list.js';
+import { getUserMenuSingle } from '../../../apicalls/usermenu/get_usermenu_single.js';
 import UserMenuPopup from './UserMenuPopup'
 
 const UserMenuDataGrid = () => {
@@ -21,7 +21,7 @@ const UserMenuDataGrid = () => {
       // sorter: false,
     },
     {
-      key: 'userrole',
+      key: 'usermenu',
       _style: { width: '20%' },
     },
     {
@@ -52,10 +52,10 @@ const UserMenuDataGrid = () => {
     }
   }
 
-  const [leaveTypeDetails, setUserRoleDetails] = useState([])
-  // const [leaveTypeId, setUserRoleId] = useState('')
+  const [UserMenuDetails, setUserMenuDetails] = useState([])
+  // const [UserMenuId, setUserMenuId] = useState('')
   const handleChangeId = (event) => {
-    setUserRoleId(event.target.value)
+    setUserMenuId(event.target.value)
   }
 
   async function loadDetails(item) {
@@ -71,10 +71,10 @@ const UserMenuDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_UserRoleID: item
+      LVT_UserMenuID: item
     }
 
-    // const res = fetch(apiUrl + 'leavetype/get_leavetype_single', {
+    // const res = fetch(apiUrl + 'UserMenu/get_UserMenu_single', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify(formData),
@@ -82,12 +82,12 @@ const UserMenuDataGrid = () => {
     //   .then(response => response.json())
     //   .then(json => {
     //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setUserRoleDetails(res1[0].UserRole[0]);
+    //     setUserMenuDetails(res1[0].UserMenu[0]);
     //     handleOpenPopup()
     //   })
-    const UserRoleDetails = await getUserRoleSingle(formData)
-    // setUserRoleDetails(res1[0].UserRole[0]);
-    setUserRoleDetails(UserRoleDetails);
+    const UserMenuDetails = await getUserMenuSingle(formData)
+    // setUserMenuDetails(res1[0].UserMenu[0]);
+    setUserMenuDetails(UserMenuDetails);
     handleOpenPopup()
   }
   const toggleDetails = (index) => {
@@ -121,11 +121,11 @@ const UserMenuDataGrid = () => {
       USR_EmployeeID: 'sedcx'
     }
 
-    const UserRoleDetails = await getUserRoleAll(formData)
-    // console.log(UserRoleDetails)
-    setData(UserRoleDetails);
+    const UserMenuDetails = await getUserMenuAll(formData)
+    // console.log(UserMenuDetails)
+    setData(UserMenuDetails);
 
-    // const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
+    // const res = await fetch(apiUrl + 'UserMenu/get_UserMenu_all', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify(formData),
@@ -134,10 +134,10 @@ const UserMenuDataGrid = () => {
     //   .then(json => {
     //     let res1 = JSON.parse(JSON.stringify(json))
 
-    //     const UserRoleDetails = [];
-    //     class UserRoleDetail {
-    //       constructor(id, leavetype, status, Alotment) {
-    //         this.leavetype = leavetype;
+    //     const UserMenuDetails = [];
+    //     class UserMenuDetail {
+    //       constructor(id, UserMenu, status, Alotment) {
+    //         this.UserMenu = UserMenu;
     //         this.id = id;
     //         this.alotment = Alotment
     //         if (status == true) { this.status = "Active"; }
@@ -145,13 +145,13 @@ const UserMenuDataGrid = () => {
     //       }
     //     }
 
-    //     for (let index = 0; index < res1[0].UserRole.length; index++) {
-    //       let element = res1[0].UserRole[index];
+    //     for (let index = 0; index < res1[0].UserMenu.length; index++) {
+    //       let element = res1[0].UserMenu[index];
     //       console.log(element)
-    //       UserRoleDetails[index] = new UserRoleDetail(element.LVT_UserRoleID, element.LVT_UserRole, element.LVT_Status, element.LVT_LeaveAlotment);
+    //       UserMenuDetails[index] = new UserMenuDetail(element.LVT_UserMenuID, element.LVT_UserMenu, element.LVT_Status, element.LVT_LeaveAlotment);
     //     }
 
-    //     setData(UserRoleDetails);
+    //     setData(UserMenuDetails);
     //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
     //   })
 
@@ -175,7 +175,7 @@ const UserMenuDataGrid = () => {
 
   const handleClosePopup = () => {
     setVisible(false);
-    setUserRoleDetails([]);
+    setUserMenuDetails([]);
   };
 
   return (
@@ -193,7 +193,7 @@ const UserMenuDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <UserMenuPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveTypeDetails={leaveTypeDetails} />
+          <UserMenuPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} UserMenuDetails={UserMenuDetails} />
         </CCol>
       </CRow>
       <CSmartTable

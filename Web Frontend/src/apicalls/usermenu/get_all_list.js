@@ -1,19 +1,18 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export class LeaveScheduleDetail {
-  constructor(id, leavetype, status, Alotment) {
-    this.leavetype = leavetype;
+export class UserMenuDetail {
+  constructor(id, usermenu, status, Alotment) {
+    this.usermenu = usermenu;
     this.id = id;
-    this.alotment = Alotment
     if (status == true) { this.status = "Active"; }
     else { this.status = "Inactive"; }
   }
 }
 // console.log(apiUrl)
-export const getEmployeeAll = async (formData) => {
-  const LeaveTypeDetails = [];
+export const getUserMenuAll = async (formData) => {
+  const UserMenuDetails = [];
 
-  const res = await fetch(apiUrl + 'employee/get_employee_all', {
+  const res = await fetch(apiUrl + 'usermenu/get_usermenu_all', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -23,9 +22,9 @@ export const getEmployeeAll = async (formData) => {
       let res1 = JSON.parse(JSON.stringify(json))
 
 
-      class LeaveTypeDetail {
-        constructor(id, leavetype, status, Alotment) {
-          this.leavetype = leavetype;
+      class UserMenuDetail {
+        constructor(id, usermenu, status, Alotment) {
+          this.usermenu = usermenu;
           this.id = id;
           this.alotment = Alotment
           if (status == true) { this.status = "Active"; }
@@ -33,21 +32,21 @@ export const getEmployeeAll = async (formData) => {
         }
       }
 
-      for (let index = 0; index < res1[0].LeaveType.length; index++) {
-        let element = res1[0].LeaveType[index];
+      for (let index = 0; index < res1[0].UserMenu.length; index++) {
+        let element = res1[0].UserMenu[index];
         // console.log(element)
-        LeaveTypeDetails[index] = new LeaveTypeDetail(element.LVT_LeaveTypeID, element.LVT_LeaveType, element.LVT_Status, element.LVT_LeaveAlotment);
+        UserMenuDetails[index] = new UserMenuDetail(element.UUM_UserMenuID, element.UUM_UserMenu, element.UUM_Status, element.UUM_LeaveAlotment);
       }
-      // console.log(LeaveTypeDetails)
+      // console.log(UserMenuDetails)
     })
 
-  return LeaveTypeDetails;
+  return UserMenuDetails;
 };
 
-export const requestdata_Employee_DropDowns_All = async (formData) => {
+export const requestdata_UserMenu_DropDowns_All = async (formData) => {
 
-  const optionsEmployee = [];
-  const res = await fetch(apiUrl + 'employee/get_employee_all', {
+  const optionsUserMenu = [];
+  const res = await fetch(apiUrl + 'usermenu/get_usermenu_all', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -56,14 +55,14 @@ export const requestdata_Employee_DropDowns_All = async (formData) => {
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
 
-      for (let index = 0; index < res1[0].Employee.length; index++) {
-        const EmployeeData = {
-          key: res1[0].Employee[index].USR_EmployeeID,
-          value: res1[0].Employee[index].USR_PrefferedName
+      for (let index = 0; index < res1[0].UserMenu.length; index++) {
+        const UserMenuData = {
+          key: res1[0].UserMenu[index].USR_UserMenuID,
+          value: res1[0].UserMenu[index].USR_PrefferedName
         };
-        optionsEmployee[index] = EmployeeData
+        optionsUserMenu[index] = UserMenuData
       }
-      console.log(optionsEmployee)
+      console.log(optionsUserMenu)
     })
-  return optionsEmployee;
+  return optionsUserMenu;
 }

@@ -56,8 +56,8 @@ const AccessGroupDataGrid = () => {
     }
   }
 
-  const [leaveTypeDetails, setAccessGroupDetails] = useState([])
-  // const [leaveTypeId, setAccessGroupId] = useState('')
+  const [AccessGroupDetails, setAccessGroupDetails] = useState([])
+  // const [AccessGroupId, setAccessGroupId] = useState('')
   const handleChangeId = (event) => {
     setAccessGroupId(event.target.value)
   }
@@ -78,7 +78,7 @@ const AccessGroupDataGrid = () => {
       UAG_AccessGroupID: item
     }
 
-    // const res = fetch(apiUrl + 'leavetype/get_leavetype_single', {
+    // const res = fetch(apiUrl + 'AccessGroup/get_AccessGroup_single', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify(formData),
@@ -129,7 +129,7 @@ const AccessGroupDataGrid = () => {
     // console.log(AccessGroupDetails)
     setData(AccessGroupDetails);
 
-    // const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
+    // const res = await fetch(apiUrl + 'AccessGroup/get_AccessGroup_all', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify(formData),
@@ -140,8 +140,8 @@ const AccessGroupDataGrid = () => {
 
     //     const AccessGroupDetails = [];
     //     class AccessGroupDetail {
-    //       constructor(id, leavetype, status, Alotment) {
-    //         this.leavetype = leavetype;
+    //       constructor(id, AccessGroup, status, Alotment) {
+    //         this.AccessGroup = AccessGroup;
     //         this.id = id;
     //         this.alotment = Alotment
     //         if (status == true) { this.status = "Active"; }
@@ -197,7 +197,7 @@ const AccessGroupDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <AccessGroupPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveTypeDetails={leaveTypeDetails} />
+          <AccessGroupPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} AccessGroupDetails={AccessGroupDetails} />
         </CCol>
       </CRow>
       <CSmartTable
