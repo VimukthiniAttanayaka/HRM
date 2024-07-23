@@ -3,6 +3,7 @@ import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTit
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
+import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
 
 const UserRolePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
 
