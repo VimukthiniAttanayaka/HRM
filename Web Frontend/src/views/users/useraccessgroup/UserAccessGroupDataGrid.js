@@ -63,7 +63,7 @@ const UserAccessGroupDataGrid = () => {
   const [optionsUserName, setOptionsUserName] = useState([]);
   const [optionsAccessGroup, setOptionsAccessGroup] = useState([]);
   const handleChangeId = (event) => {
-    setUserAccessGroupId(event.target.value)
+    // setUserAccessGroupId(event.target.value)
   }
 
   async function loadDetails(item) {
@@ -133,16 +133,13 @@ const UserAccessGroupDataGrid = () => {
     // console.log(UserAccessGroupDetails)
     setData(UserAccessGroupDetails);
 
-    const [optionsUserName, setOptionsUserName] = useState([]);
-    const [optionsAccessGroup, setOptionsAccessGroup] = useState([]);
-
     const AccessGroupDetails = await requestdata_AccessGroup_DropDowns_All(formData)
 
     setOptionsAccessGroup(AccessGroupDetails);
 
     const UserNameDetails = await requestdata_UserName_DropDowns_All(formData)
 
-    setOptionsUserName(UserNameDetails);
+    // setOptionsUserName(UserNameDetails);
 
     // const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
     //   method: 'POST',
@@ -210,7 +207,8 @@ const UserAccessGroupDataGrid = () => {
           >
             Download current items (.csv)
           </CButton>
-        </CCol><CCol>
+        </CCol>
+        <CCol>
           <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>
