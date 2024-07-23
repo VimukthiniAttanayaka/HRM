@@ -19,6 +19,7 @@ const UserRole = React.lazy(() => import('./views/users/userrole/UserRole'))
 const AccessGroup = React.lazy(() => import('./views/users/accessgroup/AccessGroup'))
 const UserAccessGroup = React.lazy(() => import('./views/users/useraccessgroup/UserAccessGroup'))
 const UserMenu = React.lazy(() => import('./views/users/usermenu/UserMenu'))
+const MenuAccessGroup = React.lazy(() => import('./views/users/menuaccessgroup/MenuAccessGroup'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))

@@ -29,11 +29,15 @@ namespace HRM.Controllers
             List<ReturnUserRoleModelHead> objUserRoleHeadList = new List<ReturnUserRoleModelHead>();
             ReturnUserRoleModelHead obj = new ReturnUserRoleModelHead() { resp = false, msg = "sfsf" };
             obj.UserRole = new List<ReturnUserRoleModel>();
+            List<AccessGroupSelect> AccessGroups = new List<AccessGroupSelect>();
+            AccessGroups.Add(new AccessGroupSelect() { UAG_AccessGroupID = "CAS", UAG_AccessGroup = "CAS" });
+            AccessGroups.Add(new AccessGroupSelect() { UAG_AccessGroupID = "ANU", UAG_AccessGroup = "ANU" });
+            AccessGroups.Add(new AccessGroupSelect() { UAG_AccessGroupID = "MED", UAG_AccessGroup = "MED" });
             if (model.EUR_UserRoleID == "CAS")
-                obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "CAS", EUR_UserRole = "Casual", EUR_Status = true });
-            if (model.EUR_UserRoleID == "ANU") obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "ANU", EUR_UserRole = "Annual", EUR_Status = true });
-            if (model.EUR_UserRoleID == "MED") obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "MED", EUR_UserRole = "Medical", EUR_Status = true });
-            if (model.EUR_UserRoleID == "MAT") obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "MAT", EUR_UserRole = "Matrinaty", EUR_Status = true });
+                obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "CAS", EUR_UserRole = "Casual", EUR_Status = true, AccessGroups = AccessGroups });
+            if (model.EUR_UserRoleID == "ANU") obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "ANU", EUR_UserRole = "Annual", EUR_Status = true, AccessGroups = AccessGroups });
+            if (model.EUR_UserRoleID == "MED") obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "MED", EUR_UserRole = "Medical", EUR_Status = true, AccessGroups = AccessGroups });
+            if (model.EUR_UserRoleID == "MAT") obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "MAT", EUR_UserRole = "Matrinaty", EUR_Status = true, AccessGroups = AccessGroups });
             objUserRoleHeadList.Add(obj);
             return objUserRoleHeadList;
 

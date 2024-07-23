@@ -4,15 +4,14 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 
-const UserRolePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
+const UserRolePopup = ({ visible, onClose, onOpen, UserRoleDetails }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
 
   // };
-  const [leaveTypeId, setUserRoleId] = useState('')
-  const [leaveAlotmentId, setLeaveAlotmentId] = useState('')
-  const [leaveType, setUserRole] = useState('')
+  const [UserRoleId, setUserRoleId] = useState('')
+  const [UserRole, setUserRole] = useState('')
   const [isActive, setIsActive] = useState(true)
 
   const handleChangeAlotment = (event) => {
@@ -34,13 +33,12 @@ const UserRolePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
 
     // Prepare form data
     const formData = {
-      LVT_UserRoleID: leaveTypeId,
-      LVT_LeaveAlotment: leaveAlotmentId,
-      LVT_UserRole: leaveType,
-      LVT_Status: isActive,
+      EUR_UserRoleID: UserRoleId,
+      EUR_UserRole: UserRole,
+      EUR_Status: isActive,
     }
     // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'leavetype/add_new_leavetype', {
+    const response = await fetch(apiUrl + 'UserRole/add_new_UserRole', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -56,7 +54,24 @@ const UserRolePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
     }
   }
 
-  console.log(leaveTypeDetails)
+  // console.log(UserRoleDetails)
+  const [checkedItems, setCheckedItems] = useState([]);
+
+  const handleCheckboxChange = (event) => {
+    const { checked, value } = event.target;
+    if (checked) {
+      setCheckedItems([...checkedItems, value]);
+    } else {
+      setCheckedItems(checkedItems.filter(item => item !== value));
+    }
+  };
+
+  const options = [
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+    { value: 'option3', label: 'Option 3' },
+  ];
+
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New UserRole</CButton>
@@ -80,7 +95,7 @@ const UserRolePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
                     <CInputGroupText>
                       <h6>UserRoleID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="UserRoleID" name="UserRoleID" value={leaveTypeDetails.LVT_UserRoleID} onChange={handleChangeId}
+                  </CCol>   <CFormInput placeholder="UserRoleID" name="UserRoleID" value={UserRoleDetails.EUR_UserRoleID} onChange={handleChangeId}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -89,20 +104,27 @@ const UserRolePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
                     <CInputGroupText>
                       <h6>UserRole</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="UserRole" name="UserRole" value={leaveTypeDetails.LVT_UserRole} onChange={handleChangeUserRole}
+                  </CCol>    <CFormInput placeholder="UserRole" name="UserRole" value={UserRoleDetails.EUR_UserRole} onChange={handleChangeUserRole}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
-                <CInputGroup className="mb-3">
+                {/* <CInputGroup className="mb-3"> */}
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>LeaveAlotment</h6>
+                      <h6>User Groups</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={leaveTypeDetails.LVT_LeaveAlotment} onChange={handleChangeAlotment}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-
-                </CInputGroup>
+                  </CCol>
+                  {options.map((option) => (
+                    <CFormCheck
+                      key={option.value}
+                      type="checkbox"
+                      label={option.label}
+                      value={option.value}
+                      checked={checkedItems.includes(option.value)}
+                      onChange={handleCheckboxChange}
+                    />
+                  ))}
+                {/* </CInputGroup> */}
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>

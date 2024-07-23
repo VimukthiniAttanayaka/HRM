@@ -1,6 +1,6 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-// export class LeaveScheduleDetail {
+// export class UserRoleDetail {
 //   constructor(id, userrole, status, Alotment) {
 //     this.userrole = userrole;
 //     this.id = id;
@@ -9,33 +9,33 @@ const apiUrl = process.env.REACT_APP_API_URL;
 //     else { this.status = "Inactive"; }
 //   }
 // }
-export class LeaveScheduleDetail  {
-  LVT_UserRoleID;
-  LVT_UserRole;
-  LVT_Status;
-  LVT_CreatedBy;
-  LVT_CreatedDateTime;
-  LVT_ModifiedBy;
-  LVT_ModifiedDateTime;
+export class UserRoleDetail {
+  EUR_UserRoleID;
+  EUR_UserRole;
+  EUR_Status;
+  EUR_CreatedBy;
+  EUR_CreatedDateTime;
+  EUR_ModifiedBy;
+  EUR_ModifiedDateTime;
 }
 // console.log(apiUrl)
 export const getUserRoleSingle = async (formData) => {
-   
-  let resw=new LeaveScheduleDetail();
+
+  let resw = new UserRoleDetail();
   const res = await fetch(apiUrl + 'userrole/get_userrole_single', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
   })
-  .then(response => response.json())
-  .then(json => {
-    let res1 = JSON.parse(JSON.stringify(json))
-    resw=res1[0].UserRole[0]
-    // console.log(res2)
-    // console.log(res1[0].UserRole[0])
-    // setUserRoleDetails(res1[0].UserRole[0]);
-    // handleOpenPopup()
-  })
-    
-    return resw;
+    .then(response => response.json())
+    .then(json => {
+      let res1 = JSON.parse(JSON.stringify(json))
+      resw = res1[0].UserRole[0]
+      // console.log(res2)
+      console.log(res1[0].UserRole[0])
+      // setUserRoleDetails(res1[0].UserRole[0]);
+      // handleOpenPopup()
+    })
+
+  return resw;
 };

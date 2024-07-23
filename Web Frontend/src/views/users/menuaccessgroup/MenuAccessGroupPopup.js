@@ -10,7 +10,7 @@ const UserRolePopup = ({ visible, onClose, onOpen, MenuAccessGroupDetails }) => 
   //   event.preventDefault();
 
   // };
-  const [MenuAccessGroupId, setMenuAccessGroupId] = useState('')
+  const [MenuAccessID, setMenuAccessID] = useState('')
   const [AccessGroupID, setAccessGroupID] = useState('')
   const [UserMenuID, setUserMenuID] = useState('')
   const [isActive, setIsActive] = useState(true)
@@ -21,8 +21,8 @@ const UserRolePopup = ({ visible, onClose, onOpen, MenuAccessGroupDetails }) => 
   const handleChangeUserMenuID = (event) => {
     setUserMenuID(event.target.value)
   }
-  const handleMenuAccessGroupId = (event) => {
-    setMenuAccessGroupId(event.target.value)
+  const handleChangeMenuAccessID = (event) => {
+    setMenuAccessID(event.target.value)
   }
   const handleChangeIsActive = (event) => { }
 
@@ -34,10 +34,10 @@ const UserRolePopup = ({ visible, onClose, onOpen, MenuAccessGroupDetails }) => 
 
     // Prepare form data
     const formData = {
-      LVT_UserRoleID: MenuAccessGroupId,
-      LVT_LeaveAlotment: leaveAlotmentId,
-      LVT_UserRole: MenuAccessGroup,
-      LVT_Status: isActive,
+      // LVT_UserRoleID: MenuAccessGroupId,
+      // LVT_LeaveAlotment: leaveAlotmentId,
+      // LVT_UserRole: MenuAccessGroup,
+      // LVT_Status: isActive,
     }
     // Submit the form data to your backend API
     const response = await fetch(apiUrl + 'MenuAccessGroup/add_new_MenuAccessGroup', {
@@ -80,7 +80,7 @@ const UserRolePopup = ({ visible, onClose, onOpen, MenuAccessGroupDetails }) => 
                     <CInputGroupText>
                       <h6>UserRoleID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="UserRoleID" name="UserRoleID" value={MenuAccessGroupDetails.LVT_UserRoleID} onChange={handleChangeId}
+                  </CCol>   <CFormInput placeholder="MenuAccessID" name="MenuAccessID" value={MenuAccessGroupDetails.UMA_MenuAccessID} onChange={handleChangeMenuAccessID}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -89,7 +89,7 @@ const UserRolePopup = ({ visible, onClose, onOpen, MenuAccessGroupDetails }) => 
                     <CInputGroupText>
                       <h6>UserRole</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="UserRole" name="UserRole" value={MenuAccessGroupDetails.LVT_UserRole} onChange={handleChangeUserRole}
+                  </CCol>    <CFormInput placeholder="AccessGroupID" name="AccessGroupID" value={MenuAccessGroupDetails.UMA_AccessGroupID} onChange={handleChangeAccessGroupID}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -98,7 +98,7 @@ const UserRolePopup = ({ visible, onClose, onOpen, MenuAccessGroupDetails }) => 
                     <CInputGroupText>
                       <h6>LeaveAlotment</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={MenuAccessGroupDetails.LVT_LeaveAlotment} onChange={handleChangeAlotment}
+                  </CCol>  <CFormInput placeholder="UserMenuID" name="UserMenuID" value={MenuAccessGroupDetails.UMA_UserMenuID} onChange={handleChangeUserMenuID}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
 

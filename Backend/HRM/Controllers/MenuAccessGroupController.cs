@@ -24,7 +24,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnMenuAccessModelHead> get_MenuAccess_single(MenuAccess model)//ok
+        public List<ReturnMenuAccessModelHead> get_MenuAccessGroup_single(MenuAccess model)//ok
         {
             List<ReturnMenuAccessModelHead> objMenuAccessHeadList = new List<ReturnMenuAccessModelHead>();
             ReturnMenuAccessModelHead obj = new ReturnMenuAccessModelHead() { resp = false, msg = "sfsf" };
@@ -54,12 +54,12 @@ namespace HRM.Controllers
                 };
                 objMenuAccessHeadList.Add(objMenuAccessHead);
 
-                objError.WriteLog(0, "MenuAccessController", "get_MenuAccess_single", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "MenuAccessController", "get_MenuAccess_single", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "MenuAccessGroupController", "get_MenuAccessGroup_single", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "MenuAccessGroupController", "get_MenuAccessGroup_single", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "MenuAccessController", "get_MenuAccess_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "MenuAccessController", "get_MenuAccess_single", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "MenuAccessGroupController", "get_MenuAccessGroup_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "MenuAccessGroupController", "get_MenuAccessGroup_single", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -72,7 +72,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnMenuAccessModelHead> get_MenuAccess_all(MenuAccessSearchModel model)//ok
+        public List<ReturnMenuAccessModelHead> get_MenuAccessGroup_all(MenuAccessSearchModel model)//ok
         {
             List<ReturnMenuAccessModelHead> objMenuAccessHeadList = new List<ReturnMenuAccessModelHead>();
             ReturnMenuAccessModelHead obj = new ReturnMenuAccessModelHead() { resp = false, msg = "sfsf" };
@@ -101,12 +101,12 @@ namespace HRM.Controllers
                 };
                 objMenuAccessHeadList.Add(objMenuAccessHead);
 
-                objError.WriteLog(0, "MenuAccessController", "get_MenuAccess_single", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "MenuAccessController", "get_MenuAccess_single", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "MenuAccessGroupController", "get_MenuAccessGroup_all", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "MenuAccessGroupController", "get_MenuAccessGroup_all", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "MenuAccessController", "get_MenuAccess_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "MenuAccessController", "get_MenuAccess_single", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "MenuAccessGroupController", "get_MenuAccessGroup_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "MenuAccessGroupController", "get_MenuAccessGroup_all", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -141,12 +141,12 @@ namespace HRM.Controllers
                 };
                 objCustHeadList.Add(objMenuAccessHead);
 
-                objError.WriteLog(0, "MenuAccessController", "add_new_MenuAccess", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "MenuAccessController", "add_new_MenuAccess", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "MenuAccessGroupController", "add_new_MenuAccess", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "MenuAccessGroupController", "add_new_MenuAccess", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "MenuAccessController", "add_new_MenuAccess", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "MenuAccessController", "add_new_MenuAccess", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "MenuAccessGroupController", "add_new_MenuAccess", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "MenuAccessGroupController", "add_new_MenuAccess", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -180,12 +180,12 @@ namespace HRM.Controllers
                 };
                 objCustHeadList.Add(objMenuAccessHead);
 
-                objError.WriteLog(0, "MenuAccessController", "modify_MenuAccess", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "MenuAccessController", "modify_MenuAccess", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "MenuAccessGroupController", "modify_MenuAccess", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "MenuAccessGroupController", "modify_MenuAccess", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "MenuAccessController", "modify_MenuAccess", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "MenuAccessController", "modify_MenuAccess", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "MenuAccessGroupController", "modify_MenuAccess", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "MenuAccessGroupController", "modify_MenuAccess", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -220,12 +220,12 @@ namespace HRM.Controllers
                 };
                 objUserHeadList.Add(objMenuAccessHead);
 
-                objError.WriteLog(0, "MenuAccessController", "inactivate_MenuAccess", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "MenuAccessController", "inactivate_MenuAccess", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "MenuAccessGroupController", "inactivate_MenuAccess", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "MenuAccessGroupController", "inactivate_MenuAccess", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "MenuAccessController", "inactivate_MenuAccess", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "MenuAccessController", "inactivate_MenuAccess", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "MenuAccessGroupController", "inactivate_MenuAccess", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "MenuAccessGroupController", "inactivate_MenuAccess", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 

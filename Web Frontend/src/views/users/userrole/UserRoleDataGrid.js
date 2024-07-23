@@ -52,8 +52,8 @@ const UserRoleDataGrid = () => {
     }
   }
 
-  const [leaveTypeDetails, setUserRoleDetails] = useState([])
-  // const [leaveTypeId, setUserRoleId] = useState('')
+  const [UserRoleDetails, setUserRoleDetails] = useState([])
+  // const [UserRoleId, setUserRoleId] = useState('')
   const handleChangeId = (event) => {
     setUserRoleId(event.target.value)
   }
@@ -71,10 +71,10 @@ const UserRoleDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_UserRoleID: item
+      EUR_UserRoleID: item
     }
 
-    // const res = fetch(apiUrl + 'leavetype/get_leavetype_single', {
+    // const res = fetch(apiUrl + 'UserRole/get_UserRole_single', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify(formData),
@@ -101,6 +101,7 @@ const UserRoleDataGrid = () => {
       newDetails = [...details, index]
       // alert(newDetails[newDetails.length - 1])
       loadDetails(newDetails[0])
+      console.log(newDetails[0])
     }
     // setDetails(newDetails)
   }
@@ -125,7 +126,7 @@ const UserRoleDataGrid = () => {
     // console.log(UserRoleDetails)
     setData(UserRoleDetails);
 
-    // const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
+    // const res = await fetch(apiUrl + 'UserRole/get_UserRole_all', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify(formData),
@@ -136,8 +137,8 @@ const UserRoleDataGrid = () => {
 
     //     const UserRoleDetails = [];
     //     class UserRoleDetail {
-    //       constructor(id, leavetype, status, Alotment) {
-    //         this.leavetype = leavetype;
+    //       constructor(id, UserRole, status, Alotment) {
+    //         this.UserRole = UserRole;
     //         this.id = id;
     //         this.alotment = Alotment
     //         if (status == true) { this.status = "Active"; }
@@ -193,7 +194,7 @@ const UserRoleDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <UserRolePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveTypeDetails={leaveTypeDetails} />
+          <UserRolePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} UserRoleDetails={UserRoleDetails} />
         </CCol>
       </CRow>
       <CSmartTable
