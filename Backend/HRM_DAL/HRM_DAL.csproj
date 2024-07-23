@@ -72,6 +72,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Models\MenuAccessModel.cs" />
+    <Compile Include="Models\UserMenuAccessModel.cs" />
     <Compile Include="Models\UserMenuModel.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AuthenticateModel.cs" />
@@ -112,7 +114,6 @@
     <Compile Include="Models\SPStatus.cs" />
     <Compile Include="Models\SystemParameterModel.cs" />
     <Compile Include="Models\SystemsSettingsModel.cs" />
-    <Compile Include="Models\UserAccessGroupModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserOtpModel.cs" />
   </ItemGroup>
