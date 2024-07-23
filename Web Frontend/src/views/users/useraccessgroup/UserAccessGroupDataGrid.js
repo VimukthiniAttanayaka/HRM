@@ -7,6 +7,7 @@ import data from './_data.js'
 import { getUserAccessGroupAll } from '../../../apicalls/useraccessgroup/get_all_list.js';
 import { getUserAccessGroupSingle } from '../../../apicalls/useraccessgroup/get_useraccessgroup_single.js';
 import UserAccessGroupPopup from './UserAccessGroupPopup'
+import AdvanceSearchPopup from './AdvanceSearch'
 import { requestdata_UserName_DropDowns_All } from '../../../apicalls/usergeneral/get_all_list.js';
 import { requestdata_AccessGroup_DropDowns_All } from '../../../apicalls/accessgroup/get_all_list.js';
 
@@ -194,10 +195,21 @@ const UserAccessGroupDataGrid = () => {
     setUserAccessGroupDetails([]);
   };
 
+  const [visibleAdvanceSearch, setVisibleAdvanceSearch] = useState(false);
+
+  const handleOpenAdvanceSearchPopup = () => {
+    setVisibleAdvanceSearch(true);
+  };
+
+  const handleCloseAdvanceSearchPopup = () => {
+    setVisibleAdvanceSearch(false);
+    setUserAccessGroupDetails([]);
+  };
+
   return (
     <CCardBody>
       <CRow>
-        <CCol>
+        <CCol md={6}>
           <CButton
             color="primary"
             className="mb-2"
@@ -208,7 +220,7 @@ const UserAccessGroupDataGrid = () => {
             Download current items (.csv)
           </CButton>
         </CCol>
-        <CCol>
+        {/* <CCol>
           <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>
@@ -237,11 +249,53 @@ const UserAccessGroupDataGrid = () => {
               ))}
             </CFormSelect>
           </CInputGroup>
+        </CCol> */}
+        <CCol md={3} className='d-flex justify-content-end'>
+          <AdvanceSearchPopup onClose={handleCloseAdvanceSearchPopup} visible={visibleAdvanceSearch} onOpen={handleOpenAdvanceSearchPopup} UserAccessGroupDetails={UserAccessGroupDetails} />
         </CCol>
-        <CCol className='d-flex justify-content-end'>
+        <CCol md={3} className='d-flex justify-content-end'>
           <UserAccessGroupPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} UserAccessGroupDetails={UserAccessGroupDetails} />
         </CCol>
       </CRow>
+      {/* <CRow className='mt-3'>
+        <CCol>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>User Name</h6>
+              </CInputGroupText>
+            </CCol>
+            <CFormSelect value={optionsUserName} onChange={(e) => setOptionsUserName(e.target.value)}>
+              {optionsUserName.map((option) => (
+                <option key={option.key} value={option.key}>
+                  {option.value}
+                </option>
+              ))}
+            </CFormSelect>
+          </CInputGroup>
+        </CCol>
+        <CCol>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>Access Group</h6>
+              </CInputGroupText>
+            </CCol>
+            <CFormSelect value={optionsAccessGroup} onChange={(e) => setOptionsAccessGroup(e.target.value)}>
+              {optionsAccessGroup.map((option) => (
+                <option key={option.key} value={option.key}>
+                  {option.value}
+                </option>
+              ))}
+            </CFormSelect>
+          </CInputGroup>
+        </CCol>
+        <CCol className='d-flex justify-content-end'>
+          <CRow className='mb-5'>
+            <UserAccessGroupPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} UserAccessGroupDetails={UserAccessGroupDetails} />
+          </CRow>
+        </CCol>
+      </CRow> */}
       <CSmartTable
         cleaner
         clickableRows
