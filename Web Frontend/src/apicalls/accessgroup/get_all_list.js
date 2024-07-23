@@ -61,7 +61,7 @@ export const requestdata_AccessGroup_DropDowns_All = async (formData) => {
         };
         optionsaccessgroup[index] = accessgroupData
       }
-      console.log(optionsaccessgroup)
+      // console.log(optionsaccessgroup)
     })
   return optionsaccessgroup;
 }

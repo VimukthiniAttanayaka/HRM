@@ -80,10 +80,10 @@ const UserAccessGroupPopup = ({ visible, onClose, onOpen, UserAccessGroupDetails
     requestdata();
   }, []);
 
-  console.log(UserAccessGroupDetails)
+  // console.log(UserAccessGroupDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New UserAccessGroup</CButton>
+      <CButton color="primary" onClick={onOpen}>New User Access Group</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -93,7 +93,7 @@ const UserAccessGroupPopup = ({ visible, onClose, onOpen, UserAccessGroupDetails
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New UserAccessGroup</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">Create New User Access Group</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">
