@@ -73,14 +73,14 @@ const UserAccessGroupPopup = ({ visible, onClose, onOpen, UserAccessGroupDetails
     const UserNameDetails = await requestdata_UserName_DropDowns_All(formData)
 
     setOptionsUserName(UserNameDetails);
-
+    //  console.log(AccessGroupDetails)
   }
 
   useEffect(() => {
     requestdata();
   }, []);
 
-  // console.log(UserAccessGroupDetails)
+
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New User Access Group</CButton>

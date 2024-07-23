@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CInputGroup, CInputGroupText, CFormSelect } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 // import UserAccessGroupPopup from './UserAccessGroupPopup.js';
@@ -7,7 +7,9 @@ import data from './_data.js'
 import { getUserAccessGroupAll } from '../../../apicalls/useraccessgroup/get_all_list.js';
 import { getUserAccessGroupSingle } from '../../../apicalls/useraccessgroup/get_useraccessgroup_single.js';
 import UserAccessGroupPopup from './UserAccessGroupPopup'
-import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
+import { requestdata_UserName_DropDowns_All } from '../../../apicalls/usergeneral/get_all_list.js';
+import { requestdata_AccessGroup_DropDowns_All } from '../../../apicalls/accessgroup/get_all_list.js';
+
 
 const UserAccessGroupDataGrid = () => {
 
@@ -58,6 +60,8 @@ const UserAccessGroupDataGrid = () => {
 
   const [UserAccessGroupDetails, setUserAccessGroupDetails] = useState([])
   // const [UserAccessGroupId, setUserAccessGroupId] = useState('')
+  const [optionsUserName, setOptionsUserName] = useState([]);
+  const [optionsAccessGroup, setOptionsAccessGroup] = useState([]);
   const handleChangeId = (event) => {
     setUserAccessGroupId(event.target.value)
   }
@@ -129,6 +133,17 @@ const UserAccessGroupDataGrid = () => {
     // console.log(UserAccessGroupDetails)
     setData(UserAccessGroupDetails);
 
+    const [optionsUserName, setOptionsUserName] = useState([]);
+    const [optionsAccessGroup, setOptionsAccessGroup] = useState([]);
+
+    const AccessGroupDetails = await requestdata_AccessGroup_DropDowns_All(formData)
+
+    setOptionsAccessGroup(AccessGroupDetails);
+
+    const UserNameDetails = await requestdata_UserName_DropDowns_All(formData)
+
+    setOptionsUserName(UserNameDetails);
+
     // const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
@@ -195,6 +210,35 @@ const UserAccessGroupDataGrid = () => {
           >
             Download current items (.csv)
           </CButton>
+        </CCol><CCol>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>User Name</h6>
+              </CInputGroupText>
+            </CCol>
+            <CFormSelect value={optionsUserName} onChange={(e) => setOptionsUserName(e.target.value)}>
+              {optionsUserName.map((option) => (
+                <option key={option.key} value={option.key}>
+                  {option.value}
+                </option>
+              ))}
+            </CFormSelect>
+          </CInputGroup>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>Access Group</h6>
+              </CInputGroupText>
+            </CCol>
+            <CFormSelect value={optionsAccessGroup} onChange={(e) => setOptionsAccessGroup(e.target.value)}>
+              {optionsAccessGroup.map((option) => (
+                <option key={option.key} value={option.key}>
+                  {option.value}
+                </option>
+              ))}
+            </CFormSelect>
+          </CInputGroup>
         </CCol>
         <CCol className='d-flex justify-content-end'>
           <UserAccessGroupPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} UserAccessGroupDetails={UserAccessGroupDetails} />

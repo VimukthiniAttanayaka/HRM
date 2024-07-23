@@ -79,7 +79,7 @@ const InternalUserDataGrid = () => {
       // AUD_notificationToken: token,
       UD_UserName: item
     }
-console.log(item)
+// console.log(item)
     // const res = fetch(apiUrl + 'InternalUser/get_InternalUser_single', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },

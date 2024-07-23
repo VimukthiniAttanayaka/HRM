@@ -56,8 +56,8 @@ export const requestdata_AccessGroup_DropDowns_All = async (formData) => {
 
       for (let index = 0; index < res1[0].AccessGroup.length; index++) {
         const accessgroupData = {
-          key: res1[0].AccessGroup[index].USR_accessgroupID,
-          value: res1[0].AccessGroup[index].USR_PrefferedName
+          key: res1[0].AccessGroup[index].UAG_AccessGroupID,
+          value: res1[0].AccessGroup[index].UAG_AccessGroup
         };
         optionsaccessgroup[index] = accessgroupData
       }
