@@ -4,6 +4,7 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 import { requestdata_UserName_DropDowns_All } from '../../../apicalls/usergeneral/get_all_list.js';
+import { requestdata_AccessGroup_DropDowns_All } from '../../../apicalls/accessgroup/get_all_list.js';
 
 const UserAccessGroupPopup = ({ visible, onClose, onOpen, UserAccessGroupDetails }) => {
 
@@ -58,16 +59,16 @@ const UserAccessGroupPopup = ({ visible, onClose, onOpen, UserAccessGroupDetails
   }
 
   const [optionsUserName, setOptionsUserName] = useState([]);
-  const [optionsUserRole, setOptionsUserRole] = useState([]);
+  const [optionsAccessGroup, setOptionsAccessGroup] = useState([]);
 
   async function requestdata() {
     const formData = {
       USR_EmployeeID: 'sedcx'
     }
 
-    // const UserRoleDetails = await requestdata_UserRoles_DropDowns_All(formData)
+    const AccessGroupDetails = await requestdata_AccessGroup_DropDowns_All(formData)
 
-    // setOptionsUserRole(UserRoleDetails);
+    setOptionsAccessGroup(AccessGroupDetails);
 
     const UserNameDetails = await requestdata_UserName_DropDowns_All(formData)
 
@@ -101,7 +102,7 @@ const UserAccessGroupPopup = ({ visible, onClose, onOpen, UserAccessGroupDetails
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>UserName</h6>
+                      <h6>User Name</h6>
                     </CInputGroupText>
                   </CCol>    <CFormSelect value={optionsUserName} onChange={(e) => setOptionsUserName(e.target.value)}>
                     {optionsUserName.map((option) => (
@@ -114,11 +115,11 @@ const UserAccessGroupPopup = ({ visible, onClose, onOpen, UserAccessGroupDetails
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>UserAccessGroup</h6>
+                      <h6>Access Group</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormSelect value={optionsUserName} onChange={(e) => setOptionsUserName(e.target.value)}>
-                    {optionsUserName.map((option) => (
+                  <CFormSelect value={optionsAccessGroup} onChange={(e) => setOptionsAccessGroup(e.target.value)}>
+                    {optionsAccessGroup.map((option) => (
                       <option key={option.key} value={option.key}>
                         {option.value}
                       </option>

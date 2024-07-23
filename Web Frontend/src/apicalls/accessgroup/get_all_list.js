@@ -42,7 +42,7 @@ export const getAccessGroupAll = async (formData) => {
   return AccessGroupDetails;
 };
 
-export const requestdata_accessgroup_DropDowns_All = async (formData) => {
+export const requestdata_AccessGroup_DropDowns_All = async (formData) => {
 
   const optionsaccessgroup = [];
   const res = await fetch(apiUrl + 'accessgroup/get_accessgroup_all', {
