@@ -65,3 +65,30 @@ export const requestdata_AccessGroup_DropDowns_All = async (formData) => {
     })
   return optionsaccessgroup;
 }
+
+
+export const requestdata_AccessGroup_SelectBox = async (formData) => {
+
+  const optionsaccessgroup = [];
+  const res = await fetch(apiUrl + 'accessgroup/get_accessgroup_all', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+  })
+    .then(response => response.json())
+    .then(json => {
+      let res1 = JSON.parse(JSON.stringify(json))
+
+      for (let index = 0; index < res1[0].AccessGroup.length; index++) {
+        const accessgroupData = {
+          key: res1[0].AccessGroup[index].UAG_AccessGroupID,
+          value: res1[0].AccessGroup[index].UAG_AccessGroup,
+          label: res1[0].AccessGroup[index].UAG_AccessGroup,
+          Ischecked: false
+        };
+        optionsaccessgroup[index] = accessgroupData
+      }
+      // console.log(optionsaccessgroup)
+    })
+  return optionsaccessgroup;
+}

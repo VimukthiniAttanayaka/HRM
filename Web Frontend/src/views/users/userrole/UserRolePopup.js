@@ -4,7 +4,7 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 
-const UserRolePopup = ({ visible, onClose, onOpen, UserRoleDetails }) => {
+const UserRolePopup = ({ visible, onClose, onOpen, UserRoleDetails , checkAccessGroupListItems }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -14,9 +14,6 @@ const UserRolePopup = ({ visible, onClose, onOpen, UserRoleDetails }) => {
   const [UserRole, setUserRole] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeAlotment = (event) => {
-    setLeaveAlotmentId(event.target.value)
-  }
   const handleChangeUserRole = (event) => {
     setUserRole(event.target.value)
   }
@@ -114,16 +111,17 @@ const UserRolePopup = ({ visible, onClose, onOpen, UserRoleDetails }) => {
                       <h6>User Groups</h6>
                     </CInputGroupText>
                   </CCol>
-                  {options.map((option) => (
-                    <CFormCheck
-                      key={option.value}
-                      type="checkbox"
-                      label={option.label}
-                      value={option.value}
-                      checked={checkedItems.includes(option.value)}
-                      onChange={handleCheckboxChange}
-                    />
-                  ))}
+                  {checkAccessGroupListItems.map((option) => (
+                  <CFormCheck
+                    key={option.value}
+                    type="checkbox"
+                    label={option.label}
+                    value={option.value}
+                    // checked={checkedItems.includes(option.value)}
+                    checked={option.Ischecked}
+                    onChange={handleCheckboxChange}
+                  />
+                ))}
                 {/* </CInputGroup> */}
                 <CInputGroup className="mb-3">
                   <CCol md={4}>

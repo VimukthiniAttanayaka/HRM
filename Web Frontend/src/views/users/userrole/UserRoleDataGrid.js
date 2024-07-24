@@ -6,7 +6,7 @@ import UserRolePopup from './UserRolePopup.js';
 // import loadDetails from './UserRolePopup.js';
 import { getUserRoleAll } from '../../../apicalls/userrole/get_all_list.js';
 import { getUserRoleSingle } from '../../../apicalls/userrole/get_userrole_single.js';
-
+import { requestdata_AccessGroup_SelectBox } from '../../../apicalls/accessgroup/get_all_list.js';
 
 const UserRoleDataGrid = () => {
 
@@ -53,11 +53,23 @@ const UserRoleDataGrid = () => {
   }
 
   const [UserRoleDetails, setUserRoleDetails] = useState([])
+  const [checkAccessGroupListItems, setcheckAccessGroupListItems] = useState([]);
   // const [UserRoleId, setUserRoleId] = useState('')
   const handleChangeId = (event) => {
     setUserRoleId(event.target.value)
   }
 
+  async function requestDefaultData() {
+    const formData = {
+      // UD_StaffID: staffId,
+      // AUD_notificationToken: token,
+      UAG_AccessGroupID: ""
+    }
+    const AccessGroupList = await requestdata_AccessGroup_SelectBox(formData)
+   
+    setcheckAccessGroupListItems(AccessGroupList);
+
+  }
   async function loadDetails(item) {
 
     const token = getJWTToken();
@@ -87,7 +99,8 @@ const UserRoleDataGrid = () => {
     //   })
     const UserRoleDetails = await getUserRoleSingle(formData)
     // setUserRoleDetails(res1[0].UserRole[0]);
-    setUserRoleDetails(UserRoleDetails);
+    setcheckAccessGroupListItems(UserRoleDetails.AccessGroups);
+     setUserRoleDetails(UserRoleDetails);
     handleOpenPopup()
   }
   const toggleDetails = (index) => {
@@ -172,6 +185,8 @@ const UserRoleDataGrid = () => {
 
   const handleOpenPopup = () => {
     setVisible(true);
+  
+    requestDefaultData();
   };
 
   const handleClosePopup = () => {
@@ -194,7 +209,7 @@ const UserRoleDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <UserRolePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} UserRoleDetails={UserRoleDetails} />
+          <UserRolePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} checkAccessGroupListItems={checkAccessGroupListItems}  UserRoleDetails={UserRoleDetails} />
         </CCol>
       </CRow>
       <CSmartTable
