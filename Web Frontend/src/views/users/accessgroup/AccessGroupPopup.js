@@ -4,7 +4,7 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 
-const AccessGroupPopup = ({ visible, onClose, onOpen, AccessGroupDetails }) => {
+const AccessGroupPopup = ({ visible, onClose, onOpen, AccessGroupDetails, checkMenuListItems }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -56,6 +56,7 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, AccessGroupDetails }) => {
 
   // console.log(UserRoleDetails)
   const [checkedItems, setCheckedItems] = useState([]);
+  // const [checkMenuListItems, setcheckMenuListItems] = useState([]);
 
   const handleCheckboxChange = (event) => {
     const { checked, value } = event.target;
@@ -67,12 +68,15 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, AccessGroupDetails }) => {
   };
 
   const options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' },
+    { value: 'option1', label: 'Option 1', checked: true },
+    { value: 'option2', label: 'Option 2', checked: true },
+    { value: 'option3', label: 'Option 3', checked: true },
   ];
 
-  // console.log(AccessGroupDetails)
+  useEffect(() => {
+  }, []);
+
+ 
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New Access Group</CButton>
@@ -112,20 +116,23 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, AccessGroupDetails }) => {
                 {/* <CInputGroup className="mb-3"> */}
                 <CCol md={4}>
                   <CInputGroupText>
-                    <h6>User Groups</h6>
+                    <h6>Available Menus</h6>
                   </CInputGroupText>
                 </CCol>
-                {options.map((option) => (
+
+                {checkMenuListItems.map((option) => (
                   <CFormCheck
                     key={option.value}
                     type="checkbox"
                     label={option.label}
                     value={option.value}
-                    checked={checkedItems.includes(option.value)}
+                    // checked={checkedItems.includes(option.value)}
+                    checked={option.Ischecked}
                     onChange={handleCheckboxChange}
                   />
                 ))}
-                {/* </CInputGroup> */}     <CInputGroup className="mb-3">
+                {/* </CInputGroup> */}
+                <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>Status</h6>

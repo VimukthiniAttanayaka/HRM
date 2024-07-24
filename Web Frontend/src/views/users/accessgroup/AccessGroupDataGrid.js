@@ -6,6 +6,7 @@ import AccessGroupPopup from './AccessGroupPopup.js';
 // import loadDetails from './AccessGroupPopup.js';
 import { getAccessGroupAll } from '../../../apicalls/accessgroup/get_all_list.js';
 import { getAccessGroupSingle } from '../../../apicalls/accessgroup/get_accessgroup_single.js';
+import { requestdata_UserMenu_SelectBox } from '../../../apicalls/usermenu/get_all_list.js';
 
 const AccessGroupDataGrid = () => {
 
@@ -28,7 +29,7 @@ const AccessGroupDataGrid = () => {
     //   key: 'alotment',
     //   _style: { width: '20%' }
     // },
-     {
+    {
       key: 'status',
       _style: { width: '20%' }
     },
@@ -57,11 +58,23 @@ const AccessGroupDataGrid = () => {
   }
 
   const [AccessGroupDetails, setAccessGroupDetails] = useState([])
+  const [checkMenuListItems, setcheckMenuListItems] = useState([]);
   // const [AccessGroupId, setAccessGroupId] = useState('')
   const handleChangeId = (event) => {
     setAccessGroupId(event.target.value)
   }
 
+  async function requestDefaultData() {
+    const formData = {
+      // UD_StaffID: staffId,
+      // AUD_notificationToken: token,
+      UAG_AccessGroupID: ""
+    }
+    const MenuList = await requestdata_UserMenu_SelectBox(formData)
+   
+    setcheckMenuListItems(MenuList);
+
+  }
   async function loadDetails(item) {
 
     const token = getJWTToken();
@@ -91,6 +104,8 @@ const AccessGroupDataGrid = () => {
     //   })
     const AccessGroupDetails = await getAccessGroupSingle(formData)
     // setAccessGroupDetails(res1[0].AccessGroup[0]);
+    console.log(AccessGroupDetails)
+    setcheckMenuListItems(AccessGroupDetails.AccessGroups);
     setAccessGroupDetails(AccessGroupDetails);
     handleOpenPopup()
   }
@@ -175,6 +190,7 @@ const AccessGroupDataGrid = () => {
 
   const handleOpenPopup = () => {
     setVisible(true);
+    requestDefaultData();
   };
 
   const handleClosePopup = () => {
@@ -197,7 +213,7 @@ const AccessGroupDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <AccessGroupPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} AccessGroupDetails={AccessGroupDetails} />
+          <AccessGroupPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} checkMenuListItems={checkMenuListItems} AccessGroupDetails={AccessGroupDetails} />
         </CCol>
       </CRow>
       <CSmartTable

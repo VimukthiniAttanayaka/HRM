@@ -34,9 +34,9 @@ namespace HRM_DAL.Models
     }
     public class AccessGroupSelect
     {
-        public string UAG_AccessGroupID { get; set; }
-        public string UAG_AccessGroup { get; set; }
-        public bool IsSelected { get; set; }
+        public string value { get; set; }
+        public string label { get; set; }
+        public bool Ischecked { get; set; }
     }
     public class ReturnUserRoleAllModel
     {

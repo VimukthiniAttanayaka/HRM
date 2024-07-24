@@ -29,11 +29,19 @@ namespace HRM.Controllers
             List<ReturnAccessGroupModelHead> objAccessGroupHeadList = new List<ReturnAccessGroupModelHead>();
             ReturnAccessGroupModelHead obj = new ReturnAccessGroupModelHead() { resp = false, msg = "sfsf" };
             obj.AccessGroup = new List<ReturnAccessGroupModel>();
+            List<AccessGroupSelect> AccessGroups = new List<AccessGroupSelect>();
+            AccessGroups.Add(new AccessGroupSelect() { value = "CAS", label = "CAS", Ischecked = true });
+            AccessGroups.Add(new AccessGroupSelect() { value = "ANU", label = "ANU", Ischecked = true });
+            AccessGroups.Add(new AccessGroupSelect() { value = "MED", label = "MED", Ischecked = true });
+
             if (model.UAG_AccessGroupID == "CAS")
-                obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "CAS", UAG_AccessGroup = "Casual", UAG_Status = true });
-            if (model.UAG_AccessGroupID == "ANU") obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "ANU", UAG_AccessGroup = "Annual", UAG_Status = true });
-            if (model.UAG_AccessGroupID == "MED") obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MED", UAG_AccessGroup = "Medical", UAG_Status = true });
-            if (model.UAG_AccessGroupID == "MAT") obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MAT", UAG_AccessGroup = "Matrinaty", UAG_Status = true });
+                obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "CAS", UAG_AccessGroup = "Casual", UAG_Status = true, AccessGroups = AccessGroups });
+            else if (model.UAG_AccessGroupID == "ANU") obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "ANU", UAG_AccessGroup = "Annual", UAG_Status = true, AccessGroups = AccessGroups });
+            else if (model.UAG_AccessGroupID == "MED") obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MED", UAG_AccessGroup = "Medical", UAG_Status = true, AccessGroups = AccessGroups });
+            else if (model.UAG_AccessGroupID == "MAT") obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MAT", UAG_AccessGroup = "Matrinaty", UAG_Status = true, AccessGroups = AccessGroups });
+
+            else obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MAT", UAG_AccessGroup = "Matrinaty", UAG_Status = true, AccessGroups = AccessGroups });
+
             objAccessGroupHeadList.Add(obj);
             return objAccessGroupHeadList;
 

@@ -30,6 +30,7 @@ namespace HRM_DAL.Models
         public DateTime UAG_CreatedDateTime { get; set; }
         public string UAG_ModifiedBy { get; set; }
         public DateTime UAG_ModifiedDateTime { get; set; }
+        public List<AccessGroupSelect> AccessGroups { get; set; }
     }
 
     public class ReturnAccessGroupAllModel
