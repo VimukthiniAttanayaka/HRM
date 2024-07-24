@@ -4,6 +4,7 @@ import { Translation } from 'react-i18next'
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Company = React.lazy(() => import('./views/employee/Company/Company'))
 const Employee = React.lazy(() => import('./views/employee/employee/Employee'))
+const EmployeeJobDescription = React.lazy(() => import('./views/employee/employeejobdescription/EmployeeJobDescription'))
 const LeaveSchedule = React.lazy(() => import('./views/leaves/leaveshedule/LeaveSchedule'))
 const LeaveType = React.lazy(() => import('./views/leaves/leavetype/LeaveType'))
 const LeaveEntitlement = React.lazy(() => import('./views/leaves/leaveentitlement/LeaveEntitlement'))
@@ -103,6 +104,10 @@ const routes = [
     element: Employee,
   },
   {
+    path: '/employee/employeejobdescription',
+    name: <Translation>{(t) => t('Employee Job Description')}</Translation>,
+    element: EmployeeJobDescription,
+  }, {
     path: '/leaves/leaveshedule',
     name: <Translation>{(t) => t('LeaveSchedule')}</Translation>,
     element: LeaveSchedule,

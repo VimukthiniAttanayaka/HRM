@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
-import ReportingManagerSearchPopup from './ReportingManagerSearchPopup.js';
-// import loadDetails from './ReportingManagerPopup.js';
-import { getReportingManagerAll } from '../../../apicalls/reportingmanager/get_all_list.js';
-import { getReportingManagerSingle } from '../../../apicalls/reportingmanager/get_reportingmanager_single.js';
+import EmployeeJobDescriptionPopup from './EmployeeJobDescriptionPopup'
 
-const ReportingManagerSearchDataGrid = () => {
+import { getEmployeeJobDescriptionAll } from '../../../apicalls/employeejobdescription/get_all_list.js';
+import { getEmployeeJobDescriptionSingle } from '../../../apicalls/employeejobdescription/get_employeejobdescription_single.js';
+
+const EmployeeJobDescriptionDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
@@ -15,23 +15,28 @@ const ReportingManagerSearchDataGrid = () => {
   const columns = [
     {
       key: 'id',
-      // label: '',
-      // filter: false,
-      // sorter: false,
+      label: '',
+      filter: false,
+      sorter: false,
     },
     {
-      key: 'ReportingManager',
+      key: 'departmentid',
       _style: { width: '20%' },
     },
-
+    // 'Employeeid',
     {
-      key: 'employeeId',
+      key: 'Employeeid',
       _style: { width: '20%' }
-    }, {
+    },
+    // 'Employeeid',
+    {
+      key: 'jobdescriptionid',
+      _style: { width: '20%' }
+    },
+    {
       key: 'status',
       _style: { width: '20%' }
     },
-
     {
       key: 'show_details',
       label: '',
@@ -54,45 +59,6 @@ const ReportingManagerSearchDataGrid = () => {
         return 'primary'
     }
   }
-
-  const [ReportingManagerDetails, setReportingManagerDetails] = useState([])
-  // const [ReportingManagerId, setReportingManagerId] = useState('')
-  const handleChangeId = (event) => {
-    setReportingManagerId(event.target.value)
-  }
-
-  async function loadDetails(item) {
-
-    const token = getJWTToken();
-    const staffId = getStaffID();
-    const customerId = getCustomerID();
-
-    // const config = {
-    //   headers: { Authorization: `Bearer ${auth}` }
-    // };
-
-    const formData = {
-      // UD_StaffID: staffId,
-      // AUD_notificationToken: token,
-      LVT_ReportingManagerID: item
-    }
-
-    // const res = fetch(apiUrl + 'ReportingManager/get_ReportingManager_single', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setReportingManagerDetails(res1[0].ReportingManager[0]);
-    //     handleOpenPopup()
-    //   })
-    const ReportingManagerDetails = await getReportingManagerSingle(formData)
-    // setReportingManagerDetails(res1[0].ReportingManager[0]);
-    setReportingManagerDetails(ReportingManagerDetails);
-    handleOpenPopup()
-  }
   const toggleDetails = (index) => {
 
 
@@ -103,12 +69,11 @@ const ReportingManagerSearchDataGrid = () => {
     } else {
       newDetails = [...details, index]
       // alert(newDetails[newDetails.length - 1])
-      loadDetails(newDetails[0])
+      // console.log(newDetails)
+      handleOpenPopup()
     }
     // setDetails(newDetails)
   }
-
-  // setCustomerId(res1[0].Customer[0].CUS_ID);}
   const apiUrl = process.env.REACT_APP_API_URL;
 
   async function requestdata() {
@@ -123,12 +88,10 @@ const ReportingManagerSearchDataGrid = () => {
       // AUD_notificationToken: token,
       USR_EmployeeID: 'sedcx'
     }
-
-    const ReportingManagerDetails = await getReportingManagerAll(formData)
-    // console.log(ReportingManagerDetails)
-    setData(ReportingManagerDetails);
-
-    // const res = await fetch(apiUrl + 'ReportingManager/get_ReportingManager_all', {
+    const EmployeeJobDescriptionDetails = await getEmployeeJobDescriptionAll(formData)
+    // console.log(EmployeeJobDescriptionDetails)
+    setData(EmployeeJobDescriptionDetails);
+    // const res = await fetch(apiUrl + 'employee/get_employee_all', {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
     //   body: JSON.stringify(formData),
@@ -136,28 +99,9 @@ const ReportingManagerSearchDataGrid = () => {
     //   .then(response => response.json())
     //   .then(json => {
     //     let res1 = JSON.parse(JSON.stringify(json))
-
-    //     const ReportingManagerDetails = [];
-    //     class ReportingManagerDetail {
-    //       constructor(id, ReportingManager, status, Alotment) {
-    //         this.ReportingManager = ReportingManager;
-    //         this.id = id;
-    //         this.alotment = Alotment
-    //         if (status == true) { this.status = "Active"; }
-    //         else { this.status = "Inactive"; }
-    //       }
-    //     }
-
-    //     for (let index = 0; index < res1[0].ReportingManager.length; index++) {
-    //       let element = res1[0].ReportingManager[index];
-    //       console.log(element)
-    //       ReportingManagerDetails[index] = new ReportingManagerDetail(element.LVT_ReportingManagerID, element.LVT_ReportingManager, element.LVT_Status, element.LVT_LeaveAlotment);
-    //     }
-
-    //     setData(ReportingManagerDetails);
+    //     console.log(res1);
     //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
     //   })
-
   }
   useEffect(() => {
     requestdata();
@@ -178,7 +122,6 @@ const ReportingManagerSearchDataGrid = () => {
 
   const handleClosePopup = () => {
     setVisible(false);
-    setReportingManagerDetails([]);
   };
 
   return (
@@ -196,16 +139,16 @@ const ReportingManagerSearchDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <ReportingManagerSearchPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} ReportingManagerDetails={ReportingManagerDetails} />
+          <EmployeeJobDescriptionPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} />
         </CCol>
       </CRow>
       <CSmartTable
         cleaner
-        clickableRows
+        // clickableRows
         columns={columns}
         columnFilter
         columnSorter
-        footer
+        // footer
         items={data}
         itemsPerPageSelect
         itemsPerPage={5}
@@ -215,17 +158,17 @@ const ReportingManagerSearchDataGrid = () => {
         //   console.log(items)
         // }}
         onSelectedItemsChange={(items) => {
-          console.log(items)
+          // console.log(items)
         }}
         scopedColumns={{
-          // avatar: (item) => (
-          //   <td>
-          //     {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-          //   </td>
-          // ),
+          avatar: (item) => (
+            <td>
+              {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
+            </td>
+          ),
           status: (item) => (
             <td>
-              <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
+              {/* <CBadge color={getBadge(item.status)}>{item.status}</CBadge> */}
             </td>
           ),
           show_details: (item) => {
@@ -278,4 +221,4 @@ const ReportingManagerSearchDataGrid = () => {
   )
 }
 
-export default ReportingManagerSearchDataGrid
+export default EmployeeJobDescriptionDataGrid

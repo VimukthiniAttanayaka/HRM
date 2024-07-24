@@ -72,6 +72,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Models\EmployeeJobDescriptionModel.cs" />
     <Compile Include="Models\MenuAccessModel.cs" />
     <Compile Include="Models\UserDetailsModel.cs" />
     <Compile Include="Models\UserAccessGroupModel.cs" />

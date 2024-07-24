@@ -4,7 +4,7 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 
-const EmployeePopup = ({ visible, onClose, onOpen }) => {
+const EmployeeJobDescriptionPopup = ({ visible, onClose, onOpen }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -12,16 +12,16 @@ const EmployeePopup = ({ visible, onClose, onOpen }) => {
   };
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New Employee</CButton>
+      <CButton color="primary" onClick={onOpen}>New Employee Job Description</CButton>
       <CModal size='lg'
-        scrollable="true"
+        scrollable
         alignment="center"
         visible={visible}
         onClose={onClose}
         aria-labelledby="TooltipsAndPopoverExample"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New Employee</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">Create New Employee Job Description</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4" md={9}>
@@ -218,4 +218,4 @@ const EmployeePopup = ({ visible, onClose, onOpen }) => {
     </>
   )
 }
-export default EmployeePopup
+export default EmployeeJobDescriptionPopup

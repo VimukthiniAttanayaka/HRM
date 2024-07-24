@@ -9,21 +9,21 @@ using Newtonsoft.Json;
 
 namespace HRM_DAL.Data
 {
-    public class Employee_Data
+    public class EmployeeJobDescription_Data
     {
         private static LogError objError = new LogError();
 
-        public static List<ReturnEmployeeModelHead> get_employees_single(Employee model)//ok
+        public static List<ReturnEmployeeJobDescriptionModelHead> get_EmployeeJobDescriptions_single(EmployeeJobDescription model)//ok
         {
-            List<ReturnEmployeeModelHead> objEmployeeHeadList = new List<ReturnEmployeeModelHead>();
-            ReturnEmployeeModelHead objemployeeHead = new ReturnEmployeeModelHead();
+            List<ReturnEmployeeJobDescriptionModelHead> objEmployeeJobDescriptionHeadList = new List<ReturnEmployeeJobDescriptionModelHead>();
+            ReturnEmployeeJobDescriptionModelHead objEmployeeJobDescriptionHead = new ReturnEmployeeJobDescriptionModelHead();
 
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
-                objemployeeHead.resp = false;
-                objemployeeHead.IsAuthenticated = false;
-                objEmployeeHeadList.Add(objemployeeHead);
-                return objEmployeeHeadList;
+                objEmployeeJobDescriptionHead.resp = false;
+                objEmployeeJobDescriptionHead.IsAuthenticated = false;
+                objEmployeeJobDescriptionHeadList.Add(objEmployeeJobDescriptionHead);
+                return objEmployeeJobDescriptionHeadList;
             }
 
             try
@@ -36,11 +36,11 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "sp_get_employees_single";
+                        cmd.CommandText = "sp_get_EmployeeJobDescriptions_single";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@ECE_EmployeeID" , model.ECE_EmployeeID);
-                        cmd.Parameters["@ECE_EmployeeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EEJ_EmployeeJobDescriptionID" , model.EEJ_EmployeeJobDescriptionID);
+                        cmd.Parameters["@EEJ_EmployeeJobDescriptionID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -51,98 +51,98 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                ReturnEmployeeModel objemployee = new ReturnEmployeeModel();
+                                ReturnEmployeeJobDescriptionModel objEmployeeJobDescription = new ReturnEmployeeJobDescriptionModel();
 
-                                objemployeeHead.resp = true;
-                                objemployeeHead.msg = "Get Employee";
+                                objEmployeeJobDescriptionHead.resp = true;
+                                objEmployeeJobDescriptionHead.msg = "Get EmployeeJobDescription";
 
-                                objemployee.ECE_EmployeeID = rdr["ECE_EmployeeID"].ToString();
-                                objemployee.ECE_CustomerID = rdr["ECE_CustomerID"].ToString();
-                                objemployee.ECE_DepartmentID = rdr["ECE_DepartmentID"].ToString();
-                                objemployee.ECE_FirstName = rdr["ECE_FirstName"].ToString();
-                                objemployee.ECE_LastName = rdr["ECE_LastName"].ToString();
-                                //objemployee.ECE_PrefferedName = rdr["ECE_PrefferedName"].ToString();
-                                //objemployee.ECE_OrgStructuralLevel1 = rdr["ECE_OrgStructuralLevel1"].ToString();
-                                //objemployee.ECE_OrgStructuralLevel2 = rdr["ECE_OrgStructuralLevel2"].ToString();
-                                //objemployee.ECE_DepartmentDetail1 = rdr["ECE_DepartmentDetail1"].ToString();
-                                //objemployee.ECE_DepartmentDetail2 = rdr["ECE_DepartmentDetail2"].ToString();
-                                //objemployee.ECE_DepartmentDetail3 = rdr["ECE_DepartmentDetail3"].ToString();
-                                //objemployee.ECE_JobCodeDescription = rdr["ECE_JobCodeDescription"].ToString();
-                                objemployee.ECE_Address = rdr["ECE_Address"].ToString();
-                                objemployee.ECE_EmailAddress = rdr["ECE_EmailAddress"].ToString();
-                                objemployee.ECE_MobileNumber = rdr["ECE_MobileNumber"].ToString();
-                                objemployee.ECE_PhoneNumber1 = rdr["ECE_PhoneNumber1"].ToString();
-                                objemployee.ECE_PhoneNumber2 = rdr["ECE_PhoneNumber2"].ToString();
-                                objemployee.ECE_RankDescription = rdr["ECE_RankDescription"].ToString();
-                                objemployee.ECE_StaffLocation = rdr["ECE_StaffLocation"].ToString();
-                                objemployee.ECE_Remarks = rdr["ECE_Remarks"].ToString();
-                                //objemployee.ECE_Pwd = rdr["ECE_Pwd"].ToString();
-                                //objemployee.ECE_LastResetDateTime = rdr["ECE_LastResetDateTime"].ToString();
-                                //objemployee.ECE_SyncedDateTime = rdr["ECE_SyncedDateTime"].ToString();
-                                //objemployee.ECE_ActiveFrom = rdr["ECE_ActiveFrom"].ToString();
-                                //objemployee.ECE_ActiveTo = rdr["ECE_ActiveTo"].ToString();
-                                objemployee.ECE_Status = Convert.ToBoolean(rdr["ECE_Status"].ToString());
+                                objEmployeeJobDescription.EEJ_EmployeeJobDescriptionID = Convert .ToInt32(rdr["EEJ_EmployeeJobDescriptionID"].ToString());
+                                objEmployeeJobDescription.EEJ_EmployeeID = rdr["EEJ_CustomerID"].ToString();
+                                objEmployeeJobDescription.EEJ_DepartmentID = rdr["EEJ_DepartmentID"].ToString();
+                                //objEmployeeJobDescription.EEJ_FirstName = rdr["EEJ_FirstName"].ToString();
+                                //objEmployeeJobDescription.EEJ_LastName = rdr["EEJ_LastName"].ToString();
+                                //objEmployeeJobDescription.EEJ_PrefferedName = rdr["EEJ_PrefferedName"].ToString();
+                                //objEmployeeJobDescription.EEJ_OrgStructuralLevel1 = rdr["EEJ_OrgStructuralLevel1"].ToString();
+                                //objEmployeeJobDescription.EEJ_OrgStructuralLevel2 = rdr["EEJ_OrgStructuralLevel2"].ToString();
+                                //objEmployeeJobDescription.EEJ_DepartmentDetail1 = rdr["EEJ_DepartmentDetail1"].ToString();
+                                //objEmployeeJobDescription.EEJ_DepartmentDetail2 = rdr["EEJ_DepartmentDetail2"].ToString();
+                                //objEmployeeJobDescription.EEJ_DepartmentDetail3 = rdr["EEJ_DepartmentDetail3"].ToString();
+                                //objEmployeeJobDescription.EEJ_JobCodeDescription = rdr["EEJ_JobCodeDescription"].ToString();
+                                //objEmployeeJobDescription.EEJ_Address = rdr["EEJ_Address"].ToString();
+                                //objEmployeeJobDescription.EEJ_EmailAddress = rdr["EEJ_EmailAddress"].ToString();
+                                //objEmployeeJobDescription.EEJ_MobileNumber = rdr["EEJ_MobileNumber"].ToString();
+                                //objEmployeeJobDescription.EEJ_PhoneNumber1 = rdr["EEJ_PhoneNumber1"].ToString();
+                                //objEmployeeJobDescription.EEJ_PhoneNumber2 = rdr["EEJ_PhoneNumber2"].ToString();
+                                //objEmployeeJobDescription.EEJ_RankDescription = rdr["EEJ_RankDescription"].ToString();
+                                //objEmployeeJobDescription.EEJ_StaffLocation = rdr["EEJ_StaffLocation"].ToString();
+                                objEmployeeJobDescription.EEJ_Remarks = rdr["EEJ_Remarks"].ToString();
+                                //objEmployeeJobDescription.EEJ_Pwd = rdr["EEJ_Pwd"].ToString();
+                                //objEmployeeJobDescription.EEJ_LastResetDateTime = rdr["EEJ_LastResetDateTime"].ToString();
+                                //objEmployeeJobDescription.EEJ_SyncedDateTime = rdr["EEJ_SyncedDateTime"].ToString();
+                                //objEmployeeJobDescription.EEJ_ActiveFrom = rdr["EEJ_ActiveFrom"].ToString();
+                                //objEmployeeJobDescription.EEJ_ActiveTo = rdr["EEJ_ActiveTo"].ToString();
+                                objEmployeeJobDescription.EEJ_Status = Convert.ToBoolean(rdr["EEJ_Status"].ToString());
 
-                                if (objemployeeHead.Employee == null)
+                                if (objEmployeeJobDescriptionHead.EmployeeJobDescription == null)
                                 {
-                                    objemployeeHead.Employee = new List<ReturnEmployeeModel>();
+                                    objEmployeeJobDescriptionHead.EmployeeJobDescription = new List<ReturnEmployeeJobDescriptionModel>();
                                 }
 
-                                objemployeeHead.Employee.Add(objemployee);
+                                objEmployeeJobDescriptionHead.EmployeeJobDescription.Add(objEmployeeJobDescription);
 
-                                objEmployeeHeadList.Add(objemployeeHead);
+                                objEmployeeJobDescriptionHeadList.Add(objEmployeeJobDescriptionHead);
                             }
 
                         }
                         else
                         {
-                            ReturnEmployeeModel objemployee = new ReturnEmployeeModel();
-                            objemployeeHead.resp = true;
-                            objemployeeHead.msg = "";
-                            objEmployeeHeadList.Add(objemployeeHead);
+                            ReturnEmployeeJobDescriptionModel objEmployeeJobDescription = new ReturnEmployeeJobDescriptionModel();
+                            objEmployeeJobDescriptionHead.resp = true;
+                            objEmployeeJobDescriptionHead.msg = "";
+                            objEmployeeJobDescriptionHeadList.Add(objEmployeeJobDescriptionHead);
 
 
                         }
 
 
                     }
-                    return objEmployeeHeadList;
+                    return objEmployeeJobDescriptionHeadList;
 
                 }
             }
             catch (Exception ex)
             {
-                objemployeeHead = new ReturnEmployeeModelHead
+                objEmployeeJobDescriptionHead = new ReturnEmployeeJobDescriptionModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
                 };
-                objEmployeeHeadList.Add(objemployeeHead);
+                objEmployeeJobDescriptionHeadList.Add(objEmployeeJobDescriptionHead);
 
-                objError.WriteLog(0, "Employee_Data", "get_employees_single", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "Employee_Data", "get_employees_single", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "EmployeeJobDescription_Data", "get_EmployeeJobDescriptions_single", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "EmployeeJobDescription_Data", "get_EmployeeJobDescriptions_single", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "Employee_Data", "get_employees_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "Employee_Data", "get_employees_single", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "EmployeeJobDescription_Data", "get_EmployeeJobDescriptions_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "EmployeeJobDescription_Data", "get_EmployeeJobDescriptions_single", "Inner Exception Message: " + ex.InnerException.Message);
                 }
            }
 
-            return objEmployeeHeadList;
+            return objEmployeeJobDescriptionHeadList;
 
         }
 
-        public static List<ReturnEmployeeModelHead> get_employee_all(EmployeeSearchModel model)//ok
+        public static List<ReturnEmployeeJobDescriptionModelHead> get_EmployeeJobDescription_all(EmployeeJobDescriptionSearchModel model)//ok
         {
-            List<ReturnEmployeeModelHead> objEmployeeHeadList = new List<ReturnEmployeeModelHead>();
-            ReturnEmployeeModelHead objemployeeHead = new ReturnEmployeeModelHead();
+            List<ReturnEmployeeJobDescriptionModelHead> objEmployeeJobDescriptionHeadList = new List<ReturnEmployeeJobDescriptionModelHead>();
+            ReturnEmployeeJobDescriptionModelHead objEmployeeJobDescriptionHead = new ReturnEmployeeJobDescriptionModelHead();
 
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
-                objemployeeHead.resp = false;
-                objemployeeHead.IsAuthenticated = false;
-                objEmployeeHeadList.Add(objemployeeHead);
-                return objEmployeeHeadList;
+                objEmployeeJobDescriptionHead.resp = false;
+                objEmployeeJobDescriptionHead.IsAuthenticated = false;
+                objEmployeeJobDescriptionHeadList.Add(objEmployeeJobDescriptionHead);
+                return objEmployeeJobDescriptionHeadList;
             }
 
             try
@@ -155,11 +155,11 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "get_employee_all";
+                        cmd.CommandText = "get_EmployeeJobDescription_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@ECE_EmployeeID", model.ECE_EmployeeID);
-                        cmd.Parameters["@ECE_EmployeeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EEJ_EmployeeJobDescriptionID", model.EEJ_EmployeeJobDescriptionID);
+                        cmd.Parameters["@EEJ_EmployeeJobDescriptionID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -170,88 +170,88 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                ReturnEmployeeModel objemployee = new ReturnEmployeeModel();
+                                ReturnEmployeeJobDescriptionModel objEmployeeJobDescription = new ReturnEmployeeJobDescriptionModel();
 
-                                objemployeeHead.resp = true;
-                                objemployeeHead.msg = "Get Employee";
+                                objEmployeeJobDescriptionHead.resp = true;
+                                objEmployeeJobDescriptionHead.msg = "Get EmployeeJobDescription";
 
-                                objemployee.ECE_EmployeeID = rdr["ECE_EmployeeID"].ToString();
-                                objemployee.ECE_CustomerID = rdr["ECE_CustomerID"].ToString();
-                                objemployee.ECE_DepartmentID = rdr["ECE_DepartmentID"].ToString();
-                                objemployee.ECE_FirstName = rdr["ECE_FirstName"].ToString();
-                                objemployee.ECE_LastName = rdr["ECE_LastName"].ToString();
-                                //objemployee.ECE_PrefferedName = rdr["ECE_PrefferedName"].ToString();
-                                //objemployee.ECE_OrgStructuralLevel1 = rdr["ECE_OrgStructuralLevel1"].ToString();
-                                //objemployee.ECE_OrgStructuralLevel2 = rdr["ECE_OrgStructuralLevel2"].ToString();
-                                //objemployee.ECE_DepartmentDetail1 = rdr["ECE_DepartmentDetail1"].ToString();
-                                //objemployee.ECE_DepartmentDetail2 = rdr["ECE_DepartmentDetail2"].ToString();
-                                //objemployee.ECE_DepartmentDetail3 = rdr["ECE_DepartmentDetail3"].ToString();
-                                //objemployee.ECE_JobCodeDescription = rdr["ECE_JobCodeDescription"].ToString();
-                                objemployee.ECE_Address = rdr["ECE_Address"].ToString();
-                                objemployee.ECE_EmailAddress = rdr["ECE_EmailAddress"].ToString();
-                                objemployee.ECE_MobileNumber = rdr["ECE_MobileNumber"].ToString();
-                                objemployee.ECE_PhoneNumber1 = rdr["ECE_PhoneNumber1"].ToString();
-                                objemployee.ECE_PhoneNumber2 = rdr["ECE_PhoneNumber2"].ToString();
-                                objemployee.ECE_RankDescription = rdr["ECE_RankDescription"].ToString();
-                                objemployee.ECE_StaffLocation = rdr["ECE_StaffLocation"].ToString();
-                                objemployee.ECE_Remarks = rdr["ECE_Remarks"].ToString();
-                                //objemployee.ECE_Pwd = rdr["ECE_Pwd"].ToString();
-                                //objemployee.ECE_LastResetDateTime = rdr["ECE_LastResetDateTime"].ToString();
-                                //objemployee.ECE_SyncedDateTime = rdr["ECE_SyncedDateTime"].ToString();
-                                //objemployee.ECE_ActiveFrom = rdr["ECE_ActiveFrom"].ToString();
-                                //objemployee.ECE_ActiveTo = rdr["ECE_ActiveTo"].ToString();
-                                objemployee.ECE_Status = Convert.ToBoolean(rdr["ECE_Status"].ToString());
+                                objEmployeeJobDescription.EEJ_EmployeeJobDescriptionID = Convert.ToInt32(rdr["EEJ_EmployeeJobDescriptionID"].ToString());
+                                objEmployeeJobDescription.EEJ_EmployeeID = rdr["EEJ_CustomerID"].ToString();
+                                objEmployeeJobDescription.EEJ_DepartmentID = rdr["EEJ_DepartmentID"].ToString();
+                                //objEmployeeJobDescription.EEJ_FirstName = rdr["EEJ_FirstName"].ToString();
+                                //objEmployeeJobDescription.EEJ_LastName = rdr["EEJ_LastName"].ToString();
+                                //objEmployeeJobDescription.EEJ_PrefferedName = rdr["EEJ_PrefferedName"].ToString();
+                                //objEmployeeJobDescription.EEJ_OrgStructuralLevel1 = rdr["EEJ_OrgStructuralLevel1"].ToString();
+                                //objEmployeeJobDescription.EEJ_OrgStructuralLevel2 = rdr["EEJ_OrgStructuralLevel2"].ToString();
+                                //objEmployeeJobDescription.EEJ_DepartmentDetail1 = rdr["EEJ_DepartmentDetail1"].ToString();
+                                //objEmployeeJobDescription.EEJ_DepartmentDetail2 = rdr["EEJ_DepartmentDetail2"].ToString();
+                                //objEmployeeJobDescription.EEJ_DepartmentDetail3 = rdr["EEJ_DepartmentDetail3"].ToString();
+                                //objEmployeeJobDescription.EEJ_JobCodeDescription = rdr["EEJ_JobCodeDescription"].ToString();
+                                //objEmployeeJobDescription.EEJ_Address = rdr["EEJ_Address"].ToString();
+                                //objEmployeeJobDescription.EEJ_EmailAddress = rdr["EEJ_EmailAddress"].ToString();
+                                //objEmployeeJobDescription.EEJ_MobileNumber = rdr["EEJ_MobileNumber"].ToString();
+                                //objEmployeeJobDescription.EEJ_PhoneNumber1 = rdr["EEJ_PhoneNumber1"].ToString();
+                                //objEmployeeJobDescription.EEJ_PhoneNumber2 = rdr["EEJ_PhoneNumber2"].ToString();
+                                //objEmployeeJobDescription.EEJ_RankDescription = rdr["EEJ_RankDescription"].ToString();
+                                //objEmployeeJobDescription.EEJ_StaffLocation = rdr["EEJ_StaffLocation"].ToString();
+                                objEmployeeJobDescription.EEJ_Remarks = rdr["EEJ_Remarks"].ToString();
+                                //objEmployeeJobDescription.EEJ_Pwd = rdr["EEJ_Pwd"].ToString();
+                                //objEmployeeJobDescription.EEJ_LastResetDateTime = rdr["EEJ_LastResetDateTime"].ToString();
+                                //objEmployeeJobDescription.EEJ_SyncedDateTime = rdr["EEJ_SyncedDateTime"].ToString();
+                                //objEmployeeJobDescription.EEJ_ActiveFrom = rdr["EEJ_ActiveFrom"].ToString();
+                                //objEmployeeJobDescription.EEJ_ActiveTo = rdr["EEJ_ActiveTo"].ToString();
+                                objEmployeeJobDescription.EEJ_Status = Convert.ToBoolean(rdr["EEJ_Status"].ToString());
 
-                                if (objemployeeHead.Employee == null)
+                                if (objEmployeeJobDescriptionHead.EmployeeJobDescription == null)
                                 {
-                                    objemployeeHead.Employee = new List<ReturnEmployeeModel>();
+                                    objEmployeeJobDescriptionHead.EmployeeJobDescription = new List<ReturnEmployeeJobDescriptionModel>();
                                 }
 
-                                objemployeeHead.Employee.Add(objemployee);
+                                objEmployeeJobDescriptionHead.EmployeeJobDescription.Add(objEmployeeJobDescription);
 
-                                objEmployeeHeadList.Add(objemployeeHead);
+                                objEmployeeJobDescriptionHeadList.Add(objEmployeeJobDescriptionHead);
                             }
 
                         }
                         else
                         {
-                            ReturnEmployeeModel objemployee = new ReturnEmployeeModel();
-                            objemployeeHead.resp = true;
-                            objemployeeHead.msg = "";
-                            objEmployeeHeadList.Add(objemployeeHead);
+                            ReturnEmployeeJobDescriptionModel objEmployeeJobDescription = new ReturnEmployeeJobDescriptionModel();
+                            objEmployeeJobDescriptionHead.resp = true;
+                            objEmployeeJobDescriptionHead.msg = "";
+                            objEmployeeJobDescriptionHeadList.Add(objEmployeeJobDescriptionHead);
 
 
                         }
 
 
                     }
-                    return objEmployeeHeadList;
+                    return objEmployeeJobDescriptionHeadList;
 
                 }
             }
             catch (Exception ex)
             {
-                objemployeeHead = new ReturnEmployeeModelHead
+                objEmployeeJobDescriptionHead = new ReturnEmployeeJobDescriptionModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
                 };
-                objEmployeeHeadList.Add(objemployeeHead);
+                objEmployeeJobDescriptionHeadList.Add(objEmployeeJobDescriptionHead);
 
-                objError.WriteLog(0, "Employee_Data", "get_employee_all", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "Employee_Data", "get_employee_all", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "EmployeeJobDescription_Data", "get_EmployeeJobDescription_all", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "EmployeeJobDescription_Data", "get_EmployeeJobDescription_all", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "Employee_Data", "get_employee_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "Employee_Data", "get_employee_all", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "EmployeeJobDescription_Data", "get_EmployeeJobDescription_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "EmployeeJobDescription_Data", "get_EmployeeJobDescription_all", "Inner Exception Message: " + ex.InnerException.Message);
                 }
             }
 
-            return objEmployeeHeadList;
+            return objEmployeeJobDescriptionHeadList;
 
         }
 
-        public static List<ReturncustResponse> add_new_employee(EmployeeModel item)//ok
+        public static List<ReturncustResponse> add_new_EmployeeJobDescription(EmployeeJobDescriptionModel item)//ok
         {
             List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
             ReturncustResponse objCustHead = new ReturncustResponse();
@@ -274,14 +274,14 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
 
 
-                        cmd.CommandText = "sp_insert_employee";
+                        cmd.CommandText = "sp_insert_EmployeeJobDescription";
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
                         cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@ECE_EmployeeID", item.ECE_EmployeeID);
-                        cmd.Parameters["@ECE_EmployeeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EEJ_EmployeeJobDescriptionID", item.EEJ_EmployeeJobDescriptionID);
+                        cmd.Parameters["@EEJ_EmployeeJobDescriptionID"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
@@ -356,19 +356,19 @@ namespace HRM_DAL.Data
                 };
                 objCustHeadList.Add(objCustHead);
 
-                objError.WriteLog(0, "Employee_Data", "add_new_employee", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "Employee_Data", "add_new_employee", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "EmployeeJobDescription_Data", "add_new_EmployeeJobDescription", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "EmployeeJobDescription_Data", "add_new_EmployeeJobDescription", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "Employee_Data", "add_new_employee", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "Employee_Data", "add_new_employee", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "EmployeeJobDescription_Data", "add_new_EmployeeJobDescription", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "EmployeeJobDescription_Data", "add_new_EmployeeJobDescription", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }
             return objCustHeadList;
         }
 
-        public static List<ReturncustResponse> modify_employee(EmployeeModel item)//ok
+        public static List<ReturncustResponse> modify_EmployeeJobDescription(EmployeeJobDescriptionModel item)//ok
         {
             List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
             ReturncustResponse objCustHead = new ReturncustResponse();
@@ -391,14 +391,14 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
 
 
-                        cmd.CommandText = "sp_modify_employee";
+                        cmd.CommandText = "sp_modify_EmployeeJobDescription";
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
                         cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@ECE_EmployeeID", item.ECE_EmployeeID);
-                        cmd.Parameters["@ECE_EmployeeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EEJ_EmployeeJobDescriptionID", item.EEJ_EmployeeJobDescriptionID);
+                        cmd.Parameters["@EEJ_EmployeeJobDescriptionID"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
@@ -472,19 +472,19 @@ namespace HRM_DAL.Data
                 };
                 objCustHeadList.Add(objCustHead);
 
-                objError.WriteLog(0, "Employee_Data", "add_new_employee", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "Employee_Data", "add_new_employee", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "EmployeeJobDescription_Data", "add_new_EmployeeJobDescription", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "EmployeeJobDescription_Data", "add_new_EmployeeJobDescription", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "Employee_Data", "add_new_employee", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "Employee_Data", "add_new_employee", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "EmployeeJobDescription_Data", "add_new_EmployeeJobDescription", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "EmployeeJobDescription_Data", "add_new_EmployeeJobDescription", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }
             return objCustHeadList;
         }
 
-        public static List<ReturnResponse> inactivate_employee(InactiveEmpModel item)//ok
+        public static List<ReturnResponse> inactivate_EmployeeJobDescription(InactiveEEJModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
             ReturnResponse objUserHead = new ReturnResponse();
@@ -509,11 +509,11 @@ namespace HRM_DAL.Data
 
 
 
-                        cmd.CommandText = "sp_del_employee";
+                        cmd.CommandText = "sp_del_EmployeeJobDescription";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@ECE_EmployeeID", item.ECE_EmployeeID);
-                        cmd.Parameters["@ECE_EmployeeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EEJ_EmployeeJobDescriptionID", item.EEJ_EmployeeJobDescriptionID);
+                        cmd.Parameters["@EEJ_EmployeeJobDescriptionID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
                         cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
@@ -552,12 +552,12 @@ namespace HRM_DAL.Data
                 };
                 objUserHeadList.Add(objUserHead);
 
-                objError.WriteLog(0, "Employee_Data", "inactivate_employee", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "Employee_Data", "inactivate_employee", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "EmployeeJobDescription_Data", "inactivate_EmployeeJobDescription", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "EmployeeJobDescription_Data", "inactivate_EmployeeJobDescription", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "Employee_Data", "inactivate_employee", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "Employee_Data", "inactivate_employee", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "EmployeeJobDescription_Data", "inactivate_EmployeeJobDescription", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "EmployeeJobDescription_Data", "inactivate_EmployeeJobDescription", "Inner Exception Message: " + ex.InnerException.Message);
                 }
                 return objUserHeadList;
             }
