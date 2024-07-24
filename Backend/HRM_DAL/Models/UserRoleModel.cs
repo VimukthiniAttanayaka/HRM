@@ -32,11 +32,12 @@ namespace HRM_DAL.Models
         public DateTime EUR_ModifiedDateTime { get; set; }
         public List<AccessGroupSelect> AccessGroups { get; set; }
     }
-    public class AccessGroupSelect {
+    public class AccessGroupSelect
+    {
         public string UAG_AccessGroupID { get; set; }
         public string UAG_AccessGroup { get; set; }
-        public bool IsSelected  { get; set; }
-}
+        public bool IsSelected { get; set; }
+    }
     public class ReturnUserRoleAllModel
     {
         [Key]

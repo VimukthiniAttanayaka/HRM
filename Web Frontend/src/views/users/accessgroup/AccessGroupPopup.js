@@ -54,7 +54,25 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, AccessGroupDetails }) => {
     }
   }
 
-  console.log(AccessGroupDetails)
+  // console.log(UserRoleDetails)
+  const [checkedItems, setCheckedItems] = useState([]);
+
+  const handleCheckboxChange = (event) => {
+    const { checked, value } = event.target;
+    if (checked) {
+      setCheckedItems([...checkedItems, value]);
+    } else {
+      setCheckedItems(checkedItems.filter(item => item !== value));
+    }
+  };
+
+  const options = [
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+    { value: 'option3', label: 'Option 3' },
+  ];
+
+  // console.log(AccessGroupDetails)
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New Access Group</CButton>
@@ -91,7 +109,23 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, AccessGroupDetails }) => {
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
-                <CInputGroup className="mb-3">
+                {/* <CInputGroup className="mb-3"> */}
+                <CCol md={4}>
+                  <CInputGroupText>
+                    <h6>User Groups</h6>
+                  </CInputGroupText>
+                </CCol>
+                {options.map((option) => (
+                  <CFormCheck
+                    key={option.value}
+                    type="checkbox"
+                    label={option.label}
+                    value={option.value}
+                    checked={checkedItems.includes(option.value)}
+                    onChange={handleCheckboxChange}
+                  />
+                ))}
+                {/* </CInputGroup> */}     <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>Status</h6>
