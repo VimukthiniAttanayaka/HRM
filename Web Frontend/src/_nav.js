@@ -49,7 +49,7 @@ const _nav = [
         name: <Translation>{(t) => t('Employee')}</Translation>,
         to: '/employee/employee',
         // isVisible:{getAttendance}
-      },{
+      }, {
         component: CNavItem,
         name: <Translation>{(t) => t('Employee Job Desription')}</Translation>,
         to: '/employee/employeejobdescription',
@@ -119,7 +119,7 @@ const _nav = [
       name: <Translation>{(t) => t('Reporting Person')}</Translation>,
       to: '/reportingperson/reportingperson',
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-    },{
+    }, {
       component: CNavItem,
       name: <Translation>{(t) => t('Reporting Manager Search')}</Translation>,
       to: '/reportingperson/reportingmanagersearch',
@@ -184,8 +184,29 @@ const _nav = [
     },],
   },
   {
-    component: CNavTitle,
+    component: CNavGroup,
     name: <Translation>{(t) => t('Master Data')}</Translation>,
+    items: [{
+      component: CNavItem,
+      name: <Translation>{(t) => t('Branch')}</Translation>,
+      to: '/masterdata/branch',
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    },{
+      component: CNavItem,
+      name: <Translation>{(t) => t('Country')}</Translation>,
+      to: '/masterdata/country',
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    },{
+      component: CNavItem,
+      name: <Translation>{(t) => t('Department')}</Translation>,
+      to: '/masterdata/department',
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    },{
+      component: CNavItem,
+      name: <Translation>{(t) => t('JobRole')}</Translation>,
+      to: '/masterdata/jobrole',
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    }],
   },
   {
     component: CNavItem,

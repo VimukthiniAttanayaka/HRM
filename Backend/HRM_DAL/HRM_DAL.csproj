@@ -47,6 +47,7 @@
     <Compile Remove="Data\PCCode_Data.cs" />
     <Compile Remove="Data\Process_Data.cs" />
     <Compile Remove="Data\Recieve_Data.cs" />
+    <Compile Remove="Data\systemssettings_Data.cs" />
     <Compile Remove="Data\UserAccessGroup_Data_Old.cs" />
     <Compile Remove="Data\UserGroupMaster_Data.cs" />
     <Compile Remove="Data\user_Data - Copy.cs" />
@@ -73,6 +74,8 @@
 
   <ItemGroup>
     <Compile Include="Models\EmployeeJobDescriptionModel.cs" />
+    <Compile Include="Models\CurrencyModel.cs" />
+    <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\MenuAccessModel.cs" />
     <Compile Include="Models\UserDetailsModel.cs" />
     <Compile Include="Models\UserAccessGroupModel.cs" />
@@ -82,6 +85,8 @@
     <Compile Include="Models\CustomerDepartment.cs" />
     <Compile Include="Models\CustomerLocation.cs" />
     <Compile Include="Models\AccessGroupModel.cs" />
+    <Compile Include="Models\BranchModel.cs" />
+    <Compile Include="Models\JobRoleModel.cs" />
     <Compile Include="Models\UserRoleModel.cs" />
     <Compile Include="Models\ReportingManagerModel.cs" />
     <Compile Include="Models\LeaveEntitlementModel.cs" />
@@ -114,7 +119,6 @@
     <Compile Include="Models\ReturnResponseGridViewBaseModel.cs" />
     <Compile Include="Models\SPStatus.cs" />
     <Compile Include="Models\SystemParameterModel.cs" />
-    <Compile Include="Models\SystemsSettingsModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserOtpModel.cs" />
   </ItemGroup>

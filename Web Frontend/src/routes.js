@@ -21,6 +21,10 @@ const AccessGroup = React.lazy(() => import('./views/users/accessgroup/AccessGro
 const UserAccessGroup = React.lazy(() => import('./views/users/useraccessgroup/UserAccessGroup'))
 const UserMenu = React.lazy(() => import('./views/users/usermenu/UserMenu'))
 const MenuAccessGroup = React.lazy(() => import('./views/users/menuaccessgroup/MenuAccessGroup'))
+const Branch = React.lazy(() => import('./views/masterdata/branch/Branch'))
+const Country = React.lazy(() => import('./views/masterdata/country/Country'))
+const Department = React.lazy(() => import('./views/masterdata/department/Department'))
+const JobRole = React.lazy(() => import('./views/masterdata/jobrole/JobRole'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -185,6 +189,23 @@ const routes = [
     path: '/users/usermenu',
     name: <Translation>{(t) => t('User Menu')}</Translation>,
     element: UserMenu,
+  },
+  {
+    path: '/masterdata/branch',
+    name: <Translation>{(t) => t('Branch')}</Translation>,
+    element: Branch,
+  }, {
+    path: '/masterdata/country',
+    name: <Translation>{(t) => t('Country')}</Translation>,
+    element: Country,
+  }, {
+    path: '/masterdata/department',
+    name: <Translation>{(t) => t('Department')}</Translation>,
+    element: Department,
+  }, {
+    path: '/masterdata/jobrole',
+    name: <Translation>{(t) => t('JobRole')}</Translation>,
+    element: JobRole,
   },
   {
     path: '/base',
