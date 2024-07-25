@@ -74,7 +74,7 @@ const CurrencyDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_CurrencyID: item
+      MDCCY_CurrencyID: item
     }
 
     // const res = fetch(apiUrl + 'Currency/get_Currency_single', {
@@ -151,7 +151,7 @@ const CurrencyDataGrid = () => {
     //     for (let index = 0; index < res1[0].Currency.length; index++) {
     //       let element = res1[0].Currency[index];
     //       console.log(element)
-    //       CurrencyDetails[index] = new CurrencyDetail(element.LVT_CurrencyID, element.LVT_Currency, element.LVT_Status, element.LVT_LeaveAlotment);
+    //       CurrencyDetails[index] = new CurrencyDetail(element.MDCCY_CurrencyID, element.MDCCY_Currency, element.MDCCY_Status, element.MDCCY_LeaveAlotment);
     //     }
 
     //     setData(CurrencyDetails);

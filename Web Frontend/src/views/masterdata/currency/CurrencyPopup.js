@@ -33,10 +33,10 @@ const CurrencyPopup = ({ visible, onClose, onOpen, CurrencyDetails }) => {
 
     // Prepare form data
     const formData = {
-      LVT_CurrencyID: CurrencyId,
-      LVT_LeaveAlotment: leaveAlotmentId,
-      LVT_Currency: Currency,
-      LVT_Status: isActive,
+      MDCCY_CurrencyID: CurrencyId,
+      MDCCY_LeaveAlotment: leaveAlotmentId,
+      MDCCY_Currency: Currency,
+      MDCCY_Status: isActive,
     }
     // Submit the form data to your backend API
     const response = await fetch(apiUrl + 'Currency/add_new_Currency', {
@@ -79,7 +79,7 @@ const CurrencyPopup = ({ visible, onClose, onOpen, CurrencyDetails }) => {
                     <CInputGroupText>
                       <h6>CurrencyID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="CurrencyID" name="CurrencyID" value={CurrencyDetails.LVT_CurrencyID} onChange={handleChangeId}
+                  </CCol>   <CFormInput placeholder="CurrencyID" name="CurrencyID" value={CurrencyDetails.MDCCY_CurrencyID} onChange={handleChangeId}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -88,7 +88,7 @@ const CurrencyPopup = ({ visible, onClose, onOpen, CurrencyDetails }) => {
                     <CInputGroupText>
                       <h6>Currency</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="Currency" name="Currency" value={CurrencyDetails.LVT_Currency} onChange={handleChangeCurrency}
+                  </CCol>    <CFormInput placeholder="Currency" name="Currency" value={CurrencyDetails.MDCCY_Currency} onChange={handleChangeCurrency}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -97,7 +97,7 @@ const CurrencyPopup = ({ visible, onClose, onOpen, CurrencyDetails }) => {
                     <CInputGroupText>
                       <h6>LeaveAlotment</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={CurrencyDetails.LVT_LeaveAlotment} onChange={handleChangeAlotment}
+                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={CurrencyDetails.MDCCY_LeaveAlotment} onChange={handleChangeAlotment}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
 
