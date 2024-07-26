@@ -37,7 +37,7 @@ const DepartmentDataGrid = () => {
     {
       key: 'show_details',
       label: '',
-      _style: { width: '1%' },
+      _style: { width: '20%' },
       filter: false,
       sorter: false,
     },
@@ -239,10 +239,24 @@ const DepartmentDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDetails(item.id)
+                    toggleDetails(item.id,'View')
                   }}
                 >
-                  {details.includes(item.id) ? 'Hide' : 'Show'}
+                  {/* {details.includes(item.id) ? 'Hide' : 'Show'} */}
+                  View
+                </CButton>
+              
+                <CButton
+                  color="primary"
+                  variant="outline"
+                  shape="square"
+                  size="sm"
+                  onClick={() => {
+                    toggleDetails(item.id,'Edit')
+                  }}
+                >
+                  {/* {details.includes(item.id) ? 'Hide' : 'Show'} */}
+                  Edit
                 </CButton>
               </td>
             )
