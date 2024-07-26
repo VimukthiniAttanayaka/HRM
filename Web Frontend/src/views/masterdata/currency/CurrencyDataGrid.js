@@ -18,16 +18,18 @@ const CurrencyDataGrid = () => {
       // label: '',
       // filter: false,
       // sorter: false,
+      _style: { width: '20%' },
     },
     {
       key: 'Currency',
       _style: { width: '20%' },
     },
 
+    // {
+    //   key: 'alotment',
+    //   _style: { width: '20%' }
+    // },
     {
-      key: 'alotment',
-      _style: { width: '20%' }
-    }, {
       key: 'status',
       _style: { width: '20%' }
     },

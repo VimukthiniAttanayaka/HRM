@@ -18,6 +18,7 @@ const BranchDataGrid = () => {
       // label: '',
       // filter: false,
       // sorter: false,
+      _style: { width: '20%' },
     },
     {
       key: 'branch',

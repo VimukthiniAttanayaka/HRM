@@ -20,7 +20,7 @@ export const getDepartmentAll = async (formData) => {
     .then(response => response.json())
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
-
+// console.log(res1)
 
       class DepartmentDetail {
         constructor(id, Department, status) {
@@ -34,7 +34,7 @@ export const getDepartmentAll = async (formData) => {
       for (let index = 0; index < res1[0].Department.length; index++) {
         let element = res1[0].Department[index];
         // console.log(element)
-        DepartmentDetails[index] = new DepartmentDetail(element.EUR_DepartmentID, element.EUR_Department, element.EUR_Status);
+        DepartmentDetails[index] = new DepartmentDetail(element.MDD_DepartmentID, element.MDD_Department, element.MDD_Status);
       }
       // console.log(DepartmentDetails)
     })
@@ -56,8 +56,8 @@ export const requestdata_Departments_DropDowns_All = async (formData) => {
 
       for (let index = 0; index < res1[0].Department.length; index++) {
         const DepartmentData = {
-          key: res1[0].Department[index].EUR_DepartmentID,
-          value: res1[0].Department[index].EUR_Department
+          key: res1[0].Department[index].MDD_DepartmentID,
+          value: res1[0].Department[index].MDD_Department
         };
         optionsDepartment[index] = DepartmentData
       }

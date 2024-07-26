@@ -18,16 +18,18 @@ const JobRoleDataGrid = () => {
       // label: '',
       // filter: false,
       // sorter: false,
+      _style: { width: '20%' },
     },
     {
       key: 'JobRole',
       _style: { width: '20%' },
     },
 
+    // {
+    //   key: 'alotment',
+    //   _style: { width: '20%' }
+    // },
     {
-      key: 'alotment',
-      _style: { width: '20%' }
-    }, {
       key: 'status',
       _style: { width: '20%' }
     },

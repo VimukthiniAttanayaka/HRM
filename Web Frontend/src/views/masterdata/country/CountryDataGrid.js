@@ -18,16 +18,18 @@ const CountryDataGrid = () => {
       // label: '',
       // filter: false,
       // sorter: false,
+      _style: { width: '20%' },
     },
     {
-      key: 'country',
+      key: 'Country',
       _style: { width: '20%' },
     },
 
+    // {
+    //   key: 'alotment',
+    //   _style: { width: '20%' }
+    // }, 
     {
-      key: 'alotment',
-      _style: { width: '20%' }
-    }, {
       key: 'status',
       _style: { width: '20%' }
     },
@@ -205,7 +207,7 @@ const CountryDataGrid = () => {
         columns={columns}
         columnFilter
         columnSorter
-        footer
+        // footer
         items={data}
         itemsPerPageSelect
         itemsPerPage={5}
