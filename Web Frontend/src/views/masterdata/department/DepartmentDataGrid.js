@@ -63,7 +63,7 @@ const DepartmentDataGrid = () => {
     setDepartmentId(event.target.value)
   }
 
-  async function loadDetails(item) {
+  async function loadDetails(item,action) {
 
     const token = getJWTToken();
     const staffId = getStaffID();
@@ -76,7 +76,7 @@ const DepartmentDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_DepartmentID: item
+      MDD_DepartmentID: item
     }
 
     // const res = fetch(apiUrl + 'Department/get_Department_single', {
@@ -95,7 +95,7 @@ const DepartmentDataGrid = () => {
     setDepartmentDetails(DepartmentDetails);
     handleOpenPopup()
   }
-  const toggleDetails = (index) => {
+  const toggleDetails = (index,action) => {
 
 
     const position = details.indexOf(index)
@@ -105,7 +105,7 @@ const DepartmentDataGrid = () => {
     } else {
       newDetails = [...details, index]
       // alert(newDetails[newDetails.length - 1])
-      loadDetails(newDetails[0])
+      loadDetails(newDetails[0],action)
     }
     // setDetails(newDetails)
   }
@@ -153,7 +153,7 @@ const DepartmentDataGrid = () => {
     //     for (let index = 0; index < res1[0].Department.length; index++) {
     //       let element = res1[0].Department[index];
     //       console.log(element)
-    //       DepartmentDetails[index] = new DepartmentDetail(element.LVT_DepartmentID, element.LVT_Department, element.LVT_Status, element.LVT_LeaveAlotment);
+    //       DepartmentDetails[index] = new DepartmentDetail(element.MDD_DepartmentID, element.MDD_Department, element.MDD_Status, element.MDD_LeaveAlotment);
     //     }
 
     //     setData(DepartmentDetails);
