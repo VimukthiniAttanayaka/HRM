@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CButton, CModal, CModalBody, CModalTitle, CModalFooter, CCol, CInputGroupText, CFormCheck, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CTimePicker, CDatePicker } from '@coreui/react-pro'
+import { CTooltip, CButton, CModal, CModalBody, CModalTitle, CModalFooter, CCol, CInputGroupText, CFormCheck, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CTimePicker, CDatePicker, CRow } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
@@ -69,7 +69,7 @@ const LeaveToApprovePopup = ({ visible, onClose, onOpen, leaveScheduleDetails })
                   time={leaveScheduleDetails.LV_LeaveEndTime} onChange={handleChangeEndTime}
                   />
                 </CInputGroup>
-             
+
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
@@ -103,8 +103,16 @@ const LeaveToApprovePopup = ({ visible, onClose, onOpen, leaveScheduleDetails })
                       <h6>Status</h6>
                     </CInputGroupText>
                   </CCol><CFormCheck label="Status" defaultChecked />
-                </CInputGroup> <div className="d-grid">
+                </CInputGroup>
+                <div className="d-grid">
+                  <CRow>
+                  <CCol md={6}>
                   <CButton color="success" type='submit'>Submit</CButton>
+                  </CCol>
+                  <CCol md={6}>
+                  <CButton color="success" type='submit'>Submit</CButton>
+                  </CCol>
+                  </CRow>
                 </div>
               </CForm>
             </CCardBody>

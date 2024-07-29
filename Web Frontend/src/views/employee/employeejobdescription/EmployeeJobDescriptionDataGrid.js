@@ -15,14 +15,14 @@ const EmployeeJobDescriptionDataGrid = () => {
   const columns = [
     {
       key: 'id',
-      label: '',
-      filter: false,
+      label: 'departmentid',
+      filter: true,
       sorter: false,
     },
-    {
-      key: 'departmentid',
-      _style: { width: '20%' },
-    },
+    // {
+    //   key: 'departmentid',
+    //   _style: { width: '20%' },
+    // },
     // 'Employeeid',
     {
       key: 'Employeeid',

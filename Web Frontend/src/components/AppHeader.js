@@ -16,6 +16,7 @@ import {
   CInputGroup,
   CInputGroupText,
   useColorModes,
+  CImage,
 } from '@coreui/react-pro'
 import CIcon from '@coreui/icons-react'
 import {
@@ -37,6 +38,7 @@ import {
   AppHeaderDropdownNotif,
   AppHeaderDropdownTasks,
 } from './header/index'
+import avatar1 from './../assets/images/avatars/1.jpg'
 
 const AppHeader = () => {
   const headerRef = useRef()
@@ -67,7 +69,10 @@ const AppHeader = () => {
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
         <CForm className="d-none d-sm-flex">
-          <CInputGroup className="border border-light border-opacity-25 rounded">
+          <CImage rounded thumbnail src={avatar1} width={35} height={35} />
+          <h4 className='px-3'>  Company Name</h4>
+
+          {/* <CInputGroup className="border border-light border-opacity-25 rounded">
             <CInputGroupText id="search-addon" className="bg-transparent border-0 px-1">
               <CIcon icon={cilSearch} size="lg" className="my-1 mx-2 text-white text-opacity-25" />
             </CInputGroupText>
@@ -77,13 +82,13 @@ const AppHeader = () => {
               aria-describedby="search-addon"
               className="bg-transparent border-0"
             />
-          </CInputGroup>
+          </CInputGroup> */}
         </CForm>
-        <CHeaderNav className="d-none d-md-flex ms-auto">
+        {/* <CHeaderNav className="d-none d-md-flex ms-auto">
           <AppHeaderDropdownNotif />
           <AppHeaderDropdownTasks />
           <AppHeaderDropdownMssg />
-        </CHeaderNav>
+        </CHeaderNav> */}
         <CHeaderNav className="ms-auto ms-md-0">
           <li className="nav-item py-1">
             <div className="vr h-100 mx-2 text-white text-opacity-50"></div>
@@ -164,14 +169,14 @@ const AppHeader = () => {
           </li>
           <AppHeaderDropdown />
         </CHeaderNav>
-        <CHeaderToggler
+        {/* <CHeaderToggler
           onClick={() => dispatch({ type: 'set', asideShow: !asideShow })}
           style={{ marginInlineEnd: '-12px' }}
         >
-          <CIcon icon={cilApplicationsSettings} size="lg" />
-        </CHeaderToggler>
+          {/* <CIcon icon={cilApplicationsSettings} size="lg" />
+      </CHeaderToggler> */}
       </CContainer>
-    </CHeader>
+    </CHeader >
   )
 }
 

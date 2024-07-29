@@ -69,13 +69,13 @@ const LeaveSchedulePopup = ({ visible, onClose, onOpen, leaveScheduleDetails }) 
                   time={leaveScheduleDetails.LV_LeaveEndTime} onChange={handleChangeEndTime}
                   />
                 </CInputGroup>
-             
+
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>EndDate</h6>
                     </CInputGroupText>
-                  </CCol>  <CDatePicker placeholder="EndDate" name="EndDate"
+                  </CCol>  <CDatePicker placeholder="EndDate" name="EndDate" disabled
                     date={leaveScheduleDetails.LV_LeaveEndDate} onChange={handleChangeEndDate}
                   />
                 </CInputGroup>
@@ -84,7 +84,7 @@ const LeaveSchedulePopup = ({ visible, onClose, onOpen, leaveScheduleDetails }) 
                     <CInputGroupText>
                       <h6>StartDate</h6>
                     </CInputGroupText>
-                  </CCol>  <CDatePicker placeholder="StartDate" name="StartDate"
+                  </CCol>  <CDatePicker placeholder="StartDate" name="StartDate" disabled
                     date={leaveScheduleDetails.LV_LeaveStartDate} onChange={handleChangeStartDate}
                   />
                 </CInputGroup>
@@ -97,13 +97,14 @@ const LeaveSchedulePopup = ({ visible, onClose, onOpen, leaveScheduleDetails }) 
                     value={leaveScheduleDetails.LV_Reason} onChange={handleChangeReason}
                   />
                 </CInputGroup>
-                <CInputGroup className="mb-3">
+                {/* <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>Status</h6>
                     </CInputGroupText>
                   </CCol><CFormCheck label="Status" defaultChecked />
-                </CInputGroup> <div className="d-grid">
+                </CInputGroup> */}
+                <div className="d-grid">
                   <CButton color="success" type='submit'>Submit</CButton>
                 </div>
               </CForm>
