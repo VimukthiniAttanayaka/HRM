@@ -16,9 +16,11 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import { setMenu } from '../../../menuActivation'
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
+  const navigate = useNavigate();
   const apiUrl = process.env.REACT_APP_API_URL;
 
   const [userName, setUserName] = useState("");
@@ -29,7 +31,6 @@ const Login = () => {
     constructor(active, menuName) {
       this.active = active;
       this.menuName = menuName
-      console.log(this.active);
     }
   }
 
@@ -67,6 +68,8 @@ const Login = () => {
           { name: "Attendance", active: true },
         ];
         setMenu(menuList);
+        console.log(menuList);
+        navigate('/dashboard');
       })
 
     // if (response.ok) {

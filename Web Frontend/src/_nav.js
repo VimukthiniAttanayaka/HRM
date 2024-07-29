@@ -20,8 +20,12 @@ import {
 } from '@coreui/icons'
 import { CNavbarToggler, CNavGroup, CNavItem, CNavTitle } from '@coreui/react-pro'
 import { Translation } from 'react-i18next'
-// import { isVisible } from '@testing-library/user-event/dist/types/utils'
-import { getAttendance } from './menuActivation'
+import { getMenu_HRM_customer, getMenu_HRM_employee } from './menuActivation'
+
+let cus = getMenu_HRM_customer();
+console.log(cus);
+let emp = getMenu_HRM_employee();
+console.log(emp);
 
 const _nav = [
   {
@@ -43,11 +47,13 @@ const _nav = [
         component: CNavItem,
         name: <Translation>{(t) => t('Company')}</Translation>,
         to: '/employee/Company',
+        disabled: !cus,
       },
       {
         component: CNavItem,
         name: <Translation>{(t) => t('Employee')}</Translation>,
         to: '/employee/employee',
+        disabled: !emp,
         // isVisible:{getAttendance}
       }, {
         component: CNavItem,
@@ -191,17 +197,17 @@ const _nav = [
       name: <Translation>{(t) => t('Branch')}</Translation>,
       to: '/masterdata/branch',
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-    },{
+    }, {
       component: CNavItem,
       name: <Translation>{(t) => t('Country')}</Translation>,
       to: '/masterdata/country',
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-    },{
+    }, {
       component: CNavItem,
       name: <Translation>{(t) => t('Department')}</Translation>,
       to: '/masterdata/department',
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-    },{
+    }, {
       component: CNavItem,
       name: <Translation>{(t) => t('JobRole')}</Translation>,
       to: '/masterdata/jobrole',
