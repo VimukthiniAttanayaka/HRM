@@ -33,10 +33,10 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails }) => {
 
     // Prepare form data
     const formData = {
-      LVT_DepartmentID: DepartmentId,
-      LVT_LeaveAlotment: leaveAlotmentId,
-      LVT_Department: Department,
-      LVT_Status: isActive,
+      MDD_DepartmentID: DepartmentId,
+      MDD_LeaveAlotment: leaveAlotmentId,
+      MDD_Department: Department,
+      MDD_Status: isActive,
     }
     // Submit the form data to your backend API
     const response = await fetch(apiUrl + 'Department/add_new_Department', {
@@ -79,7 +79,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails }) => {
                     <CInputGroupText>
                       <h6>DepartmentID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="DepartmentID" name="DepartmentID" value={DepartmentDetails.LVT_DepartmentID} onChange={handleChangeId}
+                  </CCol>   <CFormInput placeholder="DepartmentID" name="DepartmentID" value={DepartmentDetails.MDD_DepartmentID} onChange={handleChangeId}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -88,19 +88,10 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails }) => {
                     <CInputGroupText>
                       <h6>Department</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="Department" name="Department" value={DepartmentDetails.LVT_Department} onChange={handleChangeDepartment}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  </CCol>    <CFormInput placeholder="Department" name="Department" value={DepartmentDetails.MDD_Department} onChange={handleChangeDepartment}
+              
+              // readOnly={isEditable,isAddNew,IsView}// value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>LeaveAlotment</h6>
-                    </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={DepartmentDetails.LVT_LeaveAlotment} onChange={handleChangeAlotment}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
