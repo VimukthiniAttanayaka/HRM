@@ -37,8 +37,30 @@ namespace HRM.Controllers
             {
                 List<ReturnUserModel> user = new List<ReturnUserModel>();
                 List<ReturnUserAccessModel> UserAccessList = new List<ReturnUserAccessModel>();
-                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = false, MNU_MenuName = "HRM_Customer" });
-                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_employee" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_Employee_Group" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = false, MNU_MenuName = "HRM_Employee_Customer" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_Employee_Employee" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_Employee_EmployeeJobDiscription" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_Attendance_AttendanceSearch" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_Attendance_MarkAttendance" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_Leave_LeaveSchedule" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_Leave_LeaveToApprove" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_Leave_LeaveEntitlement" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_Leave_LeaveType" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_ReportingPerson_HierarchyManagement" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_ReportingPerson_ReportingPerson" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_ReportingPerson_ReportingManagerSearch" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_UserManagement_InternalUser" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_UserManagement_ExternelUser" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_UserManagement_UserRole" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_UserManagement_AccessGroup" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_UserManagement_MenuAccessGroup" })
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_UserManagement_UserAccessGroup" }); ;
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_UserManagement_UserMenu" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_MasterData_Branch" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_MasterData_country" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_MasterData_Department" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_MasterData_JobRole" });
                 string token = JwToken.Authenticate(logdata.username);
                 user.Add(new ReturnUserModel() { UD_AuthorizationToken = token, UserAccessList = UserAccessList });
 
