@@ -48,6 +48,7 @@
     <Compile Remove="Data\Process_Data.cs" />
     <Compile Remove="Data\Recieve_Data.cs" />
     <Compile Remove="Data\systemssettings_Data.cs" />
+    <Compile Remove="Data\UserAccessGroup_Data_Old.cs" />
     <Compile Remove="Data\UserRoleAccessGroup_Data_Old.cs" />
     <Compile Remove="Data\UserGroupMaster_Data.cs" />
     <Compile Remove="Data\user_Data - Copy.cs" />

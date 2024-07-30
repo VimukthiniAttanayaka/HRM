@@ -25,6 +25,7 @@
     <Compile Remove="SystemParameterController.cs" />
     <Compile Remove="SystemsSettingsController.cs" />
     <Compile Remove="SystemsSettings_BL.cs" />
+    <Compile Remove="UserAccessGroup_BL_Old.cs" />
     <Compile Remove="UserRoleAccessGroup_BL_Old.cs" />
     <Compile Remove="UserController.cs" />
     <Compile Remove="UserGroupMaster_BL.cs" />
