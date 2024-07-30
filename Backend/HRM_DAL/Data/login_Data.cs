@@ -19,10 +19,10 @@ namespace HRM_DAL.Data
     {
         private static LogError objError = new LogError();
 
-        public static List<ReturnUserModelHead> login(LogdataModel logdata)
+        public static ReturnUserModelHead login(LogdataModel logdata)
         {
 
-            List<ReturnUserModelHead> objUserHeadList = new List<ReturnUserModelHead>();
+            ReturnUserModelHead objUserHeadList = new ReturnUserModelHead();
 
             try
             {
@@ -50,47 +50,47 @@ namespace HRM_DAL.Data
                         objUserHead.resp = true;
                         objUserHead.msg = "Login";
 
-                        if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
-                        {
+                        //if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
+                        //{
+                        //    foreach (DataRow rdr in Ds.Tables[0].Rows)
+                        //    {
+                        //        if (Ds.Tables[0].Columns.Contains("RTN_RESP"))//echeck for error path
+                        //        {
+                        //            objUserHead = new ReturnUserModelHead
+                        //            {
+                        //                resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
+                        //                msg = rdr["RTN_MSG"].ToString()
+                        //            };
+                        //            if (objUserHead.user == null)
+                        //            {
+                        //                objUserHead.user = new List<ReturnUserModel>();
+                        //            }
+                        //            objUserHeadList.Add(objUserHead);
+                        //            //return objUserHeadList;
+                        //        }
+                        //    }
+                        //}
+                        //if (Ds != null && Ds.Tables.Count > 1 && Ds.Tables[1].Rows.Count > 0)
+                        //{
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                if (Ds.Tables[0].Columns.Contains("RTN_RESP"))//echeck for error path
-                                {
-                                    objUserHead = new ReturnUserModelHead
-                                    {
-                                        resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
-                                        msg = rdr["RTN_MSG"].ToString()
-                                    };
-                                    if (objUserHead.user == null)
-                                    {
-                                        objUserHead.user = new List<ReturnUserModel>();
-                                    }
-                                    objUserHeadList.Add(objUserHead);
-                                    //return objUserHeadList;
-                                }
-                            }
-                        }
-                        if (Ds != null && Ds.Tables.Count > 1 && Ds.Tables[1].Rows.Count > 0)
-                        {
-                            foreach (DataRow rdr in Ds.Tables[1].Rows)
-                            {
-                                if (!(Misc.deCrypt(rdr["UD_Pwd"].ToString()) == logdata.password))
-                                //if (!PasswordRelated.ValidatePassword(logdata.password, rdr["UD_Pwd"].ToString(), rdr["UD_PwdSalt"].ToString()))
-                                {
-                                    objUserHead = new ReturnUserModelHead
-                                    {
-                                        resp = false,
-                                        msg = "Invalid Password"
-                                    };
-                                    if (objUserHead.user == null)
-                                    {
-                                        objUserHead.user = new List<ReturnUserModel>();
-                                    }
-                                    objUserHeadList.Add(objUserHead);
-                                    //return objUserHeadList;
-                                }
-                                else
-                                {
+                                //if (!(Misc.deCrypt(rdr["UD_Pwd"].ToString()) == logdata.password))
+                                ////if (!PasswordRelated.ValidatePassword(logdata.password, rdr["UD_Pwd"].ToString(), rdr["UD_PwdSalt"].ToString()))
+                                //{
+                                //    objUserHead = new ReturnUserModelHead
+                                //    {
+                                //        resp = false,
+                                //        msg = "Invalid Password"
+                                //    };
+                                //    if (objUserHead.user == null)
+                                //    {
+                                //        objUserHead.user = new List<ReturnUserModel>();
+                                //    }
+                                //    objUserHeadList.Add(objUserHead);
+                                //    //return objUserHeadList;
+                                //}
+                                //else
+                                //{
                                     objUserHead = new ReturnUserModelHead
                                     {
                                         resp = true,
@@ -98,10 +98,10 @@ namespace HRM_DAL.Data
                                     };
 
                                     ReturnUserModel objUser = new ReturnUserModel();
-                                    var tok = rdr["UD_StaffID"].ToString();
+                                    var tok = rdr["UD_UserID"].ToString();
                                     string token = JwToken.Authenticate(tok);
                                     //string token = JwToken.Authenticate(Convert.ToInt32(rdr["UD_StaffID"]));
-                                    objUser.UD_StaffID = rdr["UD_StaffID"].ToString();
+                                    objUser.UD_StaffID = rdr["UD_UserID"].ToString();
                                     objUser.UD_FirstName = rdr["UD_FirstName"].ToString();
                                     objUser.UD_LastName = rdr["UD_LastName"].ToString();
                                     objUser.UD_EmailAddress = rdr["UD_EmailAddress"].ToString();
@@ -119,19 +119,19 @@ namespace HRM_DAL.Data
                                     }
 
                                     objUserHead.user.Add(objUser);
-                                    objUserHeadList.Add(objUserHead);
+                                    ////objUserHeadList.Add(objUserHead);
 
                                     return objUserHeadList;
                                 }
 
-                            }
-                        }
-                        if (objUserHeadList.Count == 0)
-                        {
-                            objUserHead.resp = false;
-                            objUserHead.msg = "Invalid User";
-                            objUserHeadList.Add(objUserHead);
-                        }
+                        ////    }
+                        ////}
+                        //if (objUserHeadList.Count == 0)
+                        //{
+                        //    objUserHead.resp = false;
+                        //    objUserHead.msg = "Invalid User";
+                        //    objUserHeadList.Add(objUserHead);
+                        //}
                     }
                     return objUserHeadList;
                 }
@@ -144,7 +144,7 @@ namespace HRM_DAL.Data
                     resp = false,
                     msg = ex.Message.ToString()
                 };
-                objUserHeadList.Add(objUserHead);
+                //objUserHeadList.Add(objUserHead);
 
                 objError.WriteLog(0, "login_Data", "login", "Stack Track: " + ex.StackTrace);
                 objError.WriteLog(0, "login_Data", "login", "Error Message: " + ex.Message);

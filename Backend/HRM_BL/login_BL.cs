@@ -10,7 +10,7 @@ namespace HRM_BL
 {
     public class login_BL
     {
-        public static List<ReturnUserModelHead> login(LogdataModel logdata)
+        public static ReturnUserModelHead login(LogdataModel logdata)
         {
             return HRM_DAL.Data.login_Data.login(logdata);
         }
