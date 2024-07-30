@@ -7,33 +7,33 @@ using utility_handler.Data;
 
 namespace HRM_BL
 {
-    public class UserAccessGroup_BL
+    public class UserRoleAccessGroup_BL
     {
         private static LogError objError = new LogError();
 
-        public static List<ReturnUserAccessGroupModelHead> get_UserAccessGroups_single(UserAccessGroup model)//ok
+        public static List<ReturnUserRoleAccessGroupModelHead> get_UserRoleAccessGroups_single(UserRoleAccessGroup model)//ok
         {
-            return HRM_DAL.Data.UserAccessGroup_Data.get_UserAccessGroups_single(model);
+            return HRM_DAL.Data.UserRoleAccessGroup_Data.get_UserRoleAccessGroups_single(model);
         }
-        public static List<ReturnUserAccessGroupModelHead> get_UserAccessGroup_all(UserAccessGroupSearchModel model)//ok
+        public static List<ReturnUserRoleAccessGroupModelHead> get_UserRoleAccessGroup_all(UserRoleAccessGroupSearchModel model)//ok
         {
-            return HRM_DAL.Data.UserAccessGroup_Data.get_UserAccessGroup_all(model);
-        }
-
-
-        public static List<ReturncustResponse> add_new_UserAccessGroup(UserAccessGroupModel item)//ok
-        {
-            return HRM_DAL.Data.UserAccessGroup_Data.add_new_UserAccessGroup(item);
+            return HRM_DAL.Data.UserRoleAccessGroup_Data.get_UserRoleAccessGroup_all(model);
         }
 
-        public static List<ReturncustResponse> modify_UserAccessGroup(UserAccessGroupModel item)//ok
+
+        public static List<ReturncustResponse> add_new_UserRoleAccessGroup(UserRoleAccessGroupModel item)//ok
         {
-            return HRM_DAL.Data.UserAccessGroup_Data.modify_UserAccessGroup(item);
+            return HRM_DAL.Data.UserRoleAccessGroup_Data.add_new_UserRoleAccessGroup(item);
         }
 
-        public static List<ReturnResponse> inactivate_UserAccessGroup(InactiveUUMAModel item)//ok
+        public static List<ReturncustResponse> modify_UserRoleAccessGroup(UserRoleAccessGroupModel item)//ok
         {
-            return HRM_DAL.Data.UserAccessGroup_Data.inactivate_UserAccessGroup(item);
+            return HRM_DAL.Data.UserRoleAccessGroup_Data.modify_UserRoleAccessGroup(item);
+        }
+
+        public static List<ReturnResponse> inactivate_UserRoleAccessGroup(InactiveUUMAModel item)//ok
+        {
+            return HRM_DAL.Data.UserRoleAccessGroup_Data.inactivate_UserRoleAccessGroup(item);
         }
 
 

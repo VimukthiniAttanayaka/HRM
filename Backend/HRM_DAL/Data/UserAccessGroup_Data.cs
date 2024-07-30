@@ -9,21 +9,21 @@ using Newtonsoft.Json;
 
 namespace HRM_DAL.Data
 {
-    public class UserAccessGroup_Data
+    public class UserRoleAccessGroup_Data
     {
         private static LogError objError = new LogError();
 
-        public static List<ReturnUserAccessGroupModelHead> get_UserAccessGroups_single(UserAccessGroup model)//ok
+        public static List<ReturnUserRoleAccessGroupModelHead> get_UserRoleAccessGroups_single(UserRoleAccessGroup model)//ok
         {
-            List<ReturnUserAccessGroupModelHead> objUserAccessGroupHeadList = new List<ReturnUserAccessGroupModelHead>();
-            ReturnUserAccessGroupModelHead objUserAccessGroupHead = new ReturnUserAccessGroupModelHead();
+            List<ReturnUserRoleAccessGroupModelHead> objUserRoleAccessGroupHeadList = new List<ReturnUserRoleAccessGroupModelHead>();
+            ReturnUserRoleAccessGroupModelHead objUserRoleAccessGroupHead = new ReturnUserRoleAccessGroupModelHead();
 
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
-                objUserAccessGroupHead.resp = false;
-                objUserAccessGroupHead.IsAuthenticated = false;
-                objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
-                return objUserAccessGroupHeadList;
+                objUserRoleAccessGroupHead.resp = false;
+                objUserRoleAccessGroupHead.IsAuthenticated = false;
+                objUserRoleAccessGroupHeadList.Add(objUserRoleAccessGroupHead);
+                return objUserRoleAccessGroupHeadList;
             }
 
             try
@@ -36,11 +36,11 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "sp_get_UserAccessGroups_single";
+                        cmd.CommandText = "sp_get_UserRoleAccessGroups_single";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UUAG_UserAccessGroupID", model.UUAG_UserAccessGroupID);
-                        cmd.Parameters["@UUAG_UserAccessGroupID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UURAG_UserRoleAccessGroupID", model.UURAG_UserRoleAccessGroupID);
+                        cmd.Parameters["@UURAG_UserRoleAccessGroupID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -51,76 +51,76 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                ReturnUserAccessGroupModel objUserAccessGroup = new ReturnUserAccessGroupModel();
+                                ReturnUserRoleAccessGroupModel objUserRoleAccessGroup = new ReturnUserRoleAccessGroupModel();
 
-                                objUserAccessGroupHead.resp = true;
-                                objUserAccessGroupHead.msg = "Get UserAccessGroup";
+                                objUserRoleAccessGroupHead.resp = true;
+                                objUserRoleAccessGroupHead.msg = "Get UserRoleAccessGroup";
 
-                                //objUserAccessGroup.UUAG_UserAccessGroupID = rdr["UUAG_UserAccessGroupID"].ToString();
-                                //objUserAccessGroup.UUAG_LeaveAlotment = Convert.ToInt16(rdr["UUAG_LeaveAlotment"].ToString());
-                                //objUserAccessGroup.UUAG_UserAccessGroup = rdr["UUAG_UserAccessGroup"].ToString();
-                                //objUserAccessGroup.UUAG_Status = Convert.ToBoolean(rdr["UUAG_Status"].ToString());
+                                //objUserRoleAccessGroup.UURAG_UserRoleAccessGroupID = rdr["UURAG_UserRoleAccessGroupID"].ToString();
+                                //objUserRoleAccessGroup.UURAG_LeaveAlotment = Convert.ToInt16(rdr["UURAG_LeaveAlotment"].ToString());
+                                //objUserRoleAccessGroup.UURAG_UserRoleAccessGroup = rdr["UURAG_UserRoleAccessGroup"].ToString();
+                                //objUserRoleAccessGroup.UURAG_Status = Convert.ToBoolean(rdr["UURAG_Status"].ToString());
 
-                                if (objUserAccessGroupHead.UserAccessGroup == null)
+                                if (objUserRoleAccessGroupHead.UserRoleAccessGroup == null)
                                 {
-                                    objUserAccessGroupHead.UserAccessGroup = new List<ReturnUserAccessGroupModel>();
+                                    objUserRoleAccessGroupHead.UserRoleAccessGroup = new List<ReturnUserRoleAccessGroupModel>();
                                 }
 
-                                objUserAccessGroupHead.UserAccessGroup.Add(objUserAccessGroup);
+                                objUserRoleAccessGroupHead.UserRoleAccessGroup.Add(objUserRoleAccessGroup);
 
-                                objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
+                                objUserRoleAccessGroupHeadList.Add(objUserRoleAccessGroupHead);
                             }
 
                         }
                         else
                         {
-                            ReturnUserAccessGroupModel objUserAccessGroup = new ReturnUserAccessGroupModel();
-                            objUserAccessGroupHead.resp = true;
-                            objUserAccessGroupHead.msg = "";
-                            objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
+                            ReturnUserRoleAccessGroupModel objUserRoleAccessGroup = new ReturnUserRoleAccessGroupModel();
+                            objUserRoleAccessGroupHead.resp = true;
+                            objUserRoleAccessGroupHead.msg = "";
+                            objUserRoleAccessGroupHeadList.Add(objUserRoleAccessGroupHead);
 
 
                         }
 
 
                     }
-                    return objUserAccessGroupHeadList;
+                    return objUserRoleAccessGroupHeadList;
 
                 }
             }
             catch (Exception ex)
             {
-                objUserAccessGroupHead = new ReturnUserAccessGroupModelHead
+                objUserRoleAccessGroupHead = new ReturnUserRoleAccessGroupModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
                 };
-                objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
+                objUserRoleAccessGroupHeadList.Add(objUserRoleAccessGroupHead);
 
-                objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroups_single", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroups_single", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserRoleAccessGroup_Data", "get_UserRoleAccessGroups_single", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserRoleAccessGroup_Data", "get_UserRoleAccessGroups_single", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroups_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroups_single", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserRoleAccessGroup_Data", "get_UserRoleAccessGroups_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserRoleAccessGroup_Data", "get_UserRoleAccessGroups_single", "Inner Exception Message: " + ex.InnerException.Message);
                 }
             }
 
-            return objUserAccessGroupHeadList;
+            return objUserRoleAccessGroupHeadList;
 
         }
 
-        public static List<ReturnUserAccessGroupModelHead> get_UserAccessGroup_all(UserAccessGroupSearchModel model)//ok
+        public static List<ReturnUserRoleAccessGroupModelHead> get_UserRoleAccessGroup_all(UserRoleAccessGroupSearchModel model)//ok
         {
-            List<ReturnUserAccessGroupModelHead> objUserAccessGroupHeadList = new List<ReturnUserAccessGroupModelHead>();
-            ReturnUserAccessGroupModelHead objUserAccessGroupHead = new ReturnUserAccessGroupModelHead();
+            List<ReturnUserRoleAccessGroupModelHead> objUserRoleAccessGroupHeadList = new List<ReturnUserRoleAccessGroupModelHead>();
+            ReturnUserRoleAccessGroupModelHead objUserRoleAccessGroupHead = new ReturnUserRoleAccessGroupModelHead();
 
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
-                objUserAccessGroupHead.resp = false;
-                objUserAccessGroupHead.IsAuthenticated = false;
-                objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
-                return objUserAccessGroupHeadList;
+                objUserRoleAccessGroupHead.resp = false;
+                objUserRoleAccessGroupHead.IsAuthenticated = false;
+                objUserRoleAccessGroupHeadList.Add(objUserRoleAccessGroupHead);
+                return objUserRoleAccessGroupHeadList;
             }
 
             try
@@ -133,11 +133,11 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "get_UserAccessGroup_all";
+                        cmd.CommandText = "get_UserRoleAccessGroup_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UUAG_UserAccessGroupID", model.UUAG_UserAccessGroupID);
-                        cmd.Parameters["@UUAG_UserAccessGroupID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UURAG_UserRoleAccessGroupID", model.UURAG_UserRoleAccessGroupID);
+                        cmd.Parameters["@UURAG_UserRoleAccessGroupID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -148,66 +148,66 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                ReturnUserAccessGroupModel objUserAccessGroup = new ReturnUserAccessGroupModel();
+                                ReturnUserRoleAccessGroupModel objUserRoleAccessGroup = new ReturnUserRoleAccessGroupModel();
 
-                                objUserAccessGroupHead.resp = true;
-                                objUserAccessGroupHead.msg = "Get UserAccessGroup";
+                                objUserRoleAccessGroupHead.resp = true;
+                                objUserRoleAccessGroupHead.msg = "Get UserRoleAccessGroup";
 
-                                //objUserAccessGroup.UUAG_UserAccessGroupID = rdr["UUAG_UserAccessGroupID"].ToString();
-                                //objUserAccessGroup.UUAG_LeaveAlotment = Convert.ToInt16(rdr["UUAG_LeaveAlotment"].ToString());
-                                //objUserAccessGroup.UUAG_UserAccessGroup = rdr["UUAG_UserAccessGroup"].ToString();
-                                //objUserAccessGroup.UUAG_Status = Convert.ToBoolean(rdr["UUAG_Status"].ToString());
+                                //objUserRoleAccessGroup.UURAG_UserRoleAccessGroupID = rdr["UURAG_UserRoleAccessGroupID"].ToString();
+                                //objUserRoleAccessGroup.UURAG_LeaveAlotment = Convert.ToInt16(rdr["UURAG_LeaveAlotment"].ToString());
+                                //objUserRoleAccessGroup.UURAG_UserRoleAccessGroup = rdr["UURAG_UserRoleAccessGroup"].ToString();
+                                //objUserRoleAccessGroup.UURAG_Status = Convert.ToBoolean(rdr["UURAG_Status"].ToString());
 
-                                if (objUserAccessGroupHead.UserAccessGroup == null)
+                                if (objUserRoleAccessGroupHead.UserRoleAccessGroup == null)
                                 {
-                                    objUserAccessGroupHead.UserAccessGroup = new List<ReturnUserAccessGroupModel>();
+                                    objUserRoleAccessGroupHead.UserRoleAccessGroup = new List<ReturnUserRoleAccessGroupModel>();
                                 }
 
-                                objUserAccessGroupHead.UserAccessGroup.Add(objUserAccessGroup);
+                                objUserRoleAccessGroupHead.UserRoleAccessGroup.Add(objUserRoleAccessGroup);
 
-                                objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
+                                objUserRoleAccessGroupHeadList.Add(objUserRoleAccessGroupHead);
                             }
 
                         }
                         else
                         {
-                            ReturnUserAccessGroupModel objUserAccessGroup = new ReturnUserAccessGroupModel();
-                            objUserAccessGroupHead.resp = true;
-                            objUserAccessGroupHead.msg = "";
-                            objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
+                            ReturnUserRoleAccessGroupModel objUserRoleAccessGroup = new ReturnUserRoleAccessGroupModel();
+                            objUserRoleAccessGroupHead.resp = true;
+                            objUserRoleAccessGroupHead.msg = "";
+                            objUserRoleAccessGroupHeadList.Add(objUserRoleAccessGroupHead);
 
 
                         }
 
 
                     }
-                    return objUserAccessGroupHeadList;
+                    return objUserRoleAccessGroupHeadList;
 
                 }
             }
             catch (Exception ex)
             {
-                objUserAccessGroupHead = new ReturnUserAccessGroupModelHead
+                objUserRoleAccessGroupHead = new ReturnUserRoleAccessGroupModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
                 };
-                objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
+                objUserRoleAccessGroupHeadList.Add(objUserRoleAccessGroupHead);
 
-                objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroup_all", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroup_all", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserRoleAccessGroup_Data", "get_UserRoleAccessGroup_all", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserRoleAccessGroup_Data", "get_UserRoleAccessGroup_all", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroup_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroup_Data", "get_UserAccessGroup_all", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserRoleAccessGroup_Data", "get_UserRoleAccessGroup_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserRoleAccessGroup_Data", "get_UserRoleAccessGroup_all", "Inner Exception Message: " + ex.InnerException.Message);
                 }
             }
 
-            return objUserAccessGroupHeadList;
+            return objUserRoleAccessGroupHeadList;
 
         }
 
-        public static List<ReturncustResponse> add_new_UserAccessGroup(UserAccessGroupModel item)//ok
+        public static List<ReturncustResponse> add_new_UserRoleAccessGroup(UserRoleAccessGroupModel item)//ok
         {
             List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
             ReturncustResponse objCustHead = new ReturncustResponse();
@@ -230,14 +230,14 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
 
 
-                        cmd.CommandText = "sp_insert_UserAccessGroup";
+                        cmd.CommandText = "sp_insert_UserRoleAccessGroup";
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
                         cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UUAG_UserAccessGroupID", item.UUAG_UserAccessGroupID);
-                        cmd.Parameters["@UUAG_UserAccessGroupID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UURAG_UserRoleAccessGroupID", item.UURAG_UserRoleAccessGroupID);
+                        cmd.Parameters["@UURAG_UserRoleAccessGroupID"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
@@ -312,19 +312,19 @@ namespace HRM_DAL.Data
                 };
                 objCustHeadList.Add(objCustHead);
 
-                objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserRoleAccessGroup_Data", "add_new_UserRoleAccessGroup", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserRoleAccessGroup_Data", "add_new_UserRoleAccessGroup", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserRoleAccessGroup_Data", "add_new_UserRoleAccessGroup", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserRoleAccessGroup_Data", "add_new_UserRoleAccessGroup", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }
             return objCustHeadList;
         }
 
-        public static List<ReturncustResponse> modify_UserAccessGroup(UserAccessGroupModel item)//ok
+        public static List<ReturncustResponse> modify_UserRoleAccessGroup(UserRoleAccessGroupModel item)//ok
         {
             List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
             ReturncustResponse objCustHead = new ReturncustResponse();
@@ -347,14 +347,14 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
 
 
-                        cmd.CommandText = "sp_modify_UserAccessGroup";
+                        cmd.CommandText = "sp_modify_UserRoleAccessGroup";
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
                         cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UUAG_UserAccessGroupID", item.UUAG_UserAccessGroupID);
-                        cmd.Parameters["@UUAG_UserAccessGroupID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UURAG_UserRoleAccessGroupID", item.UURAG_UserRoleAccessGroupID);
+                        cmd.Parameters["@UURAG_UserRoleAccessGroupID"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
@@ -428,19 +428,19 @@ namespace HRM_DAL.Data
                 };
                 objCustHeadList.Add(objCustHead);
 
-                objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserRoleAccessGroup_Data", "add_new_UserRoleAccessGroup", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserRoleAccessGroup_Data", "add_new_UserRoleAccessGroup", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroup_Data", "add_new_UserAccessGroup", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserRoleAccessGroup_Data", "add_new_UserRoleAccessGroup", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserRoleAccessGroup_Data", "add_new_UserRoleAccessGroup", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }
             return objCustHeadList;
         }
 
-        public static List<ReturnResponse> inactivate_UserAccessGroup(InactiveUUMAModel item)//ok
+        public static List<ReturnResponse> inactivate_UserRoleAccessGroup(InactiveUUMAModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
             ReturnResponse objUserHead = new ReturnResponse();
@@ -465,11 +465,11 @@ namespace HRM_DAL.Data
 
 
 
-                        cmd.CommandText = "sp_del_UserAccessGroup";
+                        cmd.CommandText = "sp_del_UserRoleAccessGroup";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UUAG_UserAccessGroupID", item.UUAG_UserAccessGroupID);
-                        cmd.Parameters["@UUAG_UserAccessGroupID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UURAG_UserRoleAccessGroupID", item.UURAG_UserRoleAccessGroupID);
+                        cmd.Parameters["@UURAG_UserRoleAccessGroupID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
                         cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
@@ -508,12 +508,12 @@ namespace HRM_DAL.Data
                 };
                 objUserHeadList.Add(objUserHead);
 
-                objError.WriteLog(0, "UserAccessGroup_Data", "inactivate_UserAccessGroup", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroup_Data", "inactivate_UserAccessGroup", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserRoleAccessGroup_Data", "inactivate_UserRoleAccessGroup", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserRoleAccessGroup_Data", "inactivate_UserRoleAccessGroup", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserAccessGroup_Data", "inactivate_UserAccessGroup", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroup_Data", "inactivate_UserAccessGroup", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserRoleAccessGroup_Data", "inactivate_UserRoleAccessGroup", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserRoleAccessGroup_Data", "inactivate_UserRoleAccessGroup", "Inner Exception Message: " + ex.InnerException.Message);
                 }
                 return objUserHeadList;
             }

@@ -57,7 +57,7 @@ namespace HRM.Controllers
                 ////UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_UserManagement_UserRole" });
                 ////UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_UserManagement_AccessGroup" });
                 ////UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_UserManagement_MenuAccessGroup" });
-                ////UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_UserManagement_UserAccessGroup" }); ;
+                ////UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_UserManagement_UserRoleAccessGroup" }); ;
                 ////UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_UserManagement_UserMenu" });
                 ////UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_MasterData_Branch" });
                 ////UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_MasterData_country" });

@@ -72,57 +72,73 @@ namespace HRM_DAL.Data
                         //}
                         //if (Ds != null && Ds.Tables.Count > 1 && Ds.Tables[1].Rows.Count > 0)
                         //{
-                            foreach (DataRow rdr in Ds.Tables[0].Rows)
+                        ReturnUserModel objUser = new ReturnUserModel();
+
+                        foreach (DataRow rdr in Ds.Tables[0].Rows)
+                        {
+                            //if (!(Misc.deCrypt(rdr["UD_Pwd"].ToString()) == logdata.password))
+                            ////if (!PasswordRelated.ValidatePassword(logdata.password, rdr["UD_Pwd"].ToString(), rdr["UD_PwdSalt"].ToString()))
+                            //{
+                            //    objUserHead = new ReturnUserModelHead
+                            //    {
+                            //        resp = false,
+                            //        msg = "Invalid Password"
+                            //    };
+                            //    if (objUserHead.user == null)
+                            //    {
+                            //        objUserHead.user = new List<ReturnUserModel>();
+                            //    }
+                            //    objUserHeadList.Add(objUserHead);
+                            //    //return objUserHeadList;
+                            //}
+                            //else
+                            //{
+                            objUserHead = new ReturnUserModelHead
                             {
-                                //if (!(Misc.deCrypt(rdr["UD_Pwd"].ToString()) == logdata.password))
-                                ////if (!PasswordRelated.ValidatePassword(logdata.password, rdr["UD_Pwd"].ToString(), rdr["UD_PwdSalt"].ToString()))
-                                //{
-                                //    objUserHead = new ReturnUserModelHead
-                                //    {
-                                //        resp = false,
-                                //        msg = "Invalid Password"
-                                //    };
-                                //    if (objUserHead.user == null)
-                                //    {
-                                //        objUserHead.user = new List<ReturnUserModel>();
-                                //    }
-                                //    objUserHeadList.Add(objUserHead);
-                                //    //return objUserHeadList;
-                                //}
-                                //else
-                                //{
-                                    objUserHead = new ReturnUserModelHead
-                                    {
-                                        resp = true,
-                                        msg = "Welcome to HRM"
-                                    };
+                                resp = true,
+                                msg = "Welcome to HRM"
+                            };
 
-                                    ReturnUserModel objUser = new ReturnUserModel();
-                                    var tok = rdr["UD_UserID"].ToString();
-                                    string token = JwToken.Authenticate(tok);
-                                    //string token = JwToken.Authenticate(Convert.ToInt32(rdr["UD_StaffID"]));
-                                    objUser.UD_StaffID = rdr["UD_UserID"].ToString();
-                                    objUser.UD_FirstName = rdr["UD_FirstName"].ToString();
-                                    objUser.UD_LastName = rdr["UD_LastName"].ToString();
-                                    objUser.UD_EmailAddress = rdr["UD_EmailAddress"].ToString();
-                                    objUser.UD_MobileNumber = rdr["UD_MobileNumber"].ToString();
-                                    objUser.UD_PhoneNumber = rdr["UD_PhoneNumber"].ToString();
-                                    objUser.UD_Remarks = rdr["UD_Remarks"].ToString();
+                            var tok = rdr["UD_UserID"].ToString();
+                            string token = JwToken.Authenticate(tok);
+                            //string token = JwToken.Authenticate(Convert.ToInt32(rdr["UD_StaffID"]));
+                            objUser.UD_StaffID = rdr["UD_UserID"].ToString();
+                            objUser.UD_FirstName = rdr["UD_FirstName"].ToString();
+                            objUser.UD_LastName = rdr["UD_LastName"].ToString();
+                            objUser.UD_EmailAddress = rdr["UD_EmailAddress"].ToString();
+                            objUser.UD_MobileNumber = rdr["UD_MobileNumber"].ToString();
+                            objUser.UD_PhoneNumber = rdr["UD_PhoneNumber"].ToString();
+                            objUser.UD_Remarks = rdr["UD_Remarks"].ToString();
 
-                                    objUser.UD_AuthorizationToken = token;
+                            objUser.UD_AuthorizationToken = token;
 
-                                    AuthenticationKeySetupWithDB(objUser);
+                            AuthenticationKeySetupWithDB(objUser);
 
-                                    if (objUserHead.user == null)
-                                    {
-                                        objUserHead.user = new List<ReturnUserModel>();
-                                    }
+                        }
 
-                                    objUserHead.user.Add(objUser);
-                                    ////objUserHeadList.Add(objUserHead);
+                        List<UserRoleAccessGroupModel> userroleaccesslist = new List<UserRoleAccessGroupModel>();
+                        UserRoleAccessGroupModel userroleaccessobj = new UserRoleAccessGroupModel();
+                        foreach (DataRow rdr in Ds.Tables[1].Rows)
+                        {
+                            userroleaccessobj = new UserRoleAccessGroupModel();
+                            userroleaccessobj. UURAG_AccessGroupID = rdr["UURAG_AccessGroupID"].ToString();
+                            userroleaccessobj. UURAG_UserRoleID = rdr["UURAG_UserRoleID"].ToString();
+                            userroleaccesslist.Add(userroleaccessobj);
+                        }
 
-                                    return objUserHeadList;
-                                }
+                        foreach (DataRow rdr in Ds.Tables[2].Rows)
+                        { }
+
+
+                        if (objUserHead.user == null)
+                        {
+                            objUserHead.user = new List<ReturnUserModel>();
+                        }
+
+                        objUserHead.user.Add(objUser);
+                        ////objUserHeadList.Add(objUserHead);
+
+                        return objUserHeadList;
 
                         ////    }
                         ////}

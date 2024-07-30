@@ -16,7 +16,7 @@
     <Compile Remove="Controllers\DeviceTypeController.cs" />
     <Compile Remove="Controllers\ExcelUploadsController.cs" />
     <Compile Remove="Controllers\KioskiController.cs" />
-    <Compile Remove="Controllers\KioskUserAccessGroupsController.cs" />
+    <Compile Remove="Controllers\KioskUserRoleAccessGroupsController.cs" />
     <Compile Remove="Controllers\KioskVendorController.cs" />
     <Compile Remove="Controllers\LogExcelUploadTracerController.cs" />
     <Compile Remove="Controllers\MailTrackerController.cs" />
@@ -27,8 +27,8 @@
     <Compile Remove="Controllers\RecieveController.cs" />
     <Compile Remove="Controllers\SMSTesterController.cs" />
     <Compile Remove="Controllers\SystemsSettingsController.cs" />
-    <Compile Remove="Controllers\UserAccessGroupController1.cs" />
-    <Compile Remove="Controllers\UserAccessGroupController_Old.cs" />
+    <Compile Remove="Controllers\UserRoleAccessGroupController1.cs" />
+    <Compile Remove="Controllers\UserRoleAccessGroupController_Old.cs" />
     <Compile Remove="Controllers\UserGroupMasterController.cs" />
     <Compile Remove="Controllers\UserPasswordAutoResetController.cs" />
   </ItemGroup>

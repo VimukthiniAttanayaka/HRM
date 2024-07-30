@@ -17,102 +17,102 @@ namespace HRM.Controllers
     //[BasicAuthorization]
     //[Authorize]
 
-    public class UserAccessGroupController : ControllerBase
+    public class UserRoleAccessGroupController : ControllerBase
     {
         private LogError objError = new LogError();
 
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnUserAccessGroupModelHead> get_UserAccessGroup_single(UserAccessGroup model)//ok
+        public List<ReturnUserRoleAccessGroupModelHead> get_UserRoleAccessGroup_single(UserRoleAccessGroup model)//ok
         {
-            List<ReturnUserAccessGroupModelHead> objUserAccessGroupHeadList = new List<ReturnUserAccessGroupModelHead>();
-            ReturnUserAccessGroupModelHead obj = new ReturnUserAccessGroupModelHead() { resp = false, msg = "sfsf" };
-            obj.UserAccessGroup = new List<ReturnUserAccessGroupModel>();
-            if (model.UUAG_UserAccessGroupID == "CAS")
-                obj.UserAccessGroup.Add(new ReturnUserAccessGroupModel() { UUAG_UserAccessGroupID = 1, UUAG_UserName = "CAS", UUAG_MenuAccessID = "CAS", UUAG_Status = true });
-            if (model.UUAG_UserAccessGroupID == "ANU") obj.UserAccessGroup.Add(new ReturnUserAccessGroupModel() { UUAG_UserAccessGroupID = 2, UUAG_UserName = "ANU", UUAG_MenuAccessID = "ANU", UUAG_Status = true });
-            if (model.UUAG_UserAccessGroupID == "MED") obj.UserAccessGroup.Add(new ReturnUserAccessGroupModel() { UUAG_UserAccessGroupID = 3, UUAG_UserName = "MED", UUAG_MenuAccessID = "MED", UUAG_Status = true });
-            if (model.UUAG_UserAccessGroupID == "MAT") obj.UserAccessGroup.Add(new ReturnUserAccessGroupModel() { UUAG_UserAccessGroupID = 4, UUAG_UserName = "MAT", UUAG_MenuAccessID = "MAT", UUAG_Status = true });
-            objUserAccessGroupHeadList.Add(obj);
-            return objUserAccessGroupHeadList;
+            List<ReturnUserRoleAccessGroupModelHead> objUserRoleAccessGroupHeadList = new List<ReturnUserRoleAccessGroupModelHead>();
+            ReturnUserRoleAccessGroupModelHead obj = new ReturnUserRoleAccessGroupModelHead() { resp = false, msg = "sfsf" };
+            obj.UserRoleAccessGroup = new List<ReturnUserRoleAccessGroupModel>();
+            if (model.UURAG_UserRoleAccessGroupID == "CAS")
+                obj.UserRoleAccessGroup.Add(new ReturnUserRoleAccessGroupModel() { UURAG_UserRoleAccessGroupID = 1, UURAG_UserName = "CAS", UURAG_MenuAccessID = "CAS", UURAG_Status = true });
+            if (model.UURAG_UserRoleAccessGroupID == "ANU") obj.UserRoleAccessGroup.Add(new ReturnUserRoleAccessGroupModel() { UURAG_UserRoleAccessGroupID = 2, UURAG_UserName = "ANU", UURAG_MenuAccessID = "ANU", UURAG_Status = true });
+            if (model.UURAG_UserRoleAccessGroupID == "MED") obj.UserRoleAccessGroup.Add(new ReturnUserRoleAccessGroupModel() { UURAG_UserRoleAccessGroupID = 3, UURAG_UserName = "MED", UURAG_MenuAccessID = "MED", UURAG_Status = true });
+            if (model.UURAG_UserRoleAccessGroupID == "MAT") obj.UserRoleAccessGroup.Add(new ReturnUserRoleAccessGroupModel() { UURAG_UserRoleAccessGroupID = 4, UURAG_UserName = "MAT", UURAG_MenuAccessID = "MAT", UURAG_Status = true });
+            objUserRoleAccessGroupHeadList.Add(obj);
+            return objUserRoleAccessGroupHeadList;
 
             try
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
 
-                return HRM_BL.UserAccessGroup_BL.get_UserAccessGroups_single(model);
+                return HRM_BL.UserRoleAccessGroup_BL.get_UserRoleAccessGroups_single(model);
 
             }
             catch (Exception ex)
             {
 
-                ReturnUserAccessGroupModelHead objUserAccessGroupHead = new ReturnUserAccessGroupModelHead
+                ReturnUserRoleAccessGroupModelHead objUserRoleAccessGroupHead = new ReturnUserRoleAccessGroupModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
                 };
-                objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
+                objUserRoleAccessGroupHeadList.Add(objUserRoleAccessGroupHead);
 
-                objError.WriteLog(0, "UserAccessGroupController", "get_UserAccessGroup_single", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroupController", "get_UserAccessGroup_single", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserRoleAccessGroupController", "get_UserRoleAccessGroup_single", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserRoleAccessGroupController", "get_UserRoleAccessGroup_single", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserAccessGroupController", "get_UserAccessGroup_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroupController", "get_UserAccessGroup_single", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserRoleAccessGroupController", "get_UserRoleAccessGroup_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserRoleAccessGroupController", "get_UserRoleAccessGroup_single", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
             }
 
-            return objUserAccessGroupHeadList;
+            return objUserRoleAccessGroupHeadList;
 
         }
 
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnUserAccessGroupModelHead> get_UserAccessGroup_all(UserAccessGroupSearchModel model)//ok
+        public List<ReturnUserRoleAccessGroupModelHead> get_UserRoleAccessGroup_all(UserRoleAccessGroupSearchModel model)//ok
         {
-            List<ReturnUserAccessGroupModelHead> objUserAccessGroupHeadList = new List<ReturnUserAccessGroupModelHead>();
-            ReturnUserAccessGroupModelHead obj = new ReturnUserAccessGroupModelHead() { resp = false, msg = "sfsf" };
-            obj.UserAccessGroup = new List<ReturnUserAccessGroupModel>();
-            obj.UserAccessGroup.Add(new ReturnUserAccessGroupModel() { UUAG_UserAccessGroupID = 1, UUAG_UserName = "CAS", UUAG_MenuAccessID = "CAS", UUAG_Status = true });
-            obj.UserAccessGroup.Add(new ReturnUserAccessGroupModel() { UUAG_UserAccessGroupID = 2, UUAG_UserName = "ANU", UUAG_MenuAccessID = "ANU", UUAG_Status = true });
-            obj.UserAccessGroup.Add(new ReturnUserAccessGroupModel() { UUAG_UserAccessGroupID = 3, UUAG_UserName = "MED", UUAG_MenuAccessID = "MED", UUAG_Status = true });
-            obj.UserAccessGroup.Add(new ReturnUserAccessGroupModel() { UUAG_UserAccessGroupID = 4, UUAG_UserName = "MAT", UUAG_MenuAccessID = "MAT", UUAG_Status = true });
-            objUserAccessGroupHeadList.Add(obj);
-            return objUserAccessGroupHeadList;
+            List<ReturnUserRoleAccessGroupModelHead> objUserRoleAccessGroupHeadList = new List<ReturnUserRoleAccessGroupModelHead>();
+            ReturnUserRoleAccessGroupModelHead obj = new ReturnUserRoleAccessGroupModelHead() { resp = false, msg = "sfsf" };
+            obj.UserRoleAccessGroup = new List<ReturnUserRoleAccessGroupModel>();
+            obj.UserRoleAccessGroup.Add(new ReturnUserRoleAccessGroupModel() { UURAG_UserRoleAccessGroupID = 1, UURAG_UserName = "CAS", UURAG_MenuAccessID = "CAS", UURAG_Status = true });
+            obj.UserRoleAccessGroup.Add(new ReturnUserRoleAccessGroupModel() { UURAG_UserRoleAccessGroupID = 2, UURAG_UserName = "ANU", UURAG_MenuAccessID = "ANU", UURAG_Status = true });
+            obj.UserRoleAccessGroup.Add(new ReturnUserRoleAccessGroupModel() { UURAG_UserRoleAccessGroupID = 3, UURAG_UserName = "MED", UURAG_MenuAccessID = "MED", UURAG_Status = true });
+            obj.UserRoleAccessGroup.Add(new ReturnUserRoleAccessGroupModel() { UURAG_UserRoleAccessGroupID = 4, UURAG_UserName = "MAT", UURAG_MenuAccessID = "MAT", UURAG_Status = true });
+            objUserRoleAccessGroupHeadList.Add(obj);
+            return objUserRoleAccessGroupHeadList;
 
             try
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
 
-                return HRM_BL.UserAccessGroup_BL.get_UserAccessGroup_all(model);
+                return HRM_BL.UserRoleAccessGroup_BL.get_UserRoleAccessGroup_all(model);
 
             }
             catch (Exception ex)
             {
 
-                ReturnUserAccessGroupModelHead objUserAccessGroupHead = new ReturnUserAccessGroupModelHead
+                ReturnUserRoleAccessGroupModelHead objUserRoleAccessGroupHead = new ReturnUserRoleAccessGroupModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
                 };
-                objUserAccessGroupHeadList.Add(objUserAccessGroupHead);
+                objUserRoleAccessGroupHeadList.Add(objUserRoleAccessGroupHead);
 
-                objError.WriteLog(0, "UserAccessGroupController", "get_UserAccessGroup_single", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroupController", "get_UserAccessGroup_single", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserRoleAccessGroupController", "get_UserRoleAccessGroup_single", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserRoleAccessGroupController", "get_UserRoleAccessGroup_single", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserAccessGroupController", "get_UserAccessGroup_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroupController", "get_UserAccessGroup_single", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserRoleAccessGroupController", "get_UserRoleAccessGroup_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserRoleAccessGroupController", "get_UserRoleAccessGroup_single", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
             }
 
-            return objUserAccessGroupHeadList;
+            return objUserRoleAccessGroupHeadList;
 
         }
 
@@ -120,7 +120,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturncustResponse> add_new_UserAccessGroup(UserAccessGroupModel item)//ok
+        public List<ReturncustResponse> add_new_UserRoleAccessGroup(UserRoleAccessGroupModel item)//ok
         {
             List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
 
@@ -128,25 +128,25 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
 
-                return HRM_BL.UserAccessGroup_BL.add_new_UserAccessGroup(item);
+                return HRM_BL.UserRoleAccessGroup_BL.add_new_UserRoleAccessGroup(item);
 
             }
             catch (Exception ex)
             {
 
-                ReturncustResponse objUserAccessGroupHead = new ReturncustResponse
+                ReturncustResponse objUserRoleAccessGroupHead = new ReturncustResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
                 };
-                objCustHeadList.Add(objUserAccessGroupHead);
+                objCustHeadList.Add(objUserRoleAccessGroupHead);
 
-                objError.WriteLog(0, "UserAccessGroupController", "add_new_UserAccessGroup", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroupController", "add_new_UserAccessGroup", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserRoleAccessGroupController", "add_new_UserRoleAccessGroup", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserRoleAccessGroupController", "add_new_UserRoleAccessGroup", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserAccessGroupController", "add_new_UserAccessGroup", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroupController", "add_new_UserAccessGroup", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserRoleAccessGroupController", "add_new_UserRoleAccessGroup", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserRoleAccessGroupController", "add_new_UserRoleAccessGroup", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -159,7 +159,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturncustResponse> modify_UserAccessGroup(UserAccessGroupModel item)//ok
+        public List<ReturncustResponse> modify_UserRoleAccessGroup(UserRoleAccessGroupModel item)//ok
         {
             List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
 
@@ -167,25 +167,25 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
 
-                return HRM_BL.UserAccessGroup_BL.modify_UserAccessGroup(item);
+                return HRM_BL.UserRoleAccessGroup_BL.modify_UserRoleAccessGroup(item);
 
             }
             catch (Exception ex)
             {
 
-                ReturncustResponse objUserAccessGroupHead = new ReturncustResponse
+                ReturncustResponse objUserRoleAccessGroupHead = new ReturncustResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
                 };
-                objCustHeadList.Add(objUserAccessGroupHead);
+                objCustHeadList.Add(objUserRoleAccessGroupHead);
 
-                objError.WriteLog(0, "UserAccessGroupController", "modify_UserAccessGroup", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroupController", "modify_UserAccessGroup", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserRoleAccessGroupController", "modify_UserRoleAccessGroup", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserRoleAccessGroupController", "modify_UserRoleAccessGroup", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserAccessGroupController", "modify_UserAccessGroup", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroupController", "modify_UserAccessGroup", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserRoleAccessGroupController", "modify_UserRoleAccessGroup", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserRoleAccessGroupController", "modify_UserRoleAccessGroup", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -197,7 +197,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnResponse> inactivate_UserAccessGroup(InactiveUUMAModel item)//ok
+        public List<ReturnResponse> inactivate_UserRoleAccessGroup(InactiveUUMAModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
             objUserHeadList.Add(new ReturnResponse() { resp = true, msg = "saved" });
@@ -207,25 +207,25 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
 
-                return HRM_BL.UserAccessGroup_BL.inactivate_UserAccessGroup(item);
+                return HRM_BL.UserRoleAccessGroup_BL.inactivate_UserRoleAccessGroup(item);
 
             }
             catch (Exception ex)
             {
                 ;
-                ReturnResponse objUserAccessGroupHead = new ReturnResponse
+                ReturnResponse objUserRoleAccessGroupHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
                 };
-                objUserHeadList.Add(objUserAccessGroupHead);
+                objUserHeadList.Add(objUserRoleAccessGroupHead);
 
-                objError.WriteLog(0, "UserAccessGroupController", "inactivate_UserAccessGroup", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserAccessGroupController", "inactivate_UserAccessGroup", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserRoleAccessGroupController", "inactivate_UserRoleAccessGroup", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserRoleAccessGroupController", "inactivate_UserRoleAccessGroup", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserAccessGroupController", "inactivate_UserAccessGroup", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserAccessGroupController", "inactivate_UserAccessGroup", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserRoleAccessGroupController", "inactivate_UserRoleAccessGroup", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserRoleAccessGroupController", "inactivate_UserRoleAccessGroup", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
