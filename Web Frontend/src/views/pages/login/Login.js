@@ -35,7 +35,7 @@ const Login = () => {
   }
 
   const handleSubmit = async (event) => {
-
+console.log('tutigyoh')
     const formData = {
       username: userName,
       password: password
@@ -50,10 +50,10 @@ const Login = () => {
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
         // let menuList = [];
-        console.log(res1.user[0].UserAccessList);
+        console.log(res1);
         for (let index = 0; index < res1.user[0].UserAccessList.length; index++) {
           let element = res1.user[0].UserAccessList[index];
-          // console.log(element)
+          console.log(element)
           menuList[index] = new UserMenuDetail(element.MNU_Active, element.MNU_MenuName);
         }
 

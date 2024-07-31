@@ -19,6 +19,8 @@ namespace HRM_DAL.Models
         public DateTime UMA_CreatedDateTime { get; set; }
         public string UMA_ModifiedBy { get; set; }
         public DateTime UMA_ModifiedDateTime { get; set; }
+        public string UAG_AccessGroup { get; set; }
+        public string UUM_UserMenu { get; set; }
     }
 
     public class ReturnMenuAccessModel

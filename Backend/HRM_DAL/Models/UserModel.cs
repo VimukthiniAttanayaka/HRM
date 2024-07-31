@@ -240,6 +240,8 @@ namespace HRM_DAL.Models
         public string UD_UserName { get; set; }
         public string UD_Password { get; set; }
         public List<ReturnUserAccessModel> UserAccessList { get; set; }
+        public List<MenuAccessModel> menuaccesslist { get; set; }
+        public List<UserRoleAccessGroupModel> userroleaccesslist { get; set; }
     }
     public class ReturnUserAccessModelHead : ReturnResponse
     {

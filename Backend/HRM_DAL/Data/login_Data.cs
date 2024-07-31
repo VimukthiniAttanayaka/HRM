@@ -123,18 +123,41 @@ namespace HRM_DAL.Data
                             userroleaccessobj = new UserRoleAccessGroupModel();
                             userroleaccessobj. UURAG_AccessGroupID = rdr["UURAG_AccessGroupID"].ToString();
                             userroleaccessobj. UURAG_UserRoleID = rdr["UURAG_UserRoleID"].ToString();
+                            userroleaccessobj. UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
+                            userroleaccessobj. UUR_UserRole = rdr["UUR_UserRole"].ToString() ;
+
                             userroleaccesslist.Add(userroleaccessobj);
                         }
-
+                        List<MenuAccessModel> menuaccesslist = new List<MenuAccessModel>();
+                        MenuAccessModel menuaccessobj = new MenuAccessModel();
                         foreach (DataRow rdr in Ds.Tables[2].Rows)
-                        { }
+                        {
+                            menuaccessobj = new MenuAccessModel();
+                            menuaccessobj.UMA_AccessGroupID = rdr["UMA_AccessGroupID"].ToString();
+                            menuaccessobj.UMA_UserMenuID = rdr["UMA_UserMenuID"].ToString();
+                            menuaccessobj.UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
+                            menuaccessobj.UUM_UserMenu = rdr["UUM_UserMenu"].ToString();
+
+                            menuaccesslist.Add(menuaccessobj);
+                        }
 
 
                         if (objUserHead.user == null)
                         {
                             objUserHead.user = new List<ReturnUserModel>();
                         }
+                        objUser.menuaccesslist = menuaccesslist;
+                        objUser.userroleaccesslist = userroleaccesslist;
+                        objUser.UserAccessList = new List<ReturnUserAccessModel>();
 
+                        objUser.menuaccesslist.ForEach(item =>
+                        {
+                            objUser.UserAccessList.Add(new ReturnUserAccessModel()
+                            {
+                                MNU_Active = item.UMA_Status,
+                                MNU_MenuName = item.UUM_UserMenu.ToString(),
+                            });
+                        });
                         objUserHead.user.Add(objUser);
                         ////objUserHeadList.Add(objUserHead);
 

@@ -19,6 +19,8 @@ namespace HRM_DAL.Models
         public DateTime UURAG_CreatedDateTime { get; set; }
         public string UURAG_ModifiedBy { get; set; }
         public DateTime UURAG_ModifiedDateTime { get; set; }
+        public string UAG_AccessGroup { get; set; }
+        public string UUR_UserRole { get; set; }
     }
 
     public class ReturnUserRoleAccessGroupModel
