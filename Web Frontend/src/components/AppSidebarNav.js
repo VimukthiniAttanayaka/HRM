@@ -14,10 +14,10 @@ export const AppSidebarNav = ({ items }) => {
         {icon
           ? icon
           : indent && (
-              <span className="nav-icon">
-                <span className="nav-icon-bullet"></span>
-              </span>
-            )}
+            <span className="nav-icon">
+              <span className="nav-icon-bullet"></span>
+            </span>
+          )}
         {name && name}
         {badge && (
           <CBadge color={badge.color} className="ms-auto">
@@ -48,6 +48,7 @@ export const AppSidebarNav = ({ items }) => {
     const { component, name, icon, items, to, ...rest } = item
     const Component = component
     return (
+      item.disabled?null:
       <Component compact as="div" key={index} toggler={navLink(name, icon)} {...rest}>
         {item.items?.map((item, index) =>
           item.items ? navGroup(item, index) : navItem(item, index, true),

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {
   CButton,
@@ -20,6 +20,9 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
   const navigate = useNavigate();
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -47,6 +50,7 @@ const Login = () => {
     })
       .then(response => response.json())
       .then(json => {
+        localStorage.clear();
         let res1 = JSON.parse(JSON.stringify(json))
         // let menuList = [];
         console.log(res1);
@@ -66,6 +70,7 @@ const Login = () => {
           { name: "HRM_user", active: false },
           { name: "Attendance", active: true },
         ];
+        setMenu([]);
         setMenu(menuList);
         // console.log(menuList);
         navigate('/dashboard');

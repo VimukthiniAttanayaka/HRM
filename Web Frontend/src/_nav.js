@@ -98,8 +98,6 @@ const _nav = [
     component: CNavGroup,
     name: <Translation>{(t) => t('Employee Information')}</Translation>,
     disabled: !EGroup,
-    // to: '/buttons',
-    // icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
