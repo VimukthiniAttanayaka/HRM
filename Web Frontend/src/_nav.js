@@ -20,12 +20,69 @@ import {
 } from '@coreui/icons'
 import { CNavbarToggler, CNavGroup, CNavItem, CNavTitle } from '@coreui/react-pro'
 import { Translation } from 'react-i18next'
-import { getMenu_HRM_customer, getMenu_HRM_employee } from './menuActivation'
+import {
+  getMenu_HRM_ECustomer,
+  getMenu_HRM_EEmployee,
+  getMenu_HRM_EEmployeeJobDiscription,
+  getMenu_HRM_EGroup,
+  getMenu_HRM_AAttendanceSearch,
+  getMenu_HRM_AMarkAttendance,
+  getMenu_HRM_AGroup,
+  getMenu_HRM_LGroup,
+  getMenu_HRM_LLeaveSchedule,
+  getMenu_HRM_LLeaveToApprove,
+  getMenu_HRM_LLeaveEntitlement,
+  getMenu_HRM_LLeaveType,
+  getMenu_HRM_RPGroup,
+  getMenu_HRM_RPHierarchyManagement,
+  getMenu_HRM_RPReportingPerson,
+  getMenu_HRM_RPReportingManagerSearch,
+  getMenu_HRM_UMGroup,
+  getMenu_HRM_UMInternalUser,
+  getMenu_HRM_UMExternelUser,
+  getMenu_HRM_UMUserRole,
+  getMenu_HRM_UMAccessGroup,
+  getMenu_HRM_UMMenuAccessGroup,
+  getMenu_HRM_UMUserRoleAccessGroup,
+  getMenu_HRM_UMUserMenu,
+  getMenu_HRM_MDGroup,
+  getMenu_HRM_MDBranch,
+  getMenu_HRM_MDCountry,
+  getMenu_HRM_MDDepartment,
+  getMenu_HRM_MDJobRole,
+} from './menuActivation'
 
-let cus = getMenu_HRM_customer();
-console.log(cus);
-let emp = getMenu_HRM_employee();
-console.log(emp);
+let EGroup = getMenu_HRM_EGroup();
+let ECustomer = getMenu_HRM_ECustomer();
+let EEmployee = getMenu_HRM_EEmployee();
+let EEmployeeJobDiscription = getMenu_HRM_EEmployeeJobDiscription();
+let AGroup = getMenu_HRM_AGroup();
+let AAttendanceSearch = getMenu_HRM_AAttendanceSearch();
+let AMarkAttendance = getMenu_HRM_AMarkAttendance();
+let LGroup = getMenu_HRM_LGroup();
+let LLeaveSchedule = getMenu_HRM_LLeaveSchedule();
+let LLeaveToApprove = getMenu_HRM_LLeaveToApprove();
+let LLeaveEntitlement = getMenu_HRM_LLeaveEntitlement();
+let LLeaveType = getMenu_HRM_LLeaveType();
+let RPGroup = getMenu_HRM_RPGroup();
+let RPHierarchyManagement = getMenu_HRM_RPHierarchyManagement();
+let RPReportingPerson = getMenu_HRM_RPReportingPerson();
+let RPReportingManagerSearch = getMenu_HRM_RPReportingManagerSearch();
+let UMGroup = getMenu_HRM_UMGroup();
+let UMInternalUser = getMenu_HRM_UMInternalUser();
+let UMExternalUser = getMenu_HRM_UMExternelUser();
+let UMUserRole = getMenu_HRM_UMUserRole();
+let UMAccessGroup = getMenu_HRM_UMAccessGroup();
+let UMMenuAccessGroup = getMenu_HRM_UMMenuAccessGroup();
+let UMUserAccessGroup = getMenu_HRM_UMUserRoleAccessGroup();
+let UMUserMenu = getMenu_HRM_UMUserMenu();
+let MGroup = getMenu_HRM_MDGroup();
+let MBranch = getMenu_HRM_MDBranch();
+let MCountry = getMenu_HRM_MDCountry();
+let MDepartment = getMenu_HRM_MDDepartment();
+let MJobRole = getMenu_HRM_MDJobRole();
+
+
 
 const _nav = [
   {
@@ -40,6 +97,7 @@ const _nav = [
   }, {
     component: CNavGroup,
     name: <Translation>{(t) => t('Employee Information')}</Translation>,
+    disabled: !EGroup,
     // to: '/buttons',
     // icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
     items: [
@@ -47,18 +105,19 @@ const _nav = [
         component: CNavItem,
         name: <Translation>{(t) => t('Company')}</Translation>,
         to: '/employee/Company',
-        disabled: !cus,
+        disabled: !ECustomer,
       },
       {
         component: CNavItem,
         name: <Translation>{(t) => t('Employee')}</Translation>,
         to: '/employee/employee',
-        disabled: !emp,
+        disabled: !EEmployee,
         // isVisible:{getAttendance}
       }, {
         component: CNavItem,
         name: <Translation>{(t) => t('Employee Job Desription')}</Translation>,
         to: '/employee/employeejobdescription',
+        disabled: !EEmployeeJobDiscription,
         // isVisible:{getAttendance}
       },
     ],
@@ -66,6 +125,7 @@ const _nav = [
   {
     component: CNavGroup,
     name: <Translation>{(t) => t('Attendance')}</Translation>,
+    disabled: !AGroup,
     // to: '/buttons',
     // icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
     items: [
@@ -73,11 +133,13 @@ const _nav = [
         component: CNavItem,
         name: <Translation>{(t) => t('Attendance Search')}</Translation>,
         to: '/attendance/attendance',
+        disabled: !AAttendanceSearch,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       }, {
         component: CNavItem,
         name: <Translation>{(t) => t('Mark Attendance')}</Translation>,
         to: '/attendance/markattendance',
+        disabled: !AMarkAttendance,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       },
     ],
@@ -85,26 +147,31 @@ const _nav = [
   {
     component: CNavGroup,
     name: <Translation>{(t) => t('Leave Management')}</Translation>,
+    disabled: !LGroup,
     items: [
       {
         component: CNavItem,
         name: <Translation>{(t) => t('Leave Schedule')}</Translation>,
         to: '/leaves/leaveshedule',
+        disabled: !LLeaveSchedule,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       }, {
         component: CNavItem,
         name: <Translation>{(t) => t('Leave To Approve')}</Translation>,
         to: '/leaves/leavetoapprove',
+        disabled: !LLeaveToApprove,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       }, {
         component: CNavItem,
         name: <Translation>{(t) => t('Leave Entitlement')}</Translation>,
         to: '/leaves/leaveentitlement',
+        disabled: !LLeaveEntitlement,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       }, {
         component: CNavItem,
         name: <Translation>{(t) => t('Leave Type')}</Translation>,
         to: '/leaves/leavetype',
+        disabled: !LLeaveType,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       },],
   },
@@ -115,20 +182,24 @@ const _nav = [
   {
     component: CNavGroup,
     name: <Translation>{(t) => t('Reporting person')}</Translation>,
+    disabled: !RPGroup,
     items: [{
       component: CNavItem,
       name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
       to: '/reportingperson/hierarchymanagement',
+      disabled: !RPHierarchyManagement,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
       name: <Translation>{(t) => t('Reporting Person')}</Translation>,
       to: '/reportingperson/reportingperson',
+      disabled: !RPReportingPerson,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
       name: <Translation>{(t) => t('Reporting Manager Search')}</Translation>,
       to: '/reportingperson/reportingmanagersearch',
+      disabled: !RPReportingManagerSearch,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     },],
   },
@@ -147,70 +218,84 @@ const _nav = [
   {
     component: CNavTitle,
     name: <Translation>{(t) => t('Reports')}</Translation>,
+    disabled: !UMGroup,
   },
   {
     component: CNavGroup,
     name: <Translation>{(t) => t('User Management')}</Translation>,
+    disabled: !UMGroup,
     items: [{
       component: CNavItem,
       name: <Translation>{(t) => t('Internal User')}</Translation>,
       to: '/users/internaluser',
+      disabled: !UMInternalUser,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
       name: <Translation>{(t) => t('External User')}</Translation>,
       to: '/users/externaluser',
+      disabled: !UMExternalUser,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
       name: <Translation>{(t) => t('User Role')}</Translation>,
       to: '/users/userrole',
+      disabled: !UMUserRole,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
       name: <Translation>{(t) => t('Access Group')}</Translation>,
       to: '/users/accessgroup',
+      disabled: !UMAccessGroup,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
       name: <Translation>{(t) => t('Menu Access Group')}</Translation>,
       to: '/users/menuaccessgroup',
+      disabled: !UMMenuAccessGroup,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
       name: <Translation>{(t) => t('User Access Group')}</Translation>,
       to: '/users/useraccessgroup',
+      disabled: !UMUserAccessGroup,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     },
     {
       component: CNavItem,
       name: <Translation>{(t) => t('User menu')}</Translation>,
       to: '/users/usermenu',
+      disabled: !UMUserMenu,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     },],
   },
   {
     component: CNavGroup,
     name: <Translation>{(t) => t('Master Data')}</Translation>,
+    disabled: !MGroup,
     items: [{
       component: CNavItem,
       name: <Translation>{(t) => t('Branch')}</Translation>,
       to: '/masterdata/branch',
+      disabled: !MBranch,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
       name: <Translation>{(t) => t('Country')}</Translation>,
       to: '/masterdata/country',
+      disabled: !MCountry,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
       name: <Translation>{(t) => t('Department')}</Translation>,
       to: '/masterdata/department',
+      disabled: !MDepartment,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
       name: <Translation>{(t) => t('JobRole')}</Translation>,
       to: '/masterdata/jobrole',
+      disabled: !MJobRole,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }],
   },

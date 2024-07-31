@@ -35,7 +35,6 @@ const Login = () => {
   }
 
   const handleSubmit = async (event) => {
-console.log('tutigyoh')
     const formData = {
       username: userName,
       password: password
@@ -53,7 +52,7 @@ console.log('tutigyoh')
         console.log(res1);
         for (let index = 0; index < res1.user[0].UserAccessList.length; index++) {
           let element = res1.user[0].UserAccessList[index];
-          console.log(element)
+          // console.log(element)
           menuList[index] = new UserMenuDetail(element.MNU_Active, element.MNU_MenuName);
         }
 
@@ -68,7 +67,7 @@ console.log('tutigyoh')
           { name: "Attendance", active: true },
         ];
         setMenu(menuList);
-        console.log(menuList);
+        // console.log(menuList);
         navigate('/dashboard');
       })
 
@@ -126,7 +125,7 @@ console.log('tutigyoh')
                   </CForm>
                 </CCardBody>
               </CCard>
-              <CCard  className="text-white bg-primary py-5" style={{ width: '44%' }}>
+              <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
                 <CCardBody className="text-center">
                   <div>
                     <h2>Sign up</h2>

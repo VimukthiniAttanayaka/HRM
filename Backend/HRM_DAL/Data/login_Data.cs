@@ -137,6 +137,7 @@ namespace HRM_DAL.Data
                             menuaccessobj.UMA_UserMenuID = rdr["UMA_UserMenuID"].ToString();
                             menuaccessobj.UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
                             menuaccessobj.UUM_UserMenu = rdr["UUM_UserMenu"].ToString();
+                            menuaccessobj.UMA_Status = Convert.ToBoolean(rdr["UUM_Status"].ToString());
 
                             menuaccesslist.Add(menuaccessobj);
                         }

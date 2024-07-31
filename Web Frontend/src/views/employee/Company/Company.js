@@ -16,9 +16,6 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass';
-import { getMenu_HRM_customer } from '../../../menuActivation';
-
-let cus = getMenu_HRM_customer();
 
 const Customer = () => {
 
@@ -39,8 +36,6 @@ const Customer = () => {
   const [isOtpSms, setIsOtpSms] = useState(true)
   const [isOtpEmail, setIsOtpEmail] = useState(true)
   const [isActive, setIsActive] = useState(true)
-
-console.log(cus)
 
   const handleChangeId = (event) => {
     setCustomerId(event.target.value)
