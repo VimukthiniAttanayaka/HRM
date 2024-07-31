@@ -78,7 +78,7 @@ namespace HRM.Controllers
             ReturnJobRoleModelHead obj = new ReturnJobRoleModelHead() { resp = false, msg = "sfsf" };
             obj.JobRole = new List<ReturnJobRoleModel>();
             obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "CAS", MDJR_JobRole = "Casual", MDJR_Status = true });
-            obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "ANU", MDJR_JobRole = "Annual", MDJR_Status = true });
+            obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "ANU", MDJR_JobRole = "Annual", MDJR_Status = false });
             obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "MED", MDJR_JobRole = "Medical", MDJR_Status = true });
             obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "MAT", MDJR_JobRole = "Matrinaty", MDJR_Status = true });
             objJobRoleHeadList.Add(obj);

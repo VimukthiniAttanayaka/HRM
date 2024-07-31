@@ -11,6 +11,8 @@ const JobRoleDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
+  const [popupStatus, setPopupStatus] = useState('create')
+  const [hideDelete, setHideDelete] = useState('')
 
   const columns = [
     {
@@ -33,9 +35,22 @@ const JobRoleDataGrid = () => {
       key: 'status',
       _style: { width: '20%' }
     },
-
     {
       key: 'show_details',
+      label: '',
+      _style: { width: '1%' },
+      filter: false,
+      sorter: false,
+    },
+    {
+      key: 'view',
+      label: '',
+      _style: { width: '1%' },
+      filter: false,
+      sorter: false,
+    },
+    {
+      key: 'delete',
       label: '',
       _style: { width: '1%' },
       filter: false,
@@ -76,24 +91,24 @@ const JobRoleDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_JobRoleID: item
+      MDJR_JobRoleID: item
     }
-
-    // const res = fetch(apiUrl + 'JobRole/get_JobRole_single', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setJobRoleDetails(res1[0].JobRole[0]);
-    //     handleOpenPopup()
-    //   })
     const JobRoleDetails = await getJobRoleSingle(formData)
     // setJobRoleDetails(res1[0].JobRole[0]);
     setJobRoleDetails(JobRoleDetails);
     handleOpenPopup()
+  }
+  const toggleEdit = (index) => {
+    setPopupStatus('edit')
+    toggleDetails(index)
+  }
+  const toggleDelete = (index) => {
+    setPopupStatus('delete')
+    toggleDetails(index)
+  }
+  const toggleView = (index) => {
+    setPopupStatus('view')
+    toggleDetails(index)
   }
   const toggleDetails = (index) => {
 
@@ -130,36 +145,6 @@ const JobRoleDataGrid = () => {
     // console.log(JobRoleDetails)
     setData(JobRoleDetails);
 
-    // const res = await fetch(apiUrl + 'JobRole/get_JobRole_all', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-
-    //     const JobRoleDetails = [];
-    //     class JobRoleDetail {
-    //       constructor(id, JobRole, status, Alotment) {
-    //         this.JobRole = JobRole;
-    //         this.id = id;
-    //         this.alotment = Alotment
-    //         if (status == true) { this.status = "Active"; }
-    //         else { this.status = "Inactive"; }
-    //       }
-    //     }
-
-    //     for (let index = 0; index < res1[0].JobRole.length; index++) {
-    //       let element = res1[0].JobRole[index];
-    //       console.log(element)
-    //       JobRoleDetails[index] = new JobRoleDetail(element.LVT_JobRoleID, element.LVT_JobRole, element.LVT_Status, element.LVT_LeaveAlotment);
-    //     }
-
-    //     setData(JobRoleDetails);
-    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
-    //   })
-
   }
   useEffect(() => {
     requestdata();
@@ -181,6 +166,7 @@ const JobRoleDataGrid = () => {
   const handleClosePopup = () => {
     setVisible(false);
     setJobRoleDetails([]);
+    setPopupStatus('create')
   };
 
   return (
@@ -198,7 +184,7 @@ const JobRoleDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <JobRolePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} JobRoleDetails={JobRoleDetails} />
+          <JobRolePopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} JobRoleDetails={JobRoleDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -239,14 +225,46 @@ const JobRoleDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDetails(item.id)
+                    toggleEdit(item.id)
                   }}
                 >
-                  {details.includes(item.id) ? 'Hide' : 'Show'}
+                  Edit
                 </CButton>
               </td>
             )
           },
+          view: (item) => (
+            <td>
+              <CButton
+                color="success"
+                variant="outline"
+                shape="square"
+                size="sm"
+                onClick={() => {
+                  toggleView(item.id)
+                }}
+              >
+                View
+              </CButton>
+            </td>
+          ),
+          delete: (item) => (
+            <td>
+              {item.status == 'Inactive' ? '':
+              <CButton
+                color="danger"
+                variant="outline"
+                shape="square"
+                size="sm"
+                onClick={() => {
+                  toggleDelete(item.id)
+                }}
+              >
+                Delete
+              </CButton>
+              }
+            </td>
+          ),
           details: (item) => {
             return (
               <CCollapse visible={details.includes(item.id)}>

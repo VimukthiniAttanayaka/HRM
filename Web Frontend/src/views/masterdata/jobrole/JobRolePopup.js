@@ -1,10 +1,12 @@
+const apiUrl = process.env.REACT_APP_API_URL;
+
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 
-const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails }) => {
+const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -20,14 +22,8 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails }) => {
   const handleChangeId = (event) => {
     setJobRoleId(event.target.value)
   }
-  const handleChangeIsActive = (event) => { }
-
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-
-    // Validation (optional)
-    // You can add validation logic here to check if all required fields are filled correctly
-
+  const handleCreate = async (event) => {
+    console.log('Create JobRole')
     // Prepare form data
     const formData = {
       MDJR_JobRoleID: JobRoleId,
@@ -49,8 +45,40 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails }) => {
       // Handle submission errors
       console.error('Error submitting Leave Type data:', response.statusText)
     }
+   }
+  const handleEdit = (event) => {
+    console.log('Edit JobRole')
+  }
+  const handleDelete = (event) => {
+    console.log('Delete JobRole')
   }
 
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    if (popupStatus == 'create') {
+      handleCreate(event)
+    } else if (popupStatus == 'edit') {
+      handleEdit(event)
+    } else if (popupStatus == 'delete') {
+      handleDelete(event)
+    }
+    // Validation (optional)
+    // You can add validation logic here to check if all required fields are filled correctly
+
+  }
+
+  const popupStatusSetup = (event) => {
+    if (popupStatus == 'edit'){
+      return 'Edit JobRole'
+    } else if (popupStatus == 'view'){
+      return 'View JobRole'
+    } else if (popupStatus == 'delete'){
+      return 'Delete JobRole'
+    } else {
+      return 'Create New JobRole'
+    }
+  }
   console.log(JobRoleDetails)
   return (
     <>
@@ -64,7 +92,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails }) => {
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New JobRole</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">{popupStatusSetup()}</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">
@@ -75,7 +103,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails }) => {
                     <CInputGroupText>
                       <h6>JobRoleID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="JobRoleID" name="JobRoleID" value={JobRoleDetails.MDJR_JobRoleID} onChange={handleChangeId}
+                  </CCol>   <CFormInput placeholder="JobRoleID" name="JobRoleID" value={JobRoleDetails.MDJR_JobRoleID} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -84,7 +112,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails }) => {
                     <CInputGroupText>
                       <h6>JobRole</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="JobRole" name="JobRole" value={JobRoleDetails.MDJR_JobRole} onChange={handleChangeJobRole}
+                  </CCol>    <CFormInput placeholder="JobRole" name="JobRole" value={JobRoleDetails.MDJR_JobRole} onChange={handleChangeJobRole} disabled={( popupStatus == 'view' || popupStatus == 'delete') ? true :  false}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -94,10 +122,11 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails }) => {
                       <h6>Status</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck label="Status" defaultChecked />
+                  <CFormCheck label="Status" defaultChecked disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
-                  <CButton color="success" type='submit'>Submit</CButton>
+                  {popupStatus == 'view' ? '' : ( popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
+                  <CButton color="success" type='submit'>Submit</CButton>)}
                 </div>
               </CForm>
             </CCardBody>
