@@ -22,7 +22,7 @@ namespace HRM_DAL.Data
         public static ReturnUserModelHead login(LogdataModel logdata)
         {
 
-            ReturnUserModelHead objUserHeadList = new ReturnUserModelHead();
+            ReturnUserModelHead objUserHead = new ReturnUserModelHead();
 
             try
             {
@@ -46,7 +46,7 @@ namespace HRM_DAL.Data
                         DataSet Ds = new DataSet();
                         dta.Fill(Ds);
 
-                        ReturnUserModelHead objUserHead = new ReturnUserModelHead();
+
                         objUserHead.resp = true;
                         objUserHead.msg = "Login";
 
@@ -121,10 +121,10 @@ namespace HRM_DAL.Data
                         foreach (DataRow rdr in Ds.Tables[1].Rows)
                         {
                             userroleaccessobj = new UserRoleAccessGroupModel();
-                            userroleaccessobj. UURAG_AccessGroupID = rdr["UURAG_AccessGroupID"].ToString();
-                            userroleaccessobj. UURAG_UserRoleID = rdr["UURAG_UserRoleID"].ToString();
-                            userroleaccessobj. UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
-                            userroleaccessobj. UUR_UserRole = rdr["UUR_UserRole"].ToString() ;
+                            userroleaccessobj.UURAG_AccessGroupID = rdr["UURAG_AccessGroupID"].ToString();
+                            userroleaccessobj.UURAG_UserRoleID = rdr["UURAG_UserRoleID"].ToString();
+                            userroleaccessobj.UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
+                            userroleaccessobj.UUR_UserRole = rdr["UUR_UserRole"].ToString();
 
                             userroleaccesslist.Add(userroleaccessobj);
                         }
@@ -161,7 +161,7 @@ namespace HRM_DAL.Data
                         objUserHead.user.Add(objUser);
                         ////objUserHeadList.Add(objUserHead);
 
-                        return objUserHeadList;
+                        return objUserHead;
 
                         ////    }
                         ////}
@@ -172,13 +172,13 @@ namespace HRM_DAL.Data
                         //    objUserHeadList.Add(objUserHead);
                         //}
                     }
-                    return objUserHeadList;
+                    return objUserHead;
                 }
             }
             catch (Exception ex)
             {
 
-                ReturnUserModelHead objUserHead = new ReturnUserModelHead
+                objUserHead = new ReturnUserModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -195,7 +195,7 @@ namespace HRM_DAL.Data
 
 
             }
-            return objUserHeadList;
+            return objUserHead;
         }
 
         private static void AuthenticationKeySetupWithDB(ReturnUserModel objUser)
