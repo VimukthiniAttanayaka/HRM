@@ -78,7 +78,6 @@
     <Compile Include="Models\CurrencyModel.cs" />
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\MenuAccessModel.cs" />
-    <Compile Include="Models\UserDetailsModel.cs" />
     <Compile Include="Models\UserRoleAccessGroupModel.cs" />
     <Compile Include="Models\UserMenuModel.cs" />
     <Compile Include="Models\Address.cs" />

@@ -120,224 +120,185 @@ namespace HRM.Controllers
 
         }
 
-        [HttpPost]
-        [Route("[action]")]
+        //[HttpPost]
+        //[Route("[action]")]
+        ////[Authorize]
+        //public List<ReturnResponse> inactivate_user(InactiveCUserModel item)//ok
+        //{
+        //    List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
+
+        //    try
+        //    {
+        //        LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
+
+        //        objUserHeadList = user_BL.inactivate_user(item);
+        //        return objUserHeadList;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ReturnResponse objUserHead = new ReturnResponse
+        //        {
+        //            resp = false,
+        //            msg = ex.Message.ToString()
+        //        };
+        //        objUserHeadList.Add(objUserHead);
+
+        //        objError.WriteLog(0, "UserController", "inactivate_user", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "UserController", "inactivate_user", "Error Message: " + ex.Message);
+        //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+        //        {
+        //            objError.WriteLog(0, "UserController", "inactivate_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "UserController", "inactivate_user", "Inner Exception Message: " + ex.InnerException.Message);
+        //        }
+        //        return objUserHeadList;
+        //    }
+
+
+
+
+        //}
+
+        //// POST api/<BankController>
+        //[HttpPost]
+        //[Route("[action]")]
+        ////[Authorize]
+        //public List<ReturnResponse> change_password(NewpwModel item)
+        //{
+        //    List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
+
+        //    try
+        //    {
+        //        LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
+
+        //        objUserHeadList = user_BL.change_password(item);
+        //        return objUserHeadList;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ReturnResponse objUserHead = new ReturnResponse
+        //        {
+        //            resp = false,
+        //            msg = ex.Message.ToString()
+        //        };
+        //        objUserHeadList.Add(objUserHead);
+
+        //        objError.WriteLog(0, "UserController", "change_password", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "UserController", "change_password", "Error Message: " + ex.Message);
+        //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+        //        {
+        //            objError.WriteLog(0, "UserController", "change_password", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "UserController", "change_password", "Inner Exception Message: " + ex.InnerException.Message);
+        //        }
+        //        return objUserHeadList;
+        //    }
+        //}
+
+
+        //// POST api/<BankController>
+        //[HttpPost]
+        //[Route("[action]")]
         //[Authorize]
-        public List<ReturnCustomerUserAllModelHead> get_user_all_unique(GetCustomerUserAllModel CUserall)//ok
-        {
-            List<ReturnCustomerUserAllModelHead> objCusUserHeadList = new List<ReturnCustomerUserAllModelHead>();
+        //public List<ReturnResponse> update_notification_token(NotificationTokenModel UpNotTokModel)
+        //{
+        //    List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
 
-            try
-            {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, CUserall);
+        //    try
+        //    {
+        //        LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, UpNotTokModel);
 
-                objCusUserHeadList = user_BL.get_user_all_unique(CUserall);
-                return objCusUserHeadList;
-            }
-            catch (Exception ex)
-            {
+        //        var claimsIdentity = this.User.Identity as ClaimsIdentity;
+        //        var userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
 
-                ReturnCustomerUserAllModelHead objCusUserHead = new ReturnCustomerUserAllModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objCusUserHeadList.Add(objCusUserHead);
+        //        objUserHeadList = user_BL.update_notification_token(UpNotTokModel, userId);
+        //        return objUserHeadList;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ReturnResponse objUserHead = new ReturnResponse
+        //        {
+        //            resp = false,
+        //            msg = ex.Message.ToString()
+        //        };
+        //        objUserHeadList.Add(objUserHead);
 
-                objError.WriteLog(0, "UserController", "get_user_all_unique", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "get_user_all_unique", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserController", "get_user_all_unique", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "get_user_all_unique", "Inner Exception Message: " + ex.InnerException.Message);
-                }
+        //        objError.WriteLog(0, "UserController", "update_notification_token", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "UserController", "update_notification_token", "Error Message: " + ex.Message);
+        //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+        //        {
+        //            objError.WriteLog(0, "UserController", "update_notification_token", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "UserController", "update_notification_token", "Inner Exception Message: " + ex.InnerException.Message);
+        //        }
+        //        return objUserHeadList;
+        //    }
+        //}
 
+        //[HttpPost]
+        //[Route("[action]")]
+        ////[Authorize]
+        //public List<ReturnResponse> reset_password(ResetPasswordModel resetPassword)
+        //{
 
-            }
+        //    List<ReturnResponse> objOtpHeadList = new List<ReturnResponse>();
+        //    List<ResetPasswordModel> objList = new List<ResetPasswordModel>();
 
-            return objCusUserHeadList;
+        //    try
+        //    {
+        //        LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, resetPassword);
 
-        }
+        //        string baseUrl = $"{Request.Scheme}://{Request.Host}/api";
+        //        objOtpHeadList = user_BL.reset_password(resetPassword, baseUrl);
+        //        return objOtpHeadList;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ReturnResponse objOtpHead = new ReturnResponse
+        //        {
+        //            resp = false,
+        //            msg = ex.Message.ToString()
+        //        };
+        //        objOtpHeadList.Add(objOtpHead);
 
-        [HttpPost]
-        [Route("[action]")]
-        //[Authorize]
-        public List<ReturnResponse> inactivate_user(InactiveCUserModel item)//ok
-        {
-            List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
-
-            try
-            {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
-
-                objUserHeadList = user_BL.inactivate_user(item);
-                return objUserHeadList;
-            }
-            catch (Exception ex)
-            {
-                ReturnResponse objUserHead = new ReturnResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "UserController", "inactivate_user", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "inactivate_user", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserController", "inactivate_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "inactivate_user", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-                return objUserHeadList;
-            }
-
+        //        objError.WriteLog(0, "UserController", "reset_password", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "UserController", "reset_password", "Error Message: " + ex.Message);
+        //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+        //        {
+        //            objError.WriteLog(0, "UserController", "reset_password", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "UserController", "reset_password", "Inner Exception Message: " + ex.InnerException.Message);
+        //        }
 
 
+        //    }
+        //    return objOtpHeadList;
+        //}
 
-        }
+        //[HttpGet]
+        //[Route("[action]")]
+        ////[Authorize]
+        //public string change_password_by_email(int userId, string email, string verificationCode)
+        //{
+        //    string rtnMsg = "";
+        //    try
+        //    {
+        //        LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, "userId :" + userId + ", email :" + email + ", verificationCode :" + verificationCode);
 
-        // POST api/<BankController>
-        [HttpPost]
-        [Route("[action]")]
-        //[Authorize]
-        public List<ReturnResponse> change_password(NewpwModel item)
-        {
-            List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
+        //        rtnMsg = user_BL.change_password_by_email(userId, email, verificationCode);
+        //        return rtnMsg;
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-            try
-            {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
+        //        rtnMsg = ex.Message.ToString();
 
-                objUserHeadList = user_BL.change_password(item);
-                return objUserHeadList;
-            }
-            catch (Exception ex)
-            {
-                ReturnResponse objUserHead = new ReturnResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "UserController", "change_password", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "change_password", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserController", "change_password", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "change_password", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-                return objUserHeadList;
-            }
-        }
-
-
-        // POST api/<BankController>
-        [HttpPost]
-        [Route("[action]")]
-        [Authorize]
-        public List<ReturnResponse> update_notification_token(NotificationTokenModel UpNotTokModel)
-        {
-            List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
-
-            try
-            {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, UpNotTokModel);
-
-                var claimsIdentity = this.User.Identity as ClaimsIdentity;
-                var userId = claimsIdentity.FindFirst(ClaimTypes.Name)?.Value;
-
-                objUserHeadList = user_BL.update_notification_token(UpNotTokModel, userId);
-                return objUserHeadList;
-            }
-            catch (Exception ex)
-            {
-                ReturnResponse objUserHead = new ReturnResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "UserController", "update_notification_token", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "update_notification_token", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserController", "update_notification_token", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "update_notification_token", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-                return objUserHeadList;
-            }
-        }
-
-        [HttpPost]
-        [Route("[action]")]
-        //[Authorize]
-        public List<ReturnResponse> reset_password(ResetPasswordModel resetPassword)
-        {
-
-            List<ReturnResponse> objOtpHeadList = new List<ReturnResponse>();
-            List<ResetPasswordModel> objList = new List<ResetPasswordModel>();
-
-            try
-            {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, resetPassword);
-
-                string baseUrl = $"{Request.Scheme}://{Request.Host}/api";
-                objOtpHeadList = user_BL.reset_password(resetPassword, baseUrl);
-                return objOtpHeadList;
-            }
-            catch (Exception ex)
-            {
-                ReturnResponse objOtpHead = new ReturnResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objOtpHeadList.Add(objOtpHead);
-
-                objError.WriteLog(0, "UserController", "reset_password", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "reset_password", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserController", "reset_password", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "reset_password", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-
-            }
-            return objOtpHeadList;
-        }
-
-        [HttpGet]
-        [Route("[action]")]
-        //[Authorize]
-        public string change_password_by_email(int userId, string email, string verificationCode)
-        {
-            string rtnMsg = "";
-            try
-            {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, "userId :" + userId + ", email :" + email + ", verificationCode :" + verificationCode);
-
-                rtnMsg = user_BL.change_password_by_email(userId, email, verificationCode);
-                return rtnMsg;
-            }
-            catch (Exception ex)
-            {
-
-                rtnMsg = ex.Message.ToString();
-
-                objError.WriteLog(0, "UserController", "change_password_by_email", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "change_password_by_email", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "UserController", "change_password_by_email", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "change_password_by_email", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-                return rtnMsg;
-            }
-        }
+        //        objError.WriteLog(0, "UserController", "change_password_by_email", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "UserController", "change_password_by_email", "Error Message: " + ex.Message);
+        //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+        //        {
+        //            objError.WriteLog(0, "UserController", "change_password_by_email", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "UserController", "change_password_by_email", "Inner Exception Message: " + ex.InnerException.Message);
+        //        }
+        //        return rtnMsg;
+        //    }
+        //}
 
         public static string CreateRandomPassword(int PasswordLength)
         {

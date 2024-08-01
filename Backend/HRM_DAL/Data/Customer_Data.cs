@@ -150,8 +150,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_insert_customer";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
                         cmd.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
@@ -267,8 +267,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_modify_customer";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
                         cmd.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
@@ -388,8 +388,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@CUS_ID", item.CUS_ID);
                         cmd.Parameters["@CUS_ID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
 
 

@@ -79,7 +79,7 @@ namespace HRM_DAL.Models
     {
         public string PAGE_NO { get; set; }
         public string PAGE_RECORDS_COUNT { get; set; }
-        public string UD_StaffID { get; set; }
+        public string UD_UserID { get; set; }
         public string UD_FirstName { get; set; }
         public string UD_LastName { get; set; }
         public string UGM_Name { get; set; }
@@ -91,7 +91,7 @@ namespace HRM_DAL.Models
     {
         public string UD_CustomerID { get; set; }
         public string UD_DepartmentID { get; set; }
-        public string UD_StaffID { get; set; }
+        public string UD_UserID { get; set; }
         public string UD_FirstName { get; set; }
         public string UD_LastName { get; set; }
         public string UD_PrefferedName { get; set; }

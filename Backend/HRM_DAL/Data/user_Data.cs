@@ -44,8 +44,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@USER_ID", ConfigCaller.HRMUserName);
                         cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_STAFFID", UserID);
-                        cmd.Parameters["@UD_STAFFID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@SALT", Salt);
                         cmd.Parameters["@SALT"].Direction = ParameterDirection.Input;
@@ -131,7 +131,7 @@ namespace HRM_DAL.Data
                                 //objCusUserData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
                                 //objCusUserData.UD_DepartmentID = rdr["UD_DepartmentID"].ToString();
                                 //objCusUserData.DPT_Name = rdr["DPT_Name"].ToString();
-                                //objCusUserData.UD_StaffID = rdr["UD_StaffID"].ToString();
+                                //objCusUserData.UD_UserID = rdr["UD_UserID"].ToString();
                                 //objCusUserData.UD_FirstName = rdr["UD_FirstName"].ToString();
                                 //objCusUserData.UD_LastName = rdr["UD_LastName"].ToString();
                                 //objCusUserData.UD_PrefferedName = rdr["UD_PrefferedName"].ToString();
@@ -276,8 +276,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@PAGE_RECORDS_COUNT", CUserall.PAGE_RECORDS_COUNT);
                         cmd.Parameters["@PAGE_RECORDS_COUNT"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@UD_StaffID", CUserall.UD_StaffID);
-                        //cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_UserID", CUserall.UD_UserID);
+                        //cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_FirstName", CUserall.UD_FirstName);
                         cmd.Parameters["@UD_FirstName"].Direction = ParameterDirection.Input;
@@ -304,7 +304,7 @@ namespace HRM_DAL.Data
                                 objCusUserHead.resp = true;
                                 objCusUserHead.msg = "Get Customer User";
 
-                                //objCusUserData.UD_StaffID = rdr["UD_StaffID"].ToString();
+                                //objCusUserData.UD_UserID = rdr["UD_UserID"].ToString();
                                 //objCusUserData.UD_FirstName = rdr["UD_FirstName"].ToString();
                                 //objCusUserData.UD_LastName = rdr["UD_LastName"].ToString();
                                 //objCusUserData.UGM_Name = rdr["UGM_Name"].ToString();
@@ -366,381 +366,6 @@ namespace HRM_DAL.Data
 
             return objCusUserHeadList;
 
-        }
-
-        public static List<ReturnCustomerUserAllModelHead> get_user_all_unique(GetCustomerUserAllModel CUserall)//ok
-        {
-            List<ReturnCustomerUserAllModelHead> objCusUserHeadList = new List<ReturnCustomerUserAllModelHead>();
-            List<ReturnCusUserAllModel> objCusUserSList = new List<ReturnCusUserAllModel>();
-
-            try
-            {
-                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
-                {
-
-                    ReturnCustomerUserAllModelHead objCusUserHead = new ReturnCustomerUserAllModelHead();
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        cmd.Connection = lconn;
-                        lconn.Open();
-
-                        cmd.CommandText = "sp_get_customer_user_all_unique";
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        cmd.Parameters.AddWithValue("@PAGE_NO", CUserall.PAGE_NO);
-                        cmd.Parameters["@PAGE_NO"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@PAGE_RECORDS_COUNT", CUserall.PAGE_RECORDS_COUNT);
-                        cmd.Parameters["@PAGE_RECORDS_COUNT"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@UD_StaffID", CUserall.UD_StaffID);
-                        //cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UD_FirstName", CUserall.UD_FirstName);
-                        cmd.Parameters["@UD_FirstName"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UD_LastName", CUserall.UD_LastName);
-                        cmd.Parameters["@UD_LastName"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UD_Status", CUserall.UD_Status);
-                        cmd.Parameters["@UD_Status"].Direction = ParameterDirection.Input;
-
-                        string RC = "";
-
-                        SqlDataAdapter dta = new SqlDataAdapter();
-                        dta.SelectCommand = cmd;
-                        DataSet Ds = new DataSet();
-                        dta.Fill(Ds);
-
-                        if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
-                        {
-                            foreach (DataRow rdr in Ds.Tables[0].Rows)
-                            {
-                                ReturnCusUserAllModel objCusUserData = new ReturnCusUserAllModel();
-
-                                objCusUserHead.resp = true;
-                                objCusUserHead.msg = "Get Customer User";
-
-                                //objCusUserData.UD_StaffID = rdr["UD_StaffID"].ToString();
-                                //objCusUserData.UD_FirstName = rdr["UD_FirstName"].ToString();
-                                //objCusUserData.UD_LastName = rdr["UD_LastName"].ToString();
-                                //objCusUserData.DPT_Name = rdr["DPT_Name"].ToString();
-                                //objCusUserData.DPT_ID = rdr["DPT_ID"].ToString();
-                                //objCusUserData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
-                                //objCusUserData.UD_Status = rdr["UD_Status"].ToString();
-
-                                //objCusUserData.RC = RC;
-
-                                //objUserData.UserGroup.Add(objUserHead);
-
-                                objCusUserSList.Add(objCusUserData);
-
-                                if (objCusUserHead.User == null)
-                                {
-                                    objCusUserHead.User = new List<ReturnCusUserAllModel>();
-                                }
-
-                                objCusUserHead.User.Add(objCusUserData);
-
-                            }
-                            objCusUserHeadList.Add(objCusUserHead);
-
-                        }
-                        else
-                        {
-                            objCusUserHead.resp = true;
-                            objCusUserHead.msg = "";
-                            objCusUserHeadList.Add(objCusUserHead);
-
-
-                        }
-                    }
-                }
-
-                return objCusUserHeadList;
-
-            }
-            catch (Exception ex)
-            {
-
-                ReturnCustomerUserAllModelHead objCusUserHead = new ReturnCustomerUserAllModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objCusUserHeadList.Add(objCusUserHead);
-
-                objError.WriteLog(0, "User_Data", "get_user_all_unique", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "User_Data", "get_user_all_unique", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "User_Data", "get_user_all_unique", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "User_Data", "get_user_all_unique", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-
-            }
-
-            return objCusUserHeadList;
-
-        }
-
-        public static List<ReturnResponse> inactivate_user(InactiveCUserModel item)//ok
-        {
-            List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
-
-            try
-            {
-                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        cmd.Connection = lconn;
-
-
-                        cmd.CommandText = "sp_del_customer_user";
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@TABLE", item.TABLE);
-                        cmd.Parameters["@TABLE"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@USER_ID", item.USER_ID);
-                        cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
-
-                        SqlDataAdapter dta = new SqlDataAdapter();
-                        dta.SelectCommand = cmd;
-                        DataSet Ds = new DataSet();
-                        dta.Fill(Ds);
-
-                        if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
-                        {
-                            foreach (DataRow rdr in Ds.Tables[0].Rows)
-                            {
-                                ReturnResponse objUserHead = new ReturnResponse
-                                {
-                                    resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
-                                    msg = rdr["RTN_MSG"].ToString()
-                                };
-                                objUserHeadList.Add(objUserHead);
-                            }
-                            objError.WriteLog(0, "User_Data", "inactivate_user", "Stack Track: " + objUserHeadList + item);
-
-                            return objUserHeadList;
-                        }
-
-                        return objUserHeadList;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ReturnResponse objUserHead = new ReturnResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "User_Data", "inactivate_user", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "User_Data", "inactivate_user", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "User_Data", "inactivate_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "User_Data", "inactivate_user", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-                return objUserHeadList;
-            }
-
-
-
-
-        }
-
-        public static List<ReturnLoadUserDataModel> load_user_data()//ok
-        {
-            List<ReturnLoadUserDataModel> objUserHeadList = new List<ReturnLoadUserDataModel>();
-            List<ReturnLoadUserDataModel> objUserSList = new List<ReturnLoadUserDataModel>();
-            List<ReturnUserGroupModel> objGrpSList = new List<ReturnUserGroupModel>();
-            List<ReturnUserBuModel> objBUList = new List<ReturnUserBuModel>();
-            List<ReturnUserCustModel> objCustList = new List<ReturnUserCustModel>();
-
-            List<SPResponse> objResponseList = new List<SPResponse>();
-            try
-            {
-                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
-                {
-                    ReturnLoadUserDataModel objUserHead = new ReturnLoadUserDataModel();
-
-
-                    ReturnLoadUserDataModel objUserData = new ReturnLoadUserDataModel();
-
-
-                    using (SqlCommand cmdGrp = new SqlCommand())
-                    {
-                        cmdGrp.Connection = lconn;
-
-                        cmdGrp.CommandText = "sp_get_user_groups_with_select";
-                        cmdGrp.CommandType = CommandType.StoredProcedure;
-
-                        cmdGrp.Parameters.AddWithValue("@USER_ID", "*#@%&");
-                        cmdGrp.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
-
-                        SqlDataAdapter dtaGrp = new SqlDataAdapter();
-                        dtaGrp.SelectCommand = cmdGrp;
-                        DataSet DsGrp = new DataSet();
-                        dtaGrp.Fill(DsGrp);
-
-                        if (DsGrp != null && DsGrp.Tables.Count > 0 && DsGrp.Tables[0].Rows.Count > 0)
-                        {
-                            foreach (DataRow rdrGrp in DsGrp.Tables[0].Rows)
-                            {
-                                ReturnUserGroupModel objGrpData = new ReturnUserGroupModel
-                                {
-                                    UGM_ID = rdrGrp["UGM_ID"].ToString(),
-                                    IndexNo = rdrGrp["IndexNo"].ToString(),
-                                    UGM_Name = rdrGrp["UGM_Name"].ToString(),
-                                    UAG_Select = Convert.ToBoolean(rdrGrp["UAG_Select"])
-                                };
-
-                                objGrpSList.Add(objGrpData);
-
-                                if (objUserData.usergroup == null)
-                                {
-                                    objUserData.usergroup = new List<ReturnUserGroupModel>();
-                                }
-
-
-                                objUserData.usergroup.Add(objGrpData);
-                            }
-                        }
-                    }
-                    using (SqlCommand cmdBu = new SqlCommand())
-                    {
-                        cmdBu.Connection = lconn;
-
-                        cmdBu.CommandText = "sp_get_user_business_units_with_select";
-                        cmdBu.CommandType = CommandType.StoredProcedure;
-
-                        cmdBu.Parameters.AddWithValue("@USER_ID", "*#@%&");
-                        cmdBu.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
-
-                        SqlDataAdapter dtaBu = new SqlDataAdapter();
-                        dtaBu.SelectCommand = cmdBu;
-                        DataSet DsBu = new DataSet();
-                        dtaBu.Fill(DsBu);
-
-                        if (DsBu != null && DsBu.Tables.Count > 0 && DsBu.Tables[0].Rows.Count > 0)
-                        {
-                            foreach (DataRow rdrBu in DsBu.Tables[0].Rows)
-                            {
-                                ReturnUserBuModel objBuData = new ReturnUserBuModel
-                                {
-                                    BU_ID = rdrBu["BU_ID"].ToString(),
-                                    IndexNo = rdrBu["IndexNo"].ToString(),
-                                    BU_CompanyName = rdrBu["BU_CompanyName"].ToString(),
-                                    BU_CountryCode = rdrBu["BU_CountryCode"].ToString(),
-                                    UAG_Select = Convert.ToBoolean(rdrBu["UAG_Select"])
-                                };
-
-                                objBUList.Add(objBuData);
-
-                                if (objUserData.userbu == null)
-                                {
-                                    objUserData.userbu = new List<ReturnUserBuModel>();
-                                }
-
-                                objUserData.userbu.Add(objBuData);
-
-                            }
-                        }
-                    }
-                    using (SqlCommand cmdCust = new SqlCommand())
-                    {
-                        cmdCust.Connection = lconn;
-
-                        cmdCust.CommandText = "sp_get_user_customers_with_select";
-                        cmdCust.CommandType = CommandType.StoredProcedure;
-
-                        cmdCust.Parameters.AddWithValue("@USER_ID", "*#@%&");
-                        cmdCust.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
-
-                        SqlDataAdapter dtaCust = new SqlDataAdapter();
-                        dtaCust.SelectCommand = cmdCust;
-                        DataSet DsCust = new DataSet();
-                        dtaCust.Fill(DsCust);
-
-                        if (DsCust != null && DsCust.Tables.Count > 0 && DsCust.Tables[0].Rows.Count > 0)
-                        {
-                            foreach (DataRow rdrCust in DsCust.Tables[0].Rows)
-                            {
-                                ReturnUserCustModel objCustData = new ReturnUserCustModel
-                                {
-                                    CUS_ID = rdrCust["CUS_ID"].ToString(),
-                                    IndexNo = rdrCust["IndexNo"].ToString(),
-                                    CUS_CompanyName = rdrCust["CUS_CompanyName"].ToString(),
-                                    BU_CompanyName = rdrCust["BU_CompanyName"].ToString(),
-                                    UAG_Select = Convert.ToBoolean(rdrCust["UAG_Select"])
-                                };
-
-                                objCustList.Add(objCustData);
-
-                                if (objUserData.usercust == null)
-                                {
-                                    objUserData.usercust = new List<ReturnUserCustModel>();
-                                }
-
-                                objUserData.usercust.Add(objCustData);
-
-
-                            }
-
-                        }
-                    }
-                    objUserHead.resp = true;
-
-                    objUserHeadList.Add(objUserData);
-                }
-                return objUserHeadList;
-
-            }
-            catch (Exception ex)
-            {
-                ReturnLoadUserDataModel objUserHead = new ReturnLoadUserDataModel
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "User_Data", "load_user_data", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "User_Data", "load_user_data", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "User_Data", "load_user_data", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "User_Data", "load_user_data", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-
-            }
-
-            return objUserHeadList;
-
-        }
-
-        public class UserGroupAddModel
-        {
-            public string UAG_UserID { get; set; }
-            public string UAG_GroupID { get; set; }
-            public string UAG_BusinessUnit { get; set; }
-            public string UAG_CustomerID { get; set; }
-            public string UAG_VendorID { get; set; }
-            public bool UAG_Status { get; set; }
-            public string UAG_CreatedBy { get; set; }
-            public string UAG_CreatedDateTime { get; set; }
-            public string UAG_Type { get; set; }
         }
 
         public static List<ReturnResponse> add_new_user(CUserModel item)//ok
@@ -812,8 +437,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_DepartmentID", item.UD_DepartmentID);
                         cmd.Parameters["@UD_DepartmentID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_FirstName", item.UD_FirstName);
                         cmd.Parameters["@UD_FirstName"].Direction = ParameterDirection.Input;
@@ -822,25 +447,25 @@ namespace HRM_DAL.Data
                         cmd.Parameters["@UD_LastName"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_PrefferedName", item.UD_PrefferedName);
-                        cmd.Parameters["@UD_PrefferedName"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters["@UD_PrefferedName"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_OrgStructuralLevel1", item.UD_OrgStructuralLevel1);
-                        cmd.Parameters["@UD_OrgStructuralLevel1"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_OrgStructuralLevel1", item.UD_OrgStructuralLevel1);
+                        //cmd.Parameters["@UD_OrgStructuralLevel1"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_OrgStructuralLevel2", item.UD_OrgStructuralLevel2);
-                        cmd.Parameters["@UD_OrgStructuralLevel2"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_OrgStructuralLevel2", item.UD_OrgStructuralLevel2);
+                        //cmd.Parameters["@UD_OrgStructuralLevel2"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_DepartmentDetail1", item.UD_DepartmentDetail1);
-                        cmd.Parameters["@UD_DepartmentDetail1"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_DepartmentDetail1", item.UD_DepartmentDetail1);
+                        //cmd.Parameters["@UD_DepartmentDetail1"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_DepartmentDetail2", item.UD_DepartmentDetail2);
-                        cmd.Parameters["@UD_DepartmentDetail2"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_DepartmentDetail2", item.UD_DepartmentDetail2);
+                        //cmd.Parameters["@UD_DepartmentDetail2"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_DepartmentDetail3", item.UD_DepartmentDetail3);
-                        cmd.Parameters["@UD_DepartmentDetail3"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_DepartmentDetail3", item.UD_DepartmentDetail3);
+                        //cmd.Parameters["@UD_DepartmentDetail3"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_JobCodeDescription", item.UD_JobCodeDescription);
-                        cmd.Parameters["@UD_JobCodeDescription"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_JobCodeDescription", item.UD_JobCodeDescription);
+                        //cmd.Parameters["@UD_JobCodeDescription"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_Address", item.UD_Address);
                         cmd.Parameters["@UD_Address"].Direction = ParameterDirection.Input;
@@ -863,8 +488,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_StaffLocation", item.UD_StaffLocation);
                         cmd.Parameters["@UD_StaffLocation"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_PCCode", item.UD_PCCode);
-                        cmd.Parameters["@UD_PCCode"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_PCCode", item.UD_PCCode);
+                        //cmd.Parameters["@UD_PCCode"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_PCDescription", item.UD_PCDescription);
                         cmd.Parameters["@UD_PCDescription"].Direction = ParameterDirection.Input;
@@ -931,7 +556,7 @@ namespace HRM_DAL.Data
                                             cmdud.Parameters.AddWithValue("@USER_ID", item.USER_ID);
                                             cmdud.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
 
-                                            cmdud.Parameters.AddWithValue("@UAG_UserID", item.UD_StaffID);
+                                            cmdud.Parameters.AddWithValue("@UAG_UserID", item.UD_UserID);
                                             cmdud.Parameters["@UAG_UserID"].Direction = ParameterDirection.Input;
 
                                             cmdud.Parameters.AddWithValue("@UAG_GroupID", ConfigCaller.CustomerUserGroupID);
@@ -1024,7 +649,7 @@ namespace HRM_DAL.Data
 			                                    <tr>
 				                                    <td>Login ID</td>
 				                                    <td>:</td>
-				                                    <td><b>" + item.UD_StaffID + @"</b></td>
+				                                    <td><b>" + item.UD_UserID + @"</b></td>
 			                                    </tr>
 			                                    <tr>
 				                                    <td>Password</td>
@@ -1166,8 +791,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_DepartmentID", item.UD_DepartmentID);
                         cmd.Parameters["@UD_DepartmentID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_FirstName", item.UD_FirstName);
                         cmd.Parameters["@UD_FirstName"].Direction = ParameterDirection.Input;
@@ -1178,23 +803,23 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_PrefferedName", item.UD_PrefferedName);
                         cmd.Parameters["@UD_PrefferedName"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_OrgStructuralLevel1", item.UD_OrgStructuralLevel1);
-                        cmd.Parameters["@UD_OrgStructuralLevel1"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_OrgStructuralLevel1", item.UD_OrgStructuralLevel1);
+                        //cmd.Parameters["@UD_OrgStructuralLevel1"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_OrgStructuralLevel2", item.UD_OrgStructuralLevel2);
-                        cmd.Parameters["@UD_OrgStructuralLevel2"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_OrgStructuralLevel2", item.UD_OrgStructuralLevel2);
+                        //cmd.Parameters["@UD_OrgStructuralLevel2"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_DepartmentDetail1", item.UD_DepartmentDetail1);
-                        cmd.Parameters["@UD_DepartmentDetail1"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_DepartmentDetail1", item.UD_DepartmentDetail1);
+                        //cmd.Parameters["@UD_DepartmentDetail1"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_DepartmentDetail2", item.UD_DepartmentDetail2);
-                        cmd.Parameters["@UD_DepartmentDetail2"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_DepartmentDetail2", item.UD_DepartmentDetail2);
+                        //cmd.Parameters["@UD_DepartmentDetail2"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_DepartmentDetail3", item.UD_DepartmentDetail3);
-                        cmd.Parameters["@UD_DepartmentDetail3"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_DepartmentDetail3", item.UD_DepartmentDetail3);
+                        //cmd.Parameters["@UD_DepartmentDetail3"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_JobCodeDescription", item.UD_JobCodeDescription);
-                        cmd.Parameters["@UD_JobCodeDescription"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_JobCodeDescription", item.UD_JobCodeDescription);
+                        //cmd.Parameters["@UD_JobCodeDescription"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_Address", item.UD_Address);
                         cmd.Parameters["@UD_Address"].Direction = ParameterDirection.Input;
@@ -1217,8 +842,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_StaffLocation", item.UD_StaffLocation);
                         cmd.Parameters["@UD_StaffLocation"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_PCCode", item.UD_PCCode);
-                        cmd.Parameters["@UD_PCCode"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_PCCode", item.UD_PCCode);
+                        //cmd.Parameters["@UD_PCCode"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_PCDescription", item.UD_PCDescription);
                         cmd.Parameters["@UD_PCDescription"].Direction = ParameterDirection.Input;
@@ -1269,7 +894,7 @@ namespace HRM_DAL.Data
                                             cmdud.Parameters.AddWithValue("@USER_ID", item.USER_ID);
                                             cmdud.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
 
-                                            cmdud.Parameters.AddWithValue("@UAG_UserID", item.UD_StaffID);
+                                            cmdud.Parameters.AddWithValue("@UAG_UserID", item.UD_UserID);
                                             cmdud.Parameters["@UAG_UserID"].Direction = ParameterDirection.Input;
 
                                             cmdud.Parameters.AddWithValue("@UAG_GroupID", itemcus.UGM_ID);
@@ -1320,505 +945,505 @@ namespace HRM_DAL.Data
             return objCUserHeadList;
         }
 
-        public static List<ReturnResponse> change_password(NewpwModel item)//set use need to apply - all person
-        {
-            List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
-            List<SPResponse> objResponseList = new List<SPResponse>();
-            try
-            {
-                string encryptedPW = "";
-                decimal Salt = 0;
-                string emailBody = "";
-                string smsBody = "";
-
-                string PwType = GetUserPasswordType(item.UD_StaffID, item.UD_StaffID);
-
-                string tmpPassword = "";
-
-                if (PwType.ToUpper() == "PWD")
-                {
-                    tmpPassword = PasswordRelated.CreateRandomPassword();
-                }
-                else
-                {
-                    tmpPassword = PasswordRelated.CreateRandomPIN();
-                }
-
-                //PasswordRelated.CreateEncryptedPassword(tmpPassword, ref encryptedPW, ref Salt);
-                encryptedPW = utility_handler.Utility.Misc.deCrypt(tmpPassword);
-
-                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
-                {
-                    using (SqlCommand cmdpw = new SqlCommand())
-                    {
-                        cmdpw.Connection = lconn;
-
-                        cmdpw.CommandText = "sp_sav_user_pw";
-                        cmdpw.CommandType = CommandType.StoredProcedure;
-
-                        cmdpw.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmdpw.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
-
-                        cmdpw.Parameters.AddWithValue("@USER_PW", encryptedPW);
-                        cmdpw.Parameters["@USER_PW"].Direction = ParameterDirection.Input;
-
-                        cmdpw.Parameters.AddWithValue("@USER_PwdSalt", Salt);
-                        cmdpw.Parameters["@USER_PwdSalt"].Direction = ParameterDirection.Input;
-
-                        SqlDataAdapter dta = new SqlDataAdapter();
-                        dta.SelectCommand = cmdpw;
-                        DataSet Ds = new DataSet();
-                        dta.Fill(Ds);
-
-                        int exp_date = 0;
-                        String expired_date = "";
-                        String mailroom = "";
-
-                        var CentralMailroom = SystemParameter_Data.get_system_parameter_single(new GetSystemPMSingleModel { SP_ID = "CentralMailRoomNumber" });
-
-                        if (CentralMailroom != null)
-                        {
-                            foreach (var para in CentralMailroom)
-                            {
-                                foreach (var para2 in para.SystemPM)
-                                {
-                                    mailroom = para2.SP_Value;
-                                }
-                            }
-                        }
-
-                        if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
-                        {
-                            SPResponse objResponse = new SPResponse();
-                            foreach (DataRow rdrpw in Ds.Tables[0].Rows)
-                            {
-                                if (!String.IsNullOrEmpty(rdrpw["RTN_DATE"].ToString()))
-                                {
-                                    exp_date = int.Parse(rdrpw["RTN_DATE"].ToString());
-                                    expired_date = DateTime.Now.AddDays(exp_date).ToString("dd/MMM/yyyy", CultureInfo.InvariantCulture);
-                                }
-
-                                ReturnResponse objUserHead = new ReturnResponse
-                                {
-                                    resp = Boolean.Parse(rdrpw["RTN_RESP"].ToString()),
-                                    msg = rdrpw["RTN_MSG"].ToString()
-                                };
-                                objUserHeadList.Add(objUserHead);
-
-                                string EmailAddress = "";
-                                bool IsSMSOk = false;
-                                bool IsEmailOk = false;
-
-                                //bool rtn = false;
-
-                                List<ReturnCustomerModelHead> mod = Customer_Data.get_customers_single(new Customer() { CUS_ID = item.UD_CusID });
-
-                                if (mod.FirstOrDefault().Customer != null)
-                                {
-                                    IsSMSOk = mod.FirstOrDefault().Customer.FirstOrDefault().CUS_OTP_By_SMS;
-                                    IsEmailOk = mod.FirstOrDefault().Customer.FirstOrDefault().CUS_OTP_By_Email;
-                                }
-
-                                List<ReturnCustomerUserModelHead> mod1 = User_Data.get_user_single(new GetUserSingleModel() { UD_UserName = item.UD_StaffID });
-
-                                if (mod1.FirstOrDefault().User != null)
-                                {
-                                    EmailAddress = mod1.FirstOrDefault().User.FirstOrDefault().UD_EmailAddress;
-                                }
-
-                                //if (!string.IsNullOrEmpty(ObjUMP.UPM_UserEmail))
-                                //{
-                                //    EmailAttachedFileDetails objFilesAttachment = new EmailAttachedFileDetails();
-                                //    ReturnResponse rtn = Email_Sender_Preperation.Send(/*ObjUMP.UPM_UserEmail*/EmailAddress, emailBody, BU_ID, IsEmailOk, BaseClassDBCallerData.ResetPwSubject, objFilesAttachment);
-
-                                //    if (rtn.resp == false)
-                                //    {
-                                //        ReturnResponse objUserHeads = new ReturnResponse
-                                //        {
-                                //            resp = false,
-                                //            msg = "Email Sending Failed"
-                                //        };
-                                //        objUserHeadList.Add(objUserHeads);
-                                //    }
-                                //}
-                                //if (!string.IsNullOrEmpty(ObjUMP.UPM_MobileNumber))
-                                //{
-                                //    SMS_Sender_Preperation.SMSgateway(ObjUMP.UPM_MobileNumber, smsBody, BU_ID, IsSMSOk);
-                                //}
-                            }
-                        }
-
-                    }
-
-
-                    return objUserHeadList;
-                }
-            }
-            catch (Exception ex)
-            {
-                ReturnResponse objUserHead = new ReturnResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "User_Data", "change_password", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "User_Data", "change_password", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "User_Data", "change_password", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "User_Data", "change_password", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-                return objUserHeadList;
-            }
-        }
-
-        public static List<ReturnResponse> update_notification_token(NotificationTokenModel UpNotTokModel, string userId)
-        {
-            List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
-            List<SPResponse> objResponseList = new List<SPResponse>();
-
-            try
-            {
-                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
-                {
-
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        cmd.Connection = lconn;
-
-                        cmd.CommandText = "SP_UPDATE_NOTIFICATION_TOKEN";
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-
-                        cmd.Parameters.AddWithValue("@ID", userId);
-                        cmd.Parameters["@ID"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@NOTIFICATION_TOKEN", UpNotTokModel.notification_token);
-                        cmd.Parameters["@NOTIFICATION_TOKEN"].Direction = ParameterDirection.Input;
-
-                        SqlDataAdapter dta = new SqlDataAdapter();
-                        dta.SelectCommand = cmd;
-                        DataSet Ds = new DataSet();
-                        dta.Fill(Ds);
-
-                        if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
-                        {
-                            SPResponse objResponse = new SPResponse();
-
-                            foreach (DataRow rdr in Ds.Tables[0].Rows)
-                            {
-                                ReturnResponse objUserHead = new ReturnResponse
-                                {
-                                    resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
-                                    msg = rdr["RTN_MSG"].ToString()
-                                };
-                                objUserHeadList.Add(objUserHead);
-                            }
-                        }
-                    }
-
-                }
-                return objUserHeadList;
-            }
-            catch (Exception ex)
-            {
-                ReturnResponse objUserHead = new ReturnResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
-
-                objError.WriteLog(0, "User_Data", "update_notification_token", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "User_Data", "update_notification_token", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "User_Data", "update_notification_token", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "User_Data", "update_notification_token", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-                return objUserHeadList;
-            }
-        }
-
-        public static List<ReturnResponse> reset_password(ResetPasswordModel resetPassword, string baseUrl)//set use need to apply - customer only
-        {
-
-            List<ReturnResponse> objOtpHeadList = new List<ReturnResponse>();
-            List<ResetPasswordModel> objList = new List<ResetPasswordModel>();
-            ReturnResponse objOtpHead = new ReturnResponse();
-
-            string BU_ID = "";
-
-            try
-            {
-                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
-                {
-
-                    using (SqlCommand cmdsmtp = new SqlCommand())
-                    {
-                        cmdsmtp.Connection = lconn;
-
-                        cmdsmtp.CommandText = "SP_GET_USER_EMAIL_VERIFY_CODE";
-                        cmdsmtp.CommandType = CommandType.StoredProcedure;
-
-                        cmdsmtp.Parameters.AddWithValue("@EMAIL", resetPassword.email);
-                        cmdsmtp.Parameters["@EMAIL"].Direction = ParameterDirection.Input;
-
-                        SqlDataAdapter dta = new SqlDataAdapter();
-                        dta.SelectCommand = cmdsmtp;
-                        DataSet Ds = new DataSet();
-                        dta.Fill(Ds);
-
-                        if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
-                        {
-                            foreach (DataRow rdrsmtp in Ds.Tables[0].Rows)
-                            {
-                                string code = rdrsmtp["CODE"].ToString();
-                                int id = Convert.ToInt32(rdrsmtp["ID"]);
-                                string cc = "";
-
-                                string body = "<b>Dear User,\n\r" +
-                                    "Please ckick on the following link to verify your email address." +
-                                    "\n\r\n\r" +
-                                    "<a href=\"" + baseUrl + "/User/change_password_by_email?userId=" + id + "&email=" + resetPassword.email + "&verificationCode=" + code + "\" > Verify Email </ a > </b>";
-                                //<a href=\"http://localhost:49496/Activated.aspx">login</a>
-
-                                EmailAttachedFileDetails objFilesAttachment = new EmailAttachedFileDetails();
-                                ReturnResponse rtn = Email_Sender_Preperation.Send(resetPassword.email, body, BU_ID, true, "Email Verification", objFilesAttachment);
-
-
-                                if (rtn.resp == false)
-                                {
-                                    objOtpHead.resp = false;
-                                    objOtpHead.msg = "There was an error in sending email";
-                                }
-                                else
-                                {
-                                    objOtpHead.resp = true;
-                                    objOtpHead.msg = "Email sent";
-                                }
-                            }
-                        }
-                    }
-
-                }
-
-                objOtpHeadList.Add(objOtpHead);
-            }
-            catch (Exception ex)
-            {
-
-                objOtpHead = new ReturnResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objOtpHeadList.Add(objOtpHead);
-
-                objError.WriteLog(0, "User_Data", "reset_password", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "User_Data", "reset_password", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "User_Data", "reset_password", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "User_Data", "reset_password", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-
-            }
-            return objOtpHeadList;
-        }
-
-        public static string GetUserPasswordType(string userId, string email)
-        {
-            string PwdType = "";
-            try
-            {
-                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
-                {
-                    SqlCommand cmdpw = new SqlCommand
-                    {
-                        Connection = lconn,
-                        CommandText = "SP_GET_USER_PASSWORDTYPE",
-                        CommandType = CommandType.StoredProcedure
-                    };
-
-                    cmdpw.Parameters.AddWithValue("@USER_ID", userId);
-                    cmdpw.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
-
-                    cmdpw.Parameters.AddWithValue("@EMAIL", email);
-                    cmdpw.Parameters["@EMAIL"].Direction = ParameterDirection.Input;
-
-
-                    SqlDataAdapter dta = new SqlDataAdapter();
-                    dta.SelectCommand = cmdpw;
-                    DataSet Ds = new DataSet();
-                    dta.Fill(Ds);
-
-                    if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
-                    {
-                        foreach (DataRow rdr in Ds.Tables[0].Rows)
-                        {
-                            PwdType = rdr["CUS_PinOrPwd"].ToString();
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                objError.WriteLog(0, "User_Data", "GetUserPasswordType", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "User_Data", "GetUserPasswordType", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "User_Data", "GetUserPasswordType", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "User_Data", "GetUserPasswordType", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-            }
-            return PwdType;
-        }
-
-        public static string change_password_by_email(int userId, string email, string verificationCode)//set use need to apply
-        {
-            List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
-            List<SPResponse> objResponseList = new List<SPResponse>();
-            SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString);
-            ReturnResponse objUserHead = new ReturnResponse();
-
-            string rtnMsg = "";
-            string BU_ID = "";
-            try
-            {
-                string PwType = GetUserPasswordType(userId.ToString(), email);
-
-                string tmpPassword = "";
-
-                if (PwType.ToUpper() == "PWD")
-                {
-                    tmpPassword = PasswordRelated.CreateRandomPassword();
-                }
-                else
-                {
-                    tmpPassword = PasswordRelated.CreateRandomPIN();
-                }
-
-                string body = "";
-                body = "Your password has been changed." +
-                    "" +
-                    "Password: " + tmpPassword;
-
-                EmailAttachedFileDetails objFilesAttachment = new EmailAttachedFileDetails();
-                ReturnResponse rtn = Email_Sender_Preperation.Send(email, body, BU_ID, true, BaseClassDBCallerData.ResetPwSubject, objFilesAttachment);
-
-                if (rtn.resp == false)
-                {
-                    objUserHead.resp = false;
-                    objUserHead.msg = "There was an error in sending the OTP";
-                }
-                else
-                {
-                    objUserHead.resp = true;
-                    objUserHead.msg = "Verify OTP";
-
-                    if (lconn.State == ConnectionState.Closed)
-                    {
-                        lconn.Open();
-                    }
-
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        cmd.Connection = lconn;
-
-                        SqlCommand cmdpw = new SqlCommand
-                        {
-                            Connection = lconn,
-                            CommandText = "SP_GET_USER_EMAIL_VERIFICATION",
-                            CommandType = CommandType.StoredProcedure
-                        };
-
-                        cmdpw.Parameters.AddWithValue("@USER_ID", userId);
-                        cmdpw.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
-
-                        cmdpw.Parameters.AddWithValue("@VERIFICATION_CODE", verificationCode);
-                        cmdpw.Parameters["@VERIFICATION_CODE"].Direction = ParameterDirection.Input;
-
-                        cmdpw.Parameters.AddWithValue("@Email", email);
-                        cmdpw.Parameters["@Email"].Direction = ParameterDirection.Input;
-
-
-                        string enPW = "";
-                        decimal PasswordSault = 0;
-                        PasswordRelated.CreateEncryptedPassword(tmpPassword, ref enPW, ref PasswordSault);// BCrypt.Net.BCrypt.HashPassword(tmpPassword);
-
-                        cmdpw.Parameters.AddWithValue("@TMP_PASSWORD", enPW);
-                        cmdpw.Parameters["@TMP_PASSWORD"].Direction = ParameterDirection.Input;
-
-                        cmdpw.Parameters.AddWithValue("@TMP_SALT", PasswordSault);
-                        cmdpw.Parameters["@TMP_SALT"].Direction = ParameterDirection.Input;
-
-                        SqlDataReader rdr = cmdpw.ExecuteReader();
-                        if (rdr.HasRows)
-                        {
-                            while (rdr.Read())
-                            {
-
-                                try
-                                {
-
-
-
-                                    rtnMsg = rdr["RTN_MSG"].ToString();
-
-                                }
-                                catch (Exception ex)
-                                {
-
-
-                                    rtnMsg = ex.Message.ToString();
-
-                                    objError.WriteLog(0, "User_Data", "PostNwpw", "Stack Track: " + ex.StackTrace);
-                                    objError.WriteLog(0, "User_Data", "PostNwpw", "Error Message: " + ex.Message);
-                                    if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                                    {
-                                        objError.WriteLog(0, "User_Data", "PostNwpw", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                                        objError.WriteLog(0, "User_Data", "PostNwpw", "Inner Exception Message: " + ex.InnerException.Message);
-                                    }
-
-                                }
-
-                            }
-                        }
-
-                    }
-                }
-
-
-
-                if (lconn.State == ConnectionState.Open)
-                {
-                    lconn.Close();
-                }
-                //ActivityLog.ActivityLogRequest("Password have changed by user", item.ID);
-                return rtnMsg;
-            }
-            catch (Exception ex)
-            {
-                //ReturnResponse objUserHead = new ReturnResponse();
-                //objUserHead.resp = false;
-                //objUserHead.msg = ex.Message.ToString();
-                //objUserHeadList.Add(objUserHead);
-                rtnMsg = ex.Message.ToString();
-
-                objError.WriteLog(0, "User_Data", "PostNwpw", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "User_Data", "PostNwpw", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "User_Data", "PostNwpw", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "User_Data", "PostNwpw", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-                return rtnMsg;
-            }
-        }
+        //public static List<ReturnResponse> change_password(NewpwModel item)//set use need to apply - all person
+        //{
+        //    List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
+        //    List<SPResponse> objResponseList = new List<SPResponse>();
+        //    try
+        //    {
+        //        string encryptedPW = "";
+        //        decimal Salt = 0;
+        //        string emailBody = "";
+        //        string smsBody = "";
+
+        //        string PwType = GetUserPasswordType(item.UD_UserID, item.UD_UserID);
+
+        //        string tmpPassword = "";
+
+        //        if (PwType.ToUpper() == "PWD")
+        //        {
+        //            tmpPassword = PasswordRelated.CreateRandomPassword();
+        //        }
+        //        else
+        //        {
+        //            tmpPassword = PasswordRelated.CreateRandomPIN();
+        //        }
+
+        //        //PasswordRelated.CreateEncryptedPassword(tmpPassword, ref encryptedPW, ref Salt);
+        //        encryptedPW = utility_handler.Utility.Misc.deCrypt(tmpPassword);
+
+        //        using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
+        //        {
+        //            using (SqlCommand cmdpw = new SqlCommand())
+        //            {
+        //                cmdpw.Connection = lconn;
+
+        //                cmdpw.CommandText = "sp_sav_user_pw";
+        //                cmdpw.CommandType = CommandType.StoredProcedure;
+
+        //                cmdpw.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+        //                cmdpw.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
+
+        //                cmdpw.Parameters.AddWithValue("@USER_PW", encryptedPW);
+        //                cmdpw.Parameters["@USER_PW"].Direction = ParameterDirection.Input;
+
+        //                cmdpw.Parameters.AddWithValue("@USER_PwdSalt", Salt);
+        //                cmdpw.Parameters["@USER_PwdSalt"].Direction = ParameterDirection.Input;
+
+        //                SqlDataAdapter dta = new SqlDataAdapter();
+        //                dta.SelectCommand = cmdpw;
+        //                DataSet Ds = new DataSet();
+        //                dta.Fill(Ds);
+
+        //                int exp_date = 0;
+        //                String expired_date = "";
+        //                String mailroom = "";
+
+        //                var CentralMailroom = SystemParameter_Data.get_system_parameter_single(new GetSystemPMSingleModel { SP_ID = "CentralMailRoomNumber" });
+
+        //                if (CentralMailroom != null)
+        //                {
+        //                    foreach (var para in CentralMailroom)
+        //                    {
+        //                        foreach (var para2 in para.SystemPM)
+        //                        {
+        //                            mailroom = para2.SP_Value;
+        //                        }
+        //                    }
+        //                }
+
+        //                if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
+        //                {
+        //                    SPResponse objResponse = new SPResponse();
+        //                    foreach (DataRow rdrpw in Ds.Tables[0].Rows)
+        //                    {
+        //                        if (!String.IsNullOrEmpty(rdrpw["RTN_DATE"].ToString()))
+        //                        {
+        //                            exp_date = int.Parse(rdrpw["RTN_DATE"].ToString());
+        //                            expired_date = DateTime.Now.AddDays(exp_date).ToString("dd/MMM/yyyy", CultureInfo.InvariantCulture);
+        //                        }
+
+        //                        ReturnResponse objUserHead = new ReturnResponse
+        //                        {
+        //                            resp = Boolean.Parse(rdrpw["RTN_RESP"].ToString()),
+        //                            msg = rdrpw["RTN_MSG"].ToString()
+        //                        };
+        //                        objUserHeadList.Add(objUserHead);
+
+        //                        string EmailAddress = "";
+        //                        bool IsSMSOk = false;
+        //                        bool IsEmailOk = false;
+
+        //                        //bool rtn = false;
+
+        //                        List<ReturnCustomerModelHead> mod = Customer_Data.get_customers_single(new Customer() { CUS_ID = item.UD_CusID });
+
+        //                        if (mod.FirstOrDefault().Customer != null)
+        //                        {
+        //                            IsSMSOk = mod.FirstOrDefault().Customer.FirstOrDefault().CUS_OTP_By_SMS;
+        //                            IsEmailOk = mod.FirstOrDefault().Customer.FirstOrDefault().CUS_OTP_By_Email;
+        //                        }
+
+        //                        List<ReturnCustomerUserModelHead> mod1 = User_Data.get_user_single(new GetUserSingleModel() { UD_UserName = item.UD_UserID });
+
+        //                        if (mod1.FirstOrDefault().User != null)
+        //                        {
+        //                            EmailAddress = mod1.FirstOrDefault().User.FirstOrDefault().UD_EmailAddress;
+        //                        }
+
+        //                        //if (!string.IsNullOrEmpty(ObjUMP.UPM_UserEmail))
+        //                        //{
+        //                        //    EmailAttachedFileDetails objFilesAttachment = new EmailAttachedFileDetails();
+        //                        //    ReturnResponse rtn = Email_Sender_Preperation.Send(/*ObjUMP.UPM_UserEmail*/EmailAddress, emailBody, BU_ID, IsEmailOk, BaseClassDBCallerData.ResetPwSubject, objFilesAttachment);
+
+        //                        //    if (rtn.resp == false)
+        //                        //    {
+        //                        //        ReturnResponse objUserHeads = new ReturnResponse
+        //                        //        {
+        //                        //            resp = false,
+        //                        //            msg = "Email Sending Failed"
+        //                        //        };
+        //                        //        objUserHeadList.Add(objUserHeads);
+        //                        //    }
+        //                        //}
+        //                        //if (!string.IsNullOrEmpty(ObjUMP.UPM_MobileNumber))
+        //                        //{
+        //                        //    SMS_Sender_Preperation.SMSgateway(ObjUMP.UPM_MobileNumber, smsBody, BU_ID, IsSMSOk);
+        //                        //}
+        //                    }
+        //                }
+
+        //            }
+
+
+        //            return objUserHeadList;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ReturnResponse objUserHead = new ReturnResponse
+        //        {
+        //            resp = false,
+        //            msg = ex.Message.ToString()
+        //        };
+        //        objUserHeadList.Add(objUserHead);
+
+        //        objError.WriteLog(0, "User_Data", "change_password", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "User_Data", "change_password", "Error Message: " + ex.Message);
+        //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+        //        {
+        //            objError.WriteLog(0, "User_Data", "change_password", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "User_Data", "change_password", "Inner Exception Message: " + ex.InnerException.Message);
+        //        }
+        //        return objUserHeadList;
+        //    }
+        //}
+
+        //public static List<ReturnResponse> update_notification_token(NotificationTokenModel UpNotTokModel, string userId)
+        //{
+        //    List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
+        //    List<SPResponse> objResponseList = new List<SPResponse>();
+
+        //    try
+        //    {
+        //        using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
+        //        {
+
+        //            using (SqlCommand cmd = new SqlCommand())
+        //            {
+        //                cmd.Connection = lconn;
+
+        //                cmd.CommandText = "SP_UPDATE_NOTIFICATION_TOKEN";
+        //                cmd.CommandType = CommandType.StoredProcedure;
+
+
+        //                cmd.Parameters.AddWithValue("@ID", userId);
+        //                cmd.Parameters["@ID"].Direction = ParameterDirection.Input;
+
+        //                cmd.Parameters.AddWithValue("@NOTIFICATION_TOKEN", UpNotTokModel.notification_token);
+        //                cmd.Parameters["@NOTIFICATION_TOKEN"].Direction = ParameterDirection.Input;
+
+        //                SqlDataAdapter dta = new SqlDataAdapter();
+        //                dta.SelectCommand = cmd;
+        //                DataSet Ds = new DataSet();
+        //                dta.Fill(Ds);
+
+        //                if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
+        //                {
+        //                    SPResponse objResponse = new SPResponse();
+
+        //                    foreach (DataRow rdr in Ds.Tables[0].Rows)
+        //                    {
+        //                        ReturnResponse objUserHead = new ReturnResponse
+        //                        {
+        //                            resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
+        //                            msg = rdr["RTN_MSG"].ToString()
+        //                        };
+        //                        objUserHeadList.Add(objUserHead);
+        //                    }
+        //                }
+        //            }
+
+        //        }
+        //        return objUserHeadList;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ReturnResponse objUserHead = new ReturnResponse
+        //        {
+        //            resp = false,
+        //            msg = ex.Message.ToString()
+        //        };
+        //        objUserHeadList.Add(objUserHead);
+
+        //        objError.WriteLog(0, "User_Data", "update_notification_token", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "User_Data", "update_notification_token", "Error Message: " + ex.Message);
+        //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+        //        {
+        //            objError.WriteLog(0, "User_Data", "update_notification_token", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "User_Data", "update_notification_token", "Inner Exception Message: " + ex.InnerException.Message);
+        //        }
+        //        return objUserHeadList;
+        //    }
+        //}
+
+        //public static List<ReturnResponse> reset_password(ResetPasswordModel resetPassword, string baseUrl)//set use need to apply - customer only
+        //{
+
+        //    List<ReturnResponse> objOtpHeadList = new List<ReturnResponse>();
+        //    List<ResetPasswordModel> objList = new List<ResetPasswordModel>();
+        //    ReturnResponse objOtpHead = new ReturnResponse();
+
+        //    string BU_ID = "";
+
+        //    try
+        //    {
+        //        using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
+        //        {
+
+        //            using (SqlCommand cmdsmtp = new SqlCommand())
+        //            {
+        //                cmdsmtp.Connection = lconn;
+
+        //                cmdsmtp.CommandText = "SP_GET_USER_EMAIL_VERIFY_CODE";
+        //                cmdsmtp.CommandType = CommandType.StoredProcedure;
+
+        //                cmdsmtp.Parameters.AddWithValue("@EMAIL", resetPassword.email);
+        //                cmdsmtp.Parameters["@EMAIL"].Direction = ParameterDirection.Input;
+
+        //                SqlDataAdapter dta = new SqlDataAdapter();
+        //                dta.SelectCommand = cmdsmtp;
+        //                DataSet Ds = new DataSet();
+        //                dta.Fill(Ds);
+
+        //                if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
+        //                {
+        //                    foreach (DataRow rdrsmtp in Ds.Tables[0].Rows)
+        //                    {
+        //                        string code = rdrsmtp["CODE"].ToString();
+        //                        int id = Convert.ToInt32(rdrsmtp["ID"]);
+        //                        string cc = "";
+
+        //                        string body = "<b>Dear User,\n\r" +
+        //                            "Please ckick on the following link to verify your email address." +
+        //                            "\n\r\n\r" +
+        //                            "<a href=\"" + baseUrl + "/User/change_password_by_email?userId=" + id + "&email=" + resetPassword.email + "&verificationCode=" + code + "\" > Verify Email </ a > </b>";
+        //                        //<a href=\"http://localhost:49496/Activated.aspx">login</a>
+
+        //                        EmailAttachedFileDetails objFilesAttachment = new EmailAttachedFileDetails();
+        //                        ReturnResponse rtn = Email_Sender_Preperation.Send(resetPassword.email, body, BU_ID, true, "Email Verification", objFilesAttachment);
+
+
+        //                        if (rtn.resp == false)
+        //                        {
+        //                            objOtpHead.resp = false;
+        //                            objOtpHead.msg = "There was an error in sending email";
+        //                        }
+        //                        else
+        //                        {
+        //                            objOtpHead.resp = true;
+        //                            objOtpHead.msg = "Email sent";
+        //                        }
+        //                    }
+        //                }
+        //            }
+
+        //        }
+
+        //        objOtpHeadList.Add(objOtpHead);
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        objOtpHead = new ReturnResponse
+        //        {
+        //            resp = false,
+        //            msg = ex.Message.ToString()
+        //        };
+        //        objOtpHeadList.Add(objOtpHead);
+
+        //        objError.WriteLog(0, "User_Data", "reset_password", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "User_Data", "reset_password", "Error Message: " + ex.Message);
+        //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+        //        {
+        //            objError.WriteLog(0, "User_Data", "reset_password", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "User_Data", "reset_password", "Inner Exception Message: " + ex.InnerException.Message);
+        //        }
+
+
+        //    }
+        //    return objOtpHeadList;
+        //}
+
+        //public static string GetUserPasswordType(string userId, string email)
+        //{
+        //    string PwdType = "";
+        //    try
+        //    {
+        //        using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
+        //        {
+        //            SqlCommand cmdpw = new SqlCommand
+        //            {
+        //                Connection = lconn,
+        //                CommandText = "SP_GET_USER_PASSWORDTYPE",
+        //                CommandType = CommandType.StoredProcedure
+        //            };
+
+        //            cmdpw.Parameters.AddWithValue("@USER_ID", userId);
+        //            cmdpw.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
+
+        //            cmdpw.Parameters.AddWithValue("@EMAIL", email);
+        //            cmdpw.Parameters["@EMAIL"].Direction = ParameterDirection.Input;
+
+
+        //            SqlDataAdapter dta = new SqlDataAdapter();
+        //            dta.SelectCommand = cmdpw;
+        //            DataSet Ds = new DataSet();
+        //            dta.Fill(Ds);
+
+        //            if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
+        //            {
+        //                foreach (DataRow rdr in Ds.Tables[0].Rows)
+        //                {
+        //                    PwdType = rdr["CUS_PinOrPwd"].ToString();
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        objError.WriteLog(0, "User_Data", "GetUserPasswordType", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "User_Data", "GetUserPasswordType", "Error Message: " + ex.Message);
+        //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+        //        {
+        //            objError.WriteLog(0, "User_Data", "GetUserPasswordType", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "User_Data", "GetUserPasswordType", "Inner Exception Message: " + ex.InnerException.Message);
+        //        }
+        //    }
+        //    return PwdType;
+        //}
+
+        //public static string change_password_by_email(int userId, string email, string verificationCode)//set use need to apply
+        //{
+        //    List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
+        //    List<SPResponse> objResponseList = new List<SPResponse>();
+        //    SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString);
+        //    ReturnResponse objUserHead = new ReturnResponse();
+
+        //    string rtnMsg = "";
+        //    string BU_ID = "";
+        //    try
+        //    {
+        //        string PwType = GetUserPasswordType(userId.ToString(), email);
+
+        //        string tmpPassword = "";
+
+        //        if (PwType.ToUpper() == "PWD")
+        //        {
+        //            tmpPassword = PasswordRelated.CreateRandomPassword();
+        //        }
+        //        else
+        //        {
+        //            tmpPassword = PasswordRelated.CreateRandomPIN();
+        //        }
+
+        //        string body = "";
+        //        body = "Your password has been changed." +
+        //            "" +
+        //            "Password: " + tmpPassword;
+
+        //        EmailAttachedFileDetails objFilesAttachment = new EmailAttachedFileDetails();
+        //        ReturnResponse rtn = Email_Sender_Preperation.Send(email, body, BU_ID, true, BaseClassDBCallerData.ResetPwSubject, objFilesAttachment);
+
+        //        if (rtn.resp == false)
+        //        {
+        //            objUserHead.resp = false;
+        //            objUserHead.msg = "There was an error in sending the OTP";
+        //        }
+        //        else
+        //        {
+        //            objUserHead.resp = true;
+        //            objUserHead.msg = "Verify OTP";
+
+        //            if (lconn.State == ConnectionState.Closed)
+        //            {
+        //                lconn.Open();
+        //            }
+
+        //            using (SqlCommand cmd = new SqlCommand())
+        //            {
+        //                cmd.Connection = lconn;
+
+        //                SqlCommand cmdpw = new SqlCommand
+        //                {
+        //                    Connection = lconn,
+        //                    CommandText = "SP_GET_USER_EMAIL_VERIFICATION",
+        //                    CommandType = CommandType.StoredProcedure
+        //                };
+
+        //                cmdpw.Parameters.AddWithValue("@USER_ID", userId);
+        //                cmdpw.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
+
+        //                cmdpw.Parameters.AddWithValue("@VERIFICATION_CODE", verificationCode);
+        //                cmdpw.Parameters["@VERIFICATION_CODE"].Direction = ParameterDirection.Input;
+
+        //                cmdpw.Parameters.AddWithValue("@Email", email);
+        //                cmdpw.Parameters["@Email"].Direction = ParameterDirection.Input;
+
+
+        //                string enPW = "";
+        //                decimal PasswordSault = 0;
+        //                PasswordRelated.CreateEncryptedPassword(tmpPassword, ref enPW, ref PasswordSault);// BCrypt.Net.BCrypt.HashPassword(tmpPassword);
+
+        //                cmdpw.Parameters.AddWithValue("@TMP_PASSWORD", enPW);
+        //                cmdpw.Parameters["@TMP_PASSWORD"].Direction = ParameterDirection.Input;
+
+        //                cmdpw.Parameters.AddWithValue("@TMP_SALT", PasswordSault);
+        //                cmdpw.Parameters["@TMP_SALT"].Direction = ParameterDirection.Input;
+
+        //                SqlDataReader rdr = cmdpw.ExecuteReader();
+        //                if (rdr.HasRows)
+        //                {
+        //                    while (rdr.Read())
+        //                    {
+
+        //                        try
+        //                        {
+
+
+
+        //                            rtnMsg = rdr["RTN_MSG"].ToString();
+
+        //                        }
+        //                        catch (Exception ex)
+        //                        {
+
+
+        //                            rtnMsg = ex.Message.ToString();
+
+        //                            objError.WriteLog(0, "User_Data", "PostNwpw", "Stack Track: " + ex.StackTrace);
+        //                            objError.WriteLog(0, "User_Data", "PostNwpw", "Error Message: " + ex.Message);
+        //                            if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+        //                            {
+        //                                objError.WriteLog(0, "User_Data", "PostNwpw", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //                                objError.WriteLog(0, "User_Data", "PostNwpw", "Inner Exception Message: " + ex.InnerException.Message);
+        //                            }
+
+        //                        }
+
+        //                    }
+        //                }
+
+        //            }
+        //        }
+
+
+
+        //        if (lconn.State == ConnectionState.Open)
+        //        {
+        //            lconn.Close();
+        //        }
+        //        //ActivityLog.ActivityLogRequest("Password have changed by user", item.ID);
+        //        return rtnMsg;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //ReturnResponse objUserHead = new ReturnResponse();
+        //        //objUserHead.resp = false;
+        //        //objUserHead.msg = ex.Message.ToString();
+        //        //objUserHeadList.Add(objUserHead);
+        //        rtnMsg = ex.Message.ToString();
+
+        //        objError.WriteLog(0, "User_Data", "PostNwpw", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "User_Data", "PostNwpw", "Error Message: " + ex.Message);
+        //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+        //        {
+        //            objError.WriteLog(0, "User_Data", "PostNwpw", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "User_Data", "PostNwpw", "Inner Exception Message: " + ex.InnerException.Message);
+        //        }
+        //        return rtnMsg;
+        //    }
+        //}
 
     }
 

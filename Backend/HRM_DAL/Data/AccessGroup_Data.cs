@@ -233,8 +233,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_insert_AccessGroup";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UAG_AccessGroupID", item.UAG_AccessGroupID);
                         cmd.Parameters["@UAG_AccessGroupID"].Direction = ParameterDirection.Input;
@@ -350,8 +350,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_modify_AccessGroup";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UAG_AccessGroupID", item.UAG_AccessGroupID);
                         cmd.Parameters["@UAG_AccessGroupID"].Direction = ParameterDirection.Input;
@@ -471,8 +471,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UAG_AccessGroupID", item.UAG_AccessGroupID);
                         cmd.Parameters["@UAG_AccessGroupID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
 
 

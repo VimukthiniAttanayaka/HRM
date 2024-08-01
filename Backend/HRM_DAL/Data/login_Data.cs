@@ -19,7 +19,7 @@ namespace HRM_DAL.Data
     {
         private static LogError objError = new LogError();
 
-        public static ReturnUserModelHead login(LogdataModel logdata)
+        public static ReturnUserModelHead login(LogDataRequestModel logdata)
         {
 
             ReturnUserModelHead objUserHead = new ReturnUserModelHead();
@@ -35,10 +35,10 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_user_login";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@USER_ID", logdata.username);
+                        cmd.Parameters.AddWithValue("@USER_ID", logdata.UserName);
                         cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@USER_PASSWORD", logdata.password);
+                        cmd.Parameters.AddWithValue("@USER_PASSWORD", logdata.Password);
                         cmd.Parameters["@USER_PASSWORD"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
@@ -101,8 +101,8 @@ namespace HRM_DAL.Data
 
                             var tok = rdr["UD_UserID"].ToString();
                             string token = JwToken.Authenticate(tok);
-                            //string token = JwToken.Authenticate(Convert.ToInt32(rdr["UD_StaffID"]));
-                            objUser.UD_StaffID = rdr["UD_UserID"].ToString();
+                            //string token = JwToken.Authenticate(Convert.ToInt32(rdr["UD_UserID"]));
+                            objUser.UD_UserID = rdr["UD_UserID"].ToString();
                             objUser.UD_FirstName = rdr["UD_FirstName"].ToString();
                             objUser.UD_LastName = rdr["UD_LastName"].ToString();
                             objUser.UD_EmailAddress = rdr["UD_EmailAddress"].ToString();
@@ -212,7 +212,7 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_set_AuthenticationKeySetupWithDB";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_USERID", objUser.UD_StaffID);
+                        cmd.Parameters.AddWithValue("@UD_USERID", objUser.UD_UserID);
                         cmd.Parameters["@UD_USERID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@NOTIFICATIONTOKEN", objUser.UD_AuthorizationToken);
@@ -252,7 +252,7 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_set_AuthenticationKeyValidateWithDB";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_USERID", objUser.UD_StaffID);
+                        cmd.Parameters.AddWithValue("@UD_USERID", objUser.UD_UserID);
                         cmd.Parameters["@UD_USERID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@NOTIFICATIONTOKEN", objUser.AUD_notificationToken);

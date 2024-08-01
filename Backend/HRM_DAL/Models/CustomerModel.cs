@@ -3,13 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HRM_DAL.Models
 {
-    public class ReturnBUCustomerModelHead : ReturnResponse
-    {
-        public List<ReturnUserCustModel> Customer { get; set; }
-
-
-    }
-
     public class CustomerModel : RequestBaseModel
     {
         public string CUS_ID { get; set; }

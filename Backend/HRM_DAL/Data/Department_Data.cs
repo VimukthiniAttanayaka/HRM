@@ -74,7 +74,7 @@ namespace HRM_DAL.Data
                         //cmd.Parameters.AddWithValue("@DPT_Adrs_PostalCode", item.DPT_Adrs_PostalCode);
                         //cmd.Parameters["@DPT_Adrs_PostalCode"].Direction = ParameterDirection.Input;                  
 
-                        cmd.Parameters.AddWithValue("@USER_ID", item.UD_StaffID);
+                        cmd.Parameters.AddWithValue("@USER_ID", item.UD_UserID);
                         cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
@@ -176,7 +176,7 @@ namespace HRM_DAL.Data
                         //cmd.Parameters.AddWithValue("@DPT_Adrs_PostalCode", item.DPT_Adrs_PostalCode);
                         //cmd.Parameters["@DPT_Adrs_PostalCode"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@USER_ID", item.UD_StaffID);
+                        //cmd.Parameters.AddWithValue("@USER_ID", item.UD_UserID);
                         //cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@DPT_Status", item.DPT_Status);
@@ -256,8 +256,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@DPT_ID", item.MDD_DepartmentID);
                         cmd.Parameters["@DPT_ID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
 
                         SqlDataAdapter dta = new SqlDataAdapter();

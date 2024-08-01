@@ -28,7 +28,7 @@ namespace HRM.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public ReturnUserModelHead login(LogdataModel logdata)
+        public ReturnUserModelHead login(LogDataRequestModel logdata)
         {
 
             ReturnUserModelHead objUserHead = new ReturnUserModelHead();

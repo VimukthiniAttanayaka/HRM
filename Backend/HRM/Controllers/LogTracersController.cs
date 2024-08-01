@@ -24,51 +24,51 @@ namespace HRM.Controllers
     {
         private LogError objError = new LogError();
 
-        // GET: api/<UserController>
-        [HttpPost]
-        [Route("[action]")]
-        //[Authorize]
-        public List<ReturnResponse> CreateUILogs(LogTracerModel obj)
-        {
+        //// GET: api/<UserController>
+        //[HttpPost]
+        //[Route("[action]")]
+        ////[Authorize]
+        //public List<ReturnResponse> CreateUILogs(LogTracerModel obj)
+        //{
 
-            List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
-            ReturnResponse objReturn = new ReturnResponse();
+        //    List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
+        //    ReturnResponse objReturn = new ReturnResponse();
 
-            try
-            {
-                objReturn = WriteLog(obj.logType, obj.ModuleName, obj.FunctionName, obj.LogText);
+        //    try
+        //    {
+        //        objReturn = WriteLog(obj.logType, obj.ModuleName, obj.FunctionName, obj.LogText);
 
-                ReturnUserAccessModelHead objUserHead = new ReturnUserAccessModelHead
-                {
-                    resp = true,
-                    msg = "Create UI Logs"
-                };
-                objUserHeadList.Add(objUserHead);
+        //        //ReturnUserAccessModelHead objUserHead = new ReturnUserAccessModelHead
+        //        //{
+        //        //    resp = true,
+        //        //    msg = "Create UI Logs"
+        //        //};
+        //        //objUserHeadList.Add(objUserHead);
 
-                return objUserHeadList;
-            }
-            catch (Exception ex)
-            {
+        //        return objUserHeadList;
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                ReturnUserAccessModelHead objUserHead = new ReturnUserAccessModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objUserHeadList.Add(objUserHead);
+        //        ReturnUserAccessModelHead objUserHead = new ReturnUserAccessModelHead
+        //        {
+        //            resp = false,
+        //            msg = ex.Message.ToString()
+        //        };
+        //        objUserHeadList.Add(objUserHead);
 
-                objError.WriteLog(0, "logTracersController", "CreateUILogs", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "logTracersController", "CreateUILogs", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "logTracersController", "CreateUILogs", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "logTracersController", "CreateUILogs", "Inner Exception Message: " + ex.InnerException.Message);
-                }
+        //        objError.WriteLog(0, "logTracersController", "CreateUILogs", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "logTracersController", "CreateUILogs", "Error Message: " + ex.Message);
+        //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+        //        {
+        //            objError.WriteLog(0, "logTracersController", "CreateUILogs", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "logTracersController", "CreateUILogs", "Inner Exception Message: " + ex.InnerException.Message);
+        //        }
 
 
-            }
-            return objUserHeadList;
-        }
+        //    }
+        //    return objUserHeadList;
+        //}
 
         public class LogTracerModel
         {

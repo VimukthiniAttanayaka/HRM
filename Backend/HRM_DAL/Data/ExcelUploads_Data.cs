@@ -205,15 +205,15 @@ namespace HRM_DAL.Data
                             obj.UD_FirstName = dataSet.Tables[0].Rows[i][indexPrimaryFirstName].ToString().Trim();
                             obj.UD_LastName = dataSet.Tables[0].Rows[i][indexPrimaryLastName].ToString().Trim();
                             obj.UD_PrefferedName = dataSet.Tables[0].Rows[i][indexPreferredName].ToString().Trim();
-                            obj.UD_OrgStructuralLevel1 = dataSet.Tables[0].Rows[i][indexOrgStructuralLevel1].ToString().Trim();
-                            obj.UD_OrgStructuralLevel2 = dataSet.Tables[0].Rows[i][indexOrgStructuralLevel2].ToString().Trim();
-                            obj.UD_DepartmentDetail1 = dataSet.Tables[0].Rows[i][indexLevel3Descr].ToString().Trim();
-                            obj.UD_DepartmentDetail2 = dataSet.Tables[0].Rows[i][indexLevel4Descr].ToString().Trim();
-                            obj.UD_DepartmentDetail3 = dataSet.Tables[0].Rows[i][indexLevel5Descr].ToString().Trim();
-                            obj.UD_JobCodeDescription = dataSet.Tables[0].Rows[i][indexJobCodeDescr].ToString().Trim();
+                            //obj.UD_OrgStructuralLevel1 = dataSet.Tables[0].Rows[i][indexOrgStructuralLevel1].ToString().Trim();
+                            //obj.UD_OrgStructuralLevel2 = dataSet.Tables[0].Rows[i][indexOrgStructuralLevel2].ToString().Trim();
+                            //obj.UD_DepartmentDetail1 = dataSet.Tables[0].Rows[i][indexLevel3Descr].ToString().Trim();
+                            //obj.UD_DepartmentDetail2 = dataSet.Tables[0].Rows[i][indexLevel4Descr].ToString().Trim();
+                            //obj.UD_DepartmentDetail3 = dataSet.Tables[0].Rows[i][indexLevel5Descr].ToString().Trim();
+                            //obj.UD_JobCodeDescription = dataSet.Tables[0].Rows[i][indexJobCodeDescr].ToString().Trim();
                             obj.UD_EmailAddress = dataSet.Tables[0].Rows[i][index1BankEmailAddress].ToString().Trim();
-                            obj.UD_StaffID = dataSet.Tables[0].Rows[i][index1BankID].ToString().Trim();
-                            obj.UD_PCCode = dataSet.Tables[0].Rows[i][indexPCCode].ToString().Trim();
+                            obj.UD_UserID = dataSet.Tables[0].Rows[i][index1BankID].ToString().Trim();
+                            //obj.UD_PCCode = dataSet.Tables[0].Rows[i][indexPCCode].ToString().Trim();
                             obj.UD_PCDescription = dataSet.Tables[0].Rows[i][indexPCDescription].ToString().Trim();
                             obj.UD_DepartmentID = dataSet.Tables[0].Rows[i][indexDepartmentID].ToString().Trim();
                             //obj.DPT_CPCode=dataSet.Tables[0].Rows[i][indexDepartmentName].ToString();
@@ -332,8 +332,8 @@ namespace HRM_DAL.Data
                             cmd.Parameters.AddWithValue("@UD_DepartmentID", model.UD_DepartmentID);
                             cmd.Parameters["@UD_DepartmentID"].Direction = ParameterDirection.Input;
 
-                            cmd.Parameters.AddWithValue("@UD_StaffID", model.UD_StaffID);
-                            cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@UD_UserID", model.UD_UserID);
+                            cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                             cmd.Parameters.AddWithValue("@UD_FirstName", model.UD_FirstName);
                             cmd.Parameters["@UD_FirstName"].Direction = ParameterDirection.Input;
@@ -344,23 +344,23 @@ namespace HRM_DAL.Data
                             cmd.Parameters.AddWithValue("@UD_PrefferedName", model.UD_PrefferedName);
                             cmd.Parameters["@UD_PrefferedName"].Direction = ParameterDirection.Input;
 
-                            cmd.Parameters.AddWithValue("@UD_OrgStructuralLevel1", model.UD_OrgStructuralLevel1);
-                            cmd.Parameters["@UD_OrgStructuralLevel1"].Direction = ParameterDirection.Input;
+                            //cmd.Parameters.AddWithValue("@UD_OrgStructuralLevel1", model.UD_OrgStructuralLevel1);
+                            //cmd.Parameters["@UD_OrgStructuralLevel1"].Direction = ParameterDirection.Input;
 
-                            cmd.Parameters.AddWithValue("@UD_OrgStructuralLevel2", model.UD_OrgStructuralLevel2);
-                            cmd.Parameters["@UD_OrgStructuralLevel2"].Direction = ParameterDirection.Input;
+                            //cmd.Parameters.AddWithValue("@UD_OrgStructuralLevel2", model.UD_OrgStructuralLevel2);
+                            //cmd.Parameters["@UD_OrgStructuralLevel2"].Direction = ParameterDirection.Input;
 
-                            cmd.Parameters.AddWithValue("@UD_DepartmentDetail1", model.UD_DepartmentDetail1);
-                            cmd.Parameters["@UD_DepartmentDetail1"].Direction = ParameterDirection.Input;
+                            //cmd.Parameters.AddWithValue("@UD_DepartmentDetail1", model.UD_DepartmentDetail1);
+                            //cmd.Parameters["@UD_DepartmentDetail1"].Direction = ParameterDirection.Input;
 
-                            cmd.Parameters.AddWithValue("@UD_DepartmentDetail2", model.UD_DepartmentDetail2);
-                            cmd.Parameters["@UD_DepartmentDetail2"].Direction = ParameterDirection.Input;
+                            //cmd.Parameters.AddWithValue("@UD_DepartmentDetail2", model.UD_DepartmentDetail2);
+                            //cmd.Parameters["@UD_DepartmentDetail2"].Direction = ParameterDirection.Input;
 
-                            cmd.Parameters.AddWithValue("@UD_DepartmentDetail3", model.UD_DepartmentDetail3);
-                            cmd.Parameters["@UD_DepartmentDetail3"].Direction = ParameterDirection.Input;
+                            //cmd.Parameters.AddWithValue("@UD_DepartmentDetail3", model.UD_DepartmentDetail3);
+                            //cmd.Parameters["@UD_DepartmentDetail3"].Direction = ParameterDirection.Input;
 
-                            cmd.Parameters.AddWithValue("@UD_JobCodeDescription", model.UD_JobCodeDescription);
-                            cmd.Parameters["@UD_JobCodeDescription"].Direction = ParameterDirection.Input;
+                            //cmd.Parameters.AddWithValue("@UD_JobCodeDescription", model.UD_JobCodeDescription);
+                            //cmd.Parameters["@UD_JobCodeDescription"].Direction = ParameterDirection.Input;
 
                             cmd.Parameters.AddWithValue("@UD_Address", model.UD_Address);
                             cmd.Parameters["@UD_Address"].Direction = ParameterDirection.Input;
@@ -383,8 +383,8 @@ namespace HRM_DAL.Data
                             cmd.Parameters.AddWithValue("@UD_StaffLocation", model.UD_StaffLocation);
                             cmd.Parameters["@UD_StaffLocation"].Direction = ParameterDirection.Input;
 
-                            cmd.Parameters.AddWithValue("@UD_PCCode", model.UD_PCCode);
-                            cmd.Parameters["@UD_PCCode"].Direction = ParameterDirection.Input;
+                            //cmd.Parameters.AddWithValue("@UD_PCCode", model.UD_PCCode);
+                            //cmd.Parameters["@UD_PCCode"].Direction = ParameterDirection.Input;
 
                             cmd.Parameters.AddWithValue("@UD_PCDescription", model.UD_PCDescription);
                             cmd.Parameters["@UD_PCDescription"].Direction = ParameterDirection.Input;
@@ -440,7 +440,7 @@ namespace HRM_DAL.Data
 
                                     //retlist.AddRange(User_Data.sync_user_kioski(new CUser()
                                     //{
-                                    //    USER_ID = model.UD_StaffID,
+                                    //    USER_ID = model.UD_UserID,
                                     //    TABLE = model.TABLE
                                     //}));
 

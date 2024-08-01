@@ -4,11 +4,6 @@ using System;
 
 namespace HRM_DAL.Models
 {
-    public class ReturnBUEmployeeModelHead : ReturnResponse
-    {
-        public List<ReturnUserCustModel> Employee { get; set; }
-    }
-
     public class EmployeeModel : RequestBaseModel
     {
         public string ECE_CustomerID { get; set; }

@@ -237,8 +237,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_insert_LeaveEntitlement";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@LVE_LeaveEntitlementID", item.LVE_LeaveEntitlementID);
                         cmd.Parameters["@LVE_LeaveEntitlementID"].Direction = ParameterDirection.Input;
@@ -354,8 +354,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_modify_LeaveEntitlement";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@LVE_LeaveEntitlementID", item.LVE_LeaveEntitlementID);
                         cmd.Parameters["@LVE_LeaveEntitlementID"].Direction = ParameterDirection.Input;
@@ -475,8 +475,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@LVE_LeaveEntitlementID", item.LVE_LeaveEntitlementID);
                         cmd.Parameters["@LVE_LeaveEntitlementID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
 
 

@@ -56,8 +56,7 @@ namespace HRM_DAL.Data
                                 objUserRoleHead.resp = true;
                                 objUserRoleHead.msg = "Get UserRole";
 
-                                objUserRole.EUR_UserRoleID = rdr["EUR_UserRoleID"].ToString();
-                                
+                                objUserRole.EUR_UserRoleID = rdr["EUR_UserRoleID"].ToString();                                
                                 objUserRole.EUR_UserRole = rdr["EUR_UserRole"].ToString();
                                 objUserRole.EUR_Status = Convert.ToBoolean(rdr["EUR_Status"].ToString());
 
@@ -153,8 +152,7 @@ namespace HRM_DAL.Data
                                 objUserRoleHead.resp = true;
                                 objUserRoleHead.msg = "Get UserRole";
 
-                                objUserRole.EUR_UserRoleID = rdr["EUR_UserRoleID"].ToString();
-                                
+                                objUserRole.EUR_UserRoleID = rdr["EUR_UserRoleID"].ToString();                                
                                 objUserRole.EUR_UserRole = rdr["EUR_UserRole"].ToString();
                                 objUserRole.EUR_Status = Convert.ToBoolean(rdr["EUR_Status"].ToString());
 
@@ -233,52 +231,17 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_insert_UserRole";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@EUR_UserRoleID", item.EUR_UserRoleID);
                         cmd.Parameters["@EUR_UserRoleID"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
-                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EUR_UserRole", item.EUR_UserRole);
+                        cmd.Parameters["@EUR_UserRole"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
-                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
-                        //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_UnitNumber", item.CUS_Adrs_UnitNumber);
-                        //cmd.Parameters["@CUS_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_StreetName", item.CUS_Adrs_StreetName);
-                        //cmd.Parameters["@CUS_Adrs_StreetName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_City", item.CUS_Adrs_City);
-                        //cmd.Parameters["@CUS_Adrs_City"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_CountryCode", item.CUS_Adrs_CountryCode);
-                        //cmd.Parameters["@CUS_Adrs_CountryCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_PostalCode", item.CUS_Adrs_PostalCode);
-                        //cmd.Parameters["@CUS_Adrs_PostalCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactPerson", item.CUS_ContactPerson);
-                        //cmd.Parameters["@CUS_ContactPerson"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
-                        //cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
-                        //cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_SMS", item.CUS_OTP_By_SMS);
-                        //cmd.Parameters["@CUS_OTP_By_SMS"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
-                        //cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
-
-                        string mailtypes = "";
+                        cmd.Parameters.AddWithValue("@EUR_Status", item.EUR_Status);
+                        cmd.Parameters["@EUR_Status"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -350,53 +313,17 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_modify_UserRole";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@EUR_UserRoleID", item.EUR_UserRoleID);
                         cmd.Parameters["@EUR_UserRoleID"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
-                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EUR_UserRole", item.EUR_UserRole);
+                        cmd.Parameters["@EUR_UserRole"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
-                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
-                        //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_UnitNumber", item.CUS_Adrs_UnitNumber);
-                        //cmd.Parameters["@CUS_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_StreetName", item.CUS_Adrs_StreetName);
-                        //cmd.Parameters["@CUS_Adrs_StreetName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_City", item.CUS_Adrs_City);
-                        //cmd.Parameters["@CUS_Adrs_City"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_CountryCode", item.CUS_Adrs_CountryCode);
-                        //cmd.Parameters["@CUS_Adrs_CountryCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_PostalCode", item.CUS_Adrs_PostalCode);
-                        //cmd.Parameters["@CUS_Adrs_PostalCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactPerson", item.CUS_ContactPerson);
-                        //cmd.Parameters["@CUS_ContactPerson"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
-                        //cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
-                        //cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_SMS", item.CUS_OTP_By_SMS);
-                        //cmd.Parameters["@CUS_OTP_By_SMS"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
-                        //cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Status", item.CUS_Status);
-                        //cmd.Parameters["@CUS_Status"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EUR_Status", item.EUR_Status);
+                        cmd.Parameters["@EUR_Status"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -471,8 +398,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@EUR_UserRoleID", item.EUR_UserRoleID);
                         cmd.Parameters["@EUR_UserRoleID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
 
 

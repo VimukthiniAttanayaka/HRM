@@ -8,7 +8,7 @@ namespace HRM_DAL.Models
     }
     public class AuthenticationRequestBaseModel
     {
-        public string UD_StaffID { get; set; }
+        public string UD_UserID { get; set; }
         public string AUD_notificationToken { get; set; }
     }
 

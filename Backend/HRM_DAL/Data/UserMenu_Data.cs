@@ -233,8 +233,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_insert_UserMenu";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UUM_UserMenuID", item.UUM_UserMenuID);
                         cmd.Parameters["@UUM_UserMenuID"].Direction = ParameterDirection.Input;
@@ -350,8 +350,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_modify_UserMenu";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UUM_UserMenuID", item.UUM_UserMenuID);
                         cmd.Parameters["@UUM_UserMenuID"].Direction = ParameterDirection.Input;
@@ -471,8 +471,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UUM_UserMenuID", item.UUM_UserMenuID);
                         cmd.Parameters["@UUM_UserMenuID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_StaffID", item.UD_StaffID);
-                        cmd.Parameters["@UD_StaffID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
 
 

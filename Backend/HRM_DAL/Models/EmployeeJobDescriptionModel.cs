@@ -4,10 +4,6 @@ using System;
 
 namespace HRM_DAL.Models
 {
-    public class ReturnBUEmployeeJobDescriptionModelHead : ReturnResponse
-    {
-        public List<ReturnUserCustModel> EmployeeJobDescription { get; set; }
-    }
 
     public class EmployeeJobDescriptionModel : RequestBaseModel
     {
