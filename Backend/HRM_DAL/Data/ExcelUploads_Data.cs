@@ -78,7 +78,7 @@ namespace HRM_DAL.Data
                         return lst;
                     }
 
-                    List<CUserModel> User = new List<CUserModel>();
+                    List<UserModel> User = new List<UserModel>();
 
                     System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
                     //using (var stream = System.IO.File.Open(fileNamewithPath, FileMode.Open, FileAccess.Read))
@@ -200,23 +200,14 @@ namespace HRM_DAL.Data
 
                         for (int i = 1; i < dataSet.Tables[0].Rows.Count; i++)
                         {
-                            var obj = new CUserModel() { };
+                            var obj = new UserModel() { };
 
                             obj.UD_FirstName = dataSet.Tables[0].Rows[i][indexPrimaryFirstName].ToString().Trim();
                             obj.UD_LastName = dataSet.Tables[0].Rows[i][indexPrimaryLastName].ToString().Trim();
                             obj.UD_PrefferedName = dataSet.Tables[0].Rows[i][indexPreferredName].ToString().Trim();
-                            //obj.UD_OrgStructuralLevel1 = dataSet.Tables[0].Rows[i][indexOrgStructuralLevel1].ToString().Trim();
-                            //obj.UD_OrgStructuralLevel2 = dataSet.Tables[0].Rows[i][indexOrgStructuralLevel2].ToString().Trim();
-                            //obj.UD_DepartmentDetail1 = dataSet.Tables[0].Rows[i][indexLevel3Descr].ToString().Trim();
-                            //obj.UD_DepartmentDetail2 = dataSet.Tables[0].Rows[i][indexLevel4Descr].ToString().Trim();
-                            //obj.UD_DepartmentDetail3 = dataSet.Tables[0].Rows[i][indexLevel5Descr].ToString().Trim();
-                            //obj.UD_JobCodeDescription = dataSet.Tables[0].Rows[i][indexJobCodeDescr].ToString().Trim();
                             obj.UD_EmailAddress = dataSet.Tables[0].Rows[i][index1BankEmailAddress].ToString().Trim();
                             obj.UD_UserID = dataSet.Tables[0].Rows[i][index1BankID].ToString().Trim();
-                            //obj.UD_PCCode = dataSet.Tables[0].Rows[i][indexPCCode].ToString().Trim();
-                            obj.UD_PCDescription = dataSet.Tables[0].Rows[i][indexPCDescription].ToString().Trim();
                             obj.UD_DepartmentID = dataSet.Tables[0].Rows[i][indexDepartmentID].ToString().Trim();
-                            //obj.DPT_CPCode=dataSet.Tables[0].Rows[i][indexDepartmentName].ToString();
                             obj.UD_Address = dataSet.Tables[0].Rows[i][indexDepartmentAddress].ToString().Trim();
                             obj.UD_RankDescription = dataSet.Tables[0].Rows[i][indexRankDescription].ToString().Trim();
                             obj.UD_PhoneNumber1 = dataSet.Tables[0].Rows[i][indexPrimaryTelephone].ToString().Trim();
@@ -252,7 +243,7 @@ namespace HRM_DAL.Data
                 return lst;
             }
 
-            public static List<ReturUserExcelUploadHead> add_update_user_excel(CUserModel model)
+            public static List<ReturUserExcelUploadHead> add_update_user_excel(UserModel model)
             {
                 List<ReturUserExcelUploadHead> objCUserHeadList = new List<ReturUserExcelUploadHead>();
                 ReturUserExcelUploadHead objCusUserHead = new ReturUserExcelUploadHead();
@@ -323,8 +314,8 @@ namespace HRM_DAL.Data
                             cmd.CommandText = "sp_add_update_user_excel";
                             cmd.CommandType = CommandType.StoredProcedure;
 
-                            cmd.Parameters.AddWithValue("@USER_ID", model.USER_ID);
-                            cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@UD_UserID", model.UD_UserID);
+                            cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                             cmd.Parameters.AddWithValue("@UD_CustomerID", model.UD_CustomerID);
                             cmd.Parameters["@UD_CustomerID"].Direction = ParameterDirection.Input;
@@ -382,12 +373,6 @@ namespace HRM_DAL.Data
 
                             cmd.Parameters.AddWithValue("@UD_StaffLocation", model.UD_StaffLocation);
                             cmd.Parameters["@UD_StaffLocation"].Direction = ParameterDirection.Input;
-
-                            //cmd.Parameters.AddWithValue("@UD_PCCode", model.UD_PCCode);
-                            //cmd.Parameters["@UD_PCCode"].Direction = ParameterDirection.Input;
-
-                            cmd.Parameters.AddWithValue("@UD_PCDescription", model.UD_PCDescription);
-                            cmd.Parameters["@UD_PCDescription"].Direction = ParameterDirection.Input;
 
                             if (string.IsNullOrEmpty(model.UD_Remarks)) model.UD_Remarks = "";
                             cmd.Parameters.AddWithValue("@UD_Remarks", model.UD_Remarks);

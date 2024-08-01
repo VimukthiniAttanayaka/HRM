@@ -19,7 +19,7 @@ namespace HRM_DAL.Models
 
     public class ReturUserExcelUploadHead : ReturnResponse
     {
-        public List<CUserModel> users { get; set; } = new List<CUserModel>();
+        public List<UserModel> users { get; set; } = new List<UserModel>();
         public List<userresponcemodel_return> success_users { get; set; } = new List<userresponcemodel_return>();
         public List<userresponcemodel_return> failed_users { get; set; } = new List<userresponcemodel_return>();
         public string FileNameWithPath { get; set; }

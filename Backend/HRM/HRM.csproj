@@ -28,6 +28,7 @@
     <Compile Remove="Controllers\SMSTesterController.cs" />
     <Compile Remove="Controllers\SystemsSettingsController.cs" />
     <Compile Remove="Controllers\UserAccessGroupController_Old.cs" />
+    <Compile Remove="Controllers\UserController.cs" />
     <Compile Remove="Controllers\UserRoleAccessGroupController1.cs" />
     <Compile Remove="Controllers\UserRoleAccessGroupController_Old.cs" />
     <Compile Remove="Controllers\UserGroupMasterController.cs" />

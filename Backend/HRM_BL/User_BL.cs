@@ -13,12 +13,12 @@ namespace HRM_BL
     {
         private static LogError objError = new LogError();
 
-        public static List<ReturnCustomerUserModelHead> get_user_single(GetUserSingleModel CUser) //ok
+        public static List<ReturnUserModelHead> get_user_single(GetUserSingleModel CUser) //ok
         {
             return HRM_DAL.Data.User_Data.get_user_single(CUser);
         }
 
-        public static List<ReturnCustomerUserAllModelHead> get_user_all(GetCustomerUserAllModel CUserall)//ok
+        public static List<ReturnUserAllModelHead> get_user_all(GetUserAllModel CUserall)//ok
         {
             return HRM_DAL.Data.User_Data.get_user_all(CUserall);
         }
@@ -28,12 +28,12 @@ namespace HRM_BL
             return new List<ReturnResponse>();// HRM_DAL.Data.User_Data.inactivate_user(item);
         }
 
-        public static List<ReturnResponse> add_new_user(CUserModel item)//ok
+        public static List<ReturnResponse> add_new_user(UserModel item)//ok
         {
             return HRM_DAL.Data.User_Data.add_new_user(item);
         }
 
-        public static List<ReturnResponse> modify_user(CUserModel item)//ok
+        public static List<ReturnResponse> modify_user(UserModel item)//ok
         {
             return HRM_DAL.Data.User_Data.modify_user(item);
         }
@@ -43,7 +43,7 @@ namespace HRM_BL
         //    return HRM_DAL.Data.User_Data.change_password(item);
         //}
 
-        //public static List<ReturnResponse> update_notification_toke'n(NotificationTokenModel UpNotTokModel, string userId)
+        //public static List<ReturnResponse> update_notification_token(NotificationTokenModel UpNotTokModel, string userId)
         //{
         //    return HRM_DAL.Data.User_Data.update_notification_token(UpNotTokModel, userId);
         //}

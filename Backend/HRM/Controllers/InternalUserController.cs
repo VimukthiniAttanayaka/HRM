@@ -30,15 +30,15 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnCustomerUserModelHead> get_user_single(GetUserSingleModel CUser)//ok
+        public List<ReturnUserModelHead> get_user_single(GetUserSingleModel CUser)//ok
         {
-            List<ReturnCustomerUserModelHead> objCusUserHeadList = new List<ReturnCustomerUserModelHead>();
-            ReturnCustomerUserModelHead obj = new ReturnCustomerUserModelHead() { resp = false, msg = "sfsf" };
-            obj.User = new List<ReturnCustomerUserModel>();
-            if (CUser.UD_UserName == "test")
-                obj.User.Add(new ReturnCustomerUserModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true });
-            if (CUser.UD_UserName == "test1") obj.User.Add(new ReturnCustomerUserModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true });
-            if (CUser.UD_UserName == "test2") obj.User.Add(new ReturnCustomerUserModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true });
+            List<ReturnUserModelHead> objCusUserHeadList = new List<ReturnUserModelHead>();
+            ReturnUserModelHead obj = new ReturnUserModelHead() { resp = false, msg = "sfsf" };
+            //obj.User = new List<ReturnUserModel>();
+            //if (CUser.UD_UserName == "test")
+            //    obj.User.Add(new ReturnUserModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true });
+            //if (CUser.UD_UserName == "test1") obj.User.Add(new ReturnUserModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true });
+            //if (CUser.UD_UserName == "test2") obj.User.Add(new ReturnUserModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true });
             objCusUserHeadList.Add(obj);
             return objCusUserHeadList;
 
@@ -52,7 +52,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturnCustomerUserModelHead objCusUserHead = new ReturnCustomerUserModelHead
+                ReturnUserModelHead objCusUserHead = new ReturnUserModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -77,14 +77,14 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnCustomerUserAllModelHead> get_user_all(GetCustomerUserAllModel CUserall)//ok
+        public List<ReturnUserAllModelHead> get_user_all(GetUserAllModel CUserall)//ok
         {
-            List<ReturnCustomerUserAllModelHead> objCusUserHeadList = new List<ReturnCustomerUserAllModelHead>();
-            ReturnCustomerUserAllModelHead obj = new ReturnCustomerUserAllModelHead() { resp = false, msg = "sfsf" };
-            obj.User = new List<ReturnCusUserAllModel>();
-            obj.User.Add(new ReturnCusUserAllModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true });
-            obj.User.Add(new ReturnCusUserAllModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true });
-            obj.User.Add(new ReturnCusUserAllModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true });
+            List<ReturnUserAllModelHead> objCusUserHeadList = new List<ReturnUserAllModelHead>();
+            ReturnUserAllModelHead obj = new ReturnUserAllModelHead() { resp = false, msg = "sfsf" };
+            //obj.User = new List<ReturnCusUserAllModel>();
+            //obj.User.Add(new ReturnCusUserAllModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true });
+            //obj.User.Add(new ReturnCusUserAllModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true });
+            //obj.User.Add(new ReturnCusUserAllModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true });
             objCusUserHeadList.Add(obj);
             return objCusUserHeadList;
 
@@ -98,7 +98,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturnCustomerUserAllModelHead objCusUserHead = new ReturnCustomerUserAllModelHead
+                ReturnUserAllModelHead objCusUserHead = new ReturnUserAllModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -161,7 +161,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnResponse> add_new_user(CUserModel item)//ok
+        public List<ReturnResponse> add_new_user(UserModel item)//ok
         {
             List<ReturnResponse> objCUserHeadList = new List<ReturnResponse>();
 
@@ -242,7 +242,7 @@ namespace HRM.Controllers
         //            foreach (var item in tempObj.users)
         //            {
         //                item.USER_ID = model.USER_ID;
-        //                item.UD_CustomerID = model.DPT_CustomerID;
+        //                item.UD_ID = model.DPT_ID;
         //                item.UD_HRMAccessFlag = false;
         //                //item.UD_MailBagCPCode = model.UD_MailBagCPCode;
         //                //item.UD_OutgoingMailCPCode = model.UD_OutgoingMailCPCode;
@@ -317,7 +317,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnResponse> modify_user(CUserModel item)//ok
+        public List<ReturnResponse> modify_user(UserModel item)//ok
         {
             List<ReturnResponse> objCUserHeadList = new List<ReturnResponse>();
 

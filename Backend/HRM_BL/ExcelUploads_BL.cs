@@ -22,7 +22,7 @@ namespace HRM_BL
                 return HRM_DAL.Data.ExcelUploads_Data.User_Related.user_excelupload(model);
             }
 
-            public static List<ReturUserExcelUploadHead> add_update_user_excel(CUserModel model)
+            public static List<ReturUserExcelUploadHead> add_update_user_excel(UserModel model)
             {
                 return HRM_DAL.Data.ExcelUploads_Data.User_Related.add_update_user_excel(model);
             }
