@@ -40,18 +40,60 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
     if (response.ok) {
       console.log(response);
       // Handle successful submission (e.g., display a success message)
-      console.log('Leave Type data submitted successfully!')
+      console.log('JobRole data submitted successfully!')
     } else {
       // Handle submission errors
-      console.error('Error submitting Leave Type data:', response.statusText)
+      console.error('Error submitting JobRole data:', response.statusText)
     }
    }
-  const handleEdit = (event) => {
+  const handleEdit = async (event) => {
     console.log('Edit JobRole')
+  // Prepare form data
+  const formData = {
+    MDJR_JobRoleID: JobRoleId,
+    MDJR_JobRole: JobRole,
+    MDJR_Status: isActive,
   }
-  const handleDelete = (event) => {
+  // Submit the form data to your backend API
+  const response = await fetch(apiUrl + 'JobRole/modify_JobRole', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+  })
+
+  if (response.ok) {
+    console.log(response);
+    // Handle successful submission (e.g., display a success message)
+    console.log('JobRole data submitted successfully!')
+  } else {
+    // Handle submission errors
+    console.error('Error submitting JobRole data:', response.statusText)
+  }
+}
+  const handleDelete = async (event) => {
     console.log('Delete JobRole')
+  // Prepare form data
+  const formData = {
+    MDJR_JobRoleID: JobRoleId,
+    MDJR_JobRole: JobRole,
+    MDJR_Status: isActive,
   }
+  // Submit the form data to your backend API
+  const response = await fetch(apiUrl + 'JobRole/inactivate_JobRole', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+  })
+
+  if (response.ok) {
+    console.log(response);
+    // Handle successful submission (e.g., display a success message)
+    console.log('JobRole data submitted successfully!')
+  } else {
+    // Handle submission errors
+    console.error('Error submitting JobRole data:', response.statusText)
+  }
+}
 
   const handleSubmit = async (event) => {
     event.preventDefault()
