@@ -133,11 +133,11 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "get_JobRole_all";
+                        cmd.CommandText = "sp_get_JobRole_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@MDJR_JobRoleID", model.MDJR_JobRoleID);
-                        cmd.Parameters["@MDJR_JobRoleID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@MDJR_JobRoleID", model.MDJR_JobRoleID);
+                        //cmd.Parameters["@MDJR_JobRoleID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
