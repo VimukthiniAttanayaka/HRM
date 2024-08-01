@@ -82,7 +82,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
     }
   }
 
-  console.log(DepartmentDetails)
+  // console.log(DepartmentDetails)
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New Department</CButton>

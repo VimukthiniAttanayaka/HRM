@@ -329,33 +329,11 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_department_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@PAGE_NO", item.PAGE_NO);
-                        cmd.Parameters["@PAGE_NO"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@PAGE_NO", item.PAGE_NO);
+                        //cmd.Parameters["@PAGE_NO"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@PAGE_RECORDS_COUNT", item.PAGE_RECORDS_COUNT);
-                        cmd.Parameters["@PAGE_RECORDS_COUNT"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_ID", item.DPT_ID);
-                        //cmd.Parameters["@DPT_ID"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Name", item.DPT_Name);
-                        //cmd.Parameters["@DPT_Name"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Status", item.DPT_Status);
-                        //cmd.Parameters["@DPT_Status"].Direction = ParameterDirection.Input;
-
-                        string RC;
-                        using (SqlCommand cmdrc = new SqlCommand())
-                        {
-                            cmdrc.Connection = lconn;
-
-                            cmdrc.CommandText = "sp_get_department_count";
-                            cmdrc.CommandType = CommandType.StoredProcedure;
-                            SqlDataReader rdrrc = cmdrc.ExecuteReader();
-                            rdrrc.Read();
-                            RC = rdrrc["RC"].ToString();
-                            rdrrc.Close();
-                        }
+                        //cmd.Parameters.AddWithValue("@PAGE_RECORDS_COUNT", item.PAGE_RECORDS_COUNT);
+                        //cmd.Parameters["@PAGE_RECORDS_COUNT"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -371,26 +349,10 @@ namespace HRM_DAL.Data
                                 objHead.resp = true;
                                 objHead.msg = "Department";
 
-                                //objData.DPT_ID = rdr["DPT_ID"].ToString();
-                                //objData.DPT_CustomerID = rdr["DPT_CustomerID"].ToString();
-                                //objData.DPT_Name = rdr["DPT_Name"].ToString();
-                                //objData.DPT_Adrs_BlockBuildingNo = rdr["DPT_Adrs_BlockBuildingNo"].ToString();
-                                //objData.DPT_Adrs_BuildingName = rdr["DPT_Adrs_BuildingName"].ToString();
-                                //objData.DPT_Adrs_UnitNumber = rdr["DPT_Adrs_UnitNumber"].ToString();
-                                //objData.DPT_Adrs_StreetName = rdr["DPT_Adrs_StreetName"].ToString();
-                                //objData.DPT_Adrs_City = rdr["DPT_Adrs_City"].ToString();
-                                //objData.DPT_Adrs_CountryCode = rdr["DPT_Adrs_CountryCode"].ToString();
-                                //objData.DPT_Adrs_PostalCode = rdr["DPT_Adrs_PostalCode"].ToString();
-                                //objData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
-                                //objData.DPT_Status = Convert.ToBoolean(rdr["DPT_Status"].ToString());
-
-
-                                //objData.DPT_CreatedBy = rdr["DPT_CreatedBy"].ToString();
-                                //objData.DPT_CreatedDateTime = rdr["DPT_CreatedDateTime"].ToString();
-                                //objData.DPT_ModifiedBy = rdr["DPT_ModifiedBy"].ToString();
-                                //objData.DPT_ModifiedDateTime = rdr["DPT_ModifiedDateTime"].ToString();
-
-                                objData.RC = RC;
+                                objData.MDD_DepartmentID = rdr["MDD_DepartmentID"].ToString();
+                                objData.MDD_Department = rdr["MDD_Department"].ToString();
+                                objData.MDD_LocationCode = rdr["MDD_LocationCode"].ToString();
+                                objData.MDD_Status = Convert.ToBoolean(rdr["MDD_Status"].ToString());
 
                                 if (objHead.Department == null)
                                 {
@@ -465,8 +427,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_department_single";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@DPT_ID", item.MDD_DepartmentID);
-                        cmd.Parameters["@DPT_ID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDD_DepartmentID", item.MDD_DepartmentID);
+                        cmd.Parameters["@MDD_DepartmentID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -483,22 +445,10 @@ namespace HRM_DAL.Data
                                 objHead.resp = true;
                                 objHead.msg = "Department";
 
-                                //objData.DPT_ID = rdr["DPT_ID"].ToString();
-                                //objData.DPT_CustomerID = rdr["DPT_CustomerID"].ToString();
-                                //objData.DPT_Name = rdr["DPT_Name"].ToString();
-                                //objData.DPT_Adrs_BlockBuildingNo = rdr["DPT_Adrs_BlockBuildingNo"].ToString();
-                                //objData.DPT_Adrs_BuildingName = rdr["DPT_Adrs_BuildingName"].ToString();
-                                //objData.DPT_Adrs_UnitNumber = rdr["DPT_Adrs_UnitNumber"].ToString();
-                                //objData.DPT_Adrs_StreetName = rdr["DPT_Adrs_StreetName"].ToString();
-                                //objData.DPT_Adrs_City = rdr["DPT_Adrs_City"].ToString();
-                                //objData.DPT_Adrs_CountryCode = rdr["DPT_Adrs_CountryCode"].ToString();
-                                //objData.DPT_Adrs_PostalCode = rdr["DPT_Adrs_PostalCode"].ToString();
-                                //objData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
-                                //objData.DPT_ModifiedDateTime = rdr["DPT_ModifiedDateTime"].ToString();
-                                //objData.DPT_CreatedDateTime = rdr["DPT_CreatedDateTime"].ToString();
-                                //objData.DPT_Status = Convert.ToBoolean(rdr["DPT_Status"].ToString());
-                                objData.RC = "1";
-
+                                objData.MDD_DepartmentID = rdr["MDD_DepartmentID"].ToString();
+                                objData.MDD_Department = rdr["MDD_Department"].ToString();
+                                objData.MDD_LocationCode = rdr["MDD_LocationCode"].ToString();
+                                objData.MDD_Status = Convert.ToBoolean(rdr["MDD_Status"].ToString());
 
                                 if (objHead.Department == null)
                                 {
