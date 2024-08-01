@@ -14,9 +14,6 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
   const [Department, setDepartment] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeAlotment = (event) => {
-    setLeaveAlotmentId(event.target.value)
-  }
   const handleChangeDepartment = (event) => {
     setDepartment(event.target.value)
   }
@@ -28,7 +25,6 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
     // Prepare form data
     const formData = {
       MDD_DepartmentID: DepartmentId,
-      MDD_LeaveAlotment: leaveAlotmentId,
       MDD_Department: Department,
       MDD_Status: isActive,
     }
@@ -42,18 +38,60 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
     if (response.ok) {
       console.log(response);
       // Handle successful submission (e.g., display a success message)
-      console.log('Leave Type data submitted successfully!')
+      console.log('Department data submitted successfully!')
     } else {
       // Handle submission errors
-      console.error('Error submitting Leave Type data:', response.statusText)
+      console.error('Error submitting Department data:', response.statusText)
     }
   }
-  const handleEdit = (event) => {
+  const handleEdit = async (event) => {
     console.log('Edit Department')
+  // Prepare form data
+  const formData = {
+    MDD_DepartmentID: DepartmentId,
+    MDD_Department: Department,
+    MDD_Status: isActive,
   }
-  const handleDelete = (event) => {
+  // Submit the form data to your backend API
+  const response = await fetch(apiUrl + 'Department/modify_department', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+  })
+
+  if (response.ok) {
+    console.log(response);
+    // Handle successful submission (e.g., display a success message)
+    console.log('Department data submitted successfully!')
+  } else {
+    // Handle submission errors
+    console.error('Error submitting Department data:', response.statusText)
+  }
+}
+  const handleDelete =async (event) => {
     console.log('Delete Department')
-  }
+ // Prepare form data
+ const formData = {
+  MDD_DepartmentID: DepartmentId,
+  MDD_Department: Department,
+  MDD_Status: isActive,
+}
+// Submit the form data to your backend API
+const response = await fetch(apiUrl + 'Department/inactivate_department', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(formData),
+})
+
+if (response.ok) {
+  console.log(response);
+  // Handle successful submission (e.g., display a success message)
+  console.log('Department data submitted successfully!')
+} else {
+  // Handle submission errors
+  console.error('Error submitting Department data:', response.statusText)
+}
+ }
 
   const handleSubmit = async (event) => {
     event.preventDefault()

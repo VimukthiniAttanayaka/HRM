@@ -1,26 +1,10 @@
 ﻿using HRM_DAL.Models;
 using error_handler;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using utility_handler.Data;
-//using static error_handler.InformationLog;
-using static error_handler.ErrorLog;
 using System.Reflection;
-using static error_handler.InformationLog;
-using System.Linq;
-using System.Data.OleDb;
-using System.IO;
-using System.Data;
-using System.Data.OleDb;
-using System.Data.SqlClient;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using HRM_DAL.Data;
 
 namespace HRM.Controllers
 {
