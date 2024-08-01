@@ -83,8 +83,6 @@
     <Compile Include="Models\UserMenuModel.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AuthenticateModel.cs" />
-    <Compile Include="Models\CustomerDepartment.cs" />
-    <Compile Include="Models\CustomerLocation.cs" />
     <Compile Include="Models\AccessGroupModel.cs" />
     <Compile Include="Models\BranchModel.cs" />
     <Compile Include="Models\JobRoleModel.cs" />
@@ -95,16 +93,11 @@
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\DashboardModel.cs" />
-    <Compile Include="Models\Department.cs" />
-    <Compile Include="Models\DepartmentData.cs" />
-    <Compile Include="Models\DepartmentDto.cs" />
     <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\DropDownModel.cs" />
     <Compile Include="Models\AttendanceModel.cs" />
     <Compile Include="Models\ExcelUploadsModel.cs" />
     <Compile Include="Models\LeaveModel.cs" />
-    <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\LocationDto.cs" />
     <Compile Include="Models\LocationModel.cs" />
     <Compile Include="Models\ReponceModels\HRM_ReturnResponce.cs" />
     <Compile Include="Models\ReponceModels\HRMToken.cs" />

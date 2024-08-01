@@ -126,14 +126,14 @@ const AttendanceDataGrid = () => {
       </CCol>
        <CCol className='d-flex justify-content-end'>
         <AttendancePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} />
-      </CCol>  
+      </CCol>
       <CSmartTable
         cleaner
         clickableRows
         columns={columns}
         columnFilter
         columnSorter
-        footer
+        // footer
         items={data}
         itemsPerPageSelect
         itemsPerPage={5}
@@ -146,16 +146,16 @@ const AttendanceDataGrid = () => {
           console.log(items)
         }}
         scopedColumns={{
-          avatar: (item) => (
-            <td>
-              {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-            </td>
-          ),
-          status: (item) => (
-            <td>
-              {/* <CBadge color={getBadge(item.status)}>{item.status}</CBadge> */}
-            </td>
-          ),
+          // avatar: (item) => (
+          //   <td>
+          //     {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
+          //   </td>
+          // ),
+          // status: (item) => (
+          //   <td>
+          //     {/* <CBadge color={getBadge(item.status)}>{item.status}</CBadge> */}
+          //   </td>
+          // ),
           show_details: (item) => {
             return (
               <td className="py-2">
@@ -190,7 +190,7 @@ const AttendanceDataGrid = () => {
             )
           },
         }}
-        selectable
+        // selectable
         sorterValue={{ column: 'status', state: 'asc' }}
         tableFilter
         tableProps={{

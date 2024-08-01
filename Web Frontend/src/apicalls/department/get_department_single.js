@@ -30,8 +30,8 @@ export const getDepartmentSingle = async (formData) => {
     .then(response => response.json())
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
+      console.log(res1)
       resw = res1[0].Department[0]
-      // console.log(res2)
       console.log(res1[0].Department[0])
       // setDepartmentDetails(res1[0].Department[0]);
       // handleOpenPopup()

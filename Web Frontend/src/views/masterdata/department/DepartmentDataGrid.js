@@ -11,6 +11,7 @@ const DepartmentDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
+  const [popupStatus, setPopupStatus] = useState('create')
 
   const columns = [
     {
@@ -37,7 +38,21 @@ const DepartmentDataGrid = () => {
     {
       key: 'show_details',
       label: '',
-      _style: { width: '20%' },
+      _style: { width: '1%' },
+      filter: false,
+      sorter: false,
+    },
+    {
+      key: 'view',
+      label: '',
+      _style: { width: '1%' },
+      filter: false,
+      sorter: false,
+    },
+    {
+      key: 'delete',
+      label: '',
+      _style: { width: '1%' },
       filter: false,
       sorter: false,
     },
@@ -63,7 +78,7 @@ const DepartmentDataGrid = () => {
     setDepartmentId(event.target.value)
   }
 
-  async function loadDetails(item,action) {
+  async function loadDetails(item, action) {
 
     const token = getJWTToken();
     const staffId = getStaffID();
@@ -95,7 +110,19 @@ const DepartmentDataGrid = () => {
     setDepartmentDetails(DepartmentDetails);
     handleOpenPopup()
   }
-  const toggleDetails = (index,action) => {
+  const toggleEdit = (index) => {
+    setPopupStatus('edit')
+    toggleDetails(index)
+  }
+  const toggleDelete = (index) => {
+    setPopupStatus('delete')
+    toggleDetails(index)
+  }
+  const toggleView = (index) => {
+    setPopupStatus('view')
+    toggleDetails(index)
+  }
+  const toggleDetails = (index, action) => {
 
 
     const position = details.indexOf(index)
@@ -105,7 +132,7 @@ const DepartmentDataGrid = () => {
     } else {
       newDetails = [...details, index]
       // alert(newDetails[newDetails.length - 1])
-      loadDetails(newDetails[0],action)
+      loadDetails(newDetails[0], action)
     }
     // setDetails(newDetails)
   }
@@ -181,6 +208,7 @@ const DepartmentDataGrid = () => {
   const handleClosePopup = () => {
     setVisible(false);
     setDepartmentDetails([]);
+    setPopupStatus('create')
   };
 
   return (
@@ -198,7 +226,7 @@ const DepartmentDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <DepartmentPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} DepartmentDetails={DepartmentDetails} />
+          <DepartmentPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} DepartmentDetails={DepartmentDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -239,28 +267,46 @@ const DepartmentDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDetails(item.id,'View')
+                    toggleEdit(item.id)
                   }}
                 >
-                  {/* {details.includes(item.id) ? 'Hide' : 'Show'} */}
-                  View
-                </CButton>
-              
-                <CButton
-                  color="primary"
-                  variant="outline"
-                  shape="square"
-                  size="sm"
-                  onClick={() => {
-                    toggleDetails(item.id,'Edit')
-                  }}
-                >
-                  {/* {details.includes(item.id) ? 'Hide' : 'Show'} */}
                   Edit
                 </CButton>
               </td>
             )
           },
+          view: (item) => (
+            <td>
+              <CButton
+                color="success"
+                variant="outline"
+                shape="square"
+                size="sm"
+                onClick={() => {
+                  toggleView(item.id)
+                }}
+              >
+                View
+              </CButton>
+            </td>
+          ),
+          delete: (item) => (
+            <td>
+              {item.status == 'Inactive' ? '' :
+                <CButton
+                  color="danger"
+                  variant="outline"
+                  shape="square"
+                  size="sm"
+                  onClick={() => {
+                    toggleDelete(item.id)
+                  }}
+                >
+                  Delete
+                </CButton>
+              }
+            </td>
+          ),
           details: (item) => {
             return (
               <CCollapse visible={details.includes(item.id)}>

@@ -12,7 +12,6 @@ const JobRoleDataGrid = () => {
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
-  const [hideDelete, setHideDelete] = useState('')
 
   const columns = [
     {
@@ -250,18 +249,18 @@ const JobRoleDataGrid = () => {
           ),
           delete: (item) => (
             <td>
-              {item.status == 'Inactive' ? '':
-              <CButton
-                color="danger"
-                variant="outline"
-                shape="square"
-                size="sm"
-                onClick={() => {
-                  toggleDelete(item.id)
-                }}
-              >
-                Delete
-              </CButton>
+              {item.status == 'Inactive' ? '' :
+                <CButton
+                  color="danger"
+                  variant="outline"
+                  shape="square"
+                  size="sm"
+                  onClick={() => {
+                    toggleDelete(item.id)
+                  }}
+                >
+                  Delete
+                </CButton>
               }
             </td>
           ),

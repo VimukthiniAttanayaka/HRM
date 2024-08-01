@@ -4,7 +4,7 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 
-const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails }) => {
+const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupStatus }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -23,14 +23,8 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails }) => {
   const handleChangeId = (event) => {
     setDepartmentId(event.target.value)
   }
-  const handleChangeIsActive = (event) => { }
-
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-
-    // Validation (optional)
-    // You can add validation logic here to check if all required fields are filled correctly
-
+  const handleCreate = async (event) => {
+    console.log('Create Department')
     // Prepare form data
     const formData = {
       MDD_DepartmentID: DepartmentId,
@@ -54,6 +48,39 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails }) => {
       console.error('Error submitting Leave Type data:', response.statusText)
     }
   }
+  const handleEdit = (event) => {
+    console.log('Edit Department')
+  }
+  const handleDelete = (event) => {
+    console.log('Delete Department')
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    if (popupStatus == 'create') {
+      handleCreate(event)
+    } else if (popupStatus == 'edit') {
+      handleEdit(event)
+    } else if (popupStatus == 'delete') {
+      handleDelete(event)
+    }
+    // Validation (optional)
+    // You can add validation logic here to check if all required fields are filled correctly
+
+  }
+
+  const popupStatusSetup = (event) => {
+    if (popupStatus == 'edit') {
+      return 'Edit Department'
+    } else if (popupStatus == 'view') {
+      return 'View Department'
+    } else if (popupStatus == 'delete') {
+      return 'Delete Department'
+    } else {
+      return 'Create New Department'
+    }
+  }
 
   console.log(DepartmentDetails)
   return (
@@ -68,7 +95,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails }) => {
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New Department</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">{popupStatusSetup()}</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">
@@ -79,7 +106,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails }) => {
                     <CInputGroupText>
                       <h6>DepartmentID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="DepartmentID" name="DepartmentID" value={DepartmentDetails.MDD_DepartmentID} onChange={handleChangeId}
+                  </CCol>   <CFormInput placeholder="DepartmentID" name="DepartmentID" value={DepartmentDetails.MDD_DepartmentID} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -88,9 +115,9 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails }) => {
                     <CInputGroupText>
                       <h6>Department</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="Department" name="Department" value={DepartmentDetails.MDD_Department} onChange={handleChangeDepartment}
-              
-              // readOnly={isEditable,isAddNew,IsView}// value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  </CCol>    <CFormInput placeholder="Department" name="Department" value={DepartmentDetails.MDD_Department} onChange={handleChangeDepartment} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+
+                  // readOnly={isEditable,isAddNew,IsView}// value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -99,10 +126,11 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails }) => {
                       <h6>Status</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck label="Status" defaultChecked />
+                  <CFormCheck label="Status" defaultChecked disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
-                  <CButton color="success" type='submit'>Submit</CButton>
+                  {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
+                    <CButton color="success" type='submit'>Submit</CButton>)}
                 </div>
               </CForm>
             </CCardBody>

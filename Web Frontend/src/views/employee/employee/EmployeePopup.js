@@ -12,7 +12,7 @@ const EmployeePopup = ({ visible, onClose, onOpen }) => {
   };
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New Employee</CButton>
+      <CButton color="primary" onClick={onOpen}>Add New Employee</CButton>
       <CModal size='lg'
         scrollable="true"
         alignment="center"

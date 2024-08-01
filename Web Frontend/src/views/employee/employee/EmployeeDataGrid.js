@@ -136,7 +136,7 @@ const EmployeeDataGrid = () => {
         columns={columns}
         columnFilter
         columnSorter
-        footer
+        // footer
         items={data}
         itemsPerPageSelect
         itemsPerPage={5}
@@ -149,16 +149,12 @@ const EmployeeDataGrid = () => {
           console.log(items)
         }}
         scopedColumns={{
-          avatar: (item) => (
-            <td>
-              {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-            </td>
-          ),
-          status: (item) => (
-            <td>
-              {/* <CBadge color={getBadge(item.status)}>{item.status}</CBadge> */}
-            </td>
-          ),
+
+          // status: (item) => (
+          //   <td>
+          //     {/* <CBadge color={getBadge(item.status)}>{item.status}</CBadge> */}
+          //   </td>
+          // ),
           show_details: (item) => {
             return (
               <td className="py-2">
@@ -193,7 +189,7 @@ const EmployeeDataGrid = () => {
             )
           },
         }}
-        selectable
+        // selectable
         sorterValue={{ column: 'status', state: 'asc' }}
         tableFilter
         tableProps={{
