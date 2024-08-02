@@ -291,13 +291,13 @@ const _nav = [
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
-      name: <Translation>{(t) => t('JobRole')}</Translation>,
+      name: <Translation>{(t) => t('Job Role')}</Translation>,
       to: '/masterdata/jobrole',
       disabled: !MJobRole,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       }, {
         component: CNavItem,
-        name: <Translation>{(t) => t('Location(Address)')}</Translation>,
+        name: <Translation>{(t) => t('Location (Address)')}</Translation>,
         to: '/masterdata/location',
       disabled: !MJobRole,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
@@ -305,17 +305,17 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: <Translation>{(t) => t('profile')}</Translation>,
+    name: <Translation>{(t) => t('Profile')}</Translation>,
     to: '/profile',
   },
   {
     component: CNavItem,
-    name: <Translation>{(t) => t('login')}</Translation>,
+    name: <Translation>{(t) => t('Login')}</Translation>,
     to: '/login',
   },
   {
     component: CNavItem,
-    name: <Translation>{(t) => t('ForgetPassword')}</Translation>,
+    name: <Translation>{(t) => t('Forget Password')}</Translation>,
     to: '/ForgetPassword',
   },
   // {

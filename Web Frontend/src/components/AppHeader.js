@@ -107,6 +107,21 @@ const AppHeader = () => {
                 <CIcon className="me-2" icon={cifGb} size="lg" /> English
               </CDropdownItem>
               <CDropdownItem
+                active={i18n.language === 'si'}
+                className="d-flex align-items-center"
+                as="button"
+                onClick={() => i18n.changeLanguage('si')}
+              >
+                <CIcon className="me-2" icon={cifEs} size="lg" /> Sinhala
+              </CDropdownItem> <CDropdownItem
+                active={i18n.language === 'ta'}
+                className="d-flex align-items-center"
+                as="button"
+                onClick={() => i18n.changeLanguage('ta')}
+              >
+                <CIcon className="me-2" icon={cifEs} size="lg" /> Tamil
+              </CDropdownItem>
+              {/* <CDropdownItem
                 active={i18n.language === 'es'}
                 className="d-flex align-items-center"
                 as="button"
@@ -121,7 +136,7 @@ const AppHeader = () => {
                 onClick={() => i18n.changeLanguage('pl')}
               >
                 <CIcon className="me-2" icon={cifPl} size="lg" /> Polski
-              </CDropdownItem>
+              </CDropdownItem> */}
             </CDropdownMenu>
           </CDropdown>
           <CDropdown variant="nav-item" placement="bottom-end">
