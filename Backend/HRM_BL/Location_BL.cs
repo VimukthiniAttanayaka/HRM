@@ -19,8 +19,18 @@ namespace HRM_BL
         {
             return HRM_DAL.Data.Location_Data.get_location_single(item);
         }
-
-
+        public static List<ReturnResponse> add_new_Location(LocationModel item)//ok
+        {
+            return HRM_DAL.Data.Location_Data.add_new_Location(item);
+        }
+        public static List<ReturnResponse> modify_Location(LocationModel item)
+        {
+            return HRM_DAL.Data.Location_Data.modify_Location(item);
+        }
+        public static List<ReturnResponse> inactivate_Location(InactiveMDLModel item)
+        {
+            return HRM_DAL.Data.Location_Data.inactivate_Location(item);
+        }
 
     }
 

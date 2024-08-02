@@ -62,10 +62,7 @@ namespace HRM.Controllers
             return objHeadList;
 
         }
-
-
-
-
+        
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
@@ -105,16 +102,123 @@ namespace HRM.Controllers
 
         }
 
+        //POST api/<UserController>
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<ReturnResponse> add_new_Location(LocationModel item)//ok
+        {
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
+
+                return HRM_BL.Location_BL.add_new_Location(item);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturncustResponse objLocationHead = new ReturncustResponse
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objCustHeadList.Add(objLocationHead);
+
+                objError.WriteLog(0, "LocationController", "add_new_Location", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "LocationController", "add_new_Location", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "LocationController", "add_new_Location", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "LocationController", "add_new_Location", "Inner Exception Message: " + ex.InnerException.Message);
+                }
 
 
+            }
+
+            return objCustHeadList;
+        }
+
+        //POST api/<UserController>
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<ReturnResponse> modify_Location(LocationModel item)//ok
+        {
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
+
+                return HRM_BL.Location_BL.modify_Location(item);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturncustResponse objLocationHead = new ReturncustResponse
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objCustHeadList.Add(objLocationHead);
+
+                objError.WriteLog(0, "LocationController", "modify_Location", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "LocationController", "modify_Location", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "LocationController", "modify_Location", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "LocationController", "modify_Location", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+
+            return objCustHeadList;
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<ReturnResponse> inactivate_Location(InactiveMDLModel item)//ok
+        {
+            List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
+            objUserHeadList.Add(new ReturnResponse() { resp = true, msg = "saved" });
+            return objUserHeadList;
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
+
+                return HRM_BL.Location_BL.inactivate_Location(item);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturnResponse objLocationHead = new ReturnResponse
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objUserHeadList.Add(objLocationHead);
+
+                objError.WriteLog(0, "LocationController", "inactivate_Location", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "LocationController", "inactivate_Location", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "LocationController", "inactivate_Location", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "LocationController", "inactivate_Location", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+            return objUserHeadList;
+        }
     }
-
-
-
-
-
-
-
 
 }
 
