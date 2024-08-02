@@ -14,7 +14,7 @@ namespace HRM_DAL.Models
         [Key]
         public string MDD_DepartmentID { get; set; }
         public string MDD_Department { get; set; }
-        public string MDD_LocationCode { get; set; }
+        public string MDD_LocationID { get; set; }
         public bool MDD_Status { get; set; }
         public string MDD_CreatedBy { get; set; }
         public DateTime MDD_CreatedDateTime { get; set; }
@@ -27,7 +27,7 @@ namespace HRM_DAL.Models
         [Key]
         public string MDD_DepartmentID { get; set; }
         public string MDD_Department { get; set; }
-        public string MDD_LocationCode { get; set; }
+        public string MDD_LocationID { get; set; }
         public bool MDD_Status { get; set; }
         public string MDD_CreatedBy { get; set; }
         public DateTime MDD_CreatedDateTime { get; set; }

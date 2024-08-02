@@ -89,7 +89,7 @@ const MarkAttendance = () => {
                   <h1>Mark</h1>
                   <p className="text-body-secondary">Mark Attendance</p>
                   <GoogleMaps/>
-                 
+
                   <div className="d-grid">
                     <CButton color="success" type='submit'>Submit</CButton>
                   </div>

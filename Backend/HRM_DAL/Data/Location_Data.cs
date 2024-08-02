@@ -43,11 +43,11 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_location_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@PAGE_NO", item.PAGE_NO);
-                        cmd.Parameters["@PAGE_NO"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@PAGE_NO", item.PAGE_NO);
+                        //cmd.Parameters["@PAGE_NO"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@PAGE_RECORDS_COUNT", item.PAGE_RECORDS_COUNT);
-                        cmd.Parameters["@PAGE_RECORDS_COUNT"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@PAGE_RECORDS_COUNT", item.PAGE_RECORDS_COUNT);
+                        //cmd.Parameters["@PAGE_RECORDS_COUNT"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -65,7 +65,7 @@ namespace HRM_DAL.Data
 
                                 objData.MDL_LocationID = rdr["MDL_LocationID"].ToString();
                                 objData.MDL_Location = rdr["MDL_Location"].ToString();
-                                objData.MDL_Status = rdr["MDL_Status"].ToString();
+                                objData.MDL_Status = Convert.ToBoolean( rdr["MDL_Status"].ToString());
 
                                 //objUserData.UserGroup.Add(objUserHead);
 
@@ -168,7 +168,7 @@ namespace HRM_DAL.Data
 
                                 objData.MDL_LocationID = rdr["MDL_LocationID"].ToString();
                                 objData.MDL_Location = rdr["MDL_Location"].ToString();
-                                objData.MDL_Status = rdr["MDL_Status"].ToString();
+                                objData.MDL_Status = Convert.ToBoolean( rdr["MDL_Status"].ToString());
 
                                 objList.Add(objData);
 

@@ -50,47 +50,14 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@MDD_Department", item.MDD_Department);
                         cmd.Parameters["@MDD_Department"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@MDD_LocationCode", item.MDD_LocationCode);
-                        cmd.Parameters["@MDD_LocationCode"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDD_LocationID", item.MDD_LocationID);
+                        cmd.Parameters["@MDD_LocationID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@MDD_Status", item.MDD_Status);
                         cmd.Parameters["@MDD_Status"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
                         cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_ID", item.DPT_ID);
-                        //cmd.Parameters["@DPT_ID"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Name", item.DPT_Name);
-                        //cmd.Parameters["@DPT_Name"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_LocationCode", item.DPT_LocationCode);
-                        //cmd.Parameters["@DPT_LocationCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Adrs_BlockBuildingNo", item.DPT_Adrs_BlockBuildingNo);
-                        //cmd.Parameters["@DPT_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Adrs_BuildingName", item.DPT_Adrs_BuildingName);
-                        //cmd.Parameters["@DPT_Adrs_BuildingName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Adrs_UnitNumber", item.DPT_Adrs_UnitNumber);
-                        //cmd.Parameters["@DPT_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Adrs_StreetName", item.DPT_Adrs_StreetName);
-                        //cmd.Parameters["@DPT_Adrs_StreetName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Adrs_City", item.DPT_Adrs_City);
-                        //cmd.Parameters["@DPT_Adrs_City"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Adrs_CountryCode", item.DPT_Adrs_CountryCode);
-                        //cmd.Parameters["@DPT_Adrs_CountryCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@DPT_Adrs_PostalCode", item.DPT_Adrs_PostalCode);
-                        //cmd.Parameters["@DPT_Adrs_PostalCode"].Direction = ParameterDirection.Input;                  
-
-                        //cmd.Parameters.AddWithValue("@USER_ID", item.UD_UserID);
-                        //cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -167,8 +134,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@MDD_Department", item.MDD_Department);
                         cmd.Parameters["@MDD_Department"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@MDD_LocationCode", item.MDD_LocationCode);
-                        cmd.Parameters["@MDD_LocationCode"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDD_LocationID", item.MDD_LocationID);
+                        cmd.Parameters["@MDD_LocationID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@MDD_Status", item.MDD_Status);
                         cmd.Parameters["@MDD_Status"].Direction = ParameterDirection.Input;
@@ -345,7 +312,7 @@ namespace HRM_DAL.Data
 
                                 objData.MDD_DepartmentID = rdr["MDD_DepartmentID"].ToString();
                                 objData.MDD_Department = rdr["MDD_Department"].ToString();
-                                objData.MDD_LocationCode = rdr["MDD_LocationCode"].ToString();
+                                objData.MDD_LocationID = rdr["MDD_LocationID"].ToString();
                                 objData.MDD_Status = Convert.ToBoolean(rdr["MDD_Status"].ToString());
 
                                 if (objHead.Department == null)
@@ -441,7 +408,7 @@ namespace HRM_DAL.Data
 
                                 objData.MDD_DepartmentID = rdr["MDD_DepartmentID"].ToString();
                                 objData.MDD_Department = rdr["MDD_Department"].ToString();
-                                objData.MDD_LocationCode = rdr["MDD_LocationCode"].ToString();
+                                objData.MDD_LocationID = rdr["MDD_LocationID"].ToString();
                                 objData.MDD_Status = Convert.ToBoolean(rdr["MDD_Status"].ToString());
 
                                 if (objHead.Department == null)

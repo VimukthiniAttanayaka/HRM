@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,7 +10,11 @@ namespace HRM_DAL.Models
         [Key]
         public string MDL_LocationID { get; set; }
         public string MDL_Location { get; set; }
-        public string MDL_Status { get; set; }
+        public bool MDL_Status { get; set; }
+        public string MDL_CreatedBy { get; set; }
+        public DateTime MDL_CreatedDateTime { get; set; }
+        public string MDL_ModifiedBy { get; set; }
+        public DateTime MDL_ModifiedDateTime { get; set; }
     }
 
     public class ReturnLocationModel
@@ -17,7 +22,11 @@ namespace HRM_DAL.Models
         [Key]
         public string MDL_LocationID { get; set; }
         public string MDL_Location { get; set; }
-        public string MDL_Status { get; set; }
+        public bool MDL_Status { get; set; }
+        public string MDL_CreatedBy { get; set; }
+        public DateTime MDL_CreatedDateTime { get; set; }
+        public string MDL_ModifiedBy { get; set; }
+        public DateTime MDL_ModifiedDateTime { get; set; }
     }
 
     public class ReturnLocationAllModel
@@ -25,7 +34,11 @@ namespace HRM_DAL.Models
         [Key]
         public string MDL_LocationID { get; set; }
         public string MDL_Location { get; set; }
-        public string MDL_Status { get; set; }
+        public bool MDL_Status { get; set; }
+        public string MDL_CreatedBy { get; set; }
+        public DateTime MDL_CreatedDateTime { get; set; }
+        public string MDL_ModifiedBy { get; set; }
+        public DateTime MDL_ModifiedDateTime { get; set; }
 
     }
 
@@ -38,7 +51,11 @@ namespace HRM_DAL.Models
         public string PAGE_RECORDS_COUNT { get; set; }
         public string MDL_LocationID { get; set; }
         public string MDL_Location { get; set; }
-        public string MDL_Status { get; set; }
+        public bool MDL_Status { get; set; }
+        public string MDL_CreatedBy { get; set; }
+        public DateTime MDL_CreatedDateTime { get; set; }
+        public string MDL_ModifiedBy { get; set; }
+        public DateTime MDL_ModifiedDateTime { get; set; }
 
     }
 

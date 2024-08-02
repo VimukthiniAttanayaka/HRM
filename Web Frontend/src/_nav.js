@@ -295,7 +295,13 @@ const _nav = [
       to: '/masterdata/jobrole',
       disabled: !MJobRole,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-    }],
+      }, {
+        component: CNavItem,
+        name: <Translation>{(t) => t('Location')}</Translation>,
+        to: '/masterdata/location',
+      disabled: !MJobRole,
+        // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      }],
   },
   {
     component: CNavItem,
