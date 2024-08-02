@@ -22,7 +22,7 @@ export class LocationDetail {
 export const getLocationSingle = async (formData) => {
 
   let resw = new LocationDetail();
-  const res = await fetch(apiUrl + 'Location/get_Location_single', {
+  const res = await fetch(apiUrl + 'location/get_location_single', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -30,9 +30,9 @@ export const getLocationSingle = async (formData) => {
     .then(response => response.json())
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
-      resw = res1[0].Location[0]
+      resw = res1[0].location[0]
       // console.log(res2)
-      console.log(res1[0].Location[0])
+      console.log(res1[0].location[0])
       // setLocationDetails(res1[0].Location[0]);
       // handleOpenPopup()
     })

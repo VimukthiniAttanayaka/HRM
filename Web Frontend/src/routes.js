@@ -26,7 +26,7 @@ const Country = React.lazy(() => import('./views/masterdata/country/Country'))
 const Department = React.lazy(() => import('./views/masterdata/department/Department'))
 const JobRole = React.lazy(() => import('./views/masterdata/jobrole/JobRole'))
 const Location = React.lazy(() => import('./views/masterdata/location/Location'))
-
+const Profile = React.lazy(() => import('./views/profile/Profile'))
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'))
@@ -211,6 +211,10 @@ const routes = [
     path: '/masterdata/location',
     name: <Translation>{(t) => t('Location')}</Translation>,
     element: Location,
+  }, {
+    path: '/profile',
+    name: <Translation>{(t) => t('Profile')}</Translation>,
+    element: Profile,
   },
   {
     path: '/base',

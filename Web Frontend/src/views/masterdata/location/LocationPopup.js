@@ -121,7 +121,7 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus 
       return 'Create New Location'
     }
   }
-  console.log(LocationDetails)
+  // console.log(LocationDetails)
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New Location</CButton>
@@ -154,7 +154,7 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus 
                     <CInputGroupText>
                       <h6>Location</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="Location" name="Location" value={LocationDetails.MDJR_Location} onChange={handleChangeLocation} disabled={( popupStatus == 'view' || popupStatus == 'delete') ? true :  false}
+                  </CCol>    <CFormInput placeholder="Location" name="Location" value={LocationDetails.MDL_Location} onChange={handleChangeLocation} disabled={( popupStatus == 'view' || popupStatus == 'delete') ? true :  false}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>

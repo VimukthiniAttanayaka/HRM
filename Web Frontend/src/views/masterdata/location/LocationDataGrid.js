@@ -86,11 +86,13 @@ const LocationDataGrid = () => {
     // const config = {
     //   headers: { Authorization: `Bearer ${auth}` }
     // };
-
     const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      MDL_LocationID: item
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      MDJR_LocationID: item
+      // MDJR_LocationID: item
     }
     const LocationDetails = await getLocationSingle(formData)
     // setLocationDetails(res1[0].Location[0]);
@@ -135,9 +137,8 @@ const LocationDataGrid = () => {
     //   headers: { Authorization: `Bearer ${auth}` }
     // };
     const formData = {
-      // UD_StaffID: staffId,
-      // AUD_notificationToken: token,
-      USR_EmployeeID: 'sedcx'
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
     }
 
     const LocationDetails = await getLocationAll(formData)

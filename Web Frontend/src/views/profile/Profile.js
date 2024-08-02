@@ -15,9 +15,8 @@ import {
 } from '@coreui/react-pro'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
-import { setMenu } from '../../../menuActivation'
 
-const ForgetPassword = () => {
+const Profile = () => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -87,7 +86,7 @@ const ForgetPassword = () => {
               <CCard className="p-4">
                 <CCardBody>
                   <CForm onSubmit={handleSubmit}>
-                    <h1>Change Password</h1>
+                    <h1>Profile</h1>
                     <p className="text-body-secondary">Sign In to your account</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
@@ -130,4 +129,4 @@ const ForgetPassword = () => {
   )
 }
 
-export default ForgetPassword
+export default Profile

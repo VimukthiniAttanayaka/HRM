@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
-import { Modal } from '@coreui/coreui-pro';
 
 const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupStatus }) => {
-
+  const apiUrl = process.env.REACT_APP_API_URL;
   // const handleSubmit = (event) => {
   //   event.preventDefault();
 
   // };
   const [DepartmentId, setDepartmentId] = useState('')
   const [Department, setDepartment] = useState('')
-  const [isActive, setIsActive] = useState(true)
+  const [isActive, setIsActive] = useState()
 
   const handleChangeDepartment = (event) => {
     setDepartment(event.target.value)
@@ -20,13 +19,19 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
   const handleChangeId = (event) => {
     setDepartmentId(event.target.value)
   }
+  const handleChangeStatus = (event) => {
+    setIsActive(event.target.value)
+  }
   const handleCreate = async (event) => {
-    console.log('Create Department')
+    console.log(isActive)
     // Prepare form data
     const formData = {
-      MDD_DepartmentID: DepartmentId,
-      MDD_Department: Department,
-      MDD_Status: isActive,
+        UD_UserID: "string",
+        AUD_notificationToken: "string",
+        MDD_DepartmentID: DepartmentId,
+        MDD_Department: Department,
+        MDD_LocationID: "string",
+        MDD_Status: true
     }
     // Submit the form data to your backend API
     const response = await fetch(apiUrl + 'Department/add_new_Department', {
@@ -36,6 +41,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
     })
 
     if (response.ok) {
+      onClose()
       console.log(response);
       // Handle successful submission (e.g., display a success message)
       console.log('Department data submitted successfully!')
@@ -45,13 +51,15 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
     }
   }
   const handleEdit = async (event) => {
-    console.log('Edit Department')
   // Prepare form data
-  const formData = {
-    MDD_DepartmentID: DepartmentId,
-    MDD_Department: Department,
-    MDD_Status: isActive,
-  }
+    const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      MDD_DepartmentID: DepartmentId,
+      MDD_Department: Department,
+      MDD_LocationID: "string",
+      MDD_Status: isActive
+    }
   // Submit the form data to your backend API
   const response = await fetch(apiUrl + 'Department/modify_department', {
     method: 'POST',
@@ -60,6 +68,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
   })
 
   if (response.ok) {
+    onClose()
     console.log(response);
     // Handle successful submission (e.g., display a success message)
     console.log('Department data submitted successfully!')
@@ -72,9 +81,9 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
     console.log('Delete Department')
  // Prepare form data
  const formData = {
-  MDD_DepartmentID: DepartmentId,
-  MDD_Department: Department,
-  MDD_Status: isActive,
+   UD_UserID: "string",
+   AUD_notificationToken: "string",
+   MDD_DepartmentID: DepartmentId
 }
 // Submit the form data to your backend API
 const response = await fetch(apiUrl + 'Department/inactivate_department', {
@@ -84,6 +93,7 @@ const response = await fetch(apiUrl + 'Department/inactivate_department', {
 })
 
 if (response.ok) {
+  onClose()
   console.log(response);
   // Handle successful submission (e.g., display a success message)
   console.log('Department data submitted successfully!')
@@ -164,7 +174,7 @@ if (response.ok) {
                       <h6>Status</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck label="Status" defaultChecked disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
+                  <CFormCheck onChange={handleChangeStatus} value={isActive} label="Status" defaultChecked disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
                   {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :

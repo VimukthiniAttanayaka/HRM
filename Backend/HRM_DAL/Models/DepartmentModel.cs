@@ -16,10 +16,10 @@ namespace HRM_DAL.Models
         public string MDD_Department { get; set; }
         public string MDD_LocationID { get; set; }
         public bool MDD_Status { get; set; }
-        public string MDD_CreatedBy { get; set; }
-        public DateTime MDD_CreatedDateTime { get; set; }
-        public string MDD_ModifiedBy { get; set; }
-        public DateTime MDD_ModifiedDateTime { get; set; }
+        //public string MDD_CreatedBy { get; set; }
+        //public DateTime MDD_CreatedDateTime { get; set; }
+        //public string MDD_ModifiedBy { get; set; }
+        //public DateTime MDD_ModifiedDateTime { get; set; }
     }
 
     public class ReturnDepartmentModel

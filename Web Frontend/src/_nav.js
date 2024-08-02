@@ -297,11 +297,16 @@ const _nav = [
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       }, {
         component: CNavItem,
-        name: <Translation>{(t) => t('Location')}</Translation>,
+        name: <Translation>{(t) => t('Location(Address)')}</Translation>,
         to: '/masterdata/location',
       disabled: !MJobRole,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       }],
+  },
+  {
+    component: CNavItem,
+    name: <Translation>{(t) => t('profile')}</Translation>,
+    to: '/profile',
   },
   {
     component: CNavItem,

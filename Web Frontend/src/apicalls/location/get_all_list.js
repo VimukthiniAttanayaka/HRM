@@ -12,7 +12,7 @@ export class LeaveScheduleDetail {
 export const getLocationAll = async (formData) => {
   const LocationDetails = [];
 
-  const res = await fetch(apiUrl + 'Location/get_Location_all', {
+  const res = await fetch(apiUrl + 'location/get_location_all', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -20,7 +20,6 @@ export const getLocationAll = async (formData) => {
     .then(response => response.json())
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
-
 
       class LocationDetail {
         constructor(id, Location, status) {
@@ -31,8 +30,8 @@ export const getLocationAll = async (formData) => {
         }
       }
 
-      for (let index = 0; index < res1[0].Location.length; index++) {
-        let element = res1[0].Location[index];
+      for (let index = 0; index < res1[0].location.length; index++) {
+        let element = res1[0].location[index];
         // console.log(element)
         LocationDetails[index] = new LocationDetail(element.MDL_LocationID, element.MDL_Location, element.MDL_Status);
       }

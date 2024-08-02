@@ -93,18 +93,6 @@ const DepartmentDataGrid = () => {
       // AUD_notificationToken: token,
       MDD_DepartmentID: item
     }
-
-    // const res = fetch(apiUrl + 'Department/get_Department_single', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setDepartmentDetails(res1[0].Department[0]);
-    //     handleOpenPopup()
-    //   })
     const DepartmentDetails = await getDepartmentSingle(formData)
     // setDepartmentDetails(res1[0].Department[0]);
     setDepartmentDetails(DepartmentDetails);
@@ -156,36 +144,6 @@ const DepartmentDataGrid = () => {
     const DepartmentDetails = await getDepartmentAll(formData)
     // console.log(DepartmentDetails)
     setData(DepartmentDetails);
-
-    // const res = await fetch(apiUrl + 'Department/get_Department_all', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-
-    //     const DepartmentDetails = [];
-    //     class DepartmentDetail {
-    //       constructor(id, Department, status, Alotment) {
-    //         this.Department = Department;
-    //         this.id = id;
-    //         this.alotment = Alotment
-    //         if (status == true) { this.status = "Active"; }
-    //         else { this.status = "Inactive"; }
-    //       }
-    //     }
-
-    //     for (let index = 0; index < res1[0].Department.length; index++) {
-    //       let element = res1[0].Department[index];
-    //       console.log(element)
-    //       DepartmentDetails[index] = new DepartmentDetail(element.MDD_DepartmentID, element.MDD_Department, element.MDD_Status, element.MDD_LeaveAlotment);
-    //     }
-
-    //     setData(DepartmentDetails);
-    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
-    //   })
 
   }
   useEffect(() => {
