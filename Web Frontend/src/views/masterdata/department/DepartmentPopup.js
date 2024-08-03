@@ -119,25 +119,20 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
   const popupStatusSetup = (event) => {
 
     if (popupStatus == 'edit') {
-      setTitle('Edit Department')
-      return 'Edit Department'
+      return getLabelText('Edit Department', templatetype)
     } else if (popupStatus == 'view') {
-      setTitle('View Department')
-      return 'View Department'
+      return getLabelText('View Department', templatetype)
     } else if (popupStatus == 'delete') {
-      setTitle('Delete Department')
-      return 'Delete Department'
+      return getLabelText('Delete Department', templatetype)
     } else {
-      setTitle('Create New Department')
-      return 'Create New Department'
+      return getLabelText('Create New Department', templatetype)
     }
   }
-  const [HeaderTitle, setTitle] = useState('')
+
   useEffect(() => {
     setDepartmentId(DepartmentDetails.MDD_DepartmentID)
     setDepartment(DepartmentDetails.MDD_Department)
     setIsActive(DepartmentDetails.MDD_Status)
-    popupStatusSetup()
   }, [DepartmentDetails]);
   // console.log(DepartmentDetails)
   return (
@@ -154,7 +149,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">{getLabelText({ popupStatusSetup() }, templatetype)}
+          <CModalTitle id="TooltipsAndPopoverExample">{popupStatusSetup()}
             {/* {popupStatusSetup()} */}
           </CModalTitle>
         </CModalHeader>
