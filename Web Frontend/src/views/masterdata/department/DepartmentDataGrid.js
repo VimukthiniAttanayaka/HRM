@@ -4,9 +4,11 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import DepartmentPopup from './DepartmentPopup.js';
 import { getDepartmentAll } from '../../../apicalls/department/get_all_list.js';
 import { getDepartmentSingle } from '../../../apicalls/department/get_department_single.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const DepartmentDataGrid = () => {
-
+  let templatetype = 'translation_department'
+  let templatetype_base = 'translation'
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
@@ -205,7 +207,7 @@ const DepartmentDataGrid = () => {
                     toggleEdit(item.id)
                   }}
                 >
-                  Edit
+                  {getLabelText('Edit', templatetype_base)}
                 </CButton>
               </td>
             )
@@ -221,7 +223,7 @@ const DepartmentDataGrid = () => {
                   toggleView(item.id)
                 }}
               >
-                View
+                {getLabelText('View', templatetype_base)}
               </CButton>
             </td>
           ),
@@ -237,7 +239,7 @@ const DepartmentDataGrid = () => {
                     toggleDelete(item.id)
                   }}
                 >
-                  Delete
+                  {getLabelText('Delete', templatetype_base)}
                 </CButton>
               }
             </td>
