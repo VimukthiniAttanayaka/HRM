@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
 import LocationPopup from './LocationPopup.js';
-// import loadDetails from './LocationPopup.js';
 import { getLocationAll } from '../../../apicalls/location/get_all_list.js';
 import { getLocationSingle } from '../../../apicalls/location/get_location_single.js';
 
@@ -72,10 +70,6 @@ const LocationDataGrid = () => {
   }
 
   const [LocationDetails, setLocationDetails] = useState([])
-  // const [LocationId, setLocationId] = useState('')
-  const handleChangeId = (event) => {
-    setLocationId(event.target.value)
-  }
 
   async function loadDetails(item) {
 
@@ -83,19 +77,12 @@ const LocationDataGrid = () => {
     const staffId = getStaffID();
     const customerId = getCustomerID();
 
-    // const config = {
-    //   headers: { Authorization: `Bearer ${auth}` }
-    // };
     const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
+      // UD_UserID: "string",
+      // AUD_notificationToken: "string",
       MDL_LocationID: item
-      // UD_StaffID: staffId,
-      // AUD_notificationToken: token,
-      // MDJR_LocationID: item
     }
     const LocationDetails = await getLocationSingle(formData)
-    // setLocationDetails(res1[0].Location[0]);
     setLocationDetails(LocationDetails);
     handleOpenPopup()
   }
@@ -112,15 +99,12 @@ const LocationDataGrid = () => {
     toggleDetails(index)
   }
   const toggleDetails = (index) => {
-
-
     const position = details.indexOf(index)
     let newDetails = details.slice()
     if (position !== -1) {
       newDetails.splice(position, 1)
     } else {
       newDetails = [...details, index]
-      // alert(newDetails[newDetails.length - 1])
       loadDetails(newDetails[0])
     }
     // setDetails(newDetails)
@@ -133,22 +117,22 @@ const LocationDataGrid = () => {
     const token = getJWTToken();
     const staffId = getStaffID();
     const customerId = getCustomerID();
-    // const config = {
-    //   headers: { Authorization: `Bearer ${auth}` }
-    // };
+
     const formData = {
       UD_UserID: "string",
       AUD_notificationToken: "string",
+      USR_EmployeeID: 'sedcx'
     }
 
     const LocationDetails = await getLocationAll(formData)
-    // console.log(LocationDetails)
     setData(LocationDetails);
 
   }
+  const [visible, setVisible] = useState(false);
+
   useEffect(() => {
     requestdata();
-  }, []);
+  }, [visible]);
 
 
   const [currentItems, setCurrentItems] = useState(data)
@@ -156,8 +140,6 @@ const LocationDataGrid = () => {
   const csvContent = currentItems.map((item) => Object.values(item).join(',')).join('\n')
 
   const csvCode = 'data:text/csv;charset=utf-8,SEP=,%0A' + encodeURIComponent(csvContent)
-
-  const [visible, setVisible] = useState(false);
 
   const handleOpenPopup = () => {
     setVisible(true);
@@ -206,11 +188,6 @@ const LocationDataGrid = () => {
           console.log(items)
         }}
         scopedColumns={{
-          // avatar: (item) => (
-          //   <td>
-          //     {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-          //   </td>
-          // ),
           status: (item) => (
             <td>
               <CBadge color={getBadge(item.status)}>{item.status}</CBadge>

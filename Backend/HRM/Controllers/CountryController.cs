@@ -27,15 +27,15 @@ namespace HRM.Controllers
         public List<ReturnCountryModelHead> get_Country_single(Country model)//ok
         {
             List<ReturnCountryModelHead> objCountryHeadList = new List<ReturnCountryModelHead>();
-            ReturnCountryModelHead obj = new ReturnCountryModelHead() { resp = false, msg = "sfsf" };
-            obj.Country = new List<ReturnCountryModel>();
-            if (model.MDCTY_CountryID == "CAS")
-                obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "CAS", MDCTY_Country = "Casual", MDCTY_Status = true });
-            if (model.MDCTY_CountryID == "ANU") obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "ANU", MDCTY_Country = "Annual", MDCTY_Status = true });
-            if (model.MDCTY_CountryID == "MED") obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "MED", MDCTY_Country = "Medical", MDCTY_Status = true });
-            if (model.MDCTY_CountryID == "MAT") obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "MAT", MDCTY_Country = "Matrinaty", MDCTY_Status = true });
-            objCountryHeadList.Add(obj);
-            return objCountryHeadList;
+            //ReturnCountryModelHead obj = new ReturnCountryModelHead() { resp = false, msg = "sfsf" };
+            //obj.Country = new List<ReturnCountryModel>();
+            //if (model.MDCTY_CountryID == "CAS")
+            //    obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "CAS", MDCTY_Country = "Casual", MDCTY_Status = true });
+            //if (model.MDCTY_CountryID == "ANU") obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "ANU", MDCTY_Country = "Annual", MDCTY_Status = true });
+            //if (model.MDCTY_CountryID == "MED") obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "MED", MDCTY_Country = "Medical", MDCTY_Status = true });
+            //if (model.MDCTY_CountryID == "MAT") obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "MAT", MDCTY_Country = "Matrinaty", MDCTY_Status = true });
+            //objCountryHeadList.Add(obj);
+            //return objCountryHeadList;
 
             try
             {
@@ -75,14 +75,14 @@ namespace HRM.Controllers
         public List<ReturnCountryModelHead> get_Country_all(CountrySearchModel model)//ok
         {
             List<ReturnCountryModelHead> objCountryHeadList = new List<ReturnCountryModelHead>();
-            ReturnCountryModelHead obj = new ReturnCountryModelHead() { resp = false, msg = "sfsf" };
-            obj.Country = new List<ReturnCountryModel>();
-            obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "CAS", MDCTY_Country = "Casual", MDCTY_Status = true });
-            obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "ANU", MDCTY_Country = "Annual", MDCTY_Status = true });
-            obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "MED", MDCTY_Country = "Medical", MDCTY_Status = true });
-            obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "MAT", MDCTY_Country = "Matrinaty", MDCTY_Status = true });
-            objCountryHeadList.Add(obj);
-            return objCountryHeadList;
+            //ReturnCountryModelHead obj = new ReturnCountryModelHead() { resp = false, msg = "sfsf" };
+            //obj.Country = new List<ReturnCountryModel>();
+            //obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "CAS", MDCTY_Country = "Casual", MDCTY_Status = true });
+            //obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "ANU", MDCTY_Country = "Annual", MDCTY_Status = true });
+            //obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "MED", MDCTY_Country = "Medical", MDCTY_Status = true });
+            //obj.Country.Add(new ReturnCountryModel() { MDCTY_CountryID = "MAT", MDCTY_Country = "Matrinaty", MDCTY_Status = true });
+            //objCountryHeadList.Add(obj);
+            //return objCountryHeadList;
 
             try
             {
@@ -200,8 +200,8 @@ namespace HRM.Controllers
         public List<ReturnResponse> inactivate_Country(InactiveMDCTYModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
-            objUserHeadList.Add(new ReturnResponse() { resp = true, msg = "saved" });
-            return objUserHeadList;
+            //objUserHeadList.Add(new ReturnResponse() { resp = true, msg = "saved" });
+            //return objUserHeadList;
 
             try
             {

@@ -19,15 +19,14 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
     setIsActive(event.target.checked)
   }
   const handleCreate = async (event) => {
-    console.log(isActive)
 
     const formData = {
-        UD_UserID: "string",
-        AUD_notificationToken: "string",
-        MDD_DepartmentID: DepartmentId,
-        MDD_Department: Department,
-        MDD_LocationID: "string",
-        MDD_Status: true
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      MDD_DepartmentID: DepartmentId,
+      MDD_Department: Department,
+      MDD_LocationID: "string",
+      MDD_Status: isActive
     }
     // Submit the form data to your backend API
     const response = await fetch(apiUrl + 'Department/add_new_Department', {
@@ -47,7 +46,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
     }
   }
   const handleEdit = async (event) => {
-  // Prepare form data
+    // Prepare form data
     const formData = {
       UD_UserID: "string",
       AUD_notificationToken: "string",
@@ -56,48 +55,48 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
       MDD_LocationID: "string",
       MDD_Status: isActive
     }
-  // Submit the form data to your backend API
-  const response = await fetch(apiUrl + 'Department/modify_department', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  })
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'Department/modify_department', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
 
-  if (response.ok) {
-    onClose()
-    console.log(response);
-    // Handle successful submission (e.g., display a success message)
-    console.log('Department data submitted successfully!')
-  } else {
-    // Handle submission errors
-    console.error('Error submitting Department data:', response.statusText)
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('Department data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting Department data:', response.statusText)
+    }
   }
-}
-  const handleDelete =async (event) => {
+  const handleDelete = async (event) => {
     console.log('Delete Department')
- // Prepare form data
- const formData = {
-   UD_UserID: "string",
-   AUD_notificationToken: "string",
-   MDD_DepartmentID: DepartmentId
-}
-// Submit the form data to your backend API
-const response = await fetch(apiUrl + 'Department/inactivate_department', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(formData),
-})
+    // Prepare form data
+    const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      MDD_DepartmentID: DepartmentId
+    }
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'Department/inactivate_department', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
 
-if (response.ok) {
-  onClose()
-  console.log(response);
-  // Handle successful submission (e.g., display a success message)
-  console.log('Department data submitted successfully!')
-} else {
-  // Handle submission errors
-  console.error('Error submitting Department data:', response.statusText)
-}
- }
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('Department data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting Department data:', response.statusText)
+    }
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault()

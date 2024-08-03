@@ -27,15 +27,15 @@ namespace HRM.Controllers
         public List<ReturnBranchModelHead> get_Branch_single(Branch model)//ok
         {
             List<ReturnBranchModelHead> objBranchHeadList = new List<ReturnBranchModelHead>();
-            ReturnBranchModelHead obj = new ReturnBranchModelHead() { resp = false, msg = "sfsf" };
-            obj.Branch = new List<ReturnBranchModel>();
-            if (model.MDB_BranchID == "CAS")
-                obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "CAS", MDB_Branch = "Casual", MDB_Status = true });
-            if (model.MDB_BranchID == "ANU") obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "ANU", MDB_Branch = "Annual", MDB_Status = true });
-            if (model.MDB_BranchID == "MED") obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MED", MDB_Branch = "Medical", MDB_Status = true });
-            if (model.MDB_BranchID == "MAT") obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MAT", MDB_Branch = "Matrinaty", MDB_Status = true });
-            objBranchHeadList.Add(obj);
-            return objBranchHeadList;
+            //ReturnBranchModelHead obj = new ReturnBranchModelHead() { resp = false, msg = "sfsf" };
+            //obj.Branch = new List<ReturnBranchModel>();
+            //if (model.MDB_BranchID == "CAS")
+            //    obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "CAS", MDB_Branch = "Casual", MDB_Status = true });
+            //if (model.MDB_BranchID == "ANU") obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "ANU", MDB_Branch = "Annual", MDB_Status = true });
+            //if (model.MDB_BranchID == "MED") obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MED", MDB_Branch = "Medical", MDB_Status = true });
+            //if (model.MDB_BranchID == "MAT") obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MAT", MDB_Branch = "Matrinaty", MDB_Status = true });
+            //objBranchHeadList.Add(obj);
+            //return objBranchHeadList;
 
             try
             {
@@ -75,14 +75,14 @@ namespace HRM.Controllers
         public List<ReturnBranchModelHead> get_Branch_all(BranchSearchModel model)//ok
         {
             List<ReturnBranchModelHead> objBranchHeadList = new List<ReturnBranchModelHead>();
-            ReturnBranchModelHead obj = new ReturnBranchModelHead() { resp = false, msg = "sfsf" };
-            obj.Branch = new List<ReturnBranchModel>();
-            obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "CAS", MDB_Branch = "Casual", MDB_Status = true });
-            obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "ANU", MDB_Branch = "Annual", MDB_Status = true });
-            obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MED", MDB_Branch = "Medical", MDB_Status = true });
-            obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MAT", MDB_Branch = "Matrinaty", MDB_Status = true });
-            objBranchHeadList.Add(obj);
-            return objBranchHeadList;
+            //ReturnBranchModelHead obj = new ReturnBranchModelHead() { resp = false, msg = "sfsf" };
+            //obj.Branch = new List<ReturnBranchModel>();
+            //obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "CAS", MDB_Branch = "Casual", MDB_Status = true });
+            //obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "ANU", MDB_Branch = "Annual", MDB_Status = true });
+            //obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MED", MDB_Branch = "Medical", MDB_Status = true });
+            //obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MAT", MDB_Branch = "Matrinaty", MDB_Status = true });
+            //objBranchHeadList.Add(obj);
+            //return objBranchHeadList;
 
             try
             {
@@ -200,8 +200,8 @@ namespace HRM.Controllers
         public List<ReturnResponse> inactivate_Branch(InactiveMDBModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
-            objUserHeadList.Add(new ReturnResponse() { resp = true, msg = "saved" });
-            return objUserHeadList;
+            //objUserHeadList.Add(new ReturnResponse() { resp = true, msg = "saved" });
+            //return objUserHeadList;
 
             try
             {

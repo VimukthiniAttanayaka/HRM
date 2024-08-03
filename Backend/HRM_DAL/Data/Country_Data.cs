@@ -133,11 +133,11 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "get_Country_all";
+                        cmd.CommandText = "sp_get_Country_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@MDCTY_CountryID", model.MDCTY_CountryID);
-                        cmd.Parameters["@MDCTY_CountryID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@MDCTY_CountryID", model.MDCTY_CountryID);
+                        //cmd.Parameters["@MDCTY_CountryID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -239,11 +239,11 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@MDCTY_CountryID", item.MDCTY_CountryID);
                         cmd.Parameters["@MDCTY_CountryID"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
-                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDCTY_Country", item.MDCTY_Country);
+                        cmd.Parameters["@MDCTY_Country"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
-                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDCTY_Status", item.MDCTY_Status);
+                        cmd.Parameters["@MDCTY_Status"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
                         //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
@@ -355,6 +355,12 @@ namespace HRM_DAL.Data
 
                         cmd.Parameters.AddWithValue("@MDCTY_CountryID", item.MDCTY_CountryID);
                         cmd.Parameters["@MDCTY_CountryID"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@MDCTY_Country", item.MDCTY_Country);
+                        cmd.Parameters["@MDCTY_Country"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@MDCTY_Status", item.MDCTY_Status);
+                        cmd.Parameters["@MDCTY_Status"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;

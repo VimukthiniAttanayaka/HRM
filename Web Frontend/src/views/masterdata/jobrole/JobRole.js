@@ -2,7 +2,6 @@ import React from 'react'
 import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
 
 import JobRoleDataGrid from './JobRoleDataGrid'
-import JobRolePopup from './JobRolePopup'
 
 const JobRole = () => {
   return (
@@ -12,7 +11,6 @@ const JobRole = () => {
           <strong>JobRole List</strong>
         </CCardHeader>
         <CCardBody>
-          {/* <JobRolePopup /> */}
           <JobRoleDataGrid  onOpen={() => handleOpenPopup}/>
         </CCardBody>
       </CCard>

@@ -239,6 +239,12 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@MDJR_JobRoleID", item.MDJR_JobRoleID);
                         cmd.Parameters["@MDJR_JobRoleID"].Direction = ParameterDirection.Input;
 
+                        cmd.Parameters.AddWithValue("@MDJR_JobRole", item.MDJR_JobRole);
+                        cmd.Parameters["@MDJR_JobRole"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@MDJR_Status", item.MDJR_Status);
+                        cmd.Parameters["@MDJR_Status"].Direction = ParameterDirection.Input;
+
                         //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
 
@@ -356,11 +362,11 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@MDJR_JobRoleID", item.MDJR_JobRoleID);
                         cmd.Parameters["@MDJR_JobRoleID"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
-                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDJR_JobRole", item.MDJR_JobRole);
+                        cmd.Parameters["@MDJR_JobRole"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
-                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDJR_Status", item.MDJR_Status);
+                        cmd.Parameters["@MDJR_Status"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
                         //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;

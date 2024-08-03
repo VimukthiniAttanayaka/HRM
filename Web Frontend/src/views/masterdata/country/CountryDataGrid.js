@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
 import CountryPopup from './CountryPopup.js';
-// import loadDetails from './CountryPopup.js';
 import { getCountryAll } from '../../../apicalls/country/get_all_list.js';
 import { getCountrySingle } from '../../../apicalls/country/get_country_single.js';
 
@@ -11,6 +9,7 @@ const CountryDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
+  const [popupStatus, setPopupStatus] = useState('create')
 
   const columns = [
     {
@@ -28,7 +27,7 @@ const CountryDataGrid = () => {
     // {
     //   key: 'alotment',
     //   _style: { width: '20%' }
-    // }, 
+    // },
     {
       key: 'status',
       _style: { width: '20%' }
@@ -36,6 +35,20 @@ const CountryDataGrid = () => {
 
     {
       key: 'show_details',
+      label: '',
+      _style: { width: '1%' },
+      filter: false,
+      sorter: false,
+    },
+    {
+      key: 'view',
+      label: '',
+      _style: { width: '1%' },
+      filter: false,
+      sorter: false,
+    },
+    {
+      key: 'delete',
       label: '',
       _style: { width: '1%' },
       filter: false,
@@ -58,10 +71,6 @@ const CountryDataGrid = () => {
   }
 
   const [countryDetails, setCountryDetails] = useState([])
-  // const [countryId, setCountryId] = useState('')
-  const handleChangeId = (event) => {
-    setCountryId(event.target.value)
-  }
 
   async function loadDetails(item) {
 
@@ -69,42 +78,34 @@ const CountryDataGrid = () => {
     const staffId = getStaffID();
     const customerId = getCustomerID();
 
-    // const config = {
-    //   headers: { Authorization: `Bearer ${auth}` }
-    // };
-
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
       MDCTY_CountryID: item
     }
-
-    // const res = fetch(apiUrl + 'country/get_country_single', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setCountryDetails(res1[0].Country[0]);
-    //     handleOpenPopup()
-    //   })
     const CountryDetails = await getCountrySingle(formData)
-    // setCountryDetails(res1[0].Country[0]);
     setCountryDetails(CountryDetails);
     handleOpenPopup()
   }
+  const toggleEdit = (index) => {
+    setPopupStatus('edit')
+    toggleDetails(index)
+  }
+  const toggleDelete = (index) => {
+    setPopupStatus('delete')
+    toggleDetails(index)
+  }
+  const toggleView = (index) => {
+    setPopupStatus('view')
+    toggleDetails(index)
+  }
   const toggleDetails = (index) => {
-
-
     const position = details.indexOf(index)
     let newDetails = details.slice()
     if (position !== -1) {
       newDetails.splice(position, 1)
     } else {
       newDetails = [...details, index]
-      // alert(newDetails[newDetails.length - 1])
       loadDetails(newDetails[0])
     }
     // setDetails(newDetails)
@@ -117,9 +118,7 @@ const CountryDataGrid = () => {
     const token = getJWTToken();
     const staffId = getStaffID();
     const customerId = getCustomerID();
-    // const config = {
-    //   headers: { Authorization: `Bearer ${auth}` }
-    // };
+
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
@@ -127,43 +126,14 @@ const CountryDataGrid = () => {
     }
 
     const CountryDetails = await getCountryAll(formData)
-    // console.log(CountryDetails)
     setData(CountryDetails);
 
-    // const res = await fetch(apiUrl + 'country/get_country_all', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-
-    //     const CountryDetails = [];
-    //     class CountryDetail {
-    //       constructor(id, country, status, Alotment) {
-    //         this.country = country;
-    //         this.id = id;
-    //         this.alotment = Alotment
-    //         if (status == true) { this.status = "Active"; }
-    //         else { this.status = "Inactive"; }
-    //       }
-    //     }
-
-    //     for (let index = 0; index < res1[0].Country.length; index++) {
-    //       let element = res1[0].Country[index];
-    //       console.log(element)
-    //       CountryDetails[index] = new CountryDetail(element.MDCTY_CountryID, element.MDCTY_Country, element.MDCTY_Status, element.MDCTY_LeaveAlotment);
-    //     }
-
-    //     setData(CountryDetails);
-    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
-    //   })
-
   }
+  const [visible, setVisible] = useState(false);
+
   useEffect(() => {
     requestdata();
-  }, []);
+  }, [visible]);
 
 
   const [currentItems, setCurrentItems] = useState(data)
@@ -172,8 +142,6 @@ const CountryDataGrid = () => {
 
   const csvCode = 'data:text/csv;charset=utf-8,SEP=,%0A' + encodeURIComponent(csvContent)
 
-  const [visible, setVisible] = useState(false);
-
   const handleOpenPopup = () => {
     setVisible(true);
   };
@@ -181,6 +149,7 @@ const CountryDataGrid = () => {
   const handleClosePopup = () => {
     setVisible(false);
     setCountryDetails([]);
+    setPopupStatus('create')
   };
 
   return (
@@ -198,7 +167,7 @@ const CountryDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <CountryPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} countryDetails={countryDetails} />
+          <CountryPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} countryDetails={countryDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -220,11 +189,6 @@ const CountryDataGrid = () => {
           console.log(items)
         }}
         scopedColumns={{
-          // avatar: (item) => (
-          //   <td>
-          //     {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-          //   </td>
-          // ),
           status: (item) => (
             <td>
               <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
@@ -239,14 +203,46 @@ const CountryDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDetails(item.id)
+                    toggleEdit(item.id)
                   }}
                 >
-                  {details.includes(item.id) ? 'Hide' : 'Show'}
+                  Edit
                 </CButton>
               </td>
             )
           },
+          view: (item) => (
+            <td>
+              <CButton
+                color="success"
+                variant="outline"
+                shape="square"
+                size="sm"
+                onClick={() => {
+                  toggleView(item.id)
+                }}
+              >
+                View
+              </CButton>
+            </td>
+          ),
+          delete: (item) => (
+            <td>
+              {item.status == 'Inactive' ? '' :
+                <CButton
+                  color="danger"
+                  variant="outline"
+                  shape="square"
+                  size="sm"
+                  onClick={() => {
+                    toggleDelete(item.id)
+                  }}
+                >
+                  Delete
+                </CButton>
+              }
+            </td>
+          ),
           details: (item) => {
             return (
               <CCollapse visible={details.includes(item.id)}>

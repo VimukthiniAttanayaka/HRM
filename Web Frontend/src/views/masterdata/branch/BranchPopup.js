@@ -1,61 +1,132 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
-import { Modal } from '@coreui/coreui-pro';
 
-const BranchPopup = ({ visible, onClose, onOpen, branchDetails }) => {
+const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus }) => {
+  const apiUrl = process.env.REACT_APP_API_URL;
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-
-  // };
   const [branchId, setBranchId] = useState('')
-  const [leaveAlotmentId, setLeaveAlotmentId] = useState('')
   const [branch, setBranch] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeAlotment = (event) => {
-    setLeaveAlotmentId(event.target.value)
-  }
   const handleChangeBranch = (event) => {
     setBranch(event.target.value)
   }
   const handleChangeId = (event) => {
     setBranchId(event.target.value)
   }
-  const handleChangeIsActive = (event) => { }
+  const handleChangeStatus = (event) => {
+    setIsActive(event.target.checked)
+  }
+  const handleCreate = async (event) => {
 
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-
-    // Validation (optional)
-    // You can add validation logic here to check if all required fields are filled correctly
-
-    // Prepare form data
     const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
       MDB_BranchID: branchId,
-      MDB_LeaveAlotment: leaveAlotmentId,
       MDB_Branch: branch,
-      MDB_Status: isActive,
+      MDB_Status: isActive
     }
     // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'leavetype/add_new_leavetype', {
+    const response = await fetch(apiUrl + 'Branch/add_new_Branch', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
     })
 
     if (response.ok) {
+      onClose()
       console.log(response);
       // Handle successful submission (e.g., display a success message)
-      console.log('Leave Type data submitted successfully!')
+      console.log('Branch data submitted successfully!')
     } else {
       // Handle submission errors
-      console.error('Error submitting Leave Type data:', response.statusText)
+      console.error('Error submitting Branch data:', response.statusText)
+    }
+  }
+  const handleEdit = async (event) => {
+    // Prepare form data
+    const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      MDB_BranchID: branchId,
+      MDB_Branch: branch,
+      MDB_Status: isActive
+    }
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'Branch/modify_Branch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('Branch data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting Branch data:', response.statusText)
+    }
+  }
+  const handleDelete = async (event) => {
+    // Prepare form data
+    const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      MDB_BranchID: branchId,
+    }
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'Branch/inactivate_Branch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('Branch data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting Branch data:', response.statusText)
     }
   }
 
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    if (popupStatus == 'create') {
+      handleCreate(event)
+    } else if (popupStatus == 'edit') {
+      handleEdit(event)
+    } else if (popupStatus == 'delete') {
+      handleDelete(event)
+    }
+    // Validation (optional)
+    // You can add validation logic here to check if all required fields are filled correctly
+
+  }
+
+  const popupStatusSetup = (event) => {
+    if (popupStatus == 'edit') {
+      return 'Edit Branch'
+    } else if (popupStatus == 'view') {
+      return 'View Branch'
+    } else if (popupStatus == 'delete') {
+      return 'Delete Branch'
+    } else {
+      return 'Create New Branch'
+    }
+  }
+
+  useEffect(() => {
+    setBranchId(branchDetails.MDB_BranchID)
+    setBranch(branchDetails.MDB_Branch)
+    setIsActive(branchDetails.MDB_Status)
+  }, [branchDetails]);
   // console.log(branchDetails)
   return (
     <>
@@ -69,7 +140,7 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails }) => {
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New Branch</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">{popupStatusSetup()}</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">
@@ -80,7 +151,7 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails }) => {
                     <CInputGroupText>
                       <h6>BranchID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="BranchID" name="BranchID" value={branchDetails.MDB_BranchID} onChange={handleChangeId}
+                  </CCol>   <CFormInput placeholder="BranchID" name="BranchID" value={branchId} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -89,7 +160,7 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails }) => {
                     <CInputGroupText>
                       <h6>Branch</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="Branch" name="Branch" value={branchDetails.MDB_Branch} onChange={handleChangeBranch}
+                  </CCol>    <CFormInput placeholder="Branch" name="Branch" value={branch} onChange={handleChangeBranch} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -100,10 +171,11 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails }) => {
                       <h6>Status</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck label="Status" defaultChecked />
+                  <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
-                  <CButton color="success" type='submit'>Submit</CButton>
+                  {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
+                  <CButton color="success" type='submit'>Submit</CButton>)}
                 </div>
               </CForm>
             </CCardBody>

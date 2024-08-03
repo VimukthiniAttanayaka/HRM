@@ -1,17 +1,10 @@
-const apiUrl = process.env.REACT_APP_API_URL;
-
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
-import { Modal } from '@coreui/coreui-pro';
 
 const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus }) => {
+  const apiUrl = process.env.REACT_APP_API_URL;
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-
-  // };
   const [JobRoleId, setJobRoleId] = useState('')
   const [JobRole, setJobRole] = useState('')
   const [isActive, setIsActive] = useState(true)
@@ -22,10 +15,14 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
   const handleChangeId = (event) => {
     setJobRoleId(event.target.value)
   }
+  const handleChangeStatus = (event) => {
+    setIsActive(event.target.checked)
+  }
   const handleCreate = async (event) => {
-    console.log('Create JobRole')
-    // Prepare form data
+
     const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
       MDJR_JobRoleID: JobRoleId,
       MDJR_JobRole: JobRole,
       MDJR_Status: isActive,
@@ -38,6 +35,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
     })
 
     if (response.ok) {
+      onClose()
       console.log(response);
       // Handle successful submission (e.g., display a success message)
       console.log('JobRole data submitted successfully!')
@@ -47,9 +45,10 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
     }
    }
   const handleEdit = async (event) => {
-    console.log('Edit JobRole')
   // Prepare form data
   const formData = {
+    UD_UserID: "string",
+    AUD_notificationToken: "string",
     MDJR_JobRoleID: JobRoleId,
     MDJR_JobRole: JobRole,
     MDJR_Status: isActive,
@@ -62,6 +61,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
   })
 
   if (response.ok) {
+    onClose()
     console.log(response);
     // Handle successful submission (e.g., display a success message)
     console.log('JobRole data submitted successfully!')
@@ -74,9 +74,9 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
     console.log('Delete JobRole')
   // Prepare form data
   const formData = {
+    UD_UserID: "string",
+    AUD_notificationToken: "string",
     MDJR_JobRoleID: JobRoleId,
-    MDJR_JobRole: JobRole,
-    MDJR_Status: isActive,
   }
   // Submit the form data to your backend API
   const response = await fetch(apiUrl + 'JobRole/inactivate_JobRole', {
@@ -86,6 +86,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
   })
 
   if (response.ok) {
+    onClose()
     console.log(response);
     // Handle successful submission (e.g., display a success message)
     console.log('JobRole data submitted successfully!')
@@ -121,7 +122,13 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
       return 'Create New JobRole'
     }
   }
-  console.log(JobRoleDetails)
+
+  useEffect(() => {
+    setJobRoleId(JobRoleDetails.MDJR_JobRoleID)
+    setJobRole(JobRoleDetails.MDJR_JobRole)
+    setIsActive(JobRoleDetails.MDJR_Status)
+  }, [JobRoleDetails]);
+  // console.log(JobRoleDetails)
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New JobRole</CButton>
@@ -145,7 +152,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
                     <CInputGroupText>
                       <h6>JobRoleID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="JobRoleID" name="JobRoleID" value={JobRoleDetails.MDJR_JobRoleID} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
+                  </CCol>   <CFormInput placeholder="JobRoleID" name="JobRoleID" value={JobRoleId} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -154,7 +161,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
                     <CInputGroupText>
                       <h6>JobRole</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="JobRole" name="JobRole" value={JobRoleDetails.MDJR_JobRole} onChange={handleChangeJobRole} disabled={( popupStatus == 'view' || popupStatus == 'delete') ? true :  false}
+                  </CCol>    <CFormInput placeholder="JobRole" name="JobRole" value={JobRole} onChange={handleChangeJobRole} disabled={( popupStatus == 'view' || popupStatus == 'delete') ? true :  false}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -164,7 +171,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
                       <h6>Status</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck label="Status" defaultChecked disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
+                  <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
                   {popupStatus == 'view' ? '' : ( popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :

@@ -32,7 +32,6 @@ const DepartmentDataGrid = () => {
       key: 'status',
       _style: { width: '20%' }
     },
-
     {
       key: 'show_details',
       label: '',
@@ -100,8 +99,6 @@ const DepartmentDataGrid = () => {
     toggleDetails(index)
   }
   const toggleDetails = (index, action) => {
-
-
     const position = details.indexOf(index)
     let newDetails = details.slice()
     if (position !== -1) {

@@ -14,10 +14,10 @@ namespace HRM_DAL.Models
         public string MDCTY_CountryID { get; set; }
         public string MDCTY_Country { get; set; }
         public bool MDCTY_Status { get; set; }
-        public string MDCTY_CreatedBy { get; set; }
-        public DateTime MDCTY_CreatedDateTime { get; set; }
-        public string MDCTY_ModifiedBy { get; set; }
-        public DateTime MDCTY_ModifiedDateTime { get; set; }
+        //public string MDCTY_CreatedBy { get; set; }
+        //public DateTime MDCTY_CreatedDateTime { get; set; }
+        //public string MDCTY_ModifiedBy { get; set; }
+        //public DateTime MDCTY_ModifiedDateTime { get; set; }
     }
 
     public class ReturnCountryModel

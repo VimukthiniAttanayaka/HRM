@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
 import BranchPopup from './BranchPopup.js';
-// import loadDetails from './BranchPopup.js';
 import { getBranchAll } from '../../../apicalls/branch/get_all_list.js';
 import { getBranchSingle } from '../../../apicalls/branch/get_branch_single.js';
 
@@ -11,6 +9,7 @@ const BranchDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
+  const [popupStatus, setPopupStatus] = useState('create')
 
   const columns = [
     {
@@ -28,9 +27,22 @@ const BranchDataGrid = () => {
       key: 'status',
       _style: { width: '20%' }
     },
-
     {
       key: 'show_details',
+      label: '',
+      _style: { width: '1%' },
+      filter: false,
+      sorter: false,
+    },
+    {
+      key: 'view',
+      label: '',
+      _style: { width: '1%' },
+      filter: false,
+      sorter: false,
+    },
+    {
+      key: 'delete',
       label: '',
       _style: { width: '1%' },
       filter: false,
@@ -53,10 +65,6 @@ const BranchDataGrid = () => {
   }
 
   const [BranchDetails, setBranchDetails] = useState([])
-  // const [leaveTypeId, setBranchId] = useState('')
-  const handleChangeId = (event) => {
-    setBranchId(event.target.value)
-  }
 
   async function loadDetails(item) {
 
@@ -64,44 +72,36 @@ const BranchDataGrid = () => {
     const staffId = getStaffID();
     const customerId = getCustomerID();
 
-    // const config = {
-    //   headers: { Authorization: `Bearer ${auth}` }
-    // };
-
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
       MDB_BranchID: item
     }
 
-    // const res = fetch(apiUrl + 'branch/get_branch_single', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setBranchDetails(res1[0].Branch[0]);
-    //     handleOpenPopup()
-    //   })
     const BranchDetails = await getBranchSingle(formData)
-    // setBranchDetails(res1[0].Branch[0]);
     setBranchDetails(BranchDetails);
     handleOpenPopup()
   }
-  const toggleDetails = (index) => {
-
-
+  const toggleEdit = (index) => {
+    setPopupStatus('edit')
+    toggleDetails(index)
+  }
+  const toggleDelete = (index) => {
+    setPopupStatus('delete')
+    toggleDetails(index)
+  }
+  const toggleView = (index) => {
+    setPopupStatus('view')
+    toggleDetails(index)
+  }
+  const toggleDetails = (index, action) => {
     const position = details.indexOf(index)
     let newDetails = details.slice()
     if (position !== -1) {
       newDetails.splice(position, 1)
     } else {
       newDetails = [...details, index]
-      // alert(newDetails[newDetails.length - 1])
-      loadDetails(newDetails[0])
-      console.log(newDetails[0])
+      loadDetails(newDetails[0], action)
     }
     // setDetails(newDetails)
   }
@@ -113,9 +113,7 @@ const BranchDataGrid = () => {
     const token = getJWTToken();
     const staffId = getStaffID();
     const customerId = getCustomerID();
-    // const config = {
-    //   headers: { Authorization: `Bearer ${auth}` }
-    // };
+
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
@@ -123,43 +121,14 @@ const BranchDataGrid = () => {
     }
 
     const BranchDetails = await getBranchAll(formData)
-    // console.log(BranchDetails)
     setData(BranchDetails);
 
-    // const res = await fetch(apiUrl + 'branch/get_branch_all', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-
-    //     const BranchDetails = [];
-    //     class BranchDetail {
-    //       constructor(id, branch, status, Alotment) {
-    //         this.branch = branch;
-    //         this.id = id;
-    //         this.alotment = Alotment
-    //         if (status == true) { this.status = "Active"; }
-    //         else { this.status = "Inactive"; }
-    //       }
-    //     }
-
-    //     for (let index = 0; index < res1[0].Branch.length; index++) {
-    //       let element = res1[0].Branch[index];
-    //       console.log(element)
-    //       BranchDetails[index] = new BranchDetail(element.MDB_BranchID, element.MDB_Branch, element.MDB_Status, element.MDB_LeaveAlotment);
-    //     }
-
-    //     setData(BranchDetails);
-    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
-    //   })
-
   }
+  const [visible, setVisible] = useState(false);
+
   useEffect(() => {
     requestdata();
-  }, []);
+  }, [visible]);
 
 
   const [currentItems, setCurrentItems] = useState(data)
@@ -168,8 +137,6 @@ const BranchDataGrid = () => {
 
   const csvCode = 'data:text/csv;charset=utf-8,SEP=,%0A' + encodeURIComponent(csvContent)
 
-  const [visible, setVisible] = useState(false);
-
   const handleOpenPopup = () => {
     setVisible(true);
   };
@@ -177,6 +144,7 @@ const BranchDataGrid = () => {
   const handleClosePopup = () => {
     setVisible(false);
     setBranchDetails([]);
+    setPopupStatus('create')
   };
 
   return (
@@ -194,7 +162,7 @@ const BranchDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <BranchPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} branchDetails={BranchDetails} />
+          <BranchPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} branchDetails={BranchDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -216,11 +184,6 @@ const BranchDataGrid = () => {
           console.log(items)
         }}
         scopedColumns={{
-          // avatar: (item) => (
-          //   <td>
-          //     {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-          //   </td>
-          // ),
           status: (item) => (
             <td>
               <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
@@ -235,14 +198,46 @@ const BranchDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDetails(item.id)
+                    toggleEdit(item.id)
                   }}
                 >
-                  {details.includes(item.id) ? 'Hide' : 'Show'}
+                  Edit
                 </CButton>
               </td>
             )
           },
+          view: (item) => (
+            <td>
+              <CButton
+                color="success"
+                variant="outline"
+                shape="square"
+                size="sm"
+                onClick={() => {
+                  toggleView(item.id)
+                }}
+              >
+                View
+              </CButton>
+            </td>
+          ),
+          delete: (item) => (
+            <td>
+              {item.status == 'Inactive' ? '' :
+                <CButton
+                  color="danger"
+                  variant="outline"
+                  shape="square"
+                  size="sm"
+                  onClick={() => {
+                    toggleDelete(item.id)
+                  }}
+                >
+                  Delete
+                </CButton>
+              }
+            </td>
+          ),
           details: (item) => {
             return (
               <CCollapse visible={details.includes(item.id)}>

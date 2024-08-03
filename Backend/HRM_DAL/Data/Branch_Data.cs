@@ -133,11 +133,11 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "get_Branch_all";
+                        cmd.CommandText = "sp_get_Branch_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@MDB_BranchID", model.MDB_BranchID);
-                        cmd.Parameters["@MDB_BranchID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@MDB_BranchID", model.MDB_BranchID);
+                        //cmd.Parameters["@MDB_BranchID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -239,11 +239,11 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@MDB_BranchID", item.MDB_BranchID);
                         cmd.Parameters["@MDB_BranchID"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
-                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDB_Branch", item.MDB_Branch);
+                        cmd.Parameters["@MDB_Branch"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
-                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDB_Status", item.MDB_Status);
+                        cmd.Parameters["@MDB_Status"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
                         //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
@@ -355,6 +355,12 @@ namespace HRM_DAL.Data
 
                         cmd.Parameters.AddWithValue("@MDB_BranchID", item.MDB_BranchID);
                         cmd.Parameters["@MDB_BranchID"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@MDB_Branch", item.MDB_Branch);
+                        cmd.Parameters["@MDB_Branch"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@MDB_Status", item.MDB_Status);
+                        cmd.Parameters["@MDB_Status"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;

@@ -14,10 +14,10 @@ namespace HRM_DAL.Models
         public string MDJR_JobRoleID { get; set; }
         public string MDJR_JobRole { get; set; }
         public bool MDJR_Status { get; set; }
-        public string MDJR_CreatedBy { get; set; }
-        public DateTime MDJR_CreatedDateTime { get; set; }
-        public string MDJR_ModifiedBy { get; set; }
-        public DateTime MDJR_ModifiedDateTime { get; set; }
+        //public string MDJR_CreatedBy { get; set; }
+        //public DateTime MDJR_CreatedDateTime { get; set; }
+        //public string MDJR_ModifiedBy { get; set; }
+        //public DateTime MDJR_ModifiedDateTime { get; set; }
     }
 
     public class ReturnJobRoleModel

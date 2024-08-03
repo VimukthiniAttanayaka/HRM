@@ -200,8 +200,8 @@ namespace HRM.Controllers
         public List<ReturnResponse> inactivate_JobRole(InactiveMDJRModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
-            objUserHeadList.Add(new ReturnResponse() { resp = true, msg = "saved" });
-            return objUserHeadList;
+            //objUserHeadList.Add(new ReturnResponse() { resp = true, msg = "saved" });
+            //return objUserHeadList;
 
             try
             {

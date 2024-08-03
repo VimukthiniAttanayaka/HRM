@@ -2,7 +2,6 @@ import React from 'react'
 import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
 
 import BranchDataGrid from './BranchDataGrid'
-import BranchPopup from './BranchPopup'
 
 const Branch = () => {
   return (
@@ -12,7 +11,6 @@ const Branch = () => {
           <strong>Branch List</strong>
         </CCardHeader>
         <CCardBody>
-          {/* <BranchPopup /> */}
           <BranchDataGrid  onOpen={() => handleOpenPopup}/>
         </CCardBody>
       </CCard>

@@ -14,10 +14,10 @@ namespace HRM_DAL.Models
         public string MDB_BranchID { get; set; }
         public string MDB_Branch { get; set; }
         public bool MDB_Status { get; set; }
-        public string MDB_CreatedBy { get; set; }
-        public DateTime MDB_CreatedDateTime { get; set; }
-        public string MDB_ModifiedBy { get; set; }
-        public DateTime MDB_ModifiedDateTime { get; set; }
+        //public string MDB_CreatedBy { get; set; }
+        //public DateTime MDB_CreatedDateTime { get; set; }
+        //public string MDB_ModifiedBy { get; set; }
+        //public DateTime MDB_ModifiedDateTime { get; set; }
     }
 
     public class ReturnBranchModel

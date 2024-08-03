@@ -253,11 +253,11 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@MDL_LocationID", item.MDL_LocationID);
                         cmd.Parameters["@MDL_LocationID"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
-                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDL_Location", item.MDL_Location);
+                        cmd.Parameters["@MDL_Location"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
-                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDL_Status", item.MDL_Status);
+                        cmd.Parameters["@MDL_Status"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
                         //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
@@ -369,6 +369,12 @@ namespace HRM_DAL.Data
 
                         cmd.Parameters.AddWithValue("@MDL_LocationID", item.MDL_LocationID);
                         cmd.Parameters["@MDL_LocationID"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@MDL_Location", item.MDL_Location);
+                        cmd.Parameters["@MDL_Location"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@MDL_Status", item.MDL_Status);
+                        cmd.Parameters["@MDL_Status"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;

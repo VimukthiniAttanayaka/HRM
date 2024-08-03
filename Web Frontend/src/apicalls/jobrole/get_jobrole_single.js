@@ -32,7 +32,7 @@ export const getJobRoleSingle = async (formData) => {
       let res1 = JSON.parse(JSON.stringify(json))
       resw = res1[0].JobRole[0]
       // console.log(res2)
-      console.log(res1[0].JobRole[0])
+      // console.log(res1[0].JobRole[0])
       // setJobRoleDetails(res1[0].JobRole[0]);
       // handleOpenPopup()
     })

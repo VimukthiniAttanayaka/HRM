@@ -11,7 +11,7 @@ const Department = () => {
           <strong>Department List</strong>
         </CCardHeader>
         <CCardBody>
-          <DepartmentDataGrid  onOpen={() => handleOpenPopup}/>
+          <DepartmentDataGrid onOpen={() => handleOpenPopup} />
         </CCardBody>
       </CCard>
     </>
