@@ -39,8 +39,10 @@ import {
   AppHeaderDropdownTasks,
 } from './header/index'
 import avatar1 from './../assets/images/avatars/1.jpg'
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const AppHeader = () => {
+  let templatetype = 'translation_top_menu'
   const headerRef = useRef()
   const { colorMode, setColorMode } = useColorModes('coreui-pro-react-admin-template-theme-bright')
   const { i18n, t } = useTranslation()
@@ -158,7 +160,7 @@ const AppHeader = () => {
                 type="button"
                 onClick={() => setColorMode('light')}
               >
-                <CIcon className="me-2" icon={cilSun} size="lg" /> {t('light')}
+                <CIcon className="me-2" icon={cilSun} size="lg" /> {getLabelText('Light', templatetype)}
               </CDropdownItem>
               <CDropdownItem
                 active={colorMode === 'dark'}
@@ -167,7 +169,7 @@ const AppHeader = () => {
                 type="button"
                 onClick={() => setColorMode('dark')}
               >
-                <CIcon className="me-2" icon={cilMoon} size="lg" /> {t('dark')}
+                <CIcon className="me-2" icon={cilMoon} size="lg" /> {getLabelText('Dark', templatetype)}
               </CDropdownItem>
               <CDropdownItem
                 active={colorMode === 'auto'}
@@ -176,7 +178,7 @@ const AppHeader = () => {
                 type="button"
                 onClick={() => setColorMode('auto')}
               >
-                <CIcon className="me-2" icon={cilContrast} size="lg" /> Auto
+                <CIcon className="me-2" icon={cilContrast} size="lg" /> {getLabelText('Auto', templatetype)}
               </CDropdownItem>
             </CDropdownMenu>
           </CDropdown>

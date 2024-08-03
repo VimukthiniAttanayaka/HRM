@@ -25,8 +25,10 @@ import {
 import CIcon from '@coreui/icons-react'
 
 import avatar8 from './../../assets/images/avatars/8.jpg'
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const AppHeaderDropdown = () => {
+  let templatetype = 'translation_top_menu'
   const { t } = useTranslation()
   return (
     <CDropdown variant="nav-item" alignment="end">
@@ -35,7 +37,7 @@ const AppHeaderDropdown = () => {
       </CDropdownToggle>
       <CDropdownMenu className="pt-0">
         <CDropdownHeader className="bg-body-secondary text-body-secondary fw-semibold rounded-top mb-2">
-          {t('account')}
+          {getLabelText('account', templatetype)}
         </CDropdownHeader>
         {/* <CDropdownItem href="#">
           <CIcon icon={cilBell} className="me-2" />
@@ -70,7 +72,7 @@ const AppHeaderDropdown = () => {
         </CDropdownHeader> */}
         <CDropdownItem href="#">
           <CIcon icon={cilUser} className="me-2" />
-          {t('profile')}
+          {getLabelText('profile', templatetype)}
         </CDropdownItem>
         {/* <CDropdownItem href="#">
           <CIcon icon={cilSettings} className="me-2" />
@@ -97,7 +99,7 @@ const AppHeaderDropdown = () => {
         </CDropdownItem> */}
         <CDropdownItem href="#/login">
           <CIcon icon={cilAccountLogout} className="me-2" />
-          {t('logout')}
+          {getLabelText('logout', templatetype)}
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
