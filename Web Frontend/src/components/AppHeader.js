@@ -29,7 +29,7 @@ import {
   cilLanguage,
   cifGb,
   cifEs,
-  cifPl,
+  cifLk,
 } from '@coreui/icons'
 
 import {
@@ -104,7 +104,8 @@ const AppHeader = () => {
                 as="button"
                 onClick={() => i18n.changeLanguage('en')}
               >
-                <CIcon className="me-2" icon={cifGb} size="lg" /> English
+                <CIcon className="me-2" icon={cifGb} size="lg" />
+                English
               </CDropdownItem>
               <CDropdownItem
                 active={i18n.language === 'si'}
@@ -112,14 +113,14 @@ const AppHeader = () => {
                 as="button"
                 onClick={() => i18n.changeLanguage('si')}
               >
-                <CIcon className="me-2" icon={cifEs} size="lg" /> Sinhala
+                <CIcon className="me-2" icon={cifLk} size="lg" /> සිංහල
               </CDropdownItem> <CDropdownItem
                 active={i18n.language === 'ta'}
                 className="d-flex align-items-center"
                 as="button"
                 onClick={() => i18n.changeLanguage('ta')}
               >
-                <CIcon className="me-2" icon={cifEs} size="lg" /> Tamil
+                <CIcon className="me-2" icon={cifLk} size="lg" /> தமிழ்
               </CDropdownItem>
               {/* <CDropdownItem
                 active={i18n.language === 'es'}
