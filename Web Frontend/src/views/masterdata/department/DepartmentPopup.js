@@ -6,7 +6,7 @@ import { Translation } from 'react-i18next'
 
 const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupStatus }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
-   let templatetype='translation_department'
+  let templatetype = 'translation_department'
 
   const [DepartmentId, setDepartmentId] = useState('')
   const [Department, setDepartment] = useState('')
@@ -25,12 +25,12 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
     console.log(isActive)
 
     const formData = {
-        UD_UserID: "string",
-        AUD_notificationToken: "string",
-        MDD_DepartmentID: DepartmentId,
-        MDD_Department: Department,
-        MDD_LocationID: "string",
-        MDD_Status: true
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      MDD_DepartmentID: DepartmentId,
+      MDD_Department: Department,
+      MDD_LocationID: "string",
+      MDD_Status: true
     }
     // Submit the form data to your backend API
     const response = await fetch(apiUrl + 'Department/add_new_Department', {
@@ -50,7 +50,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
     }
   }
   const handleEdit = async (event) => {
-  // Prepare form data
+    // Prepare form data
     const formData = {
       UD_UserID: "string",
       AUD_notificationToken: "string",
@@ -59,48 +59,48 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
       MDD_LocationID: "string",
       MDD_Status: isActive
     }
-  // Submit the form data to your backend API
-  const response = await fetch(apiUrl + 'Department/modify_department', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  })
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'Department/modify_department', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
 
-  if (response.ok) {
-    onClose()
-    console.log(response);
-    // Handle successful submission (e.g., display a success message)
-    console.log('Department data submitted successfully!')
-  } else {
-    // Handle submission errors
-    console.error('Error submitting Department data:', response.statusText)
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('Department data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting Department data:', response.statusText)
+    }
   }
-}
-  const handleDelete =async (event) => {
+  const handleDelete = async (event) => {
     console.log('Delete Department')
- // Prepare form data
- const formData = {
-   UD_UserID: "string",
-   AUD_notificationToken: "string",
-   MDD_DepartmentID: DepartmentId
-}
-// Submit the form data to your backend API
-const response = await fetch(apiUrl + 'Department/inactivate_department', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(formData),
-})
+    // Prepare form data
+    const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      MDD_DepartmentID: DepartmentId
+    }
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'Department/inactivate_department', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
 
-if (response.ok) {
-  onClose()
-  console.log(response);
-  // Handle successful submission (e.g., display a success message)
-  console.log('Department data submitted successfully!')
-} else {
-  // Handle submission errors
-  console.error('Error submitting Department data:', response.statusText)
-}
- }
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('Department data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting Department data:', response.statusText)
+    }
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -118,28 +118,34 @@ if (response.ok) {
   }
 
   const popupStatusSetup = (event) => {
+
     if (popupStatus == 'edit') {
+      setTitle('Edit Department')
       return 'Edit Department'
     } else if (popupStatus == 'view') {
+      setTitle('View Department')
       return 'View Department'
     } else if (popupStatus == 'delete') {
+      setTitle('Delete Department')
       return 'Delete Department'
     } else {
+      setTitle('Create New Department')
       return 'Create New Department'
     }
   }
-
+  const [HeaderTitle, setTitle] = useState('')
   useEffect(() => {
     setDepartmentId(DepartmentDetails.MDD_DepartmentID)
     setDepartment(DepartmentDetails.MDD_Department)
     setIsActive(DepartmentDetails.MDD_Status)
+    popupStatusSetup()
   }, [DepartmentDetails]);
   // console.log(DepartmentDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>  {getLabelText('New Department',templatetype)}
+      <CButton color="primary" onClick={onOpen}>  {getLabelText('New Department', templatetype)}
         {/* New Department */}
-        </CButton>
+      </CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -149,7 +155,9 @@ if (response.ok) {
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">{popupStatusSetup()}</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">{getLabelText({ popupStatusSetup() }, templatetype)}
+            {/* {popupStatusSetup()} */}
+          </CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">
@@ -158,7 +166,7 @@ if (response.ok) {
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>DepartmentID</h6>
+                      <h6>{getLabelText('DepartmentID', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>   <CFormInput placeholder="DepartmentID" name="DepartmentID" value={DepartmentDetails.MDD_DepartmentID} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
@@ -167,7 +175,7 @@ if (response.ok) {
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>Department</h6>
+                      <h6>{getLabelText('Department', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>    <CFormInput placeholder="Department" name="Department" value={Department} onChange={handleChangeDepartment} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
 
@@ -177,14 +185,14 @@ if (response.ok) {
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>Status</h6>
+                      <h6>{getLabelText('Status', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>
                   <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
-                  {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
-                    <CButton color="success" type='submit'>Submit</CButton>)}
+                  {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :
+                    <CButton color="success" type='submit'>{getLabelText('Submit', templatetype)}</CButton>)}
                 </div>
               </CForm>
             </CCardBody>

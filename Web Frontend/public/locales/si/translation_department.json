@@ -1,4 +1,11 @@
 {
     "Department List": "දෙපාර්තමේන්තු ලැයිස්තුව",
-    "New Department": "නව දෙපාර්තමේන්තුව"
+    "New Department": "නව දෙපාර්තමේන්තුව",  
+    "Edit Department": "දෙපාර්තමේන්තුව සංස්කරණ",
+    "View Department": "දෙපාර්තමේන්තුව බලන්න",
+    "Delete Department": "දෙපාර්තමේන්තුව මකන්න",
+    "Create New Department": "නව දෙපාර්තමේන්තුවක් සාදන්න",
+    "DepartmentID": "දෙපාර්තමේන්තු හැඳුනුම්පත",
+    "Department": "ෙදපාර්තෙම්න්තුෙව්",
+    "Status": "තත්ත්වය","Delete":"මකන්න","Submit":"ඉදිරිපත් කරන්න"
 }
