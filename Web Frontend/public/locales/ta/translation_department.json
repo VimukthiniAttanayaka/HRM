@@ -7,5 +7,8 @@
     "Create New Department": "புதிய துறையை உருவாக்கவும்",
     "DepartmentID": "துறை ஐடி",
     "Department": "துறை",
-    "Status": "நிலை","Delete":"அழி","Submit":"சமர்ப்பிக்கவும்"
+    "Status": "நிலை",
+    "Delete": "அழி",
+    "Submit": "சமர்ப்பிக்கவும்",
+    "ID": "ஐடி"
 }
