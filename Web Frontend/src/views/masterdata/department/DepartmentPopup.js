@@ -161,7 +161,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
                     <CInputGroupText>
                       <h6>{getLabelText('DepartmentID', templatetype)}</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="DepartmentID" name="DepartmentID" value={DepartmentDetails.MDD_DepartmentID} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
+                  </CCol>   <CFormInput placeholder={getLabelText("DepartmentID", templatetype)} name="DepartmentID" value={DepartmentDetails.MDD_DepartmentID} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -170,7 +170,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
                     <CInputGroupText>
                       <h6>{getLabelText('Department', templatetype)}</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="Department" name="Department" value={Department} onChange={handleChangeDepartment} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+                  </CCol>    <CFormInput placeholder={getLabelText("Department", templatetype)} name="Department" value={Department} onChange={handleChangeDepartment} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
 
                   // readOnly={isEditable,isAddNew,IsView}// value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
