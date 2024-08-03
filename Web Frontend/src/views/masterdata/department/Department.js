@@ -3,7 +3,6 @@ import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
 
 import DepartmentDataGrid from './DepartmentDataGrid'
 import { getLabelText } from 'src/MultipleLanguageSheets'
-import { Translation } from 'react-i18next'
 
 const Department = () => {
   let templatetype='translation_department'

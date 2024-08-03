@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
-import { Translation } from 'react-i18next'
 
 const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupStatus }) => {
   const apiUrl = process.env.REACT_APP_API_URL;

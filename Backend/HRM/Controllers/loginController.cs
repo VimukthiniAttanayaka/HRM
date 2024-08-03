@@ -37,7 +37,12 @@ namespace HRM.Controllers
             {
                 List<ReturnUserModel> user = new List<ReturnUserModel>();
                 List<ReturnUserAccessModel> UserAccessList = new List<ReturnUserAccessModel>();
-
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_Attendance_Group" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_Employee_Group" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_Leave_Group" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_MasterData_Group" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_ReportingPerson_Group" });
+                UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_UserManagement_Group" });
 
                 ////UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = true, MNU_MenuName = "HRM_Employee_Group" });
                 ////UserAccessList.Add(new ReturnUserAccessModel() { MNU_Active = false, MNU_MenuName = "HRM_Employee_Customer" });
@@ -68,7 +73,7 @@ namespace HRM.Controllers
 
                 ////objUserHead = new ReturnUserModelHead() { resp = true, msg = "Welcome To HRM", user = user };
                 ////return objUserHead;
-                
+
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, logdata);
 
                 objUserHead = login_BL.login(logdata);
