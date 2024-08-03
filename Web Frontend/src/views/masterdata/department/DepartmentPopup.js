@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
+import { Translation } from 'react-i18next'
 
 const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupStatus }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
+  let templatetype = 'translation_department'
 
   const [DepartmentId, setDepartmentId] = useState('')
   const [Department, setDepartment] = useState('')
@@ -114,26 +117,34 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
   }
 
   const popupStatusSetup = (event) => {
+
     if (popupStatus == 'edit') {
+      setTitle('Edit Department')
       return 'Edit Department'
     } else if (popupStatus == 'view') {
+      setTitle('View Department')
       return 'View Department'
     } else if (popupStatus == 'delete') {
+      setTitle('Delete Department')
       return 'Delete Department'
     } else {
+      setTitle('Create New Department')
       return 'Create New Department'
     }
   }
-
+  const [HeaderTitle, setTitle] = useState('')
   useEffect(() => {
     setDepartmentId(DepartmentDetails.MDD_DepartmentID)
     setDepartment(DepartmentDetails.MDD_Department)
     setIsActive(DepartmentDetails.MDD_Status)
+    popupStatusSetup()
   }, [DepartmentDetails]);
   // console.log(DepartmentDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New Department</CButton>
+      <CButton color="primary" onClick={onOpen}>  {getLabelText('New Department', templatetype)}
+        {/* New Department */}
+      </CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -143,7 +154,9 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">{popupStatusSetup()}</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">{getLabelText({ popupStatusSetup() }, templatetype)}
+            {/* {popupStatusSetup()} */}
+          </CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">
@@ -152,7 +165,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>DepartmentID</h6>
+                      <h6>{getLabelText('DepartmentID', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>   <CFormInput placeholder="DepartmentID" name="DepartmentID" value={DepartmentDetails.MDD_DepartmentID} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
@@ -161,7 +174,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>Department</h6>
+                      <h6>{getLabelText('Department', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>    <CFormInput placeholder="Department" name="Department" value={Department} onChange={handleChangeDepartment} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
 
@@ -171,14 +184,14 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>Status</h6>
+                      <h6>{getLabelText('Status', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>
                   <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
-                  {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
-                    <CButton color="success" type='submit'>Submit</CButton>)}
+                  {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :
+                    <CButton color="success" type='submit'>{getLabelText('Submit', templatetype)}</CButton>)}
                 </div>
               </CForm>
             </CCardBody>
