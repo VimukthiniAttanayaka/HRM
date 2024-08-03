@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
+import { Translation } from 'react-i18next'
 
 const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupStatus }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
+   let templatetype='translation_department'
 
   const [DepartmentId, setDepartmentId] = useState('')
   const [Department, setDepartment] = useState('')
@@ -134,7 +137,9 @@ if (response.ok) {
   // console.log(DepartmentDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New Department</CButton>
+      <CButton color="primary" onClick={onOpen}>  {getLabelText('New Department',templatetype)}
+        {/* New Department */}
+        </CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
