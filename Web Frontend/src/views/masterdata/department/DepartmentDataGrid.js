@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
 import DepartmentPopup from './DepartmentPopup.js';
-// import loadDetails from './DepartmentPopup.js';
 import { getDepartmentAll } from '../../../apicalls/department/get_all_list.js';
 import { getDepartmentSingle } from '../../../apicalls/department/get_department_single.js';
 
@@ -73,10 +71,6 @@ const DepartmentDataGrid = () => {
   }
 
   const [DepartmentDetails, setDepartmentDetails] = useState([])
-  // const [DepartmentId, setDepartmentId] = useState('')
-  const handleChangeId = (event) => {
-    setDepartmentId(event.target.value)
-  }
 
   async function loadDetails(item, action) {
 
@@ -84,17 +78,12 @@ const DepartmentDataGrid = () => {
     const staffId = getStaffID();
     const customerId = getCustomerID();
 
-    // const config = {
-    //   headers: { Authorization: `Bearer ${auth}` }
-    // };
-
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
       MDD_DepartmentID: item
     }
     const DepartmentDetails = await getDepartmentSingle(formData)
-    // setDepartmentDetails(res1[0].Department[0]);
     setDepartmentDetails(DepartmentDetails);
     handleOpenPopup()
   }
@@ -119,7 +108,6 @@ const DepartmentDataGrid = () => {
       newDetails.splice(position, 1)
     } else {
       newDetails = [...details, index]
-      // alert(newDetails[newDetails.length - 1])
       loadDetails(newDetails[0], action)
     }
     // setDetails(newDetails)
@@ -132,9 +120,7 @@ const DepartmentDataGrid = () => {
     const token = getJWTToken();
     const staffId = getStaffID();
     const customerId = getCustomerID();
-    // const config = {
-    //   headers: { Authorization: `Bearer ${auth}` }
-    // };
+
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
@@ -142,13 +128,14 @@ const DepartmentDataGrid = () => {
     }
 
     const DepartmentDetails = await getDepartmentAll(formData)
-    // console.log(DepartmentDetails)
     setData(DepartmentDetails);
 
   }
+  const [visible, setVisible] = useState(false);
+
   useEffect(() => {
     requestdata();
-  }, []);
+  }, [visible]);
 
 
   const [currentItems, setCurrentItems] = useState(data)
@@ -156,8 +143,6 @@ const DepartmentDataGrid = () => {
   const csvContent = currentItems.map((item) => Object.values(item).join(',')).join('\n')
 
   const csvCode = 'data:text/csv;charset=utf-8,SEP=,%0A' + encodeURIComponent(csvContent)
-
-  const [visible, setVisible] = useState(false);
 
   const handleOpenPopup = () => {
     setVisible(true);
@@ -206,11 +191,6 @@ const DepartmentDataGrid = () => {
           console.log(items)
         }}
         scopedColumns={{
-          // avatar: (item) => (
-          //   <td>
-          //     {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-          //   </td>
-          // ),
           status: (item) => (
             <td>
               <CBadge color={getBadge(item.status)}>{item.status}</CBadge>

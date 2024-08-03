@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
 
 const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupStatus }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
 
-  // };
   const [DepartmentId, setDepartmentId] = useState('')
   const [Department, setDepartment] = useState('')
-  const [isActive, setIsActive] = useState()
+  const [isActive, setIsActive] = useState(true)
 
   const handleChangeDepartment = (event) => {
     setDepartment(event.target.value)
@@ -20,11 +16,11 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
     setDepartmentId(event.target.value)
   }
   const handleChangeStatus = (event) => {
-    setIsActive(event.target.value)
+    setIsActive(event.target.checked)
   }
   const handleCreate = async (event) => {
     console.log(isActive)
-    // Prepare form data
+
     const formData = {
         UD_UserID: "string",
         AUD_notificationToken: "string",
@@ -130,6 +126,11 @@ if (response.ok) {
     }
   }
 
+  useEffect(() => {
+    setDepartmentId(DepartmentDetails.MDD_DepartmentID)
+    setDepartment(DepartmentDetails.MDD_Department)
+    setIsActive(DepartmentDetails.MDD_Status)
+  }, [DepartmentDetails]);
   // console.log(DepartmentDetails)
   return (
     <>
@@ -163,7 +164,7 @@ if (response.ok) {
                     <CInputGroupText>
                       <h6>Department</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="Department" name="Department" value={DepartmentDetails.MDD_Department} onChange={handleChangeDepartment} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+                  </CCol>    <CFormInput placeholder="Department" name="Department" value={Department} onChange={handleChangeDepartment} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
 
                   // readOnly={isEditable,isAddNew,IsView}// value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
@@ -174,7 +175,7 @@ if (response.ok) {
                       <h6>Status</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck onChange={handleChangeStatus} value={isActive} label="Status" defaultChecked disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
+                  <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
                   {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
