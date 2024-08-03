@@ -4,9 +4,11 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import BranchPopup from './BranchPopup.js';
 import { getBranchAll } from '../../../apicalls/branch/get_all_list.js';
 import { getBranchSingle } from '../../../apicalls/branch/get_branch_single.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const BranchDataGrid = () => {
-
+  let templatetype = 'translation_branch'
+let templatetype_base = 'translation'
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
@@ -15,16 +17,19 @@ const BranchDataGrid = () => {
     {
       key: 'id',
       // label: '',
-      // filter: false,
+      label:  getLabelText('ID', templatetype),
+       // filter: false,
       // sorter: false,
       _style: { width: '20%' },
     },
     {
       key: 'branch',
-      _style: { width: '20%' },
+      label:  getLabelText('Branch', templatetype),
+         _style: { width: '20%' },
     },
     {
       key: 'status',
+      label:  getLabelText('Status', templatetype),
       _style: { width: '20%' }
     },
     {
@@ -158,7 +163,7 @@ const BranchDataGrid = () => {
             download="coreui-table-data.csv"
             target="_blank"
           >
-            Download current items (.csv)
+             {getLabelText('Download current items (.csv)', templatetype_base)}
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>

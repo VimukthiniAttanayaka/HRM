@@ -6,9 +6,11 @@ import CurrencyPopup from './CurrencyPopup.js/index.js';
 // import loadDetails from './CurrencyPopup.js';
 import { getCurrencyAll } from '../../../apicalls/currency/get_all_list.js';
 import { getCurrencySingle } from '../../../apicalls/currency/get_Currency_single.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const CurrencyDataGrid = () => {
-
+  let templatetype = 'translation_currency'
+let templatetype_base = 'translation'
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
 
@@ -16,13 +18,15 @@ const CurrencyDataGrid = () => {
     {
       key: 'id',
       // label: '',
+      label:  getLabelText('ID', templatetype),
       // filter: false,
       // sorter: false,
       _style: { width: '20%' },
     },
     {
       key: 'Currency',
-      _style: { width: '20%' },
+      label:  getLabelText('Currency', templatetype),
+         _style: { width: '20%' },
     },
 
     // {
@@ -31,6 +35,7 @@ const CurrencyDataGrid = () => {
     // },
     {
       key: 'status',
+      label:  getLabelText('Status', templatetype),
       _style: { width: '20%' }
     },
 
@@ -194,7 +199,7 @@ const CurrencyDataGrid = () => {
             download="coreui-table-data.csv"
             target="_blank"
           >
-            Download current items (.csv)
+            {getLabelText('Download current items (.csv)', templatetype_base)}
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>

@@ -4,9 +4,11 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import CountryPopup from './CountryPopup.js';
 import { getCountryAll } from '../../../apicalls/country/get_all_list.js';
 import { getCountrySingle } from '../../../apicalls/country/get_country_single.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const CountryDataGrid = () => {
-
+  let templatetype = 'translation_country'
+let templatetype_base = 'translation'
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
@@ -15,13 +17,15 @@ const CountryDataGrid = () => {
     {
       key: 'id',
       // label: '',
-      // filter: false,
+      label:  getLabelText('ID', templatetype),
+        // filter: false,
       // sorter: false,
       _style: { width: '20%' },
     },
     {
       key: 'Country',
-      _style: { width: '20%' },
+      label:  getLabelText('Country', templatetype),
+         _style: { width: '20%' },
     },
 
     // {
@@ -30,6 +34,7 @@ const CountryDataGrid = () => {
     // },
     {
       key: 'status',
+      label:  getLabelText('Status', templatetype),
       _style: { width: '20%' }
     },
 
@@ -163,7 +168,7 @@ const CountryDataGrid = () => {
             download="coreui-table-data.csv"
             target="_blank"
           >
-            Download current items (.csv)
+            {getLabelText('Download current items (.csv)', templatetype_base)}
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>

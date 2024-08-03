@@ -4,9 +4,11 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import JobRolePopup from './JobRolePopup.js';
 import { getJobRoleAll } from '../../../apicalls/jobrole/get_all_list.js';
 import { getJobRoleSingle } from '../../../apicalls/jobrole/get_jobrole_single.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const JobRoleDataGrid = () => {
-
+  let templatetype = 'translation_jobrole'
+let templatetype_base = 'translation'
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
@@ -14,14 +16,16 @@ const JobRoleDataGrid = () => {
   const columns = [
     {
       key: 'id',
-      // label: '',
+      label:  getLabelText('ID', templatetype),
+        // label: '',
       // filter: false,
       // sorter: false,
       _style: { width: '20%' },
     },
     {
       key: 'JobRole',
-      _style: { width: '20%' },
+      label:  getLabelText('JobRole', templatetype),
+         _style: { width: '20%' },
     },
 
     // {
@@ -30,6 +34,7 @@ const JobRoleDataGrid = () => {
     // },
     {
       key: 'status',
+      label:  getLabelText('Status', templatetype),
       _style: { width: '20%' }
     },
     {
@@ -162,7 +167,7 @@ const JobRoleDataGrid = () => {
             download="coreui-table-data.csv"
             target="_blank"
           >
-            Download current items (.csv)
+            {getLabelText('Download current items (.csv)', templatetype_base)}
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
