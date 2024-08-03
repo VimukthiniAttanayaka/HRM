@@ -164,7 +164,7 @@ const DepartmentDataGrid = () => {
             download="coreui-table-data.csv"
             target="_blank"
           >
-            Download current items (.csv)
+            {getLabelText('Download current items (.csv)', templatetype_base)}
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>

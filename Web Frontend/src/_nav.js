@@ -51,6 +51,7 @@ import {
   getMenu_HRM_MDDepartment,
   getMenu_HRM_MDJobRole,
 } from './menuActivation'
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 let EGroup = getMenu_HRM_EGroup();
 let ECustomer = getMenu_HRM_ECustomer();
@@ -83,11 +84,14 @@ let MDepartment = getMenu_HRM_MDDepartment();
 let MJobRole = getMenu_HRM_MDJobRole();
 
 
+let templatetype_base = 'translation'
+let templatetype = 'translation_navbar'
 
 const _nav = [
   {
     component: CNavItem,
-    name: <Translation>{(t) => t('dashboard')}</Translation>,
+    // name: <Translation>{(t) => t('dashboard')}</Translation>,
+    name: getLabelText('dashboard', templatetype),
     to: '/dashboard',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
     // badge: {
@@ -96,24 +100,27 @@ const _nav = [
     // },
   }, {
     component: CNavGroup,
-    name: <Translation>{(t) => t('Employee Information')}</Translation>,
-    disabled: !EGroup,
+    // name: <Translation>{(t) => t('Employee Information')}</Translation>,
+    name: getLabelText('Employee Information', templatetype), disabled: !EGroup,
     items: [
       {
         component: CNavItem,
-        name: <Translation>{(t) => t('Company')}</Translation>,
+        // name: <Translation>{(t) => t('Company')}</Translation>,
+        name: getLabelText('Company', templatetype),
         to: '/employee/Company',
         disabled: !ECustomer,
       },
       {
         component: CNavItem,
-        name: <Translation>{(t) => t('Employee')}</Translation>,
+        // name: <Translation>{(t) => t('Employee')}</Translation>,
+        name: getLabelText('Employee', templatetype),
         to: '/employee/employee',
         disabled: !EEmployee,
         // isVisible:{getAttendance}
       }, {
         component: CNavItem,
-        name: <Translation>{(t) => t('Employee Job Desription')}</Translation>,
+        // name: <Translation>{(t) => t('Employee Job Desription')}</Translation>,
+        name: getLabelText('Employee Job Desription', templatetype),
         to: '/employee/employeejobdescription',
         disabled: !EEmployeeJobDiscription,
         // isVisible:{getAttendance}
@@ -122,20 +129,23 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: <Translation>{(t) => t('Attendance')}</Translation>,
+    // name: <Translation>{(t) => t('Attendance')}</Translation>,
+    name: getLabelText('Attendance', templatetype),
     disabled: !AGroup,
     // to: '/buttons',
     // icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: <Translation>{(t) => t('Attendance Search')}</Translation>,
+        // name: <Translation>{(t) => t('Attendance Search')}</Translation>,
+        name: getLabelText('Attendance Search', templatetype),
         to: '/attendance/attendance',
         disabled: !AAttendanceSearch,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       }, {
         component: CNavItem,
-        name: <Translation>{(t) => t('Mark Attendance')}</Translation>,
+        // name: <Translation>{(t) => t('Mark Attendance')}</Translation>,
+        name: getLabelText('Mark Attendance', templatetype),
         to: '/attendance/markattendance',
         disabled: !AMarkAttendance,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
@@ -144,30 +154,36 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: <Translation>{(t) => t('Leave Management')}</Translation>,
+    // name: <Translation>{(t) => t('Leave Management')}</Translation>,
+    name: getLabelText('Leave Management', templatetype),
+    to: '/attendance/markattendance',
     disabled: !LGroup,
     items: [
       {
         component: CNavItem,
-        name: <Translation>{(t) => t('Leave Schedule')}</Translation>,
+        // name: <Translation>{(t) => t('Leave Schedule')}</Translation>,
+        name: getLabelText('Leave Schedule', templatetype),
         to: '/leaves/leaveshedule',
         disabled: !LLeaveSchedule,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       }, {
         component: CNavItem,
-        name: <Translation>{(t) => t('Leave To Approve')}</Translation>,
+        // name: <Translation>{(t) => t('Leave To Approve')}</Translation>,
+        name: getLabelText('Leave To Approve', templatetype),
         to: '/leaves/leavetoapprove',
         disabled: !LLeaveToApprove,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       }, {
         component: CNavItem,
-        name: <Translation>{(t) => t('Leave Entitlement')}</Translation>,
+        // name: <Translation>{(t) => t('Leave Entitlement')}</Translation>,
+        name: getLabelText('Leave Entitlement', templatetype),
         to: '/leaves/leaveentitlement',
         disabled: !LLeaveEntitlement,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       }, {
         component: CNavItem,
-        name: <Translation>{(t) => t('Leave Type')}</Translation>,
+        // name: <Translation>{(t) => t('Leave Type')}</Translation>,
+        name: getLabelText('Leave Type', templatetype),
         to: '/leaves/leavetype',
         disabled: !LLeaveType,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
@@ -179,23 +195,26 @@ const _nav = [
   // },
   {
     component: CNavGroup,
-    name: <Translation>{(t) => t('Reporting person')}</Translation>,
-    disabled: !RPGroup,
+    // name: <Translation>{(t) => t('Reporting person')}</Translation>,
+    name: getLabelText('Reporting person', templatetype), disabled: !RPGroup,
     items: [{
       component: CNavItem,
-      name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
+      // name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
+      name: getLabelText('Hierarchy Management', templatetype),
       to: '/reportingperson/hierarchymanagement',
       disabled: !RPHierarchyManagement,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
-      name: <Translation>{(t) => t('Reporting Person')}</Translation>,
+      // name: <Translation>{(t) => t('Reporting Person')}</Translation>,
+      name: getLabelText('Reporting Person', templatetype),
       to: '/reportingperson/reportingperson',
       disabled: !RPReportingPerson,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
-      name: <Translation>{(t) => t('Reporting Manager Search')}</Translation>,
+      // name: <Translation>{(t) => t('Reporting Manager Search')}</Translation>,
+      name: getLabelText('Reporting Manager Search', templatetype),
       to: '/reportingperson/reportingmanagersearch',
       disabled: !RPReportingManagerSearch,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
@@ -215,53 +234,62 @@ const _nav = [
   // },
   {
     component: CNavTitle,
-    name: <Translation>{(t) => t('Reports')}</Translation>,
+    // name: <Translation>{(t) => t('Reports')}</Translation>,
+    name: getLabelText('Reports', templatetype),
     disabled: !UMGroup,
   },
   {
     component: CNavGroup,
-    name: <Translation>{(t) => t('User Management')}</Translation>,
+    // name: <Translation>{(t) => t('User Management')}</Translation>,
+    name: getLabelText('User Management', templatetype),
     disabled: !UMGroup,
     items: [{
       component: CNavItem,
-      name: <Translation>{(t) => t('Internal User')}</Translation>,
+      // name: <Translation>{(t) => t('Internal User')}</Translation>,
+      name: getLabelText('Internal User', templatetype),
       to: '/users/internaluser',
       disabled: !UMInternalUser,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
-      name: <Translation>{(t) => t('External User')}</Translation>,
+      // name: <Translation>{(t) => t('External User')}</Translation>,
+      name: getLabelText('External User', templatetype),
       to: '/users/externaluser',
       disabled: !UMExternalUser,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
-      name: <Translation>{(t) => t('User Role')}</Translation>,
+      // name: <Translation>{(t) => t('User Role')}</Translation>,
+      name: getLabelText('User Role', templatetype),
       to: '/users/userrole',
       disabled: !UMUserRole,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
-      name: <Translation>{(t) => t('Access Group')}</Translation>,
+      // name: <Translation>{(t) => t('Access Group')}</Translation>,
+      name: getLabelText('Access Group', templatetype),
       to: '/users/accessgroup',
       disabled: !UMAccessGroup,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
-      name: <Translation>{(t) => t('Menu Access Group')}</Translation>,
+      // name: <Translation>{(t) => t('Menu Access Group')}</Translation>,
+      name: getLabelText('Menu Access Group', templatetype),
       to: '/users/menuaccessgroup',
       disabled: !UMMenuAccessGroup,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
-      name: <Translation>{(t) => t('User Access Group')}</Translation>,
+      // name: <Translation>{(t) => t('User Access Group')}</Translation>,
+      name: getLabelText('User Access Group', templatetype),
       to: '/users/useraccessgroup',
       disabled: !UMUserAccessGroup,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     },
     {
       component: CNavItem,
-      name: <Translation>{(t) => t('User menu')}</Translation>,
+      // name: <Translation>{(t) => t('User menu')}</Translation>,
+      name: getLabelText('User menu', templatetype),
       to: '/users/usermenu',
       disabled: !UMUserMenu,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
@@ -269,53 +297,62 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: <Translation>{(t) => t('Master Data')}</Translation>,
+    // name: <Translation>{(t) => t('Master Data')}</Translation>,
+    name: getLabelText('Master Data', templatetype),
     disabled: !MGroup,
     items: [{
       component: CNavItem,
-      name: <Translation>{(t) => t('Branch')}</Translation>,
+      // name: <Translation>{(t) => t('Branch')}</Translation>,
+      name: getLabelText('Branch', templatetype),
       to: '/masterdata/branch',
       disabled: !MBranch,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
-      name: <Translation>{(t) => t('Country')}</Translation>,
+      // name: <Translation>{(t) => t('Country')}</Translation>,
+      name: getLabelText('Country', templatetype),
       to: '/masterdata/country',
       disabled: !MCountry,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
-      name: <Translation>{(t) => t('Department')}</Translation>,
+      // name: <Translation>{(t) => t('Department')}</Translation>,
+      name: getLabelText('Department', templatetype),
       to: '/masterdata/department',
       disabled: !MDepartment,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,
-      name: <Translation>{(t) => t('Job Role')}</Translation>,
+      // name: <Translation>{(t) => t('Job Role')}</Translation>,
+      name: getLabelText('Job Role', templatetype),
       to: '/masterdata/jobrole',
       disabled: !MJobRole,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-      }, {
-        component: CNavItem,
-        name: <Translation>{(t) => t('Location (Address)')}</Translation>,
-        to: '/masterdata/location',
+    }, {
+      component: CNavItem,
+      // name: <Translation>{(t) => t('Location (Address)')}</Translation>,
+      name: getLabelText('Location (Address)', templatetype),
+      to: '/masterdata/location',
       disabled: !MJobRole,
-        // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-      }],
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    }],
   },
   {
     component: CNavItem,
-    name: <Translation>{(t) => t('Profile')}</Translation>,
+    // name: <Translation>{(t) => t('Profile')}</Translation>,
+    name: getLabelText('Profile', templatetype),
     to: '/profile',
   },
   {
     component: CNavItem,
-    name: <Translation>{(t) => t('Login')}</Translation>,
+    // name: <Translation>{(t) => t('Login')}</Translation>,
+    name: getLabelText('Login', templatetype),
     to: '/login',
   },
   {
     component: CNavItem,
-    name: <Translation>{(t) => t('Forget Password')}</Translation>,
+    // name: <Translation>{(t) => t('Forget Password')}</Translation>,
+    name: getLabelText('Forget Password', templatetype),
     to: '/ForgetPassword',
   },
   // {
