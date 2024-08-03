@@ -1,0 +1,21 @@
+{
+    "Company": "සමාගම",
+    "Employee": "සේවකයා",
+    "Branch": "ශාඛාව",
+    "Country": "රට",
+    "Department": "ෙදපාර්තෙම්න්තුෙව්",
+    "Location (Address)": "ස්ථානය (ලිපිනය)",
+    "Job Role": "රැකියා කාර්යභාරය",
+    "Profile": "පැතිකඩ",
+    "Login": "ඇතුල් වන්න",
+    "Employee Information": "සේවක තොරතුරු",
+    "Reports": "වාර්තා",
+    "Master Data": "ප්රධාන දත්ත",
+    "Forget Password": "මුරපදය අමතක කරන්න",
+    "Edit": "-සංස්කරණය කරන්න",
+    "View": "දැක්ම",
+    "Delete": "මකන්න",
+    "Download current items (.csv)": "වත්මන් අයිතම බාගන්න (.csv)",
+    "dashboard": "උපකරණ පුවරුව",
+    "home": "මුල් පිටුව"
+}
