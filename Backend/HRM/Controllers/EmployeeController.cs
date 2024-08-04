@@ -233,7 +233,7 @@ namespace HRM.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> PostImage(IFormFile image)
+        public async Task<IActionResult> PostImage(IFormFile image,IFormFile cv)
         {
             if (image == null || image.Length == 0)
             {

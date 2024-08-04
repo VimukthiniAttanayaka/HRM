@@ -59,6 +59,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
     // console.log(selectedFileCV)
     const formData = new FormData();
     formData.append('image', profileImageFile);
+    formData.append('cv', profileImageFile);
 
     try {
       const response =
@@ -67,12 +68,12 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
         //   headers: { 'Content-Type': 'multipart/form-data' },
         //   body: formData,
         // })
-      await axios.post(apiUrl + 'Employee/PostImage',
-        formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+        await axios.post(apiUrl + 'Employee/PostImage',
+          formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
       console.log(response.data);
     } catch (error) {
       console.error(error);
