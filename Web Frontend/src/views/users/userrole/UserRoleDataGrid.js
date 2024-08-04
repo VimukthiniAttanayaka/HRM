@@ -218,7 +218,7 @@ const UserRoleDataGrid = () => {
         columns={columns}
         columnFilter
         columnSorter
-        footer
+        // footer
         items={data}
         itemsPerPageSelect
         itemsPerPage={5}
