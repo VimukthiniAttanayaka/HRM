@@ -6,13 +6,15 @@ import axios from 'axios';
 const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
 
-  const [profileImageFile, setprofileImageFile] = useState();
+  const [selectedFileProfileImage, setSelectedFileProfileImage] = useState();
   const [selectedFileCV, setSelectedFileCV] = useState(null);
-  const [nICImageFiles, setNICImageFiles] = useState([]);
+  const [selectedFileNIC, setSelectedFileNIC] = useState([]);
+  const [selectedFilePassport, setSelectedFilePassport] = useState();
+  const [selectedFileDrivingLicense, setSelectedFileDrivingLicense] = useState();
 
   function handleChangeProfileImage(e) {
     console.log(e.target.files);
-    setprofileImageFile(e.target.files[0]);
+    setSelectedFileProfileImage(e.target.files[0]);
   }
 
   const handleFileChangeCV = (event) => {
@@ -21,11 +23,11 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
 
   const handleImageChangeNIC = (event) => {
     const newImages = Array.from(event.target.files); // Convert FileList to array
-    setNICImageFiles((prevImages) => [...prevImages, ...newImages]);
+    setSelectedFileNIC((prevImages) => [...prevImages, ...newImages]);
   };
 
   const handleRemoveImage = (index) => {
-    setNICImageFiles((prevImages) => {
+    setSelectedFileNIC((prevImages) => {
       const updatedImages = [...prevImages];
       updatedImages.splice(index, 1);
       return updatedImages;
@@ -55,11 +57,15 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("hi")
-    console.log(profileImageFile)
+    console.log(selectedFileProfileImage)
     // console.log(selectedFileCV)
     const formData = new FormData();
-    formData.append('image', profileImageFile);
-    formData.append('cv', profileImageFile);
+    // formData.append('image', selectedFileProfileImage);
+    formData.append('cv', selectedFileCV);
+    formData.append('nic', selectedFileNIC);
+    formData.append('profileImage', selectedFileProfileImage);
+    formData.append('passport', selectedFilePassport);
+    formData.append('drivingLicense', selectedFileDrivingLicense);
 
     try {
       const response =
@@ -219,7 +225,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
               </CTabPanel>
               <CTabPanel className="p-3" itemKey="profile">
                 <CForm onSubmit={handleSubmit}>
-                  <CInputGroup className="mb-3">
+                  {/* <CInputGroup className="mb-3">
                     <CCol md={4}>
                       <CInputGroupText>
                         <h6>Document Name</h6>
@@ -232,7 +238,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                       <option value="PWD">Passport</option>
                       <option value="PIN">Driving License</option>
                     </CFormSelect>
-                  </CInputGroup>
+                  </CInputGroup> */}
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
                       <CInputGroupText>
@@ -240,7 +246,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                       </CInputGroupText>
                     </CCol>
                     <input type="file" onChange={handleChangeProfileImage} />
-                    <img src={profileImageFile} width={100} />
+                    <img src={selectedFileProfileImage} width={100} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -253,7 +259,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                     {/* <button type="submit">Upload</button>
                   </form>  */}
                     {/* <input type="file" onChange={handleChangeProfileImage} />
-                  <img src={profileImageFile} width={100} /> */}
+                  <img src={selectedFileProfileImage} width={100} /> */}
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -267,7 +273,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                       multiple // Allow selecting multiple files
                       onChange={handleImageChangeNIC}
                     />
-                    {nICImageFiles.map((imageFile, index) => (
+                    {selectedFileNIC.map((imageFile, index) => (
                       <CCol key={index} md={4} className="d-flex align-items-center mb-2">
                         <img src={URL.createObjectURL(imageFile)} width={100} alt="Profile Image" />
                         <CButton variant="outline" colorScheme="red" ml={2} onClick={() => handleRemoveImage(index)}>

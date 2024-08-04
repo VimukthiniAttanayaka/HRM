@@ -228,34 +228,97 @@ namespace HRM.Controllers
         }
 
 
-        public static IFormFile frncv{get; set;}
-        
+        public static ImageModel frncv {get; set;}
+        public static ImageModel frnnic { get; set;}
+        public static ImageModel frnprofileImage { get; set;}
+        public static ImageModel frnpassport { get; set; }
+        public static ImageModel frndrivingLicense { get; set; }
+
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> PostImage(IFormFile image,IFormFile cv)
+        public async Task<IActionResult> PostImage(IFormFile cv, IFormFile nic, IFormFile profileImage, IFormFile passport, IFormFile drivingLicense)
         {
-            if (image == null || image.Length == 0)
+            if (cv != null && cv.Length > 0 )
             {
-                return BadRequest("Image is required");
+                using (var memoryStream = new MemoryStream())
+                {
+                    await cv.CopyToAsync(memoryStream);
+                    var imageBytes = memoryStream.ToArray();
+
+                    // Save image bytes to database
+                    var imageModel = new ImageModel { ImageData = imageBytes };
+                    frncv = imageModel;
+                }
             }
+            if (nic != null && nic.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await nic.CopyToAsync(memoryStream);
+                    var imageBytes = memoryStream.ToArray();
+
+                    // Save image bytes to database
+                    var imageModel = new ImageModel { ImageData = imageBytes };
+                    frnnic = imageModel;
+                }
+            }
+            if (profileImage != null && profileImage.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await profileImage.CopyToAsync(memoryStream);
+                    var imageBytes = memoryStream.ToArray();
+
+                    // Save image bytes to database
+                    var imageModel = new ImageModel { ImageData = imageBytes };
+                    frnprofileImage = imageModel;
+                }
+            }
+            if (passport != null && passport.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await passport.CopyToAsync(memoryStream);
+                    var imageBytes = memoryStream.ToArray();
+
+                    // Save image bytes to database
+                    var imageModel = new ImageModel { ImageData = imageBytes };
+                    frnpassport = imageModel;
+                }
+            }
+            if (drivingLicense != null && drivingLicense.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await drivingLicense.CopyToAsync(memoryStream);
+                    var imageBytes = memoryStream.ToArray();
+
+                    // Save image bytes to database
+                    var imageModel = new ImageModel { ImageData = imageBytes };
+                    frndrivingLicense = imageModel;
+                }
+            }
+            //{
+            //    return BadRequest("cv is required");
+            //} 
 
             // Convert image to byte array
-            using (var memoryStream = new MemoryStream()) { 
+            //using (var memoryStream = new MemoryStream()) { 
             
 
-                await image.CopyToAsync(memoryStream);
-                var imageBytes = memoryStream.ToArray();
+            //    await image.CopyToAsync(memoryStream);
+            //    var imageBytes = memoryStream.ToArray();
 
 
-                // Save image bytes to database
-                var imageModel = new ImageModel { ImageData = imageBytes };
-                var s = image.Name;
-                var s1 = image.FileName;
-                //if(image.type)
-                //_context.Images.Add(imageModel);
-                //await _context.SaveChangesAsync();
-            }
+            //    // Save image bytes to database
+            //    var imageModel = new ImageModel { ImageData = imageBytes };
+            //    //var s = image.Name;
+            //    //var s1 = image.FileName;
+            //    //if(image.type)
+            //    //_context.Images.Add(imageModel);
+            //    //await _context.SaveChangesAsync();
+            //}
 
             return Ok("Image uploaded successfully");
         }
