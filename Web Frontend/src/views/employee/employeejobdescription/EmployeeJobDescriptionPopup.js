@@ -118,13 +118,13 @@ const EmployeeJobDescriptionPopup = ({ visible, onClose, onOpen }) => {
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>ActiveFrom</h6>
+                      <h6>Assign Date</h6>
                     </CInputGroupText>
-                  </CCol> <CDatePicker placeholder="ActiveFrom" name="ActiveFrom"
+                  </CCol> <CDatePicker placeholder="AssignDate" name="AssignDate"
                   // value={customerId} onChange={handleChangeId}
                   />
                 </CInputGroup>
-                <CInputGroup className="mb-3">
+                {/* <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>ActiveTo</h6>
@@ -132,7 +132,7 @@ const EmployeeJobDescriptionPopup = ({ visible, onClose, onOpen }) => {
                   </CCol> <CDatePicker placeholder="ActiveTo" name="ActiveTo"
                   // value={customerId} onChange={handleChangeId}
                   />
-                </CInputGroup>
+                </CInputGroup> */}
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>

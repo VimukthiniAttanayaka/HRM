@@ -8,6 +8,10 @@ using System.Data;
 using utility_handler.Data;
 using static error_handler.ErrorLog;
 using System.Reflection;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace HRM.Controllers
 {
@@ -221,6 +225,45 @@ namespace HRM.Controllers
 
             }
             return objUserHeadList;
+        }
+
+
+        public static IFormFile frncv{get; set;}
+        
+
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<IActionResult> PostImage(IFormFile image)
+        {
+            if (image == null || image.Length == 0)
+            {
+                return BadRequest("Image is required");
+            }
+
+            // Convert image to byte array
+            using (var memoryStream = new MemoryStream()) { 
+            
+
+                await image.CopyToAsync(memoryStream);
+                var imageBytes = memoryStream.ToArray();
+
+
+                // Save image bytes to database
+                var imageModel = new ImageModel { ImageData = imageBytes };
+                var s = image.Name;
+                var s1 = image.FileName;
+                //if(image.type)
+                //_context.Images.Add(imageModel);
+                //await _context.SaveChangesAsync();
+            }
+
+            return Ok("Image uploaded successfully");
+        }
+        public class ImageModel
+        {
+            public int Id { get; set; }
+            public byte[] ImageData { get; set; }
+            public string Type { get; set; }
         }
     }
 

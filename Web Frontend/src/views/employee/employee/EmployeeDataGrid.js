@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
-import EmployeePopup from './EmployeePopup'
+import EmployeePopupTab from './EmployeePopupTab'
 
 const EmployeeDataGrid = () => {
 
@@ -127,7 +127,7 @@ const EmployeeDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <EmployeePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} />
+          <EmployeePopupTab onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} />
         </CCol>
       </CRow>
       <CSmartTable
