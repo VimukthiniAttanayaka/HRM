@@ -2,16 +2,19 @@ import React from 'react'
 import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
 
 import JobRoleDataGrid from './JobRoleDataGrid'
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const JobRole = () => {
+  let templatetype = 'translation_jobrole'
+  let templatetype_base = 'translation'
   return (
     <>
       <CCard className="mb-4">
         <CCardHeader>
-          <strong>JobRole List</strong>
+          <strong>    {getLabelText('JobRole List', templatetype)}</strong>
         </CCardHeader>
         <CCardBody>
-          <JobRoleDataGrid  onOpen={() => handleOpenPopup}/>
+          <JobRoleDataGrid onOpen={() => handleOpenPopup} />
         </CCardBody>
       </CCard>
     </>
