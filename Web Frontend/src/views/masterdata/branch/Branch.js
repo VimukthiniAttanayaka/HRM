@@ -5,15 +5,15 @@ import BranchDataGrid from './BranchDataGrid'
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const Branch = () => {
-  let templatetype='translation_branch'
+  let templatetype = 'translation_branch'
   return (
     <>
       <CCard className="mb-4">
         <CCardHeader>
-          <strong>{getLabelText('Branch List',templatetype)}</strong>
+          <strong>{getLabelText('Branch List', templatetype)}</strong>
         </CCardHeader>
         <CCardBody>
-          <BranchDataGrid  onOpen={() => handleOpenPopup}/>
+          <BranchDataGrid onOpen={() => handleOpenPopup} />
         </CCardBody>
       </CCard>
     </>

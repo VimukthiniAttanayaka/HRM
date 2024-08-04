@@ -152,7 +152,7 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus }) =
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>BranchID</h6>
+                      <h6>{getLabelText('BranchID', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>   <CFormInput placeholder="BranchID" name="BranchID" value={branchId} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
@@ -161,7 +161,7 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus }) =
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>Branch</h6>
+                      <h6>{getLabelText('Branch', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>    <CFormInput placeholder="Branch" name="Branch" value={branch} onChange={handleChangeBranch} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
@@ -171,14 +171,14 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus }) =
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>Status</h6>
+                      <h6>{getLabelText('Status', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>
                   <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
-                  {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
-                    <CButton color="success" type='submit'>Submit</CButton>)}
+                  {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :
+                    <CButton color="success" type='submit'>{getLabelText('Submit', templatetype)}</CButton>)}
                 </div>
               </CForm>
             </CCardBody>

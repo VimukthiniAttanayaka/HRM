@@ -6,16 +6,16 @@ import CurrencyPopup from './CurrencyPopup'
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const Currency = () => {
-  let templatetype='translation_currency'
+  let templatetype = 'translation_currency'
   return (
     <>
       <CCard className="mb-4">
         <CCardHeader>
-          <strong>{getLabelText('Currency List',templatetype)}</strong>
+          <strong>{getLabelText('Currency List', templatetype)}</strong>
         </CCardHeader>
         <CCardBody>
           {/* <CurrencyPopup /> */}
-          <CurrencyDataGrid  onOpen={() => handleOpenPopup}/>
+          <CurrencyDataGrid onOpen={() => handleOpenPopup} />
         </CCardBody>
       </CCard>
     </>
