@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
+  let templatetype = 'translation_branch'
+  let templatetype_base = 'translation'
 
   const [branchId, setBranchId] = useState('')
   const [branch, setBranch] = useState('')
@@ -112,13 +115,13 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus }) =
 
   const popupStatusSetup = (event) => {
     if (popupStatus == 'edit') {
-      return 'Edit Branch'
+      return getLabelText('Edit Branch', templatetype)
     } else if (popupStatus == 'view') {
-      return 'View Branch'
+      return getLabelText('View Branch', templatetype)
     } else if (popupStatus == 'delete') {
-      return 'Delete Branch'
+      return getLabelText('Delete Branch', templatetype)
     } else {
-      return 'Create New Branch'
+      return getLabelText('Create New Branch', templatetype)
     }
   }
 
@@ -130,7 +133,7 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus }) =
   // console.log(branchDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New Branch</CButton>
+      <CButton color="primary" onClick={onOpen}>{getLabelText('New Branch', templatetype)}</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -175,7 +178,7 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus }) =
                 </CInputGroup>
                 <div className="d-grid">
                   {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
-                  <CButton color="success" type='submit'>Submit</CButton>)}
+                    <CButton color="success" type='submit'>Submit</CButton>)}
                 </div>
               </CForm>
             </CCardBody>

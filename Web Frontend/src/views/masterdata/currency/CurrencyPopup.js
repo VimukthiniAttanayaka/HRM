@@ -58,7 +58,7 @@ const CurrencyPopup = ({ visible, onClose, onOpen, CurrencyDetails }) => {
   console.log(CurrencyDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New Currency</CButton>
+      <CButton color="primary" onClick={onOpen}>{getLabelText('New Currency', templatetype)}</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"

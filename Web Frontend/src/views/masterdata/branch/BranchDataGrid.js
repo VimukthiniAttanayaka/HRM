@@ -8,7 +8,7 @@ import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const BranchDataGrid = () => {
   let templatetype = 'translation_branch'
-let templatetype_base = 'translation'
+  let templatetype_base = 'translation'
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
@@ -17,19 +17,19 @@ let templatetype_base = 'translation'
     {
       key: 'id',
       // label: '',
-      label:  getLabelText('ID', templatetype),
-       // filter: false,
+      label: getLabelText('ID', templatetype),
+      // filter: false,
       // sorter: false,
       _style: { width: '20%' },
     },
     {
       key: 'branch',
-      label:  getLabelText('Branch', templatetype),
-         _style: { width: '20%' },
+      label: getLabelText('Branch', templatetype),
+      _style: { width: '20%' },
     },
     {
       key: 'status',
-      label:  getLabelText('Status', templatetype),
+      label: getLabelText('Status', templatetype),
       _style: { width: '20%' }
     },
     {
@@ -163,7 +163,7 @@ let templatetype_base = 'translation'
             download="coreui-table-data.csv"
             target="_blank"
           >
-             {getLabelText('Download current items (.csv)', templatetype_base)}
+            {getLabelText('Download current items (.csv)', templatetype_base)}
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>

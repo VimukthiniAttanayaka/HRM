@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus }) => {
+
+  let templatetype = 'translation_location'
+  let templatetype_base = 'translation'
   const apiUrl = process.env.REACT_APP_API_URL;
 
   const [LocationId, setLocationId] = useState('')
@@ -43,7 +47,7 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus 
       // Handle submission errors
       console.error('Error submitting Location data:', response.statusText)
     }
-   }
+  }
   const handleEdit = async (event) => {
 
     const formData = {
@@ -53,48 +57,48 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus 
       MDL_Location: Location,
       MDL_Status: isActive,
     }
-  // Submit the form data to your backend API
-  const response = await fetch(apiUrl + 'location/modify_Location', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  })
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'location/modify_Location', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
 
-  if (response.ok) {
-    onClose()
-    console.log(response);
-    // Handle successful submission (e.g., display a success message)
-    console.log('Location data submitted successfully!')
-  } else {
-    // Handle submission errors
-    console.error('Error submitting Location data:', response.statusText)
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('Location data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting Location data:', response.statusText)
+    }
   }
-}
   const handleDelete = async (event) => {
     console.log('Delete Location')
-  // Prepare form data
-  const formData = {
-    UD_UserID: "string",
-    AUD_notificationToken: "string",
-    MDL_LocationID: LocationId,
-  }
-  // Submit the form data to your backend API
-  const response = await fetch(apiUrl + 'location/inactivate_Location', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  })
+    // Prepare form data
+    const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      MDL_LocationID: LocationId,
+    }
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'location/inactivate_Location', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
 
-  if (response.ok) {
-    onClose()
-    console.log(response);
-    // Handle successful submission (e.g., display a success message)
-    console.log('Location data submitted successfully!')
-  } else {
-    // Handle submission errors
-    console.error('Error submitting Location data:', response.statusText)
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('Location data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting Location data:', response.statusText)
+    }
   }
-}
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -112,14 +116,14 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus 
   }
 
   const popupStatusSetup = (event) => {
-    if (popupStatus == 'edit'){
-      return 'Edit Location'
-    } else if (popupStatus == 'view'){
-      return 'View Location'
-    } else if (popupStatus == 'delete'){
-      return 'Delete Location'
+    if (popupStatus == 'edit') {
+      return getLabelText('Edit Location', templatetype)
+    } else if (popupStatus == 'view') {
+      return getLabelText('View Location', templatetype)
+    } else if (popupStatus == 'delete') {
+      return getLabelText('Delete Location', templatetype)
     } else {
-      return 'Create New Location'
+      return getLabelText('Create New Location', templatetype)
     }
   }
 
@@ -131,7 +135,7 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus 
   // console.log(LocationDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New Location</CButton>
+      <CButton color="primary" onClick={onOpen}>{getLabelText('New Location', templatetype)}</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -161,7 +165,7 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus 
                     <CInputGroupText>
                       <h6>Location</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="Location" name="Location" value={Location} onChange={handleChangeLocation} disabled={( popupStatus == 'view' || popupStatus == 'delete') ? true :  false}
+                  </CCol>    <CFormInput placeholder="Location" name="Location" value={Location} onChange={handleChangeLocation} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -174,8 +178,8 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus 
                   <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
-                  {popupStatus == 'view' ? '' : ( popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
-                  <CButton color="success" type='submit'>Submit</CButton>)}
+                  {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
+                    <CButton color="success" type='submit'>Submit</CButton>)}
                 </div>
               </CForm>
             </CCardBody>

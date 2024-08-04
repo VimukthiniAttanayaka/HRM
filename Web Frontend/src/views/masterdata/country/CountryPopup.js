@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const CountryPopup = ({ visible, onClose, onOpen, countryDetails, popupStatus }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
+  let templatetype = 'translation_country'
+  let templatetype_base = 'translation'
 
   const [countryId, setCountryId] = useState('')
   const [country, setCountry] = useState('')
@@ -112,13 +115,13 @@ const CountryPopup = ({ visible, onClose, onOpen, countryDetails, popupStatus })
 
   const popupStatusSetup = (event) => {
     if (popupStatus == 'edit') {
-      return 'Edit Country'
+      return getLabelText('Edit Country', templatetype)
     } else if (popupStatus == 'view') {
-      return 'View Country'
+      return getLabelText('View Country', templatetype)
     } else if (popupStatus == 'delete') {
-      return 'Delete Country'
+      return getLabelText('Delete Country', templatetype)
     } else {
-      return 'Create New Country'
+      return getLabelText('Create New Country', templatetype)
     }
   }
 
@@ -131,7 +134,7 @@ const CountryPopup = ({ visible, onClose, onOpen, countryDetails, popupStatus })
   // console.log(countryDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New Country</CButton>
+      <CButton color="primary" onClick={onOpen}>{getLabelText('New Country', templatetype)}</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -175,7 +178,7 @@ const CountryPopup = ({ visible, onClose, onOpen, countryDetails, popupStatus })
                 </CInputGroup>
                 <div className="d-grid">
                   {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
-                  <CButton color="success" type='submit'>Submit</CButton>)}
+                    <CButton color="success" type='submit'>Submit</CButton>)}
                 </div>
               </CForm>
             </CCardBody>

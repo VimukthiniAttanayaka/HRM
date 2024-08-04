@@ -8,7 +8,7 @@ import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const CountryDataGrid = () => {
   let templatetype = 'translation_country'
-let templatetype_base = 'translation'
+  let templatetype_base = 'translation'
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
@@ -17,15 +17,15 @@ let templatetype_base = 'translation'
     {
       key: 'id',
       // label: '',
-      label:  getLabelText('ID', templatetype),
-        // filter: false,
+      label: getLabelText('ID', templatetype),
+      // filter: false,
       // sorter: false,
       _style: { width: '20%' },
     },
     {
       key: 'Country',
-      label:  getLabelText('Country', templatetype),
-         _style: { width: '20%' },
+      label: getLabelText('Country', templatetype),
+      _style: { width: '20%' },
     },
 
     // {
@@ -34,7 +34,7 @@ let templatetype_base = 'translation'
     // },
     {
       key: 'status',
-      label:  getLabelText('Status', templatetype),
+      label: getLabelText('Status', templatetype),
       _style: { width: '20%' }
     },
 

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
+  let templatetype = 'translation_jobrole'
+  let templatetype_base = 'translation'
 
   const [JobRoleId, setJobRoleId] = useState('')
   const [JobRole, setJobRole] = useState('')
@@ -43,58 +46,58 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
       // Handle submission errors
       console.error('Error submitting JobRole data:', response.statusText)
     }
-   }
+  }
   const handleEdit = async (event) => {
-  // Prepare form data
-  const formData = {
-    UD_UserID: "string",
-    AUD_notificationToken: "string",
-    MDJR_JobRoleID: JobRoleId,
-    MDJR_JobRole: JobRole,
-    MDJR_Status: isActive,
-  }
-  // Submit the form data to your backend API
-  const response = await fetch(apiUrl + 'JobRole/modify_JobRole', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  })
+    // Prepare form data
+    const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      MDJR_JobRoleID: JobRoleId,
+      MDJR_JobRole: JobRole,
+      MDJR_Status: isActive,
+    }
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'JobRole/modify_JobRole', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
 
-  if (response.ok) {
-    onClose()
-    console.log(response);
-    // Handle successful submission (e.g., display a success message)
-    console.log('JobRole data submitted successfully!')
-  } else {
-    // Handle submission errors
-    console.error('Error submitting JobRole data:', response.statusText)
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('JobRole data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting JobRole data:', response.statusText)
+    }
   }
-}
   const handleDelete = async (event) => {
     console.log('Delete JobRole')
-  // Prepare form data
-  const formData = {
-    UD_UserID: "string",
-    AUD_notificationToken: "string",
-    MDJR_JobRoleID: JobRoleId,
-  }
-  // Submit the form data to your backend API
-  const response = await fetch(apiUrl + 'JobRole/inactivate_JobRole', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  })
+    // Prepare form data
+    const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      MDJR_JobRoleID: JobRoleId,
+    }
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'JobRole/inactivate_JobRole', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
 
-  if (response.ok) {
-    onClose()
-    console.log(response);
-    // Handle successful submission (e.g., display a success message)
-    console.log('JobRole data submitted successfully!')
-  } else {
-    // Handle submission errors
-    console.error('Error submitting JobRole data:', response.statusText)
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('JobRole data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting JobRole data:', response.statusText)
+    }
   }
-}
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -112,14 +115,14 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
   }
 
   const popupStatusSetup = (event) => {
-    if (popupStatus == 'edit'){
-      return 'Edit JobRole'
-    } else if (popupStatus == 'view'){
-      return 'View JobRole'
-    } else if (popupStatus == 'delete'){
-      return 'Delete JobRole'
+    if (popupStatus == 'edit') {
+      return getLabelText('Edit JobRole', templatetype)
+    } else if (popupStatus == 'view') {
+      return getLabelText('View JobRole', templatetype)
+    } else if (popupStatus == 'delete') {
+      return getLabelText('Delete JobRole', templatetype)
     } else {
-      return 'Create New JobRole'
+      return getLabelText('Create New JobRole', templatetype)
     }
   }
 
@@ -131,7 +134,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
   // console.log(JobRoleDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New JobRole</CButton>
+      <CButton color="primary" onClick={onOpen}>{getLabelText('New JobRole', templatetype)}</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -161,7 +164,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
                     <CInputGroupText>
                       <h6>JobRole</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="JobRole" name="JobRole" value={JobRole} onChange={handleChangeJobRole} disabled={( popupStatus == 'view' || popupStatus == 'delete') ? true :  false}
+                  </CCol>    <CFormInput placeholder="JobRole" name="JobRole" value={JobRole} onChange={handleChangeJobRole} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -174,8 +177,8 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
                   <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
-                  {popupStatus == 'view' ? '' : ( popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
-                  <CButton color="success" type='submit'>Submit</CButton>)}
+                  {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
+                    <CButton color="success" type='submit'>Submit</CButton>)}
                 </div>
               </CForm>
             </CCardBody>

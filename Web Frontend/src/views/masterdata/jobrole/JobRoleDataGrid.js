@@ -8,7 +8,7 @@ import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const JobRoleDataGrid = () => {
   let templatetype = 'translation_jobrole'
-let templatetype_base = 'translation'
+  let templatetype_base = 'translation'
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
@@ -16,16 +16,16 @@ let templatetype_base = 'translation'
   const columns = [
     {
       key: 'id',
-      label:  getLabelText('ID', templatetype),
-        // label: '',
+      label: getLabelText('ID', templatetype),
+      // label: '',
       // filter: false,
       // sorter: false,
       _style: { width: '20%' },
     },
     {
       key: 'JobRole',
-      label:  getLabelText('JobRole', templatetype),
-         _style: { width: '20%' },
+      label: getLabelText('JobRole', templatetype),
+      _style: { width: '20%' },
     },
 
     // {
@@ -34,7 +34,7 @@ let templatetype_base = 'translation'
     // },
     {
       key: 'status',
-      label:  getLabelText('Status', templatetype),
+      label: getLabelText('Status', templatetype),
       _style: { width: '20%' }
     },
     {

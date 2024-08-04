@@ -1,14 +1,15 @@
 {
-    "Department List": "දෙපාර්තමේන්තු ලැයිස්තුව",
-    "New Department": "නව දෙපාර්තමේන්තුව",
-    "Edit Department": "දෙපාර්තමේන්තුව සංස්කරණ",
-    "View Department": "දෙපාර්තමේන්තුව බලන්න",
-    "Delete Department": "දෙපාර්තමේන්තුව මකන්න",
-    "Create New Department": "නව දෙපාර්තමේන්තුවක් සාදන්න",
-    "DepartmentID": "දෙපාර්තමේන්තු හැඳුනුම්පත",
-    "Department": "ෙදපාර්තෙම්න්තුෙව්",
+    "Location List": "ස්ථානය ලැයිස්තුව",
+    "New Location": "නව ස්ථානය",
+    "Edit Location": "ස්ථානය සංස්කරණ",
+    "View Location": "ස්ථානය බලන්න",
+    "Delete Location": "ස්ථානය මකන්න",
+    "Create New Location": "නව ස්ථානය සාදන්න",
+    "LocationID": "ස්ථානය හැඳුනුම්පත",
+    "Location": "ස්ථානය",
     "Status": "තත්ත්වය",
     "Delete": "මකන්න",
     "Submit": "ඉදිරිපත් කරන්න",
-    "ID": "හැඳුනුම්පත"
+    "ID": "හැඳුනුම්පත",
+    "Location (Address)": "ස්ථානය (ලිපිනය)"
 }
