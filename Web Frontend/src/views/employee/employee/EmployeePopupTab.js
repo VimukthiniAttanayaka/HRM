@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { CTooltip, CRow, CButton, CModal, CTabs, CFormSelect, CTabList, CTab, CCol, CInputGroupText, CTabContent, CTabPanel, CModalBody, CModalTitle, CModalFooter, CFormCheck, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import axios from 'axios';
+import { use } from 'i18next';
 
 const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -21,18 +22,32 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
     setSelectedFileCV(event.target.files[0]);
   };
 
-  const handleImageChangeNIC = (event) => {
-    const newImages = Array.from(event.target.files); // Convert FileList to array
-    setSelectedFileNIC((prevImages) => [...prevImages, ...newImages]);
-  };
+  function handleChangeNIC(e) {
+    console.log(e.target.files);
+    setSelectedFileNIC(e.target.files[0]);
+  }
 
-  const handleRemoveImage = (index) => {
-    setSelectedFileNIC((prevImages) => {
-      const updatedImages = [...prevImages];
-      updatedImages.splice(index, 1);
-      return updatedImages;
-    });
-  };
+  function handleChangePassport(e) {
+    console.log(e.target.files);
+    setSelectedFilePassport(e.target.files[0]);
+  }
+
+  function handleChangeDrivingLicense(e) {
+    console.log(e.target.files);
+    setSelectedFileDrivingLicense(e.target.files[0]);
+  }
+  // const handleImageChangeNIC = (event) => {
+  //   const newImages = Array.from(event.target.files); // Convert FileList to array
+  //   setSelectedFileNIC((prevImages) => [...prevImages, ...newImages]);
+  // };
+
+  // const handleRemoveImage = (index) => {
+  //   setSelectedFileNIC((prevImages) => {
+  //     const updatedImages = [...prevImages];
+  //     updatedImages.splice(index, 1);
+  //     return updatedImages;
+  //   });
+  // };
 
   const handleSubmit1
     = async (event) => {
@@ -86,6 +101,11 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
     }
 
   };
+
+  var image;
+  useEffect(() => {
+    image = selectedFileProfileImage;
+  }, [selectedFileProfileImage]);
   return (
     <>
       <CButton color="primary" onClick={onOpen}>Add New Employee</CButton>
@@ -264,6 +284,33 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
                       <CInputGroupText>
+                        <h6>NIC</h6>
+                      </CInputGroupText>
+                    </CCol>
+                    <input type="file" onChange={handleChangeNIC} />
+                    <img src={selectedFileNIC} width={100} />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CCol md={4}>
+                      <CInputGroupText>
+                        <h6>Passport</h6>
+                      </CInputGroupText>
+                    </CCol>
+                    <input type="file" onChange={handleChangePassport} />
+                    <img src={selectedFilePassport} width={100} />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CCol md={4}>
+                      <CInputGroupText>
+                        <h6>Driving License</h6>
+                      </CInputGroupText>
+                    </CCol>
+                    <input type="file" onChange={handleChangeDrivingLicense} />
+                    <img src={selectedFileDrivingLicense} width={100} />
+                  </CInputGroup>
+                  {/* <CInputGroup className="mb-3">
+                    <CCol md={4}>
+                      <CInputGroupText>
                         <h6>Profile Image</h6>
                       </CInputGroupText>
                     </CCol>
@@ -281,7 +328,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                         </CButton>
                       </CCol>
                     ))}
-                  </CInputGroup>
+                  </CInputGroup> */}
                   <div className="d-grid">
                     <CButton color="success" type='submit'>Submit</CButton>
                   </div>
