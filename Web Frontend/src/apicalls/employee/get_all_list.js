@@ -1,17 +1,8 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export class LeaveScheduleDetail {
-  constructor(id, leavetype, status, Alotment) {
-    this.leavetype = leavetype;
-    this.id = id;
-    this.alotment = Alotment
-    if (status == true) { this.status = "Active"; }
-    else { this.status = "Inactive"; }
-  }
-}
 // console.log(apiUrl)
 export const getEmployeeAll = async (formData) => {
-  const LeaveTypeDetails = [];
+  const EmployeeDetails = [];
 
   const res = await fetch(apiUrl + 'employee/get_employee_all', {
     method: 'POST',
@@ -22,26 +13,51 @@ export const getEmployeeAll = async (formData) => {
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
 
+      class EmployeeDetail {
+        constructor(EME_EmployeeID,
+          EME_FirstName,
+          EME_LastName,
+          EME_Gender,
+          EME_PrefferedName,
+          EME_JobTitle_Code,
+          EME_ReportingManager,
+          EME_EmployeeType,
+          EME_MobileNumber,
+          EME_Status) {
 
-      class LeaveTypeDetail {
-        constructor(id, leavetype, status, Alotment) {
-          this.leavetype = leavetype;
-          this.id = id;
-          this.alotment = Alotment
-          if (status == true) { this.status = "Active"; }
+          this.EME_EmployeeID = EME_EmployeeID;
+          this.EME_FirstName = EME_FirstName;
+          this.EME_LastName = EME_LastName;
+          this.EME_Gender = EME_Gender;
+          this.EME_PrefferedName = EME_PrefferedName;
+          this.EME_JobTitle_Code = EME_JobTitle_Code;
+          this.EME_ReportingManager = EME_ReportingManager;
+          this.EME_EmployeeType = EME_EmployeeType;
+          this.EME_MobileNumber = EME_MobileNumber;
+          if (EME_Status == true) { this.status = "Active"; }
           else { this.status = "Inactive"; }
         }
       }
 
-      for (let index = 0; index < res1[0].LeaveType.length; index++) {
-        let element = res1[0].LeaveType[index];
+      for (let index = 0; index < res1[0].Employee.length; index++) {
+        let element = res1[0].Employee[index];
         // console.log(element)
-        LeaveTypeDetails[index] = new LeaveTypeDetail(element.LVT_LeaveTypeID, element.LVT_LeaveType, element.LVT_Status, element.LVT_LeaveAlotment);
+        EmployeeDetails[index] = new EmployeeDetail(
+          element.EME_EmployeeID,
+          element.EME_FirstName,
+          element.EME_LastName,
+          element.EME_Gender,
+          element.EME_PrefferedName,
+          element.EME_JobTitle_Code,
+          element.EME_ReportingManager,
+          element.EME_EmployeeType,
+          element.EME_MobileNumber,
+          element.EME_Status);
       }
-      // console.log(LeaveTypeDetails)
+      // console.log(EmployeeDetails)
     })
 
-  return LeaveTypeDetails;
+  return EmployeeDetails;
 };
 
 export const requestdata_Employee_DropDowns_All = async (formData) => {

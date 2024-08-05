@@ -3,26 +3,44 @@ import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol } from '@coreui/
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import EmployeePopupTab from './EmployeePopupTab'
+import { getEmployeeAll } from '../../../apicalls/employee/get_all_list.js';
 
 const EmployeeDataGrid = () => {
 
   const [details, setDetails] = useState([])
+  const [data, setData] = useState([])
 
   const columns = [
     {
-      key: 'id',
-      label: '',
+      key: 'EME_EmployeeID',
+      label: 'ID',
       filter: false,
       sorter: false,
     },
     {
-      key: 'name',
+      key: 'EME_FirstName',
+      label: 'Name',
       _style: { width: '20%' },
     },
-    'registered',
     {
-      key: 'role',
-      _style: { width: '20%' }
+      key: 'EME_EmployeeType',
+      label: 'Employee Type',
+      _style: { width: '25%' }
+    },
+    {
+      key: 'EME_PrefferedName',
+      label: 'Preffered Name',
+      _style: { width: '25%' }
+    },
+    {
+      key: 'EME_ReportingManager',
+      label: 'Reporting Manager',
+      _style: { width: '25%' }
+    },
+    {
+      key: 'EME_MobileNumber',
+      label: 'Mobile Number',
+      _style: { width: '25%' }
     },
     {
       key: 'status',
@@ -71,25 +89,18 @@ const EmployeeDataGrid = () => {
     const token = getJWTToken();
     const staffId = getStaffID();
     const customerId = getCustomerID();
-    // const config = {
-    //   headers: { Authorization: `Bearer ${auth}` }
-    // };
+
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      USR_EmployeeID: 'sedcx'
+      EME_EmployeeID: 'sedcx'
     }
-    // const res = await fetch(apiUrl + 'employee/get_employee_all', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-    //     console.log(res1);
-    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
-    //   })
+
+    const EmployeeDetails = await getEmployeeAll(formData)
+    setData(EmployeeDetails);
+
+    console.log(EmployeeDetails)
+
   }
   useEffect(() => {
     requestdata();
@@ -134,7 +145,7 @@ const EmployeeDataGrid = () => {
         cleaner
         clickableRows
         columns={columns}
-        columnFilter
+        // columnFilter
         columnSorter
         // footer
         items={data}

@@ -1,94 +1,77 @@
 import React, { useState, useEffect } from 'react'
-// import {
-//   CButton,
-//   CCard,
-//   CCardBody,
-//   CCol,
-//   CContainer,
-//   CForm,
-//   CFormInput,
-//   CInputGroup,
-//   CInputGroupText,
-//   CRow,
-//   CFormCheck,
-//   CFormSelect,
-// } from '@coreui/react-pro'
-// import CIcon from '@coreui/icons-react'
-// import { cilLockLocked, cilUser } from '@coreui/icons'
-// import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass';
-// import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 
 import { Tree } from 'antd';
+import PopUp from './PopUp';
 
 const treeData = [
   {
-    title: '0-0',
+    title: 'neelaka',
     key: '0-0',
     children: [
       {
-        title: '0-0-0',
+        title: 'nisantha',
         key: '0-0-0',
         children: [
           {
-            title: '0-0-0-0',
+            title: 'vimukthini',
             key: '0-0-0-0',
           },
           {
-            title: '0-0-0-1',
+            title: 'chiranta',
             key: '0-0-0-1',
           },
-          {
-            title: '0-0-0-2',
-            key: '0-0-0-2',
-          },
+          // {
+          //   title: '0-0-0-2',
+          //   key: '0-0-0-2',
+          // },
         ],
       },
       {
-        title: '0-0-1',
+        title: 'ruvi',
         key: '0-0-1',
-        children: [
-          {
-            title: '0-0-1-0',
-            key: '0-0-1-0',
-          },
-          {
-            title: '0-0-1-1',
-            key: '0-0-1-1',
-          },
-          {
-            title: '0-0-1-2',
-            key: '0-0-1-2',
-          },
-        ],
+        // children: [
+        //   {
+        //     title: '0-0-1-0',
+        //     key: '0-0-1-0',
+        //   },
+        //   {
+        //     title: '0-0-1-1',
+        //     key: '0-0-1-1',
+        //   },
+        //   {
+        //     title: '0-0-1-2',
+        //     key: '0-0-1-2',
+        //   },
+        // ],
       },
       {
-        title: '0-0-2',
+        title: 'nawod',
         key: '0-0-2',
       },
     ],
   },
-  {
-    title: '0-1',
-    key: '0-1',
-    children: [
-      {
-        title: '0-1-0-0',
-        key: '0-1-0-0',
-      },
-      {
-        title: '0-1-0-1',
-        key: '0-1-0-1',
-      },
-      {
-        title: '0-1-0-2',
-        key: '0-1-0-2',
-      },
-    ],
-  },
-  {
-    title: '0-2',
-    key: '0-2',
-  },
+  // {
+  //   title: '0-1',
+  //   key: '0-1',
+  //   children: [
+  //     {
+  //       title: '0-1-0-0',
+  //       key: '0-1-0-0',
+  //     },
+  //     {
+  //       title: '0-1-0-1',
+  //       key: '0-1-0-1',
+  //     },
+  //     {
+  //       title: '0-1-0-2',
+  //       key: '0-1-0-2',
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: '0-2',
+  //   key: '0-2',
+  // },
 ];
 
 const HierarchyManagement = () => {
@@ -97,6 +80,17 @@ const HierarchyManagement = () => {
   const [checkedKeys, setCheckedKeys] = useState(['0-0-0']);
   const [selectedKeys, setSelectedKeys] = useState([]);
   const [autoExpandParent, setAutoExpandParent] = useState(true);
+
+  const [visible, setVisible] = useState(false);
+
+  const handleOpenPopup = () => {
+    setVisible(true);
+  };
+
+  const handleClosePopup = () => {
+    setVisible(false);
+  };
+
   const onExpand = (expandedKeysValue) => {
     console.log('onExpand', expandedKeysValue);
     // if not set autoExpandParent to false, if children expanded, parent can not collapse.
@@ -109,21 +103,25 @@ const HierarchyManagement = () => {
     setCheckedKeys(checkedKeysValue);
   };
   const onSelect = (selectedKeysValue, info) => {
+    setVisible(true);
     console.log('onSelect', info);
     setSelectedKeys(selectedKeysValue);
   };
   return (
-    <Tree
-      checkable
-      onExpand={onExpand}
-      expandedKeys={expandedKeys}
-      autoExpandParent={autoExpandParent}
-      onCheck={onCheck}
-      checkedKeys={checkedKeys}
-      onSelect={onSelect}
-      selectedKeys={selectedKeys}
-      treeData={treeData}
-    />
+    <>
+      <PopUp onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} />
+      <Tree
+        // checkable
+        onExpand={onExpand}
+        expandedKeys={expandedKeys}
+        autoExpandParent={autoExpandParent}
+        onCheck={onCheck}
+        checkedKeys={checkedKeys}
+        onSelect={onSelect}
+        selectedKeys={selectedKeys}
+        treeData={treeData}
+      />
+    </>
   );
 
   // const apiUrl = process.env.REACT_APP_API_URL;

@@ -17,15 +17,15 @@ const DepartmentDataGrid = () => {
     {
       key: 'id',
       // label: '',
-      label:  getLabelText('ID', templatetype),
+      label: getLabelText('ID', templatetype),
       // filter: false,
       // sorter: false,
       _style: { width: '20%' },
     },
     {
       key: 'Department',
-      label:  getLabelText('Department', templatetype),
-        _style: { width: '20%' },
+      label: getLabelText('Department', templatetype),
+      _style: { width: '20%' },
     },
 
     // {
@@ -34,8 +34,8 @@ const DepartmentDataGrid = () => {
     // },
     {
       key: 'status',
-      label:  getLabelText('Status', templatetype),
-        _style: { width: '20%' }
+      label: getLabelText('Status', templatetype),
+      _style: { width: '20%' }
     },
     {
       key: 'show_details',

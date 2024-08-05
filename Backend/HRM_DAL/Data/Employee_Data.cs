@@ -39,8 +39,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_employees_single";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@ECE_EmployeeID" , model.ECE_EmployeeID);
-                        cmd.Parameters["@ECE_EmployeeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_EmployeeID" , model.EME_EmployeeID);
+                        cmd.Parameters["@EME_EmployeeID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -56,32 +56,31 @@ namespace HRM_DAL.Data
                                 objemployeeHead.resp = true;
                                 objemployeeHead.msg = "Get Employee";
 
-                                objemployee.ECE_EmployeeID = rdr["ECE_EmployeeID"].ToString();
-                                objemployee.ECE_CustomerID = rdr["ECE_CustomerID"].ToString();
-                                objemployee.ECE_DepartmentID = rdr["ECE_DepartmentID"].ToString();
-                                objemployee.ECE_FirstName = rdr["ECE_FirstName"].ToString();
-                                objemployee.ECE_LastName = rdr["ECE_LastName"].ToString();
-                                //objemployee.ECE_PrefferedName = rdr["ECE_PrefferedName"].ToString();
-                                //objemployee.ECE_OrgStructuralLevel1 = rdr["ECE_OrgStructuralLevel1"].ToString();
-                                //objemployee.ECE_OrgStructuralLevel2 = rdr["ECE_OrgStructuralLevel2"].ToString();
-                                //objemployee.ECE_DepartmentDetail1 = rdr["ECE_DepartmentDetail1"].ToString();
-                                //objemployee.ECE_DepartmentDetail2 = rdr["ECE_DepartmentDetail2"].ToString();
-                                //objemployee.ECE_DepartmentDetail3 = rdr["ECE_DepartmentDetail3"].ToString();
-                                //objemployee.ECE_JobCodeDescription = rdr["ECE_JobCodeDescription"].ToString();
-                                objemployee.ECE_Address = rdr["ECE_Address"].ToString();
-                                objemployee.ECE_EmailAddress = rdr["ECE_EmailAddress"].ToString();
-                                objemployee.ECE_MobileNumber = rdr["ECE_MobileNumber"].ToString();
-                                objemployee.ECE_PhoneNumber1 = rdr["ECE_PhoneNumber1"].ToString();
-                                objemployee.ECE_PhoneNumber2 = rdr["ECE_PhoneNumber2"].ToString();
-                                objemployee.ECE_RankDescription = rdr["ECE_RankDescription"].ToString();
-                                objemployee.ECE_StaffLocation = rdr["ECE_StaffLocation"].ToString();
-                                objemployee.ECE_Remarks = rdr["ECE_Remarks"].ToString();
-                                //objemployee.ECE_Pwd = rdr["ECE_Pwd"].ToString();
-                                //objemployee.ECE_LastResetDateTime = rdr["ECE_LastResetDateTime"].ToString();
-                                //objemployee.ECE_SyncedDateTime = rdr["ECE_SyncedDateTime"].ToString();
-                                //objemployee.ECE_ActiveFrom = rdr["ECE_ActiveFrom"].ToString();
-                                //objemployee.ECE_ActiveTo = rdr["ECE_ActiveTo"].ToString();
-                                objemployee.ECE_Status = Convert.ToBoolean(rdr["ECE_Status"].ToString());
+                                objemployee.EME_CustomerID = rdr["EME_CustomerID"].ToString();
+                                objemployee.EME_DepartmentID = rdr["EME_DepartmentID"].ToString();
+                                objemployee.EME_EmployeeID = rdr["EME_EmployeeID"].ToString();
+                                objemployee.EME_FirstName = rdr["EME_FirstName"].ToString();
+                                objemployee.EME_LastName = rdr["EME_LastName"].ToString();
+                                objemployee.EME_Gender = rdr["EME_Gender"].ToString();
+                                objemployee.EME_MaritalStatus = rdr["EME_MaritalStatus"].ToString();
+                                objemployee.EME_Nationality = rdr["EME_Nationality"].ToString();
+                                objemployee.EME_BloodGroup = rdr["EME_BloodGroup"].ToString();
+                                objemployee.EME_NIC = rdr["EME_NIC"].ToString();
+                                objemployee.EME_Passport = rdr["EME_Passport"].ToString();
+                                objemployee.EME_DrivingLicense = rdr["EME_DrivingLicense"].ToString();
+                                objemployee.EME_PrefferedName = rdr["EME_PrefferedName"].ToString();
+                                objemployee.EME_JobTitle_Code = rdr["EME_JobTitle_Code"].ToString();
+                                objemployee.EME_ReportingManager = rdr["EME_ReportingManager"].ToString();
+                                objemployee.EME_EmployeeType = rdr["EME_EmployeeType"].ToString();
+                                objemployee.EME_PayeeTaxNumber = rdr["EME_PayeeTaxNumber"].ToString();
+                                objemployee.EME_Salary = rdr["EME_Salary"].ToString();
+                                objemployee.EME_Address = rdr["EME_Address"].ToString();
+                                objemployee.EME_EmailAddress = rdr["EME_EmailAddress"].ToString();
+                                objemployee.EME_MobileNumber = rdr["EME_MobileNumber"].ToString();
+                                objemployee.EME_PhoneNumber1 = rdr["EME_PhoneNumber1"].ToString();
+                                objemployee.EME_PhoneNumber2 = rdr["EME_PhoneNumber2"].ToString();
+                                objemployee.EME_Status = Convert.ToBoolean( rdr["EME_Status"].ToString());
+                                objemployee.EME_DateOfHire = Convert.ToDateTime( rdr["EME_DateOfHire"].ToString());
 
                                 if (objemployeeHead.Employee == null)
                                 {
@@ -155,11 +154,8 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "get_employee_all";
+                        cmd.CommandText = "sp_get_employee_all";
                         cmd.CommandType = CommandType.StoredProcedure;
-
-                        cmd.Parameters.AddWithValue("@ECE_EmployeeID", model.ECE_EmployeeID);
-                        cmd.Parameters["@ECE_EmployeeID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -175,32 +171,40 @@ namespace HRM_DAL.Data
                                 objemployeeHead.resp = true;
                                 objemployeeHead.msg = "Get Employee";
 
-                                objemployee.ECE_EmployeeID = rdr["ECE_EmployeeID"].ToString();
-                                objemployee.ECE_CustomerID = rdr["ECE_CustomerID"].ToString();
-                                objemployee.ECE_DepartmentID = rdr["ECE_DepartmentID"].ToString();
-                                objemployee.ECE_FirstName = rdr["ECE_FirstName"].ToString();
-                                objemployee.ECE_LastName = rdr["ECE_LastName"].ToString();
-                                //objemployee.ECE_PrefferedName = rdr["ECE_PrefferedName"].ToString();
-                                //objemployee.ECE_OrgStructuralLevel1 = rdr["ECE_OrgStructuralLevel1"].ToString();
-                                //objemployee.ECE_OrgStructuralLevel2 = rdr["ECE_OrgStructuralLevel2"].ToString();
-                                //objemployee.ECE_DepartmentDetail1 = rdr["ECE_DepartmentDetail1"].ToString();
-                                //objemployee.ECE_DepartmentDetail2 = rdr["ECE_DepartmentDetail2"].ToString();
-                                //objemployee.ECE_DepartmentDetail3 = rdr["ECE_DepartmentDetail3"].ToString();
-                                //objemployee.ECE_JobCodeDescription = rdr["ECE_JobCodeDescription"].ToString();
-                                objemployee.ECE_Address = rdr["ECE_Address"].ToString();
-                                objemployee.ECE_EmailAddress = rdr["ECE_EmailAddress"].ToString();
-                                objemployee.ECE_MobileNumber = rdr["ECE_MobileNumber"].ToString();
-                                objemployee.ECE_PhoneNumber1 = rdr["ECE_PhoneNumber1"].ToString();
-                                objemployee.ECE_PhoneNumber2 = rdr["ECE_PhoneNumber2"].ToString();
-                                objemployee.ECE_RankDescription = rdr["ECE_RankDescription"].ToString();
-                                objemployee.ECE_StaffLocation = rdr["ECE_StaffLocation"].ToString();
-                                objemployee.ECE_Remarks = rdr["ECE_Remarks"].ToString();
-                                //objemployee.ECE_Pwd = rdr["ECE_Pwd"].ToString();
-                                //objemployee.ECE_LastResetDateTime = rdr["ECE_LastResetDateTime"].ToString();
-                                //objemployee.ECE_SyncedDateTime = rdr["ECE_SyncedDateTime"].ToString();
-                                //objemployee.ECE_ActiveFrom = rdr["ECE_ActiveFrom"].ToString();
-                                //objemployee.ECE_ActiveTo = rdr["ECE_ActiveTo"].ToString();
-                                objemployee.ECE_Status = Convert.ToBoolean(rdr["ECE_Status"].ToString());
+                                objemployee.EME_CustomerID = rdr["EME_CustomerID"].ToString();
+                                objemployee.EME_DepartmentID = rdr["EME_DepartmentID"].ToString();
+                                objemployee.EME_EmployeeID = rdr["EME_EmployeeID"].ToString();
+                                objemployee.EME_FirstName = rdr["EME_FirstName"].ToString();
+                                objemployee.EME_LastName = rdr["EME_LastName"].ToString();
+                                objemployee.EME_Gender = rdr["EME_Gender"].ToString();
+                                objemployee.EME_MaritalStatus = rdr["EME_MaritalStatus"].ToString();
+                                objemployee.EME_Nationality = rdr["EME_Nationality"].ToString();
+                                objemployee.EME_BloodGroup = rdr["EME_BloodGroup"].ToString();
+                                objemployee.EME_NIC = rdr["EME_NIC"].ToString();
+                                objemployee.EME_Passport = rdr["EME_Passport"].ToString();
+                                objemployee.EME_DrivingLicense = rdr["EME_DrivingLicense"].ToString();
+                                objemployee.EME_PrefferedName = rdr["EME_PrefferedName"].ToString();
+                                objemployee.EME_JobTitle_Code = rdr["EME_JobTitle_Code"].ToString();
+                                objemployee.EME_ReportingManager = rdr["EME_ReportingManager"].ToString();
+                                objemployee.EME_EmployeeType = rdr["EME_EmployeeType"].ToString();
+                                objemployee.EME_PayeeTaxNumber = rdr["EME_PayeeTaxNumber"].ToString();
+                                objemployee.EME_Salary = rdr["EME_Salary"].ToString();
+                                objemployee.EME_Address = rdr["EME_Address"].ToString();
+                                objemployee.EME_EmailAddress = rdr["EME_EmailAddress"].ToString();
+                                objemployee.EME_MobileNumber = rdr["EME_MobileNumber"].ToString();
+                                objemployee.EME_PhoneNumber1 = rdr["EME_PhoneNumber1"].ToString();
+                                objemployee.EME_PhoneNumber2 = rdr["EME_PhoneNumber2"].ToString();
+                                objemployee.EME_Status = Convert.ToBoolean(rdr["EME_Status"].ToString());
+                                //objemployee.EME_DateOfHire = Convert.ToDateTime(rdr["EME_DateOfHire"]);
+                                if (rdr["EME_DateOfHire"] != DBNull.Value)
+                                {
+                                    objemployee.EME_DateOfHire = Convert.ToDateTime(rdr["EME_DateOfHire"]);
+                                }
+                                else
+                                {
+                                    // Handle null value, e.g.,
+                                    objemployee.EME_DateOfHire = DateTime.MinValue; // Or another default value
+                                }
 
                                 if (objemployeeHead.Employee == null)
                                 {
@@ -280,8 +284,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
                         cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@ECE_EmployeeID", item.ECE_EmployeeID);
-                        cmd.Parameters["@ECE_EmployeeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_EmployeeID", item.EME_EmployeeID);
+                        cmd.Parameters["@EME_EmployeeID"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
@@ -397,8 +401,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
                         cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@ECE_EmployeeID", item.ECE_EmployeeID);
-                        cmd.Parameters["@ECE_EmployeeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_EmployeeID", item.EME_EmployeeID);
+                        cmd.Parameters["@EME_EmployeeID"].Direction = ParameterDirection.Input;
 
                         //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
@@ -512,8 +516,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_del_employee";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@ECE_EmployeeID", item.ECE_EmployeeID);
-                        cmd.Parameters["@ECE_EmployeeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_EmployeeID", item.EME_EmployeeID);
+                        cmd.Parameters["@EME_EmployeeID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
                         cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
