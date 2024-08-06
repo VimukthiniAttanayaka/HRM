@@ -104,6 +104,7 @@ const DepartmentDataGrid = () => {
     toggleDetails(index)
   }
   const toggleDetails = (index, action) => {
+    console.log(index)
     const position = details.indexOf(index)
     let newDetails = details.slice()
     if (position !== -1) {

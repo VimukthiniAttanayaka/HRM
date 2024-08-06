@@ -73,14 +73,32 @@ namespace HRM_DAL.Data
                                 objemployee.EME_ReportingManager = rdr["EME_ReportingManager"].ToString();
                                 objemployee.EME_EmployeeType = rdr["EME_EmployeeType"].ToString();
                                 objemployee.EME_PayeeTaxNumber = rdr["EME_PayeeTaxNumber"].ToString();
-                                objemployee.EME_Salary = rdr["EME_Salary"].ToString();
+                                objemployee.EME_Salary = Convert.ToDecimal( rdr["EME_Salary"].ToString());
                                 objemployee.EME_Address = rdr["EME_Address"].ToString();
                                 objemployee.EME_EmailAddress = rdr["EME_EmailAddress"].ToString();
                                 objemployee.EME_MobileNumber = rdr["EME_MobileNumber"].ToString();
                                 objemployee.EME_PhoneNumber1 = rdr["EME_PhoneNumber1"].ToString();
                                 objemployee.EME_PhoneNumber2 = rdr["EME_PhoneNumber2"].ToString();
                                 objemployee.EME_Status = Convert.ToBoolean( rdr["EME_Status"].ToString());
-                                objemployee.EME_DateOfHire = Convert.ToDateTime( rdr["EME_DateOfHire"].ToString());
+                                //objemployee.EME_DateOfBirth = Convert.ToDateTime(rdr["EME_DateOfBirth"].ToString());
+                                if (rdr["EME_DateOfBirth"] != DBNull.Value)
+                                {
+                                    objemployee.EME_DateOfBirth = Convert.ToDateTime(rdr["EME_DateOfBirth"]);
+                                }
+                                else
+                                {
+                                    // Handle null value, e.g.,
+                                    objemployee.EME_DateOfBirth = DateTime.MinValue; // Or another default value
+                                }
+                                if (rdr["EME_DateOfHire"] != DBNull.Value)
+                                {
+                                    objemployee.EME_DateOfHire = Convert.ToDateTime(rdr["EME_DateOfHire"]);
+                                }
+                                else
+                                {
+                                    // Handle null value, e.g.,
+                                    objemployee.EME_DateOfHire = DateTime.MinValue; // Or another default value
+                                }
 
                                 if (objemployeeHead.Employee == null)
                                 {
@@ -188,7 +206,7 @@ namespace HRM_DAL.Data
                                 objemployee.EME_ReportingManager = rdr["EME_ReportingManager"].ToString();
                                 objemployee.EME_EmployeeType = rdr["EME_EmployeeType"].ToString();
                                 objemployee.EME_PayeeTaxNumber = rdr["EME_PayeeTaxNumber"].ToString();
-                                objemployee.EME_Salary = rdr["EME_Salary"].ToString();
+                                objemployee.EME_Salary = Convert.ToDecimal( rdr["EME_Salary"].ToString());
                                 objemployee.EME_Address = rdr["EME_Address"].ToString();
                                 objemployee.EME_EmailAddress = rdr["EME_EmailAddress"].ToString();
                                 objemployee.EME_MobileNumber = rdr["EME_MobileNumber"].ToString();
@@ -196,6 +214,15 @@ namespace HRM_DAL.Data
                                 objemployee.EME_PhoneNumber2 = rdr["EME_PhoneNumber2"].ToString();
                                 objemployee.EME_Status = Convert.ToBoolean(rdr["EME_Status"].ToString());
                                 //objemployee.EME_DateOfHire = Convert.ToDateTime(rdr["EME_DateOfHire"]);
+                                if (rdr["EME_DateOfBirth"] != DBNull.Value)
+                                {
+                                    objemployee.EME_DateOfBirth = Convert.ToDateTime(rdr["EME_DateOfBirth"]);
+                                }
+                                else
+                                {
+                                    // Handle null value, e.g.,
+                                    objemployee.EME_DateOfBirth = DateTime.MinValue; // Or another default value
+                                }
                                 if (rdr["EME_DateOfHire"] != DBNull.Value)
                                 {
                                     objemployee.EME_DateOfHire = Convert.ToDateTime(rdr["EME_DateOfHire"]);
@@ -284,47 +311,83 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
                         cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
+                        cmd.Parameters.AddWithValue("@EME_CustomerID", item.EME_CustomerID);
+                        cmd.Parameters["@EME_CustomerID"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EME_DepartmentID", item.EME_DepartmentID);
+                        cmd.Parameters["@EME_DepartmentID"].Direction = ParameterDirection.Input;
+
                         cmd.Parameters.AddWithValue("@EME_EmployeeID", item.EME_EmployeeID);
                         cmd.Parameters["@EME_EmployeeID"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
-                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_FirstName", item.EME_FirstName);
+                        cmd.Parameters["@EME_FirstName"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
-                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_LastName", item.EME_LastName);
+                        cmd.Parameters["@EME_LastName"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
-                        //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_Gender", item.EME_Gender);
+                        cmd.Parameters["@EME_Gender"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_UnitNumber", item.CUS_Adrs_UnitNumber);
-                        //cmd.Parameters["@CUS_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_MaritalStatus", item.EME_MaritalStatus);
+                        cmd.Parameters["@EME_MaritalStatus"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_StreetName", item.CUS_Adrs_StreetName);
-                        //cmd.Parameters["@CUS_Adrs_StreetName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_Nationality", item.EME_Nationality);
+                        cmd.Parameters["@EME_Nationality"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_City", item.CUS_Adrs_City);
-                        //cmd.Parameters["@CUS_Adrs_City"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_BloodGroup", item.EME_BloodGroup);
+                        cmd.Parameters["@EME_BloodGroup"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_CountryCode", item.CUS_Adrs_CountryCode);
-                        //cmd.Parameters["@CUS_Adrs_CountryCode"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_NIC", item.EME_NIC);
+                        cmd.Parameters["@EME_NIC"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_PostalCode", item.CUS_Adrs_PostalCode);
-                        //cmd.Parameters["@CUS_Adrs_PostalCode"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_Passport", item.EME_Passport);
+                        cmd.Parameters["@EME_Passport"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_ContactPerson", item.CUS_ContactPerson);
-                        //cmd.Parameters["@CUS_ContactPerson"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_DrivingLicense", item.EME_DrivingLicense);
+                        cmd.Parameters["@EME_DrivingLicense"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
-                        //cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_PrefferedName", item.EME_PrefferedName);
+                        cmd.Parameters["@EME_PrefferedName"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
-                        //cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_JobTitle_Code", item.EME_JobTitle_Code);
+                        cmd.Parameters["@EME_JobTitle_Code"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_SMS", item.CUS_OTP_By_SMS);
-                        //cmd.Parameters["@CUS_OTP_By_SMS"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_ReportingManager", item.EME_ReportingManager);
+                        cmd.Parameters["@EME_ReportingManager"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
-                        //cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EME_EmployeeType", item.EME_EmployeeType);
+                        cmd.Parameters["@EME_EmployeeType"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EME_PayeeTaxNumber", item.EME_PayeeTaxNumber);
+                        cmd.Parameters["@EME_PayeeTaxNumber"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EME_Salary", item.EME_Salary);
+                        cmd.Parameters["@EME_Salary"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EME_Address", item.EME_Address);
+                        cmd.Parameters["@EME_Address"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EME_EmailAddress", item.EME_EmailAddress);
+                        cmd.Parameters["@EME_EmailAddress"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EME_MobileNumber", item.EME_MobileNumber);
+                        cmd.Parameters["@EME_MobileNumber"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EME_PhoneNumber1", item.EME_PhoneNumber1);
+                        cmd.Parameters["@EME_PhoneNumber1"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EME_PhoneNumber2", item.EME_PhoneNumber2);
+                        cmd.Parameters["@EME_PhoneNumber2"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EME_DateOfHire", item.EME_DateOfHire);
+                        cmd.Parameters["@EME_DateOfHire"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EME_Status", item.EME_Status);
+                        cmd.Parameters["@EME_Status"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EME_DateOfBirth", item.EME_DateOfBirth);
+                        cmd.Parameters["@EME_DateOfBirth"].Direction = ParameterDirection.Input;
 
                         string mailtypes = "";
 

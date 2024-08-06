@@ -24,18 +24,19 @@ namespace HRM_DAL.Models
         public string EME_ReportingManager { get; set; }
         public string EME_EmployeeType { get; set; }
         public string EME_PayeeTaxNumber { get; set; }
-        public string EME_Salary { get; set; }
+        public decimal EME_Salary { get; set; }
         public string EME_Address { get; set; }
         public string EME_EmailAddress { get; set; }
         public string EME_MobileNumber { get; set; }
         public string EME_PhoneNumber1 { get; set; }
         public string EME_PhoneNumber2 { get; set; }
-        public DateTime EME_DateOfHire {  get; set; }
+        public DateTime? EME_DateOfHire {  get; set; }
         public bool EME_Status { get; set; }
-        public string EME_CreatedBy { get; set; }
-        public DateTime EME_CreatedDateTime { get; set; }
-        public string EME_ModifiedBy { get; set; }
-        public DateTime EME_ModifiedDateTime { get; set; }
+        //public string EME_CreatedBy { get; set; }
+        //public DateTime EME_CreatedDateTime { get; set; }
+        //public string EME_ModifiedBy { get; set; }
+        //public DateTime EME_ModifiedDateTime { get; set; }
+        public DateTime? EME_DateOfBirth { get; set; }
     }
 
     public class ReturnEmpResponse : ReturnResponse
@@ -66,7 +67,7 @@ namespace HRM_DAL.Models
         public string EME_ReportingManager { get; set; }
         public string EME_EmployeeType { get; set; }
         public string EME_PayeeTaxNumber { get; set; }
-        public string EME_Salary { get; set; }
+        public decimal EME_Salary { get; set; }
         public string EME_Address { get; set; }
         public string EME_EmailAddress { get; set; }
         public string EME_MobileNumber { get; set; }
@@ -74,10 +75,11 @@ namespace HRM_DAL.Models
         public string EME_PhoneNumber2 { get; set; }
         public DateTime EME_DateOfHire { get; set; }
         public bool EME_Status { get; set; }
-        public string EME_CreatedBy { get; set; }
-        public DateTime EME_CreatedDateTime { get; set; }
-        public string EME_ModifiedBy { get; set; }
-        public DateTime EME_ModifiedDateTime { get; set; }
+        //public string EME_CreatedBy { get; set; }
+        //public DateTime EME_CreatedDateTime { get; set; }
+        //public string EME_ModifiedBy { get; set; }
+        //public DateTime EME_ModifiedDateTime { get; set; }
+        public DateTime EME_DateOfBirth { get; set; }
     }
 
     public class ReturnEmployeeAllModel

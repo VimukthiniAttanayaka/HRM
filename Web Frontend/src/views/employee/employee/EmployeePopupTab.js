@@ -2,10 +2,260 @@ import React, { useState, useEffect } from 'react'
 import { CTooltip, CRow, CButton, CModal, CTabs, CFormSelect, CTabList, CTab, CCol, CInputGroupText, CTabContent, CTabPanel, CModalBody, CModalTitle, CModalFooter, CFormCheck, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import axios from 'axios';
-import { use } from 'i18next';
 
-const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
+const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStatus }) => {
+console.log('EmployeeDetails', EmployeeDetails);
   const apiUrl = process.env.REACT_APP_API_URL;
+
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [dob, setDob] = useState(null)
+  const [maritalStatus, setMaritalStatus] = useState('')
+  const [gender, setGender] = useState('')
+  const [nationality, setNationality] = useState('')
+  const [bloodGroup, setBloodGroup] = useState('')
+  const [prefferedName, setPrefferedName] = useState('')
+  const [nic, setNic] = useState('')
+  const [passport, setPassport] = useState('')
+  const [drivingLicense, setDrivingLicense] = useState('')
+  const [address, setAddress] = useState('')
+  const [emailAddress, setEmailAddress] = useState('')
+  const [mobileNumber, setMobileNumber] = useState('')
+  const [phoneNumber1, setPhoneNumber1] = useState('')
+  const [phoneNumber2, setPhoneNumber2] = useState('')
+  const [jobTitle, setJobTitle] = useState('')
+  const [department, setDepartment] = useState('')
+  const [reportingManager, setReportingManager] = useState('')
+  const [dateOfHired, setDateOfHired] = useState('')
+  const [employmentType, setEmploymentType] = useState('')
+  const [salary, setSalary] = useState()
+  const [additionalInformation, setAdditionalInformation] = useState('')
+  const [tin, setTin] = useState('')
+  const [isActive, setIsActive] = useState(true)
+
+  const handleChangeFirstName = (event) => {
+    setFirstName(event.target.value)
+  }
+  const handleChangeLastName = (event) => {
+    setLastName(event.target.value)
+  }
+  const handleChangeDob = (date) => {
+    setDob(date)
+  }
+  const handleChangeMaritalStatus = (event) => {
+    setMaritalStatus(event.target.value)
+  }
+  const handleChangeGender = (event) => {
+    setGender(event.target.value)
+  }
+  const handleChangeNationality = (event) => {
+    setNationality(event.target.value)
+  }
+  const handleChangeBloodGroup = (event) => {
+    setBloodGroup(event.target.value)
+  }
+  const handleChangePrefferedName = (event) => {
+    setPrefferedName(event.target.value)
+  }
+  const handleChangeNicNumber = (event) => {
+    setNic(event.target.value)
+  }
+  const handleChangePassportNumber = (event) => {
+    setPassport(event.target.value)
+  }
+  const handleChangeDrivingLicenseNumber = (event) => {
+    setDrivingLicense(event.target.value)
+  }
+  const handleChangeAddress = (event) => {
+    setAddress(event.target.value)
+  }
+  const handleChangeEmailAddress = (event) => {
+    setEmailAddress(event.target.value)
+  }
+  const handleChangeMobileNumber = (event) => {
+    setMobileNumber(event.target.value)
+  }
+  const handleChangePhoneNumber1 = (event) => {
+    setPhoneNumber1(event.target.value)
+  }
+  const handleChangePhoneNumber2 = (event) => {
+    setPhoneNumber2(event.target.value)
+  }
+  const handleChangeJobTitle = (event) => {
+    setJobTitle(event.target.value)
+  }
+  const handleChangeDepartment = (event) => {
+    setDepartment(event.target.value)
+  }
+  const handleChangeReportingManager = (event) => {
+    setReportingManager(event.target.value)
+  }
+  const handleChangeDateOfHired = (date) => {
+    setDateOfHired(date)
+  }
+  const handleChangeEmploymentType = (event) => {
+    setEmploymentType(event.target.value)
+  }
+  const handleChangeSalary = (event) => {
+    setSalary(event.target.value)
+  }
+  const handleChangeAdditionalInformation = (event) => {
+    setAdditionalInformation(event.target.value)
+  }
+  const handleChangeTin = (event) => {
+    setTin(event.target.value)
+  }
+
+  const handleCreate = async (event) => {
+
+    const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      EME_CustomerID: "string",
+      EME_DepartmentID: department,
+      EME_EmployeeID: firstName,
+      EME_FirstName: firstName,
+      EME_LastName: lastName,
+      EME_Gender: gender,
+      EME_MaritalStatus: maritalStatus,
+      EME_Nationality: nationality,
+      EME_BloodGroup: bloodGroup,
+      EME_NIC: nic,
+      EME_Passport: passport,
+      EME_DrivingLicense: drivingLicense,
+      EME_PrefferedName: prefferedName,
+      EME_JobTitle_Code: jobTitle,
+      EME_ReportingManager: reportingManager,
+      EME_EmployeeType: employmentType,
+      EME_PayeeTaxNumber: tin,
+      EME_Salary: 879,
+      EME_Address: address,
+      EME_EmailAddress: emailAddress,
+      EME_MobileNumber: mobileNumber,
+      EME_PhoneNumber1: phoneNumber1,
+      EME_PhoneNumber2: phoneNumber2,
+      EME_DateOfHire: "2024-08-06T19:38:24.851Z",
+      EME_Status: true,
+      EME_DateOfBirth: "2024-08-06T19:38:24.851Z",
+    }
+    console.log(formData);
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'Employee/add_new_employee', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('Department data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting Department data:', response.statusText)
+    }
+  }
+  const handleEdit = async (event) => {
+    // Prepare form data
+    const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      EME_CustomerID: "string",
+      EME_DepartmentID: department,
+      EME_EmployeeID: "string",
+      EME_FirstName: firstName,
+      EME_LastName: lastName,
+      EME_Gender: gender,
+      EME_MaritalStatus: maritalStatus,
+      EME_Nationality: nationality,
+      EME_BloodGroup: bloodGroup,
+      EME_NIC: nic,
+      EME_Passport: passport,
+      EME_DrivingLicense: drivingLicense,
+      EME_PrefferedName: prefferedName,
+      EME_JobTitle_Code: jobTitle,
+      EME_ReportingManager: reportingManager,
+      EME_EmployeeType: employmentType,
+      EME_PayeeTaxNumber: tin,
+      EME_Salary: salary,
+      EME_Address: address,
+      EME_EmailAddress: emailAddress,
+      EME_MobileNumber: mobileNumber,
+      EME_PhoneNumber1: phoneNumber1,
+      EME_PhoneNumber2: phoneNumber2,
+      EME_DateOfHire: "2024-08-06T19:38:24.851Z",
+      EME_Status: isActive,
+      EME_DateOfBirth: "2024-08-06T19:38:24.851Z",
+    }
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'Employee/modify_employee', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('Department data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting Department data:', response.statusText)
+    }
+  }
+  const handleDelete = async (event) => {
+    console.log('Delete Department')
+    // Prepare form data
+    const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      MDD_DepartmentID: DepartmentId
+    }
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'Department/inactivate_department', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('Department data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting Department data:', response.statusText)
+    }
+  }
+
+  const handleSubmitData = async (event) => {
+    event.preventDefault()
+
+    if (popupStatus == 'create') {
+      handleCreate(event)
+    } else if (popupStatus == 'edit') {
+      handleEdit(event)
+    } else if (popupStatus == 'delete') {
+      handleDelete(event)
+    }
+
+  }
+
+  const popupStatusSetup = (event) => {
+
+    if (popupStatus == 'edit') {
+      return 'Edit Employee'
+    } else if (popupStatus == 'view') {
+      return 'View Employee'
+    } else if (popupStatus == 'delete') {
+      return 'Delete Employee'
+    } else {
+      return 'Create New Employee'
+    }
+  }
 
   const [selectedFileProfileImage, setSelectedFileProfileImage] = useState();
   const [selectedFileCV, setSelectedFileCV] = useState(null);
@@ -14,7 +264,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
   const [selectedFileDrivingLicense, setSelectedFileDrivingLicense] = useState();
 
   function handleChangeProfileImage(e) {
-    console.log(e.target.files);
+    // console.log(e.target.files);
     setSelectedFileProfileImage(e.target.files[0]);
   }
 
@@ -23,19 +273,20 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
   };
 
   function handleChangeNIC(e) {
-    console.log(e.target.files);
+    // console.log(e.target.files);
     setSelectedFileNIC(e.target.files[0]);
   }
 
   function handleChangePassport(e) {
-    console.log(e.target.files);
+    // console.log(e.target.files);
     setSelectedFilePassport(e.target.files[0]);
   }
 
   function handleChangeDrivingLicense(e) {
-    console.log(e.target.files);
+    // console.log(e.target.files);
     setSelectedFileDrivingLicense(e.target.files[0]);
   }
+
   // const handleImageChangeNIC = (event) => {
   //   const newImages = Array.from(event.target.files); // Convert FileList to array
   //   setSelectedFileNIC((prevImages) => [...prevImages, ...newImages]);
@@ -49,33 +300,30 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
   //   });
   // };
 
-  const handleSubmit1
-    = async (event) => {
-      event.preventDefault();
-      const formData = new FormData();
-      formData.append('file', selectedFile);
+  // const handleSubmit1
+  //   = async (event) => {
+  //     event.preventDefault();
+  //     const formData = new FormData();
+  //     formData.append('file', selectedFile);
 
-      try {
-        const response = await axios.post('/api/upload',
-          formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
+  //     try {
+  //       const response = await axios.post('/api/upload',
+  //         formData, {
+  //         headers: {
+  //           'Content-Type': 'multipart/form-data',
+  //         },
+  //       });
+  //       console.log(response.data);
+  //     } catch (error) {
+  //       console.error(error);
 
-      }
-    };
+  //     }
+  //   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("hi")
-    console.log(selectedFileProfileImage)
-    // console.log(selectedFileCV)
+
     const formData = new FormData();
-    // formData.append('image', selectedFileProfileImage);
     formData.append('cv', selectedFileCV);
     formData.append('nic', selectedFileNIC);
     formData.append('profileImage', selectedFileProfileImage);
@@ -83,13 +331,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
     formData.append('drivingLicense', selectedFileDrivingLicense);
 
     try {
-      const response =
-        // await fetch(apiUrl + 'Employee/PostImage', {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'multipart/form-data' },
-        //   body: formData,
-        // })
-        await axios.post(apiUrl + 'Employee/PostImage',
+      const response = await axios.post(apiUrl + 'Employee/PostImage',
           formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -102,10 +344,35 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
 
   };
 
-  var image;
   useEffect(() => {
-    image = selectedFileProfileImage;
-  }, [selectedFileProfileImage]);
+    const createdDateTime = EmployeeDetails.EME_DateOfBirth;
+    setFirstName(EmployeeDetails.EME_FirstName)
+    setLastName(EmployeeDetails.EME_LastName)
+    setDob(new Date(createdDateTime))
+    setMaritalStatus(EmployeeDetails.EME_MaritalStatus)
+    setGender(EmployeeDetails.EME_Gender)
+    setNationality(EmployeeDetails.EME_Nationality)
+    setBloodGroup(EmployeeDetails.EME_BloodGroup)
+    setPrefferedName(EmployeeDetails.EME_PrefferedName)
+    setNic(EmployeeDetails.EME_NIC)
+    setPassport(EmployeeDetails.EME_Passport)
+    setDrivingLicense(EmployeeDetails.EME_DrivingLicense)
+    setAddress(EmployeeDetails.EME_Address)
+    setEmailAddress(EmployeeDetails.EME_EmailAddress)
+    setMobileNumber(EmployeeDetails.EME_MobileNumber)
+    setPhoneNumber1(EmployeeDetails.EME_PhoneNumber1)
+    setPhoneNumber2(EmployeeDetails.EME_PhoneNumber2)
+    setJobTitle(EmployeeDetails.EME_JobTitle_Code)
+    setDepartment(EmployeeDetails.EME_Department)
+    setReportingManager(EmployeeDetails.EME_ReportingManager)
+    setDateOfHired(EmployeeDetails.EME_DateOfHired)
+    setEmploymentType(EmployeeDetails.EME_EmploymentType)
+    setSalary(EmployeeDetails.EME_Salary)
+    setAdditionalInformation(EmployeeDetails.EME_AdditionalInformation)
+    setTin(EmployeeDetails.EME_PayeeTaxNumber)
+    setIsActive(EmployeeDetails.EME_Status)
+    }, [EmployeeDetails]);
+
   return (
     <>
       <CButton color="primary" onClick={onOpen}>Add New Employee</CButton>
@@ -118,7 +385,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New Employee</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">{popupStatusSetup()}</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CTabs activeItemKey="general">
@@ -127,7 +394,6 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
               <CTab itemKey="profile">Profile</CTab>
               <CTab itemKey="contact">Contact</CTab>
               <CTab itemKey="employment">Employment</CTab>
-              {/* <CTab disabled itemKey="disabled">Disabled</CTab> */}
             </CTabList>
             <CTabContent>
               <CTabPanel className="p-3" itemKey="general">
@@ -137,7 +403,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                       <h6>FirstName</h6>
                     </CInputGroupText>
                   </CCol> <CFormInput placeholder="FirstName" name="FirstName"
-                  // value={customerId} onChange={handleChangeId}
+                  value={firstName} onChange={handleChangeFirstName}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -146,7 +412,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                       <h6>LastName</h6>
                     </CInputGroupText>
                   </CCol> <CFormInput placeholder="LastName" name="LastName"
-                  // value={customerId} onChange={handleChangeId}
+                  value={lastName} onChange={handleChangeLastName}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -155,7 +421,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                       <h6>Date of birth</h6>
                     </CInputGroupText>
                   </CCol> <CDatePicker placeholder="Date of birth" name="dob"
-                  // value={customerId} onChange={handleChangeId}
+                  value={dob} onChange={handleChangeDob}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -164,8 +430,10 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                       <h6>Gender</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck inline type="radio" name="inlineRadioOptions" id="inlineCheckbox1" value="option1" label="Male" className='ms-4' />
-                  <CFormCheck inline type="radio" name="inlineRadioOptions" id="inlineCheckbox2" value="option2" label="Female" />
+                  <CFormCheck inline type="radio" name="gender" id="inlineCheckbox1" value="male" label="Male" checked={gender === 'male'}
+                    onChange={handleChangeGender} className='ms-4' />
+                  <CFormCheck inline type="radio" name="gender" id="inlineCheckbox2" value="female" label="Female" checked={gender === 'female'}
+                    onChange={handleChangeGender} />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
@@ -173,10 +441,14 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                       <h6>Marital status</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck inline type="radio" name="inlineRadioOptions" id="inlineCheckbox1" value="option1" label="Male" className='ms-4' />
-                  <CFormCheck inline type="radio" name="inlineRadioOptions" id="inlineCheckbox2" value="option2" label="Female" />
-                  <CFormCheck inline type="radio" name="inlineRadioOptions" id="inlineCheckbox2" value="option2" label="Female" />
-                  <CFormCheck inline type="radio" name="inlineRadioOptions" id="inlineCheckbox2" value="option2" label="Female" />
+                  <CFormCheck inline type="radio" name="maritalStatus" id="inlineCheckbox1" value="singal" label="Single" checked={maritalStatus === 'singal'}
+                    onChange={handleChangeMaritalStatus} className='ms-4' />
+                  <CFormCheck inline type="radio" name="maritalStatus" id="inlineCheckbox2" value="married" label="Married" checked={maritalStatus === 'married'}
+                    onChange={handleChangeMaritalStatus} />
+                  <CFormCheck inline type="radio" name="maritalStatus" id="inlineCheckbox2" value="widowed" label="Widowed" checked={maritalStatus === 'widowed'}
+                    onChange={handleChangeMaritalStatus} />
+                  <CFormCheck inline type="radio" name="maritalStatus" id="inlineCheckbox2" value="divorced" label="Divorced" checked={maritalStatus === 'divorced'}
+                    onChange={handleChangeMaritalStatus} />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
@@ -184,9 +456,9 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                       <h6>Nationality/Country</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormSelect>
-                    <option value="PIN">Pin</option>
-                    <option value="PWD">Password</option>
+                  <CFormSelect value={nationality} onChange={handleChangeNationality}>
+                    <option value="srilankan">Srilankan</option>
+                    <option value="indian">Indian</option>
                   </CFormSelect>
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -195,15 +467,15 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                       <h6>Blood group</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormSelect>
-                    <option value="PIN">O+</option>
-                    <option value="PWD">O-</option>
-                    <option value="PIN">A+</option>
-                    <option value="PWD">A-</option>
-                    <option value="PIN">B+</option>
-                    <option value="PWD">B-</option>
-                    <option value="PIN">AB+</option>
-                    <option value="PWD">AB-</option>
+                  <CFormSelect value={bloodGroup} onChange={handleChangeBloodGroup}>
+                    <option value="o+">O+</option>
+                    <option value="o-">O-</option>
+                    <option value="a+">A+</option>
+                    <option value="a-">A-</option>
+                    <option value="b+">B+</option>
+                    <option value="b-">B-</option>
+                    <option value="ab+">AB+</option>
+                    <option value="ab-">AB-</option>
                   </CFormSelect>
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -211,8 +483,8 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>PrefferedName</h6>
                     </CInputGroupText>
-                  </CCol> <CFormInput placeholder="PrefferedName" name="PrefferedName"
-                  // value={customerId} onChange={handleChangeId}
+                  </CCol> <CFormInput placeholder="PrefferedName" name="prefferedName"
+                  value={prefferedName} onChange={handleChangePrefferedName}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -220,8 +492,8 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>NIC</h6>
                     </CInputGroupText>
-                  </CCol> <CFormInput placeholder="JobTitle_Code" name="JobTitle_Code"
-                  // value={customerId} onChange={handleChangeId}
+                  </CCol> <CFormInput placeholder="NIC" name="nic"
+                  value={nic} onChange={handleChangeNicNumber}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -229,8 +501,8 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>Passport</h6>
                     </CInputGroupText>
-                  </CCol> <CFormInput placeholder="JobTitle_Code" name="JobTitle_Code"
-                  // value={customerId} onChange={handleChangeId}
+                  </CCol> <CFormInput placeholder="Passport Number" name="passportNumber"
+                  value={passport} onChange={handleChangePassportNumber}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -238,8 +510,8 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>Driving License</h6>
                     </CInputGroupText>
-                  </CCol> <CFormInput placeholder="JobTitle_Code" name="JobTitle_Code"
-                  // value={customerId} onChange={handleChangeId}
+                  </CCol> <CFormInput placeholder="Driving License" name="drivingLicense"
+                  value={drivingLicense} onChange={handleChangeDrivingLicenseNumber}
                   />
                 </CInputGroup>
               </CTabPanel>
@@ -346,7 +618,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                       <h6>Address</h6>
                     </CInputGroupText>
                   </CCol> <CFormInput placeholder="Address" name="Address"
-                  // value={customerId} onChange={handleChangeId}
+                  value={address} onChange={handleChangeAddress}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -354,8 +626,8 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>EmailAddress</h6>
                     </CInputGroupText>
-                  </CCol> <CFormInput placeholder="EmailAddress" name="EmailAddress"
-                  // value={customerId} onChange={handleChangeId}
+                  </CCol> <CFormInput placeholder="EmailAddress" name="emailAddress"
+                  value={emailAddress} onChange={handleChangeEmailAddress}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -363,8 +635,8 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>MobileNumber</h6>
                     </CInputGroupText>
-                  </CCol> <CFormInput placeholder="MobileNumber" name="MobileNumber"
-                  // value={customerId} onChange={handleChangeId}
+                  </CCol> <CFormInput placeholder="MobileNumber" name="mobileNumber"
+                  value={mobileNumber} onChange={handleChangeMobileNumber}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -372,8 +644,8 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>PhoneNumber1</h6>
                     </CInputGroupText>
-                  </CCol> <CFormInput placeholder="PhoneNumber1" name="PhoneNumber1"
-                  // value={customerId} onChange={handleChangeId}
+                  </CCol> <CFormInput placeholder="PhoneNumber1" name="phoneNumber1"
+                  value={phoneNumber1} onChange={handleChangePhoneNumber1}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -381,27 +653,28 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>PhoneNumber2</h6>
                     </CInputGroupText>
-                  </CCol> <CFormInput placeholder="PhoneNumber2" name="PhoneNumber2"
-                  // value={customerId} onChange={handleChangeId}
+                  </CCol> <CFormInput placeholder="PhoneNumber2" name="phoneNumber2"
+                  value={phoneNumber2} onChange={handleChangePhoneNumber2}
                   />
                 </CInputGroup>
               </CTabPanel>
               <CTabPanel className="p-3" itemKey="employment">
+                <CForm onSubmit={handleSubmitData}>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>Job title</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormSelect>
-                    <option value="PIN">O+</option>
-                    <option value="PWD">O-</option>
-                    <option value="PIN">A+</option>
-                    <option value="PWD">A-</option>
-                    <option value="PIN">B+</option>
+                  <CFormSelect value={jobTitle} onChange={handleChangeJobTitle}>
+                    <option value="manager">Manager</option>
+                    <option value="directer">Directer</option>
+                    <option value="developer">Developer</option>
+                    <option value="techLead">Tech lead</option>
+                    {/* <option value="PIN">B+</option>
                     <option value="PWD">B-</option>
                     <option value="PIN">AB+</option>
-                    <option value="PWD">AB-</option>
+                    <option value="PWD">AB-</option> */}
                   </CFormSelect>
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -410,15 +683,15 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                       <h6>Department</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormSelect>
-                    <option value="PIN">O+</option>
-                    <option value="PWD">O-</option>
-                    <option value="PIN">A+</option>
-                    <option value="PWD">A-</option>
-                    <option value="PIN">B+</option>
+                  <CFormSelect value={department} onChange={handleChangeDepartment}>
+                    <option value="management">Management</option>
+                    <option value="hr">HR</option>
+                    <option value="accounting">Accounting</option>
+                    <option value="developer">Developer</option>
+                    {/* <option value="PIN">B+</option>
                     <option value="PWD">B-</option>
                     <option value="PIN">AB+</option>
-                    <option value="PWD">AB-</option>
+                    <option value="PWD">AB-</option> */}
                   </CFormSelect>
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -427,7 +700,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                       <h6>Reporting manager</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormSelect>
+                  <CFormSelect value={reportingManager} onChange={handleChangeReportingManager}>
                     <option value="PIN">O+</option>
                     <option value="PWD">O-</option>
                     <option value="PIN">A+</option>
@@ -443,8 +716,8 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>Date of hire</h6>
                     </CInputGroupText>
-                  </CCol> <CDatePicker placeholder="Date of birth" name="dob"
-                  // value={customerId} onChange={handleChangeId}
+                  </CCol> <CDatePicker placeholder="Date of hired" name="dateOfHired"
+                  value={dateOfHired} onChange={handleChangeDateOfHired}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -453,10 +726,10 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                       <h6>Employment type</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormSelect>
-                    <option value="PIN">FullTime</option>
-                    <option value="PWD">part-time</option>
-                    <option value="PIN">contract</option>
+                  <CFormSelect value={employmentType} onChange={handleChangeEmploymentType}>
+                    <option value="fullTime">full-time</option>
+                    <option value="partTime">part-time</option>
+                    <option value="contract">contract</option>
                   </CFormSelect>
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -464,8 +737,8 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>Salary</h6>
                     </CInputGroupText>
-                  </CCol> <CFormInput placeholder="JobTitle_Code" name="JobTitle_Code"
-                  // value={customerId} onChange={handleChangeId}
+                  </CCol> <CFormInput placeholder="Salary" name="salary" type='number'
+                  value={salary} onChange={handleChangeSalary}
                   />
                 </CInputGroup>
                 {/* <CInputGroup className="mb-3">
@@ -483,7 +756,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                       <h6>Additional Information</h6>
                     </CInputGroupText>
                   </CCol> <CFormInput placeholder="JobTitle_Code" name="JobTitle_Code"
-                  // value={customerId} onChange={handleChangeId}
+                  value={additionalInformation} onChange={handleChangeAdditionalInformation}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -491,14 +764,16 @@ const EmployeePopupTab = ({ visible, onClose, onOpen }) => {
                     <CInputGroupText>
                       <h6>Tax identification number(TIN)</h6>
                     </CInputGroupText>
-                  </CCol> <CFormInput placeholder="JobTitle_Code" name="JobTitle_Code"
-                  // value={customerId} onChange={handleChangeId}
+                  </CCol> <CFormInput placeholder="TIN" name="tin"
+                  value={tin} onChange={handleChangeTin}
                   />
                 </CInputGroup>
+                  <div className="d-grid">
+                    {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :
+                      <CButton color="success" type='submit'>Submit</CButton>)}
+                  </div>
+                </CForm>
               </CTabPanel>
-              {/* <CTabPanel className="p-3" itemKey="disabled">
-                Disabled tab content
-              </CTabPanel> */}
             </CTabContent>
           </CTabs>
         </CModalBody>

@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
 import EmployeePopupTab from './EmployeePopupTab'
 import { getEmployeeAll } from '../../../apicalls/employee/get_all_list.js';
+import { getEmployeeSingle } from '../../../apicalls/employee/get_employee_single.js';
 
 const EmployeeDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
+  const [popupStatus, setPopupStatus] = useState('create')
 
   const columns = [
     {
@@ -53,6 +54,20 @@ const EmployeeDataGrid = () => {
       filter: false,
       sorter: false,
     },
+    {
+      key: 'view',
+      label: '',
+      _style: { width: '1%' },
+      filter: false,
+      sorter: false,
+    },
+    {
+      key: 'delete',
+      label: '',
+      _style: { width: '1%' },
+      filter: false,
+      sorter: false,
+    },
   ];
   const getBadge = (status) => {
     switch (status) {
@@ -68,18 +83,45 @@ const EmployeeDataGrid = () => {
         return 'primary'
     }
   }
-  const toggleDetails = (index) => {
 
+  const [EmployeeDetails, setEmployeeDetails] = useState([])
 
+  async function loadDetails(item, action) {
+
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+
+    const formData = {
+      // UD_StaffID: staffId,
+      // AUD_notificationToken: token,
+      EME_EmployeeID: item
+    }
+    const EmployeeDetails = await getEmployeeSingle(formData)
+    setEmployeeDetails(EmployeeDetails);
+    handleOpenPopup()
+  }
+  const toggleEdit = (index) => {
+    setPopupStatus('edit')
+    toggleDetails(index)
+  }
+  const toggleDelete = (index) => {
+    setPopupStatus('delete')
+    toggleDetails(index)
+  }
+  const toggleView = (index) => {
+    setPopupStatus('view')
+    toggleDetails(index)
+  }
+
+  const toggleDetails = (index, action) => {
     const position = details.indexOf(index)
     let newDetails = details.slice()
     if (position !== -1) {
       newDetails.splice(position, 1)
     } else {
       newDetails = [...details, index]
-      // alert(newDetails[newDetails.length - 1])
-      console.log(newDetails)
-      handleOpenPopup()
+      loadDetails(newDetails[0], action)
     }
     // setDetails(newDetails)
   }
@@ -99,12 +141,13 @@ const EmployeeDataGrid = () => {
     const EmployeeDetails = await getEmployeeAll(formData)
     setData(EmployeeDetails);
 
-    console.log(EmployeeDetails)
-
   }
+
+  const [visible, setVisible] = useState(false);
+
   useEffect(() => {
     requestdata();
-  }, []);
+  }, [visible]);
 
 
   const [currentItems, setCurrentItems] = useState(data)
@@ -113,14 +156,14 @@ const EmployeeDataGrid = () => {
 
   const csvCode = 'data:text/csv;charset=utf-8,SEP=,%0A' + encodeURIComponent(csvContent)
 
-  const [visible, setVisible] = useState(false);
-
   const handleOpenPopup = () => {
     setVisible(true);
   };
 
   const handleClosePopup = () => {
     setVisible(false);
+    setEmployeeDetails([]);
+    setPopupStatus('create')
   };
 
   return (
@@ -138,7 +181,7 @@ const EmployeeDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <EmployeePopupTab onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} />
+          <EmployeePopupTab popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} EmployeeDetails={EmployeeDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -160,12 +203,11 @@ const EmployeeDataGrid = () => {
           console.log(items)
         }}
         scopedColumns={{
-
-          // status: (item) => (
-          //   <td>
-          //     {/* <CBadge color={getBadge(item.status)}>{item.status}</CBadge> */}
-          //   </td>
-          // ),
+          status: (item) => (
+            <td>
+              <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
+            </td>
+          ),
           show_details: (item) => {
             return (
               <td className="py-2">
@@ -175,14 +217,46 @@ const EmployeeDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDetails(item.id)
+                    toggleEdit(item.EME_EmployeeID)
                   }}
                 >
-                  {details.includes(item.id) ? 'Hide' : 'Show'}
+                  Edit
                 </CButton>
               </td>
             )
           },
+          view: (item) => (
+            <td>
+              <CButton
+                color="success"
+                variant="outline"
+                shape="square"
+                size="sm"
+                onClick={() => {
+                  toggleView(item.EME_EmployeeID)
+                }}
+              >
+                View
+              </CButton>
+            </td>
+          ),
+          delete: (item) => (
+            <td>
+              {item.status == 'Inactive' ? '' :
+                <CButton
+                  color="danger"
+                  variant="outline"
+                  shape="square"
+                  size="sm"
+                  onClick={() => {
+                    toggleDelete(item.EME_EmployeeID)
+                  }}
+                >
+                  Delete
+                </CButton>
+              }
+            </td>
+          ),
           details: (item) => {
             return (
               <CCollapse visible={details.includes(item.id)}>
