@@ -17,3 +17,10 @@
 {
   background-color: red !important;
 }
+#dob{
+  padding: 0.375rem 0.75rem;
+  width: 66%;
+  background-color: var(--cui-body-bg);
+  border: var(--cui-border-width) solid var(--cui-border-color);
+  border-radius: var(--cui-border-radius);
+}
