@@ -4,10 +4,10 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import axios from 'axios';
 
 const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStatus }) => {
-console.log('EmployeeDetails', EmployeeDetails)
+
   const apiUrl = process.env.REACT_APP_API_URL;
 
-  const [employeeId, setEmployeeId] = useState('')
+  const [employeeId, setEmployeeId] = useState()
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [dob, setDob] = useState('1990-01-01')
@@ -184,7 +184,7 @@ console.log('EmployeeDetails', EmployeeDetails)
       EME_ReportingManager: reportingManager,
       EME_EmployeeType: employmentType,
       EME_PayeeTaxNumber: tin,
-      EME_Salary: 569,
+      EME_Salary: 568,
       EME_Address: address,
       EME_EmailAddress: emailAddress,
       EME_MobileNumber: mobileNumber,
@@ -351,40 +351,68 @@ console.log('EmployeeDetails', EmployeeDetails)
   };
 
   useEffect(() => {
-    const createdDOB = EmployeeDetails.EME_DateOfBirth;
-    if (createdDOB !== undefined) {
-      const dateOnly = createdDOB.slice(0, 10);
-      setDob(dateOnly)
+    if (popupStatus == 'create') {
+      setEmployeeId('')
+      setFirstName('')
+      setLastName('')
+      setMaritalStatus('')
+      setGender('')
+      setNationality('srilankan')
+      setBloodGroup('o+')
+      setPrefferedName('')
+      setNic('')
+      setPassport('')
+      setDrivingLicense('')
+      setAddress('')
+      setEmailAddress('')
+      setMobileNumber('')
+      setPhoneNumber1('')
+      setPhoneNumber2('')
+      setJobTitle('manager')
+      setDepartment('management')
+      setReportingManager('PIN1')
+      setEmploymentType('fullTime')
+      setSalary(0)
+      setAdditionalInformation('')
+      setTin('')
+      setIsActive(true)
     }
-    const createdDOH = EmployeeDetails.EME_DateOfHired;
-    if (createdDOH !== undefined) {
-      const dateOnly = createdDOH.slice(0, 10);
-      setDob(dateOnly)
+    else {
+      const createdDOB = EmployeeDetails.EME_DateOfBirth;
+      if (createdDOB !== undefined) {
+        const dateOnly = createdDOB.slice(0, 10);
+        setDob(dateOnly)
+      }
+      const createdDOH = EmployeeDetails.EME_DateOfHired;
+      if (createdDOH !== undefined) {
+        const dateOnly = createdDOH.slice(0, 10);
+        setDob(dateOnly)
+      }
+      setEmployeeId(EmployeeDetails.EME_EmployeeID)
+      setFirstName(EmployeeDetails.EME_FirstName)
+      setLastName(EmployeeDetails.EME_LastName)
+      setMaritalStatus(EmployeeDetails.EME_MaritalStatus)
+      setGender(EmployeeDetails.EME_Gender)
+      setNationality(EmployeeDetails.EME_Nationality)
+      setBloodGroup(EmployeeDetails.EME_BloodGroup)
+      setPrefferedName(EmployeeDetails.EME_PrefferedName)
+      setNic(EmployeeDetails.EME_NIC)
+      setPassport(EmployeeDetails.EME_Passport)
+      setDrivingLicense(EmployeeDetails.EME_DrivingLicense)
+      setAddress(EmployeeDetails.EME_Address)
+      setEmailAddress(EmployeeDetails.EME_EmailAddress)
+      setMobileNumber(EmployeeDetails.EME_MobileNumber)
+      setPhoneNumber1(EmployeeDetails.EME_PhoneNumber1)
+      setPhoneNumber2(EmployeeDetails.EME_PhoneNumber2)
+      setJobTitle(EmployeeDetails.EME_JobTitle_Code)
+      setDepartment(EmployeeDetails.EME_DepartmentID)
+      setReportingManager(EmployeeDetails.EME_ReportingManager)
+      setEmploymentType(EmployeeDetails.EME_EmployeeType)
+      setSalary(EmployeeDetails.EME_Salary)
+      setAdditionalInformation(EmployeeDetails.EME_AdditionalInformation)
+      setTin(EmployeeDetails.EME_PayeeTaxNumber)
+      setIsActive(EmployeeDetails.EME_Status)
     }
-    setEmployeeId(EmployeeDetails.EME_EmployeeID)
-    setFirstName(EmployeeDetails.EME_FirstName)
-    setLastName(EmployeeDetails.EME_LastName)
-    setMaritalStatus(EmployeeDetails.EME_MaritalStatus)
-    setGender(EmployeeDetails.EME_Gender)
-    setNationality(EmployeeDetails.EME_Nationality)
-    setBloodGroup(EmployeeDetails.EME_BloodGroup)
-    setPrefferedName(EmployeeDetails.EME_PrefferedName)
-    setNic(EmployeeDetails.EME_NIC)
-    setPassport(EmployeeDetails.EME_Passport)
-    setDrivingLicense(EmployeeDetails.EME_DrivingLicense)
-    setAddress(EmployeeDetails.EME_Address)
-    setEmailAddress(EmployeeDetails.EME_EmailAddress)
-    setMobileNumber(EmployeeDetails.EME_MobileNumber)
-    setPhoneNumber1(EmployeeDetails.EME_PhoneNumber1)
-    setPhoneNumber2(EmployeeDetails.EME_PhoneNumber2)
-    setJobTitle(EmployeeDetails.EME_JobTitle_Code)
-    setDepartment(EmployeeDetails.EME_DepartmentID)
-    setReportingManager(EmployeeDetails.EME_ReportingManager)
-    setEmploymentType(EmployeeDetails.EME_EmployeeType)
-    setSalary(EmployeeDetails.EME_Salary)
-    setAdditionalInformation(EmployeeDetails.EME_AdditionalInformation)
-    setTin(EmployeeDetails.EME_PayeeTaxNumber)
-    setIsActive(EmployeeDetails.EME_Status)
   }, [EmployeeDetails]);
 
   return (
