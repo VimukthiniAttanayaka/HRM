@@ -15,6 +15,7 @@ import {
 } from '@coreui/react-pro'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import ProfileTabContent from "./ProfileTabContent";
 
 const Profile = () => {
 
@@ -96,7 +97,7 @@ const Profile = () => {
                       Home tab content
                     </CTabPanel>
                     <CTabPanel className="p-3" itemKey="profile">
-                      Profile tab content
+                      <ProfileTabContent></ProfileTabContent>
                     </CTabPanel>
                     <CTabPanel className="p-3" itemKey="contact">
                       Contact tab content
