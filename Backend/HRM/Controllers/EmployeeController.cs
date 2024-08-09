@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.IO;
 using System.Threading.Tasks;
+using Org.BouncyCastle.Utilities;
+using static iTextSharp.text.pdf.AcroFields;
 
 namespace HRM.Controllers
 {
@@ -322,6 +324,182 @@ namespace HRM.Controllers
 
             return Ok("Image uploaded successfully");
         }
+        [HttpPost]
+        [Route("[action]")]
+        public List<ReturncustResponse> uploadAttachment(Employee model)
+        {
+            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
+            //var emp = model.EME_EmployeeID;
+            //string basecv = Convert.ToBase64String(frncv.ImageData);
+            List<EmployeeAttachmentModel> attachmentList = new List<EmployeeAttachmentModel>();
+            EmployeeAttachmentModel attachmentModel = null;
+            if (frncv != null || frncv.ImageData != null)
+            {
+                attachmentModel = new EmployeeAttachmentModel
+                {
+                    USRED_EmployeeID = model.EME_EmployeeID,
+                    USRED_DocumentData = Convert.ToBase64String(frncv.ImageData),
+                    USRED_DocumentType = "pdf",
+                    USRED_DocumentName = "cv",
+                    USRED_Status = true
+                };
+                attachmentList.Add(attachmentModel);
+            }
+            if (frnnic != null || frnnic.ImageData != null)
+            {
+                attachmentModel = new EmployeeAttachmentModel
+                {
+                    USRED_EmployeeID = model.EME_EmployeeID,
+                    USRED_DocumentData = Convert.ToBase64String(frnnic.ImageData),
+                    USRED_DocumentType = "jpg",
+                    USRED_DocumentName = "nic",
+                    USRED_Status = true
+                };
+                attachmentList.Add(attachmentModel);
+            }
+            if (frnprofileImage != null || frnprofileImage.ImageData != null)
+            {
+                attachmentModel = new EmployeeAttachmentModel
+                {
+                    USRED_EmployeeID = model.EME_EmployeeID,
+                    USRED_DocumentData = Convert.ToBase64String(frnprofileImage.ImageData),
+                    USRED_DocumentType = "jpg",
+                    USRED_DocumentName = "profileImage",
+                    USRED_Status = true
+                };
+                attachmentList.Add(attachmentModel);
+            }
+            if (frnpassport != null || frnpassport.ImageData != null)
+            {
+                attachmentModel = new EmployeeAttachmentModel
+                {
+                    USRED_EmployeeID = model.EME_EmployeeID,
+                    USRED_DocumentData = Convert.ToBase64String(frnpassport.ImageData),
+                    USRED_DocumentType = "jpg",
+                    USRED_DocumentName = "passport",
+                    USRED_Status = true
+                };
+                attachmentList.Add(attachmentModel);
+            }
+            if (frndrivingLicense != null || frndrivingLicense.ImageData != null)
+            {
+                attachmentModel = new EmployeeAttachmentModel
+                {
+                    USRED_EmployeeID = model.EME_EmployeeID,
+                    USRED_DocumentData = Convert.ToBase64String(frndrivingLicense.ImageData),
+                    USRED_DocumentType = "jpg",
+                    USRED_DocumentName = "drivingLicense",
+                    USRED_Status = true
+                };
+                attachmentList.Add(attachmentModel);
+            }
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, attachmentList);
+
+                return HRM_BL.Employee_BL.upload_employee_documents(attachmentList);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturncustResponse objemployeeHead = new ReturncustResponse
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objCustHeadList.Add(objemployeeHead);
+
+                objError.WriteLog(0, "employeeController", "add_new_employee", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "employeeController", "add_new_employee", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "employeeController", "add_new_employee", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "employeeController", "add_new_employee", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+            return objCustHeadList;
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<EmployeeAttachmentModel> get_employeeDocument_all(EmployeeSearchModel model)//ok
+        {
+            List<EmployeeAttachmentModel> objemployeeHeadList = new List<EmployeeAttachmentModel>();
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
+
+                objemployeeHeadList = HRM_BL.Employee_BL.get_employeeDocument_all(model);
+                foreach (var item in objemployeeHeadList)
+                {
+                    if (item.USRED_DocumentName == "cv")
+                    {
+                        frncv = new ImageModel() {
+                            ImageData = item.USRED_DocumentDataByte 
+                        };
+                    }
+                    if (item.USRED_DocumentName == "nic")
+                    {
+                        frnnic = new ImageModel()
+                        {
+                            ImageData = item.USRED_DocumentDataByte
+                        };
+                    }
+                    if (item.USRED_DocumentName == "profileImage")
+                    {
+                        frnprofileImage = new ImageModel()
+                        {
+                            ImageData = item.USRED_DocumentDataByte
+                        };
+                    }
+                    if (item.USRED_DocumentName == "passport")
+                    {
+                        frnpassport = new ImageModel()
+                        {
+                            ImageData = item.USRED_DocumentDataByte
+                        };
+                    }
+                    if (item.USRED_DocumentName == "drivingLicense")
+                    {
+                        frndrivingLicense = new ImageModel()
+                        {
+                            ImageData = item.USRED_DocumentDataByte
+                        };
+                    }
+                }
+                return objemployeeHeadList;
+
+            }
+            catch (Exception ex)
+            {
+
+                EmployeeAttachmentModel objemployeeHead = new EmployeeAttachmentModel
+                {
+                    //resp = false,
+                    //msg = ex.Message.ToString()
+                };
+                objemployeeHeadList.Add(objemployeeHead);
+
+                objError.WriteLog(0, "employeeController", "get_employee_single", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "employeeController", "get_employee_single", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "employeeController", "get_employee_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "employeeController", "get_employee_single", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+
+            return objemployeeHeadList;
+
+        }
+
         public class ImageModel
         {
             public int Id { get; set; }

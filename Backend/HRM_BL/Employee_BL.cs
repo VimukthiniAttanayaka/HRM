@@ -25,7 +25,14 @@ namespace HRM_BL
         {
             return HRM_DAL.Data.Employee_Data.add_new_employee(item);
         }
-
+        public static List<ReturncustResponse> upload_employee_documents(List<EmployeeAttachmentModel> item)//ok
+        {
+            return HRM_DAL.Data.Employee_Data.upload_employee_documents(item);
+        }
+        public static List<EmployeeAttachmentModel> get_employeeDocument_all(EmployeeSearchModel model)//ok
+        {
+            return HRM_DAL.Data.Employee_Data.get_employeeDocument_all(model);
+        }
         public static List<ReturncustResponse> modify_employee(EmployeeModel item)//ok
         {
             return HRM_DAL.Data.Employee_Data.modify_employee(item);

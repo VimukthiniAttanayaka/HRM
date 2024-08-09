@@ -329,38 +329,47 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = new FormData();
-    formData.append('image', selectedFileProfileImage);
-
-    try {
-      const response = await fetch(apiUrl + 'Employee/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await response.json();
-      console.log(data); // Handle success
-    } catch (error) {
-      console.error(error); // Handle error
-    }
     // const formData = new FormData();
-    // formData.append('cv', selectedFileCV);
-    // formData.append('nic', selectedFileNIC);
-    // formData.append('profileImage', selectedFileProfileImage);
-    // formData.append('passport', selectedFilePassport);
-    // formData.append('drivingLicense', selectedFileDrivingLicense);
+    // formData.append('image', selectedFileProfileImage);
 
     // try {
-    //   const response = await axios.post(apiUrl + 'Employee/PostImage',
-    //     formData, {
-    //     headers: {
-    //       'Content-Type': 'multipart/form-data',
-    //     },
+    //   const response = await fetch(apiUrl + 'Employee/upload', {
+    //     method: 'POST',
+    //     body: formData,
     //   });
-    //   console.log(response.data);
+
+    //   const data = await response.json();
+    //   console.log(data); // Handle success
     // } catch (error) {
-    //   console.error(error);
+    //   console.error(error); // Handle error
     // }
+    const data = {
+      EME_EmployeeID: 'employeeId',
+    }
+    const formData = new FormData();
+    formData.append('cv', selectedFileCV);
+    formData.append('nic', selectedFileNIC);
+    formData.append('profileImage', selectedFileProfileImage);
+    formData.append('passport', selectedFilePassport);
+    formData.append('drivingLicense', selectedFileDrivingLicense);
+
+    try {
+      const response = await axios.post(apiUrl + 'Employee/PostImage',
+        formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      const response1 = await axios.post(apiUrl + 'Employee/uploadAttachment',
+        data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
 
   };
 

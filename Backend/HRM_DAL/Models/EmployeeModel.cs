@@ -133,4 +133,13 @@ namespace HRM_DAL.Models
         public string CUS_CompanyName { get; set; }
 
     }
+    public class EmployeeAttachmentModel : RequestBaseModel
+    {
+        public string USRED_EmployeeID { get; set; }
+        public string USRED_DocumentData { get; set; }
+        public string USRED_DocumentType { get; set; }
+        public string USRED_DocumentName { get; set; }
+        public bool USRED_Status { get; set; }
+        public byte[] USRED_DocumentDataByte { get; set; }
+    }
 }
