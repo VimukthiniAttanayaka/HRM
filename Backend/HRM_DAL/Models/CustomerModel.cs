@@ -47,7 +47,7 @@ namespace HRM_DAL.Models
         public string CUS_PinOrPwd { get; set; }
         public bool CUS_OTP_By_SMS { get; set; }
         public bool CUS_OTP_By_Email { get; set; }
-        public string CUS_Status { get; set; }
+        public bool CUS_Status { get; set; }
         public string CUS_CreatedBy { get; set; }
         public string CUS_CreatedDateTime { get; set; }
         public string CUS_ModifiedBy { get; set; }
@@ -61,7 +61,7 @@ namespace HRM_DAL.Models
 
         public string CUS_ID { get; set; }
         public string CUS_CompanyName { get; set; }
-        public string CUS_Status { get; set; }
+        public bool CUS_Status { get; set; }
         public string RC { get; set; }
     }
 

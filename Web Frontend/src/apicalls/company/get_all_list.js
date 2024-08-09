@@ -20,28 +20,29 @@ export const getCompanyAll = async (formData) => {
     .then(response => response.json())
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
-console.log(res1)
+      console.log(res1)
 
       class CompanyDetail {
         constructor(
-        CUS_ID,
-        CUS_CompanyName,
-        CUS_Adrs_BlockBuildingNo,
-        CUS_Adrs_BuildingName,
-        CUS_Adrs_UnitNumber,
-        CUS_Adrs_StreetName,
-        CUS_Adrs_City,
-        CUS_Adrs_CountryCode,
-        CUS_Adrs_PostalCode,
-        CUS_ContactPerson,
-        CUS_ContactNumber,
-        CUS_PinOrPwd,
-        CUS_OTP_By_SMS,
-        CUS_OTP_By_Email,
-        CUS_Status,
+          CUS_ID,
+          CUS_CompanyName,
+          CUS_Adrs_BlockBuildingNo,
+          CUS_Adrs_BuildingName,
+          CUS_Adrs_UnitNumber,
+          CUS_Adrs_StreetName,
+          CUS_Adrs_City,
+          CUS_Adrs_CountryCode,
+          CUS_Adrs_PostalCode,
+          CUS_ContactPerson,
+          CUS_ContactNumber,
+          CUS_PinOrPwd,
+          CUS_OTP_By_SMS,
+          CUS_OTP_By_Email,
+          CUS_Status,
         ) {
+
           this.CUS_ID = CUS_ID;
-            this.CUS_CompanyName = CUS_CompanyName;
+          this.CUS_CompanyName = CUS_CompanyName;
           this.CUS_Adrs_BlockBuildingNo = CUS_Adrs_BlockBuildingNo;
           this.CUS_Adrs_BuildingName = CUS_Adrs_BuildingName;
           this.CUS_Adrs_UnitNumber = CUS_Adrs_UnitNumber;
@@ -61,7 +62,7 @@ console.log(res1)
 
       for (let index = 0; index < res1[0].Customer.length; index++) {
         let element = res1[0].Customer[index];
-        // console.log(element)
+
         CompanyDetails[index] = new CompanyDetail(element.CUS_ID,
           element.CUS_CompanyName,
           element.CUS_Adrs_BlockBuildingNo,
@@ -80,7 +81,7 @@ console.log(res1)
       }
       // console.log(CompanyDetails)
     })
-
+  console.log(CompanyDetails)
   return CompanyDetails;
 };
 

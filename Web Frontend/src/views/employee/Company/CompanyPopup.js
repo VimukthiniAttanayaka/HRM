@@ -7,18 +7,6 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
   const apiUrl = process.env.REACT_APP_API_URL;
   let templatetype = 'translation_company'
 
-  // const [CompanyId, setCompanyId] = useState('')
-  // const [Company, setCompany] = useState('')
-  // const [isActive, setIsActive] = useState(true)
-
-  // const handleChangeCompany = (event) => {
-  //   setCompany(event.target.value)
-  // }
-  // const handleChangeId = (event) => {
-  //   setCompanyId(event.target.value)
-  // }
-  // const apiUrl = process.env.REACT_APP_API_URL;
-
   const [customerId, setCustomerId] = useState('')
   const [companyName, setCompanyName] = useState('')
   const [blockBuildingNumber, setBlockBuildingNumber] = useState('')
@@ -30,7 +18,7 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
   const [addressPostalCode, setAddressPostalCode] = useState('')
   const [contactPerson, setContactPerson] = useState('')
   const [contactNumber, setContactNumber] = useState('')
-  const [pinOrPassword, setPinOrPassword] = useState('PIN')
+  const [pinOrPassword, setPinOrPassword] = useState('pin')
   const [isOtpSms, setIsOtpSms] = useState(true)
   const [isOtpEmail, setIsOtpEmail] = useState(true)
   const [isActive, setIsActive] = useState(true)
@@ -68,9 +56,15 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
   const handleChangeContactNumber = (event) => {
     setContactNumber(event.target.value)
   }
-  const handleChangePinOrPassword = (event) => { }
-  const handleChangeIsOtpSms = (event) => { }
-  const handleChangeIsOtpEmail = (event) => { }
+  const handleChangePinOrPassword = (event) => { 
+    setPinOrPassword(event.target.value)
+  }
+  const handleChangeIsOtpSms = (event) => { 
+    setIsOtpSms(event.target.checked)
+  }
+  const handleChangeIsOtpEmail = (event) => { 
+    setIsOtpEmail(event.target.checked)
+  }
   const handleChangeStatus = (event) => {
     setIsActive(event.target.checked)
   }
@@ -91,10 +85,10 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
       CUS_Adrs_PostalCode: addressPostalCode,
       CUS_ContactPerson: contactPerson,
       CUS_ContactNumber: contactNumber,
-      CUS_PinOrPwd: "string",
-      CUS_OTP_By_SMS: true,
-      CUS_OTP_By_Email: true,
-      CUS_Status: true
+      CUS_PinOrPwd: pinOrPassword,
+      CUS_OTP_By_SMS: isOtpSms,
+      CUS_OTP_By_Email: isOtpEmail,
+      CUS_Status: isActive
     }
     // Submit the form data to your backend API
     const response = await fetch(apiUrl + 'Customer/add_new_customer', {
@@ -129,10 +123,10 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
       CUS_Adrs_PostalCode: addressPostalCode,
       CUS_ContactPerson: contactPerson,
       CUS_ContactNumber: contactNumber,
-      CUS_PinOrPwd: "string",
-      CUS_OTP_By_SMS: true,
-      CUS_OTP_By_Email: true,
-      CUS_Status: true
+      CUS_PinOrPwd: pinOrPassword,
+      CUS_OTP_By_SMS: isOtpSms,
+      CUS_OTP_By_Email: isOtpEmail,
+      CUS_Status: isActive
     }
     // Submit the form data to your backend API
     const response = await fetch(apiUrl + 'Customer/modify_customer', {
@@ -206,6 +200,24 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
   }
 
   useEffect(() => {
+    if (popupStatus == 'create') {
+      setCustomerId('')
+    setCompanyName('')
+    setBlockBuildingNumber('')
+    setAddressBuildingName('')
+    setAddressUnitNumber('')
+    setAddressStreetName('')
+    setAddressCity('')
+    setAddressCountryCode('')
+    setAddressPostalCode('')
+    setContactPerson('')
+    setContactNumber('')
+      setPinOrPassword('pin')
+    setIsOtpSms(true)
+    setIsOtpEmail(true)
+    setIsActive(true)
+    }
+    else{
     setCustomerId(CompanyDetails.CUS_ID)
     setCompanyName(CompanyDetails.CUS_CompanyName)
     setBlockBuildingNumber(CompanyDetails.CUS_Adrs_BlockBuildingNo)
@@ -221,6 +233,7 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
     setIsOtpSms(CompanyDetails.CUS_OTP_By_SMS)
     setIsOtpEmail(CompanyDetails.CUS_OTP_By_Email)
     setIsActive(CompanyDetails.CUS_Status)
+    }
   }, [CompanyDetails]);
   // console.log(CompanyDetails)
   return (
@@ -341,20 +354,20 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
                       <h6>Pin or Password</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormSelect>
-                    <option value="PIN">Pin</option>
-                    <option value="PWD">Password</option>
+                  <CFormSelect value={pinOrPassword} onChange={handleChangePinOrPassword}>
+                    <option value="pin">Pin</option>
+                    <option value="pwd">Password</option>
                   </CFormSelect>
                 </CInputGroup>
                 <CRow>
                   <CCol md={4}>
                     <CInputGroup className="mb-4">
-                      <CFormCheck label="OTP by sms" defaultChecked />
+                      <CFormCheck label="OTP by sms" checked={isOtpSms} onChange={handleChangeIsOtpSms} />
                     </CInputGroup>
                   </CCol>
                   <CCol md={4}>
                     <CInputGroup className="mb-4">
-                      <CFormCheck label="OTP by email" defaultChecked />
+                      <CFormCheck label="OTP by email" checked={isOtpEmail} onChange={handleChangeIsOtpEmail}/>
                     </CInputGroup>
                   </CCol>
                   <CCol md={4}>

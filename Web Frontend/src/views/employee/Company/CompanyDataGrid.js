@@ -200,6 +200,7 @@ const CompanyDataGrid = () => {
           console.log(items)
         }}
         scopedColumns={{
+
           status: (item) => (
             <td>
               <CBadge color={getBadge(item.status)}>{item.status}</CBadge>

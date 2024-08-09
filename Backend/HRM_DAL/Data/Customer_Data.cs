@@ -70,7 +70,7 @@ namespace HRM_DAL.Data
                                 objcustomer.CUS_PinOrPwd = rdr["CUS_PinOrPwd"].ToString();
                                 objcustomer.CUS_OTP_By_SMS = Convert.ToBoolean(rdr["CUS_OTP_By_SMS"]);
                                 objcustomer.CUS_OTP_By_Email = Convert.ToBoolean(rdr["CUS_OTP_By_Email"]);
-                                objcustomer.CUS_Status = rdr["CUS_Status"].ToString();
+                                objcustomer.CUS_Status = Convert.ToBoolean(rdr["CUS_Status"].ToString());
                                 objcustomer.RC = "1";
 
                                 if (objcustomerHead.Customer == null)
@@ -178,7 +178,7 @@ namespace HRM_DAL.Data
                                 objcustomer.CUS_PinOrPwd = rdr["CUS_PinOrPwd"].ToString();
                                 objcustomer.CUS_OTP_By_SMS = Convert.ToBoolean(rdr["CUS_OTP_By_SMS"]);
                                 objcustomer.CUS_OTP_By_Email = Convert.ToBoolean(rdr["CUS_OTP_By_Email"]);
-                                objcustomer.CUS_Status = rdr["CUS_Status"].ToString();
+                                objcustomer.CUS_Status = Convert.ToBoolean(rdr["CUS_Status"].ToString());
                                 objcustomer.RC = "1";
 
                                 if (objcustomerHead.Customer == null)
