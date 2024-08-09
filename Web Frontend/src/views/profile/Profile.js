@@ -16,6 +16,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import ProfileTabContent from "./ProfileTabContent";
+import UserProfileContact from "./UserProfileContact";
 
 const Profile = () => {
 
@@ -87,10 +88,10 @@ const Profile = () => {
               <CCard className="p-4">
                 <CTabs activeItemKey="profile">
                   <CTabList variant="tabs">
-                    <CTab itemKey="home">Home</CTab>
+                    {/*<CTab itemKey="home">Home</CTab>*/}
                     <CTab itemKey="profile">Profile</CTab>
                     <CTab itemKey="contact">Contact</CTab>
-                    <CTab disabled itemKey="disabled">Disabled</CTab>
+                    {/*<CTab disabled itemKey="disabled">Disabled</CTab>*/}
                   </CTabList>
                   <CTabContent>
                     <CTabPanel className="p-3" itemKey="home">
@@ -100,7 +101,7 @@ const Profile = () => {
                       <ProfileTabContent></ProfileTabContent>
                     </CTabPanel>
                     <CTabPanel className="p-3" itemKey="contact">
-                      Contact tab content
+                      <UserProfileContact></UserProfileContact>
                     </CTabPanel>
                     <CTabPanel className="p-3" itemKey="disabled">
                       Disabled tab content

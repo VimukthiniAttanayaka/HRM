@@ -20,83 +20,71 @@ function ProfileTabContent() {
       <div className="">
         <CRow>
           <CCol className={'p-2 m-1'}>Reporting Manager :</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>name name</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>name name</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>Status</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>Active</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>Active</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>Employ Type</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>trainee</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>trainee</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>Payee Tax Number</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>tax num</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>tax num</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>Salary</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>LKR 550,000</CCol>
-        </CRow>
-        <CRow>
-          <CCol className={'p-2 m-1'}>Address</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>House No, road, city</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>LKR 550,000</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>Date of Birth</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>1520/06/30</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>1520/06/30</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>Date of Hire</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>2023/03/15</CCol>
-        </CRow>
-        <CRow>
-          <CCol className={'p-2 m-1'}>Mobile</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>012-3456789</CCol>
-        </CRow>
-        <CRow>
-          <CCol className={'p-2 m-1'}>Phone</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>012-3456789</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>2023/03/15</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>Gender</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>female</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>female</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>Marital Status</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>married</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>married</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>Nationality</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>Sri Lankan</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>Sri Lankan</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>Blood Group</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>A-</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>A-</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>NIC</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>2134568988x</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>2134568988x</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>Passport</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>null</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>null</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>Driving Licence</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>null</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>null</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>Created by</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>2023/11/12</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>2023/11/12</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>Modified by</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>self</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>self</CCol>
         </CRow>
         <CRow>
           <CCol className={'p-2 m-1'}>Modified date time</CCol>
-          <CCol className={'p-2 m-1 border border-info rounded'}>2025/03/12 12:27:11</CCol>
+          <CCol className={'p-2 m-1 border rounded'}>2025/03/12 12:27:11</CCol>
         </CRow>
       </div>
     </div>
