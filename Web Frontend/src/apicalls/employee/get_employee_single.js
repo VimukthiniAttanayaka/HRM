@@ -1,19 +1,37 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export class LeaveScheduleDetail  {
-  LVT_LeaveTypeID;
-  LVT_LeaveType;
-  LVT_LeaveAlotent;
-  LVT_Status;
-  LVT_CreatedBy;
-  LVT_CreatedDateTime;
-  LVT_ModifiedBy;
-  LVT_ModifiedDateTime;
+export class EmployeeDetail {
+  EME_CustomerID;
+  EME_DepartmentID;
+  EME_EmployeeID;
+  EME_FirstName;
+  EME_LastName;
+  EME_Gender;
+  EME_MaritalStatus;
+  EME_Nationality;
+  EME_BloodGroup;
+  EME_NIC;
+  EME_Passport;
+  EME_DrivingLicense;
+  EME_PrefferedName;
+  EME_JobTitle_Code;
+  EME_ReportingManager;
+  EME_EmployeeType;
+  EME_PayeeTaxNumber;
+  EME_Salary;
+  EME_Address;
+  EME_EmailAddress;
+  EME_MobileNumber;
+  EME_PhoneNumber1;
+  EME_PhoneNumber2;
+  EME_DateOfHire;
+  EME_Status;
+  EME_DateOfBirth;
 }
 // console.log(apiUrl)
 export const getEmployeeSingle = async (formData) => {
-   
-  let resw=new LeaveScheduleDetail();
+
+  let resw=new EmployeeDetail();
   const res = await fetch(apiUrl + 'employee/get_employee_single', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -28,6 +46,6 @@ export const getEmployeeSingle = async (formData) => {
     // setLeaveTypeDetails(res1[0].LeaveType[0]);
     // handleOpenPopup()
   })
-    
+
     return resw;
 };
