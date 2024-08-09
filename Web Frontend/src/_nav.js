@@ -237,6 +237,13 @@ const _nav = [
     // name: <Translation>{(t) => t('Reports')}</Translation>,
     name: getLabelText('Reports', templatetype),
     disabled: !UMGroup,
+  },{
+    component: CNavItem,
+    // name: <Translation>{(t) => t('User Access Group')}</Translation>,
+    name: getLabelText('Report Viewer', templatetype),
+    to: '/report',
+    disabled: !UMUserAccessGroup,
+    // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {
     component: CNavGroup,
