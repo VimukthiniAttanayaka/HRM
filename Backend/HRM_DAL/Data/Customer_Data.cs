@@ -124,6 +124,112 @@ namespace HRM_DAL.Data
 
         }
 
+        public static List<ReturnCustomerModelHead> get_customer_all(CustomerSearchModel model)//ok
+        {
+            List<ReturnCustomerModelHead> objCustomerHeadList = new List<ReturnCustomerModelHead>();
+            ReturnCustomerModelHead objcustomerHead = new ReturnCustomerModelHead();
+
+            if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
+            {
+                objcustomerHead.resp = false;
+                objcustomerHead.IsAuthenticated = false;
+                objCustomerHeadList.Add(objcustomerHead);
+                return objCustomerHeadList;
+            }
+
+            try
+            {
+                using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
+                {
+
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = lconn;
+                        lconn.Open();
+
+                        cmd.CommandText = "sp_get_customer_all";
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        SqlDataAdapter dta = new SqlDataAdapter();
+                        dta.SelectCommand = cmd;
+                        DataSet Ds = new DataSet();
+                        dta.Fill(Ds);
+
+                        if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
+                        {
+                            foreach (DataRow rdr in Ds.Tables[0].Rows)
+                            {
+                                ReturnCustomerModel objcustomer = new ReturnCustomerModel();
+
+                                objcustomerHead.resp = true;
+                                objcustomerHead.msg = "Get Customer";
+
+                                objcustomer.CUS_ID = rdr["CUS_ID"].ToString();
+                                objcustomer.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
+                                objcustomer.CUS_Adrs_BlockBuildingNo = rdr["CUS_Adrs_BlockBuildingNo"].ToString();
+                                objcustomer.CUS_Adrs_BuildingName = rdr["CUS_Adrs_BuildingName"].ToString();
+                                objcustomer.CUS_Adrs_UnitNumber = rdr["CUS_Adrs_UnitNumber"].ToString();
+                                objcustomer.CUS_Adrs_StreetName = rdr["CUS_Adrs_StreetName"].ToString();
+                                objcustomer.CUS_Adrs_City = rdr["CUS_Adrs_City"].ToString();
+                                objcustomer.CUS_Adrs_CountryCode = rdr["CUS_Adrs_CountryCode"].ToString();
+                                objcustomer.CUS_Adrs_PostalCode = rdr["CUS_Adrs_PostalCode"].ToString();
+                                objcustomer.CUS_ContactPerson = rdr["CUS_ContactPerson"].ToString();
+                                objcustomer.CUS_ContactNumber = rdr["CUS_ContactNumber"].ToString();
+                                objcustomer.CUS_PinOrPwd = rdr["CUS_PinOrPwd"].ToString();
+                                objcustomer.CUS_OTP_By_SMS = Convert.ToBoolean(rdr["CUS_OTP_By_SMS"]);
+                                objcustomer.CUS_OTP_By_Email = Convert.ToBoolean(rdr["CUS_OTP_By_Email"]);
+                                objcustomer.CUS_Status = rdr["CUS_Status"].ToString();
+                                objcustomer.RC = "1";
+
+                                if (objcustomerHead.Customer == null)
+                                {
+                                    objcustomerHead.Customer = new List<ReturnCustomerModel>();
+                                }
+
+                                objcustomerHead.Customer.Add(objcustomer);
+
+                                objCustomerHeadList.Add(objcustomerHead);
+                            }
+
+                        }
+                        else
+                        {
+                            ReturnCustomerModel objcustomer = new ReturnCustomerModel();
+                            objcustomerHead.resp = true;
+                            objcustomerHead.msg = "";
+                            objCustomerHeadList.Add(objcustomerHead);
+
+
+                        }
+
+
+                    }
+                    return objCustomerHeadList;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                objcustomerHead = new ReturnCustomerModelHead
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objCustomerHeadList.Add(objcustomerHead);
+
+                objError.WriteLog(0, "Customer_Data", "get_customer_all", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "Customer_Data", "get_customer_all", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "Customer_Data", "get_customer_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "Customer_Data", "get_customer_all", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+            }
+
+            return objCustomerHeadList;
+
+        }
+
         public static List<ReturncustResponse> add_new_customer(CustomerModel item)//ok
         {
             List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
@@ -194,6 +300,9 @@ namespace HRM_DAL.Data
 
                         cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
                         cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@CUS_Status", item.CUS_Status);
+                        cmd.Parameters["@CUS_Status"].Direction = ParameterDirection.Input;
 
                         string mailtypes = "";
 

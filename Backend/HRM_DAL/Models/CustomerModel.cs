@@ -88,7 +88,10 @@ namespace HRM_DAL.Models
 
 
     }
-
+    public class CustomerSearchModel : RequestBaseModel
+    {
+        public string CUS_ID { get; set; }
+    }
     public class InactiveCusModel : RequestBaseModel
     {
 

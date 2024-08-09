@@ -265,7 +265,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
 
   const [selectedFileProfileImage, setSelectedFileProfileImage] = useState();
   const [selectedFileCV, setSelectedFileCV] = useState(null);
-  const [selectedFileNIC, setSelectedFileNIC] = useState([]);
+  const [selectedFileNIC, setSelectedFileNIC] = useState();
   const [selectedFilePassport, setSelectedFilePassport] = useState();
   const [selectedFileDrivingLicense, setSelectedFileDrivingLicense] = useState();
 
@@ -330,23 +330,37 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('cv', selectedFileCV);
-    formData.append('nic', selectedFileNIC);
-    formData.append('profileImage', selectedFileProfileImage);
-    formData.append('passport', selectedFilePassport);
-    formData.append('drivingLicense', selectedFileDrivingLicense);
+    formData.append('image', selectedFileProfileImage);
 
     try {
-      const response = await axios.post(apiUrl + 'Employee/PostImage',
-        formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      const response = await fetch(apiUrl + 'Employee/upload', {
+        method: 'POST',
+        body: formData,
       });
-      console.log(response.data);
+
+      const data = await response.json();
+      console.log(data); // Handle success
     } catch (error) {
-      console.error(error);
+      console.error(error); // Handle error
     }
+    // const formData = new FormData();
+    // formData.append('cv', selectedFileCV);
+    // formData.append('nic', selectedFileNIC);
+    // formData.append('profileImage', selectedFileProfileImage);
+    // formData.append('passport', selectedFilePassport);
+    // formData.append('drivingLicense', selectedFileDrivingLicense);
+
+    // try {
+    //   const response = await axios.post(apiUrl + 'Employee/PostImage',
+    //     formData, {
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data',
+    //     },
+    //   });
+    //   console.log(response.data);
+    // } catch (error) {
+    //   console.error(error);
+    // }
 
   };
 
@@ -598,7 +612,10 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
                       </CInputGroupText>
                     </CCol>
                     <input type="file" onChange={handleChangeProfileImage} />
-                    <img src={selectedFileProfileImage} width={100} />
+                    {selectedFileProfileImage && (
+                      <img src={URL.createObjectURL(selectedFileProfileImage)} alt="Preview" width={100} />
+                    )}
+                    {/* <img src={selectedFileProfileImage} width={100} /> */}
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -620,7 +637,9 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
                       </CInputGroupText>
                     </CCol>
                     <input type="file" onChange={handleChangeNIC} />
-                    <img src={selectedFileNIC} width={100} />
+                    {selectedFileNIC && (
+                      <img src={URL.createObjectURL(selectedFileNIC)} alt="Preview" width={100} />
+                    )}
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -629,7 +648,9 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
                       </CInputGroupText>
                     </CCol>
                     <input type="file" onChange={handleChangePassport} />
-                    <img src={selectedFilePassport} width={100} />
+                    {selectedFilePassport && (
+                      <img src={URL.createObjectURL(selectedFilePassport)} alt="Preview" width={100} />
+                    )}
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CCol md={4}>
@@ -638,7 +659,9 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
                       </CInputGroupText>
                     </CCol>
                     <input type="file" onChange={handleChangeDrivingLicense} />
-                    <img src={selectedFileDrivingLicense} width={100} />
+                    {selectedFileDrivingLicense && (
+                      <img src={URL.createObjectURL(selectedFileDrivingLicense)} alt="Preview" width={100} />
+                    )}
                   </CInputGroup>
                   {/* <CInputGroup className="mb-3">
                     <CCol md={4}>

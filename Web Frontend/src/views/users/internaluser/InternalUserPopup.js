@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CFormSelect, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
-import { Modal } from '@coreui/coreui-pro';
 import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
 import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
 
-const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) => {
+const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popupStatus }) => {
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
+  const apiUrl = process.env.REACT_APP_API_URL;
 
-  // };
   const [selectedOptionEmployeeID, setSelectedOptionEmployeeID] = useState('');
   const [selectedOptionUserRole, setSelectedOptionUserRole] = useState('');
 
@@ -51,13 +47,127 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails }) =>
     setUserName(event.target.value)
   }
 
+  const handleCreate = async (event) => {
+
+    const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      MDD_DepartmentID: DepartmentId,
+      MDD_Department: Department,
+      MDD_LocationID: "string",
+      MDD_Status: isActive
+    }
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'Department/add_new_Department', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('Department data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting Department data:', response.statusText)
+    }
+  }
+  const handleEdit = async (event) => {
+    // Prepare form data
+    const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      MDD_DepartmentID: DepartmentId,
+      MDD_Department: Department,
+      MDD_LocationID: "string",
+      MDD_Status: isActive
+    }
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'Department/modify_department', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('Department data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting Department data:', response.statusText)
+    }
+  }
+  const handleDelete = async (event) => {
+    console.log('Delete Department')
+    // Prepare form data
+    const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      MDD_DepartmentID: DepartmentId
+    }
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'Department/inactivate_department', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+
+    if (response.ok) {
+      onClose()
+      console.log(response);
+      // Handle successful submission (e.g., display a success message)
+      console.log('Department data submitted successfully!')
+    } else {
+      // Handle submission errors
+      console.error('Error submitting Department data:', response.statusText)
+    }
+  }
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault()
+
+  //   if (popupStatus == 'create') {
+  //     handleCreate(event)
+  //   } else if (popupStatus == 'edit') {
+  //     handleEdit(event)
+  //   } else if (popupStatus == 'delete') {
+  //     handleDelete(event)
+  //   }
+  //   // Validation (optional)
+  //   // You can add validation logic here to check if all required fields are filled correctly
+
+  // }
+
+  const popupStatusSetup = (event) => {
+
+    if (popupStatus == 'edit') {
+      return getLabelText('Edit Department', templatetype)
+    } else if (popupStatus == 'view') {
+      return getLabelText('View Department', templatetype)
+    } else if (popupStatus == 'delete') {
+      return getLabelText('Delete Department', templatetype)
+    } else {
+      return getLabelText('Create New Department', templatetype)
+    }
+  }
+
+  // useEffect(() => {
+  //   setDepartmentId(DepartmentDetails.MDD_DepartmentID)
+  //   setDepartment(DepartmentDetails.MDD_Department)
+  //   setIsActive(DepartmentDetails.MDD_Status)
+  // }, [DepartmentDetails]);
+
+
+
+
+
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    // Validation (optional)
-    // You can add validation logic here to check if all required fields are filled correctly
-
-    // Prepare form data
     const formData = {
       LVT_InternalUserID: InternalUserId,
       LVT_LeaveAlotment: leaveAlotmentId,

@@ -15,7 +15,10 @@ namespace HRM_BL
         {
             return HRM_DAL.Data.Customer_Data.get_customers_single(CUS_ID);
         }
-
+        public static List<ReturnCustomerModelHead> get_customer_all(CustomerSearchModel model)//ok
+        {
+            return HRM_DAL.Data.Customer_Data.get_customer_all(model);
+        }
         public static List<ReturncustResponse> add_new_customer(CustomerModel item)//ok
         {
             return HRM_DAL.Data.Customer_Data.add_new_customer(item);

@@ -1,6 +1,5 @@
 import React from 'react'
 import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
-
 import DepartmentDataGrid from './DepartmentDataGrid'
 import { getLabelText } from 'src/MultipleLanguageSheets'
 

@@ -60,6 +60,52 @@ namespace HRM.Controllers
 
         }
 
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<ReturnCustomerModelHead> get_customers_all(CustomerSearchModel model)//ok
+        {
+            List<ReturnCustomerModelHead> objcustomerHeadList = new List<ReturnCustomerModelHead>();
+            //ReturnEmployeeModelHead obj = new ReturnEmployeeModelHead() { resp = false, msg = "sfsf" };
+            //obj.Employee = new List<ReturnEmployeeModel>();
+            //obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test", EME_EmployeeID = "test" });
+            //obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test1", EME_EmployeeID = "test1" });
+            //obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test2", EME_EmployeeID = "test2" });
+            //objemployeeHeadList.Add(obj);
+            //return objemployeeHeadList;
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
+
+                return HRM_BL.Customer_BL.get_customer_all(model);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturnCustomerModelHead objcustomerHead = new ReturnCustomerModelHead
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objcustomerHeadList.Add(objcustomerHead);
+
+                objError.WriteLog(0, "customerController", "get_customer_single", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "customerController", "get_customer_single", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "customerController", "get_customer_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "customerController", "get_customer_single", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+
+            return objcustomerHeadList;
+
+        }
+
         //POST api/<UserController>
         [HttpPost]
         [Route("[action]")]

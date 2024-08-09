@@ -1,41 +1,64 @@
 import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import InternalUserPopup from './InternalUserPopup.js';
-import { getInternalUserAll } from '../../../apicalls/internaluser/get_all_list.js';
-import { getInternalUserSingle } from '../../../apicalls/internaluser/get_internaluser_single.js';
+import CompanyPopup from './CompanyPopup.js';
+import { getCompanyAll } from '../../../apicalls/company/get_all_list.js';
+import { getCompanySingle } from '../../../apicalls/company/get_company_single.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
-const InternalUserDataGrid = () => {
-
+const CompanyDataGrid = () => {
+  let templatetype = 'translation_company'
+  let templatetype_base = 'translation'
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
 
   const columns = [
     {
-      key: 'UserName',
-      // label: '',
-      // filter: false,
-      // sorter: false,
+      key: 'CUS_ID',
+      label: 'ID',
+      filter: false,
+      sorter: false,
     },
     {
-      key: 'EmailAddress',
-      _style: { width: '20%' },
-    },{
-      key: 'EmployeeID',
+      key: 'CUS_CompanyName',
+      label: getLabelText('Name', templatetype),
       _style: { width: '20%' },
     },
-
     {
-      key: 'MobileNumber',
-      _style: { width: '20%' }
-    }, {
+      key: 'CUS_ContactPerson',
+      label: getLabelText('Company', templatetype),
+      _style: { width: '20%' },
+    },
+    {
+      key: 'CUS_ContactNumber',
+      label: getLabelText('Company', templatetype),
+      _style: { width: '20%' },
+    },
+    // {
+    //   key: 'alotment',
+    //   _style: { width: '20%' }
+    // },
+    {
       key: 'status',
       _style: { width: '20%' }
     },
-
     {
       key: 'show_details',
+      label: '',
+      _style: { width: '1%' },
+      filter: false,
+      sorter: false,
+    },
+    {
+      key: 'view',
+      label: '',
+      _style: { width: '1%' },
+      filter: false,
+      sorter: false,
+    },
+    {
+      key: 'delete',
       label: '',
       _style: { width: '1%' },
       filter: false,
@@ -57,10 +80,9 @@ const InternalUserDataGrid = () => {
     }
   }
 
-  const [InternalUserDetails, setInternalUserDetails] = useState([])
+  const [CompanyDetails, setCompanyDetails] = useState([])
 
-  async function loadDetails(item) {
-
+  async function loadDetails(item, action) {
     const token = getJWTToken();
     const staffId = getStaffID();
     const customerId = getCustomerID();
@@ -68,10 +90,11 @@ const InternalUserDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      UD_UserName: item
+      CUS_ID: item
     }
-    const InternalUserDetails = await getInternalUserSingle(formData)
-    setInternalUserDetails(InternalUserDetails);
+    const CompanyDetails = await getCompanySingle(formData)
+    console.log(CompanyDetails)
+    setCompanyDetails(CompanyDetails);
     handleOpenPopup()
   }
   const toggleEdit = (index) => {
@@ -87,7 +110,7 @@ const InternalUserDataGrid = () => {
     toggleDetails(index)
   }
   const toggleDetails = (index, action) => {
-    console.log(index)
+
     const position = details.indexOf(index)
     let newDetails = details.slice()
     if (position !== -1) {
@@ -110,13 +133,13 @@ const InternalUserDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      USR_EmployeeID: 'sedcx'
+      CUS_ID: 'sedcx'
     }
 
-    const InternalUserList = await getInternalUserAll(formData)
-    setData(InternalUserList);
-  }
+    const CompanyDetails = await getCompanyAll(formData)
+    setData(CompanyDetails);
 
+  }
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -130,21 +153,20 @@ const InternalUserDataGrid = () => {
 
   const csvCode = 'data:text/csv;charset=utf-8,SEP=,%0A' + encodeURIComponent(csvContent)
 
-
   const handleOpenPopup = () => {
     setVisible(true);
   };
 
   const handleClosePopup = () => {
     setVisible(false);
-    setInternalUserDetails([]);
+    setCompanyDetails([]);
     setPopupStatus('create')
   };
 
   return (
     <CCardBody>
       <CRow>
-        <CCol>
+        {/* <CCol>
           <CButton
             color="primary"
             className="mb-2"
@@ -152,15 +174,15 @@ const InternalUserDataGrid = () => {
             download="coreui-table-data.csv"
             target="_blank"
           >
-            Download current items (.csv)
+            {getLabelText('Download current items (.csv)', templatetype_base)}
           </CButton>
-        </CCol>
+        </CCol> */}
         <CCol className='d-flex justify-content-end'>
-          <InternalUserPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} InternalUserDetails={InternalUserDetails} />
+          <CompanyPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} CompanyDetails={CompanyDetails} />
         </CCol>
       </CRow>
       <CSmartTable
-        cleaner
+        // cleaner
         clickableRows
         columns={columns}
         columnFilter
@@ -192,7 +214,7 @@ const InternalUserDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleEdit(item.id)
+                    toggleEdit(item.CUS_ID)
                   }}
                 >
                   {getLabelText('Edit', templatetype_base)}
@@ -208,7 +230,7 @@ const InternalUserDataGrid = () => {
                 shape="square"
                 size="sm"
                 onClick={() => {
-                  toggleView(item.id)
+                  toggleView(item.CUS_ID)
                 }}
               >
                 {getLabelText('View', templatetype_base)}
@@ -224,7 +246,7 @@ const InternalUserDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDelete(item.id)
+                    toggleDelete(item.CUS_ID)
                   }}
                 >
                   {getLabelText('Delete', templatetype_base)}
@@ -251,7 +273,7 @@ const InternalUserDataGrid = () => {
         }}
         // selectable
         sorterValue={{ column: 'status', state: 'asc' }}
-        tableFilter
+        // tableFilter
         tableProps={{
           className: 'add-this-class',
           responsive: true,
@@ -265,4 +287,4 @@ const InternalUserDataGrid = () => {
   )
 }
 
-export default InternalUserDataGrid
+export default CompanyDataGrid

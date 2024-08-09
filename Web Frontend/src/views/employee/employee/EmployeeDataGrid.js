@@ -87,7 +87,6 @@ const EmployeeDataGrid = () => {
   const [EmployeeDetails, setEmployeeDetails] = useState([])
 
   async function loadDetails(item, action) {
-
     const token = getJWTToken();
     const staffId = getStaffID();
     const customerId = getCustomerID();
@@ -115,6 +114,7 @@ const EmployeeDataGrid = () => {
   }
 
   const toggleDetails = (index, action) => {
+    console.log(index)
     const position = details.indexOf(index)
     let newDetails = details.slice()
     if (position !== -1) {
