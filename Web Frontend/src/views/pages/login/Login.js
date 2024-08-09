@@ -61,7 +61,7 @@ const Login = () => {
         }
 
         localStorage.setItem('token', res1.user[0].UD_AuthorizationToken)
-        localStorage.setItem('staff_id', 'res1.user[0].UD_AuthorizationToken')
+        localStorage.setItem('staff_id', res1.user[0].UD_UserID)
         localStorage.setItem('customer_id', 'cus1')
 
         const courses = [

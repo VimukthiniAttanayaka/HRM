@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
 import {
   CButton,
@@ -15,67 +15,29 @@ import {
 } from '@coreui/react-pro'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import ProfileTabContent from "./ProfileTabContent";
+import UserProfileContact from "./UserProfileContact";
+import {getEmployeeSingle} from "../../apicalls/employee/get_employee_single";
+import {getStaffID} from "../../staticClass";
 
 const Profile = () => {
 
-  const apiUrl = process.env.REACT_APP_API_URL;
-
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [menuLIst, setMenuList] = useState([]);
-
-  class UserMenuDetail {
-    constructor(active, menuName) {
-      this.active = active;
-      this.menuName = menuName
-    }
+  const formData = {
+    EME_EmployeeID: getStaffID(),
+    AUD_notificationToken: '',
+    UD_UserID: ''
   }
+  let [employeeData, setEmployData] =  useState(getEmployeeSingle(formData))
 
-  const handleSubmit = async (event) => {
-
-    const formData = {
-      username: userName,
-      password: password
+  useEffect(() => {
+    async function fetchData() {
+      // You can await here
+      let tmpEmpData = await getEmployeeSingle(formData)
+      setEmployData(tmpEmpData)
+      // ...
     }
-    // Submit the form data to your backend API
-    const res = await fetch(apiUrl + 'login/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-      .then(response => response.json())
-      .then(json => {
-        let res1 = JSON.parse(JSON.stringify(json))
-        console.log(res1.user[0].UserAccessList);
-        for (let index = 0; index < res1.user[0].UserAccessList.length; index++) {
-          let element = res1.user[0].UserAccessList[index];
-          // console.log(element)
-          setMenuList[index] = new UserMenuDetail(element.MNU_Active, element.MNU_MenuName);
-        }
-
-        localStorage.setItem('token', res1.user[0].UD_AuthorizationToken)
-        localStorage.setItem('staff_id', 'res1.user[0].UD_AuthorizationToken')
-        localStorage.setItem('customer_id', 'cus1')
-
-        const courses = [
-          { name: "HRM_employee", active: true },
-          { name: "HRM_customer", active: true },
-          { name: "HRM_user", active: false },
-          { name: "Attendance", active: true },
-        ];
-        setMenu(courses);
-        console.log(menuLIst);
-      })
-
-    // if (response.ok) {
-
-    // Handle successful submission (e.g., display a success message)
-    //   console.log('Customer data submitted successfully!')
-    // } else {
-    //   // Handle submission errors
-    //   console.error('Error submitting customer data:', response.statusText)
-    // }
-  }
+    fetchData();
+  }, []);
 
   return (
     <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
@@ -86,20 +48,20 @@ const Profile = () => {
               <CCard className="p-4">
                 <CTabs activeItemKey="profile">
                   <CTabList variant="tabs">
-                    <CTab itemKey="home">Home</CTab>
+                    {/*<CTab itemKey="home">Home</CTab>*/}
                     <CTab itemKey="profile">Profile</CTab>
                     <CTab itemKey="contact">Contact</CTab>
-                    <CTab disabled itemKey="disabled">Disabled</CTab>
+                    {/*<CTab disabled itemKey="disabled">Disabled</CTab>*/}
                   </CTabList>
                   <CTabContent>
                     <CTabPanel className="p-3" itemKey="home">
                       Home tab content
                     </CTabPanel>
                     <CTabPanel className="p-3" itemKey="profile">
-                      Profile tab content
+                      <ProfileTabContent employeeData={employeeData}></ProfileTabContent>
                     </CTabPanel>
                     <CTabPanel className="p-3" itemKey="contact">
-                      Contact tab content
+                      <UserProfileContact employeeData={employeeData}></UserProfileContact>
                     </CTabPanel>
                     <CTabPanel className="p-3" itemKey="disabled">
                       Disabled tab content
