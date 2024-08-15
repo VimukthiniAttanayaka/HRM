@@ -495,7 +495,7 @@ namespace HRM_DAL.Data
                                         LV_ApprovedBy = rdr["LV_ApprovedBy"].ToString(),
                                         LV_ApprovedDate = approveddate,
                                         LV_Status = Convert.ToBoolean(rdr["LV_Status"].ToString()),
-                                        RC = RC,
+                                        //RC = RC,
                                     };
                                     objLeaveHead.LeaveGridViewModelList.Add(objLeaveDetail);
                                 }

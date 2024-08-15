@@ -12,6 +12,7 @@ const JobRoleDataGrid = () => {
   let templatetype_base = 'translation'
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
+
   const [popupStatus, setPopupStatus] = useState('create')
 
   const columns = [
@@ -127,9 +128,9 @@ const JobRoleDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      USR_EmployeeID: 'sedcx'
+      USR_EmployeeID: 'sedcx',MDJR_JobRoleID: 'sedcx', PAGE_NO: currentPage, PAGE_RECORDS_COUNT: itemsPerPage
     }
-
+console.log(formData);
     const JobRoleDetails = await getJobRoleAll(formData)
     setData(JobRoleDetails);
 
@@ -197,13 +198,18 @@ const JobRoleDataGrid = () => {
         columnFilter
         columnSorter
         // footer
-        items={data}
+        items={data.Data}
         itemsPerPageSelect
         // itemsPerPage={5}
         itemsPerPage={itemsPerPage}
         onItemsPerPageChange={handleItemsPerPageChange}
         onFilteredItemsChange={setCurrentItems}
-        pagination
+        pagination={<div> <Pagination
+          totalItems={data.RC}
+          currentPage={currentPage}
+          setCurrentPage={handlePageChange}
+          itemsPerPage={itemsPerPage}
+        /></div>}
         // onFilteredItemsChange={(items) => {
         //   console.log(items)
         // }}
@@ -294,12 +300,12 @@ const JobRoleDataGrid = () => {
         tableBodyProps={{
           className: 'align-middle'
         }} />
-      <Pagination
+      {/* <Pagination
         totalItems={100}
         currentPage={currentPage}
         setCurrentPage={handlePageChange}
         itemsPerPage={itemsPerPage}
-      />
+      /> */}
     </CCardBody>
   )
 }

@@ -75,14 +75,20 @@ namespace HRM.Controllers
         public List<ReturnJobRoleModelHead> get_JobRole_all(JobRoleSearchModel model)//ok
         {
             List<ReturnJobRoleModelHead> objJobRoleHeadList = new List<ReturnJobRoleModelHead>();
-            ////ReturnJobRoleModelHead obj = new ReturnJobRoleModelHead() { resp = false, msg = "sfsf" };
-            ////obj.JobRole = new List<ReturnJobRoleModel>();
-            //obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "CAS", MDJR_JobRole = "Casual", MDJR_Status = true });
-            //obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "ANU", MDJR_JobRole = "Annual", MDJR_Status = false });
-            //obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "MED", MDJR_JobRole = "Medical", MDJR_Status = true });
-            //obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "MAT", MDJR_JobRole = "Matrinaty", MDJR_Status = true });
-            //objJobRoleHeadList.Add(obj);
-            //return objJobRoleHeadList;
+            ReturnJobRoleModelHead obj = new ReturnJobRoleModelHead() { resp = false, msg = "sfsf", RC = 100 };
+            obj.JobRole = new List<ReturnJobRoleModel>();
+            obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "CAS", MDJR_JobRole = "Casual", MDJR_Status = true });
+            obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "ANU", MDJR_JobRole = "Annual", MDJR_Status = false });
+            obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "MED", MDJR_JobRole = "Medical", MDJR_Status = true });
+            obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "MAT", MDJR_JobRole = "Matrinaty", MDJR_Status = true });
+            obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "CAS", MDJR_JobRole = "Casual", MDJR_Status = true });
+            for (int i = 0; i < 100; i++)
+            {
+                obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "CAS", MDJR_JobRole = "Casual", MDJR_Status = true });
+
+            }
+            objJobRoleHeadList.Add(obj);
+            return objJobRoleHeadList;
 
             try
             {

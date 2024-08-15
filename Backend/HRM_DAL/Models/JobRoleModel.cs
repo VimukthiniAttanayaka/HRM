@@ -4,7 +4,7 @@ using System;
 
 namespace HRM_DAL.Models
 {
-    public class ReturnJobRoleModelHead : ReturnResponse
+    public class ReturnJobRoleModelHead : ReturnResponseGridViewBaseModel
     {
         public List<ReturnJobRoleModel> JobRole { get; set; }
     }
@@ -54,7 +54,7 @@ namespace HRM_DAL.Models
 
     }
 
-    public class JobRoleSearchModel : RequestBaseModel
+    public class JobRoleSearchModel : RequestGridBaseModel
     {
         public string MDJR_JobRoleID { get; set; }
     }

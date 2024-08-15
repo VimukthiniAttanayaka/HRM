@@ -1,7 +1,7 @@
 ﻿namespace HRM_DAL.Models
 {
-    public class ReturnResponseGridViewBaseModel
+    public class ReturnResponseGridViewBaseModel:ReturnResponse
     {
-        public string RC { get; set; }
+        public int RC { get; set; }
     }
 }

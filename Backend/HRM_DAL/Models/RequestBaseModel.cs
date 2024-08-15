@@ -15,7 +15,7 @@ namespace HRM_DAL.Models
     public class RequestGridBaseModel : RequestBaseModel
     {
 
-        public string PAGE_NO { get; set; }
-        public string PAGE_RECORDS_COUNT { get; set; }
+        public int PAGE_NO { get; set; }
+        public int PAGE_RECORDS_COUNT { get; set; }
     }
 }
