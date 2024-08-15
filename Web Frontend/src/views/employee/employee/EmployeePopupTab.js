@@ -237,6 +237,52 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
     }
   }
 
+  const [img, setImg] = useState('')
+  const handleGetAllDocument = async (event) => {
+    console.log('Delete Department')
+    // Prepare form data
+    const formData = {
+      UD_UserID: "string",
+      AUD_notificationToken: "string",
+      EME_EmployeeID: "employeeId"
+    }
+    // Submit the form data to your backend API
+    const response = await fetch(apiUrl + 'Employee/get_employeeDocument_all', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+      .then(response => response.json())
+      .then(json => {
+        let res1 = JSON.parse(JSON.stringify(json))
+        console.log(res1)
+        setImg(res1)
+      })
+    // if (response.ok) {
+    //   onClose()
+    //   console.log(response);
+    //   // Handle successful submission (e.g., display a success message)
+    //   console.log('Department data submitted successfully!')
+    // } else {
+    //   // Handle submission errors
+    //   console.error('Error submitting Department data:', response.statusText)
+    // }
+  }
+
+  function ImageDisplay({ documentData }) {
+    const { USRED_DocumentData, USRED_DocumentType } = documentData;
+
+    const createImageSrc = (base64String, imageType) => {
+      return `data:image/${imageType};base64,${base64String}`;
+    };
+
+    const imageSrc = createImageSrc(USRED_DocumentData, USRED_DocumentType);
+
+    return (
+      <img src={imageSrc} alt="Document" />
+    );
+  }
+
   const handleSubmitData = async (event) => {
     event.preventDefault()
 
@@ -435,6 +481,8 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
       setAdditionalInformation(EmployeeDetails.EME_AdditionalInformation)
       setTin(EmployeeDetails.EME_PayeeTaxNumber)
       setIsActive(EmployeeDetails.EME_Status)
+
+      handleGetAllDocument()
     }
   }, [EmployeeDetails]);
 
@@ -453,6 +501,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
           <CModalTitle id="TooltipsAndPopoverExample">{popupStatusSetup()}</CModalTitle>
         </CModalHeader>
         <CModalBody>
+          {/* {ImageDisplay(img[0])} */}
           <CTabs activeItemKey="general">
             <CTabList variant="tabs">
               <CTab itemKey="general">General</CTab>

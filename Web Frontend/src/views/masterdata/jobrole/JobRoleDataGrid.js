@@ -5,6 +5,7 @@ import JobRolePopup from './JobRolePopup.js';
 import { getJobRoleAll } from '../../../apicalls/jobrole/get_all_list.js';
 import { getJobRoleSingle } from '../../../apicalls/jobrole/get_jobrole_single.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
+import Pagination from './Pagination.js'
 
 const JobRoleDataGrid = () => {
   let templatetype = 'translation_jobrole'
@@ -155,6 +156,21 @@ const JobRoleDataGrid = () => {
     setJobRoleDetails([]);
     setPopupStatus('create')
   };
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handleItemsPerPageChange = (newItemsPerPage) => {
+    console.log(newItemsPerPage);
+    setItemsPerPage(newItemsPerPage);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // Fetch data for the new page
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
   return (
     <CCardBody>
@@ -183,7 +199,9 @@ const JobRoleDataGrid = () => {
         // footer
         items={data}
         itemsPerPageSelect
-        itemsPerPage={5}
+        // itemsPerPage={5}
+        itemsPerPage={itemsPerPage}
+        onItemsPerPageChange={handleItemsPerPageChange}
         onFilteredItemsChange={setCurrentItems}
         pagination
         // onFilteredItemsChange={(items) => {
@@ -276,6 +294,12 @@ const JobRoleDataGrid = () => {
         tableBodyProps={{
           className: 'align-middle'
         }} />
+      <Pagination
+        totalItems={100}
+        currentPage={currentPage}
+        setCurrentPage={handlePageChange}
+        itemsPerPage={itemsPerPage}
+      />
     </CCardBody>
   )
 }

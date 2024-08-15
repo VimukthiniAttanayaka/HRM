@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse ,CCol} from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CCol } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import AttendancePopup from './AttendancePopup'
@@ -124,7 +124,7 @@ const AttendanceDataGrid = () => {
         Download current items (.csv)
       </CButton>
       </CCol>
-       <CCol className='d-flex justify-content-end'>
+      <CCol className='d-flex justify-content-end'>
         <AttendancePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} />
       </CCol>
       <CSmartTable
