@@ -128,9 +128,10 @@ const JobRoleDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      USR_EmployeeID: 'sedcx',MDJR_JobRoleID: 'sedcx', PAGE_NO: currentPage, PAGE_RECORDS_COUNT: itemsPerPage
+      USR_EmployeeID: 'sedcx', MDJR_JobRoleID: 'sedcx',
+      PAGE_NO: currentPage, PAGE_RECORDS_COUNT: itemsPerPage, ColumnSpecialFilter: JSON.stringify(columnFilter)
     }
-console.log(formData);
+    console.log(tableFilter);
     const JobRoleDetails = await getJobRoleAll(formData)
     setData(JobRoleDetails);
 
@@ -141,8 +142,12 @@ console.log(formData);
     requestdata();
   }, [visible]);
 
-
   const [currentItems, setCurrentItems] = useState(data)
+
+  useEffect(() => {
+    requestdata();
+  }, [currentItems]);
+
 
   const csvContent = currentItems.map((item) => Object.values(item).join(',')).join('\n')
 
@@ -159,6 +164,16 @@ console.log(formData);
   };
   const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
   const [currentPage, setCurrentPage] = useState(1);
+  const [columnFilter, setColumnFilter] = useState([])
+  const [tableFilter, setTableFilter] = useState([])
+  useEffect(() => {
+    // console.log(columnFilter);
+    requestdata();
+  }, [columnFilter]);
+
+  useEffect(() => {
+    requestdata();
+  }, [tableFilter]);
 
   const handleItemsPerPageChange = (newItemsPerPage) => {
     console.log(newItemsPerPage);
@@ -195,7 +210,8 @@ console.log(formData);
         cleaner
         clickableRows
         columns={columns}
-        columnFilter
+        columnFilter//={setColumnFilter}
+        onColumnFilterChange={setColumnFilter}
         columnSorter
         // footer
         items={data.Data}
@@ -204,6 +220,8 @@ console.log(formData);
         itemsPerPage={itemsPerPage}
         onItemsPerPageChange={handleItemsPerPageChange}
         onFilteredItemsChange={setCurrentItems}
+        onTableFilterChange={setTableFilter}
+        
         pagination={<div> <Pagination
           totalItems={data.RC}
           currentPage={currentPage}

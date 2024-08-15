@@ -25,7 +25,7 @@ export const getJobRoleAll = async (formData) => {
     .then(response => response.json())
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
-console.log(res1);
+// console.log(res1);
 
       class JobRoleDetail {
         constructor(id, JobRole, status) {
@@ -37,7 +37,7 @@ console.log(res1);
       }
 
       let RC = res1[0].RC;
-      console.log(RC);
+      // console.log(RC);
       for (let index = 0; index < res1[0].JobRole.length; index++) {
         let element = res1[0].JobRole[index];
         // console.log(element)

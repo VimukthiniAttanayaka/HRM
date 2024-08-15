@@ -17,5 +17,6 @@ namespace HRM_DAL.Models
 
         public int PAGE_NO { get; set; }
         public int PAGE_RECORDS_COUNT { get; set; }
+        public object ColumnSpecialFilter { get; set; }
     }
 }
