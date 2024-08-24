@@ -5,6 +5,9 @@ import DepartmentPopup from './DepartmentPopup.js';
 import { getDepartmentAll } from '../../../apicalls/department/get_all_list.js';
 import { getDepartmentSingle } from '../../../apicalls/department/get_department_single.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
+import Pagination from '../../shared/Pagination.js'
+import { getBadge } from '../../shared/gridviewconstants.js';
+import { columns } from '../../../controllers/department_controllers.js';
 
 const DepartmentDataGrid = () => {
   let templatetype = 'translation_department'
@@ -12,68 +15,31 @@ const DepartmentDataGrid = () => {
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [columnFilter, setColumnFilter] = useState([])
+  const [tableFilter, setTableFilter] = useState([])
+  useEffect(() => {
+    // console.log(columnFilter);
+    requestdata();
+  }, [columnFilter]);
 
-  const columns = [
-    {
-      key: 'id',
-      // label: '',
-      label: getLabelText('ID', templatetype),
-      // filter: false,
-      // sorter: false,
-      _style: { width: '20%' },
-    },
-    {
-      key: 'Department',
-      label: getLabelText('Department', templatetype),
-      _style: { width: '20%' },
-    },
+  useEffect(() => {
+    requestdata();
+  }, [tableFilter]);
 
-    // {
-    //   key: 'alotment',
-    //   _style: { width: '20%' }
-    // },
-    {
-      key: 'status',
-      label: getLabelText('Status', templatetype),
-      _style: { width: '20%' }
-    },
-    {
-      key: 'show_details',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-    {
-      key: 'view',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-    {
-      key: 'delete',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-  ];
-  const getBadge = (status) => {
-    switch (status) {
-      case 'Active':
-        return 'success'
-      case 'Inactive':
-        return 'secondary'
-      case 'Pending':
-        return 'warning'
-      case 'Banned':
-        return 'danger'
-      default:
-        return 'primary'
-    }
-  }
+  const handleItemsPerPageChange = (newItemsPerPage) => {
+    console.log(newItemsPerPage);
+    setItemsPerPage(newItemsPerPage);
+  };
 
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // Fetch data for the new page
+  };
+
+
+ 
   const [DepartmentDetails, setDepartmentDetails] = useState([])
 
   async function loadDetails(item, action) {
@@ -180,13 +146,20 @@ const DepartmentDataGrid = () => {
         clickableRows
         columns={columns}
         columnFilter
+        onColumnFilterChange={setColumnFilter}
         columnSorter
         // footer
         items={data}
         itemsPerPageSelect
         itemsPerPage={5}
         onFilteredItemsChange={setCurrentItems}
-        pagination
+        onTableFilterChange={setTableFilter}
+        pagination={<div> <Pagination
+          totalItems={data.RC}
+          currentPage={currentPage}
+          setCurrentPage={handlePageChange}
+          itemsPerPage={itemsPerPage}
+        /></div>}
         // onFilteredItemsChange={(items) => {
         //   console.log(items)
         // }}

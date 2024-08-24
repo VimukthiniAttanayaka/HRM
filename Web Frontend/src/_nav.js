@@ -233,17 +233,45 @@ const _nav = [
   //   name: <Translation>{(t) => t('Exit Interview')}</Translation>,
   // },
   {
-    component: CNavTitle,
+    component: CNavGroup,
     // name: <Translation>{(t) => t('Reports')}</Translation>,
     name: getLabelText('Reports', templatetype),
     disabled: !UMGroup,
-  },{
-    component: CNavItem,
-    // name: <Translation>{(t) => t('User Access Group')}</Translation>,
-    name: getLabelText('Report Viewer', templatetype),
-    to: '/report',
-    disabled: !UMUserAccessGroup,
-    // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    items: [{
+      component: CNavItem,
+      // name: <Translation>{(t) => t('User Access Group')}</Translation>,
+      name: getLabelText('Report Viewer', templatetype),
+      to: '/report',
+      disabled: !UMUserAccessGroup,
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    }]
+  }, {
+    component: CNavGroup,
+    // name: <Translation>{(t) => t('Reports')}</Translation>,
+    name: getLabelText('Log Reports', templatetype),
+    disabled: !UMGroup,
+    items: [{
+      component: CNavItem,
+      // name: <Translation>{(t) => t('User Access Group')}</Translation>,
+      name: getLabelText('User Log', templatetype),
+      to: '/logreports/userlog',
+      disabled: !UMUserAccessGroup,
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    },{
+      component: CNavItem,
+      // name: <Translation>{(t) => t('User Access Group')}</Translation>,
+      name: getLabelText('Audit Log', templatetype),
+      to: '/logreports/auditlog',
+      disabled: !UMUserAccessGroup,
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    },{
+      component: CNavItem,
+      // name: <Translation>{(t) => t('User Access Group')}</Translation>,
+      name: getLabelText('Error Log', templatetype),
+      to: '/logreports/errorlog',
+      disabled: !UMUserAccessGroup,
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    }],
   },
   {
     component: CNavGroup,

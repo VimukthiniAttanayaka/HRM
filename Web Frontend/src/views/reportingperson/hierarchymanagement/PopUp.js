@@ -44,7 +44,7 @@ const PopUp = ({ visible, onClose, onOpen }) => {
         aria-labelledby="TooltipsAndPopoverExample"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New Employee</CModalTitle>
+          {/* <CModalTitle id="TooltipsAndPopoverExample">Create New Employee</CModalTitle> */}
         </CModalHeader>
         <CModalBody>
           {/* <CCard className="mx-4" md={9}>

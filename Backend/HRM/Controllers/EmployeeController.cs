@@ -72,13 +72,13 @@ namespace HRM.Controllers
         public List<ReturnEmployeeModelHead> get_employee_all(EmployeeSearchModel model)//ok
         {
             List<ReturnEmployeeModelHead> objemployeeHeadList = new List<ReturnEmployeeModelHead>();
-            //ReturnEmployeeModelHead obj = new ReturnEmployeeModelHead() { resp = false, msg = "sfsf" };
-            //obj.Employee = new List<ReturnEmployeeModel>();
-            //obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test", EME_EmployeeID = "test" });
-            //obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test1", EME_EmployeeID = "test1" });
-            //obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test2", EME_EmployeeID = "test2" });
-            //objemployeeHeadList.Add(obj);
-            //return objemployeeHeadList;
+            ReturnEmployeeModelHead obj = new ReturnEmployeeModelHead() { resp = false, msg = "sfsf" };
+            obj.Employee = new List<ReturnEmployeeModel>();
+            obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test", EME_EmployeeID = "test" });
+            obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test1", EME_EmployeeID = "test1" });
+            obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test2", EME_EmployeeID = "test2" });
+            objemployeeHeadList.Add(obj);
+            return objemployeeHeadList;
 
             try
             {

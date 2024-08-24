@@ -5,7 +5,10 @@ import JobRolePopup from './JobRolePopup.js';
 import { getJobRoleAll } from '../../../apicalls/jobrole/get_all_list.js';
 import { getJobRoleSingle } from '../../../apicalls/jobrole/get_jobrole_single.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
-import Pagination from './Pagination.js'
+import Pagination from '../../shared/Pagination.js'
+import { getBadge } from '../../shared/gridviewconstants.js';
+import { columns } from '../../../controllers/jobrole_controllers.js';
+
 
 const JobRoleDataGrid = () => {
   let templatetype = 'translation_jobrole'
@@ -15,67 +18,7 @@ const JobRoleDataGrid = () => {
 
   const [popupStatus, setPopupStatus] = useState('create')
 
-  const columns = [
-    {
-      key: 'id',
-      label: getLabelText('ID', templatetype),
-      // label: '',
-      // filter: false,
-      // sorter: false,
-      _style: { width: '20%' },
-    },
-    {
-      key: 'JobRole',
-      label: getLabelText('JobRole', templatetype),
-      _style: { width: '20%' },
-    },
-
-    // {
-    //   key: 'alotment',
-    //   _style: { width: '20%' }
-    // },
-    {
-      key: 'status',
-      label: getLabelText('Status', templatetype),
-      _style: { width: '20%' }
-    },
-    {
-      key: 'show_details',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-    {
-      key: 'view',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-    {
-      key: 'delete',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-  ];
-  const getBadge = (status) => {
-    switch (status) {
-      case 'Active':
-        return 'success'
-      case 'Inactive':
-        return 'secondary'
-      case 'Pending':
-        return 'warning'
-      case 'Banned':
-        return 'danger'
-      default:
-        return 'primary'
-    }
-  }
-
+  
   const [JobRoleDetails, setJobRoleDetails] = useState([])
 
   async function loadDetails(item) {
@@ -221,7 +164,7 @@ const JobRoleDataGrid = () => {
         onItemsPerPageChange={handleItemsPerPageChange}
         onFilteredItemsChange={setCurrentItems}
         onTableFilterChange={setTableFilter}
-        
+
         pagination={<div> <Pagination
           totalItems={data.RC}
           currentPage={currentPage}

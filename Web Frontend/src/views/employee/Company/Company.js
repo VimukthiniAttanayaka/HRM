@@ -5,16 +5,16 @@ import DepartmentDataGrid from './CompanyDataGrid'
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const Customer = () => {
-  let templatetype = 'translation_department'
+  let templatetype = 'translation_company'
   return (
     <>
       <CCard className="mb-4">
         <CCardHeader>
           {/* <strong>Department List</strong> */}
-          {getLabelText('Department List', templatetype)}
+          {getLabelText('Company List', templatetype)}
         </CCardHeader>
         <CCardBody>
-          <DepartmentDataGrid onOpen={() => handleOpenPopup} />
+          <CompanyDataGrid onOpen={() => handleOpenPopup} />
         </CCardBody>
       </CCard>
     </>

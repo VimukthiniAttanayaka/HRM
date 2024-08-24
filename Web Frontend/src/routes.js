@@ -28,6 +28,9 @@ const JobRole = React.lazy(() => import('./views/masterdata/jobrole/JobRole'))
 const Location = React.lazy(() => import('./views/masterdata/location/Location'))
 const Profile = React.lazy(() => import('./views/profile/Profile'))
 const Reports = React.lazy(() => import('./views/Report/Report'))
+const UserLogReports= React.lazy(() => import('./views/logreports/userlog/userlog'))
+const ErrorLogReports= React.lazy(() => import('./views/logreports/errorlog/errorlog'))
+const AuditLogReports= React.lazy(() => import('./views/logreports/auditlog/auditlog'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -197,6 +200,18 @@ const routes = [
     path: '/report',
     name: <Translation>{(t) => t('Reports')}</Translation>,
     element: Reports,
+  },{
+    path: '/logreports/userlog',
+    name: <Translation>{(t) => t('User Log Reports')}</Translation>,
+    element: UserLogReports,
+  },{
+    path: '/logreports/errorlog',
+    name: <Translation>{(t) => t('Error Log Reports')}</Translation>,
+    element: ErrorLogReports,
+  },{
+    path: '/logreports/auditlog',
+    name: <Translation>{(t) => t('Audit Log Reports')}</Translation>,
+    element: AuditLogReports,
   },
   {
     path: '/masterdata/branch',
