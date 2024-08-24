@@ -1,6 +1,7 @@
 export const data = {
-  header1: "Header 1",
-  header2: "Header 2",
+  CompanyTitle: "DoashaIT (PVT) LTD",
+  LoggedUser: "Neelaka",
+  PrintedDate: "10/10/2024",
   content: [
     {
       name: "John1",
@@ -27,6 +28,23 @@ export const data = {
       ],
     },
   ],
-  footer1: "Footer 1",
-  footer2: "Footer 2",
+  Copyright: "Copyright @DoashaIT",
+  // footer2: "Footer 2",
 };
+
+export class UserLogModel {
+  CompanyTitle;
+  LoggedUser;
+  PrintedDate;
+  Copyright;
+  content= [
+    { id: 1, name: 'Object 1' },
+    { id: 2, name: 'Object 2' },
+    { id: 2, name: 'Object 2' }
+  ];
+}
+export class UserLogModel_Content{
+  id;
+  name;
+  surname;
+}
