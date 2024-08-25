@@ -7,6 +7,7 @@ import { getEmployeeSingle } from '../../../apicalls/employee/get_employee_singl
 import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
 import { columns } from '../../../controllers/employee_controllers.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExampleExport.js';
 
 const EmployeeDataGrid = () => {
 
@@ -140,11 +141,11 @@ const EmployeeDataGrid = () => {
             Download current items (.csv)
           </CButton>
         </CCol>
-
+        <CCol > <ExcelExport data={data} fileName="employees" /></CCol>
         <CCol className='d-flex justify-content-end'>
           <EmployeePopupTab popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} EmployeeDetails={EmployeeDetails} />
         </CCol>
-      </CRow>    
+      </CRow>
 
       <CSmartTable
         cleaner

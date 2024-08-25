@@ -8,6 +8,7 @@ import defaultLayout from './layout_json.json';
 import { data as defaultData,columns as defaultColumns } from './data';
 import { dataSource as defaultDataSource } from './data-source';
 import { getUserLogReport } from '../../../apicalls/reportdata/userlogreport.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExampleExport.js';
 
 
 function ReportHome() {
@@ -69,7 +70,7 @@ function ReportHome() {
         border: '1px solid black',
         width: '1100px',
         margin: 'auto',
-      }}>
+      }}> <ExcelExport data={data} fileName="logreport" />
         <ReportRenderer
           columns={columns}
           data={data}

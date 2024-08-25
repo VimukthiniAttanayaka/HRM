@@ -30,6 +30,7 @@
     "chart.js": "^4.4.2",
     "classnames": "^2.5.1",
     "core-js": "^3.36.1",
+    "file-saver": "^2.0.5",
     "i18next": "^23.10.1",
     "i18next-browser-languagedetector": "^7.2.0",
     "i18next-http-backend": "^2.5.0",
@@ -46,7 +47,8 @@
     "react-spreadsheet": "^0.9.5",
     "redux": "5.0.1",
     "scheduler": "^0.23.2",
-    "simplebar-react": "^3.2.4"
+    "simplebar-react": "^3.2.4",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",

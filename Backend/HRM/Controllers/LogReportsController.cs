@@ -120,5 +120,55 @@ namespace HRM.Controllers
             return objAccessGroupHeadList;
 
         }
+
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<ReturnAuditLogReportsModelHead> get_AuditLogReport(AccessGroup model)//ok
+        {
+            List<ReturnAuditLogReportsModelHead> objAccessGroupHeadList = new List<ReturnAuditLogReportsModelHead>();
+            ReturnAuditLogReportsModelHead obj = new ReturnAuditLogReportsModelHead() { resp = false, msg = "sfsf" };
+            obj.AuditLog = new List<AuditLogModel>();
+
+            //obj.AuditLog.Add(new AuditLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "ANU", UserLogId = "Annual", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Annual" });
+            //obj.AuditLog.Add(new AuditLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "ANU1", UserLogId = "Annual1", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Annual1" });
+            //obj.AuditLog.Add(new AuditLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "MED", UserLogId = "Medical", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Medical" });
+            //obj.AuditLog.Add(new AuditLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "MAT", UserLogId = "Matrinaty", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Matrinaty" });
+            //obj.AuditLog.Add(new AuditLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "MAT", UserLogId = "Matrinaty", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Matrinaty" });
+
+            objAccessGroupHeadList.Add(obj);
+            return objAccessGroupHeadList;
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
+
+                //return HRM_BL.AccessGroup_BL.get_AccessGroups_single(model);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturnAuditLogReportsModelHead objAccessGroupHead = new ReturnAuditLogReportsModelHead
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objAccessGroupHeadList.Add(objAccessGroupHead);
+
+                objError.WriteLog(0, "LogReportsController", "get_AuditLogReport", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "LogReportsController", "get_AuditLogReport", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "LogReportsController", "get_AuditLogReport", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "LogReportsController", "get_AuditLogReport", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+
+            return objAccessGroupHeadList;
+
+        }
     }
 }
