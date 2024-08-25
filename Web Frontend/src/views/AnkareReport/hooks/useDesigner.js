@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-export function useDesigner({ dataSource, layout, onChange }) {
+export function useDesigner({ dataSource, layout, onChange,columns }) {
   const designerRef = useRef();
   const [designer, setDesigner] = useState();
 
@@ -11,6 +11,7 @@ export function useDesigner({ dataSource, layout, onChange }) {
         element: designerRef.current,
         dataSource,
         layout,
+        columns
       });
 
       setDesigner(designerInstance);

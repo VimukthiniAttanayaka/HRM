@@ -45,6 +45,15 @@ export class UserLogModel {
 }
 export class UserLogModel_Content{
   id;
-  name;
-  surname;
+  userid;
+  username;
+  LoggedDateTime;
+  UserLogOffTime
 }
+export const columns = [
+  { key: 'id', title: 'ID', dataIndex: 'id', width: 80 },
+  { key: 'userid', title: 'userid', dataIndex: 'userid' },
+  { key: 'username', title: 'username', dataIndex: 'username' },
+  { key: 'LoggedDateTime', title: 'LoggedDateTime', dataIndex: 'LoggedDateTime' },
+  { key: 'UserLogOffTime', title: 'UserLogOffTime', dataIndex: 'UserLogOffTime' }
+];

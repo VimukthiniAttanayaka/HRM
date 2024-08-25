@@ -24,23 +24,17 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnAccessGroupModelHead> get_UerLogReport(AccessGroup model)//ok
+        public List<ReturnUserLogReportsModelHead> get_UerLogReport(AccessGroup model)//ok
         {
-            List<ReturnAccessGroupModelHead> objAccessGroupHeadList = new List<ReturnAccessGroupModelHead>();
-            ReturnAccessGroupModelHead obj = new ReturnAccessGroupModelHead() { resp = false, msg = "sfsf" };
-            obj.AccessGroup = new List<ReturnAccessGroupModel>();
-            List<AccessGroupSelect> AccessGroups = new List<AccessGroupSelect>();
-            AccessGroups.Add(new AccessGroupSelect() { value = "CAS", label = "CAS", Ischecked = true });
-            AccessGroups.Add(new AccessGroupSelect() { value = "ANU", label = "ANU", Ischecked = true });
-            AccessGroups.Add(new AccessGroupSelect() { value = "MED", label = "MED", Ischecked = true });
+            List<ReturnUserLogReportsModelHead> objAccessGroupHeadList = new List<ReturnUserLogReportsModelHead>();
+            ReturnUserLogReportsModelHead obj = new ReturnUserLogReportsModelHead() { resp = false, msg = "sfsf" };
+            obj.UserLog = new List<UserLogModel>();
 
-
-            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "CAS", UAG_AccessGroup = "Casual", UAG_Status = true, AccessGroups = AccessGroups });
-            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "ANU", UAG_AccessGroup = "Annual", UAG_Status = true, AccessGroups = AccessGroups });
-            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MED", UAG_AccessGroup = "Medical", UAG_Status = true, AccessGroups = AccessGroups });
-            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MAT", UAG_AccessGroup = "Matrinaty", UAG_Status = true, AccessGroups = AccessGroups });
-
-            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MAT", UAG_AccessGroup = "Matrinaty", UAG_Status = true, AccessGroups = AccessGroups });
+            obj.UserLog.Add(new UserLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "ANU", UserLogId = "Annual", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Annual" });
+            obj.UserLog.Add(new UserLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "ANU1", UserLogId = "Annual1", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Annual1" });
+            obj.UserLog.Add(new UserLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "MED", UserLogId = "Medical", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Medical" });
+            obj.UserLog.Add(new UserLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "MAT", UserLogId = "Matrinaty", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Matrinaty" });
+            obj.UserLog.Add(new UserLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "MAT", UserLogId = "Matrinaty", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Matrinaty" });
 
             objAccessGroupHeadList.Add(obj);
             return objAccessGroupHeadList;
@@ -49,25 +43,25 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
 
-                return HRM_BL.AccessGroup_BL.get_AccessGroups_single(model);
+                //return HRM_BL.AccessGroup_BL.get_AccessGroups_single(model);
 
             }
             catch (Exception ex)
             {
 
-                ReturnAccessGroupModelHead objAccessGroupHead = new ReturnAccessGroupModelHead
+                ReturnUserLogReportsModelHead objAccessGroupHead = new ReturnUserLogReportsModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
                 };
                 objAccessGroupHeadList.Add(objAccessGroupHead);
 
-                objError.WriteLog(0, "LogReportsController", "get_AccessGroup_single", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "LogReportsController", "get_AccessGroup_single", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "LogReportsController", "get_UerLogReport", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "LogReportsController", "get_UerLogReport", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "LogReportsController", "get_AccessGroup_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "LogReportsController", "get_AccessGroup_single", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "LogReportsController", "get_UerLogReport", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "LogReportsController", "get_UerLogReport", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 

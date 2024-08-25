@@ -1,108 +1,193 @@
 {
   "width": 698,
   "headerSection": {
-      "height": 50,
-      "binding": "",
-      "items": [
-          {
-              "x": 5,
-              "y": 23,
-              "width": 687,
-              "height": 20,
-              "name": "",
-              "textAlign": "center",
-              "fontWeight": "bold",
-              "type": "text",
-              "text": "User Log Report",
-              "binding": ""
-          },
-          {
-              "x": 63,
-              "y": 4,
-              "width": 100,
-              "height": 20,
-              "name": "",
-              "type": "text",
-              "text": "LoggedUser",
-              "binding": "LoggedUser"
-          },
-          {
-              "x": 5,
-              "y": 4,
-              "width": 58,
-              "height": 20,
-              "name": "",
-              "type": "text",
-              "text": "Printed By",
-              "binding": ""
-          },
-          {
-              "x": 163,
-              "y": 3,
-              "width": 447,
-              "height": 20,
-              "name": "",
-              "textAlign": "center",
-              "fontWeight": "bold",
-              "type": "text",
-              "text": "DoashaIT (PVT) LTD",
-              "binding": ""
-          },
-          {
-              "x": 610,
-              "y": 3,
-              "width": 87,
-              "height": 20,
-              "name": "",
-              "type": "text",
-              "text": "PrintedDate",
-              "binding": "PrintedDate"
-          }
-      ],
-      "sections": []
+    "height": 72,
+    "binding": "",
+    "items": [
+      {
+        "x": 5,
+        "y": 23,
+        "width": 687,
+        "height": 20,
+        "name": "",
+        "textAlign": "center",
+        "fontWeight": "bold",
+        "type": "text",
+        "text": "User Log Report",
+        "binding": ""
+      },
+      {
+        "x": 63,
+        "y": 4,
+        "width": 100,
+        "height": 20,
+        "name": "",
+        "type": "text",
+        "text": "LoggedUser",
+        "binding": "LoggedUser"
+      },
+      {
+        "x": 5,
+        "y": 4,
+        "width": 58,
+        "height": 20,
+        "name": "",
+        "type": "text",
+        "text": "Printed By",
+        "binding": ""
+      },
+      {
+        "x": 163,
+        "y": 3,
+        "width": 447,
+        "height": 20,
+        "name": "",
+        "textAlign": "center",
+        "fontWeight": "bold",
+        "type": "text",
+        "text": "DoashaIT (PVT) LTD",
+        "binding": ""
+      },
+      {
+        "x": 610,
+        "y": 3,
+        "width": 87,
+        "height": 20,
+        "name": "",
+        "type": "text",
+        "text": "PrintedDate",
+        "binding": "PrintedDate"
+      },
+      {
+        "x": 2,
+        "y": 50,
+        "width": 62,
+        "height": 20,
+        "fontWeight": "bold",
+        "name": "",
+        "type": "text",
+        "text": "id",
+        "binding": ""
+      },
+      {
+        "x": 64,
+        "y": 50,
+        "width": 100,
+        "height": 20,
+        "name": "",
+        "fontWeight": "bold",
+        "type": "text",
+        "text": "userid",
+        "binding": ""
+      },
+      {
+        "x": 164,
+        "y": 50,
+        "width": 282,
+        "height": 20,
+        "name": "",
+        "fontWeight": "bold",
+        "type": "text",
+        "text": "username",
+        "binding": ""
+      },
+      {
+        "x": 451,
+        "y": 50,
+        "width": 122,
+        "height": 20,
+        "name": "",
+        "fontWeight": "bold",
+        "type": "text",
+        "text": "LoggedDateTime",
+        "binding": ""
+      },
+      {
+        "x": 573,
+        "y": 50,
+        "width": 121,
+        "height": 20,
+        "name": "",
+        "fontWeight": "bold",
+        "type": "text",
+        "text": "UserLogOffTime",
+        "binding": ""
+      }
+    ],
+    "sections": []
   },
   "contentSection": {
-      "height": 75,
-      "binding": "content",
-      "items": [
-          {
-              "x": 9,
-              "y": 6,
-              "width": 100,
-              "height": 20,
-              "name": "",
-              "type": "text",
-              "text": "Label1",
-              "binding": "name"
-          },
-          {
-              "x": 9,
-              "y": 26,
-              "width": 200,
-              "height": 40,
-              "name": "",
-              "type": "text",
-              "text": "Label2",
-              "binding": "surname"
-          }
-      ],
-      "sections": []
+    "height": 42,
+    "binding": "content",
+    "items": [
+      {
+        "x": 2,
+        "y": 16,
+        "width": 62,
+        "height": 20,
+        "name": "",
+        "type": "text",
+        "text": "id",
+        "binding": "id"
+      },
+      {
+        "x": 64,
+        "y": 16,
+        "width": 100,
+        "height": 20,
+        "name": "",
+        "type": "text",
+        "text": "userid",
+        "binding": "userid"
+      },
+      {
+        "x": 164,
+        "y": 16,
+        "width": 282,
+        "height": 20,
+        "name": "",
+        "type": "text",
+        "text": "username",
+        "binding": "username"
+      },
+      {
+        "x": 450,
+        "y": 16,
+        "width": 118,
+        "height": 20,
+        "name": "",
+        "type": "text",
+        "text": "LoggedDateTime",
+        "binding": "LoggedDateTime"
+      },
+      {
+        "x": 573,
+        "y": 16,
+        "width": 121,
+        "height": 20,
+        "name": "",
+        "type": "text",
+        "text": "UserLogOffTime",
+        "binding": "UserLogOffTime"
+      }
+    ],
+    "sections": []
   },
   "footerSection": {
-      "height": 24,
-      "binding": "",
-      "items": [
-          {
-              "x": 287,
-              "y": 1,
-              "width": 130,
-              "height": 20,
-              "name": "",
-              "type": "text",
-              "text": "Doashait © 2024 .",
-              "binding": ""
-          }
-      ],
-      "sections": []
+    "height": 24,
+    "binding": "",
+    "items": [
+      {
+        "x": 287,
+        "y": 1,
+        "width": 130,
+        "height": 20,
+        "name": "",
+        "type": "text",
+        "text": "Doashait © 2024 .",
+        "binding": ""
+      }
+    ],
+    "sections": []
   }
 }

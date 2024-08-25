@@ -1,4 +1,6 @@
 const apiUrl = process.env.REACT_APP_API_URL;
+const COMPANY_NAME = process.env.COMPANY_NAME;
+const COPYRIGHT = process.env.COPYRIGHT;
 import { UserLogModel, UserLogModel_Content } from "src/views/logreports/userlog/data";
 
 // console.log(apiUrl)
@@ -13,17 +15,20 @@ export const getUserLogReport = async (formData) => {
         .then(response => response.json())
         .then(json => {
             let res1 = JSON.parse(JSON.stringify(json))
-            UserLogDetails.CompanyTitle="DoashaIT (PVT) LTD";
-            UserLogDetails.LoggedUser="Neelaka";
-            UserLogDetails.PrintedDate=new Date().toLocaleDateString();
+            UserLogDetails.CompanyTitle = COMPANY_NAME;
+            UserLogDetails.LoggedUser = "Neelaka";
+            UserLogDetails.PrintedDate = new Date().toLocaleDateString();
+            UserLogDetails.Copyright = COPYRIGHT;
 
-            for (let index = 0; index < res1[0].AccessGroup.length; index++) {
-                let element = res1[0].AccessGroup[index];
+            for (let index = 0; index < res1[0].UserLog.length; index++) {
+                let element = res1[0].UserLog[index];
                 // console.log(element)
                 let obj_c = new UserLogModel_Content();
-                obj_c.id = element.UAG_AccessGroupID;
-                obj_c.name = element.UAG_AccessGroup;
-                obj_c.surname = element.UAG_Status;
+                obj_c.id = element.UserLogId;
+                obj_c.userid = element.UserID;
+                obj_c.username = element.UserName;
+                obj_c.LoggedDateTime = element.LoggedDateTime;
+                obj_c.UserLogOffTime = element.LoggedDateTime;
                 UserLogDetails.content[index] = obj_c;
             }
         })

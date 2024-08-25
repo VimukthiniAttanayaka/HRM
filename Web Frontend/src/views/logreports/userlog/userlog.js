@@ -5,14 +5,16 @@ import { ReportRenderer } from "../../../AnkareReport/components/ReportRenderer"
 // import { useState } from "react";
 // import { layout as defaultLayout } from './layout_json';
 import defaultLayout from './layout_json.json';
-import { data as defaultData } from './data';
+import { data as defaultData,columns as defaultColumns } from './data';
 import { dataSource as defaultDataSource } from './data-source';
 import { getUserLogReport } from '../../../apicalls/reportdata/userlogreport.js';
+
 
 function ReportHome() {
   const [designer, setDesigner] = useState();
 
   const [data, setData] = useState(defaultData);
+  const [columns, setColumns] = useState(defaultColumns);
   const [dataSource, setDataSource] = useState(defaultDataSource);
   // const [layout, setLayout] = useState(defaultLayout);
   const [layout, setLayout] = useState(defaultLayout);
@@ -37,7 +39,7 @@ function ReportHome() {
   }, []);
 
   return (
-    <div>
+    <div>  
       <div style={{
         width: '1100px',
         height: '500px',
@@ -46,6 +48,7 @@ function ReportHome() {
       }}>
         <ReportDesigner
           dataSource={dataSource}
+          columns={columns}
           layout={layout}
           onChange={(e) => {
             // console.log("onchange:", e);
@@ -68,11 +71,12 @@ function ReportHome() {
         margin: 'auto',
       }}>
         <ReportRenderer
+          columns={columns}
           data={data}
           layout={layout}
         />
       </div>
-     </div>
+    </div>
   )
 }
 
