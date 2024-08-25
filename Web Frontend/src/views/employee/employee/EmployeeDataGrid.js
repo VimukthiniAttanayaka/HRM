@@ -10,9 +10,11 @@ import { columns } from '../../../controllers/employee_controllers.js';
 
 const EmployeeDataGrid = () => {
 
+
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
+  const [filename, setfilename] = useState('filename')
   const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
   const [currentPage, setCurrentPage] = useState(1);
   const [columnFilter, setColumnFilter] = useState([])
@@ -52,6 +54,11 @@ const EmployeeDataGrid = () => {
     setEmployeeDetails(EmployeeDetails);
     handleOpenPopup()
   }
+
+  // async function  downloadclick(item, action) {
+  //   exportToExcel();
+  // }
+
   const toggleEdit = (index) => {
     setPopupStatus('edit')
     toggleDetails(index)
@@ -128,14 +135,17 @@ const EmployeeDataGrid = () => {
             href={csvCode}
             download="coreui-table-data.csv"
             target="_blank"
+          // onClick={downloadclick}
           >
             Download current items (.csv)
           </CButton>
         </CCol>
+
         <CCol className='d-flex justify-content-end'>
           <EmployeePopupTab popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} EmployeeDetails={EmployeeDetails} />
         </CCol>
-      </CRow>
+      </CRow>    
+
       <CSmartTable
         cleaner
         clickableRows

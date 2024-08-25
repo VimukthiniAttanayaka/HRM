@@ -24,7 +24,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnUserLogReportsModelHead> get_UerLogReport(AccessGroup model)//ok
+        public List<ReturnUserLogReportsModelHead> get_UserLogReport(AccessGroup model)//ok
         {
             List<ReturnUserLogReportsModelHead> objAccessGroupHeadList = new List<ReturnUserLogReportsModelHead>();
             ReturnUserLogReportsModelHead obj = new ReturnUserLogReportsModelHead() { resp = false, msg = "sfsf" };
@@ -56,12 +56,62 @@ namespace HRM.Controllers
                 };
                 objAccessGroupHeadList.Add(objAccessGroupHead);
 
-                objError.WriteLog(0, "LogReportsController", "get_UerLogReport", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "LogReportsController", "get_UerLogReport", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "LogReportsController", "get_UserLogReport", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "LogReportsController", "get_UserLogReport", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "LogReportsController", "get_UerLogReport", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "LogReportsController", "get_UerLogReport", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "LogReportsController", "get_UserLogReport", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "LogReportsController", "get_UserLogReport", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+
+            return objAccessGroupHeadList;
+
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<ReturnErrorLogReportsModelHead> get_ErrorLogReport(AccessGroup model)//ok
+        {
+            List<ReturnErrorLogReportsModelHead> objAccessGroupHeadList = new List<ReturnErrorLogReportsModelHead>();
+            ReturnErrorLogReportsModelHead obj = new ReturnErrorLogReportsModelHead() { resp = false, msg = "sfsf" };
+            obj.ErrorLog = new List<ErrorLogModel>();
+
+            //obj.ErrorLog.Add(new ErrorLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "ANU", UserLogId = "Annual", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Annual" });
+            //obj.ErrorLog.Add(new ErrorLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "ANU1", UserLogId = "Annual1", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Annual1" });
+            //obj.ErrorLog.Add(new ErrorLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "MED", UserLogId = "Medical", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Medical" });
+            //obj.ErrorLog.Add(new ErrorLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "MAT", UserLogId = "Matrinaty", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Matrinaty" });
+            //obj.ErrorLog.Add(new ErrorLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "MAT", UserLogId = "Matrinaty", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Matrinaty" });
+
+            objAccessGroupHeadList.Add(obj);
+            return objAccessGroupHeadList;
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
+
+                //return HRM_BL.AccessGroup_BL.get_AccessGroups_single(model);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturnErrorLogReportsModelHead objAccessGroupHead = new ReturnErrorLogReportsModelHead
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objAccessGroupHeadList.Add(objAccessGroupHead);
+
+                objError.WriteLog(0, "LogReportsController", "get_ErrorLogReport", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "LogReportsController", "get_ErrorLogReport", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "LogReportsController", "get_ErrorLogReport", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "LogReportsController", "get_ErrorLogReport", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 

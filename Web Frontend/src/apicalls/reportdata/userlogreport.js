@@ -7,7 +7,7 @@ import { UserLogModel, UserLogModel_Content } from "src/views/logreports/userlog
 export const getUserLogReport = async (formData) => {
     const UserLogDetails = new UserLogModel();
 
-    const res = await fetch(apiUrl + 'LogReports/get_UerLogReport', {
+    const res = await fetch(apiUrl + 'LogReports/get_UserLogReport', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
