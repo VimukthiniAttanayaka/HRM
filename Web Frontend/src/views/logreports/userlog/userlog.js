@@ -5,7 +5,7 @@ import { ReportRenderer } from "../../../AnkareReport/components/ReportRenderer"
 // import { useState } from "react";
 // import { layout as defaultLayout } from './layout_json';
 import defaultLayout from './layout_json.json';
-import { data as defaultData,columns as defaultColumns } from './data';
+import { data as defaultData, columns as defaultColumns } from './data';
 import { dataSource as defaultDataSource } from './data-source';
 import { getUserLogReport } from '../../../apicalls/reportdata/userlogreport.js';
 import ExcelExport from '../../shared/ExcelRelated/ExcelExampleExport.js';
@@ -40,8 +40,8 @@ function ReportHome() {
   }, []);
 
   return (
-    <div>  
-      <div style={{
+    <div>
+      {/* <div style={{
         width: '1100px',
         height: '500px',
         border: '1px solid black',
@@ -57,7 +57,6 @@ function ReportHome() {
             if (designer) {
               console.clear();
               console.log(designer);
-              // alert(designer.toJSON());
               setLayout(designer.toJSON());
             }
           }}
@@ -65,17 +64,18 @@ function ReportHome() {
             setDesigner(d);
           }}
         />
-      </div>
+      </div> */}
+      <ExcelExport data={data} fileName="logreport" />
       <div style={{
         border: '1px solid black',
         width: '1100px',
         margin: 'auto',
-      }}> <ExcelExport data={data} fileName="logreport" />
+      }}>
         <ReportRenderer
           columns={columns}
           data={data}
           layout={layout}
-        />
+        />/
       </div>
     </div>
   )

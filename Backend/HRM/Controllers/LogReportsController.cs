@@ -24,7 +24,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnUserLogReportsModelHead> get_UserLogReport(AccessGroup model)//ok
+        public List<ReturnUserLogReportsModelHead> get_UserLogReport(RequestUserLog model)//ok
         {
             List<ReturnUserLogReportsModelHead> objAccessGroupHeadList = new List<ReturnUserLogReportsModelHead>();
             ReturnUserLogReportsModelHead obj = new ReturnUserLogReportsModelHead() { resp = false, msg = "sfsf" };
@@ -43,7 +43,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
 
-                //return HRM_BL.AccessGroup_BL.get_AccessGroups_single(model);
+                return HRM_BL.LogReports_BL.get_UserLogReport(model);
 
             }
             catch (Exception ex)
@@ -74,17 +74,17 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnErrorLogReportsModelHead> get_ErrorLogReport(AccessGroup model)//ok
+        public List<ReturnErrorLogReportsModelHead> get_ErrorLogReport(RequestErrorLog model)//ok
         {
             List<ReturnErrorLogReportsModelHead> objAccessGroupHeadList = new List<ReturnErrorLogReportsModelHead>();
             ReturnErrorLogReportsModelHead obj = new ReturnErrorLogReportsModelHead() { resp = false, msg = "sfsf" };
             obj.ErrorLog = new List<ErrorLogModel>();
 
-            //obj.ErrorLog.Add(new ErrorLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "ANU", UserLogId = "Annual", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Annual" });
-            //obj.ErrorLog.Add(new ErrorLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "ANU1", UserLogId = "Annual1", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Annual1" });
-            //obj.ErrorLog.Add(new ErrorLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "MED", UserLogId = "Medical", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Medical" });
-            //obj.ErrorLog.Add(new ErrorLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "MAT", UserLogId = "Matrinaty", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Matrinaty" });
-            //obj.ErrorLog.Add(new ErrorLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "MAT", UserLogId = "Matrinaty", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Matrinaty" });
+            obj.ErrorLog.Add(new ErrorLogModel() { ErrorLogId = "ANU", ErrorDescription = "ANU", ErrorUserId = "ANU", ErrorDatetime = "ANU", ErrorLoggedIp = "ANU", ErrorRef = "ANU", ErrorPage = "ANU" });
+            obj.ErrorLog.Add(new ErrorLogModel() { ErrorLogId = "ANU", ErrorDescription = "ANU", ErrorUserId = "ANU", ErrorDatetime = "ANU", ErrorLoggedIp = "ANU", ErrorRef = "ANU", ErrorPage = "ANU" });
+            obj.ErrorLog.Add(new ErrorLogModel() { ErrorLogId = "ANU", ErrorDescription = "ANU", ErrorUserId = "ANU", ErrorDatetime = "ANU", ErrorLoggedIp = "ANU", ErrorRef = "ANU", ErrorPage = "ANU" });
+            obj.ErrorLog.Add(new ErrorLogModel() { ErrorLogId = "ANU", ErrorDescription = "ANU", ErrorUserId = "ANU", ErrorDatetime = "ANU", ErrorLoggedIp = "ANU", ErrorRef = "ANU", ErrorPage = "ANU" });
+            obj.ErrorLog.Add(new ErrorLogModel() { ErrorLogId = "ANU", ErrorDescription = "ANU", ErrorUserId = "ANU", ErrorDatetime = "ANU", ErrorLoggedIp = "ANU", ErrorRef = "ANU", ErrorPage = "ANU" });
 
             objAccessGroupHeadList.Add(obj);
             return objAccessGroupHeadList;
@@ -93,7 +93,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
 
-                //return HRM_BL.AccessGroup_BL.get_AccessGroups_single(model);
+                return HRM_BL.LogReports_BL.get_ErrorLogReport(model);
 
             }
             catch (Exception ex)
@@ -124,17 +124,17 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnAuditLogReportsModelHead> get_AuditLogReport(AccessGroup model)//ok
+        public List<ReturnAuditLogReportsModelHead> get_AuditLogReport(RequestAuditLog model)//ok
         {
             List<ReturnAuditLogReportsModelHead> objAccessGroupHeadList = new List<ReturnAuditLogReportsModelHead>();
             ReturnAuditLogReportsModelHead obj = new ReturnAuditLogReportsModelHead() { resp = false, msg = "sfsf" };
             obj.AuditLog = new List<AuditLogModel>();
 
-            //obj.AuditLog.Add(new AuditLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "ANU", UserLogId = "Annual", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Annual" });
-            //obj.AuditLog.Add(new AuditLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "ANU1", UserLogId = "Annual1", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Annual1" });
-            //obj.AuditLog.Add(new AuditLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "MED", UserLogId = "Medical", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Medical" });
-            //obj.AuditLog.Add(new AuditLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "MAT", UserLogId = "Matrinaty", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Matrinaty" });
-            //obj.AuditLog.Add(new AuditLogModel() { LoggedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserID = "MAT", UserLogId = "Matrinaty", UserLogOffTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), UserName = "Matrinaty" });
+            obj.AuditLog.Add(new AuditLogModel() { Action = "ANU", Description = "ANU", CreatedBy = "ANU", ClientIP = "ANU", CreatedDateTime = "ANU", SequenceNo = "ANU", Module = "ANU", Controler = "ANU", ActionType = "ANU", ActionMap_ID = "ANU" });
+            obj.AuditLog.Add(new AuditLogModel() { Action = "ANU", Description = "ANU", CreatedBy = "ANU", ClientIP = "ANU", CreatedDateTime = "ANU", SequenceNo = "ANU", Module = "ANU", Controler = "ANU", ActionType = "ANU", ActionMap_ID = "ANU" });
+            obj.AuditLog.Add(new AuditLogModel() { Action = "ANU", Description = "ANU", CreatedBy = "ANU", ClientIP = "ANU", CreatedDateTime = "ANU", SequenceNo = "ANU", Module = "ANU", Controler = "ANU", ActionType = "ANU", ActionMap_ID = "ANU" });
+            obj.AuditLog.Add(new AuditLogModel() { Action = "ANU", Description = "ANU", CreatedBy = "ANU", ClientIP = "ANU", CreatedDateTime = "ANU", SequenceNo = "ANU", Module = "ANU", Controler = "ANU", ActionType = "ANU", ActionMap_ID = "ANU" });
+            obj.AuditLog.Add(new AuditLogModel() { Action = "ANU", Description = "ANU", CreatedBy = "ANU", ClientIP = "ANU", CreatedDateTime = "ANU", SequenceNo = "ANU", Module = "ANU", Controler = "ANU", ActionType = "ANU", ActionMap_ID = "ANU" });
 
             objAccessGroupHeadList.Add(obj);
             return objAccessGroupHeadList;
@@ -143,7 +143,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
 
-                //return HRM_BL.AccessGroup_BL.get_AccessGroups_single(model);
+                return HRM_BL.LogReports_BL.get_AuditLogReport(model);
 
             }
             catch (Exception ex)

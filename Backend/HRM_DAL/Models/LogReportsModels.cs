@@ -50,4 +50,13 @@ namespace HRM_DAL.Models
         public string ErrorRef { get; set; }
         public string ErrorPage { get; set; }
     }
+    public class RequestErrorLog : RequestBaseModel
+    {
+    }
+    public class RequestUserLog : RequestBaseModel
+    {
+    }
+    public class RequestAuditLog : RequestBaseModel
+    {
+    }
 }
