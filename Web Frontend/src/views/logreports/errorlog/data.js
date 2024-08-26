@@ -1,6 +1,7 @@
 export const data = {
-  header1: "Header 1",
-  header2: "Header 2",
+  CompanyTitle: "DoashaIT (PVT) LTD",
+  LoggedError: "Neelaka",
+  PrintedDate: "10/10/2024",
   content: [
     {
       name: "John1",
@@ -27,6 +28,54 @@ export const data = {
       ],
     },
   ],
-  footer1: "Footer 1",
-  footer2: "Footer 2",
+  Copyright: "Copyright @DoashaIT",
+  // footer2: "Footer 2",
 };
+
+export class ErrorLogModel {
+  CompanyTitle;
+  LoggedError;
+  PrintedDate;
+  Copyright;
+  content = [
+    // { id: 1, name: 'Object 1' },
+    // { id: 2, name: 'Object 2' },
+    // { id: 2, name: 'Object 2' }
+  ];
+  titlelist = [
+    // [{ value: "Vanilla" }, { value: "Chocolate" }, { value: "" }],
+    // [{ value: "Strawberry" }, { value: "Cookies" }, { value: "" }],
+    // [{ value: "Strawberry" }, { value: "Cookies" }, { value: "" }]
+  ];
+  headerlist = [];
+  copyrightlist = [];
+}
+export class ErrorLogModel_Content {
+  logid;
+  description;  
+  errorpage;
+  userid;
+  datetime;
+  loggedip;
+  errorref;
+}
+export class ErrorLogModel_Title {
+  LoggedError;
+  CompanyTitle;
+  PrintedDate;
+}
+export class ErrorLogModel_Header {
+  ReportTitle;
+}
+export class ErrorLogModel_CopyRight {
+  Copyright;
+}
+export let ExcelColumnsHeadings = [['id', 'Errorid', 'Errorname', 'loggedin', 'logout']];
+
+export const columns = [
+  { key: 'id', title: 'ID', dataIndex: 'id', width: 80 },
+  { key: 'Errorid', title: 'Errorid', dataIndex: 'Errorid' },
+  { key: 'Errorname', title: 'Errorname', dataIndex: 'Errorname' },
+  { key: 'loggedin', title: 'loggedin', dataIndex: 'loggedin' },
+  { key: 'logout', title: 'logout', dataIndex: 'logout' }
+];
