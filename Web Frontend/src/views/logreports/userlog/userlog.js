@@ -78,7 +78,7 @@ function ReportHome() {
           }}
         />
       </div> */}
-      <ExcelExportReports data={dataList} title={titleList} header={headerList} copyright={copyrightList} columns={ExcelColumnsHeadings} fileName="logreport" />
+      <ExcelExportReports data={dataList} title={titleList} header={headerList} copyright={copyrightList} columns={ExcelColumnsHeadings} fileName="userlogreport" />
       {/* <ExcelExampleReadEdit datas={dataList} visible={visible} fileName="logreport" /> */}
 
       <div style={{
