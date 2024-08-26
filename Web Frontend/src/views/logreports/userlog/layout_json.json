@@ -99,7 +99,7 @@
         "name": "",
         "fontWeight": "bold",
         "type": "text",
-        "text": "LoggedDateTime",
+        "text": "loggedin",
         "binding": ""
       },
       {
@@ -110,7 +110,7 @@
         "name": "",
         "fontWeight": "bold",
         "type": "text",
-        "text": "UserLogOffTime",
+        "text": "logout",
         "binding": ""
       }
     ],
@@ -158,7 +158,7 @@
         "name": "",
         "type": "text",
         "text": "LoggedDateTime",
-        "binding": "LoggedDateTime"
+        "binding": "loggedin"
       },
       {
         "x": 573,
@@ -168,7 +168,7 @@
         "name": "",
         "type": "text",
         "text": "UserLogOffTime",
-        "binding": "UserLogOffTime"
+        "binding": "logout"
       }
     ],
     "sections": []

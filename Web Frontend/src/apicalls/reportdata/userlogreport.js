@@ -19,10 +19,10 @@ export const getUserLogReport = async (formData) => {
         .then(response => response.json())
         .then(json => {
             let res1 = JSON.parse(JSON.stringify(json))
-            // UserLogDetails.CompanyTitle = companyname;
-            // UserLogDetails.LoggedUser = "Neelaka";
-            // UserLogDetails.PrintedDate = new Date().toLocaleDateString();
-            // UserLogDetails.Copyright = COPYRIGHT;
+            UserLogDetails.CompanyTitle = companyname;
+            UserLogDetails.LoggedUser = "Neelaka";
+            UserLogDetails.PrintedDate = new Date().toLocaleDateString();
+            UserLogDetails.Copyright = COPYRIGHT;
 
             let obj_t = new UserLogModel_Title();
             obj_t.LoggedUserTitle = "Logged User : ";

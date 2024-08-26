@@ -40,7 +40,7 @@ function ReportHome() {
     const UserLogReport = await getUserLogReport(formData)
     setData(UserLogReport);
 
-    console.log(UserLogReport.titlelist);
+    // console.log(UserLogReport.titlelist);
     setDataList(UserLogReport.content);
     setTitleList(UserLogReport.titlelist);
     setHeaderList(UserLogReport.headerlist);
