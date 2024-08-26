@@ -7,18 +7,19 @@ const ExcelExampleReadEdit = ({ visible, datas }) => {
     const [data, setData] = useState(
         [
             [{ value: "Vanilla" }, { value: "Chocolate" }, { value: "" }],
-            [{ value: "Strawberry" }, { value: "Cookies" }, { value: "" }]
+            [{ value: "Strawberry" }, { value: "Cookies" }, { value: "" }],
+            [{ value: "Strawberry1" }, { value: "Cookies1" }, { value: "" }]
         ]
     );
 
-
+    console.log(visible);
     // useEffect(() => {
-    //     if (datas.length > 0) {
-    //         console.log(datas);
-    //         setData(datas)
-    //     }
-    // }, [datas]);
+    //     setData(datas);
+    // }, [visible]);
 
-    return <Spreadsheet data={data} onChange={setData} />;
+    return <div className="d-grid">
+        {visible == true ? <Spreadsheet data={datas} onChange={setData} /> : <Spreadsheet data={data} onChange={setData} />}
+    </div>
+        ;
 };
 export default ExcelExampleReadEdit;

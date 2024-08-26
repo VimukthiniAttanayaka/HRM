@@ -5,20 +5,26 @@ import { ReportRenderer } from "../../../AnkareReport/components/ReportRenderer"
 // import { useState } from "react";
 // import { layout as defaultLayout } from './layout_json';
 import defaultLayout from './layout_json.json';
-import { data as defaultData, columns as defaultColumns } from './data';
+import { data as defaultData, columns as defaultColumns, ExcelColumnsHeadings } from './data';
 import { dataSource as defaultDataSource } from './data-source';
 import { getUserLogReport } from '../../../apicalls/reportdata/userlogreport.js';
-import ExcelExport from '../../shared/ExcelRelated/ExcelExampleExport.js';
+import ExcelExportReports from '../../shared/ExcelRelated/ExcelExportReports.js';
+// import ExcelExampleReadEdit from '../../shared/ExcelRelated/ExcelReadEdit/ExcelExampleReadEdit.js';
 
 
 function ReportHome() {
   const [designer, setDesigner] = useState();
 
   const [data, setData] = useState(defaultData);
+  const [dataList, setDataList] = useState(defaultData);
+  const [titleList, setTitleList] = useState(defaultData);
+  const [headerList, setHeaderList] = useState(defaultData);
+  const [copyrightList, setCopyrightList] = useState(defaultData);
   const [columns, setColumns] = useState(defaultColumns);
   const [dataSource, setDataSource] = useState(defaultDataSource);
   // const [layout, setLayout] = useState(defaultLayout);
   const [layout, setLayout] = useState(defaultLayout);
+  const [visible, setVisible] = useState(false);
 
   async function requestdata() {
     const token = getJWTToken();
@@ -34,10 +40,17 @@ function ReportHome() {
     const UserLogReport = await getUserLogReport(formData)
     setData(UserLogReport);
 
+    console.log(UserLogReport.titlelist);
+    setDataList(UserLogReport.content);
+    setTitleList(UserLogReport.titlelist);
+    setHeaderList(UserLogReport.headerlist);
+    setCopyrightList(UserLogReport.copyrightlist);
+    setVisible(true);
   }
   useEffect(() => {
     requestdata();
   }, []);
+
 
   return (
     <div>
@@ -65,7 +78,9 @@ function ReportHome() {
           }}
         />
       </div> */}
-      <ExcelExport data={data} fileName="logreport" />
+      <ExcelExportReports data={dataList} title={titleList} header={headerList} copyright={copyrightList} columns={ExcelColumnsHeadings} fileName="logreport" />
+      {/* <ExcelExampleReadEdit datas={dataList} visible={visible} fileName="logreport" /> */}
+
       <div style={{
         border: '1px solid black',
         width: '1100px',

@@ -37,23 +37,43 @@ export class UserLogModel {
   LoggedUser;
   PrintedDate;
   Copyright;
-  content= [
-    { id: 1, name: 'Object 1' },
-    { id: 2, name: 'Object 2' },
-    { id: 2, name: 'Object 2' }
+  content = [
+    // { id: 1, name: 'Object 1' },
+    // { id: 2, name: 'Object 2' },
+    // { id: 2, name: 'Object 2' }
   ];
+  titlelist = [
+    // [{ value: "Vanilla" }, { value: "Chocolate" }, { value: "" }],
+    // [{ value: "Strawberry" }, { value: "Cookies" }, { value: "" }],
+    // [{ value: "Strawberry" }, { value: "Cookies" }, { value: "" }]
+  ];
+  headerlist = [];
+  copyrightlist = [];
 }
-export class UserLogModel_Content{
+export class UserLogModel_Content {
   id;
   userid;
   username;
-  LoggedDateTime;
-  UserLogOffTime
+  loggedin;
+  logout
 }
+export class UserLogModel_Title {
+  LoggedUser;
+  CompanyTitle;
+  PrintedDate;
+}
+export class UserLogModel_Header {
+  ReportTitle;
+}
+export class UserLogModel_CopyRight {
+  Copyright;
+}
+export let ExcelColumnsHeadings = [['id', 'userid', 'username', 'loggedin', 'logout']];
+
 export const columns = [
   { key: 'id', title: 'ID', dataIndex: 'id', width: 80 },
   { key: 'userid', title: 'userid', dataIndex: 'userid' },
   { key: 'username', title: 'username', dataIndex: 'username' },
-  { key: 'LoggedDateTime', title: 'LoggedDateTime', dataIndex: 'LoggedDateTime' },
-  { key: 'UserLogOffTime', title: 'UserLogOffTime', dataIndex: 'UserLogOffTime' }
+  { key: 'loggedin', title: 'loggedin', dataIndex: 'loggedin' },
+  { key: 'logout', title: 'logout', dataIndex: 'logout' }
 ];

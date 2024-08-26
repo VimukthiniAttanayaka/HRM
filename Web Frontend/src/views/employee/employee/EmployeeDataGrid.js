@@ -7,7 +7,7 @@ import { getEmployeeSingle } from '../../../apicalls/employee/get_employee_singl
 import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
 import { columns } from '../../../controllers/employee_controllers.js';
-import ExcelExport from '../../shared/ExcelRelated/ExcelExampleExport.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
 
 const EmployeeDataGrid = () => {
 
