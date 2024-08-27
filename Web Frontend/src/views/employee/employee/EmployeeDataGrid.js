@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge,CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import EmployeePopupTab from './EmployeePopupTab'
 import { getEmployeeAll } from '../../../apicalls/employee/get_all_list.js';
@@ -9,7 +9,11 @@ import { getBadge } from '../../shared/gridviewconstants.js';
 import { columns } from '../../../controllers/employee_controllers.js';
 import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
 import { Margin, usePDF, Options } from "react-to-pdf";
+import {
 
+  cilOptions,
+} from '@coreui/icons'
+import CIcon from '@coreui/icons-react'
 const EmployeeDataGrid = () => {
 
 
@@ -132,8 +136,28 @@ const EmployeeDataGrid = () => {
 
   return (
     <CCardBody>
-      <CRow>
+      <CRow className='mb-4'>
         <CCol>
+        <CDropdown>
+          <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
+          <CDropdownMenu>
+            <CDropdownItem><CButton
+              color="primary"
+              className="mb-2"
+              href={csvCode}
+              download="coreui-table-data.csv"
+              target="_blank"
+            // onClick={downloadclick}
+            >
+              Download current items (.csv)
+            </CButton></CDropdownItem>
+            <CDropdownItem><ExcelExport data={data} fileName="employees" /></CDropdownItem>
+            <CDropdownItem><CButton color="primary"
+              className="mb-2" onClick={() => toPDF()}>Download PDF</CButton></CDropdownItem>
+          </CDropdownMenu>
+        </CDropdown>
+        </CCol>
+        {/* <CCol>
           <CButton
             color="primary"
             className="mb-2"
@@ -147,7 +171,7 @@ const EmployeeDataGrid = () => {
         </CCol>
         <CCol > <ExcelExport data={data} fileName="employees" /></CCol>
         <CCol > <CButton color="primary"
-          className="mb-2" onClick={() => toPDF()}>Download PDF</CButton></CCol>
+          className="mb-2" onClick={() => toPDF()}>Download PDF</CButton></CCol> */}
         <CCol className='d-flex justify-content-end'>
           <EmployeePopupTab popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} EmployeeDetails={EmployeeDetails} />
         </CCol>
