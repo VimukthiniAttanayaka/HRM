@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge,CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import EmployeePopupTab from './EmployeePopupTab'
 import { getEmployeeAll } from '../../../apicalls/employee/get_all_list.js';
@@ -138,24 +138,24 @@ const EmployeeDataGrid = () => {
     <CCardBody>
       <CRow className='mb-4'>
         <CCol>
-        <CDropdown>
-          <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
-          <CDropdownMenu>
-            <CDropdownItem><CButton
-              color="primary"
-              className="mb-2"
-              href={csvCode}
-              download="coreui-table-data.csv"
-              target="_blank"
-            // onClick={downloadclick}
-            >
-              Download current items (.csv)
-            </CButton></CDropdownItem>
-            <CDropdownItem><ExcelExport data={data} fileName="employees" /></CDropdownItem>
-            <CDropdownItem><CButton color="primary"
-              className="mb-2" onClick={() => toPDF()}>Download PDF</CButton></CDropdownItem>
-          </CDropdownMenu>
-        </CDropdown>
+          <CDropdown>
+            <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
+            <CDropdownMenu>
+              <CDropdownItem><CButton
+                color="primary"
+                className="mb-2"
+                href={csvCode}
+                download="coreui-table-data.csv"
+                target="_blank"
+              // onClick={downloadclick}
+              >
+                Download items as .csv
+              </CButton></CDropdownItem>
+              <CDropdownItem><ExcelExport data={data} fileName="employees" /></CDropdownItem>
+              <CDropdownItem><CButton color="primary"
+                className="mb-2" onClick={() => toPDF()}>Download items as PDF </CButton></CDropdownItem>
+            </CDropdownMenu>
+          </CDropdown>
         </CCol>
         {/* <CCol>
           <CButton

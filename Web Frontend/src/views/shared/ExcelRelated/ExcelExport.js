@@ -17,7 +17,7 @@ const ExcelExport = ({ data, columns, fileName }) => {
 
     //Starting in the second row to avoid overriding and skipping headers
     xlsx.utils.sheet_add_json(worksheet, data, { origin: 'A2', skipHeader: true });
-    
+
     xlsx.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
     const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
     const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
@@ -27,7 +27,7 @@ const ExcelExport = ({ data, columns, fileName }) => {
   return (
     <CButton color="primary"
       className="mb-2"
-      onClick={exportToExcel}>Export to Excel</CButton>
+      onClick={exportToExcel}>Download items as Excel</CButton>
   );
 }
 
