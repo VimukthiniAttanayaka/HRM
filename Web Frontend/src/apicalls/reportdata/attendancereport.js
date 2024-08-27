@@ -4,10 +4,10 @@ const COPYRIGHT = process.env.COPYRIGHT;
 import { AuditLogModel, AuditLogModel_Content, AuditLogModel_Title, AuditLogModel_Header, AuditLogModel_CopyRight } from "src/views/logreports/auditlog/data";
 
 // console.log(apiUrl)
-export const getAuditLogReport = async (formData) => {
+export const getAttendanceReport = async (formData) => {
     const AuditLogDetails = new AuditLogModel();
 
-    const res = await fetch(apiUrl + 'LogReports/get_auditLogReport', {
+    const res = await fetch(apiUrl + 'Reports/get_AttendanceReport', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

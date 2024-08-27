@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react'
 import { data as defaultData, columns as defaultColumns, ExcelColumnsHeadings } from './data.js';
 import { dataSource as defaultDataSource } from './data-source.js';
 import defaultLayout from './layout_json.json';
-import { getAuditLogReport } from '../../../apicalls/reportdata/auditlogreport.js';
+import { getBirthdayReport } from '../../../apicalls/reportdata/birthdayreport.js';
 import ExcelExportReports from '../../shared/ExcelRelated/ExcelExportReports.js';
 
 function ReportHome() {
@@ -35,14 +35,14 @@ function ReportHome() {
       EME_EmployeeID: 'sedcx'
     }
 
-    const AuditLogReport = await getAuditLogReport(formData)
-    setData(AuditLogReport);
+    const BirthdayReport = await getBirthdayReport(formData)
+    setData(BirthdayReport);
 
     // console.log(UserLogReport.titlelist);
-    setDataList(AuditLogReport.content);
-    setTitleList(AuditLogReport.titlelist);
-    setHeaderList(AuditLogReport.headerlist);
-    setCopyrightList(AuditLogReport.copyrightlist);
+    setDataList(BirthdayReport.content);
+    setTitleList(BirthdayReport.titlelist);
+    setHeaderList(BirthdayReport.headerlist);
+    setCopyrightList(BirthdayReport.copyrightlist);
     setVisible(true);
   }
   useEffect(() => {
@@ -76,7 +76,7 @@ function ReportHome() {
           }}
         />
       </div> */}
-    <ExcelExportReports data={dataList} title={titleList} header={headerList} copyright={copyrightList} columns={ExcelColumnsHeadings} fileName="auditlogreport" />
+    <ExcelExportReports data={dataList} title={titleList} header={headerList} copyright={copyrightList} columns={ExcelColumnsHeadings} fileName="Birthdayreport" />
       <div style={{
         border: '1px solid black',
         width: '1100px',

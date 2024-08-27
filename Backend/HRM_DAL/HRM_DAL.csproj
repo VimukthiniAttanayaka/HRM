@@ -77,6 +77,7 @@
     <Compile Include="Models\EmployeeJobDescriptionModel.cs" />
     <Compile Include="Models\CurrencyModel.cs" />
     <Compile Include="Models\CountryModel.cs" />
+    <Compile Include="Models\ReportsModels.cs" />
     <Compile Include="Models\LogReportsModels.cs" />
     <Compile Include="Models\MenuAccessModel.cs" />
     <Compile Include="Models\UserRoleAccessGroupModel.cs" />

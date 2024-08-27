@@ -4,10 +4,10 @@ const COPYRIGHT = process.env.COPYRIGHT;
 import { ErrorLogModel, ErrorLogModel_Content, ErrorLogModel_Title, ErrorLogModel_Header, ErrorLogModel_CopyRight } from "src/views/logreports/errorlog/data";
 
 // console.log(apiUrl)
-export const getErrorLogReport = async (formData) => {
+export const getBirthdayReport = async (formData) => {
     const ErrorLogDetails = new ErrorLogModel();
 
-    const res = await fetch(apiUrl + 'LogReports/get_errorLogReport', {
+    const res = await fetch(apiUrl + 'Reports/get_BirthdayReport', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

@@ -66,13 +66,13 @@ namespace HRM.Controllers
         public List<ReturnCustomerModelHead> get_customers_all(CustomerSearchModel model)//ok
         {
             List<ReturnCustomerModelHead> objcustomerHeadList = new List<ReturnCustomerModelHead>();
-            //ReturnEmployeeModelHead obj = new ReturnEmployeeModelHead() { resp = false, msg = "sfsf" };
-            //obj.Employee = new List<ReturnEmployeeModel>();
-            //obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test", EME_EmployeeID = "test" });
-            //obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test1", EME_EmployeeID = "test1" });
-            //obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test2", EME_EmployeeID = "test2" });
-            //objemployeeHeadList.Add(obj);
-            //return objemployeeHeadList;
+            ReturnCustomerModelHead obj = new ReturnCustomerModelHead() { resp = false, msg = "sfsf" };
+            obj.Customer = new List<ReturnCustomerModel>();
+            obj.Customer.Add(new ReturnCustomerModel() { CUS_CompanyName = "test", CUS_ID = "test" });
+            obj.Customer.Add(new ReturnCustomerModel() { CUS_CompanyName = "test1", CUS_ID = "test1" });
+            obj.Customer.Add(new ReturnCustomerModel() { CUS_CompanyName = "test2", CUS_ID = "test2" });
+            objcustomerHeadList.Add(obj);
+            return objcustomerHeadList;
 
             try
             {
