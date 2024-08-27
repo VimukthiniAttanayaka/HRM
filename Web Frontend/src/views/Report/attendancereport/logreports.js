@@ -1,6 +1,6 @@
 import '../../AnkareReport/report.css'
 // import ReportHome from "../../AnkareReport/ReportHome";
-import ReportHome from './auditlogreport'
+import ReportHome from './attendancereport'
 
 function Report() {
   return(

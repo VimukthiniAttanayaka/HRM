@@ -1,10 +1,10 @@
-import { ReportDesigner } from "../../../AnkareReport/components/ReportDesigner";
-import { ReportRenderer } from "../../../AnkareReport/components/ReportRenderer";
+import { ReportDesigner } from "../../../AnkareReport/components/ReportDesigner.js";
+import { ReportRenderer } from "../../../AnkareReport/components/ReportRenderer.js";
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import React, { useState, useEffect } from 'react'
 // import { layout as defaultLayout } from './layout';
-import { data as defaultData, columns as defaultColumns, ExcelColumnsHeadings } from './data';
-import { dataSource as defaultDataSource } from './data-source';
+import { data as defaultData, columns as defaultColumns, ExcelColumnsHeadings } from './data.js';
+import { dataSource as defaultDataSource } from './data-source.js';
 import defaultLayout from './layout_json.json';
 import { getAuditLogReport } from '../../../apicalls/reportdata/auditlogreport.js';
 import ExcelExportReports from '../../shared/ExcelRelated/ExcelExportReports.js';

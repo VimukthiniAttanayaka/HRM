@@ -1,7 +1,7 @@
 import React from 'react'
 import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
 
-import DepartmentDataGrid from './CompanyDataGrid'
+import CompanyDataGrid from './CompanyDataGrid'
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const Customer = () => {

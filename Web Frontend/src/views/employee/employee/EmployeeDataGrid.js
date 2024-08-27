@@ -8,6 +8,7 @@ import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
 import { columns } from '../../../controllers/employee_controllers.js';
 import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
+import { Margin, usePDF, Options } from "react-to-pdf";
 
 const EmployeeDataGrid = () => {
 
@@ -20,6 +21,9 @@ const EmployeeDataGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [columnFilter, setColumnFilter] = useState([])
   const [tableFilter, setTableFilter] = useState([])
+
+  const { toPDF, targetRef } = usePDF({ filename: 'page.pdf' });
+
   useEffect(() => {
     // console.log(columnFilter);
     requestdata();
@@ -142,120 +146,124 @@ const EmployeeDataGrid = () => {
           </CButton>
         </CCol>
         <CCol > <ExcelExport data={data} fileName="employees" /></CCol>
+        <CCol > <CButton color="primary"
+          className="mb-2" onClick={() => toPDF()}>Download PDF</CButton></CCol>
         <CCol className='d-flex justify-content-end'>
           <EmployeePopupTab popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} EmployeeDetails={EmployeeDetails} />
         </CCol>
       </CRow>
 
-      <CSmartTable
-        cleaner
-        clickableRows
-        columns={columns}
-        columnFilter
-        columnSorter
-        // footer
-        items={data}
-        onColumnFilterChange={setColumnFilter}
-        itemsPerPageSelect
-        itemsPerPage={5}
-        onFilteredItemsChange={setCurrentItems}
-        onTableFilterChange={setTableFilter}
-        pagination={<div> <Pagination
-          totalItems={data.RC}
-          currentPage={currentPage}
-          setCurrentPage={handlePageChange}
-          itemsPerPage={itemsPerPage}
-        /></div>}
-        // onFilteredItemsChange={(items) => {
-        //   console.log(items)
-        // }}
-        onSelectedItemsChange={(items) => {
-          console.log(items)
-        }}
-        scopedColumns={{
-          status: (item) => (
-            <td>
-              <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
-            </td>
-          ),
-          show_details: (item) => {
-            return (
-              <td className="py-2">
+      <div ref={targetRef}>
+        <CSmartTable
+          cleaner
+          clickableRows
+          columns={columns}
+          columnFilter
+          columnSorter
+          // footer
+          items={data}
+          onColumnFilterChange={setColumnFilter}
+          itemsPerPageSelect
+          itemsPerPage={5}
+          onFilteredItemsChange={setCurrentItems}
+          onTableFilterChange={setTableFilter}
+          pagination={<div> <Pagination
+            totalItems={data.RC}
+            currentPage={currentPage}
+            setCurrentPage={handlePageChange}
+            itemsPerPage={itemsPerPage}
+          /></div>}
+          // onFilteredItemsChange={(items) => {
+          //   console.log(items)
+          // }}
+          onSelectedItemsChange={(items) => {
+            console.log(items)
+          }}
+          scopedColumns={{
+            status: (item) => (
+              <td>
+                <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
+              </td>
+            ),
+            show_details: (item) => {
+              return (
+                <td className="py-2">
+                  <CButton
+                    color="primary"
+                    variant="outline"
+                    shape="square"
+                    size="sm"
+                    onClick={() => {
+                      toggleEdit(item.EME_EmployeeID)
+                    }}
+                  >
+                    Edit
+                  </CButton>
+                </td>
+              )
+            },
+            view: (item) => (
+              <td>
                 <CButton
-                  color="primary"
+                  color="success"
                   variant="outline"
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleEdit(item.EME_EmployeeID)
+                    toggleView(item.EME_EmployeeID)
                   }}
                 >
-                  Edit
+                  View
                 </CButton>
               </td>
-            )
-          },
-          view: (item) => (
-            <td>
-              <CButton
-                color="success"
-                variant="outline"
-                shape="square"
-                size="sm"
-                onClick={() => {
-                  toggleView(item.EME_EmployeeID)
-                }}
-              >
-                View
-              </CButton>
-            </td>
-          ),
-          delete: (item) => (
-            <td>
-              {item.status == 'Inactive' ? '' :
-                <CButton
-                  color="danger"
-                  variant="outline"
-                  shape="square"
-                  size="sm"
-                  onClick={() => {
-                    toggleDelete(item.EME_EmployeeID)
-                  }}
-                >
-                  Delete
-                </CButton>
-              }
-            </td>
-          ),
-          details: (item) => {
-            return (
-              <CCollapse visible={details.includes(item.id)}>
-                <CCardBody className="p-3">
-                  <h4>{item.username}</h4>
-                  <p className="text-muted">User since: {item.registered}</p>
-                  <CButton size="sm" color="info">
-                    User Settings
-                  </CButton>
-                  <CButton size="sm" color="danger" className="ml-1">
+            ),
+            delete: (item) => (
+              <td>
+                {item.status == 'Inactive' ? '' :
+                  <CButton
+                    color="danger"
+                    variant="outline"
+                    shape="square"
+                    size="sm"
+                    onClick={() => {
+                      toggleDelete(item.EME_EmployeeID)
+                    }}
+                  >
                     Delete
                   </CButton>
-                </CCardBody>
-              </CCollapse>
-            )
-          },
-        }}
-        // selectable
-        sorterValue={{ column: 'status', state: 'asc' }}
-        tableFilter
-        tableProps={{
-          className: 'add-this-class',
-          responsive: true,
-          striped: true,
-          hover: true,
-        }}
-        tableBodyProps={{
-          className: 'align-middle'
-        }} />
+                }
+              </td>
+            ),
+            details: (item) => {
+              return (
+                <CCollapse visible={details.includes(item.id)}>
+                  <CCardBody className="p-3">
+                    <h4>{item.username}</h4>
+                    <p className="text-muted">User since: {item.registered}</p>
+                    <CButton size="sm" color="info">
+                      User Settings
+                    </CButton>
+                    <CButton size="sm" color="danger" className="ml-1">
+                      Delete
+                    </CButton>
+                  </CCardBody>
+                </CCollapse>
+              )
+            },
+          }}
+          // selectable
+          sorterValue={{ column: 'status', state: 'asc' }}
+          tableFilter
+          tableProps={{
+            className: 'add-this-class',
+            responsive: true,
+            striped: true,
+            hover: true,
+          }}
+          tableBodyProps={{
+            className: 'align-middle'
+          }} />
+      </div>
     </CCardBody>
   )
 }

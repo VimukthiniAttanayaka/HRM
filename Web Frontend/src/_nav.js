@@ -240,8 +240,15 @@ const _nav = [
     items: [{
       component: CNavItem,
       // name: <Translation>{(t) => t('User Access Group')}</Translation>,
-      name: getLabelText('Report Viewer', templatetype),
-      to: '/report',
+      name: getLabelText('Attendance Report', templatetype),
+      to: '/reports/attendancereport',
+      disabled: !UMUserAccessGroup,
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    },{
+      component: CNavItem,
+      // name: <Translation>{(t) => t('User Access Group')}</Translation>,
+      name: getLabelText('Birthday Report', templatetype),
+      to: '/reports/birthdayreport',
       disabled: !UMUserAccessGroup,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }]
@@ -257,14 +264,14 @@ const _nav = [
       to: '/logreports/userlog',
       disabled: !UMUserAccessGroup,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-    },{
+    }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('User Access Group')}</Translation>,
       name: getLabelText('Audit Log', templatetype),
       to: '/logreports/auditlog',
       disabled: !UMUserAccessGroup,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-    },{
+    }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('User Access Group')}</Translation>,
       name: getLabelText('Error Log', templatetype),

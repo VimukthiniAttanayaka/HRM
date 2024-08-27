@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import { ReportDesigner } from "../../../AnkareReport/components/ReportDesigner";
-import { ReportRenderer } from "../../../AnkareReport/components/ReportRenderer";
+import { ReportDesigner } from "../../../AnkareReport/components/ReportDesigner.js";
+import { ReportRenderer } from "../../../AnkareReport/components/ReportRenderer.js";
 // import { useState } from "react";
+// import { layout as defaultLayout } from './layout_json';
 import defaultLayout from './layout_json.json';
-import { data as defaultData, columns as defaultColumns, ExcelColumnsHeadings } from './data';
-import { dataSource as defaultDataSource } from './data-source';
-import { getErrorLogReport } from '../../../apicalls/reportdata/errorlogreport.js';
+import { data as defaultData, columns as defaultColumns, ExcelColumnsHeadings } from './data.js';
+import { dataSource as defaultDataSource } from './data-source.js';
+import { getUserLogReport } from '../../../apicalls/logreportdata/userlogreport.js';
 import ExcelExportReports from '../../shared/ExcelRelated/ExcelExportReports.js';
+// import ExcelExampleReadEdit from '../../shared/ExcelRelated/ExcelReadEdit/ExcelExampleReadEdit.js';
+import { Margin, usePDF, Options } from "react-to-pdf";
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
+import DoanloadPDF_Div from 'src/views/shared/PDFRelated/DownloadPDF_Div.js';
 
-function ReportHome() {
+
+function UserLogReport() {
   const [designer, setDesigner] = useState();
 
   const [data, setData] = useState(defaultData);
@@ -22,6 +28,8 @@ function ReportHome() {
   // const [layout, setLayout] = useState(defaultLayout);
   const [layout, setLayout] = useState(defaultLayout);
   const [visible, setVisible] = useState(false);
+  const { toPDF, targetRef } = usePDF({ filename: 'page.pdf' });
+
 
   async function requestdata() {
     const token = getJWTToken();
@@ -34,20 +42,19 @@ function ReportHome() {
       EME_EmployeeID: 'sedcx'
     }
 
-    const ErrorLogReport = await getErrorLogReport(formData)
-    setData(ErrorLogReport);
+    const UserLogReport = await getUserLogReport(formData)
+    setData(UserLogReport);
 
     // console.log(UserLogReport.titlelist);
-    setDataList(ErrorLogReport.content);
-    setTitleList(ErrorLogReport.titlelist);
-    setHeaderList(ErrorLogReport.headerlist);
-    setCopyrightList(ErrorLogReport.copyrightlist);
+    setDataList(UserLogReport.content);
+    setTitleList(UserLogReport.titlelist);
+    setHeaderList(UserLogReport.headerlist);
+    setCopyrightList(UserLogReport.copyrightlist);
     setVisible(true);
   }
   useEffect(() => {
     requestdata();
   }, []);
-
 
   return (
     <div>
@@ -59,9 +66,10 @@ function ReportHome() {
       }}>
         <ReportDesigner
           dataSource={dataSource}
+          columns={columns}
           layout={layout}
           onChange={(e) => {
-            console.log("onchange:", e);
+            // console.log("onchange:", e);
 
             if (designer) {
               console.clear();
@@ -74,14 +82,18 @@ function ReportHome() {
           }}
         />
       </div> */}
-      <ExcelExportReports data={dataList} title={titleList} header={headerList} copyright={copyrightList} columns={ExcelColumnsHeadings} fileName="errorlogreport" />
+      <ExcelExportReports data={dataList} title={titleList} header={headerList} copyright={copyrightList} columns={ExcelColumnsHeadings} fileName="userlogreport" />
+      <CButton onClick={() => toPDF()}>Download PDF</CButton>
+      {/* <DoanloadPDF_Div targetRef1={targetRef}  ></DoanloadPDF_Div> */}
+      {/* <ExcelExampleReadEdit datas={dataList} visible={visible} fileName="logreport" /> */}
 
-      <div style={{
+      <div ref={targetRef} style={{
         border: '1px solid black',
         width: '1100px',
         margin: 'auto',
       }}>
         <ReportRenderer
+          columns={columns}
           data={data}
           layout={layout}
         />
@@ -90,4 +102,4 @@ function ReportHome() {
   )
 }
 
-export default ReportHome
+export default UserLogReport

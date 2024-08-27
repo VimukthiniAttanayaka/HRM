@@ -28,9 +28,12 @@ const JobRole = React.lazy(() => import('./views/masterdata/jobrole/JobRole'))
 const Location = React.lazy(() => import('./views/masterdata/location/Location'))
 const Profile = React.lazy(() => import('./views/profile/Profile'))
 const Reports = React.lazy(() => import('./views/Report/Report'))
-const UserLogReports= React.lazy(() => import('./views/logreports/userlog/userlog'))
-const ErrorLogReports= React.lazy(() => import('./views/logreports/errorlog/errorlog'))
-const AuditLogReports= React.lazy(() => import('./views/logreports/auditlog/auditlog'))
+const BoldReports = React.lazy(() => import('./views/Report/boldreport'))
+const AttendanceReport = React.lazy(() => import('./views/Report/attendancereport/attendancereport'))
+const BirthdayReport = React.lazy(() => import('./views/Report/birthdayreport/birthdayreport'))
+const UserLogReport= React.lazy(() => import('./views/logreports/userlog/userlogreport'))
+const ErrorLogReport= React.lazy(() => import('./views/logreports/errorlog/errorlogreport'))
+const AuditLogReport= React.lazy(() => import('./views/logreports/auditlog/auditlogreport'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -200,18 +203,31 @@ const routes = [
     path: '/report',
     name: <Translation>{(t) => t('Reports')}</Translation>,
     element: Reports,
+  },
+  {
+    path: '/Report/boldreport',
+    name: <Translation>{(t) => t('Reports')}</Translation>,
+    element: BoldReports,
+  },{
+    path: '/Report/attendancereport',
+    name: <Translation>{(t) => t('Attendance Report')}</Translation>,
+    element: AttendanceReport,
+  },{
+    path: '/Report/birthdayreport',
+    name: <Translation>{(t) => t('Birthday Report')}</Translation>,
+    element: BirthdayReport,
   },{
     path: '/logreports/userlog',
     name: <Translation>{(t) => t('User Log Reports')}</Translation>,
-    element: UserLogReports,
+    element: UserLogReport,
   },{
     path: '/logreports/errorlog',
     name: <Translation>{(t) => t('Error Log Reports')}</Translation>,
-    element: ErrorLogReports,
+    element: ErrorLogReport,
   },{
     path: '/logreports/auditlog',
     name: <Translation>{(t) => t('Audit Log Reports')}</Translation>,
-    element: AuditLogReports,
+    element: AuditLogReport,
   },
   {
     path: '/masterdata/branch',
