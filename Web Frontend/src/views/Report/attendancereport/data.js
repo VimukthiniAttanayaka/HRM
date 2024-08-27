@@ -31,7 +31,7 @@ export const data = {
   footer2: "Footer 2",
 };
 
-export class AuditLogModel {
+export class AttendanceModel {
   CompanyTitle;
   LoggedAudit;
   PrintedDate;
@@ -49,7 +49,7 @@ export class AuditLogModel {
   headerlist = [];
   copyrightlist = [];
 }
-export class AuditLogModel_Content {
+export class AttendanceModel_Content {
   action;
   description;
   createdBy;
@@ -61,15 +61,15 @@ export class AuditLogModel_Content {
   actionType;
   actionMap_ID
 }
-export class AuditLogModel_Title {
+export class AttendanceModel_Title {
   LoggedAudit;
   CompanyTitle;
   PrintedDate;
 }
-export class AuditLogModel_Header {
+export class AttendanceModel_Header {
   ReportTitle;
 }
-export class AuditLogModel_CopyRight {
+export class AttendanceModel_CopyRight {
   Copyright;
 }
 export let ExcelColumnsHeadings = [['id', 'Auditid', 'Auditname', 'loggedin', 'logout']];

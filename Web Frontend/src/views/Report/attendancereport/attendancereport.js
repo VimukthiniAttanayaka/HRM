@@ -8,6 +8,8 @@ import { dataSource as defaultDataSource } from './data-source.js';
 import defaultLayout from './layout_json.json';
 import { getAttendanceReport } from '../../../apicalls/reportdata/attendancereport.js';
 import ExcelExportReports from '../../shared/ExcelRelated/ExcelExportReports.js';
+import { Margin, usePDF, Options } from "react-to-pdf";
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 
 function ReportHome() {
   const [designer, setDesigner] = useState();
@@ -22,6 +24,8 @@ function ReportHome() {
   // const [layout, setLayout] = useState(defaultLayout);
   const [layout, setLayout] = useState(defaultLayout);
   const [visible, setVisible] = useState(false);
+  const { toPDF, targetRef } = usePDF({ filename: 'page.pdf' });
+
 
 
   async function requestdata() {
@@ -77,7 +81,8 @@ function ReportHome() {
         />
       </div> */}
       <ExcelExportReports data={dataList} title={titleList} header={headerList} copyright={copyrightList} columns={ExcelColumnsHeadings} fileName="Attendancereport" />
-      <div style={{
+      <CButton onClick={() => toPDF()}>Download PDF</CButton>
+       <div style={{
         border: '1px solid black',
         width: '1100px',
         margin: 'auto',

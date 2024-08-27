@@ -9,6 +9,7 @@ import defaultLayout from './layout_json.json';
 import { getAuditLogReport } from '../../../apicalls/logreportdata/auditlogreport.js';
 import ExcelExportReports from '../../shared/ExcelRelated/ExcelExportReports.js';
 import { Margin, usePDF, Options } from "react-to-pdf";
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 
 function AuditLogReport() {
   const [designer, setDesigner] = useState();
