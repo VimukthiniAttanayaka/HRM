@@ -5,6 +5,8 @@ import CompanyPopup from './CompanyPopup.js';
 import { getCompanyAll } from '../../../apicalls/company/get_all_list.js';
 import { getCompanySingle } from '../../../apicalls/company/get_company_single.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
+import { getBadge } from '../../shared/gridviewconstants.js';
+import { columns } from '../../../controllers/company_controller.js';
 
 const CompanyDataGrid = () => {
   let templatetype = 'translation_company'
@@ -12,73 +14,6 @@ const CompanyDataGrid = () => {
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
-
-  const columns = [
-    {
-      key: 'CUS_ID',
-      label: 'ID',
-      filter: false,
-      sorter: false,
-    },
-    {
-      key: 'CUS_CompanyName',
-      label: getLabelText('Name', templatetype),
-      _style: { width: '20%' },
-    },
-    {
-      key: 'CUS_ContactPerson',
-      label: getLabelText('Company', templatetype),
-      _style: { width: '20%' },
-    },
-    {
-      key: 'CUS_ContactNumber',
-      label: getLabelText('Company', templatetype),
-      _style: { width: '20%' },
-    },
-    // {
-    //   key: 'alotment',
-    //   _style: { width: '20%' }
-    // },
-    {
-      key: 'status',
-      _style: { width: '20%' }
-    },
-    {
-      key: 'show_details',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-    {
-      key: 'view',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-    {
-      key: 'delete',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-  ];
-  const getBadge = (status) => {
-    switch (status) {
-      case 'Active':
-        return 'success'
-      case 'Inactive':
-        return 'secondary'
-      case 'Pending':
-        return 'warning'
-      case 'Banned':
-        return 'danger'
-      default:
-        return 'primary'
-    }
-  }
 
   const [CompanyDetails, setCompanyDetails] = useState([])
 
