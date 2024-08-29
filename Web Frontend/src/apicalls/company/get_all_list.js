@@ -26,6 +26,7 @@ export const getCompanyAll = async (formData) => {
         constructor(
           CUS_ID,
           CUS_CompanyName,
+          CUS_GroupCompany,
           CUS_Adrs_BlockBuildingNo,
           CUS_Adrs_BuildingName,
           CUS_Adrs_UnitNumber,
@@ -43,6 +44,7 @@ export const getCompanyAll = async (formData) => {
 
           this.CUS_ID = CUS_ID;
           this.CUS_CompanyName = CUS_CompanyName;
+          this.CUS_GroupCompany = CUS_GroupCompany;
           this.CUS_Adrs_BlockBuildingNo = CUS_Adrs_BlockBuildingNo;
           this.CUS_Adrs_BuildingName = CUS_Adrs_BuildingName;
           this.CUS_Adrs_UnitNumber = CUS_Adrs_UnitNumber;
@@ -65,6 +67,7 @@ export const getCompanyAll = async (formData) => {
 
         CompanyDetails[index] = new CompanyDetail(element.CUS_ID,
           element.CUS_CompanyName,
+          element.CUS_GroupCompany,
           element.CUS_Adrs_BlockBuildingNo,
           element.CUS_Adrs_BuildingName,
           element.CUS_Adrs_UnitNumber,

@@ -9,6 +9,7 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
 
   const [customerId, setCustomerId] = useState('')
   const [companyName, setCompanyName] = useState('')
+  const [groupName, setGroupName] = useState('')
   const [blockBuildingNumber, setBlockBuildingNumber] = useState('')
   const [addressBuildingName, setAddressBuildingName] = useState('')
   const [addressUnitNumber, setAddressUnitNumber] = useState('')
@@ -28,6 +29,9 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
   }
   const handleChangeName = (event) => {
     setCompanyName(event.target.value)
+  }
+  const handleChangeGroupName = (event) => {
+    setGroupName(event.target.value)
   }
   const handleChangeBlockBuildingNumber = (event) => {
     setBlockBuildingNumber(event.target.value)
@@ -56,13 +60,13 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
   const handleChangeContactNumber = (event) => {
     setContactNumber(event.target.value)
   }
-  const handleChangePinOrPassword = (event) => { 
+  const handleChangePinOrPassword = (event) => {
     setPinOrPassword(event.target.value)
   }
-  const handleChangeIsOtpSms = (event) => { 
+  const handleChangeIsOtpSms = (event) => {
     setIsOtpSms(event.target.checked)
   }
-  const handleChangeIsOtpEmail = (event) => { 
+  const handleChangeIsOtpEmail = (event) => {
     setIsOtpEmail(event.target.checked)
   }
   const handleChangeStatus = (event) => {
@@ -76,6 +80,7 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
       AUD_notificationToken: "string",
       CUS_ID: customerId,
       CUS_CompanyName: companyName,
+      CUS_GroupCompany: groupName,
       CUS_Adrs_BlockBuildingNo: blockBuildingNumber,
       CUS_Adrs_BuildingName: addressBuildingName,
       CUS_Adrs_UnitNumber: addressUnitNumber,
@@ -114,6 +119,7 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
       AUD_notificationToken: "string",
       CUS_ID: customerId,
       CUS_CompanyName: companyName,
+      CUS_GroupCompany: groupName,
       CUS_Adrs_BlockBuildingNo: blockBuildingNumber,
       CUS_Adrs_BuildingName: addressBuildingName,
       CUS_Adrs_UnitNumber: addressUnitNumber,
@@ -203,6 +209,7 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
     if (popupStatus == 'create') {
       setCustomerId('')
     setCompanyName('')
+    setGroupName('')
     setBlockBuildingNumber('')
     setAddressBuildingName('')
     setAddressUnitNumber('')
@@ -220,6 +227,7 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
     else{
     setCustomerId(CompanyDetails.CUS_ID)
     setCompanyName(CompanyDetails.CUS_CompanyName)
+    setGroupName(CompanyDetails.CUS_GroupCompany)
     setBlockBuildingNumber(CompanyDetails.CUS_Adrs_BlockBuildingNo)
     setAddressBuildingName(CompanyDetails.CUS_Adrs_BuildingName)
     setAddressUnitNumber(CompanyDetails.CUS_Adrs_UnitNumber)
@@ -275,6 +283,14 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
                     </CInputGroupText>
                   </CCol>
                   <CFormInput maxLength={20} placeholder="Company Name" name="companyName" value={companyName} onChange={handleChangeName} />
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>Group Company</h6>
+                    </CInputGroupText>
+                  </CCol>
+                  <CFormInput maxLength={20} placeholder="Group Company" name="groupName" value={groupName} onChange={handleChangeGroupName} />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>

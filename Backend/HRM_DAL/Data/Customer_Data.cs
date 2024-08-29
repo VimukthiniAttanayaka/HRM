@@ -58,6 +58,7 @@ namespace HRM_DAL.Data
 
                                 objcustomer.CUS_ID = rdr["CUS_ID"].ToString();
                                 objcustomer.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
+                                objcustomer.CUS_GroupCompany = rdr["CUS_GroupCompany"].ToString();
                                 objcustomer.CUS_Adrs_BlockBuildingNo = rdr["CUS_Adrs_BlockBuildingNo"].ToString();
                                 objcustomer.CUS_Adrs_BuildingName = rdr["CUS_Adrs_BuildingName"].ToString();
                                 objcustomer.CUS_Adrs_UnitNumber = rdr["CUS_Adrs_UnitNumber"].ToString();
@@ -166,6 +167,7 @@ namespace HRM_DAL.Data
 
                                 objcustomer.CUS_ID = rdr["CUS_ID"].ToString();
                                 objcustomer.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
+                                objcustomer.CUS_GroupCompany = rdr["CUS_GroupCompany"].ToString();
                                 objcustomer.CUS_Adrs_BlockBuildingNo = rdr["CUS_Adrs_BlockBuildingNo"].ToString();
                                 objcustomer.CUS_Adrs_BuildingName = rdr["CUS_Adrs_BuildingName"].ToString();
                                 objcustomer.CUS_Adrs_UnitNumber = rdr["CUS_Adrs_UnitNumber"].ToString();
@@ -264,6 +266,9 @@ namespace HRM_DAL.Data
 
                         cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@CUS_GroupCompany", item.CUS_CompanyName);
+                        cmd.Parameters["@CUS_GroupCompany"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
                         cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
@@ -384,6 +389,9 @@ namespace HRM_DAL.Data
 
                         cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
                         cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@CUS_GroupCompany", item.CUS_CompanyName);
+                        cmd.Parameters["@CUS_GroupCompany"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
                         cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
