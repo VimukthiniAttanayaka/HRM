@@ -17,6 +17,11 @@ export const columns = [
       label: getLabelText('Name', templatetype),
       _style: { width: '20%' },
     },
+  {
+    key: 'CUS_GroupCompany',
+    label: getLabelText('GroupName', templatetype),
+    _style: { width: '20%' },
+  },
     {
       key: 'CUS_ContactPerson',
       label: getLabelText('Company', templatetype),

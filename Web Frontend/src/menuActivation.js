@@ -1,6 +1,6 @@
 export const setMenu = (menuItem) => {
   return menuItem.map((item) => {
-    console.log(item.menuName, item.active);
+    // console.log(item.menuName, item.active);
     localStorage.setItem(item.menuName, item.active);
   });
 };

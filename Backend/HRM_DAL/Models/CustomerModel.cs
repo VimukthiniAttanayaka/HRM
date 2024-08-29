@@ -7,6 +7,7 @@ namespace HRM_DAL.Models
     {
         public string CUS_ID { get; set; }
         public string CUS_CompanyName { get; set; }
+        public string CUS_GroupCompany {  get; set; }
         public string CUS_Adrs_BlockBuildingNo { get; set; }
         public string CUS_Adrs_BuildingName { get; set; }
         public string CUS_Adrs_UnitNumber { get; set; }
@@ -35,6 +36,7 @@ namespace HRM_DAL.Models
 
         public string CUS_ID { get; set; }
         public string CUS_CompanyName { get; set; }
+        public string CUS_GroupCompany { get; set; }
         public string CUS_Adrs_BlockBuildingNo { get; set; }
         public string CUS_Adrs_BuildingName { get; set; }
         public string CUS_Adrs_UnitNumber { get; set; }
@@ -61,6 +63,7 @@ namespace HRM_DAL.Models
 
         public string CUS_ID { get; set; }
         public string CUS_CompanyName { get; set; }
+        public string CUS_GroupCompany { get; set; }
         public bool CUS_Status { get; set; }
         public string RC { get; set; }
     }
