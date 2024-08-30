@@ -3,7 +3,9 @@ import { CTooltip, CButton, CFormSelect, CModal, CModalBody, CCol, CInputGroupTe
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
 import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
-
+// import { CSelect } from '@coreui/react';
+// import Select from 'react-select';
+// CSelect,
 const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popupStatus }) => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -208,7 +210,11 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popu
     setOptionsEmployeeID(EmployeeDetails);
 
   }
-
+  const options = [
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+    // ... more options
+  ];
   useEffect(() => {
     requestdata();
   }, []);
@@ -283,13 +289,26 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popu
                       </option>
                     ))}
                   </CFormSelect>
+                  {/* <CSelect
+                    label="Dropdown with Filtering"
+                    options={options}
+                    components={{
+                      DropdownIndicator: (props) => (
+                        <Select.components.DropdownIndicator {...props}>
+                          <Select.components.DropdownIndicator {...props} />
+                          <Select.components.ClearIndicator {...props} />
+                        </Select.components.DropdownIndicator>
+                      ),
+                    }}
+                  /> */}
+
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>FirstName</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="FirstName" name="FirstName" value={InternalUserDetails.UD_FirstName ? InternalUserDetails.UD_FirstName:''} onChange={handleChangeFirstName}
+                  </CCol>  <CFormInput placeholder="FirstName" name="FirstName" value={InternalUserDetails.UD_FirstName ? InternalUserDetails.UD_FirstName : ''} onChange={handleChangeFirstName}
                   />
 
                 </CInputGroup>
@@ -298,7 +317,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popu
                     <CInputGroupText>
                       <h6>LastName</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LastName" name="LastName" value={InternalUserDetails.UD_LastName ? InternalUserDetails.UD_LastName:''} onChange={handleChangeLastName}
+                  </CCol>  <CFormInput placeholder="LastName" name="LastName" value={InternalUserDetails.UD_LastName ? InternalUserDetails.UD_LastName : ''} onChange={handleChangeLastName}
                   />
 
                 </CInputGroup>
@@ -307,7 +326,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popu
                     <CInputGroupText>
                       <h6>EmailAddress</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="EmailAddress" name="EmailAddress" value={InternalUserDetails.UD_EmailAddress ? InternalUserDetails.UD_EmailAddress:''} onChange={handleChangeEmailAddress}
+                  </CCol>  <CFormInput placeholder="EmailAddress" name="EmailAddress" value={InternalUserDetails.UD_EmailAddress ? InternalUserDetails.UD_EmailAddress : ''} onChange={handleChangeEmailAddress}
                   />
 
                 </CInputGroup>
@@ -316,7 +335,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popu
                     <CInputGroupText>
                       <h6>MobileNumber</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="MobileNumber" name="MobileNumber" value={InternalUserDetails.UD_MobileNumber ? InternalUserDetails.UD_MobileNumber:''} onChange={handleChangeMobileNumber}
+                  </CCol>  <CFormInput placeholder="MobileNumber" name="MobileNumber" value={InternalUserDetails.UD_MobileNumber ? InternalUserDetails.UD_MobileNumber : ''} onChange={handleChangeMobileNumber}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
 
@@ -326,7 +345,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popu
                     <CInputGroupText>
                       <h6>PhoneNumber</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="PhoneNumber" name="PhoneNumber" value={InternalUserDetails.UD_PhoneNumber ? InternalUserDetails.UD_PhoneNumber:''} onChange={handleChangePhoneNumber}
+                  </CCol>  <CFormInput placeholder="PhoneNumber" name="PhoneNumber" value={InternalUserDetails.UD_PhoneNumber ? InternalUserDetails.UD_PhoneNumber : ''} onChange={handleChangePhoneNumber}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
 
@@ -336,7 +355,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popu
                     <CInputGroupText>
                       <h6>Remarks</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="Remarks" name="Remarks" value={InternalUserDetails.UD_Remarks ? InternalUserDetails.UD_Remarks:''} onChange={handleChangeRemarks}
+                  </CCol>  <CFormInput placeholder="Remarks" name="Remarks" value={InternalUserDetails.UD_Remarks ? InternalUserDetails.UD_Remarks : ''} onChange={handleChangeRemarks}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
 

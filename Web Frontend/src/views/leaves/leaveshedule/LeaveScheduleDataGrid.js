@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CInputGroupText } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import LeaveSchedulePopup from './LeaveSchedulePopup.js';
+import { columns } from '../../../controllers/leaveschedule_controller.js'
 
 const LeaveScheduleDataGrid = () => {
 
@@ -10,54 +11,6 @@ const LeaveScheduleDataGrid = () => {
   const [data, setData] = useState([])
   const [leaveScheduleDetails, setLeaveScheduleDetails] = useState([])
 
-  const columns = [
-    {
-      key: 'id',
-      label: '',
-      filter: false,
-      sorter: false,
-    },
-    {
-      key: 'entitlement',
-      _style: { width: '20%' },
-    },
-    // 'leavetype',
-    {
-      key: 'leavetype',
-      _style: { width: '20%' }
-    }, {
-      key: 'startdate',
-      _style: { width: '20%' }
-    }, {
-      key: 'enddate',
-      _style: { width: '20%' }
-    },
-    {
-      key: 'status',
-      _style: { width: '20%' }
-    },
-    {
-      key: 'show_details',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-  ];
-  const getBadge = (status) => {
-    switch (status) {
-      case 'Active':
-        return 'success'
-      case 'Inactive':
-        return 'secondary'
-      case 'Pending':
-        return 'warning'
-      case 'Banned':
-        return 'danger'
-      default:
-        return 'primary'
-    }
-  }
 
   async function loadDetails(item) {
 
@@ -178,8 +131,16 @@ const LeaveScheduleDataGrid = () => {
 
   return (
     <CCardBody>
+      <CRow><CCol><CInputGroupText>
+        <h6>Annual Leave</h6>
+      </CInputGroupText></CCol>
+        <CCol><CInputGroupText>Casual Leave</CInputGroupText></CCol>
+        <CCol><CInputGroupText>Medical Leave</CInputGroupText></CCol>
+        <CCol><CInputGroupText>Lieu Leave</CInputGroupText></CCol>
+        <CCol><CInputGroupText>Maternity Leave</CInputGroupText></CCol>
+      </CRow>
       <CRow>
-        <CCol>
+        {/* <CCol>
           <CButton
             color="primary"
             className="mb-2"
@@ -189,7 +150,7 @@ const LeaveScheduleDataGrid = () => {
           >
             Download current items (.csv)
           </CButton>
-        </CCol>
+        </CCol> */}
         <CCol className='d-flex justify-content-end'>
           <LeaveSchedulePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveScheduleDetails={leaveScheduleDetails} />
         </CCol>
@@ -198,9 +159,9 @@ const LeaveScheduleDataGrid = () => {
         cleaner
         clickableRows
         columns={columns}
-        columnFilter
-        columnSorter
-        footer
+        // columnFilter
+        // columnSorter
+        // footer
         items={data}
         itemsPerPageSelect
         itemsPerPage={5}
@@ -257,7 +218,7 @@ const LeaveScheduleDataGrid = () => {
             )
           },
         }}
-        selectable
+        // selectable
         sorterValue={{ column: 'status', state: 'asc' }}
         tableFilter
         tableProps={{

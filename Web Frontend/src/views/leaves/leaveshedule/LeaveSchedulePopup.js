@@ -26,10 +26,10 @@ const LeaveSchedulePopup = ({ visible, onClose, onOpen, leaveScheduleDetails }) 
   const handleChangeStartDate = (event) => {
     setStartDate(event.target.value)
   }
-  const handleChangeStartTime= (event) => {
+  const handleChangeStartTime = (event) => {
     setStartTime(event.target.value)
   }
-  const handleChangeEndTime= (event) => {
+  const handleChangeEndTime = (event) => {
     setEndTime(event.target.value)
   }
   // console.log(leaveScheduleDetails.LV_LeaveEndDate)
@@ -52,12 +52,22 @@ const LeaveSchedulePopup = ({ visible, onClose, onOpen, leaveScheduleDetails }) 
             <CCardBody className="p-4">
               <CForm onSubmit={handleSubmit}>
                 <CInputGroup className="mb-3">
+                <CCol md={4}>
+                  <CInputGroupText>
+                    <h6>Leave Type</h6>
+                  </CInputGroupText>
+                </CCol>   
+                {/* <CTimePicker placeholder="StartTime" name="StartTime"
+                  time={leaveScheduleDetails.LV_LeaveStartTime} onChange={handleChangeStartTime}
+                /> */}
+              </CInputGroup>
+                <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>InTime</h6>
                     </CInputGroupText>
                   </CCol>   <CTimePicker placeholder="StartTime" name="StartTime"
-                  time={leaveScheduleDetails.LV_LeaveStartTime} onChange={handleChangeStartTime}
+                    time={leaveScheduleDetails.LV_LeaveStartTime} onChange={handleChangeStartTime}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -66,7 +76,7 @@ const LeaveSchedulePopup = ({ visible, onClose, onOpen, leaveScheduleDetails }) 
                       <h6>OutTime</h6>
                     </CInputGroupText>
                   </CCol>    <CTimePicker placeholder="EndTime" name="EndTime"
-                  time={leaveScheduleDetails.LV_LeaveEndTime} onChange={handleChangeEndTime}
+                    time={leaveScheduleDetails.LV_LeaveEndTime} onChange={handleChangeEndTime}
                   />
                 </CInputGroup>
 

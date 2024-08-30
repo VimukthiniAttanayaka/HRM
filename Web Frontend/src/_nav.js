@@ -117,14 +117,15 @@ const _nav = [
         to: '/employee/employee',
         disabled: !EEmployee,
         // isVisible:{getAttendance}
-      }, {
-        component: CNavItem,
-        // name: <Translation>{(t) => t('Employee Job Desription')}</Translation>,
-        name: getLabelText('Employee Job Desription', templatetype),
-        to: '/employee/employeejobdescription',
-        disabled: !EEmployeeJobDiscription,
-        // isVisible:{getAttendance}
       },
+      //  {
+      //   component: CNavItem,
+      //   // name: <Translation>{(t) => t('Employee Job Desription')}</Translation>,
+      //   name: getLabelText('Employee Job Desription', templatetype),
+      //   to: '/employee/employeejobdescription',
+      //   disabled: !EEmployeeJobDiscription,
+      //   // isVisible:{getAttendance}
+      // },
     ],
   },
   {
