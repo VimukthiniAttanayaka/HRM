@@ -86,35 +86,6 @@ const EmployeeJobDescriptionPopup = ({ visible, onClose, onOpen }) => {
                     ))}
                   </CFormSelect>
                 </CInputGroup>
-                {/* <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>Department Id</h6>
-                    </CInputGroupText>
-                  </CCol>
-                  <CFormInput placeholder="Department Id" name="DepartmentId"
-                  // value={customerId} onChange={handleChangeId}
-                  />
-                </CInputGroup>
-
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>Employee ID</h6>
-                    </CInputGroupText>
-                  </CCol> <CFormInput placeholder="Employee ID" name="EmployeeID"
-                  // value={customerId} onChange={handleChangeId}
-                  />
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>JobTitle_Code</h6>
-                    </CInputGroupText>
-                  </CCol> <CFormInput placeholder="JobTitle_Code" name="JobTitle_Code"
-                  // value={customerId} onChange={handleChangeId}
-                  />
-                </CInputGroup>*/}
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
@@ -124,15 +95,6 @@ const EmployeeJobDescriptionPopup = ({ visible, onClose, onOpen }) => {
                   // value={customerId} onChange={handleChangeId}
                   />
                 </CInputGroup>
-                {/* <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>ActiveTo</h6>
-                    </CInputGroupText>
-                  </CCol> <CDatePicker placeholder="ActiveTo" name="ActiveTo"
-                  // value={customerId} onChange={handleChangeId}
-                  />
-                </CInputGroup> */}
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
