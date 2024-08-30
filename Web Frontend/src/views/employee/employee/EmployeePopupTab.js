@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CRow, CButton, CModal, CTabs, CFormSelect, CTabList, CTab, CCol, CInputGroupText, CTabContent, CTabPanel, CModalBody, CModalTitle, CModalFooter, CFormCheck, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import General from './General.js';
-import Profile from './Profile.js';
-import Contact from './Contact.js';
-import Employment from './Employment.js';
-import JobDiscription from './JobDiscription.js';
+import EmployeePopupTab_General from './EmployeePopupTab_General.js';
+import EmployeePopupTab_Profile from './EmployeePopupTab_Profile.js';
+import EmployeePopupTab_Contact from './EmployeePopupTab_Contact.js';
+import EmployeePopupTab_Employment from './EmployeePopupTab_Employment.js';
+import EmployeePopupTab_JobDiscription from './EmployeePopupTab_JobDiscription.js';
 
 const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStatus }) => {
 
@@ -64,11 +64,11 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
               <CTab itemKey="jobDiscription">Job Discription</CTab>
             </CTabList>
             <CTabContent>
-              <General popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
-              <Profile popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
-              <Contact popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
-              <Employment popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
-              <JobDiscription popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
+              <EmployeePopupTab_General popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
+              <EmployeePopupTab_Profile popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
+              <EmployeePopupTab_Contact popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
+              <EmployeePopupTab_Employment popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
+              <EmployeePopupTab_JobDiscription popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
             </CTabContent>
           </CTabs>
         </CModalBody>

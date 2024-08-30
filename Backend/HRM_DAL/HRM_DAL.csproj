@@ -14,14 +14,20 @@
     <PackageReference Include="System.Data.OleDb" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="EmailTemplates\**" />
     <Compile Remove="FilePathReference_Processing_ItemLevel_Local\**" />
     <Compile Remove="GeneratedPDF\**" />
+    <Compile Remove="Images\**" />
     <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="EmailTemplates\**" />
     <EmbeddedResource Remove="FilePathReference_Processing_ItemLevel_Local\**" />
     <EmbeddedResource Remove="GeneratedPDF\**" />
+    <EmbeddedResource Remove="Images\**" />
     <EmbeddedResource Remove="Models\**" />
+    <None Remove="EmailTemplates\**" />
     <None Remove="FilePathReference_Processing_ItemLevel_Local\**" />
     <None Remove="GeneratedPDF\**" />
+    <None Remove="Images\**" />
     <None Remove="Models\**" />
   </ItemGroup>
 
@@ -151,11 +157,6 @@
     <None Update="Report1.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="EmailTemplates\" />
-    <Folder Include="Images\" />
   </ItemGroup>
 
 </Project>

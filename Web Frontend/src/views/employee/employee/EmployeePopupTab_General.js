@@ -3,7 +3,7 @@ import { CTooltip, CRow, CButton, CModal, CTabs, CFormSelect, CTabList, CTab, CC
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import axios from 'axios';
 
-const General = ({ EmployeeDetails, popupStatus }) => {
+const EmployeePopupTab_General = ({ EmployeeDetails, popupStatus }) => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -318,4 +318,4 @@ const General = ({ EmployeeDetails, popupStatus }) => {
     </>
   )
 }
-export default General
+export default EmployeePopupTab_General

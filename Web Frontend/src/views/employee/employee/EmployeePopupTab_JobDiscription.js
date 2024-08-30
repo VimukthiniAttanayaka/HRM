@@ -3,7 +3,7 @@ import { CTooltip, CRow, CButton, CModal, CTabs, CFormSelect, CTabList, CTab, CC
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import { requestdata_LeaveTypes_DropDowns_All } from '../../../apicalls/leavetype/get_all_list.js';
 
-const JobDiscription = ({ EmployeeDetails, popupStatus }) => {
+const EmployeePopupTab_JobDiscription = ({ EmployeeDetails, popupStatus }) => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -100,4 +100,4 @@ const JobDiscription = ({ EmployeeDetails, popupStatus }) => {
     </>
   )
 }
-export default JobDiscription
+export default EmployeePopupTab_JobDiscription

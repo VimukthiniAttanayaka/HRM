@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { CTooltip, CRow, CButton, CModal, CTabs, CFormSelect, CTabList, CTab, CCol, CInputGroupText, CTabContent, CTabPanel, CModalBody, CModalTitle, CModalFooter, CFormCheck, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import axios from 'axios';
-import General from './General.js';
-import Profile from './Profile.js';
-import Contact from './Contact.js';
+import EmployeePopupTab_General from './EmployeePopupTab_General.js';
+import EmployeePopupTab_Profile from './EmployeePopupTab_Profile.js';
+import EmployeePopupTab_Contact from './EmployeePopupTab_Contact.js';
 
-const Employment = ({ EmployeeDetails, popupStatus }) => {
+const EmployeePopupTab_Employment = ({ EmployeeDetails, popupStatus }) => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -358,4 +358,4 @@ const Employment = ({ EmployeeDetails, popupStatus }) => {
     </>
   )
 }
-export default Employment
+export default EmployeePopupTab_Employment
