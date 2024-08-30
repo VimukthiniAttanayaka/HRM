@@ -6,6 +6,7 @@ import EmployeePopupTab_Profile from './EmployeePopupTab_Profile.js';
 import EmployeePopupTab_Contact from './EmployeePopupTab_Contact.js';
 import EmployeePopupTab_Employment from './EmployeePopupTab_Employment.js';
 import EmployeePopupTab_JobDescriptionGrid from './EmployeePopupTab_JobDescriptionGrid.js';
+import EmployeePopupTab_JobDescriptionPopUp from './EmployeePopupTab_JobDescriptionPopUp.js';
 
 const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStatus }) => {
 
@@ -61,7 +62,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
               <CTab itemKey="profile">Profile</CTab>
               <CTab itemKey="contact">Contact</CTab>
               <CTab itemKey="employment">Employment</CTab>
-              <CTab itemKey="jobDiscription">Job Discription</CTab>
+              <CTab itemKey="jobDescription">Job Description</CTab>
             </CTabList>
             <CTabContent>
               <EmployeePopupTab_General popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />

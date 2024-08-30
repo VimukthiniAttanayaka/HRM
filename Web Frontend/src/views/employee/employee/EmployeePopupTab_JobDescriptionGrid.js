@@ -18,16 +18,10 @@ const EmployeePopupTab_JobDescriptionGrid = ({ EmployeeDetails, popupStatus }) =
       filter: true,
       sorter: false,
     },
-    // {
-    //   key: 'departmentid',
-    //   _style: { width: '20%' },
-    // },
-    // 'Employeeid',
     {
       key: 'Employeeid',
       _style: { width: '20%' }
     },
-    // 'Employeeid',
     {
       key: 'jobdescriptionid',
       _style: { width: '20%' }
@@ -56,7 +50,7 @@ const EmployeePopupTab_JobDescriptionGrid = ({ EmployeeDetails, popupStatus }) =
       newDetails = [...details, index]
       // alert(newDetails[newDetails.length - 1])
       // console.log(newDetails)
-      handleOpenPopup()
+      handleOpenPopup1()
     }
     // setDetails(newDetails)
   }
@@ -100,110 +94,113 @@ const EmployeePopupTab_JobDescriptionGrid = ({ EmployeeDetails, popupStatus }) =
 
   const csvCode = 'data:text/csv;charset=utf-8,SEP=,%0A' + encodeURIComponent(csvContent)
 
-  const [visible, setVisible] = useState(false);
+  const [visible1, setVisible1] = useState(false);
 
-  const handleOpenPopup = () => {
-    setVisible(true);
+  const handleOpenPopup1 = () => {
+    setVisible1(true);
   };
 
-  const handleClosePopup = () => {
-    setVisible(false);
+  const handleClosePopup1 = () => {
+    setVisible1(false);
   };
 
   return (
-    <CCardBody>
-      <CRow>
-        <CCol>
-          <CButton
-            color="primary"
-            className="mb-2"
-            href={csvCode}
-            download="coreui-table-data.csv"
-            target="_blank"
-          >
-            Download current items (.csv)
-          </CButton>
-        </CCol>
-        <CCol className='d-flex justify-content-end'>
-          <EmployeePopupTab_JobDescriptionPopUp onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} />
-        </CCol>
-      </CRow>
-      <CSmartTable
-        cleaner
-        // clickableRows
-        columns={columns}
-        columnFilter
-        columnSorter
-        // footer
-        items={data}
-        itemsPerPageSelect
-        itemsPerPage={5}
-        onFilteredItemsChange={setCurrentItems}
-        pagination
-        // onFilteredItemsChange={(items) => {
-        //   console.log(items)
-        // }}
-        onSelectedItemsChange={(items) => {
-          // console.log(items)
-        }}
-        scopedColumns={{
-          avatar: (item) => (
-            <td>
-              {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-            </td>
-          ),
-          status: (item) => (
-            <td>
-              <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
-            </td>
-          ),
-          show_details: (item) => {
-            return (
-              <td className="py-2">
-                <CButton
-                  color="primary"
-                  variant="outline"
-                  shape="square"
-                  size="sm"
-                  onClick={() => {
-                    toggleDetails(item.id)
-                  }}
-                >
-                  {details.includes(item.id) ? 'Hide' : 'Show'}
-                </CButton>
+    <> 
+     <CTabPanel className="p-3" itemKey="jobDescription">
+      <CCardBody>
+        <CRow>
+          <CCol>
+            <CButton
+              color="primary"
+              className="mb-2"
+              href={csvCode}
+              download="coreui-table-data.csv"
+              target="_blank"
+            >
+              Download current items (.csv)
+            </CButton>
+          </CCol>
+          <CCol className='d-flex justify-content-end'>
+            <EmployeePopupTab_JobDescriptionPopUp onClose1={handleClosePopup1} visible1={visible1} onOpen1={handleOpenPopup1} />
+          </CCol>
+        </CRow>
+        <CSmartTable
+          cleaner
+          // clickableRows
+          columns={columns}
+          columnFilter
+          columnSorter
+          // footer
+          items={data}
+          itemsPerPageSelect
+          itemsPerPage={5}
+          onFilteredItemsChange={setCurrentItems}
+          pagination
+          // onFilteredItemsChange={(items) => {
+          //   console.log(items)
+          // }}
+          onSelectedItemsChange={(items) => {
+            // console.log(items)
+          }}
+          scopedColumns={{
+            avatar: (item) => (
+              <td>
+                {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
               </td>
-            )
-          },
-          details: (item) => {
-            return (
-              <CCollapse visible={details.includes(item.id)}>
-                <CCardBody className="p-3">
-                  <h4>{item.username}</h4>
-                  <p className="text-muted">User since: {item.registered}</p>
-                  <CButton size="sm" color="info">
-                    User Settings
+            ),
+            status: (item) => (
+              <td>
+                <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
+              </td>
+            ),
+            show_details: (item) => {
+              return (
+                <td className="py-2">
+                  <CButton
+                    color="primary"
+                    variant="outline"
+                    shape="square"
+                    size="sm"
+                    onClick={() => {
+                      toggleDetails(item.id)
+                    }}
+                  >
+                    {details.includes(item.id) ? 'Hide' : 'Show'}
                   </CButton>
-                  <CButton size="sm" color="danger" className="ml-1">
-                    Delete
-                  </CButton>
-                </CCardBody>
-              </CCollapse>
-            )
-          },
-        }}
-        // selectable
-        sorterValue={{ column: 'status', state: 'asc' }}
-        tableFilter
-        tableProps={{
-          className: 'add-this-class',
-          responsive: true,
-          striped: true,
-          hover: true,
-        }}
-        tableBodyProps={{
-          className: 'align-middle'
-        }} />
-    </CCardBody>
+                </td>
+              )
+            },
+            details: (item) => {
+              return (
+                <CCollapse visible={details.includes(item.id)}>
+                  <CCardBody className="p-3">
+                    <h4>{item.username}</h4>
+                    <p className="text-muted">User since: {item.registered}</p>
+                    <CButton size="sm" color="info">
+                      User Settings
+                    </CButton>
+                    <CButton size="sm" color="danger" className="ml-1">
+                      Delete
+                    </CButton>
+                  </CCardBody>
+                </CCollapse>
+              )
+            },
+          }}
+          // selectable
+          sorterValue={{ column: 'status', state: 'asc' }}
+          tableFilter
+          tableProps={{
+            className: 'add-this-class',
+            responsive: true,
+            striped: true,
+            hover: true,
+          }}
+          tableBodyProps={{
+            className: 'align-middle'
+          }} />
+      </CCardBody>
+    </CTabPanel> </>
   )
 }
 export default EmployeePopupTab_JobDescriptionGrid
