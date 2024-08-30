@@ -5,7 +5,7 @@ import EmployeePopupTab_General from './EmployeePopupTab_General.js';
 import EmployeePopupTab_Profile from './EmployeePopupTab_Profile.js';
 import EmployeePopupTab_Contact from './EmployeePopupTab_Contact.js';
 import EmployeePopupTab_Employment from './EmployeePopupTab_Employment.js';
-import EmployeePopupTab_JobDiscription from './EmployeePopupTab_JobDiscription.js';
+import EmployeePopupTab_JobDescriptionGrid from './EmployeePopupTab_JobDescriptionGrid.js';
 
 const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStatus }) => {
 
@@ -68,7 +68,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
               <EmployeePopupTab_Profile popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
               <EmployeePopupTab_Contact popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
               <EmployeePopupTab_Employment popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
-              <EmployeePopupTab_JobDiscription popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
+              <EmployeePopupTab_JobDescriptionGrid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
             </CTabContent>
           </CTabs>
         </CModalBody>

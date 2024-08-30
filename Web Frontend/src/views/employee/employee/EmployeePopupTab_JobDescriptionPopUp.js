@@ -3,7 +3,7 @@ import { CTooltip, CRow, CButton, CModal, CTabs, CFormSelect, CTabList, CTab, CC
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import { requestdata_LeaveTypes_DropDowns_All } from '../../../apicalls/leavetype/get_all_list.js';
 
-const EmployeePopupTab_JobDiscription = ({ EmployeeDetails, popupStatus }) => {
+const EmployeePopupTab_JobDescriptionPopUp = ({ EmployeeDetails, popupStatus, visible, onClose, onOpen }) => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -31,6 +31,7 @@ const EmployeePopupTab_JobDiscription = ({ EmployeeDetails, popupStatus }) => {
 
   return (
     <>
+      <CButton color="primary" onClick={onOpen}>New Employee Job Description</CButton>
       <CTabPanel className="p-3" itemKey="jobDiscription">
         <CForm onSubmit={handleSubmit}>
           <CInputGroup className="mb-3">
@@ -100,4 +101,4 @@ const EmployeePopupTab_JobDiscription = ({ EmployeeDetails, popupStatus }) => {
     </>
   )
 }
-export default EmployeePopupTab_JobDiscription
+export default EmployeePopupTab_JobDescriptionPopUp
