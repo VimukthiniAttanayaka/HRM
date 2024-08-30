@@ -36,7 +36,7 @@ const EmployeePopupTab_JobDiscription = ({ EmployeeDetails, popupStatus }) => {
           <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>
-                <h6>Department Id</h6>
+                <h6>Department</h6>
               </CInputGroupText>
             </CCol>
             <CFormSelect value={selectedJobDescription} onChange={(e) => setSelectedJobDescription(e.target.value)}>
@@ -47,7 +47,7 @@ const EmployeePopupTab_JobDiscription = ({ EmployeeDetails, popupStatus }) => {
               ))}
             </CFormSelect>
           </CInputGroup>
-          <CInputGroup className="mb-3">
+          {/* <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>
                 <h6>Employee ID</h6>
@@ -60,11 +60,11 @@ const EmployeePopupTab_JobDiscription = ({ EmployeeDetails, popupStatus }) => {
                 </option>
               ))}
             </CFormSelect>
-          </CInputGroup>
+          </CInputGroup> */}
           <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>
-                <h6>JobTitle_Code</h6>
+                <h6>JobTitle</h6>
               </CInputGroupText>
             </CCol>
             <CFormSelect value={selectedJobDescription} onChange={(e) => setSelectedJobDescription(e.target.value)}>
