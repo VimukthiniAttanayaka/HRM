@@ -229,10 +229,25 @@ const _nav = [
   //   component: CNavTitle,
   //   name: <Translation>{(t) => t('New Joinee Management')}</Translation>,
   // },
-  // {
-  //   component: CNavTitle,
-  //   name: <Translation>{(t) => t('Exit Interview')}</Translation>,
-  // },
+  {
+    component: CNavGroup,
+    name: <Translation>{(t) => t('Exit Interview')}</Translation>,
+    items: [{
+      component: CNavItem,
+      // name: <Translation>{(t) => t('User Access Group')}</Translation>,
+      name: getLabelText('Exit Interview Questions', templatetype),
+      to: '/exitinterview/exitinterviewquestions',
+      // disabled: !UMUserAccessGroup,
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    },{
+      component: CNavItem,
+      // name: <Translation>{(t) => t('User Access Group')}</Translation>,
+      name: getLabelText('Exit Interview Answers', templatetype),
+      to: '/exitinterview/exitinterviewanswers',
+      // disabled: !UMUserAccessGroup,
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    }]
+  },
   {
     component: CNavGroup,
     // name: <Translation>{(t) => t('Reports')}</Translation>,
@@ -245,7 +260,7 @@ const _nav = [
       to: '/report/attendancereport',
       disabled: !UMUserAccessGroup,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-    },{
+    }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('User Access Group')}</Translation>,
       name: getLabelText('Birthday Report', templatetype),
