@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import JobRolePopup from './JobRolePopup.js';
 import { getJobRoleAll } from '../../../apicalls/jobrole/get_all_list.js';
@@ -7,7 +7,9 @@ import { getJobRoleSingle } from '../../../apicalls/jobrole/get_jobrole_single.j
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
-import { columns } from '../../controllers/jobrole_controllers.js';
+import { columns, headers } from '../../controllers/jobrole_controllers.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
+import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
 
 const JobRoleDataGrid = () => {
@@ -18,6 +20,10 @@ const JobRoleDataGrid = () => {
 
   const [popupStatus, setPopupStatus] = useState('create')
 
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [columnFilter, setColumnFilter] = useState([])
+  const [tableFilter, setTableFilter] = useState([])
   
   const [JobRoleDetails, setJobRoleDetails] = useState([])
 
@@ -105,10 +111,7 @@ const JobRoleDataGrid = () => {
     setJobRoleDetails([]);
     setPopupStatus('create')
   };
-  const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
-  const [currentPage, setCurrentPage] = useState(1);
-  const [columnFilter, setColumnFilter] = useState([])
-  const [tableFilter, setTableFilter] = useState([])
+
   useEffect(() => {
     // console.log(columnFilter);
     requestdata();
@@ -135,15 +138,24 @@ const JobRoleDataGrid = () => {
     <CCardBody>
       <CRow>
         <CCol>
-          <CButton
-            color="primary"
-            className="mb-2"
-            href={csvCode}
-            download="coreui-table-data.csv"
-            target="_blank"
-          >
-            {getLabelText('Download current items (.csv)', templatetype_base)}
-          </CButton>
+        <CDropdown>
+            <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
+            <CDropdownMenu>
+              <CDropdownItem><CButton
+                color="primary"
+                className="mb-2"
+                href={csvCode}
+                download="jobrole.csv"
+                target="_blank"
+              >
+                Download items as .csv
+              </CButton></CDropdownItem>
+              <CDropdownItem><ExcelExport data={data} fileName="jobrole" headers={headers} /></CDropdownItem>
+              <CDropdownItem>
+                <CSmartGridPDF data={data} headers={headers} filename="jobrole" title="jobrole" />
+              </CDropdownItem>
+            </CDropdownMenu>
+          </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
           <JobRolePopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} JobRoleDetails={JobRoleDetails} />

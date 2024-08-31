@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import BranchPopup from './BranchPopup.js';
 import { getBranchAll } from '../../../apicalls/branch/get_all_list.js';
 import { getBranchSingle } from '../../../apicalls/branch/get_branch_single.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
+import Pagination from '../../shared/Pagination.js'
+import { getBadge } from '../../shared/gridviewconstants.js';
+import { columns, headers } from '../../controllers/branch_controllers.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
+import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
 const BranchDataGrid = () => {
   let templatetype = 'translation_branch'
@@ -13,61 +18,10 @@ const BranchDataGrid = () => {
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
 
-  const columns = [
-    {
-      key: 'id',
-      // label: '',
-      label: getLabelText('ID', templatetype),
-      // filter: false,
-      // sorter: false,
-      _style: { width: '20%' },
-    },
-    {
-      key: 'branch',
-      label: getLabelText('Branch', templatetype),
-      _style: { width: '20%' },
-    },
-    {
-      key: 'status',
-      label: getLabelText('Status', templatetype),
-      _style: { width: '20%' }
-    },
-    {
-      key: 'show_details',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-    {
-      key: 'view',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-    {
-      key: 'delete',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-  ];
-  const getBadge = (status) => {
-    switch (status) {
-      case 'Active':
-        return 'success'
-      case 'Inactive':
-        return 'secondary'
-      case 'Pending':
-        return 'warning'
-      case 'Banned':
-        return 'danger'
-      default:
-        return 'primary'
-    }
-  }
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [columnFilter, setColumnFilter] = useState([])
+  const [tableFilter, setTableFilter] = useState([])
 
   const [BranchDetails, setBranchDetails] = useState([])
 
@@ -87,6 +41,16 @@ const BranchDataGrid = () => {
     setBranchDetails(BranchDetails);
     handleOpenPopup()
   }
+  const handleItemsPerPageChange = (newItemsPerPage) => {
+    console.log(newItemsPerPage);
+    setItemsPerPage(newItemsPerPage);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // Fetch data for the new page
+  };
+
   const toggleEdit = (index) => {
     setPopupStatus('edit')
     toggleDetails(index)
@@ -156,15 +120,24 @@ const BranchDataGrid = () => {
     <CCardBody>
       <CRow>
         <CCol>
-          <CButton
-            color="primary"
-            className="mb-2"
-            href={csvCode}
-            download="coreui-table-data.csv"
-            target="_blank"
-          >
-            {getLabelText('Download current items (.csv)', templatetype_base)}
-          </CButton>
+        <CDropdown>
+            <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
+            <CDropdownMenu>
+              <CDropdownItem><CButton
+                color="primary"
+                className="mb-2"
+                href={csvCode}
+                download="branch.csv"
+                target="_blank"
+              >
+                Download items as .csv
+              </CButton></CDropdownItem>
+              <CDropdownItem><ExcelExport data={data} fileName="branch" headers={headers} /></CDropdownItem>
+              <CDropdownItem>
+                <CSmartGridPDF data={data} headers={headers} filename="branch" title="branch" />
+              </CDropdownItem>
+            </CDropdownMenu>
+          </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
           <BranchPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} branchDetails={BranchDetails} />
@@ -181,7 +154,12 @@ const BranchDataGrid = () => {
         itemsPerPageSelect
         itemsPerPage={5}
         onFilteredItemsChange={setCurrentItems}
-        pagination
+        pagination={<div> <Pagination
+          totalItems={data.RC}
+          currentPage={currentPage}
+          setCurrentPage={handlePageChange}
+          itemsPerPage={itemsPerPage}
+        /></div>}
         // onFilteredItemsChange={(items) => {
         //   console.log(items)
         // }}

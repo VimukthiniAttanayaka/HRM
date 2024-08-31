@@ -82,11 +82,11 @@ namespace HRM.Controllers
             obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "MED", MDJR_JobRole = "Medical", MDJR_Status = true });
             obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "MAT", MDJR_JobRole = "Matrinaty", MDJR_Status = true });
             obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "CAS", MDJR_JobRole = "Casual", MDJR_Status = true });
-            for (int i = 0; i < 100; i++)
-            {
-                obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "CAS", MDJR_JobRole = "Casual", MDJR_Status = true });
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "CAS", MDJR_JobRole = "Casual", MDJR_Status = true });
 
-            }
+            //}
             objJobRoleHeadList.Add(obj);
             return objJobRoleHeadList;
 

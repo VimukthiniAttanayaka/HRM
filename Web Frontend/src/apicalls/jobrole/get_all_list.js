@@ -48,7 +48,7 @@ export const getJobRoleAll = async (formData) => {
       // console.log(JobRoleDetails)
     })
 
-  return JobHeaders;// JobRoleDetails;
+  return JobRoleDetails;// JobRoleDetails;
 };
 
 export const requestdata_JobRoles_DropDowns_All = async (formData) => {

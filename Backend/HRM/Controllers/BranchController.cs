@@ -75,14 +75,14 @@ namespace HRM.Controllers
         public List<ReturnBranchModelHead> get_Branch_all(BranchSearchModel model)//ok
         {
             List<ReturnBranchModelHead> objBranchHeadList = new List<ReturnBranchModelHead>();
-            //ReturnBranchModelHead obj = new ReturnBranchModelHead() { resp = false, msg = "sfsf" };
-            //obj.Branch = new List<ReturnBranchModel>();
-            //obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "CAS", MDB_Branch = "Casual", MDB_Status = true });
-            //obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "ANU", MDB_Branch = "Annual", MDB_Status = true });
-            //obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MED", MDB_Branch = "Medical", MDB_Status = true });
-            //obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MAT", MDB_Branch = "Matrinaty", MDB_Status = true });
-            //objBranchHeadList.Add(obj);
-            //return objBranchHeadList;
+            ReturnBranchModelHead obj = new ReturnBranchModelHead() { resp = false, msg = "sfsf" };
+            obj.Branch = new List<ReturnBranchModel>();
+            obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "CAS", MDB_Branch = "Casual", MDB_Status = true });
+            obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "ANU", MDB_Branch = "Annual", MDB_Status = true });
+            obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MED", MDB_Branch = "Medical", MDB_Status = true });
+            obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MAT", MDB_Branch = "Matrinaty", MDB_Status = true });
+            objBranchHeadList.Add(obj);
+            return objBranchHeadList;
 
             try
             {

@@ -2,8 +2,8 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 export class BranchDetail {
   constructor(id, branch, status) {
-    this.branch = branch;
     this.id = id;
+    this.branch = branch;
     if (status == true) { this.status = "Active"; }
     else { this.status = "Inactive"; }
   }

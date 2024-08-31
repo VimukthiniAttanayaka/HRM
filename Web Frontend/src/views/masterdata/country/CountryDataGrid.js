@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import CountryPopup from './CountryPopup.js';
 import { getCountryAll } from '../../../apicalls/country/get_all_list.js';
 import { getCountrySingle } from '../../../apicalls/country/get_country_single.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
+
+import { getBadge } from '../../shared/gridviewconstants.js';
+import { columns, headers } from '../../controllers/country_controllers.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
+import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
 const CountryDataGrid = () => {
   let templatetype = 'translation_country'
@@ -13,67 +18,11 @@ const CountryDataGrid = () => {
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
 
-  const columns = [
-    {
-      key: 'id',
-      // label: '',
-      label: getLabelText('ID', templatetype),
-      // filter: false,
-      // sorter: false,
-      _style: { width: '20%' },
-    },
-    {
-      key: 'Country',
-      label: getLabelText('Country', templatetype),
-      _style: { width: '20%' },
-    },
-
-    // {
-    //   key: 'alotment',
-    //   _style: { width: '20%' }
-    // },
-    {
-      key: 'status',
-      label: getLabelText('Status', templatetype),
-      _style: { width: '20%' }
-    },
-
-    {
-      key: 'show_details',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-    {
-      key: 'view',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-    {
-      key: 'delete',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-  ];
-  const getBadge = (status) => {
-    switch (status) {
-      case 'Active':
-        return 'success'
-      case 'Inactive':
-        return 'secondary'
-      case 'Pending':
-        return 'warning'
-      case 'Banned':
-        return 'danger'
-      default:
-        return 'primary'
-    }
-  }
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [columnFilter, setColumnFilter] = useState([])
+  const [tableFilter, setTableFilter] = useState([])
+ 
 
   const [countryDetails, setCountryDetails] = useState([])
 
@@ -161,15 +110,24 @@ const CountryDataGrid = () => {
     <CCardBody>
       <CRow>
         <CCol>
-          <CButton
-            color="primary"
-            className="mb-2"
-            href={csvCode}
-            download="coreui-table-data.csv"
-            target="_blank"
-          >
-            {getLabelText('Download current items (.csv)', templatetype_base)}
-          </CButton>
+        <CDropdown>
+            <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
+            <CDropdownMenu>
+              <CDropdownItem><CButton
+                color="primary"
+                className="mb-2"
+                href={csvCode}
+                download="country.csv"
+                target="_blank"
+              >
+                Download items as .csv
+              </CButton></CDropdownItem>
+              <CDropdownItem><ExcelExport data={data} fileName="country" headers={headers} /></CDropdownItem>
+              <CDropdownItem>
+                <CSmartGridPDF data={data} headers={headers} filename="country" title="country" />
+              </CDropdownItem>
+            </CDropdownMenu>
+          </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
           <CountryPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} countryDetails={countryDetails} />
@@ -186,7 +144,12 @@ const CountryDataGrid = () => {
         itemsPerPageSelect
         itemsPerPage={5}
         onFilteredItemsChange={setCurrentItems}
-        pagination
+        pagination={<div> <Pagination
+          totalItems={data.RC}
+          currentPage={currentPage}
+          setCurrentPage={handlePageChange}
+          itemsPerPage={itemsPerPage}
+        /></div>}
         // onFilteredItemsChange={(items) => {
         //   console.log(items)
         // }}

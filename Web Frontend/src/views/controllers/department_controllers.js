@@ -50,3 +50,9 @@ export  const columns = [
     sorter: false,
   },
 ];
+
+export const headers = [["id", "Department", "status"]];
+
+export const GetDataList = (data) => {
+  return data.map(elt => [elt.id, elt.Department, elt.status]);
+}

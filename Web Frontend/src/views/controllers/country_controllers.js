@@ -1,21 +1,21 @@
 
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
-let templatetype = 'translation_jobrole'
+let templatetype = 'translation_department'
 let templatetype_base = 'translation'
 
-export const columns = [
+export  const columns = [
   {
     key: 'id',
-    label: getLabelText('ID', templatetype),
     // label: '',
+    label: getLabelText('ID', templatetype),
     // filter: false,
     // sorter: false,
     _style: { width: '20%' },
   },
   {
-    key: 'JobRole',
-    label: getLabelText('JobRole', templatetype),
+    key: 'Country',
+    label: getLabelText('Country', templatetype),
     _style: { width: '20%' },
   },
 
@@ -28,6 +28,7 @@ export const columns = [
     label: getLabelText('Status', templatetype),
     _style: { width: '20%' }
   },
+
   {
     key: 'show_details',
     label: '',
@@ -51,8 +52,8 @@ export const columns = [
   },
 ];
 
-export const headers = [["id", "JobRole", "status"]];
+export const headers = [["id", "country", "status"]];
 
 export const GetDataList = (data) => {
-  return data.map(elt => [elt.id, elt.JobRole, elt.status]);
+  return data.map(elt => [elt.id, elt.country, elt.status]);
 }
