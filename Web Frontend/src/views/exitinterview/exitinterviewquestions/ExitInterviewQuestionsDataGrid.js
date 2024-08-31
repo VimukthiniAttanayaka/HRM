@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import ExitInterviewQuestionsPopup from './ExitInterviewQuestionsPopup.js';
@@ -7,8 +7,13 @@ import { getExitInterviewQuestionsSingle } from '../../../apicalls/exitinterview
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
-import { columns } from '../../../controllers/exitinterviewquestions_controllers.js';
+import { columns, headers, GetDataList } from '../../../controllers/exitinterviewquestions_controllers.js';
 import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
+import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
+// import { jsPDF } from 'jspdf';
+// import html2canvas from 'html2canvas';
+// import { data } from 'src/AnkareReport/data/data.js';
+// import "jspdf-autotable";
 
 const ExitInterviewQuestionsDataGrid = () => {
   let templatetype = 'translation_exitinterviewquestions'
@@ -20,6 +25,8 @@ const ExitInterviewQuestionsDataGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [columnFilter, setColumnFilter] = useState([])
   const [tableFilter, setTableFilter] = useState([])
+  // const tableRef = useRef(null);
+
   useEffect(() => {
     // console.log(columnFilter);
     requestdata();
@@ -40,7 +47,7 @@ const ExitInterviewQuestionsDataGrid = () => {
   };
 
 
- 
+
   const [exitinterviewquestionsDetails, setexitinterviewquestionsDetails] = useState([])
 
   async function loadDetails(item, action) {
@@ -128,39 +135,31 @@ const ExitInterviewQuestionsDataGrid = () => {
     <CCardBody>
       <CRow>
         <CCol>
-        <CDropdown>
+          <CDropdown>
             <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
             <CDropdownMenu>
               <CDropdownItem><CButton
                 color="primary"
                 className="mb-2"
                 href={csvCode}
-                download="employees.csv"
+                download="exitinterviewquestions.csv"
                 target="_blank"
-              // onClick={downloadclick}
               >
                 Download items as .csv
               </CButton></CDropdownItem>
               <CDropdownItem><ExcelExport data={data} fileName="exitinterviewquestions" /></CDropdownItem>
-              <CDropdownItem><CButton color="primary"
-                className="mb-2" onClick={() => toPDF()}>Download items as PDF </CButton></CDropdownItem>
+              <CDropdownItem>
+                <CSmartGridPDF data={data} headers={headers} filename="exitinterviewquestions" title="exit interview questions" />
+              </CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
-              {/* <CButton
-            color="primary"
-            className="mb-2"
-            href={csvCode}
-            download="coreui-table-data.csv"
-            target="_blank"
-          >
-            {getLabelText('Download current items (.csv)', templatetype_base)}
-          </CButton> */}
         </CCol>
         <CCol className='d-flex justify-content-end'>
           <ExitInterviewQuestionsPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} exitinterviewquestionsDetails={exitinterviewquestionsDetails} />
         </CCol>
       </CRow>
       <CSmartTable
+        // ref={tableRef}
         cleaner
         clickableRows
         columns={columns}

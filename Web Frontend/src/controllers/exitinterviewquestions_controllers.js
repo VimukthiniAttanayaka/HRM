@@ -1,7 +1,8 @@
 
 import { getLabelText } from 'src/MultipleLanguageSheets'
+import React, { useState, useEffect, useRef } from 'react'
 
-let templatetype = 'translation_department'
+let templatetype = 'translation_exitinterviewquestions'
 let templatetype_base = 'translation'
 
 export const columns = [
@@ -51,3 +52,9 @@ export const columns = [
     sorter: false,
   },
 ];
+
+export const headers = [["id", "Description", "EntryType", "status"]];
+
+export const GetDataList = (data) => {
+  return data.map(elt => [elt.id, elt.Description, elt.EntryType, elt.status]);
+}
