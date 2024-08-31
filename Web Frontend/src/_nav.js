@@ -246,6 +246,13 @@ const _nav = [
       to: '/exitinterview/exitinterviewanswers',
       // disabled: !UMUserAccessGroup,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    },{
+      component: CNavItem,
+      // name: <Translation>{(t) => t('User Access Group')}</Translation>,
+      name: getLabelText('Termination', templatetype),
+      to: '/exitinterview/termination',
+      // disabled: !UMUserAccessGroup,
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }]
   },
   {

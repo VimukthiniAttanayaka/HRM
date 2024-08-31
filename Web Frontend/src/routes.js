@@ -37,6 +37,7 @@ const AuditLogReport= React.lazy(() => import('./views/logreports/auditlog/audit
 
 const ExitInterviewAnswers= React.lazy(() => import('./views/exitinterview/exitinterviewanswers/ExitInterviewAnswers'))
 const ExitInterviewQuestions= React.lazy(() => import('./views/exitinterview/exitinterviewquestions/ExitInterviewQuestions'))
+const Termination= React.lazy(() => import('./views/exitinterview/termination/Termination'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -264,6 +265,10 @@ const routes = [
     path: '/exitinterview/exitinterviewquestions',
     name: <Translation>{(t) => t('ExitInterviewQuestions')}</Translation>,
     element: ExitInterviewQuestions,
+  },{
+    path: '/exitinterview/termination',
+    name: <Translation>{(t) => t('Termination')}</Translation>,
+    element: Termination,
   },
   {
     path: '/base',
