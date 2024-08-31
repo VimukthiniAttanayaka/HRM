@@ -7,13 +7,9 @@ import { getExitInterviewQuestionsSingle } from '../../../apicalls/exitinterview
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
-import { columns, headers, GetDataList } from '../../../controllers/exitinterviewquestions_controllers.js';
+import { columns, headers } from '../../controllers/exitinterviewquestions_controllers.js';
 import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
 import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
-// import { jsPDF } from 'jspdf';
-// import html2canvas from 'html2canvas';
-// import { data } from 'src/AnkareReport/data/data.js';
-// import "jspdf-autotable";
 
 const ExitInterviewQuestionsDataGrid = () => {
   let templatetype = 'translation_exitinterviewquestions'
@@ -25,7 +21,6 @@ const ExitInterviewQuestionsDataGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [columnFilter, setColumnFilter] = useState([])
   const [tableFilter, setTableFilter] = useState([])
-  // const tableRef = useRef(null);
 
   useEffect(() => {
     // console.log(columnFilter);
@@ -147,7 +142,7 @@ const ExitInterviewQuestionsDataGrid = () => {
               >
                 Download items as .csv
               </CButton></CDropdownItem>
-              <CDropdownItem><ExcelExport data={data} fileName="exitinterviewquestions" /></CDropdownItem>
+              <CDropdownItem><ExcelExport data={data} fileName="exitinterviewquestions" headers={headers} /></CDropdownItem>
               <CDropdownItem>
                 <CSmartGridPDF data={data} headers={headers} filename="exitinterviewquestions" title="exit interview questions" />
               </CDropdownItem>

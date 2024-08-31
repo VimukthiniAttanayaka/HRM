@@ -7,7 +7,7 @@ import { getJobRoleSingle } from '../../../apicalls/jobrole/get_jobrole_single.j
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
-import { columns } from '../../../controllers/jobrole_controllers.js';
+import { columns } from '../../controllers/jobrole_controllers.js';
 
 
 const JobRoleDataGrid = () => {

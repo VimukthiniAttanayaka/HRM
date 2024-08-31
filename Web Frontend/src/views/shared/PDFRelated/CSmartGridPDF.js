@@ -4,22 +4,17 @@ import { Margin, usePDF, Options } from "react-to-pdf";
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
+import { setDataByPage } from '../CallGridMappings.js'
 
 import "jspdf-autotable";
-
-
-import { columns, headers, GetDataList as ExitInterviewQuestions_GetDataList } from '../../../controllers/exitinterviewquestions_controllers.js';
 
 const CSmartGridPDF = ({ filename, data, title, headers }) => {
 
   const [data1, setData] = useState([])
-  const setDataByPage = (filename, data) => {
-    if (filename == "exitinterviewquestions") setData(ExitInterviewQuestions_GetDataList(data))
-  }
 
   const handleExportToPDF = () => {
 
-    setDataByPage(filename, data);
+    setData(setDataByPage(filename, data));
 
     const unit = "pt";
     const size = "A4"; // Use A1, A2, A3 or A4

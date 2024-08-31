@@ -7,7 +7,7 @@ import { getTerminationSingle } from '../../../apicalls/termination/get_terminat
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
-import { columns } from '../../../controllers/termination_controllers.js';
+import { columns } from '../../controllers/termination_controllers.js';
 
 const TerminationDataGrid = () => {
   let templatetype = 'translation_Termination'

@@ -7,7 +7,7 @@ import { getDepartmentSingle } from '../../../apicalls/department/get_department
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
-import { columns } from '../../../controllers/department_controllers.js';
+import { columns } from '../../controllers/department_controllers.js';
 
 const DepartmentDataGrid = () => {
   let templatetype = 'translation_department'

@@ -3,7 +3,7 @@ import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '
 import { saveAs } from 'file-saver';
 const xlsx = require('xlsx');
 
-const ExcelExport = ({ data, columns, fileName }) => {
+const ExcelExport = ({ data, headers, fileName }) => {
 
   const exportToExcel = () => {
 
@@ -13,10 +13,10 @@ const ExcelExport = ({ data, columns, fileName }) => {
     const workbook = xlsx.utils.book_new();
     let Heading = [];//[['id', 'name', 'text']];
     //Had to create a new workbook and then add the header
-    xlsx.utils.sheet_add_aoa(worksheet, Heading);
+    // xlsx.utils.sheet_add_aoa(worksheet, headers);
 
     //Starting in the second row to avoid overriding and skipping headers
-    xlsx.utils.sheet_add_json(worksheet, data, { origin: 'A2', skipHeader: true });
+    xlsx.utils.sheet_add_json(worksheet, data, { origin: 'A1', skipHeader: false });
 
     xlsx.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
     const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });

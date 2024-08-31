@@ -3,7 +3,7 @@ import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CInputGroupText
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import LeaveSchedulePopup from './LeaveSchedulePopup.js';
-import { columns } from '../../../controllers/leaveschedule_controller.js'
+import { columns } from '../../controllers/leaveschedule_controller.js'
 
 const LeaveScheduleDataGrid = () => {
 

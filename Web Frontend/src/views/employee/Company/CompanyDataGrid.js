@@ -6,7 +6,7 @@ import { getCompanyAll } from '../../../apicalls/company/get_all_list.js';
 import { getCompanySingle } from '../../../apicalls/company/get_company_single.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import { getBadge } from '../../shared/gridviewconstants.js';
-import { columns } from '../../../controllers/company_controller.js';
+import { columns } from '../../controllers/company_controller.js';
 
 const CompanyDataGrid = () => {
   let templatetype = 'translation_company'

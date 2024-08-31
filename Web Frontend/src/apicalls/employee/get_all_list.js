@@ -25,15 +25,15 @@ export const getEmployeeAll = async (formData) => {
           EME_MobileNumber,
           EME_Status) {
 
-          this.EME_EmployeeID = EME_EmployeeID;
-          this.EME_FirstName = EME_FirstName;
-          this.EME_LastName = EME_LastName;
-          this.EME_Gender = EME_Gender;
-          this.EME_PrefferedName = EME_PrefferedName;
-          this.EME_JobTitle_Code = EME_JobTitle_Code;
-          this.EME_ReportingManager = EME_ReportingManager;
-          this.EME_EmployeeType = EME_EmployeeType;
-          this.EME_MobileNumber = EME_MobileNumber;
+          this.id = EME_EmployeeID;
+          this.FirstName = EME_FirstName;
+          this.LastName = EME_LastName;
+          this.EmployeeType = EME_EmployeeType;
+          // this.EME_Gender = EME_Gender;
+          this.PrefferedName = EME_PrefferedName;
+          // this.EME_JobTitle_Code = EME_JobTitle_Code;
+          this.ReportingManager = EME_ReportingManager;
+          this.MobileNumber = EME_MobileNumber;
           if (EME_Status == true) { this.status = "Active"; }
           else { this.status = "Inactive"; }
         }
