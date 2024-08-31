@@ -129,9 +129,9 @@ const ExitInterviewQuestionsPopup = ({ visible, onClose, onOpen, ExitInterviewQu
   }
 
   useEffect(() => {
-    setExitInterviewQuestionsId(ExitInterviewQuestionsDetails.MDD_ExitInterviewQuestionsID)
-    setExitInterviewQuestions(ExitInterviewQuestionsDetails.MDD_ExitInterviewQuestions)
-    setIsActive(ExitInterviewQuestionsDetails.MDD_Status)
+    // setExitInterviewQuestionsId(ExitInterviewQuestionsDetails.MDD_ExitInterviewQuestionsID)
+    // setExitInterviewQuestions(ExitInterviewQuestionsDetails.MDD_ExitInterviewQuestions)
+    // setIsActive(ExitInterviewQuestionsDetails.MDD_Status)
   }, [ExitInterviewQuestionsDetails]);
   // console.log(ExitInterviewQuestionsDetails)
   return (
@@ -161,7 +161,7 @@ const ExitInterviewQuestionsPopup = ({ visible, onClose, onOpen, ExitInterviewQu
                     <CInputGroupText>
                       <h6>{getLabelText('ExitInterviewQuestionsID', templatetype)}</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="ExitInterviewQuestionsID" name="ExitInterviewQuestionsID" value={ExitInterviewQuestionsDetails.MDD_ExitInterviewQuestionsID} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
+                  </CCol>   <CFormInput placeholder="ExitInterviewQuestionsID" name="ExitInterviewQuestionsID" value={ExitInterviewQuestionsId} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>

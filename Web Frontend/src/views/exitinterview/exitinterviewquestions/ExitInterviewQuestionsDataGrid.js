@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import ExitInterviewQuestionsPopup from './ExitInterviewQuestionsPopup.js';
-import { getDepartmentAll } from '../../../apicalls/department/get_all_list.js';
-import { getDepartmentSingle } from '../../../apicalls/department/get_department_single.js';
+import { getExitInterviewQuestionsAll } from '../../../apicalls/exitinterviewquestions/get_all_list.js';
+import { getExitInterviewQuestionsSingle } from '../../../apicalls/exitinterviewquestions/get_exitinterviewquestions_single.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
-import { columns } from '../../../controllers/department_controllers.js';
+import { columns } from '../../../controllers/exitinterviewquestions_controllers.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
 
 const ExitInterviewQuestionsDataGrid = () => {
-  let templatetype = 'translation_department'
+  let templatetype = 'translation_exitinterviewquestions'
   let templatetype_base = 'translation'
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
@@ -40,7 +41,7 @@ const ExitInterviewQuestionsDataGrid = () => {
 
 
  
-  const [DepartmentDetails, setDepartmentDetails] = useState([])
+  const [exitinterviewquestionsDetails, setexitinterviewquestionsDetails] = useState([])
 
   async function loadDetails(item, action) {
 
@@ -51,10 +52,10 @@ const ExitInterviewQuestionsDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      MDD_DepartmentID: item
+      MDD_exitinterviewquestionsID: item
     }
-    const DepartmentDetails = await getDepartmentSingle(formData)
-    setDepartmentDetails(DepartmentDetails);
+    const exitinterviewquestionsDetails = await getExitInterviewQuestionsSingle(formData)
+    setexitinterviewquestionsDetails(exitinterviewquestionsDetails);
     handleOpenPopup()
   }
   const toggleEdit = (index) => {
@@ -96,8 +97,8 @@ const ExitInterviewQuestionsDataGrid = () => {
       USR_EmployeeID: 'sedcx'
     }
 
-    const DepartmentDetails = await getDepartmentAll(formData)
-    setData(DepartmentDetails);
+    const exitinterviewquestionsDetails = await getExitInterviewQuestionsAll(formData)
+    setData(exitinterviewquestionsDetails);
 
   }
   const [visible, setVisible] = useState(false);
@@ -119,7 +120,7 @@ const ExitInterviewQuestionsDataGrid = () => {
 
   const handleClosePopup = () => {
     setVisible(false);
-    setDepartmentDetails([]);
+    setexitinterviewquestionsDetails([]);
     setPopupStatus('create')
   };
 
@@ -127,7 +128,25 @@ const ExitInterviewQuestionsDataGrid = () => {
     <CCardBody>
       <CRow>
         <CCol>
-          <CButton
+        <CDropdown>
+            <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
+            <CDropdownMenu>
+              <CDropdownItem><CButton
+                color="primary"
+                className="mb-2"
+                href={csvCode}
+                download="employees.csv"
+                target="_blank"
+              // onClick={downloadclick}
+              >
+                Download items as .csv
+              </CButton></CDropdownItem>
+              <CDropdownItem><ExcelExport data={data} fileName="exitinterviewquestions" /></CDropdownItem>
+              <CDropdownItem><CButton color="primary"
+                className="mb-2" onClick={() => toPDF()}>Download items as PDF </CButton></CDropdownItem>
+            </CDropdownMenu>
+          </CDropdown>
+              {/* <CButton
             color="primary"
             className="mb-2"
             href={csvCode}
@@ -135,10 +154,10 @@ const ExitInterviewQuestionsDataGrid = () => {
             target="_blank"
           >
             {getLabelText('Download current items (.csv)', templatetype_base)}
-          </CButton>
+          </CButton> */}
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <ExitInterviewQuestionsPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} DepartmentDetails={DepartmentDetails} />
+          <ExitInterviewQuestionsPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} exitinterviewquestionsDetails={exitinterviewquestionsDetails} />
         </CCol>
       </CRow>
       <CSmartTable
