@@ -26,7 +26,7 @@ const EmployeeDataGrid = () => {
   const [columnFilter, setColumnFilter] = useState([])
   const [tableFilter, setTableFilter] = useState([])
 
-  const { toPDF, targetRef } = usePDF({ filename: 'page.pdf' });
+  const { toPDF, targetRef } = usePDF({ filename: 'employee.pdf' });
 
   useEffect(() => {
     // console.log(columnFilter);
@@ -145,7 +145,7 @@ const EmployeeDataGrid = () => {
                 color="primary"
                 className="mb-2"
                 href={csvCode}
-                download="coreui-table-data.csv"
+                download="employees.csv"
                 target="_blank"
               // onClick={downloadclick}
               >

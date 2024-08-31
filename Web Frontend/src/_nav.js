@@ -231,7 +231,8 @@ const _nav = [
   // },
   {
     component: CNavGroup,
-    name: <Translation>{(t) => t('Exit Interview')}</Translation>,
+    name: getLabelText('Exit Interview', templatetype),
+    // name: <Translation>{(t) => t('Exit Interview')}</Translation>,
     items: [{
       component: CNavItem,
       // name: <Translation>{(t) => t('User Access Group')}</Translation>,

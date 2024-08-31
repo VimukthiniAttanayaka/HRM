@@ -80,6 +80,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Models\ExitInterviewQuestionsModel.cs" />
     <Compile Include="Models\EmployeeJobDescriptionModel.cs" />
     <Compile Include="Models\CurrencyModel.cs" />
     <Compile Include="Models\CountryModel.cs" />

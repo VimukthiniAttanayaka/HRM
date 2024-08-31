@@ -259,11 +259,11 @@ const routes = [
     element: Profile,
   }, {
     path: '/exitinterview/exitinterviewanswers',
-    name: <Translation>{(t) => t('ExitInterviewAnswers')}</Translation>,
+    name: <Translation>{(t) => t('Exit Interview Answers')}</Translation>,
     element: ExitInterviewAnswers,
   }, {
     path: '/exitinterview/exitinterviewquestions',
-    name: <Translation>{(t) => t('ExitInterviewQuestions')}</Translation>,
+    name: <Translation>{(t) => t('Exit Interview Questions')}</Translation>,
     element: ExitInterviewQuestions,
   },{
     path: '/exitinterview/termination',

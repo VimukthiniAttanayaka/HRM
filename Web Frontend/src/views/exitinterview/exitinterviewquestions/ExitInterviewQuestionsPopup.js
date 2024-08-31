@@ -3,19 +3,19 @@ import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTit
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
-const ExitInterviewQuestionsPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupStatus }) => {
+const ExitInterviewQuestionsPopup = ({ visible, onClose, onOpen, ExitInterviewQuestionsDetails, popupStatus }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
-  let templatetype = 'translation_department'
+  let templatetype = 'translation_exitinterviewquestions'
 
-  const [DepartmentId, setDepartmentId] = useState('')
-  const [Department, setDepartment] = useState('')
+  const [ExitInterviewQuestionsId, setExitInterviewQuestionsId] = useState('')
+  const [ExitInterviewQuestions, setExitInterviewQuestions] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeDepartment = (event) => {
-    setDepartment(event.target.value)
+  const handleChangeExitInterviewQuestions = (event) => {
+    setExitInterviewQuestions(event.target.value)
   }
   const handleChangeId = (event) => {
-    setDepartmentId(event.target.value)
+    setExitInterviewQuestionsId(event.target.value)
   }
   const handleChangeStatus = (event) => {
     setIsActive(event.target.checked)
@@ -25,13 +25,13 @@ const ExitInterviewQuestionsPopup = ({ visible, onClose, onOpen, DepartmentDetai
     const formData = {
       UD_UserID: "string",
       AUD_notificationToken: "string",
-      MDD_DepartmentID: DepartmentId,
-      MDD_Department: Department,
+      MDD_ExitInterviewQuestionsID: ExitInterviewQuestionsId,
+      MDD_ExitInterviewQuestions: ExitInterviewQuestions,
       MDD_LocationID: "string",
       MDD_Status: isActive
     }
     // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'Department/add_new_Department', {
+    const response = await fetch(apiUrl + 'ExitInterviewQuestions/add_new_ExitInterviewQuestions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -41,10 +41,10 @@ const ExitInterviewQuestionsPopup = ({ visible, onClose, onOpen, DepartmentDetai
       onClose()
       console.log(response);
       // Handle successful submission (e.g., display a success message)
-      console.log('Department data submitted successfully!')
+      console.log('ExitInterviewQuestions data submitted successfully!')
     } else {
       // Handle submission errors
-      console.error('Error submitting Department data:', response.statusText)
+      console.error('Error submitting ExitInterviewQuestions data:', response.statusText)
     }
   }
   const handleEdit = async (event) => {
@@ -52,13 +52,13 @@ const ExitInterviewQuestionsPopup = ({ visible, onClose, onOpen, DepartmentDetai
     const formData = {
       UD_UserID: "string",
       AUD_notificationToken: "string",
-      MDD_DepartmentID: DepartmentId,
-      MDD_Department: Department,
+      MDD_ExitInterviewQuestionsID: ExitInterviewQuestionsId,
+      MDD_ExitInterviewQuestions: ExitInterviewQuestions,
       MDD_LocationID: "string",
       MDD_Status: isActive
     }
     // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'Department/modify_department', {
+    const response = await fetch(apiUrl + 'ExitInterviewQuestions/modify_ExitInterviewQuestions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -68,22 +68,22 @@ const ExitInterviewQuestionsPopup = ({ visible, onClose, onOpen, DepartmentDetai
       onClose()
       console.log(response);
       // Handle successful submission (e.g., display a success message)
-      console.log('Department data submitted successfully!')
+      console.log('ExitInterviewQuestions data submitted successfully!')
     } else {
       // Handle submission errors
-      console.error('Error submitting Department data:', response.statusText)
+      console.error('Error submitting ExitInterviewQuestions data:', response.statusText)
     }
   }
   const handleDelete = async (event) => {
-    console.log('Delete Department')
+    console.log('Delete ExitInterviewQuestions')
     // Prepare form data
     const formData = {
       UD_UserID: "string",
       AUD_notificationToken: "string",
-      MDD_DepartmentID: DepartmentId
+      MDD_ExitInterviewQuestionsID: ExitInterviewQuestionsId
     }
     // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'Department/inactivate_department', {
+    const response = await fetch(apiUrl + 'ExitInterviewQuestions/inactivate_ExitInterviewQuestions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -93,10 +93,10 @@ const ExitInterviewQuestionsPopup = ({ visible, onClose, onOpen, DepartmentDetai
       onClose()
       console.log(response);
       // Handle successful submission (e.g., display a success message)
-      console.log('Department data submitted successfully!')
+      console.log('ExitInterviewQuestions data submitted successfully!')
     } else {
       // Handle submission errors
-      console.error('Error submitting Department data:', response.statusText)
+      console.error('Error submitting ExitInterviewQuestions data:', response.statusText)
     }
   }
 
@@ -118,26 +118,26 @@ const ExitInterviewQuestionsPopup = ({ visible, onClose, onOpen, DepartmentDetai
   const popupStatusSetup = (event) => {
 
     if (popupStatus == 'edit') {
-      return getLabelText('Edit Department', templatetype)
+      return getLabelText('Edit ExitInterviewQuestions', templatetype)
     } else if (popupStatus == 'view') {
-      return getLabelText('View Department', templatetype)
+      return getLabelText('View ExitInterviewQuestions', templatetype)
     } else if (popupStatus == 'delete') {
-      return getLabelText('Delete Department', templatetype)
+      return getLabelText('Delete ExitInterviewQuestions', templatetype)
     } else {
-      return getLabelText('Create New Department', templatetype)
+      return getLabelText('Create New ExitInterviewQuestions', templatetype)
     }
   }
 
   useEffect(() => {
-    setDepartmentId(DepartmentDetails.MDD_DepartmentID)
-    setDepartment(DepartmentDetails.MDD_Department)
-    setIsActive(DepartmentDetails.MDD_Status)
-  }, [DepartmentDetails]);
-  // console.log(DepartmentDetails)
+    setExitInterviewQuestionsId(ExitInterviewQuestionsDetails.MDD_ExitInterviewQuestionsID)
+    setExitInterviewQuestions(ExitInterviewQuestionsDetails.MDD_ExitInterviewQuestions)
+    setIsActive(ExitInterviewQuestionsDetails.MDD_Status)
+  }, [ExitInterviewQuestionsDetails]);
+  // console.log(ExitInterviewQuestionsDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>  {getLabelText('New Department', templatetype)}
-        {/* New Department */}
+      <CButton color="primary" onClick={onOpen}>  {getLabelText('New Exit Interview Questions', templatetype)}
+        {/* New ExitInterviewQuestions */}
       </CButton>
       <CModal size='lg'
         scrollable
@@ -159,18 +159,18 @@ const ExitInterviewQuestionsPopup = ({ visible, onClose, onOpen, DepartmentDetai
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>{getLabelText('DepartmentID', templatetype)}</h6>
+                      <h6>{getLabelText('ExitInterviewQuestionsID', templatetype)}</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="DepartmentID" name="DepartmentID" value={DepartmentDetails.MDD_DepartmentID} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
+                  </CCol>   <CFormInput placeholder="ExitInterviewQuestionsID" name="ExitInterviewQuestionsID" value={ExitInterviewQuestionsDetails.MDD_ExitInterviewQuestionsID} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>{getLabelText('Department', templatetype)}</h6>
+                      <h6>{getLabelText('ExitInterviewQuestions', templatetype)}</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="Department" name="Department" value={Department} onChange={handleChangeDepartment} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+                  </CCol>    <CFormInput placeholder="ExitInterviewQuestions" name="ExitInterviewQuestions" value={ExitInterviewQuestions} onChange={handleChangeExitInterviewQuestions} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
 
                   // readOnly={isEditable,isAddNew,IsView}// value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />

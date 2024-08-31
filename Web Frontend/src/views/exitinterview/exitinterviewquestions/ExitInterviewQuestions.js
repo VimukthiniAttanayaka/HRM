@@ -4,13 +4,13 @@ import ExitInterviewQuestionsDataGrid from './ExitInterviewQuestionsDataGrid'
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const ExitInterviewQuestions = () => {
-  let templatetype = 'translation_department'
+  let templatetype = 'translation_exitinterviewquestions'
   return (
     <>
       <CCard className="mb-4">
         <CCardHeader>
-          {/* <strong>Department List</strong> */}
-          {getLabelText('Department List', templatetype)}
+          {/* <strong>ExitInterviewQuestions List</strong> */}
+          {getLabelText('Exit Interview Questions List', templatetype)}
         </CCardHeader>
         <CCardBody>
           <ExitInterviewQuestionsDataGrid onOpen={() => handleOpenPopup} />

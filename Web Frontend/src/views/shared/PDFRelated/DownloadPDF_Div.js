@@ -5,7 +5,7 @@ import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '
 
 const DownloadPDF_Div = ({ targetRef1, filename }) => {
 
-    const { toPDF, targetRef } = usePDF({ filename: 'page.pdf' });
+    const { toPDF, targetRef } = usePDF({ filename: filename });//'page.pdf'
 
     // useEffect(() => {
     //     requestdata();
