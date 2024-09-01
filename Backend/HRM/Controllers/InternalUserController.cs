@@ -81,10 +81,10 @@ namespace HRM.Controllers
         {
             List<ReturnUserAllModelHead> objCusUserHeadList = new List<ReturnUserAllModelHead>();
             ReturnUserAllModelHead obj = new ReturnUserAllModelHead() { resp = false, msg = "sfsf" };
-            //obj.User = new List<ReturnCusUserAllModel>();
-            //obj.User.Add(new ReturnCusUserAllModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true });
-            //obj.User.Add(new ReturnCusUserAllModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true });
-            //obj.User.Add(new ReturnCusUserAllModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true });
+            obj.User = new List<ReturnUserAllModel>();
+            obj.User.Add(new ReturnUserAllModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true });
+            obj.User.Add(new ReturnUserAllModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true });
+            obj.User.Add(new ReturnUserAllModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true });
             objCusUserHeadList.Add(obj);
             return objCusUserHeadList;
 

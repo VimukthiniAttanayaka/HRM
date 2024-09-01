@@ -13,7 +13,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 export const getUserAccessGroupAll = async (formData) => {
   const UserAccessGroupDetails = [];
 
-  const res = await fetch(apiUrl + 'UserAccessGroup/get_UserAccessGroup_all', {
+  const res = await fetch(apiUrl + 'UserRoleAccessGroup/get_UserRoleAccessGroup_all', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -33,8 +33,8 @@ export const getUserAccessGroupAll = async (formData) => {
         }
       }
 
-      for (let index = 0; index < res1[0].UserAccessGroup.length; index++) {
-        let element = res1[0].UserAccessGroup[index];
+      for (let index = 0; index < res1[0].UserRoleAccessGroup.length; index++) {
+        let element = res1[0].UserRoleAccessGroup[index];
         // console.log(element)
         UserAccessGroupDetails[index] = new UserAccessGroupDetail(element.UUAG_UserAccessGroupID, element.UUAG_MenuAccessID, element.UUAG_Status, element.UUAG_UserName);
       }

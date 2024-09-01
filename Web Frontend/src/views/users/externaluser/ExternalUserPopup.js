@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CFormSelect, CButton, CTabs, CTabList, CTabContent,CTabPanel , CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CTab, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
+import ExternalUserPopup_Details from './ExternalUserPopup_Details.js';
+import ExternalUserPopup_Access from './ExternalUserPopup_Access.js';
 
-const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails }) => {
+const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails, popupStatus  }) => {
+
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -94,13 +97,24 @@ const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails }) =>
 
   }
 
+  const popupStatusSetup = (event) => {
+    if (popupStatus == 'edit') {
+      return getLabelText('Edit Country', templatetype)
+    } else if (popupStatus == 'view') {
+      return getLabelText('View Country', templatetype)
+    } else if (popupStatus == 'delete') {
+      return getLabelText('Delete Country', templatetype)
+    } else {
+      return getLabelText('Create New Country', templatetype)
+    }
+  }
   useEffect(() => {
     requestdata();
   }, []);
 
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New Internal User</CButton>
+      <CButton color="primary" onClick={onOpen}>New External User</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -110,108 +124,21 @@ const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails }) =>
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New Internal User</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">Create New External User</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <CCard className="mx-4">
-            <CCardBody className="p-4">
-              <CForm onSubmit={handleSubmit}>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>UserName</h6>
-                    </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="UserName" name="UserName" value={ExternalUserDetails.UD_UserName ? ExternalUserDetails.UD_UserName : ''} onChange={handleChangeUserName}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
+          <CTabs activeItemKey="general">
+            <CTabList variant="tabs">
+              <CTab itemKey="general">General</CTab>
+              <CTab itemKey="access">Access</CTab>
+            </CTabList>
+            <CTabContent>
 
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>User Role</h6>
-                    </CInputGroupText>
-                  </CCol>
+              <ExternalUserPopup_Details popupStatus={popupStatus} ExternalUserDetails={ExternalUserDetails} />
+              <ExternalUserPopup_Access popupStatus={popupStatus} ExternalUserDetails={ExternalUserDetails} />
 
-                  <CFormSelect value={selectedOptionUserRole} onChange={(e) => setSelectedOptionUserRole(e.target.value)}>
-                    {optionsUserRole.map((option) => (
-                      <option key={option.key} value={option.key}>
-                        {option.value}
-                      </option>
-                    ))}
-                  </CFormSelect>
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>FirstName</h6>
-                    </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="FirstName" name="FirstName" value={ExternalUserDetails.UD_FirstName ? ExternalUserDetails.UD_FirstName : ''} onChange={handleChangeFirstName}
-                  />
-
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>LastName</h6>
-                    </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LastName" name="LastName" value={ExternalUserDetails.UD_LastName ? ExternalUserDetails.UD_LastName : ''} onChange={handleChangeLastName}
-                  />
-
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>EmailAddress</h6>
-                    </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="EmailAddress" name="EmailAddress" value={ExternalUserDetails.UD_EmailAddress ? ExternalUserDetails.UD_EmailAddress : ''} onChange={handleChangeEmailAddress}
-                  />
-
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>MobileNumber</h6>
-                    </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="MobileNumber" name="MobileNumber" value={ExternalUserDetails.UD_MobileNumber ? ExternalUserDetails.UD_MobileNumber : ''} onChange={handleChangeMobileNumber}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>PhoneNumber</h6>
-                    </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="PhoneNumber" name="PhoneNumber" value={ExternalUserDetails.UD_PhoneNumber ? ExternalUserDetails.UD_PhoneNumber : ''} onChange={handleChangePhoneNumber}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>Remarks</h6>
-                    </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="Remarks" name="Remarks" value={ExternalUserDetails.UD_Remarks ? ExternalUserDetails.UD_Remarks : ''} onChange={handleChangeRemarks}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>Status</h6>
-                    </CInputGroupText>
-                  </CCol>
-                  <CFormCheck label="Status" defaultChecked />
-                </CInputGroup>
-                <div className="d-grid">
-                  <CButton color="success" type='submit'>Submit</CButton>
-                </div>
-              </CForm>
-            </CCardBody>
-          </CCard>
+            </CTabContent>
+          </CTabs>
         </CModalBody>
       </CModal>
     </>

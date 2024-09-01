@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CFormSelect, CButton, CTabs,CTab, CTabList, CTabContent, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CButton, CFormSelect, CModal, CModalBody, CTabPanel, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
 import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
-import InternalUserPopup_Details from './InternalUserPopup_Details.js';
-import InternalUserPopup_Access from './InternalUserPopup_Access.js';
 // import { CSelect } from '@coreui/react';
 // import Select from 'react-select';
 // CSelect,
-const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popupStatus }) => {
+const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetails, popupStatus }) => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -224,33 +222,144 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popu
   // console.log(InternalUserDetails)
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New Internal User</CButton>
-      <CModal size='lg'
-        scrollable
-        alignment="center"
-        visible={visible}
-        onClose={onClose}
-        aria-labelledby="TooltipsAndPopoverExample"
-        backdrop="static"
-      >
-        <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New Internal User</CModalTitle>
-        </CModalHeader>
-        <CModalBody>
-          <CTabs activeItemKey="general">
-            <CTabList variant="tabs">
-              <CTab itemKey="general">General</CTab>
-              <CTab itemKey="access">Access</CTab>
-            </CTabList>
-            <CTabContent>
-              <InternalUserPopup_Details popupStatus={popupStatus} InternalUserDetails={InternalUserDetails} />
-              <InternalUserPopup_Access popupStatus={popupStatus} InternalUserDetails={InternalUserDetails} />
+      <CTabPanel className="p-3" itemKey="general">
+        <CForm onSubmit={handleSubmit}>
+          {/* <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>EmployeeID</h6>
+                    </CInputGroupText>
+                  </CCol>
 
-            </CTabContent>
-          </CTabs>
-        </CModalBody>
-      </CModal>
+                  <CFormInput placeholder="EmployeeID" name="EmployeeID" value={InternalUserDetails.UD_EmployeeID ? InternalUserDetails.UD_EmployeeID:''} onChange={handleChangeEmployeeID}
+
+                  />
+
+                </CInputGroup> */}
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>UserName</h6>
+              </CInputGroupText>
+            </CCol>  <CFormInput placeholder="UserName" name="UserName" value={InternalUserDetails.UD_UserName ? InternalUserDetails.UD_UserName : ''} onChange={handleChangeUserName}
+            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+            />
+
+          </CInputGroup>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>User Role</h6>
+              </CInputGroupText>
+            </CCol>
+
+            <CFormSelect value={selectedOptionUserRole} onChange={(e) => setSelectedOptionUserRole(e.target.value)}>
+              {optionsUserRole.map((option) => (
+                <option key={option.key} value={option.key}>
+                  {option.value}
+                </option>
+              ))}
+            </CFormSelect>
+          </CInputGroup>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>Employee ID</h6>
+              </CInputGroupText>
+            </CCol>
+
+            <CFormSelect value={selectedOptionEmployeeID} onChange={(e) => setSelectedOptionEmployeeID(e.target.value)}>
+              {optionsEmployeeID.map((option) => (
+                <option key={option.key} value={option.key}>
+                  {option.value}
+                </option>
+              ))}
+            </CFormSelect>
+            {/* <CSelect
+                    label="Dropdown with Filtering"
+                    options={options}
+                    components={{
+                      DropdownIndicator: (props) => (
+                        <Select.components.DropdownIndicator {...props}>
+                          <Select.components.DropdownIndicator {...props} />
+                          <Select.components.ClearIndicator {...props} />
+                        </Select.components.DropdownIndicator>
+                      ),
+                    }}
+                  /> */}
+
+          </CInputGroup>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>FirstName</h6>
+              </CInputGroupText>
+            </CCol>  <CFormInput placeholder="FirstName" name="FirstName" value={InternalUserDetails.UD_FirstName ? InternalUserDetails.UD_FirstName : ''} onChange={handleChangeFirstName}
+            />
+
+          </CInputGroup>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>LastName</h6>
+              </CInputGroupText>
+            </CCol>  <CFormInput placeholder="LastName" name="LastName" value={InternalUserDetails.UD_LastName ? InternalUserDetails.UD_LastName : ''} onChange={handleChangeLastName}
+            />
+
+          </CInputGroup>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>EmailAddress</h6>
+              </CInputGroupText>
+            </CCol>  <CFormInput placeholder="EmailAddress" name="EmailAddress" value={InternalUserDetails.UD_EmailAddress ? InternalUserDetails.UD_EmailAddress : ''} onChange={handleChangeEmailAddress}
+            />
+
+          </CInputGroup>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>MobileNumber</h6>
+              </CInputGroupText>
+            </CCol>  <CFormInput placeholder="MobileNumber" name="MobileNumber" value={InternalUserDetails.UD_MobileNumber ? InternalUserDetails.UD_MobileNumber : ''} onChange={handleChangeMobileNumber}
+            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+            />
+
+          </CInputGroup>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>PhoneNumber</h6>
+              </CInputGroupText>
+            </CCol>  <CFormInput placeholder="PhoneNumber" name="PhoneNumber" value={InternalUserDetails.UD_PhoneNumber ? InternalUserDetails.UD_PhoneNumber : ''} onChange={handleChangePhoneNumber}
+            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+            />
+
+          </CInputGroup>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>Remarks</h6>
+              </CInputGroupText>
+            </CCol>  <CFormInput placeholder="Remarks" name="Remarks" value={InternalUserDetails.UD_Remarks ? InternalUserDetails.UD_Remarks : ''} onChange={handleChangeRemarks}
+            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+            />
+
+          </CInputGroup>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>Status</h6>
+              </CInputGroupText>
+            </CCol>
+            <CFormCheck label="Status" defaultChecked />
+          </CInputGroup>
+          <div className="d-grid">
+            <CButton color="success" type='submit'>Submit</CButton>
+          </div>
+        </CForm>
+      </CTabPanel>
     </>
   )
 }
-export default InternalUserPopup
+export default InternalUserPopup_Details

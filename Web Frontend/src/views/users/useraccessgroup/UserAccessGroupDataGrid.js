@@ -218,7 +218,7 @@ const UserAccessGroupDataGrid = () => {
             target="_blank"
           >
             Download current items (.csv)
-          </CButton>
+          </CButton> 
         </CCol>
         {/* <CCol>
           <CInputGroup className="mb-3">

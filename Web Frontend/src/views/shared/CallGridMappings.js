@@ -42,7 +42,7 @@ export const setDataByPage = (filename, data) => {
         // console.log(filename);
         return ReportingManager_GetDataList(data)
     }if (filename == "company") {
-        console.log(filename);
+        // console.log(filename);
         return Company_GetDataList(data)
     }
 }
