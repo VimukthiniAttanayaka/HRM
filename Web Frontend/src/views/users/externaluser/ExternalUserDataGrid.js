@@ -157,7 +157,12 @@ console.log(item)
         itemsPerPageSelect
         itemsPerPage={5}
         onFilteredItemsChange={setCurrentItems}
-        pagination
+        pagination={<div> <Pagination
+          totalItems={data.RC}
+          currentPage={currentPage}
+          setCurrentPage={handlePageChange}
+          itemsPerPage={itemsPerPage}
+        /></div>}
         // onFilteredItemsChange={(items) => {
         //   console.log(items)
         // }}
@@ -165,11 +170,6 @@ console.log(item)
           console.log(items)
         }}
         scopedColumns={{
-          // avatar: (item) => (
-          //   <td>
-          //     {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-          //   </td>
-          // ),
           status: (item) => (
             <td>
               <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
@@ -184,14 +184,46 @@ console.log(item)
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDetails(item.UserName)
+                    toggleEdit(item.id)
                   }}
                 >
-                  {details.includes(item.id) ? 'Hide' : 'Show'}
+                  Edit
                 </CButton>
               </td>
             )
           },
+          view: (item) => (
+            <td>
+              <CButton
+                color="success"
+                variant="outline"
+                shape="square"
+                size="sm"
+                onClick={() => {
+                  toggleView(item.id)
+                }}
+              >
+                View
+              </CButton>
+            </td>
+          ),
+          delete: (item) => (
+            <td>
+              {item.status == 'Inactive' ? '' :
+                <CButton
+                  color="danger"
+                  variant="outline"
+                  shape="square"
+                  size="sm"
+                  onClick={() => {
+                    toggleDelete(item.id)
+                  }}
+                >
+                  Delete
+                </CButton>
+              }
+            </td>
+          ),
           details: (item) => {
             return (
               <CCollapse visible={details.includes(item.id)}>

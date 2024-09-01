@@ -1,54 +1,29 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CFormSelect, CButton, CModal, CModalBody,CBadge, CRow, CCol, CSmartTable, CTabPanel, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CBadge, CDropdown, CDropdownItem, CDropdownMenu, CDropdownToggle, CRow, CCol, CSmartTable, CTabPanel, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
+import Pagination from '../../shared/Pagination.js'
+import { getBadge } from '../../shared/gridviewconstants.js';
+import { columns_Access, headers } from '../../controllers/externaluser_controllers.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
+import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
+import ExternalUserPopup_AccessPopup from './ExternalUserPopup_AccessPopup.js';
 
-const ExternalUserPopup_Access = ({ visible, onClose, onOpen, ExternalUserDetails, popupStatus }) => {
+const ExternalUserPopup_Access = ({ onClose, onOpen, ExternalUserDetails, popupStatus }) => {
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
-  const columns = [
-    {
-      key: 'UserAccessGroupID',
-      // label: '',
-      // filter: false,
-      // sorter: false,
-    },
-    {
-      key: 'MenuAccessID',
-      _style: { width: '20%' },
-    },
-    {
-      key: 'UserName',
-      _style: { width: '20%' },
-    },
-    {
-      key: 'status',
-      _style: { width: '20%' }
-    },
-    {
-      key: 'show_details',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-  ];
-  const getBadge = (status) => {
-    switch (status) {
-      case 'Active':
-        return 'success'
-      case 'Inactive':
-        return 'secondary'
-      case 'Pending':
-        return 'warning'
-      case 'Banned':
-        return 'danger'
-      default:
-        return 'primary'
-    }
-  }
+
+  const [visible, setVisible] = useState(false);
+
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [columnFilter, setColumnFilter] = useState([])
+  const [tableFilter, setTableFilter] = useState([])
+
+  const [userAccessDetails, setUserAccessDetails] = useState([])
+
   const [currentItems, setCurrentItems] = useState(data)
 
   const csvContent = currentItems.map((item) => Object.values(item).join(',')).join('\n')
@@ -122,6 +97,15 @@ const ExternalUserPopup_Access = ({ visible, onClose, onOpen, ExternalUserDetail
     }
   }
 
+  const handleItemsPerPageChange = (newItemsPerPage) => {
+    console.log(newItemsPerPage);
+    setItemsPerPage(newItemsPerPage);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // Fetch data for the new page
+  };
   const [selectedOptionEmployeeID, setSelectedOptionEmployeeID] = useState('');
 
   // console.log(ExternalUserDetails)
@@ -142,27 +126,49 @@ const ExternalUserPopup_Access = ({ visible, onClose, onOpen, ExternalUserDetail
     requestdata();
   }, []);
 
+  const handleOpenPopup = () => {
+    setVisible(true);
+  };
+
+  const handleClosePopup = () => {
+    setVisible(false);
+    setUserAccessDetails([]);
+    setPopupStatus('create')
+  };
+
   return (
     <>
       <CTabPanel className="p-3" itemKey="access">
         <CCardBody>
           <CRow>
             <CCol md={6}>
-              {/* <CButton
-            color="primary"
-            className="mb-2"
-            href={csvCode}
-            download="coreui-table-data.csv"
-            target="_blank"
-          >
-            Download current items (.csv)
-          </CButton>  */}
+              <CDropdown>
+                <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
+                <CDropdownMenu>
+                  <CDropdownItem><CButton
+                    color="primary"
+                    className="mb-2"
+                    href={csvCode}
+                    download="externaluseraccess.csv"
+                    target="_blank"
+                  >
+                    Download items as .csv
+                  </CButton></CDropdownItem>
+                  <CDropdownItem><ExcelExport data={data} fileName="externaluseraccess" headers={headers} /></CDropdownItem>
+                  <CDropdownItem>
+                    <CSmartGridPDF data={data} headers={headers} filename="externaluseraccess" title="externaluseraccess" />
+                  </CDropdownItem>
+                </CDropdownMenu>
+              </CDropdown>
+            </CCol>
+            <CCol className='d-flex justify-content-end'>
+              <ExternalUserPopup_AccessPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} userAccessDetails={userAccessDetails} />
             </CCol>
           </CRow>
           <CSmartTable
             cleaner
             clickableRows
-            columns={columns}
+            columns={columns_Access}
             columnFilter
             columnSorter
             // footer
@@ -170,7 +176,12 @@ const ExternalUserPopup_Access = ({ visible, onClose, onOpen, ExternalUserDetail
             itemsPerPageSelect
             itemsPerPage={5}
             onFilteredItemsChange={setCurrentItems}
-            pagination
+            pagination={<div> <Pagination
+              totalItems={data.RC}
+              currentPage={currentPage}
+              setCurrentPage={handlePageChange}
+              itemsPerPage={itemsPerPage}
+            /></div>}
             // onFilteredItemsChange={(items) => {
             //   console.log(items)
             // }}

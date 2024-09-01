@@ -155,7 +155,12 @@ const InternalUserDataGrid = () => {
         itemsPerPageSelect
         itemsPerPage={5}
         onFilteredItemsChange={setCurrentItems}
-        pagination
+        pagination={<div> <Pagination
+          totalItems={data.RC}
+          currentPage={currentPage}
+          setCurrentPage={handlePageChange}
+          itemsPerPage={itemsPerPage}
+        /></div>}
         // onFilteredItemsChange={(items) => {
         //   console.log(items)
         // }}
@@ -180,7 +185,7 @@ const InternalUserDataGrid = () => {
                     toggleEdit(item.id)
                   }}
                 >
-                  {getLabelText('Edit', templatetype_base)}
+                  Edit
                 </CButton>
               </td>
             )
@@ -196,7 +201,7 @@ const InternalUserDataGrid = () => {
                   toggleView(item.id)
                 }}
               >
-                {getLabelText('View', templatetype_base)}
+                View
               </CButton>
             </td>
           ),
@@ -212,7 +217,7 @@ const InternalUserDataGrid = () => {
                     toggleDelete(item.id)
                   }}
                 >
-                  {getLabelText('Delete', templatetype_base)}
+                  Delete
                 </CButton>
               }
             </td>
