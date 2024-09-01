@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import CompanyPopup from './CompanyPopup.js';
 import { getCompanyAll } from '../../../apicalls/company/get_all_list.js';
 import { getCompanySingle } from '../../../apicalls/company/get_company_single.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import { getBadge } from '../../shared/gridviewconstants.js';
-import { columns } from '../../controllers/company_controller.js';
+import { columns, headers } from '../../controllers/company_controllers.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
+import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
+
+import Pagination from '../../shared/Pagination.js'
 
 const CompanyDataGrid = () => {
   let templatetype = 'translation_company'
@@ -15,6 +19,10 @@ const CompanyDataGrid = () => {
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
 
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [columnFilter, setColumnFilter] = useState([])
+  const [tableFilter, setTableFilter] = useState([])
   const [CompanyDetails, setCompanyDetails] = useState([])
 
   async function loadDetails(item, action) {
@@ -28,10 +36,19 @@ const CompanyDataGrid = () => {
       CUS_ID: item
     }
     const CompanyDetails = await getCompanySingle(formData)
-    console.log(CompanyDetails)
+    // console.log(CompanyDetails)
     setCompanyDetails(CompanyDetails);
     handleOpenPopup()
   }
+  const handleItemsPerPageChange = (newItemsPerPage) => {
+    // console.log(newItemsPerPage);
+    setItemsPerPage(newItemsPerPage);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // Fetch data for the new page
+  };
   const toggleEdit = (index) => {
     setPopupStatus('edit')
     toggleDetails(index)
@@ -100,19 +117,26 @@ const CompanyDataGrid = () => {
 
   return (
     <CCardBody>
-      <CRow>
-        {/* <CCol>
-          <CButton
-            color="primary"
-            className="mb-2"
-            href={csvCode}
-            download="coreui-table-data.csv"
-            target="_blank"
-          >
-            {getLabelText('Download current items (.csv)', templatetype_base)}
-          </CButton>
-        </CCol> */}
-        <CCol className='d-flex justify-content-end'>
+      <CRow className='mb-4'>
+        <CCol>   <CDropdown>
+          <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
+          <CDropdownMenu>
+            <CDropdownItem><CButton
+              color="primary"
+              className="mb-2"
+              href={csvCode}
+              download="company.csv"
+              target="_blank"
+            >
+              Download items as .csv
+            </CButton></CDropdownItem>
+            <CDropdownItem><ExcelExport data={data} fileName="company" headers={headers} /></CDropdownItem>
+            <CDropdownItem>
+              <CSmartGridPDF data={data} headers={headers} filename="company" title="company" />
+            </CDropdownItem>
+          </CDropdownMenu>
+        </CDropdown>
+        </CCol> <CCol className='d-flex justify-content-end'>
           <CompanyPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} CompanyDetails={CompanyDetails} />
         </CCol>
       </CRow>
@@ -127,7 +151,12 @@ const CompanyDataGrid = () => {
         itemsPerPageSelect
         itemsPerPage={5}
         onFilteredItemsChange={setCurrentItems}
-        pagination
+        pagination={<div> <Pagination
+          totalItems={data.RC}
+          currentPage={currentPage}
+          setCurrentPage={handlePageChange}
+          itemsPerPage={itemsPerPage}
+        /></div>}
         // onFilteredItemsChange={(items) => {
         //   console.log(items)
         // }}

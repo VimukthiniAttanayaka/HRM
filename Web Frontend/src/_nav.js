@@ -205,14 +205,16 @@ const _nav = [
       to: '/reportingperson/hierarchymanagement',
       disabled: !RPHierarchyManagement,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-    }, {
-      component: CNavItem,
-      // name: <Translation>{(t) => t('Reporting Person')}</Translation>,
-      name: getLabelText('Reporting Person', templatetype),
-      to: '/reportingperson/reportingperson',
-      disabled: !RPReportingPerson,
-      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-    }, {
+    }, 
+    // {
+    //   component: CNavItem,
+    //   // name: <Translation>{(t) => t('Reporting Person')}</Translation>,
+    //   name: getLabelText('Reporting Person', templatetype),
+    //   to: '/reportingperson/reportingperson',
+    //   disabled: !RPReportingPerson,
+    //   // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    // },
+     {
       component: CNavItem,
       // name: <Translation>{(t) => t('Reporting Manager Search')}</Translation>,
       name: getLabelText('Reporting Manager', templatetype),

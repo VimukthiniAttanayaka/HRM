@@ -20,7 +20,7 @@ export const getCompanyAll = async (formData) => {
     .then(response => response.json())
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
-      console.log(res1)
+      // console.log(res1)
 
       class CompanyDetail {
         constructor(
@@ -42,21 +42,21 @@ export const getCompanyAll = async (formData) => {
           CUS_Status,
         ) {
 
-          this.CUS_ID = CUS_ID;
-          this.CUS_CompanyName = CUS_CompanyName;
-          this.CUS_GroupCompany = CUS_GroupCompany;
-          this.CUS_Adrs_BlockBuildingNo = CUS_Adrs_BlockBuildingNo;
-          this.CUS_Adrs_BuildingName = CUS_Adrs_BuildingName;
-          this.CUS_Adrs_UnitNumber = CUS_Adrs_UnitNumber;
-          this.CUS_Adrs_StreetName = CUS_Adrs_StreetName;
-          this.CUS_Adrs_City = CUS_Adrs_City;
-          this.CUS_Adrs_CountryCode = CUS_Adrs_CountryCode;
-          this.CUS_Adrs_PostalCode = CUS_Adrs_PostalCode;
-          this.CUS_ContactPerson = CUS_ContactPerson;
-          this.CUS_ContactNumber = CUS_ContactNumber;
-          this.CUS_PinOrPwd = CUS_PinOrPwd;
-          this.CUS_OTP_By_SMS = CUS_OTP_By_SMS;
-          this.CUS_OTP_By_Email = CUS_OTP_By_Email;
+          this.ID = CUS_ID;
+          this.CompanyName = CUS_CompanyName;
+          this.GroupCompany = CUS_GroupCompany;
+          this.Adrs_BlockBuildingNo = CUS_Adrs_BlockBuildingNo;
+          this.Adrs_BuildingName = CUS_Adrs_BuildingName;
+          this.Adrs_UnitNumber = CUS_Adrs_UnitNumber;
+          this.Adrs_StreetName = CUS_Adrs_StreetName;
+          this.Adrs_City = CUS_Adrs_City;
+          this.Adrs_CountryCode = CUS_Adrs_CountryCode;
+          this.Adrs_PostalCode = CUS_Adrs_PostalCode;
+          this.ContactPerson = CUS_ContactPerson;
+          this.ContactNumber = CUS_ContactNumber;
+          this.PinOrPwd = CUS_PinOrPwd;
+          this.OTP_By_SMS = CUS_OTP_By_SMS;
+          this.OTP_By_Email = CUS_OTP_By_Email;
           if (CUS_Status == true) { this.status = "Active"; }
           else { this.status = "Inactive"; }
         }
@@ -84,7 +84,7 @@ export const getCompanyAll = async (formData) => {
       }
       // console.log(CompanyDetails)
     })
-  console.log(CompanyDetails)
+  // console.log(CompanyDetails)
   return CompanyDetails;
 };
 

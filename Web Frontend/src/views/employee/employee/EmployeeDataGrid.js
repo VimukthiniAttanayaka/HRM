@@ -32,7 +32,7 @@ const EmployeeDataGrid = () => {
   }, [tableFilter]);
 
   const handleItemsPerPageChange = (newItemsPerPage) => {
-    console.log(newItemsPerPage);
+    // console.log(newItemsPerPage);
     setItemsPerPage(newItemsPerPage);
   };
 
