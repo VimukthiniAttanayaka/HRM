@@ -21,13 +21,13 @@ export const getReportingManagerAll = async (formData) => {
     .then(response => response.json())
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
-      console.log(res1)
+      // console.log(res1)
 
       class ReportingManagerDetail {
-        constructor(id, ReportingManager, status, employeeid) {
+        constructor(id, ReportingManager, status, AllocatedTeam) {
           this.ReportingManager = ReportingManager;
           this.id = id;
-          this.employeeid = employeeid
+          this.AllocatedTeam = AllocatedTeam
           if (status == true) { this.status = "Active"; }
           else { this.status = "Inactive"; }
         }
@@ -35,8 +35,8 @@ export const getReportingManagerAll = async (formData) => {
 
       for (let index = 0; index < res1[0].ReportingManager.length; index++) {
         let element = res1[0].ReportingManager[index];
-        console.log(element)
-        ReportingManagerDetails[index] = new ReportingManagerDetail(element.RM_ID, element.RM_ReportingManagerID, element.RM_Status, element.RM_EmployeeID);
+        // console.log(element)
+        ReportingManagerDetails[index] = new ReportingManagerDetail(element.RM_ID, element.RM_ReportingManagerID, element.RM_Status, element.RM_AllocatedTeam);
       }
       // console.log(ReportingManagerDetails)
     })

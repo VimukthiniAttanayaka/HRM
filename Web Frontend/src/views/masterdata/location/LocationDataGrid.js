@@ -6,6 +6,7 @@ import { getLocationAll } from '../../../apicalls/location/get_all_list.js';
 import { getLocationSingle } from '../../../apicalls/location/get_location_single.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
+import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
 import { columns, headers } from '../../controllers/location_controllers.js';
 import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
@@ -40,6 +41,15 @@ const LocationDataGrid = () => {
     setLocationDetails(LocationDetails);
     handleOpenPopup()
   }
+  const handleItemsPerPageChange = (newItemsPerPage) => {
+    console.log(newItemsPerPage);
+    setItemsPerPage(newItemsPerPage);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // Fetch data for the new page
+  };
   const toggleEdit = (index) => {
     setPopupStatus('edit')
     toggleDetails(index)

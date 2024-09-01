@@ -29,9 +29,9 @@ namespace HRM.Controllers
             List<ReturnReportingManagerModelHead> objReportingManagerHeadList = new List<ReturnReportingManagerModelHead>();
             ReturnReportingManagerModelHead obj = new ReturnReportingManagerModelHead() { resp = false, msg = "sfsf" };
             obj.ReportingManager = new List<ReturnReportingManagerModel>();
-            obj.ReportingManager.Add(new ReturnReportingManagerModel() { RM_ID = 1, RM_EmployeeID = "test", RM_ReportingManagerID = "test", RM_Status = true });
-            obj.ReportingManager.Add(new ReturnReportingManagerModel() { RM_ID = 2, RM_EmployeeID = "test1", RM_ReportingManagerID = "test1", RM_Status = true });
-            obj.ReportingManager.Add(new ReturnReportingManagerModel() { RM_ID = 3, RM_EmployeeID = "test2", RM_ReportingManagerID = "test2", RM_Status = true });
+            obj.ReportingManager.Add(new ReturnReportingManagerModel() { RM_ID = 1, RM_AllocatedTeam = 10, RM_ReportingManagerID = "test", RM_Status = true });
+            obj.ReportingManager.Add(new ReturnReportingManagerModel() { RM_ID = 2, RM_AllocatedTeam = 10, RM_ReportingManagerID = "test1", RM_Status = true });
+            obj.ReportingManager.Add(new ReturnReportingManagerModel() { RM_ID = 3, RM_AllocatedTeam = 10, RM_ReportingManagerID = "test2", RM_Status = true });
             objReportingManagerHeadList.Add(obj);
             return objReportingManagerHeadList;
 
@@ -75,9 +75,9 @@ namespace HRM.Controllers
             List<ReturnReportingManagerModelHead> objReportingManagerHeadList = new List<ReturnReportingManagerModelHead>();
             ReturnReportingManagerModelHead obj = new ReturnReportingManagerModelHead() { resp = false, msg = "sfsf" };
             obj.ReportingManager = new List<ReturnReportingManagerModel>();
-            obj.ReportingManager.Add(new ReturnReportingManagerModel() { RM_ID = 1, RM_EmployeeID = "test", RM_ReportingManagerID = "test", RM_Status = true });
-            obj.ReportingManager.Add(new ReturnReportingManagerModel() { RM_ID = 2, RM_EmployeeID = "test1", RM_ReportingManagerID = "test1", RM_Status = true });
-            obj.ReportingManager.Add(new ReturnReportingManagerModel() { RM_ID = 3, RM_EmployeeID = "test2", RM_ReportingManagerID = "test2", RM_Status = true });
+            obj.ReportingManager.Add(new ReturnReportingManagerModel() { RM_ID = 1, RM_AllocatedTeam = 10, RM_ReportingManagerID = "test", RM_Status = true });
+            obj.ReportingManager.Add(new ReturnReportingManagerModel() { RM_ID = 2, RM_AllocatedTeam = 10, RM_ReportingManagerID = "test1", RM_Status = true });
+            obj.ReportingManager.Add(new ReturnReportingManagerModel() { RM_ID = 3, RM_AllocatedTeam = 10, RM_ReportingManagerID = "test2", RM_Status = true });
             objReportingManagerHeadList.Add(obj);
             return objReportingManagerHeadList;
 

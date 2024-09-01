@@ -215,8 +215,8 @@ const _nav = [
     }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('Reporting Manager Search')}</Translation>,
-      name: getLabelText('Reporting Manager Search', templatetype),
-      to: '/reportingperson/reportingmanagersearch',
+      name: getLabelText('Reporting Manager', templatetype),
+      to: '/reportingperson/reportingmanager',
       disabled: !RPReportingManagerSearch,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     },],
@@ -378,7 +378,7 @@ const _nav = [
       // name: <Translation>{(t) => t('Country')}</Translation>,
       name: getLabelText('Country', templatetype),
       to: '/masterdata/country',
-      disabled: !MCountry,
+      // disabled: !MCountry,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     }, {
       component: CNavItem,

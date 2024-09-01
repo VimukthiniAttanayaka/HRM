@@ -1,59 +1,27 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import ReportingManagerSearchPopup from './ReportingManagerSearchPopup.js';
 // import loadDetails from './ReportingManagerPopup.js';
+import Pagination from '../../shared/Pagination.js'
 import { getReportingManagerAll } from '../../../apicalls/reportingmanager/get_all_list.js';
 import { getReportingManagerSingle } from '../../../apicalls/reportingmanager/get_reportingmanager_single.js';
+
+import { getBadge } from '../../shared/gridviewconstants.js';
+import { columns, headers } from '../../controllers/reportingmanager_controllers.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
+import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
 const ReportingManagerSearchDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
 
-  const columns = [
-    {
-      key: 'id',
-      // label: '',
-      // filter: false,
-      // sorter: false,
-    },
-    {
-      key: 'ReportingManager',
-      _style: { width: '20%' },
-    },
-
-    {
-      key: 'employeeId',
-      _style: { width: '20%' }
-    }, {
-      key: 'status',
-      _style: { width: '20%' }
-    },
-
-    {
-      key: 'show_details',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-  ];
-  const getBadge = (status) => {
-    switch (status) {
-      case 'Active':
-        return 'success'
-      case 'Inactive':
-        return 'secondary'
-      case 'Pending':
-        return 'warning'
-      case 'Banned':
-        return 'danger'
-      default:
-        return 'primary'
-    }
-  }
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [columnFilter, setColumnFilter] = useState([])
+  const [tableFilter, setTableFilter] = useState([])
 
   const [ReportingManagerDetails, setReportingManagerDetails] = useState([])
   // const [ReportingManagerId, setReportingManagerId] = useState('')
@@ -67,6 +35,7 @@ const ReportingManagerSearchDataGrid = () => {
     const staffId = getStaffID();
     const customerId = getCustomerID();
 
+
     // const config = {
     //   headers: { Authorization: `Bearer ${auth}` }
     // };
@@ -77,22 +46,19 @@ const ReportingManagerSearchDataGrid = () => {
       LVT_ReportingManagerID: item
     }
 
-    // const res = fetch(apiUrl + 'ReportingManager/get_ReportingManager_single', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setReportingManagerDetails(res1[0].ReportingManager[0]);
-    //     handleOpenPopup()
-    //   })
     const ReportingManagerDetails = await getReportingManagerSingle(formData)
-    // setReportingManagerDetails(res1[0].ReportingManager[0]);
     setReportingManagerDetails(ReportingManagerDetails);
     handleOpenPopup()
   }
+  const handleItemsPerPageChange = (newItemsPerPage) => {
+    console.log(newItemsPerPage);
+    setItemsPerPage(newItemsPerPage);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // Fetch data for the new page
+  };
   const toggleDetails = (index) => {
 
 
@@ -185,15 +151,24 @@ const ReportingManagerSearchDataGrid = () => {
     <CCardBody>
       <CRow>
         <CCol>
-          <CButton
-            color="primary"
-            className="mb-2"
-            href={csvCode}
-            download="coreui-table-data.csv"
-            target="_blank"
-          >
-            Download current items (.csv)
-          </CButton>
+        <CDropdown>
+            <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
+            <CDropdownMenu>
+              <CDropdownItem><CButton
+                color="primary"
+                className="mb-2"
+                href={csvCode}
+                download="reportingmanager.csv"
+                target="_blank"
+              >
+                Download items as .csv
+              </CButton></CDropdownItem>
+              <CDropdownItem><ExcelExport data={data} fileName="reportingmanager" headers={headers} /></CDropdownItem>
+              <CDropdownItem>
+                <CSmartGridPDF data={data} headers={headers} filename="reportingmanager" title="reportingmanager" />
+              </CDropdownItem>
+            </CDropdownMenu>
+          </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
           <ReportingManagerSearchPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} ReportingManagerDetails={ReportingManagerDetails} />
@@ -205,12 +180,17 @@ const ReportingManagerSearchDataGrid = () => {
         columns={columns}
         columnFilter
         columnSorter
-        footer
+        // footer
         items={data}
         itemsPerPageSelect
         itemsPerPage={5}
         onFilteredItemsChange={setCurrentItems}
-        pagination
+        pagination={<div> <Pagination
+          totalItems={data.RC}
+          currentPage={currentPage}
+          setCurrentPage={handlePageChange}
+          itemsPerPage={itemsPerPage}
+        /></div>}
         // onFilteredItemsChange={(items) => {
         //   console.log(items)
         // }}

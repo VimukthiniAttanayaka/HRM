@@ -6,6 +6,7 @@ import { GetDataList as Location_GetDataList } from '../controllers/location_con
 import { GetDataList as Country_GetDataList } from '../controllers/country_controllers.js';
 import { GetDataList as Department_GetDataList } from '../controllers/department_controllers.js';
 import { GetDataList as JobRole_GetDataList } from '../controllers/jobrole_controllers.js';
+import { GetDataList as ReportingManager_GetDataList } from '../controllers/reportingmanager_controllers.js';
 
 export const setDataByPage = (filename, data) => {
 
@@ -22,7 +23,7 @@ export const setDataByPage = (filename, data) => {
         return Branch_GetDataList(data)
     }
       if (filename == "location") {
-        // console.log(filename);
+        console.log(filename);
         return Location_GetDataList(data)
     }
     if (filename == "country") {
@@ -36,5 +37,8 @@ export const setDataByPage = (filename, data) => {
     if (filename == "jobrole") {
         // console.log(filename);
         return JobRole_GetDataList(data)
+    } if (filename == "reportingmanager") {
+        console.log(filename);
+        return ReportingManager_GetDataList(data)
     }
 }

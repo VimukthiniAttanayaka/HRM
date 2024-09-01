@@ -1,7 +1,7 @@
 import React from 'react'
 import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
 
-import ReportingManagerSearchDataGrid from './ReportingManagerSearchDataGrid'
+import ReportingManagerSearchDataGrid from './ReportingManagerDataGrid'
 import ReportingManagerSearchPopup from './ReportingManagerSearchPopup'
 
 const ReportingManagerSearch = () => {

@@ -8,7 +8,7 @@ namespace HRM_DAL.Models
     {
         public int RM_ID { get; set; }
         public string RM_ReportingManagerID { get; set; }
-        public string RM_EmployeeID { get; set; }
+        public int RM_AllocatedTeam { get; set; }
         public bool RM_Status { get; set; }
         public string RM_CreatedBy { get; set; }
         public DateTime RM_CreatedDateTime { get; set; }
@@ -22,7 +22,7 @@ namespace HRM_DAL.Models
 
         public int RM_ID { get; set; }
         public string RM_ReportingManagerID { get; set; }
-        public string RM_EmployeeID { get; set; }
+        public int RM_AllocatedTeam { get; set; }
         public bool RM_Status { get; set; }
         public string RM_CreatedBy { get; set; }
         public DateTime RM_CreatedDateTime { get; set; }
