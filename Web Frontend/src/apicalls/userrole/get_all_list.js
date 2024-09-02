@@ -24,8 +24,8 @@ export const getUserRoleAll = async (formData) => {
 
       class UserRoleDetail {
         constructor(id, userrole, status) {
-          this.userrole = userrole;
           this.id = id;
+          this.userrole = userrole;
           if (status == true) { this.status = "Active"; }
           else { this.status = "Inactive"; }
         }

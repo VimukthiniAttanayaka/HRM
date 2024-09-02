@@ -24,8 +24,8 @@ export const getAccessGroupAll = async (formData) => {
 
       class AccessGroupDetail {
         constructor(id, AccessGroup, status) {
-          this.AccessGroup = AccessGroup;
           this.id = id;
+          this.AccessGroup = AccessGroup;
           if (status == true) { this.status = "Active"; }
           else { this.status = "Inactive"; }
         }
@@ -57,8 +57,8 @@ export const getAccessGroupListForUserRole = async (formData) => {
 
       class AccessGroupDetail {
         constructor(id, AccessGroup, status) {
-          this.AccessGroup = AccessGroup;
           this.id = id;
+          this.AccessGroup = AccessGroup;
           if (status == true) { this.status = "Active"; }
           else { this.status = "Inactive"; }
         }

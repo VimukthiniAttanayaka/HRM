@@ -1,18 +1,19 @@
 
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
-let templatetype = 'translation_department'
+let templatetype = 'translation_userrole'
 let templatetype_base = 'translation'
 
-export  const columns = [
+export const columns = [
   {
     key: 'id',
-    // label: '',
+    _style: { width: '20%' },
+    label: 'id',
     // filter: false,
     // sorter: false,
   },
   {
-    key: 'userrole',
+    key: 'userrole', label: 'user role',
     _style: { width: '20%' },
   },
   {
@@ -29,10 +30,10 @@ export  const columns = [
   },
 ];
 
-export const headers = [["id", "branch", "status"]];
+export const headers = [["id", "userrole", "status"]];
 
 export const GetDataList = (data) => {
-  return data.map(elt => [elt.id, elt.branch, elt.status]);
+  return data.map(elt => [elt.id, elt.userrole, elt.status]);
 }
 
 export const columnsGroup = [

@@ -23,10 +23,9 @@ export const getUserMenuAll = async (formData) => {
 
 
       class UserMenuDetail {
-        constructor(id, usermenu, status, Alotment) {
-          this.usermenu = usermenu;
-          this.id = id;
-          this.alotment = Alotment
+        constructor(id, usermenu, status) {       
+          this.id = id;  
+           this.usermenu = usermenu;
           if (status == true) { this.status = "Active"; }
           else { this.status = "Inactive"; }
         }
@@ -35,7 +34,7 @@ export const getUserMenuAll = async (formData) => {
       for (let index = 0; index < res1[0].UserMenu.length; index++) {
         let element = res1[0].UserMenu[index];
         // console.log(element)
-        UserMenuDetails[index] = new UserMenuDetail(element.UUM_UserMenuID, element.UUM_UserMenu, element.UUM_Status, element.UUM_LeaveAlotment);
+        UserMenuDetails[index] = new UserMenuDetail(element.UUM_UserMenuID, element.UUM_UserMenu, element.UUM_Status);
       }
       // console.log(UserMenuDetails)
     })
@@ -57,10 +56,9 @@ export const getUserMenuListForAccessGroup = async (formData) => {
 
 
       class UserMenuDetail {
-        constructor(id, usermenu, status, Alotment) {
-          this.usermenu = usermenu;
-          this.id = id;
-          this.alotment = Alotment
+        constructor(id, usermenu, status) {
+         this.id = id;
+          this.usermenu = usermenu;          
           if (status == true) { this.status = "Active"; }
           else { this.status = "Inactive"; }
         }
@@ -69,7 +67,7 @@ export const getUserMenuListForAccessGroup = async (formData) => {
       for (let index = 0; index < res1[0].UserMenu.length; index++) {
         let element = res1[0].UserMenu[index];
         // console.log(element)
-        UserMenuDetails[index] = new UserMenuDetail(element.UUM_UserMenuID, element.UUM_UserMenu, element.UUM_Status, element.UUM_LeaveAlotment);
+        UserMenuDetails[index] = new UserMenuDetail(element.UUM_UserMenuID, element.UUM_UserMenu, element.UUM_Status);
       }
       // console.log(UserMenuDetails)
     })

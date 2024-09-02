@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 // import UserMenuPopup from './UserMenuPopup.js';
@@ -8,49 +8,19 @@ import { getUserMenuAll } from '../../../apicalls/usermenu/get_all_list.js';
 import { getUserMenuSingle } from '../../../apicalls/usermenu/get_usermenu_single.js';
 import UserMenuPopup from './UserMenuPopup'
 
+import { getLabelText } from 'src/MultipleLanguageSheets'
+import Pagination from '../../shared/Pagination.js'
+import { getBadge } from '../../shared/gridviewconstants.js';
+import { columns, headers } from '../../controllers/usermenu_controllers.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
+import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
+
+
 const UserMenuDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
 
-  const columns = [
-    {
-      key: 'id',
-      // label: '',
-      // filter: false,
-      // sorter: false,
-    },
-    {
-      key: 'usermenu',
-      _style: { width: '20%' },
-    },
-    {
-      key: 'status',
-      _style: { width: '20%' }
-    },
-
-    {
-      key: 'show_details',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-  ];
-  const getBadge = (status) => {
-    switch (status) {
-      case 'Active':
-        return 'success'
-      case 'Inactive':
-        return 'secondary'
-      case 'Pending':
-        return 'warning'
-      case 'Banned':
-        return 'danger'
-      default:
-        return 'primary'
-    }
-  }
 
   const [UserMenuDetails, setUserMenuDetails] = useState([])
   // const [UserMenuId, setUserMenuId] = useState('')
@@ -73,18 +43,6 @@ const UserMenuDataGrid = () => {
       // AUD_notificationToken: token,
       UUM_UserMenuID: item
     }
-
-    // const res = fetch(apiUrl + 'UserMenu/get_UserMenu_single', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setUserMenuDetails(res1[0].UserMenu[0]);
-    //     handleOpenPopup()
-    //   })
     const UserMenuDetails = await getUserMenuSingle(formData)
     // setUserMenuDetails(res1[0].UserMenu[0]);
     setUserMenuDetails(UserMenuDetails);
@@ -125,37 +83,6 @@ const UserMenuDataGrid = () => {
     const UserMenuDetails = await getUserMenuAll(formData)
     // console.log(UserMenuDetails)
     setData(UserMenuDetails);
-
-    // const res = await fetch(apiUrl + 'UserMenu/get_UserMenu_all', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-
-    //     const UserMenuDetails = [];
-    //     class UserMenuDetail {
-    //       constructor(id, UserMenu, status, Alotment) {
-    //         this.UserMenu = UserMenu;
-    //         this.id = id;
-    //         this.alotment = Alotment
-    //         if (status == true) { this.status = "Active"; }
-    //         else { this.status = "Inactive"; }
-    //       }
-    //     }
-
-    //     for (let index = 0; index < res1[0].UserMenu.length; index++) {
-    //       let element = res1[0].UserMenu[index];
-    //       console.log(element)
-    //       UserMenuDetails[index] = new UserMenuDetail(element.UUM_UserMenuID, element.UUM_UserMenu, element.UUM_Status, element.UUM_LeaveAlotment);
-    //     }
-
-    //     setData(UserMenuDetails);
-    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
-    //   })
-
   }
   useEffect(() => {
     requestdata();
@@ -183,15 +110,24 @@ const UserMenuDataGrid = () => {
     <CCardBody>
       <CRow>
         <CCol>
-          <CButton
-            color="primary"
-            className="mb-2"
-            href={csvCode}
-            download="coreui-table-data.csv"
-            target="_blank"
-          >
-            Download current items (.csv)
-          </CButton>
+        <CDropdown>
+            <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
+            <CDropdownMenu>
+              <CDropdownItem><CButton
+                color="primary"
+                className="mb-2"
+                href={csvCode}
+                download="usermenu.csv"
+                target="_blank"
+              >
+                Download items as .csv
+              </CButton></CDropdownItem>
+              <CDropdownItem><ExcelExport data={data} fileName="usermenu" headers={headers} /></CDropdownItem>
+              <CDropdownItem>
+                <CSmartGridPDF data={data} headers={headers} filename="usermenu" title="usermenu" />
+              </CDropdownItem>
+            </CDropdownMenu>
+          </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
           <UserMenuPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} UserMenuDetails={UserMenuDetails} />

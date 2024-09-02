@@ -7,7 +7,7 @@ import { Modal } from '@coreui/coreui-pro';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
-import { columnsMenu, headers } from '../../controllers/useraccessgroup_controllers.js';
+import { columnsMenu, headers } from '../../controllers/accessgroup_controllers.js';
 import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
 import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 import { UserMenu_DropDowns_All_Selectable, getUserMenuListForAccessGroup } from '../../../apicalls/usermenu/get_all_list.js';

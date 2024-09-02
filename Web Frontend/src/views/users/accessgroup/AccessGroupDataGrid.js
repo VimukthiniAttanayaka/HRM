@@ -11,7 +11,7 @@ import { UserMenu_DropDowns_All_Selectable, getUserMenuListForAccessGroup } from
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
-import { columns, headers } from '../../controllers/useraccessgroup_controllers.js';
+import { columns, headers } from '../../controllers/accessgroup_controllers.js';
 import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
 import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 

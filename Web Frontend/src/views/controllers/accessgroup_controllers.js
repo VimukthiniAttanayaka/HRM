@@ -1,7 +1,7 @@
 
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
-let templatetype = 'translation_department'
+let templatetype = 'translation_accessgroup'
 let templatetype_base = 'translation'
 
 export const columns = [
@@ -30,10 +30,10 @@ export const columns = [
   },
 ];
 
-export const headers = [["id", "branch", "status"]];
+export const headers = [["id", "AccessGroup", "status"]];
 
 export const GetDataList = (data) => {
-  return data.map(elt => [elt.id, elt.branch, elt.status]);
+  return data.map(elt => [elt.id, elt.AccessGroup, elt.status]);
 }
 
 export const columnsMenu = [

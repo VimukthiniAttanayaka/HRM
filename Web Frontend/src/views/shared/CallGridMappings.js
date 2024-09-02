@@ -8,6 +8,9 @@ import { GetDataList as Department_GetDataList } from '../controllers/department
 import { GetDataList as JobRole_GetDataList } from '../controllers/jobrole_controllers.js';
 import { GetDataList as ReportingManager_GetDataList } from '../controllers/reportingmanager_controllers.js';
 import { GetDataList as Company_GetDataList } from '../controllers/company_controllers.js';
+import { GetDataList as UserMenu_GetDataList } from '../controllers/usermenu_controllers.js';
+import { GetDataList as UserRole_GetDataList } from '../controllers/userrole_controllers.js';
+import { GetDataList as AccessGroup_GetDataList } from '../controllers/accessgroup_controllers.js';
 
 export const setDataByPage = (filename, data) => {
 
@@ -23,7 +26,7 @@ export const setDataByPage = (filename, data) => {
         // console.log(filename);
         return Branch_GetDataList(data)
     }
-      if (filename == "location") {
+    if (filename == "location") {
         console.log(filename);
         return Location_GetDataList(data)
     }
@@ -34,15 +37,25 @@ export const setDataByPage = (filename, data) => {
     if (filename == "department") {
         // console.log(filename);
         return Department_GetDataList(data)
-    }  
+    }
     if (filename == "jobrole") {
         // console.log(filename);
         return JobRole_GetDataList(data)
     } if (filename == "reportingmanager") {
         // console.log(filename);
         return ReportingManager_GetDataList(data)
-    }if (filename == "company") {
+    } if (filename == "company") {
         // console.log(filename);
         return Company_GetDataList(data)
+    }
+    if (filename == "usermenu") {
+        // console.log(filename);
+        return UserMenu_GetDataList(data)
+    } if (filename == "userrole") {
+        // console.log(filename);
+        return UserRole_GetDataList(data)
+    } if (filename == "accessgroup") {
+        // console.log(filename);
+        return AccessGroup_GetDataList(data)
     }
 }
