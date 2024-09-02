@@ -1,56 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import UserRolePopup from './UserRolePopup.js';
 // import loadDetails from './UserRolePopup.js';
 import { getUserRoleAll } from '../../../apicalls/userrole/get_all_list.js';
 import { getUserRoleSingle } from '../../../apicalls/userrole/get_userrole_single.js';
-import { requestdata_AccessGroup_SelectBox } from '../../../apicalls/accessgroup/get_all_list.js';
+import { UserMenu_DropDowns_All_Selectable, getUserMenuListForAccessGroup } from '../../../apicalls/usermenu/get_all_list.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
+import Pagination from '../../shared/Pagination.js'
+import { getBadge } from '../../shared/gridviewconstants.js';
+import { columns, headers } from '../../controllers/userrole_controllers.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
+import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
 const UserRoleDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
 
-  const columns = [
-    {
-      key: 'id',
-      // label: '',
-      // filter: false,
-      // sorter: false,
-    },
-    {
-      key: 'userrole',
-      _style: { width: '20%' },
-    },
-    {
-      key: 'status',
-      _style: { width: '20%' }
-    },
-
-    {
-      key: 'show_details',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-  ];
-  const getBadge = (status) => {
-    switch (status) {
-      case 'Active':
-        return 'success'
-      case 'Inactive':
-        return 'secondary'
-      case 'Pending':
-        return 'warning'
-      case 'Banned':
-        return 'danger'
-      default:
-        return 'primary'
-    }
-  }
+ 
 
   const [UserRoleDetails, setUserRoleDetails] = useState([])
   const [checkAccessGroupListItems, setcheckAccessGroupListItems] = useState([]);
@@ -59,17 +28,17 @@ const UserRoleDataGrid = () => {
     setUserRoleId(event.target.value)
   }
 
-  async function requestDefaultData() {
-    const formData = {
-      // UD_StaffID: staffId,
-      // AUD_notificationToken: token,
-      UAG_AccessGroupID: ""
-    }
-    const AccessGroupList = await requestdata_AccessGroup_SelectBox(formData)
+  // async function requestDefaultData() {
+  //   const formData = {
+  //     // UD_StaffID: staffId,
+  //     // AUD_notificationToken: token,
+  //     UAG_AccessGroupID: ""
+  //   }
+  //   const AccessGroupList = await requestdata_AccessGroup_SelectBox(formData)
    
-    setcheckAccessGroupListItems(AccessGroupList);
+  //   setcheckAccessGroupListItems(AccessGroupList);
 
-  }
+  // }
   async function loadDetails(item) {
 
     const token = getJWTToken();
@@ -186,7 +155,7 @@ const UserRoleDataGrid = () => {
   const handleOpenPopup = () => {
     setVisible(true);
   
-    requestDefaultData();
+    // requestDefaultData();
   };
 
   const handleClosePopup = () => {
@@ -198,15 +167,24 @@ const UserRoleDataGrid = () => {
     <CCardBody>
       <CRow>
         <CCol>
-          <CButton
-            color="primary"
-            className="mb-2"
-            href={csvCode}
-            download="coreui-table-data.csv"
-            target="_blank"
-          >
-            Download current items (.csv)
-          </CButton>
+        <CDropdown>
+            <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
+            <CDropdownMenu>
+              <CDropdownItem><CButton
+                color="primary"
+                className="mb-2"
+                href={csvCode}
+                download="userrole.csv"
+                target="_blank"
+              >
+                Download items as .csv
+              </CButton></CDropdownItem>
+              <CDropdownItem><ExcelExport data={data} fileName="userrole" headers={headers} /></CDropdownItem>
+              <CDropdownItem>
+                <CSmartGridPDF data={data} headers={headers} filename="userrole" title="userrole" />
+              </CDropdownItem>
+            </CDropdownMenu>
+          </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
           <UserRolePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} checkAccessGroupListItems={checkAccessGroupListItems}  UserRoleDetails={UserRoleDetails} />

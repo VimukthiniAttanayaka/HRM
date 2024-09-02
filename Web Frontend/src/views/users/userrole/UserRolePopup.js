@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CButton, CModal, CModalBody, CTabs, CCol, CTabList, CTab, CTabContent, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
+import UserRolePopup_Details from './UserRolePopup_Details.js';
+import UserRolePopup_AccessGroup from './UserRolePopup_AccessGroup.js';
 
-const UserRolePopup = ({ visible, onClose, onOpen, UserRoleDetails , checkAccessGroupListItems }) => {
+const UserRolePopup = ({ visible, onClose, onOpen, UserRoleDetails, checkAccessGroupListItems, popupStatus }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -84,59 +86,18 @@ const UserRolePopup = ({ visible, onClose, onOpen, UserRoleDetails , checkAccess
           <CModalTitle id="TooltipsAndPopoverExample">Create New UserRole</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <CCard className="mx-4">
-            <CCardBody className="p-4">
-              <CForm onSubmit={handleSubmit}>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>UserRoleID</h6>
-                    </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="UserRoleID" name="UserRoleID" value={UserRoleDetails.EUR_UserRoleID} onChange={handleChangeId}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>UserRole</h6>
-                    </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="UserRole" name="UserRole" value={UserRoleDetails.EUR_UserRole} onChange={handleChangeUserRole}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-                </CInputGroup>
-                {/* <CInputGroup className="mb-3"> */}
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>User Groups</h6>
-                    </CInputGroupText>
-                  </CCol>
-                  {checkAccessGroupListItems.map((option) => (
-                  <CFormCheck
-                    key={option.value}
-                    type="checkbox"
-                    label={option.label}
-                    value={option.value}
-                    // checked={checkedItems.includes(option.value)}
-                    checked={option.Ischecked}
-                    onChange={handleCheckboxChange}
-                  />
-                ))}
-                {/* </CInputGroup> */}
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>Status</h6>
-                    </CInputGroupText>
-                  </CCol>
-                  <CFormCheck label="Status" defaultChecked />
-                </CInputGroup>
-                <div className="d-grid">
-                  <CButton color="success" type='submit'>Submit</CButton>
-                </div>
-              </CForm>
-            </CCardBody>
-          </CCard>
+          <CTabs activeItemKey="general">
+            <CTabList variant="tabs">
+              <CTab itemKey="general">General</CTab>
+              <CTab itemKey="groups">Groups</CTab>
+            </CTabList>
+            <CTabContent>
+
+              <UserRolePopup_Details popupStatus={popupStatus} UserRoleDetails={UserRoleDetails} />
+              <UserRolePopup_AccessGroup popupStatus={popupStatus} UserRoleDetails={UserRoleDetails} />
+
+            </CTabContent>
+          </CTabs>
         </CModalBody>
       </CModal>
     </>

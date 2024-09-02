@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CBadge, CDropdown,CCollapse , CDropdownItem, CDropdownMenu, CDropdownToggle, CRow, CCol, CSmartTable, CTabPanel, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CButton, CSmartTable,CBadge ,CCollapse , CModal, CModalBody, CCol, CTabPanel, CRow, CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
-
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
-import { columnsMenu, headers } from '../../controllers/useraccessgroup_controllers.js';
+import { columns, headers,columnsGroup } from '../../controllers/userrole_controllers.js';
 import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
 import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
-import { UserMenu_DropDowns_All_Selectable, getUserMenuListForAccessGroup } from '../../../apicalls/usermenu/get_all_list.js';
+import { AccessGroup_DropDowns_All_Selectable, getAccessGroupListForUserRole } from '../../../apicalls/accessgroup/get_all_list.js';
 
-const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }) => {
+
+const UserRolePopup_AccessGroup = ({ visible, onClose, onOpen, UserRoleDetails, checkAccessGroupListItems }) => {
 
   useEffect(() => {
     requestdata();
@@ -25,7 +25,7 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
   const [AccessGroup, setAccessGroup] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const [UserMenuDetails, setUserMenuDetails] = useState([])
+  const [AccessGroupDetails, setAccessGroupDetails] = useState([])
 
   const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
   const [currentPage, setCurrentPage] = useState(1);
@@ -90,10 +90,10 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
       // UAG_AccessGroupID: item
     }
 
-  
-    const UserMenuDetails = await getUserMenuListForAccessGroup(formData)
-    // console.log(UserMenuDetails)
-    setUserMenuDetails(UserMenuDetails);
+
+    const AccessGroupDetails = await getAccessGroupListForUserRole(formData)
+    // console.log(AccessGroupDetails)
+    setAccessGroupDetails(AccessGroupDetails);
   }
   // async function requestDefaultData() {
   //   const formData = {
@@ -101,7 +101,7 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
   //     // AUD_notificationToken: token,
   //     UAG_AccessGroupID: ""
   //   }
-  //   const MenuList = await UserMenu_DropDowns_All_Selectable(formData)
+  //   const MenuList = await AccessGroup_DropDowns_All_Selectable(formData)
 
   //   setcheckMenuListItems(MenuList);
 
@@ -160,7 +160,7 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
 
   return (
     <>
-      <CTabPanel className="p-3" itemKey="menus">
+      <CTabPanel className="p-3" itemKey="groups">
         <CRow>
           <CCol>
             <CDropdown>
@@ -181,16 +181,16 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
                 </CDropdownItem>
               </CDropdownMenu>
             </CDropdown>
-          </CCol>        
+          </CCol>
         </CRow>
         <CSmartTable
           cleaner
           clickableRows
-          columns={columnsMenu}
+          columns={columnsGroup}
           columnFilter
           columnSorter
           // footer
-          items={UserMenuDetails}
+          items={AccessGroupDetails}
           itemsPerPageSelect
           itemsPerPage={5}
           onFilteredItemsChange={setCurrentItems}
@@ -267,4 +267,4 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
     </>
   )
 }
-export default AccessGroupPopup_Menus
+export default UserRolePopup_AccessGroup
