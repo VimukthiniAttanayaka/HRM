@@ -45,7 +45,7 @@ export const columnsMenu = [
     _style: { width: '20%' },
   },
   {
-    key: 'Menu',
+    key: 'usermenu',
     _style: { width: '80%' },
   },
   {
