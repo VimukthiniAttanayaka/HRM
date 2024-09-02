@@ -6,7 +6,7 @@ import MenuAccessGroupPopup from './MenuAccessGroupPopup.js';
 // import loadDetails from './MenuAccessGroupPopup.js';
 import { getMenuAccessGroupAll } from '../../../apicalls/menuaccessgroup/get_all_list.js';
 import { getMenuAccessGroupSingle } from '../../../apicalls/menuaccessgroup/get_menuaccessgroup_single.js';
-import { requestdata_UserMenu_DropDowns_All } from '../../../apicalls/usermenu/get_all_list.js';
+import { UserMenu_DropDowns_All_Selectable } from '../../../apicalls/usermenu/get_all_list.js';
 import { requestdata_AccessGroup_DropDowns_All } from '../../../apicalls/accessgroup/get_all_list.js';
 
 
@@ -139,40 +139,9 @@ const MenuAccessGroupDataGrid = () => {
 
     setOptionsAccessGroup(AccessGroupDetails);
 
-    const UserMenuDetails = await requestdata_UserMenu_DropDowns_All(formData)
+    const UserMenuDetails = await UserMenu_DropDowns_All_Selectable(formData)
 
     setOptionsUserMenu(UserMenuDetails);
-
-    // const res = await fetch(apiUrl + 'MenuAccessGroup/get_MenuAccessGroup_all', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-
-    //     const MenuAccessGroupDetails = [];
-    //     class MenuAccessGroupDetail {
-    //       constructor(id, MenuAccessGroup, status, Alotment) {
-    //         this.MenuAccessGroup = MenuAccessGroup;
-    //         this.id = id;
-    //         this.alotment = Alotment
-    //         if (status == true) { this.status = "Active"; }
-    //         else { this.status = "Inactive"; }
-    //       }
-    //     }
-
-    //     for (let index = 0; index < res1[0].MenuAccessGroup.length; index++) {
-    //       let element = res1[0].MenuAccessGroup[index];
-    //       console.log(element)
-    //       MenuAccessGroupDetails[index] = new MenuAccessGroupDetail(element.LVT_MenuAccessGroupID, element.LVT_MenuAccessGroup, element.LVT_Status, element.LVT_LeaveAlotment);
-    //     }
-
-    //     setData(MenuAccessGroupDetails);
-    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
-    //   })
-
   }
   useEffect(() => {
     requestdata();

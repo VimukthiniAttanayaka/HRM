@@ -43,7 +43,41 @@ export const getUserMenuAll = async (formData) => {
   return UserMenuDetails;
 };
 
-export const requestdata_UserMenu_DropDowns_All = async (formData) => {
+export const getUserMenuListForAccessGroup = async (formData) => {
+  const UserMenuDetails = [];
+
+  const res = await fetch(apiUrl + 'usermenu/get_usermenu_all', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+  })
+    .then(response => response.json())
+    .then(json => {
+      let res1 = JSON.parse(JSON.stringify(json))
+
+
+      class UserMenuDetail {
+        constructor(id, usermenu, status, Alotment) {
+          this.usermenu = usermenu;
+          this.id = id;
+          this.alotment = Alotment
+          if (status == true) { this.status = "Active"; }
+          else { this.status = "Inactive"; }
+        }
+      }
+
+      for (let index = 0; index < res1[0].UserMenu.length; index++) {
+        let element = res1[0].UserMenu[index];
+        // console.log(element)
+        UserMenuDetails[index] = new UserMenuDetail(element.UUM_UserMenuID, element.UUM_UserMenu, element.UUM_Status, element.UUM_LeaveAlotment);
+      }
+      // console.log(UserMenuDetails)
+    })
+
+  return UserMenuDetails;
+};
+
+export const UserMenu_DropDowns_All_Selectable = async (formData) => {
 
   const optionsUserMenu = [];
   const res = await fetch(apiUrl + 'usermenu/get_usermenu_all', {

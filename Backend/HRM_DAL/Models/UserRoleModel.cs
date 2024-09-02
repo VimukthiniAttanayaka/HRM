@@ -38,6 +38,7 @@ namespace HRM_DAL.Models
         public string label { get; set; }
         public bool Ischecked { get; set; }
     }
+
     public class ReturnUserRoleAllModel
     {
         [Key]

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CFormSelect, CButton, CTabs, CTabList, CTabContent,CTabPanel , CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CTab, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
+import AccessGroupPopup_Details from './AccessGroupPopup_Details.js';
+import AccessGroupPopup_Menus from './AccessGroupPopup_Menus.js';
 
-const AccessGroupPopup = ({ visible, onClose, onOpen, AccessGroupDetails, checkMenuListItems }) => {
+
+const AccessGroupPopup = ({ visible, onClose, onOpen, AccessGroupDetails, checkMenuListItems, popupStatus   }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -92,60 +95,18 @@ const AccessGroupPopup = ({ visible, onClose, onOpen, AccessGroupDetails, checkM
           <CModalTitle id="TooltipsAndPopoverExample">Create New Access Group</CModalTitle>
         </CModalHeader>
         <CModalBody>
-          <CCard className="mx-4">
-            <CCardBody className="p-4">
-              <CForm onSubmit={handleSubmit}>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>AccessGroupID</h6>
-                    </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="AccessGroupID" name="AccessGroupID" value={AccessGroupDetails.UAG_AccessGroupID} onChange={handleChangeId}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>AccessGroup</h6>
-                    </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="AccessGroup" name="AccessGroup" value={AccessGroupDetails.UAG_AccessGroup} onChange={handleChangeAccessGroup}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-                </CInputGroup>
-                {/* <CInputGroup className="mb-3"> */}
-                <CCol md={4}>
-                  <CInputGroupText>
-                    <h6>Available Menus</h6>
-                  </CInputGroupText>
-                </CCol>
+        <CTabs activeItemKey="general">
+            <CTabList variant="tabs">
+              <CTab itemKey="general">General</CTab>
+              <CTab itemKey="menus">Menus</CTab>
+            </CTabList>
+            <CTabContent>
 
-                {checkMenuListItems.map((option) => (
-                  <CFormCheck
-                    key={option.value}
-                    type="checkbox"
-                    label={option.label}
-                    value={option.value}
-                    // checked={checkedItems.includes(option.value)}
-                    checked={option.Ischecked}
-                    onChange={handleCheckboxChange}
-                  />
-                ))}
-                {/* </CInputGroup> */}
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>Status</h6>
-                    </CInputGroupText>
-                  </CCol>
-                  <CFormCheck label="Status" defaultChecked />
-                </CInputGroup>
-                <div className="d-grid">
-                  <CButton color="success" type='submit'>Submit</CButton>
-                </div>
-              </CForm>
-            </CCardBody>
-          </CCard>
+              <AccessGroupPopup_Details popupStatus={popupStatus} AccessGroupDetails={AccessGroupDetails} />
+              <AccessGroupPopup_Menus popupStatus={popupStatus} AccessGroupDetails={AccessGroupDetails} />
+
+            </CTabContent>
+          </CTabs>
         </CModalBody>
       </CModal>
     </>
