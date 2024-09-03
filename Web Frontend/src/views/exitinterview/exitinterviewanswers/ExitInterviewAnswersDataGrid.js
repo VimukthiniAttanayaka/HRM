@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import ExitInterviewAnswersPopup from './ExitInterviewAnswersPopup.js';
 import { getDepartmentAll } from '../../../apicalls/department/get_all_list.js';
 import { getDepartmentSingle } from '../../../apicalls/department/get_department_single.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
@@ -113,16 +112,6 @@ const ExitInterviewAnswersDataGrid = () => {
 
   const csvCode = 'data:text/csv;charset=utf-8,SEP=,%0A' + encodeURIComponent(csvContent)
 
-  const handleOpenPopup = () => {
-    setVisible(true);
-  };
-
-  const handleClosePopup = () => {
-    setVisible(false);
-    setDepartmentDetails([]);
-    setPopupStatus('create')
-  };
-
   return (
     <CCardBody>
       <CRow>
@@ -136,9 +125,6 @@ const ExitInterviewAnswersDataGrid = () => {
           >
             {getLabelText('Download current items (.csv)', templatetype_base)}
           </CButton>
-        </CCol>
-        <CCol className='d-flex justify-content-end'>
-          <ExitInterviewAnswersPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} DepartmentDetails={DepartmentDetails} />
         </CCol>
       </CRow>
       <CSmartTable
