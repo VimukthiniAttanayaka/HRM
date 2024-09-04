@@ -91,12 +91,12 @@ namespace HRM.Controllers
                 };
                 objcustomerHeadList.Add(objcustomerHead);
 
-                objError.WriteLog(0, "customerController", "get_customer_single", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "customerController", "get_customer_single", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "customerController", "get_customers_all", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "customerController", "get_customers_all", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "customerController", "get_customer_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "customerController", "get_customer_single", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "customerController", "get_customers_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "customerController", "get_customers_all", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
