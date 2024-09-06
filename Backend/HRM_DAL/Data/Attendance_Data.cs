@@ -471,7 +471,7 @@ namespace HRM_DAL.Data
                                         StartDate = StartDate
                                         //RC = RC,
                                     };
-                                    objAttendanceHead.AttendanceGridViewModelList.Add(objAttendanceDetail);
+                                    objAttendanceHead.Attendance.Add(objAttendanceDetail);
                                 }
 
                             }

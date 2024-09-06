@@ -124,7 +124,7 @@ const _nav = [
         to: '/employee/employee_excelupload',
         // disabled: !EEmployee,
         // isVisible:{getAttendance}
-      },
+      },,
       //  {
       //   component: CNavItem,
       //   // name: <Translation>{(t) => t('Employee Job Desription')}</Translation>,
@@ -157,7 +157,14 @@ const _nav = [
         to: '/attendance/markattendance',
         disabled: !AMarkAttendance,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-      },
+      },{
+        component: CNavItem,
+        // name: <Translation>{(t) => t('Employee')}</Translation>,
+        name: getLabelText('attendance_excelupload', templatetype),
+        to: '/attendance/attendance_excelupload',
+        // disabled: !EEmployee,
+        // isVisible:{getAttendance}
+      }
     ],
   },
   {
@@ -256,7 +263,21 @@ const _nav = [
       to: '/exitinterview/exitinterviewanswers',
       // disabled: !UMUserAccessGroup,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-    },{
+    }, {
+      component: CNavItem,
+      // name: <Translation>{(t) => t('Employee')}</Translation>,
+      name: getLabelText('exitinterviewanswers_excelupload', templatetype),
+      to: '/exitinterview/exitinterviewanswers_excelupload',
+      // disabled: !EEmployee,
+      // isVisible:{getAttendance}
+    }, {
+      component: CNavItem,
+      // name: <Translation>{(t) => t('Employee')}</Translation>,
+      name: getLabelText('exitinterviewquestions_excelupload', templatetype),
+      to: '/exitinterview/exitinterviewquestions_excelupload',
+      // disabled: !EEmployee,
+      // isVisible:{getAttendance}
+    } ,{
       component: CNavItem,
       // name: <Translation>{(t) => t('User Access Group')}</Translation>,
       name: getLabelText('Termination', templatetype),

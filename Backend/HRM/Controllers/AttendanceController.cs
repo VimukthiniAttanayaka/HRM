@@ -92,9 +92,17 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<AttendanceGridViewHeaderModel> get_Attendance_grid_details(AttendanceGridRequestModel item)//ok
+        public List<AttendanceGridViewHeaderModel> get_Attendance_all(AttendanceGridRequestModel item)//ok
         {
             List<AttendanceGridViewHeaderModel> objCountryHeadList = new List<AttendanceGridViewHeaderModel>();
+            AttendanceGridViewHeaderModel obj = new AttendanceGridViewHeaderModel() { resp = false, msg = "sfsf" };
+            obj.Attendance = new List<AttendanceGridViewModel>();
+            obj.Attendance.Add(new AttendanceGridViewModel() { AttendanceDate = DateTime.Now, EndDate = DateTime.Now });
+            obj.Attendance.Add(new AttendanceGridViewModel() { AttendanceDate = DateTime.Now, EndDate = DateTime.Now });
+            obj.Attendance.Add(new AttendanceGridViewModel() { AttendanceDate = DateTime.Now, EndDate = DateTime.Now });
+            objCountryHeadList.Add(obj);
+            return objCountryHeadList;
+
             try
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, "");

@@ -1,55 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CCol } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import AttendancePopup from './AttendancePopup'
+import { getAttendanceAll } from '../../../apicalls/attendance/get_all_list.js';
+import { getAttendanceSingle } from '../../../apicalls/attendance/get_attendance_single.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
+import { getBadge } from '../../shared/gridviewconstants.js';
+import { columns, headers } from '../../controllers/attendance_controllers.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
+import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
 const AttendanceDataGrid = () => {
 
   const [details, setDetails] = useState([])
-
-  const columns = [
-    {
-      key: 'id',
-      label: '',
-      filter: false,
-      sorter: false,
-    },
-    {
-      key: 'name',
-      _style: { width: '20%' },
-    },
-    'registered',
-    {
-      key: 'role',
-      _style: { width: '20%' }
-    },
-    {
-      key: 'status',
-      _style: { width: '20%' }
-    },
-    {
-      key: 'show_details',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-  ];
-  const getBadge = (status) => {
-    switch (status) {
-      case 'Active':
-        return 'success'
-      case 'Inactive':
-        return 'secondary'
-      case 'Pending':
-        return 'warning'
-      case 'Banned':
-        return 'danger'
-      default:
-        return 'primary'
-    }
-  }
+  const [data, setData] = useState([])
+  const [popupStatus, setPopupStatus] = useState('create')
+  
   const toggleDetails = (index) => {
     const position = details.indexOf(index)
     let newDetails = details.slice()
@@ -89,17 +56,8 @@ const AttendanceDataGrid = () => {
       // AUD_notificationToken: token,
       USR_EmployeeID: 'sedcx'
     }
-    // const res = await fetch(apiUrl + 'employee/get_employee_all', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-    //     console.log(res1);
-    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
-    //   })
+    const AttendanceDetails = await getAttendanceAll(formData)
+    setData(AttendanceDetails);
   }
   useEffect(() => {
     requestdata();
@@ -114,15 +72,24 @@ const AttendanceDataGrid = () => {
 
   return (
     <CCardBody>
-      <CCol><CButton
-        color="primary"
-        className="mb-2"
-        href={csvCode}
-        download="coreui-table-data.csv"
-        target="_blank"
-      >
-        Download current items (.csv)
-      </CButton>
+      <CCol>  <CDropdown>
+        <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
+        <CDropdownMenu>
+          <CDropdownItem><CButton
+            color="primary"
+            className="mb-2"
+            href={csvCode}
+            download="attendance.csv"
+            target="_blank"
+          >
+            Download items as .csv
+          </CButton></CDropdownItem>
+          <CDropdownItem><ExcelExport data={data} fileName="attendance" headers={headers} /></CDropdownItem>
+          <CDropdownItem>
+            <CSmartGridPDF data={data} headers={headers} filename="attendance" title="attendance" />
+          </CDropdownItem>
+        </CDropdownMenu>
+      </CDropdown>
       </CCol>
       <CCol className='d-flex justify-content-end'>
         <AttendancePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} />

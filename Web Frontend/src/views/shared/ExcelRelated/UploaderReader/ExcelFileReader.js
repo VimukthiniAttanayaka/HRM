@@ -171,12 +171,6 @@ export default class ExcelPage extends Component {
     //if successful, banigate and clear the data
     //this.setState({ rows: [] })
   };
-  handleSubmit1 = async () => {
-    console.log("submitting: ", this.state.rows);
-    //submit to API
-    //if successful, banigate and clear the data
-    //this.setState({ rows: [] })
-  };
 
   handleDelete = key => {
     const rows = [...this.state.rows];

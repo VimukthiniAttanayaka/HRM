@@ -42,6 +42,20 @@ export function getRowsForColumns(slice, classtype) {
                 ColumnsList.push(new EmployeeDetail(
                     row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]
                 ));
+            } 
+            if (classtype == "exitinterviewquestions") {
+                ColumnsList.push(new ExitInterviewQuestionsDetail(
+                    row[0], row[1], row[2], row[3]
+                ));
+            } 
+              if (classtype == "exitinterviewanswers") {
+                ColumnsList.push(new ExitInterviewAnswersDetail(
+                    row[0], row[1], row[2], row[3]
+                ));
+            }   if (classtype == "attendance") {
+                ColumnsList.push(new AttendanceDetail(
+                    row[0], row[1], row[2], row[3],row[4], row[5], row[6], row[7]
+                ));
             }
             // ColumnsList.push({
             //     key: index,

@@ -6,15 +6,19 @@ const Company = React.lazy(() => import('./views/employee/Company/Company'))
 const Employee = React.lazy(() => import('./views/employee/employee/Employee'))
 const Employee_ExcelUpload = React.lazy(() => import('./views/employee/employee_excelupload/Employee_ExcelUpload'))
 const EmployeeJobDescription = React.lazy(() => import('./views/employee/employeejobdescription/EmployeeJobDescription'))
+const ExitInterviewAnswers_ExcelUpload = React.lazy(() => import('./views/exitinterview/exitinterviewanswers_excelupload/ExitInterviewAnswers_ExcelUpload'))
+const ExitInterviewQuestions_ExcelUpload = React.lazy(() => import('./views/exitinterview/exitinterviewquestions_excelupload/ExitInterviewQuestions_ExcelUpload'))
+const Attendance_ExcelUpload = React.lazy(() => import('./views/attendance/attendance_excelupload/Attendance_ExcelUpload'))
+
 const LeaveSchedule = React.lazy(() => import('./views/leaves/leaveshedule/LeaveSchedule'))
 const LeaveType = React.lazy(() => import('./views/leaves/leavetype/LeaveType'))
 const LeaveEntitlement = React.lazy(() => import('./views/leaves/leaveentitlement/LeaveEntitlement'))
 const LeaveToApprove = React.lazy(() => import('./views/leaves/leavetoapprove/LeaveToApprove'))
 const Attendance = React.lazy(() => import('./views/attendance/attendance/Attendance'))
 const MarkAttendance = React.lazy(() => import('./views/attendance/markattendance/MarkAttendance'))
-const HeirarchyManagement= React.lazy(() => import('./views/reportingperson/hierarchymanagement/hierarchymanagement'))
-const ReportingPerson= React.lazy(() => import('./views/reportingperson/reportingperson/reportingperson'))
-const ReportingManager=React.lazy(() => import('./views/reportingperson/reportingmanager/ReportingManager'))
+const HeirarchyManagement = React.lazy(() => import('./views/reportingperson/hierarchymanagement/hierarchymanagement'))
+const ReportingPerson = React.lazy(() => import('./views/reportingperson/reportingperson/reportingperson'))
+const ReportingManager = React.lazy(() => import('./views/reportingperson/reportingmanager/ReportingManager'))
 const InternalUser = React.lazy(() => import('./views/users/internaluser/InternalUser'))
 const ExternalUser = React.lazy(() => import('./views/users/externaluser/ExternalUser'))
 const UserRole = React.lazy(() => import('./views/users/userrole/UserRole'))
@@ -32,13 +36,13 @@ const Reports = React.lazy(() => import('./views/Report/Report'))
 const BoldReports = React.lazy(() => import('./views/Report/boldreport'))
 const AttendanceReport = React.lazy(() => import('./views/Report/attendancereport/attendancereport'))
 const BirthdayReport = React.lazy(() => import('./views/Report/birthdayreport/birthdayreport'))
-const UserLogReport= React.lazy(() => import('./views/logreports/userlog/userlogreport'))
-const ErrorLogReport= React.lazy(() => import('./views/logreports/errorlog/errorlogreport'))
-const AuditLogReport= React.lazy(() => import('./views/logreports/auditlog/auditlogreport'))
+const UserLogReport = React.lazy(() => import('./views/logreports/userlog/userlogreport'))
+const ErrorLogReport = React.lazy(() => import('./views/logreports/errorlog/errorlogreport'))
+const AuditLogReport = React.lazy(() => import('./views/logreports/auditlog/auditlogreport'))
 
-const ExitInterviewAnswers= React.lazy(() => import('./views/exitinterview/exitinterviewanswers/ExitInterviewAnswers'))
-const ExitInterviewQuestions= React.lazy(() => import('./views/exitinterview/exitinterviewquestions/ExitInterviewQuestions'))
-const Termination= React.lazy(() => import('./views/exitinterview/termination/Termination'))
+const ExitInterviewAnswers = React.lazy(() => import('./views/exitinterview/exitinterviewanswers/ExitInterviewAnswers'))
+const ExitInterviewQuestions = React.lazy(() => import('./views/exitinterview/exitinterviewquestions/ExitInterviewQuestions'))
+const Termination = React.lazy(() => import('./views/exitinterview/termination/Termination'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -125,15 +129,27 @@ const routes = [
     path: '/employee/employeejobdescription',
     name: <Translation>{(t) => t('Employee Job Description')}</Translation>,
     element: EmployeeJobDescription,
-  },  {
+  }, {
     path: '/employee/employee_excelupload',
     name: <Translation>{(t) => t('Employee ExcelUpload')}</Translation>,
     element: Employee_ExcelUpload,
-  },{
+  }, {
+    path: '/exitinterview/exitinterviewanswers_excelupload',
+    name: <Translation>{(t) => t('Employee ExcelUpload')}</Translation>,
+    element: ExitInterviewAnswers_ExcelUpload,
+  }, {
+    path: '/exitinterview/exitinterviewquestions_excelupload',
+    name: <Translation>{(t) => t('Employee ExcelUpload')}</Translation>,
+    element: ExitInterviewQuestions_ExcelUpload,
+  }, {
+    path: '/attendance/attendance_excelupload',
+    name: <Translation>{(t) => t('Employee ExcelUpload')}</Translation>,
+    element: Attendance_ExcelUpload,
+  }, {
     path: '/leaves/leaveshedule',
     name: <Translation>{(t) => t('LeaveSchedule')}</Translation>,
     element: LeaveSchedule,
-  },{
+  }, {
     path: '/leaves/leavetoapprove',
     name: <Translation>{(t) => t('LeaveToApprove')}</Translation>,
     element: LeaveToApprove,
@@ -217,23 +233,23 @@ const routes = [
     path: '/Report/boldreport',
     name: <Translation>{(t) => t('Reports')}</Translation>,
     element: BoldReports,
-  },{
+  }, {
     path: '/Report/attendancereport',
     name: <Translation>{(t) => t('Attendance Report')}</Translation>,
     element: AttendanceReport,
-  },{
+  }, {
     path: '/Report/birthdayreport',
     name: <Translation>{(t) => t('Birthday Report')}</Translation>,
     element: BirthdayReport,
-  },{
+  }, {
     path: '/logreports/userlog',
     name: <Translation>{(t) => t('User Log Reports')}</Translation>,
     element: UserLogReport,
-  },{
+  }, {
     path: '/logreports/errorlog',
     name: <Translation>{(t) => t('Error Log Reports')}</Translation>,
     element: ErrorLogReport,
-  },{
+  }, {
     path: '/logreports/auditlog',
     name: <Translation>{(t) => t('Audit Log Reports')}</Translation>,
     element: AuditLogReport,
@@ -270,7 +286,7 @@ const routes = [
     path: '/exitinterview/exitinterviewquestions',
     name: <Translation>{(t) => t('Exit Interview Questions')}</Translation>,
     element: ExitInterviewQuestions,
-  },{
+  }, {
     path: '/exitinterview/termination',
     name: <Translation>{(t) => t('Termination')}</Translation>,
     element: Termination,

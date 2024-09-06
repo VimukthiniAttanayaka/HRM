@@ -44,7 +44,7 @@ namespace HRM_DAL.Models
 
     public class AttendanceGridViewHeaderModel : ReturnResponse
     {
-        public List<AttendanceGridViewModel> AttendanceGridViewModelList { get; set; } = new List<AttendanceGridViewModel>();
+        public List<AttendanceGridViewModel> Attendance { get; set; } = new List<AttendanceGridViewModel>();
     }
 
     public class AttendanceGridViewModel : ReturnResponseGridViewBaseModel
