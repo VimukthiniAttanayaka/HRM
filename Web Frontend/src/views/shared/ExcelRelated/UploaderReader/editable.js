@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, Input} from 'antd'
+import { Form, Input } from 'antd'
 
 const EditableContext = React.createContext();
 
@@ -19,9 +19,9 @@ export class EditableCell extends React.Component {
   toggleEdit = () => {
     const editing = !this.state.editing;
     this.setState({ editing }, () => {
-      if (editing) {
-        this.input.focus();
-      }
+      // if (editing) {
+      //   this.input.focus();
+      // }
     });
   };
 
@@ -37,12 +37,13 @@ export class EditableCell extends React.Component {
   };
 
   renderCell = form => {
+    // console.log(form)
     this.form = form;
     const { children, dataIndex, record, title } = this.props;
     const { editing } = this.state;
     return editing ? (
       <Form.Item style={{ margin: 0 }}>
-        {form.getFieldDecorator(dataIndex, {
+        {/* {form.getFieldDecorator(dataIndex, {
           rules: [
             {
               required: true,
@@ -50,13 +51,14 @@ export class EditableCell extends React.Component {
             },
           ],
           initialValue: record[dataIndex],
-        })(<Input ref={node => (this.input = node)} onPressEnter={this.save} onBlur={this.save} />)}
+        })(<Input ref={node => (this.input = node)} onPressEnter={this.save} onBlur={this.save} />)
+        } */}
       </Form.Item>
     ) : (
       <div
         className="editable-cell-value-wrap"
         style={{ paddingRight: 24, minHeight: 32 }}
-        onClick={this.toggleEdit}
+        // onClick={this.toggleEdit}
       >
         {children}
       </div>

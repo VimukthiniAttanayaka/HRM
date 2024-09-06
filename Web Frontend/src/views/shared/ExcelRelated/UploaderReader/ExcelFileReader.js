@@ -1,50 +1,53 @@
 
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Table, Button, Popconfirm, Row, Col, Upload } from "antd";//Icon, 
 import { ExcelRenderer } from "react-excel-renderer";
 import { EditableCell } from "./editable";//EditableFormRow, 
+import { getRowsForColumns, getColumnsForSheet } from "./templates"
 
 export default class ExcelPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      classtype: "requests",
       cols: [],
       rows: [],
       errorMessage: null,
-      columns: [
-        {
-          title: "NAME",
-          dataIndex: "name",
-          editable: true
-        },
-        {
-          title: "AGE",
-          dataIndex: "age",
-          editable: true
-        },
-        {
-          title: "GENDER",
-          dataIndex: "gender",
-          editable: true
-        },
-        {
-          title: "Action",
-          dataIndex: "action",
-          render: (text, record) =>
-            this.state.rows.length >= 1 ? (
-              <Popconfirm
-                title="Sure to delete?"
-                onConfirm={() => this.handleDelete(record.key)}
-              >
-                {/* <Icon
-                  type="delete"
-                  theme="filled"
-                  style={{ color: "red", fontSize: "20px" }}
-                /> */}
-              </Popconfirm>
-            ) : null
-        }
-      ]
+      columns: []
+      //[
+      // {
+      //   title: "NAME",
+      //   dataIndex: "name",
+      //   editable: true
+      // },
+      // {
+      //   title: "AGE",
+      //   dataIndex: "age",
+      //   editable: true
+      // },
+      // {
+      //   title: "GENDER",
+      //   dataIndex: "gender",
+      //   editable: true
+      // },
+      // {
+      //   title: "Action",
+      //   dataIndex: "action",
+      //   render: (text, record) =>
+      //     this.state.rows.length >= 1 ? (
+      //       <Popconfirm
+      //         title="Sure to delete?"
+      //         onConfirm={() => this.handleDelete(record.key)}
+      //       >
+      //         {/* <Icon
+      //           type="delete"
+      //           theme="filled"
+      //           style={{ color: "red", fontSize: "20px" }}
+      //         /> */}
+      //       </Popconfirm>
+      //     ) : null
+      // }
+      // ]
     };
   }
 
@@ -67,7 +70,7 @@ export default class ExcelPage extends Component {
     const isExcel =
       file[0].type === "application/vnd.ms-excel" ||
       file[0].type ===
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     if (!isExcel) {
       errorMessage = "You can only upload Excel file!";
     }
@@ -81,7 +84,12 @@ export default class ExcelPage extends Component {
   }
 
   fileHandler = fileList => {
-    console.log("fileList", fileList);
+    // console.log("fileList", fileList);
+    // console.log("classtype", this.state.classtype);
+    console.log("classtype", window.classtype);
+    this.setState({ classtype:  window.classtype });
+    console.log("classtype", this.state.classtype);
+
     let fileObj = fileList;
     if (!fileObj) {
       this.setState({
@@ -94,7 +102,7 @@ export default class ExcelPage extends Component {
       !(
         fileObj.type === "application/vnd.ms-excel" ||
         fileObj.type ===
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
       )
     ) {
       this.setState({
@@ -102,22 +110,44 @@ export default class ExcelPage extends Component {
       });
       return false;
     }
+
+
     //just pass the fileObj as parameter
     ExcelRenderer(fileObj, (err, resp) => {
       if (err) {
         console.log(err);
       } else {
+
         let newRows = [];
-        resp.rows.slice(1).map((row, index) => {
-          if (row && row !== "undefined") {
-            newRows.push({
-              key: index,
-              name: row[0],
-              age: row[1],
-              gender: row[2]
-            });
-          }
-        });
+        let columns = getColumnsForSheet(resp.rows.slice(0))
+        this.setState({ columns: columns });
+        console.log(this.state.classtype);
+        newRows = getRowsForColumns(resp.rows.slice(1), this.state.classtype)
+        console.log(columns);
+
+        // resp.rows.slice(0).map((row, index) => {
+        //   if (row && row !== "undefined") {
+        //     newRows.push({
+        //       key: index,
+        //       name: row[0],
+        //       age: row[1],
+        //       gender: row[2]
+        //     });
+        //   }
+        // });
+        // resp.rows.slice(1).map((row, index) => {
+        //   if (row && row !== "undefined") {
+        //     newRows.push({
+        //       key: index,
+        //       name: row[0],
+        //       age: row[1],
+        //       gender: row[2]
+        //     });
+        //   }
+        // });
+
+        console.log(newRows);
+
         if (newRows.length === 0) {
           this.setState({
             errorMessage: "No data found in file!"
@@ -125,7 +155,7 @@ export default class ExcelPage extends Component {
           return false;
         } else {
           this.setState({
-            cols: resp.cols,
+            cols: columns,//resp.cols,
             rows: newRows,
             errorMessage: null
           });
@@ -136,6 +166,12 @@ export default class ExcelPage extends Component {
   };
 
   handleSubmit = async () => {
+    console.log("submitting: ", this.state.rows);
+    //submit to API
+    //if successful, banigate and clear the data
+    //this.setState({ rows: [] })
+  };
+  handleSubmit1 = async () => {
     console.log("submitting: ", this.state.rows);
     //submit to API
     //if successful, banigate and clear the data
@@ -167,21 +203,40 @@ export default class ExcelPage extends Component {
         cell: EditableCell
       }
     };
-    const columns = this.state.columns.map(col => {
-      if (!col.editable) {
-        return col;
-      }
-      return {
-        ...col,
-        onCell: record => ({
-          record,
-          editable: col.editable,
-          dataIndex: col.dataIndex,
-          title: col.title,
-          handleSave: this.handleSave
-        })
-      };
-    });
+    // const columns =
+    //   [
+    //     {
+    //       title: "NAME",
+    //       dataIndex: "name",
+    //       editable: true
+    //     },
+    //     {
+    //       title: "AGE",
+    //       dataIndex: "age",
+    //       editable: true
+    //     },
+    //     {
+    //       title: "GENDER",
+    //       dataIndex: "gender",
+    //       editable: true
+    //     },
+    //   ];
+
+    // const columns = this.state.columns.map(col => {
+    //   if (!col.editable) {
+    //     return col;
+    //   }
+    //   return {
+    //     ...col,
+    //     onCell: record => ({
+    //       record,
+    //       editable: col.editable,
+    //       dataIndex: col.dataIndex,
+    //       title: col.title,
+    //       handleSave: this.handleSave
+    //     })
+    //   };
+    // });
     return (
       <>
         {/* <h1>Importing Excel Component</h1> */}
@@ -216,15 +271,15 @@ export default class ExcelPage extends Component {
           >
             {this.state.rows.length > 0 && (
               <>
-                <Button
+                {/* <Button
                   onClick={this.handleAdd}
                   size="large"
                   type="info"
                   style={{ marginBottom: 16 }}
                 >
-                  {/* <Icon type="plus" /> */}
                   Add a row
-                </Button>{" "}
+                </Button>{" "} */}
+                {/* <Icon type="plus" /> */}
                 <Button
                   onClick={this.handleSubmit}
                   size="large"
@@ -239,14 +294,15 @@ export default class ExcelPage extends Component {
         </Row>
         <div>
           <Upload
-            name="file"
+            name="file"// onClick={() => this.setState({ classtype: "dfasfasf" })}
             beforeUpload={this.fileHandler}
             onRemove={() => this.setState({ rows: [] })}
             multiple={false}
+          // onPreview={}
           >
             <Button>
               {/* <Icon type="upload" /> */}
-               Click to Upload Excel File
+              Click to Upload Excel File
             </Button>
           </Upload>
         </div>
@@ -255,7 +311,7 @@ export default class ExcelPage extends Component {
             components={components}
             rowClassName={() => "editable-row"}
             dataSource={this.state.rows}
-            columns={columns}
+            columns={this.state.columns}
           />
         </div>
       </>

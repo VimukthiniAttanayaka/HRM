@@ -117,6 +117,13 @@ const _nav = [
         to: '/employee/employee',
         disabled: !EEmployee,
         // isVisible:{getAttendance}
+      }, {
+        component: CNavItem,
+        // name: <Translation>{(t) => t('Employee')}</Translation>,
+        name: getLabelText('Employee_ExcelUpload', templatetype),
+        to: '/employee/employee_excelupload',
+        // disabled: !EEmployee,
+        // isVisible:{getAttendance}
       },
       //  {
       //   component: CNavItem,
