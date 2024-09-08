@@ -1,7 +1,7 @@
 // import React from 'react'
 import { CCard, CCardHeader, CCardBody } from '@coreui/react-pro'
 
-import AnswersList_ExcelUploadDataGrid from './AnswersList_ExcelUploadDataGrid.js'
+import AnswersApprovalDataGrid from './AnswersApprovalDataGrid.js'
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import ExcelFileReader from '../../shared/ExcelRelated/UploaderReader/ExcelFileReader.js'
 // import { getLeaveEntitlementAll } from '../../../apicalls/LeaveEntitlement/get_all_list.js';
@@ -26,8 +26,8 @@ const AnswersList_ExcelUpload = () => {
           {getLabelText('Company List', templatetype)}
         </CCardHeader>
         <CCardBody>
-          <ExcelFileReader />
-          <AnswersList_ExcelUploadDataGrid onOpen={() => handleOpenPopup} />
+        <ExcelFileReader />
+          <AnswersApprovalDataGrid onOpen={() => handleOpenPopup} />
         </CCardBody>
       </CCard>
     </>

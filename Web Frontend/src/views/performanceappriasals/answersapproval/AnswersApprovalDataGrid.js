@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 // import CompanyPopup from './CompanyPopup.js';
-import { getPerformanceAppriasalQuestionsAll } from '../../../apicalls/performanceappriasalquestions/get_all_list.js';
-// import { getPerformanceAppriasalQuestionsSingle } from '../../../apicalls/performanceappriasalquestions/get_LeaveEntitlement_single.js';
+import { getPerformanceAppriasalAnswersAll } from '../../../apicalls/performanceappriasalanswers/get_all_list.js';
+// import { getPerformanceAppriasalAnswersSingle } from '../../../apicalls/performanceappriasalanswers/get_LeaveEntitlement_single.js';
 // import { getLabelText } from 'src/MultipleLanguageSheets'
 import { getBadge } from '../../shared/gridviewconstants.js';
-import { columns, headers } from '../../controllers/performanceappriasalquestions_controllers.js';
+import { columns, headers } from '../../controllers/performanceappriasalanswers_controllers.js';
 import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
 import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
 import Pagination from '../../shared/Pagination.js'
 
-const QuestionsList_ExcelUploadDataGrid = () => {
+const AnswersApprovalDataGrid = () => {
   let templatetype = 'translation_company'
   let templatetype_base = 'translation'
 
@@ -271,4 +271,4 @@ const QuestionsList_ExcelUploadDataGrid = () => {
   )
 }
 
-export default QuestionsList_ExcelUploadDataGrid
+export default AnswersApprovalDataGrid

@@ -207,7 +207,7 @@ const _nav = [
   {
     component: CNavGroup,
     // name: <Translation>{(t) => t('performance appraisals')}</Translation>,
-    name: getLabelText('performance appraisals', templatetype),
+    name: getLabelText('Performance Appraisals', templatetype),
     items: [{
       component: CNavItem,
       // name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,

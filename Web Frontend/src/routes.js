@@ -6,13 +6,14 @@ const Company = React.lazy(() => import('./views/employee/Company/Company'))
 const Employee = React.lazy(() => import('./views/employee/employee/Employee'))
 const Employee_ExcelUpload = React.lazy(() => import('./views/employee/employee_excelupload/Employee_ExcelUpload'))
 const EmployeeJobDescription = React.lazy(() => import('./views/employee/employeejobdescription/EmployeeJobDescription'))
-const ExitInterviewAnswers_ExcelUpload = React.lazy(() => import('./views/exitinterview/exitinterviewanswers_excelupload/ExitInterviewAnswers_ExcelUpload'))
-const ExitInterviewQuestions_ExcelUpload = React.lazy(() => import('./views/exitinterview/exitinterviewquestions_excelupload/ExitInterviewQuestions_ExcelUpload'))
-const Attendance_ExcelUpload = React.lazy(() => import('./views/attendance/attendance_excelupload/Attendance_ExcelUpload'))
 
 const PerformanceAppriasalsQuestionsList_ExcelUpload = React.lazy(() => import('./views/performanceappriasals/questionslist_excelupload/QuestionsList_ExcelUpload'))
 const PerformanceAppriasalsAnswersList_ExcelUpload = React.lazy(() => import('./views/performanceappriasals/answerslist_excelupload/AnswersList_ExcelUpload'))
 const PerformanceAppriasalsAnswers_Approval = React.lazy(() => import('./views/performanceappriasals/answersapproval/AnswersApproval'))
+
+const ExitInterviewAnswers_ExcelUpload = React.lazy(() => import('./views/exitinterview/exitinterviewanswers_excelupload/ExitInterviewAnswers_ExcelUpload'))
+const ExitInterviewQuestions_ExcelUpload = React.lazy(() => import('./views/exitinterview/exitinterviewquestions_excelupload/ExitInterviewQuestions_ExcelUpload'))
+const Attendance_ExcelUpload = React.lazy(() => import('./views/attendance/attendance_excelupload/Attendance_ExcelUpload'))
 
 const LeaveSchedule = React.lazy(() => import('./views/leaves/leaveshedule/LeaveSchedule'))
 const LeaveType = React.lazy(() => import('./views/leaves/leavetype/LeaveType'))
@@ -20,6 +21,7 @@ const LeaveEntitlement = React.lazy(() => import('./views/leaves/leaveentitlemen
 const LeaveToApprove = React.lazy(() => import('./views/leaves/leavetoapprove/LeaveToApprove'))
 const Attendance = React.lazy(() => import('./views/attendance/attendance/Attendance'))
 const MarkAttendance = React.lazy(() => import('./views/attendance/markattendance/MarkAttendance'))
+
 const HeirarchyManagement = React.lazy(() => import('./views/reportingperson/hierarchymanagement/hierarchymanagement'))
 const ReportingPerson = React.lazy(() => import('./views/reportingperson/reportingperson/reportingperson'))
 const ReportingManager = React.lazy(() => import('./views/reportingperson/reportingmanager/ReportingManager'))
@@ -171,17 +173,17 @@ const routes = [
   {
     path: '/performanceappriasals/questionslist_excelupload',
     name: <Translation>{(t) => t('Questions_List_Upload')}</Translation>,
-    element: PerformanceAppriasalsQuestionsList_ExcelUpload = React.lazy(() => import('./views/performanceappriasals/questionslist_excelupload/QuestionsList_ExcelUpload'))
+    element: PerformanceAppriasalsQuestionsList_ExcelUpload,
   },
   {
     path: '/performanceappriasals/answerslist_excelupload',
     name: <Translation>{(t) => t('Answers_List_Upload')}</Translation>,
-    element: PerformanceAppriasalsAnswersList_ExcelUpload = React.lazy(() => import('./views/performanceappriasals/answerslist_excelupload/AnswersList_ExcelUpload'))
+    element: PerformanceAppriasalsAnswersList_ExcelUpload,
   },
   {
     path: '/performanceappriasals/answersapproval',
     name: <Translation>{(t) => t('Answers_Approval')}</Translation>,
-    element: PerformanceAppriasalsAnswers_Approval = React.lazy(() => import('./views/performanceappriasals/answersapproval/AnswersApproval'))
+    element: PerformanceAppriasalsAnswers_Approval,
   },
   {
     path: '/attendance/attendance',
