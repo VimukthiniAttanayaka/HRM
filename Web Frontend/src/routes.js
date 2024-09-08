@@ -10,6 +10,10 @@ const ExitInterviewAnswers_ExcelUpload = React.lazy(() => import('./views/exitin
 const ExitInterviewQuestions_ExcelUpload = React.lazy(() => import('./views/exitinterview/exitinterviewquestions_excelupload/ExitInterviewQuestions_ExcelUpload'))
 const Attendance_ExcelUpload = React.lazy(() => import('./views/attendance/attendance_excelupload/Attendance_ExcelUpload'))
 
+const PerformanceAppriasalsQuestionsList_ExcelUpload = React.lazy(() => import('./views/performanceappriasals/questionslist_excelupload/QuestionsList_ExcelUpload'))
+const PerformanceAppriasalsAnswersList_ExcelUpload = React.lazy(() => import('./views/performanceappriasals/answerslist_excelupload/AnswersList_ExcelUpload'))
+const PerformanceAppriasalsAnswers_Approval = React.lazy(() => import('./views/performanceappriasals/answersapproval/AnswersApproval'))
+
 const LeaveSchedule = React.lazy(() => import('./views/leaves/leaveshedule/LeaveSchedule'))
 const LeaveType = React.lazy(() => import('./views/leaves/leavetype/LeaveType'))
 const LeaveEntitlement = React.lazy(() => import('./views/leaves/leaveentitlement/LeaveEntitlement'))
@@ -163,6 +167,21 @@ const routes = [
     path: '/leaves/leavetype',
     name: <Translation>{(t) => t('LeaveType')}</Translation>,
     element: LeaveType,
+  },
+  {
+    path: '/performanceappriasals/questionslist_excelupload',
+    name: <Translation>{(t) => t('Questions_List_Upload')}</Translation>,
+    element: PerformanceAppriasalsQuestionsList_ExcelUpload = React.lazy(() => import('./views/performanceappriasals/questionslist_excelupload/QuestionsList_ExcelUpload'))
+  },
+  {
+    path: '/performanceappriasals/answerslist_excelupload',
+    name: <Translation>{(t) => t('Answers_List_Upload')}</Translation>,
+    element: PerformanceAppriasalsAnswersList_ExcelUpload = React.lazy(() => import('./views/performanceappriasals/answerslist_excelupload/AnswersList_ExcelUpload'))
+  },
+  {
+    path: '/performanceappriasals/answersapproval',
+    name: <Translation>{(t) => t('Answers_Approval')}</Translation>,
+    element: PerformanceAppriasalsAnswers_Approval = React.lazy(() => import('./views/performanceappriasals/answersapproval/AnswersApproval'))
   },
   {
     path: '/attendance/attendance',

@@ -120,11 +120,11 @@ const _nav = [
       }, {
         component: CNavItem,
         // name: <Translation>{(t) => t('Employee')}</Translation>,
-        name: getLabelText('Employee_ExcelUpload', templatetype),
+        name: getLabelText('Employee Excel Upload', templatetype),
         to: '/employee/employee_excelupload',
         // disabled: !EEmployee,
         // isVisible:{getAttendance}
-      },,
+      }, ,
       //  {
       //   component: CNavItem,
       //   // name: <Translation>{(t) => t('Employee Job Desription')}</Translation>,
@@ -157,10 +157,10 @@ const _nav = [
         to: '/attendance/markattendance',
         disabled: !AMarkAttendance,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-      },{
+      }, {
         component: CNavItem,
         // name: <Translation>{(t) => t('Employee')}</Translation>,
-        name: getLabelText('attendance_excelupload', templatetype),
+        name: getLabelText('Attendance Excel Upload', templatetype),
         to: '/attendance/attendance_excelupload',
         // disabled: !EEmployee,
         // isVisible:{getAttendance}
@@ -204,10 +204,33 @@ const _nav = [
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       },],
   },
-  // {
-  //   component: CNavTitle,
-  //   name: <Translation>{(t) => t('performance appraisals')}</Translation>,
-  // },
+  {
+    component: CNavGroup,
+    // name: <Translation>{(t) => t('performance appraisals')}</Translation>,
+    name: getLabelText('performance appraisals', templatetype),
+    items: [{
+      component: CNavItem,
+      // name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
+      name: getLabelText('Questions List Upload', templatetype),
+      to: '/performanceappriasals/questionslist_excelupload',
+      disabled: !RPHierarchyManagement,
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    },{
+      component: CNavItem,
+      // name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
+      name: getLabelText('Answers List Upload', templatetype),
+      to: '/performanceappriasals/answerslist_excelupload',
+      disabled: !RPHierarchyManagement,
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    },{
+      component: CNavItem,
+      // name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
+      name: getLabelText('Answers Approval', templatetype),
+      to: '/performanceappriasals/answersapproval',
+      disabled: !RPHierarchyManagement,
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    },]
+  },
   {
     component: CNavGroup,
     // name: <Translation>{(t) => t('Reporting person')}</Translation>,
@@ -219,7 +242,7 @@ const _nav = [
       to: '/reportingperson/hierarchymanagement',
       disabled: !RPHierarchyManagement,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-    }, 
+    },
     // {
     //   component: CNavItem,
     //   // name: <Translation>{(t) => t('Reporting Person')}</Translation>,
@@ -228,7 +251,7 @@ const _nav = [
     //   disabled: !RPReportingPerson,
     //   // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
     // },
-     {
+    {
       component: CNavItem,
       // name: <Translation>{(t) => t('Reporting Manager Search')}</Translation>,
       name: getLabelText('Reporting Manager', templatetype),
@@ -256,7 +279,7 @@ const _nav = [
       to: '/exitinterview/exitinterviewquestions',
       // disabled: !UMUserAccessGroup,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-    },{
+    }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('User Access Group')}</Translation>,
       name: getLabelText('Exit Interview Answers', templatetype),
@@ -266,18 +289,18 @@ const _nav = [
     }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('Employee')}</Translation>,
-      name: getLabelText('exitinterviewanswers_excelupload', templatetype),
+      name: getLabelText('Exit Interview Answers Excel Upload', templatetype),
       to: '/exitinterview/exitinterviewanswers_excelupload',
       // disabled: !EEmployee,
       // isVisible:{getAttendance}
     }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('Employee')}</Translation>,
-      name: getLabelText('exitinterviewquestions_excelupload', templatetype),
+      name: getLabelText('Exit Interview Questions Excel Upload', templatetype),
       to: '/exitinterview/exitinterviewquestions_excelupload',
       // disabled: !EEmployee,
       // isVisible:{getAttendance}
-    } ,{
+    }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('User Access Group')}</Translation>,
       name: getLabelText('Termination', templatetype),
