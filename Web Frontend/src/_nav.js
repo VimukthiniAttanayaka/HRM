@@ -211,18 +211,32 @@ const _nav = [
     items: [{
       component: CNavItem,
       // name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
+      name: getLabelText('Questions', templatetype),
+      to: '/performanceappriasals/questions',
+      disabled: !RPHierarchyManagement,
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    }, {
+      component: CNavItem,
+      // name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
+      name: getLabelText('Answers', templatetype),
+      to: '/performanceappriasals/answers',
+      disabled: !RPHierarchyManagement,
+      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+    }, {
+      component: CNavItem,
+      // name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
       name: getLabelText('Questions List Upload', templatetype),
       to: '/performanceappriasals/questionslist_excelupload',
       disabled: !RPHierarchyManagement,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-    },{
+    }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
       name: getLabelText('Answers List Upload', templatetype),
       to: '/performanceappriasals/answerslist_excelupload',
       disabled: !RPHierarchyManagement,
       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-    },{
+    }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('Hierarchy Management')}</Translation>,
       name: getLabelText('Answers Approval', templatetype),

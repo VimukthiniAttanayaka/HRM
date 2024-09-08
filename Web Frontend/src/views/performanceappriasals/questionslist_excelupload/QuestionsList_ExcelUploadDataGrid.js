@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 // import CompanyPopup from './CompanyPopup.js';
-import { getPerformanceAppriasalQuestionsAll } from '../../../apicalls/performanceappriasalquestions/get_all_list.js';
+// import { getPerformanceAppriasalQuestionsAll } from '../../../apicalls/performanceappriasalquestions/get_all_list.js';
 // import { getPerformanceAppriasalQuestionsSingle } from '../../../apicalls/performanceappriasalquestions/get_LeaveEntitlement_single.js';
 // import { getLabelText } from 'src/MultipleLanguageSheets'
 import { getBadge } from '../../shared/gridviewconstants.js';
@@ -103,8 +103,8 @@ const QuestionsList_ExcelUploadDataGrid = () => {
       EME_LeaveEntitlementID: 'sedcx'
     }
 
-    const LeaveEntitlementDetails = await getLeaveEntitlementAll(formData)
-    setData(LeaveEntitlementDetails);
+    // const LeaveEntitlementDetails = await getLeaveEntitlementAll(formData)
+    // setData(LeaveEntitlementDetails);
 
   }
 

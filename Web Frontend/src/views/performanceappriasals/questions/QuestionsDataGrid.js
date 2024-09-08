@@ -12,7 +12,7 @@ import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
 import Pagination from '../../shared/Pagination.js'
 
-const AnswersList_ExcelUploadDataGrid = () => {
+const QuestionsDataGrid = () => {
   let templatetype = 'translation_company'
   let templatetype_base = 'translation'
 
@@ -271,4 +271,4 @@ const AnswersList_ExcelUploadDataGrid = () => {
   )
 }
 
-export default AnswersList_ExcelUploadDataGrid
+export default QuestionsDataGrid

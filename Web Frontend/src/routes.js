@@ -10,6 +10,8 @@ const EmployeeJobDescription = React.lazy(() => import('./views/employee/employe
 const PerformanceAppriasalsQuestionsList_ExcelUpload = React.lazy(() => import('./views/performanceappriasals/questionslist_excelupload/QuestionsList_ExcelUpload'))
 const PerformanceAppriasalsAnswersList_ExcelUpload = React.lazy(() => import('./views/performanceappriasals/answerslist_excelupload/AnswersList_ExcelUpload'))
 const PerformanceAppriasalsAnswers_Approval = React.lazy(() => import('./views/performanceappriasals/answersapproval/AnswersApproval'))
+const PerformanceAppriasalsQuestions = React.lazy(() => import('./views/performanceappriasals/questions/Questions'))
+const PerformanceAppriasalsAnswers = React.lazy(() => import('./views/performanceappriasals/answers/Answers'))
 
 const ExitInterviewAnswers_ExcelUpload = React.lazy(() => import('./views/exitinterview/exitinterviewanswers_excelupload/ExitInterviewAnswers_ExcelUpload'))
 const ExitInterviewQuestions_ExcelUpload = React.lazy(() => import('./views/exitinterview/exitinterviewquestions_excelupload/ExitInterviewQuestions_ExcelUpload'))
@@ -174,6 +176,10 @@ const routes = [
     path: '/performanceappriasals/questionslist_excelupload',
     name: <Translation>{(t) => t('Questions_List_Upload')}</Translation>,
     element: PerformanceAppriasalsQuestionsList_ExcelUpload,
+  }, {
+    path: '/performanceappriasals/questions',
+    name: <Translation>{(t) => t('Questions')}</Translation>,
+    element: PerformanceAppriasalsQuestions,
   },
   {
     path: '/performanceappriasals/answerslist_excelupload',
@@ -181,6 +187,10 @@ const routes = [
     element: PerformanceAppriasalsAnswersList_ExcelUpload,
   },
   {
+    path: '/performanceappriasals/answers',
+    name: <Translation>{(t) => t('Answers')}</Translation>,
+    element: PerformanceAppriasalsAnswers,
+  },  {
     path: '/performanceappriasals/answersapproval',
     name: <Translation>{(t) => t('Answers_Approval')}</Translation>,
     element: PerformanceAppriasalsAnswers_Approval,
