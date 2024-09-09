@@ -202,6 +202,13 @@ const _nav = [
         to: '/leaves/leavetype',
         disabled: !LLeaveType,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      },{
+        component: CNavItem,
+        // name: <Translation>{(t) => t('Leave Type')}</Translation>,
+        name: getLabelText('Leave Entitlement Excel Upload', templatetype),
+        to: '/leaves/leaveentitlement_excelupload',
+        disabled: !LLeaveType,
+        // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
       },],
   },
   {

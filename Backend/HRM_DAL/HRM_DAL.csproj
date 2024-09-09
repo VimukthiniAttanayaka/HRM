@@ -80,6 +80,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Models\PerformanceAppriasalAnswersModel.cs" />
+    <Compile Include="Models\PerformanceAppriasalApprovalModel.cs" />
+    <Compile Include="Models\PerformanceAppriasalQuestionsModel.cs" />
     <Compile Include="Models\ExitInterviewQuestionsModel.cs" />
     <Compile Include="Models\EmployeeJobDescriptionModel.cs" />
     <Compile Include="Models\CurrencyModel.cs" />

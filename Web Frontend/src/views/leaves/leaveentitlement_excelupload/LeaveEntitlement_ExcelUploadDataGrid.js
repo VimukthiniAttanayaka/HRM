@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 // import CompanyPopup from './CompanyPopup.js';
-import { getLeaveEntitlementAll } from '../../../apicalls/LeaveEntitlement/get_all_list.js';
-import { getLeaveEntitlementSingle } from '../../../apicalls/LeaveEntitlement/get_LeaveEntitlement_single.js';
+// import { getLeaveEntitlementAll } from '../../../apicalls/LeaveEntitlement/get_all_list.js';
+// import { getLeaveEntitlementSingle } from '../../../apicalls/LeaveEntitlement/get_LeaveEntitlement_single.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import { getBadge } from '../../shared/gridviewconstants.js';
-import { columns, headers } from '../../controllers/LeaveEntitlement_controllers.js';
+import { columns, headers } from '../../controllers/leaveentitlement_controller.js';
 import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
 import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
@@ -103,8 +103,8 @@ const LeaveEntitlement_ExcelUploadDataGrid = () => {
       EME_LeaveEntitlementID: 'sedcx'
     }
 
-    const LeaveEntitlementDetails = await getLeaveEntitlementAll(formData)
-    setData(LeaveEntitlementDetails);
+    // const LeaveEntitlementDetails = await getLeaveEntitlementAll(formData)
+    // setData(LeaveEntitlementDetails);
 
   }
 

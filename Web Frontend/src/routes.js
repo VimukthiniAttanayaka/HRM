@@ -16,6 +16,7 @@ const PerformanceAppriasalsAnswers = React.lazy(() => import('./views/performanc
 const ExitInterviewAnswers_ExcelUpload = React.lazy(() => import('./views/exitinterview/exitinterviewanswers_excelupload/ExitInterviewAnswers_ExcelUpload'))
 const ExitInterviewQuestions_ExcelUpload = React.lazy(() => import('./views/exitinterview/exitinterviewquestions_excelupload/ExitInterviewQuestions_ExcelUpload'))
 const Attendance_ExcelUpload = React.lazy(() => import('./views/attendance/attendance_excelupload/Attendance_ExcelUpload'))
+const LeaveEntitlement_ExcelUpload = React.lazy(() => import('./views/leaves/leaveentitlement_excelupload/LeaveEntitlement_ExcelUpload'))
 
 const LeaveSchedule = React.lazy(() => import('./views/leaves/leaveshedule/LeaveSchedule'))
 const LeaveType = React.lazy(() => import('./views/leaves/leavetype/LeaveType'))
@@ -171,6 +172,11 @@ const routes = [
     path: '/leaves/leavetype',
     name: <Translation>{(t) => t('LeaveType')}</Translation>,
     element: LeaveType,
+  },
+  {
+    path: '/leaves/leaveentitlement_excelupload',
+    name: <Translation>{(t) => t('Leave Entitlement Excel Upload')}</Translation>,
+    element: LeaveEntitlement_ExcelUpload,
   },
   {
     path: '/performanceappriasals/questionslist_excelupload',

@@ -5,54 +5,16 @@ import data from './_data.js'
 import LeaveTypePopup from './LeaveEntitlementPopup.js';
 // import loadDetails from './LeaveTypePopup.js';
 import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
+import { getBadge } from '../../shared/gridviewconstants.js';
+import { columns, headers } from '../../controllers/leaveentitlement_controller.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
+import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
 const LeaveEntitlementDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
-
-  const columns = [
-    {
-      key: 'id',
-      // label: '',
-      // filter: false,
-      // sorter: false,
-    },
-    {
-      key: 'leavetype',
-      _style: { width: '20%' },
-    },
-
-    {
-      key: 'alotment',
-      _style: { width: '20%' }
-    }, {
-      key: 'status',
-      _style: { width: '20%' }
-    },
-
-    {
-      key: 'show_details',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-  ];
-  const getBadge = (status) => {
-    switch (status) {
-      case 'Active':
-        return 'success'
-      case 'Inactive':
-        return 'secondary'
-      case 'Pending':
-        return 'warning'
-      case 'Banned':
-        return 'danger'
-      default:
-        return 'primary'
-    }
-  }
 
   const [leaveEntitlementDetails, setLeaveEntitlementDetails] = useState([])
   // const [leaveTypeId, setLeaveTypeId] = useState('')
