@@ -19,6 +19,8 @@ const ExternalUserDataGrid = () => {
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
 
+  const [popupStatus, setPopupStatus] = useState('create')
+
   const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
   const [currentPage, setCurrentPage] = useState(1);
   const [columnFilter, setColumnFilter] = useState([])
@@ -43,7 +45,7 @@ const ExternalUserDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      UD_UserName: item
+      UE_UserID: item
     }
 console.log(item)
  
@@ -53,6 +55,19 @@ console.log(item)
     setExternalUserDetails(ExternalUserDetails);
     handleOpenPopup()
   }
+  const toggleEdit = (index) => {
+    setPopupStatus('edit')
+    toggleDetails(index)
+  }
+  const toggleDelete = (index) => {
+    setPopupStatus('delete')
+    toggleDetails(index)
+  }
+  const toggleView = (index) => {
+    setPopupStatus('view')
+    toggleDetails(index)
+  }
+  
   const toggleDetails = (index) => {
 
 
@@ -118,7 +133,8 @@ console.log(item)
     setVisible(false);
     setExternalUserDetails([]);
   };
-
+  
+  
   return (
     <CCardBody>
       <CRow>
@@ -143,7 +159,7 @@ console.log(item)
           </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <ExternalUserPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} ExternalUserDetails={ExternalUserDetails} />
+          <ExternalUserPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} ExternalUserDetails={ExternalUserDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -184,7 +200,7 @@ console.log(item)
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleEdit(item.id)
+                    toggleEdit(item.UserID)
                   }}
                 >
                   Edit
@@ -200,7 +216,7 @@ console.log(item)
                 shape="square"
                 size="sm"
                 onClick={() => {
-                  toggleView(item.id)
+                  toggleView(item.UserID)
                 }}
               >
                 View
@@ -216,7 +232,7 @@ console.log(item)
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDelete(item.id)
+                    toggleDelete(item.UserID)
                   }}
                 >
                   Delete
@@ -226,7 +242,7 @@ console.log(item)
           ),
           details: (item) => {
             return (
-              <CCollapse visible={details.includes(item.id)}>
+              <CCollapse visible={details.includes(item.UserID)}>
                 <CCardBody className="p-3">
                   <h4>{item.username}</h4>
                   <p className="text-muted">User since: {item.registered}</p>

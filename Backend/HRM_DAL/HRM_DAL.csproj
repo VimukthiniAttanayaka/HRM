@@ -80,6 +80,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Models\InternalUserModel.cs" />
     <Compile Include="Models\PerformanceAppriasalAnswersModel.cs" />
     <Compile Include="Models\PerformanceAppriasalApprovalModel.cs" />
     <Compile Include="Models\PerformanceAppriasalQuestionsModel.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Models\ReportsModels.cs" />
     <Compile Include="Models\LogReportsModels.cs" />
     <Compile Include="Models\MenuAccessModel.cs" />
+    <Compile Include="Models\ExternalUserModel.cs" />
     <Compile Include="Models\UserRoleAccessGroupModel.cs" />
     <Compile Include="Models\UserMenuModel.cs" />
     <Compile Include="Models\Address.cs" />

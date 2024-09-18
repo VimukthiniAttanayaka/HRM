@@ -30,41 +30,41 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnUserModelHead> get_user_single(GetUserSingleModel CUser)//ok
+        public List<ReturnExternalUserModelHead> get_user_single(GetExternalUserSingleModel CUser)//ok
         {
-            List<ReturnUserModelHead> objCusUserHeadList = new List<ReturnUserModelHead>();
-            ReturnUserModelHead obj = new ReturnUserModelHead() { resp = false, msg = "sfsf" };
-            obj.user = new List<ReturnUserModel>();
-            //if (CUser.UD_UserID == "test")
-            //    obj.user.Add(new ReturnUserModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true });
-            //if (CUser.UD_UserID == "test1") obj.user.Add(new ReturnUserModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true });
-            //if (CUser.UD_UserID == "test2") obj.user.Add(new ReturnUserModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true });
-            objCusUserHeadList.Add(obj);
-            return objCusUserHeadList;
+            List<ReturnExternalUserModelHead> objCusUserHeadList = new List<ReturnExternalUserModelHead>();
+            //ReturnUserModelHead obj = new ReturnUserModelHead() { resp = false, msg = "sfsf" };
+            //obj.user = new List<ReturnUserModel>();
+            ////if (CUser.UD_UserID == "test")
+            ////    obj.user.Add(new ReturnUserModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true });
+            ////if (CUser.UD_UserID == "test1") obj.user.Add(new ReturnUserModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true });
+            ////if (CUser.UD_UserID == "test2") obj.user.Add(new ReturnUserModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true });
+            //objCusUserHeadList.Add(obj);
+            //return objCusUserHeadList;
 
             try
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, CUser);
 
-                objCusUserHeadList = user_BL.get_user_single(CUser);
+                objCusUserHeadList = user_BL.get_user_external_single(CUser);
                 return objCusUserHeadList;
             }
             catch (Exception ex)
             {
 
-                ReturnUserModelHead objCusUserHead = new ReturnUserModelHead
+                ReturnExternalUserModelHead objCusUserHead = new ReturnExternalUserModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
                 };
                 objCusUserHeadList.Add(objCusUserHead);
 
-                objError.WriteLog(0, "UserController", "get_user_single", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "get_user_single", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "ExternalUserController", "get_user_single", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "ExternalUserController", "get_user_single", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserController", "get_user_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "get_user_single", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "ExternalUserController", "get_user_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "ExternalUserController", "get_user_single", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -77,40 +77,40 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnUserAllModelHead> get_user_all(GetUserAllModel CUserall)//ok
+        public List<ReturnExternalUserAllModelHead> get_user_all(GetUserAllModel CUserall)//ok
         {
-            List<ReturnUserAllModelHead> objCusUserHeadList = new List<ReturnUserAllModelHead>();
-            ReturnUserAllModelHead obj = new ReturnUserAllModelHead() { resp = false, msg = "sfsf" };
-            obj.User = new List<ReturnUserAllModel>();
-            obj.User.Add(new ReturnUserAllModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true });
-            obj.User.Add(new ReturnUserAllModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true });
-            obj.User.Add(new ReturnUserAllModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true });
-            objCusUserHeadList.Add(obj);
-            return objCusUserHeadList;
+            List<ReturnExternalUserAllModelHead> objCusUserHeadList = new List<ReturnExternalUserAllModelHead>();
+            //ReturnUserAllModelHead obj = new ReturnUserAllModelHead() { resp = false, msg = "sfsf" };
+            //obj.User = new List<ReturnUserAllModel>();
+            //obj.User.Add(new ReturnUserAllModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true });
+            //obj.User.Add(new ReturnUserAllModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true });
+            //obj.User.Add(new ReturnUserAllModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true });
+            //objCusUserHeadList.Add(obj);
+            //return objCusUserHeadList;
 
             try
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, CUserall);
 
-                objCusUserHeadList = user_BL.get_user_all(CUserall);
+                objCusUserHeadList = user_BL.sp_get_user_external_all(CUserall);
                 return objCusUserHeadList;
             }
             catch (Exception ex)
             {
 
-                ReturnUserAllModelHead objCusUserHead = new ReturnUserAllModelHead
+                ReturnExternalUserAllModelHead objCusUserHead = new ReturnExternalUserAllModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
                 };
                 objCusUserHeadList.Add(objCusUserHead);
 
-                objError.WriteLog(0, "UserController", "get_user_all", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "get_user_all", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "ExternalUserController", "get_user_all", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "ExternalUserController", "get_user_all", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserController", "get_user_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "get_user_all", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "ExternalUserController", "get_user_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "ExternalUserController", "get_user_all", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -143,12 +143,12 @@ namespace HRM.Controllers
         //        };
         //        objUserHeadList.Add(objUserHead);
 
-        //        objError.WriteLog(0, "UserController", "inactivate_user", "Stack Track: " + ex.StackTrace);
-        //        objError.WriteLog(0, "UserController", "inactivate_user", "Error Message: " + ex.Message);
+        //        objError.WriteLog(0, "ExternalUserController", "inactivate_user", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "ExternalUserController", "inactivate_user", "Error Message: " + ex.Message);
         //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
         //        {
-        //            objError.WriteLog(0, "UserController", "inactivate_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-        //            objError.WriteLog(0, "UserController", "inactivate_user", "Inner Exception Message: " + ex.InnerException.Message);
+        //            objError.WriteLog(0, "ExternalUserController", "inactivate_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "ExternalUserController", "inactivate_user", "Inner Exception Message: " + ex.InnerException.Message);
         //        }
         //        return objUserHeadList;
         //    }
@@ -181,12 +181,12 @@ namespace HRM.Controllers
                 };
                 objCUserHeadList.Add(objCusUserHead);
 
-                objError.WriteLog(0, "UserController", "add_new_user", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "add_new_user", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "ExternalUserController", "add_new_user", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "ExternalUserController", "add_new_user", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserController", "add_new_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "add_new_user", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "ExternalUserController", "add_new_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "ExternalUserController", "add_new_user", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }
@@ -196,7 +196,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnResponse> modify_user(UserModel item)//ok
+        public List<ReturnResponse> modify_user(ExternalUserModel item)//ok
         {
             List<ReturnResponse> objCUserHeadList = new List<ReturnResponse>();
 
@@ -204,7 +204,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
 
-                objCUserHeadList = user_BL.modify_user(item);
+                objCUserHeadList = user_BL.modify_external_user(item);
                 return objCUserHeadList;
             }
             catch (Exception ex)
@@ -216,12 +216,12 @@ namespace HRM.Controllers
                 };
                 objCUserHeadList.Add(objCusUserHead);
 
-                objError.WriteLog(0, "UserController", "modify_user", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserController", "modify_user", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "ExternalUserController", "modify_user", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "ExternalUserController", "modify_user", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserController", "modify_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserController", "modify_user", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "ExternalUserController", "modify_user", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "ExternalUserController", "modify_user", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }
@@ -252,12 +252,12 @@ namespace HRM.Controllers
         //        };
         //        objUserHeadList.Add(objUserHead);
 
-        //        objError.WriteLog(0, "UserController", "change_password", "Stack Track: " + ex.StackTrace);
-        //        objError.WriteLog(0, "UserController", "change_password", "Error Message: " + ex.Message);
+        //        objError.WriteLog(0, "ExternalUserController", "change_password", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "ExternalUserController", "change_password", "Error Message: " + ex.Message);
         //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
         //        {
-        //            objError.WriteLog(0, "UserController", "change_password", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-        //            objError.WriteLog(0, "UserController", "change_password", "Inner Exception Message: " + ex.InnerException.Message);
+        //            objError.WriteLog(0, "ExternalUserController", "change_password", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "ExternalUserController", "change_password", "Inner Exception Message: " + ex.InnerException.Message);
         //        }
         //        return objUserHeadList;
         //    }
@@ -291,12 +291,12 @@ namespace HRM.Controllers
         //        };
         //        objUserHeadList.Add(objUserHead);
 
-        //        objError.WriteLog(0, "UserController", "update_notification_token", "Stack Track: " + ex.StackTrace);
-        //        objError.WriteLog(0, "UserController", "update_notification_token", "Error Message: " + ex.Message);
+        //        objError.WriteLog(0, "ExternalUserController", "update_notification_token", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "ExternalUserController", "update_notification_token", "Error Message: " + ex.Message);
         //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
         //        {
-        //            objError.WriteLog(0, "UserController", "update_notification_token", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-        //            objError.WriteLog(0, "UserController", "update_notification_token", "Inner Exception Message: " + ex.InnerException.Message);
+        //            objError.WriteLog(0, "ExternalUserController", "update_notification_token", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "ExternalUserController", "update_notification_token", "Inner Exception Message: " + ex.InnerException.Message);
         //        }
         //        return objUserHeadList;
         //    }
@@ -328,12 +328,12 @@ namespace HRM.Controllers
         //        };
         //        objOtpHeadList.Add(objOtpHead);
 
-        //        objError.WriteLog(0, "UserController", "reset_password", "Stack Track: " + ex.StackTrace);
-        //        objError.WriteLog(0, "UserController", "reset_password", "Error Message: " + ex.Message);
+        //        objError.WriteLog(0, "ExternalUserController", "reset_password", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "ExternalUserController", "reset_password", "Error Message: " + ex.Message);
         //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
         //        {
-        //            objError.WriteLog(0, "UserController", "reset_password", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-        //            objError.WriteLog(0, "UserController", "reset_password", "Inner Exception Message: " + ex.InnerException.Message);
+        //            objError.WriteLog(0, "ExternalUserController", "reset_password", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "ExternalUserController", "reset_password", "Inner Exception Message: " + ex.InnerException.Message);
         //        }
 
 
@@ -359,12 +359,12 @@ namespace HRM.Controllers
 
         //        rtnMsg = ex.Message.ToString();
 
-        //        objError.WriteLog(0, "UserController", "change_password_by_email", "Stack Track: " + ex.StackTrace);
-        //        objError.WriteLog(0, "UserController", "change_password_by_email", "Error Message: " + ex.Message);
+        //        objError.WriteLog(0, "ExternalUserController", "change_password_by_email", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "ExternalUserController", "change_password_by_email", "Error Message: " + ex.Message);
         //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
         //        {
-        //            objError.WriteLog(0, "UserController", "change_password_by_email", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-        //            objError.WriteLog(0, "UserController", "change_password_by_email", "Inner Exception Message: " + ex.InnerException.Message);
+        //            objError.WriteLog(0, "ExternalUserController", "change_password_by_email", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "ExternalUserController", "change_password_by_email", "Inner Exception Message: " + ex.InnerException.Message);
         //        }
         //        return rtnMsg;
         //    }

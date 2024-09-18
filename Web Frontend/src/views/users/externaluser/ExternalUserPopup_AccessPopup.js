@@ -3,8 +3,8 @@ import { CTooltip, CButton, CModal, CModalBody, CCol, CFormSelect, CInputGroupTe
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
-import { requestdata_UserName_DropDowns_All } from '../../../apicalls/usergeneral/get_all_list.js';
-import { requestdata_AccessGroup_DropDowns_All } from '../../../apicalls/accessgroup/get_all_list.js';
+// import { requestdata_UserName_DropDowns_All } from '../../../apicalls/usergeneral/get_all_list.js';
+// import { requestdata_AccessGroup_DropDowns_All } from '../../../apicalls/accessgroup/get_all_list.js';
 
 const ExternalUserPopup_AccessPopup = ({ visible, onClose, onOpen, UserAccessGroupDetails }) => {
 
@@ -66,13 +66,13 @@ const ExternalUserPopup_AccessPopup = ({ visible, onClose, onOpen, UserAccessGro
       USR_EmployeeID: 'sedcx'
     }
 
-    const AccessGroupDetails = await requestdata_AccessGroup_DropDowns_All(formData)
+    // const AccessGroupDetails = await requestdata_AccessGroup_DropDowns_All(formData)
 
-    setOptionsAccessGroup(AccessGroupDetails);
+    // setOptionsAccessGroup(AccessGroupDetails);
 
-    const UserNameDetails = await requestdata_UserName_DropDowns_All(formData)
+    // const UserNameDetails = await requestdata_UserName_DropDowns_All(formData)
 
-    setOptionsUserName(UserNameDetails);
+    // setOptionsUserName(UserNameDetails);
     //  console.log(AccessGroupDetails)
   }
 

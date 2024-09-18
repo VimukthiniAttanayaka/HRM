@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CTabPanel, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CTabPanel, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
-import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
+// import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
+import { modifyExternalUser } from '../../../apicalls/externaluser/modify.js';
+import { deleteExternalUser } from '../../../apicalls/externaluser/delete.js';
+import { addNewExternalUser } from '../../../apicalls/externaluser/add_new.js';
+import { CCalendar } from '@coreui/react-pro/dist/esm/components/calendar/CCalendar.js';
 
 const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetails, popupStatus }) => {
+  let templatetype = 'translation_jobrole'
+  let templatetype_base = 'translation'
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -17,15 +24,13 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
   const [EmailAddress, setEmailAddress] = useState('')
   const [MobileNumber, setMobileNumber] = useState('')
   const [Remarks, setRemarks] = useState('')
-  const [EmployeeID, setEmployeeID] = useState('')
+  const [ActiveFrom, setActiveFrom] = useState('')
+  const [ActiveTo, setActiveTo] = useState('')
   const [PhoneNumber, setPhoneNumber] = useState('')
-  const [UserName, setUserName] = useState('')
+  const [UserID, setUserID] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeIsActive = (event) => { }
-  const handleChangeEmployeeID = (event) => {
-    setEmployeeID(event.target.value)
-  }
+  const handleChangeIsActive = (event) => { setIsActive(event.target.value) }
   const handleChangeFirstName = (event) => {
     setFirstName(event.target.value)
   }
@@ -44,8 +49,14 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
   const handleChangePhoneNumber = (event) => {
     setPhoneNumber(event.target.value)
   }
-  const handleChangeUserName = (event) => {
-    setUserName(event.target.value)
+  const handleChangeUserID = (event) => {
+    setUserID(event.target.value)
+  }
+  const handleChangeActiveFrom = (event) => {
+    setActiveFrom(event.target.value)
+  }
+  const handleChangeActiveTo = (event) => {
+    setActiveTo(event.target.value)
   }
 
   const handleSubmit = async (event) => {
@@ -56,25 +67,20 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
 
     // Prepare form data
     const formData = {
-      LVT_ExternalUserID: ExternalUserId,
-      LVT_LeaveAlotment: leaveAlotmentId,
-      LVT_ExternalUser: ExternalUser,
-      LVT_Status: isActive,
+      UE_UserID: UserID, UE_FirstName: FirstName, UE_LastName: LastName,
+      UE_EmailAddress: EmailAddress, UE_MobileNumber: MobileNumber, UE_PhoneNumber: PhoneNumber, UE_Remarks: Remarks,
+      UE_ActiveFrom: ActiveFrom, UE_ActiveTo: ActiveTo, UE_Status: isActive
     }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'ExternalUser/add_new_ExternalUser', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
 
-    if (response.ok) {
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Leave Type data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Leave Type data:', response.statusText)
+    if (popupStatus == 'edit') {
+      const UserRoleDetails = await modifyExternalUser(formData)
+    }
+    else if (popupStatus == 'delete') {
+      const UserRoleDetails = await deleteExternalUser(formData)
+    }
+    else {
+      const UserRoleDetails = await addNewExternalUser(formData)
+
     }
   }
 
@@ -88,15 +94,27 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
       USR_EmployeeID: 'sedcx'
     }
 
-    const UserRoleDetails = await requestdata_UserRoles_DropDowns_All(formData)
+    // const UserRoleDetails = await requestdata_UserRoles_DropDowns_All(formData)
 
-    setOptionsUserRole(UserRoleDetails);
+    // setOptionsUserRole(UserRoleDetails);
 
   }
 
   useEffect(() => {
-    requestdata();
-  }, []);
+    console.log(ExternalUserDetails)
+    setFirstName(ExternalUserDetails.UE_FirstName)
+    setLastName(ExternalUserDetails.UE_LastName)
+    setEmailAddress(ExternalUserDetails.UE_EmailAddress)
+    setMobileNumber(ExternalUserDetails.UE_MobileNumber)
+    setRemarks(ExternalUserDetails.UE_Remarks)
+    // setEmployeeID(ExternalUserDetails.UE_EmployeeID)
+    setPhoneNumber(ExternalUserDetails.UE_PhoneNumber)
+    setUserID(ExternalUserDetails.UE_UserID)
+    setActiveFrom(ExternalUserDetails.UE_ActiveFrom)
+    setActiveTo(ExternalUserDetails.UE_ActiveTo)
+    setIsActive(ExternalUserDetails.UE_status)
+
+  }, [ExternalUserDetails]);
 
   return (
     <>
@@ -105,9 +123,9 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
           <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>
-                <h6>UserName</h6>
+                <h6>UserID</h6>
               </CInputGroupText>
-            </CCol>  <CFormInput placeholder="UserName" name="UserName" value={ExternalUserDetails.UD_UserName ? ExternalUserDetails.UD_UserName : ''} onChange={handleChangeUserName}
+            </CCol>  <CFormInput placeholder="UserID" name="UserID" value={UserID} onChange={handleChangeUserID}
             // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
             />
 
@@ -132,7 +150,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               <CInputGroupText>
                 <h6>FirstName</h6>
               </CInputGroupText>
-            </CCol>  <CFormInput placeholder="FirstName" name="FirstName" value={ExternalUserDetails.UD_FirstName ? ExternalUserDetails.UD_FirstName : ''} onChange={handleChangeFirstName}
+            </CCol>  <CFormInput placeholder="FirstName" name="FirstName" value={FirstName} onChange={handleChangeFirstName}
             />
 
           </CInputGroup>
@@ -141,7 +159,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               <CInputGroupText>
                 <h6>LastName</h6>
               </CInputGroupText>
-            </CCol>  <CFormInput placeholder="LastName" name="LastName" value={ExternalUserDetails.UD_LastName ? ExternalUserDetails.UD_LastName : ''} onChange={handleChangeLastName}
+            </CCol>  <CFormInput placeholder="LastName" name="LastName" value={LastName} onChange={handleChangeLastName}
             />
 
           </CInputGroup>
@@ -150,7 +168,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               <CInputGroupText>
                 <h6>EmailAddress</h6>
               </CInputGroupText>
-            </CCol>  <CFormInput placeholder="EmailAddress" name="EmailAddress" value={ExternalUserDetails.UD_EmailAddress ? ExternalUserDetails.UD_EmailAddress : ''} onChange={handleChangeEmailAddress}
+            </CCol>  <CFormInput placeholder="EmailAddress" name="EmailAddress" value={EmailAddress} onChange={handleChangeEmailAddress}
             />
 
           </CInputGroup>
@@ -159,8 +177,8 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               <CInputGroupText>
                 <h6>MobileNumber</h6>
               </CInputGroupText>
-            </CCol>  <CFormInput placeholder="MobileNumber" name="MobileNumber" value={ExternalUserDetails.UD_MobileNumber ? ExternalUserDetails.UD_MobileNumber : ''} onChange={handleChangeMobileNumber}
-            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+            </CCol>  <CFormInput placeholder="MobileNumber" name="MobileNumber" value={MobileNumber} onChange={handleChangeMobileNumber}
+
             />
 
           </CInputGroup>
@@ -169,8 +187,25 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               <CInputGroupText>
                 <h6>PhoneNumber</h6>
               </CInputGroupText>
-            </CCol>  <CFormInput placeholder="PhoneNumber" name="PhoneNumber" value={ExternalUserDetails.UD_PhoneNumber ? ExternalUserDetails.UD_PhoneNumber : ''} onChange={handleChangePhoneNumber}
-            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+            </CCol>  <CFormInput placeholder="PhoneNumber" name="PhoneNumber" value={PhoneNumber} onChange={handleChangePhoneNumber}
+            />
+
+          </CInputGroup>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>ActiveFrom</h6>
+              </CInputGroupText>
+            </CCol>  <CDatePicker placeholder="ActiveFrom" name="ActiveFrom" value={ActiveFrom} onChange={handleChangeActiveFrom}
+            />
+
+          </CInputGroup>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>ActiveTo</h6>
+              </CInputGroupText>
+            </CCol>  <CDatePicker placeholder="ActiveTo" name="ActiveTo" value={ActiveTo} onChange={handleChangeActiveTo}
             />
 
           </CInputGroup>
@@ -179,8 +214,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               <CInputGroupText>
                 <h6>Remarks</h6>
               </CInputGroupText>
-            </CCol>  <CFormInput placeholder="Remarks" name="Remarks" value={ExternalUserDetails.UD_Remarks ? ExternalUserDetails.UD_Remarks : ''} onChange={handleChangeRemarks}
-            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+            </CCol>  <CFormInput placeholder="Remarks" name="Remarks" value={Remarks} onChange={handleChangeRemarks}
             />
 
           </CInputGroup>
@@ -190,10 +224,11 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
                 <h6>Status</h6>
               </CInputGroupText>
             </CCol>
-            <CFormCheck label="Status" defaultChecked />
+            <CFormCheck checked={isActive} onChange={handleChangeIsActive} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
           </CInputGroup>
           <div className="d-grid">
-            <CButton color="success" type='submit'>Submit</CButton>
+            {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :
+              <CButton color="success" type='submit'>{getLabelText('Submit', templatetype)}</CButton>)}
           </div>
         </CForm>
       </CTabPanel>

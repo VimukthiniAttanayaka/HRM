@@ -6,19 +6,23 @@ let templatetype_base = 'translation'
 
 export const columns = [
   {
-    key: 'UserName',
+    key: 'UserID',
     // label: '',
     // filter: false,
-    // sorter: false,
+    // sorter: false, 
+    _style: { width: '20%' },
+  }, {
+    key: 'FirstName',
+    _style: { width: '20%' },
+  },
+  {
+    key: 'LastName',
+    _style: { width: '20%' },
   },
   {
     key: 'EmailAddress',
     _style: { width: '20%' },
-  },{
-    key: 'EmployeeID',
-    _style: { width: '20%' },
-  },
-
+  }, 
   {
     key: 'MobileNumber',
     _style: { width: '20%' }
@@ -36,10 +40,13 @@ export const columns = [
   },
 ];
 
-export const headers = [["id", "branch", "status"]];
+export const headers = [["UserID", "FirstName", "LastName", "EmailAddress", 
+  "MobileNumber", "PhoneNumber", "Remarks", "ActiveFrom", "ActiveTo", "Status"]];
 
 export const GetDataList = (data) => {
-  return data.map(elt => [elt.id, elt.branch, elt.status]);
+  return data.map(elt => [elt.UserID,elt.FirstName, elt.LastName, elt.EmailAddress,
+    elt.MobileNumber, elt.PhoneNumber, elt.Remarks, elt.ActiveFrom, elt.ActiveTo,
+    elt.Status]);
 }
 
 

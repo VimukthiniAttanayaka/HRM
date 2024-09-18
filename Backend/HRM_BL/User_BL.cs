@@ -13,14 +13,22 @@ namespace HRM_BL
     {
         private static LogError objError = new LogError();
 
-        public static List<ReturnUserModelHead> get_user_single(GetUserSingleModel CUser) //ok
+        public static List<ReturnInternalUserModelHead> get_user_internal_single(GetInternalUserSingleModel CUser) //ok
         {
-            return HRM_DAL.Data.User_Data.get_user_single(CUser);
+            return HRM_DAL.Data.User_Data.get_user_internal_single(CUser);
+        }
+        public static List<ReturnExternalUserModelHead> get_user_external_single(GetExternalUserSingleModel CUser) //ok
+        {
+            return HRM_DAL.Data.User_Data.get_user_external_single(CUser);
+        }
+        public static List<ReturnExternalUserAllModelHead> sp_get_user_external_all(GetUserAllModel CUserall)//ok
+        {
+            return HRM_DAL.Data.User_Data.sp_get_user_external_all(CUserall);
         }
 
-        public static List<ReturnUserAllModelHead> get_user_all(GetUserAllModel CUserall)//ok
+        public static List<ReturnInternalUserAllModelHead> sp_get_user_internal_all(GetUserAllModel CUserall)//ok
         {
-            return HRM_DAL.Data.User_Data.get_user_all(CUserall);
+            return HRM_DAL.Data.User_Data.sp_get_user_internal_all(CUserall);
         }
 
         public static List<ReturnResponse> inactivate_user(InactiveUserModel item)//ok
@@ -33,9 +41,13 @@ namespace HRM_BL
             return HRM_DAL.Data.User_Data.add_new_user(item);
         }
 
-        public static List<ReturnResponse> modify_user(UserModel item)//ok
+        public static List<ReturnResponse> modify_external_user(ExternalUserModel item)//ok
         {
-            return HRM_DAL.Data.User_Data.modify_user(item);
+            return HRM_DAL.Data.User_Data.modify_external_user(item);
+        }
+        public static List<ReturnResponse> modify_internal_user(InternalUserModel item)//ok
+        {
+            return HRM_DAL.Data.User_Data.modify_internal_user(item);
         }
 
         //public static List<ReturnResponse> change_password(NewpwModel item)

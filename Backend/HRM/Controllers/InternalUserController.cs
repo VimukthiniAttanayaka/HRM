@@ -30,29 +30,29 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnUserModelHead> get_user_single(GetUserSingleModel CUser)//ok
+        public List<ReturnInternalUserModelHead> get_user_single(GetInternalUserSingleModel CUser)//ok
         {
-            List<ReturnUserModelHead> objCusUserHeadList = new List<ReturnUserModelHead>();
-            ReturnUserModelHead obj = new ReturnUserModelHead() { resp = false, msg = "sfsf" };
-            //obj.User = new List<ReturnUserModel>();
-            //if (CUser.UD_UserName == "test")
-            //    obj.User.Add(new ReturnUserModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true });
-            //if (CUser.UD_UserName == "test1") obj.User.Add(new ReturnUserModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true });
-            //if (CUser.UD_UserName == "test2") obj.User.Add(new ReturnUserModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true });
-            objCusUserHeadList.Add(obj);
-            return objCusUserHeadList;
+            List<ReturnInternalUserModelHead> objCusUserHeadList = new List<ReturnInternalUserModelHead>();
+            //ReturnUserModelHead obj = new ReturnUserModelHead() { resp = false, msg = "sfsf" };
+            ////obj.User = new List<ReturnUserModel>();
+            ////if (CUser.UD_UserName == "test")
+            ////    obj.User.Add(new ReturnUserModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true });
+            ////if (CUser.UD_UserName == "test1") obj.User.Add(new ReturnUserModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true });
+            ////if (CUser.UD_UserName == "test2") obj.User.Add(new ReturnUserModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true });
+            //objCusUserHeadList.Add(obj);
+            //return objCusUserHeadList;
 
             try
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, CUser);
 
-                objCusUserHeadList = user_BL.get_user_single(CUser);
+                objCusUserHeadList = user_BL.get_user_internal_single(CUser);
                 return objCusUserHeadList;
             }
             catch (Exception ex)
             {
 
-                ReturnUserModelHead objCusUserHead = new ReturnUserModelHead
+                ReturnInternalUserModelHead objCusUserHead = new ReturnInternalUserModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -77,28 +77,28 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnUserAllModelHead> get_user_all(GetUserAllModel CUserall)//ok
+        public List<ReturnInternalUserAllModelHead> get_user_all(GetUserAllModel CUserall)//ok
         {
-            List<ReturnUserAllModelHead> objCusUserHeadList = new List<ReturnUserAllModelHead>();
-            ReturnUserAllModelHead obj = new ReturnUserAllModelHead() { resp = false, msg = "sfsf" };
-            obj.User = new List<ReturnUserAllModel>();
-            obj.User.Add(new ReturnUserAllModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true });
-            obj.User.Add(new ReturnUserAllModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true });
-            obj.User.Add(new ReturnUserAllModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true });
-            objCusUserHeadList.Add(obj);
-            return objCusUserHeadList;
+            List<ReturnInternalUserAllModelHead> objCusUserHeadList = new List<ReturnInternalUserAllModelHead>();
+            //ReturnUserAllModelHead obj = new ReturnUserAllModelHead() { resp = false, msg = "sfsf" };
+            //obj.User = new List<ReturnUserAllModel>();
+            //obj.User.Add(new ReturnUserAllModel() { UD_UserName = "test", UD_EmployeeID = "test", UD_Status = true });
+            //obj.User.Add(new ReturnUserAllModel() { UD_UserName = "test1", UD_EmployeeID = "test1", UD_Status = true });
+            //obj.User.Add(new ReturnUserAllModel() { UD_UserName = "test2", UD_EmployeeID = "test2", UD_Status = true });
+            //objCusUserHeadList.Add(obj);
+            //return objCusUserHeadList;
 
             try
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, CUserall);
 
-                objCusUserHeadList = user_BL.get_user_all(CUserall);
+                objCusUserHeadList = user_BL.sp_get_user_internal_all(CUserall);
                 return objCusUserHeadList;
             }
             catch (Exception ex)
             {
 
-                ReturnUserAllModelHead objCusUserHead = new ReturnUserAllModelHead
+                ReturnInternalUserAllModelHead objCusUserHead = new ReturnInternalUserAllModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -317,7 +317,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnResponse> modify_user(UserModel item)//ok
+        public List<ReturnResponse> modify_user(InternalUserModel item)//ok
         {
             List<ReturnResponse> objCUserHeadList = new List<ReturnResponse>();
 
@@ -325,7 +325,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
 
-                objCUserHeadList = user_BL.modify_user(item);
+                objCUserHeadList = user_BL.modify_internal_user(item);
                 return objCUserHeadList;
             }
             catch (Exception ex)

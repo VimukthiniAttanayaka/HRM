@@ -3,7 +3,7 @@ import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CBadge, CDropdown, 
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
-import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
+// import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
 import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
 import { columns_Access, headers } from '../../controllers/externaluser_controllers.js';
@@ -116,9 +116,9 @@ const ExternalUserPopup_Access = ({ onClose, onOpen, ExternalUserDetails, popupS
       USR_EmployeeID: 'sedcx'
     }
 
-    const UserRoleDetails = await requestdata_UserRoles_DropDowns_All(formData)
+    // const UserRoleDetails = await requestdata_UserRoles_DropDowns_All(formData)
 
-    setOptionsUserRole(UserRoleDetails);
+    // setOptionsUserRole(UserRoleDetails);
 
   }
 

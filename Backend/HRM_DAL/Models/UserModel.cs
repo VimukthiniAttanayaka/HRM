@@ -90,32 +90,6 @@ namespace HRM_DAL.Models
         public string UD_Status { get; set; }
     }
 
-    public class ReturnUserAllModel
-    {
 
-        public string UD_EmployeeID { get; set; }
-        public string UD_FirstName { get; set; }
-        public string UD_LastName { get; set; }
-        public string UD_EmailAddress { get; set; }
-        public string UD_MobileNumber { get; set; }
-        public string UD_PhoneNumber { get; set; }
-        public string UD_Remarks { get; set; }
-        public string authorizationToken { get; set; }
-        [Key]
-        public string UD_UserName { get; set; }
-        public string UD_Password { get; set; }
-        public bool UD_Status { get; set; }
-    }
-
-    public class ReturnUserAllModelHead : ReturnResponse
-    {
-        public List<ReturnUserAllModel> User { get; set; }
-
-    }
-
-    public class GetUserSingleModel
-    {
-        public string UD_UserID { get; set; }
-    }
 
 }

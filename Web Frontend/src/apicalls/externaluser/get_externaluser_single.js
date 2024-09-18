@@ -1,38 +1,23 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-// export class LeaveScheduleDetail {
-//   constructor(id, leavetype, status, Alotment) {
-//     this.leavetype = leavetype;
-//     this.id = id;
-//     this.alotment = Alotment
-//     if (status == true) { this.status = "Active"; }
-//     else { this.status = "Inactive"; }
-//   }
-// }
 export class ExternalUserDetail {
-  UD_EmployeeID;
-  UD_FirstName;
-  UD_LastName;
-  UD_EmailAddress;
-  UD_MobileNumber;
-  UD_PhoneNumber;
-  UD_Remarks;
+  UE_UserID; UE_FirstName; UE_LastName; UE_EmailAddress; UE_MobileNumber; UE_PhoneNumber; UE_Remarks; UE_ActiveFrom; UE_ActiveTo; UE_Status; UE_Pwd; UE_PwdSalt; UE_PwdLastResetDateTime; UE_CreatedBy;
+  UE_CreatedDateTime; UE_ModifiedBy; UE_ModifiedDateTime; UE_Otp; UE_Otp_Generate_On;
   authorizationToken;
-  UD_UserName;
-  UD_Status;
 }
 
 // console.log(apiUrl)
 export const getExternalUserSingle = async (formData) => {
 
   let resw = new ExternalUserDetail();
-  const res = await fetch(apiUrl + 'internaluser/get_user_single', {
+  const res = await fetch(apiUrl + 'externaluser/get_user_single', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
   })
     .then(response => response.json())
     .then(json => {
+      // console.log(JSON.stringify(json))
       let res1 = JSON.parse(JSON.stringify(json))
       resw = res1[0].User[0]
       // console.log(res2)
