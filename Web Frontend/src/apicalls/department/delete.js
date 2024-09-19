@@ -1,12 +1,9 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
+export const deleteInternalUser = async (formData) => {
 
-import ReturnResponse from '../../publicmodels/ReturnResonse'
-
-export const addNewExternalUser = async (formData) => {
-  let resw = new ReturnResponse();
   // Submit the form data to your backend API/
-  const response = await fetch(apiUrl + 'ExternalUser/add_new_user', {
+  const response = await fetch(apiUrl + 'InternalUser/inactivate_user', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),

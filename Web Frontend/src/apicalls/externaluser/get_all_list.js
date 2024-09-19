@@ -15,7 +15,7 @@ export class ExternalUserList {
     this.ActiveTo = ActiveTo;
 
     if (Status === true) { this.status = "Active"; }
-    else { this.status = "Inactive"; console.log(Status + 1) }
+    else { this.status = "Inactive"; }
   }
 }
 

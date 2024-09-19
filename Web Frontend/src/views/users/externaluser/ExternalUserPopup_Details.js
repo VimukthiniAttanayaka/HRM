@@ -10,9 +10,10 @@ import { deleteExternalUser } from '../../../apicalls/externaluser/delete.js';
 import { addNewExternalUser } from '../../../apicalls/externaluser/add_new.js';
 
 import PopUpAlert from '../../shared/PopUpAlert.js'
+import { format, parse } from 'date-fns'
 
 const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetails, popupStatus }) => {
-  let templatetype = 'translation_jobrole'
+  let templatetype = 'translation_externaluser'
   let templatetype_base = 'translation'
 
   // const handleSubmit = (event) => {
@@ -39,8 +40,6 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
   const handleChangeRemarks = (event) => { setRemarks(event.target.value) }
   const handleChangePhoneNumber = (event) => { setPhoneNumber(event.target.value) }
   const handleChangeUserID = (event) => { setUserID(event.target.value) }
-  const handleChangeActiveFrom = (event) => { setActiveFrom(event.target.value) }
-  const handleChangeActiveTo = (event) => { setActiveTo(event.target.value) }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -53,8 +52,8 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
     const formData = {
       UE_UserID: UserID, UE_FirstName: FirstName, UE_LastName: LastName,
       UE_EmailAddress: EmailAddress, UE_MobileNumber: MobileNumber, UE_PhoneNumber: PhoneNumber, UE_Remarks: Remarks,
-      UE_UserRole:selectedOptionUserRole,
-      // UE_ActiveFrom: ActiveFrom, UE_ActiveTo: ActiveTo,
+      UE_UserRole: selectedOptionUserRole,
+      UE_ActiveFrom: ActiveFrom.toJSON(), UE_ActiveTo: ActiveTo.toJSON(),
       UE_Status: isActive
     }
 
@@ -96,21 +95,17 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
   }
 
   useEffect(() => {
-    console.log(ExternalUserDetails)
+    // console.log(ExternalUserDetails)
     setFirstName(ExternalUserDetails.UE_FirstName)
     setLastName(ExternalUserDetails.UE_LastName)
     setEmailAddress(ExternalUserDetails.UE_EmailAddress)
     setMobileNumber(ExternalUserDetails.UE_MobileNumber)
     setRemarks(ExternalUserDetails.UE_Remarks)
-    // setEmployeeID(ExternalUserDetails.UE_EmployeeID)
     setPhoneNumber(ExternalUserDetails.UE_PhoneNumber)
     setUserID(ExternalUserDetails.UE_UserID)
     setActiveFrom(ExternalUserDetails.UE_ActiveFrom)
     setActiveTo(ExternalUserDetails.UE_ActiveTo)
     setIsActive(ExternalUserDetails.UE_status)
-    // console.log(ActiveFrom)
-    // setActiveFrom(new Date('2023-12-25'))
-    // console.log(ActiveFrom)
     requestdata();
   }, [ExternalUserDetails]);
 
@@ -205,13 +200,13 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
                 <h6>ActiveFrom</h6>
               </CInputGroupText>
             </CCol>
-            <CDatePicker placeholder="ActiveFrom" name="ActiveFrom" value={ActiveFrom} onChange={handleChangeActiveFrom}
-              // disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false} 
-              />
-            <CDatePicker
-              value={ActiveFrom}
-              onChange={(date) => setSelectedDate(date)}
+            <CDatePicker placeholder="ActiveFrom" name="ActiveFrom" date={ActiveFrom}
+              onDateChange={(date) => { setActiveFrom(date) }}
+              inputDateParse={(date) => parse(date, 'dd-MMM-yyyy', new Date())}
+              inputDateFormat={(date) => format(new Date(date), 'dd-MMM-yyyy')}
+            // disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false} 
             />
+           
           </CInputGroup>
           <CInputGroup className="mb-3">
             <CCol md={4}>
@@ -219,9 +214,12 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
                 <h6>ActiveTo</h6>
               </CInputGroupText>
             </CCol>
-            <CDatePicker placeholder="ActiveTo" name="ActiveTo" value={ActiveTo} onChange={handleChangeActiveTo}
-              // disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false}
-               />
+            <CDatePicker placeholder="ActiveTo" name="ActiveTo" date={ActiveTo}
+              onDateChange={(date) => { setActiveTo(date) }}
+              inputDateParse={(date) => parse(date, 'dd-MMM-yyyy', new Date())}
+              inputDateFormat={(date) => format(new Date(date), 'dd-MMM-yyyy')}
+            // disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false}
+            />
 
           </CInputGroup>
           <CInputGroup className="mb-3">
@@ -241,7 +239,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               </CInputGroupText>
             </CCol>
             <CFormCheck checked={isActive} onChange={handleChangeIsActive} label="Status"
-             disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
           </CInputGroup>
           <div className="d-grid">
             {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
+// import data from './_data.js'
 import ExternalUserPopup from './ExternalUserPopup.js';
 // import loadDetails from './ExternalUserPopup.js';
 import { getExternalUserAll } from '../../../apicalls/externaluser/get_all_list.js';
@@ -25,7 +25,7 @@ const ExternalUserDataGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [columnFilter, setColumnFilter] = useState([])
   const [tableFilter, setTableFilter] = useState([])
- 
+
   const [ExternalUserDetails, setExternalUserDetails] = useState([])
   // const [ExternalUserId, setExternalUserId] = useState('')
   const handleChangeId = (event) => {
@@ -47,11 +47,11 @@ const ExternalUserDataGrid = () => {
       // AUD_notificationToken: token,
       UE_UserID: item
     }
-console.log(item)
- 
+    // console.log(item)
+
     const ExternalUserDetails = await getExternalUserSingle(formData)
     // setExternalUserDetails(res1[0].ExternalUser[0]);
-    console.log(ExternalUserDetails)
+    // console.log(ExternalUserDetails)
     setExternalUserDetails(ExternalUserDetails);
     handleOpenPopup()
   }
@@ -67,7 +67,7 @@ console.log(item)
     setPopupStatus('view')
     toggleDetails(index)
   }
-  
+
   const toggleDetails = (index) => {
 
 
@@ -78,7 +78,7 @@ console.log(item)
     } else {
       newDetails = [...details, index]
       // alert(newDetails[newDetails.length - 1])
-      console.log(newDetails)
+      // console.log(newDetails)
       loadDetails(newDetails[0])
     }
     // setDetails(newDetails)
@@ -133,13 +133,13 @@ console.log(item)
     setVisible(false);
     setExternalUserDetails([]);
   };
-  
-  
+
+
   return (
     <CCardBody>
       <CRow>
         <CCol>
-        <CDropdown>
+          <CDropdown>
             <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
             <CDropdownMenu>
               <CDropdownItem><CButton
@@ -203,7 +203,7 @@ console.log(item)
                     toggleEdit(item.UserID)
                   }}
                 >
-                  Edit
+                  {getLabelText('Edit', templatetype_base)}
                 </CButton>
               </td>
             )
@@ -219,7 +219,7 @@ console.log(item)
                   toggleView(item.UserID)
                 }}
               >
-                View
+                {getLabelText('View', templatetype_base)}
               </CButton>
             </td>
           ),
@@ -235,7 +235,7 @@ console.log(item)
                     toggleDelete(item.UserID)
                   }}
                 >
-                  Delete
+                  {getLabelText('Delete', templatetype_base)}
                 </CButton>
               }
             </td>

@@ -1,18 +1,10 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export class DepartmentDetail {
-  EUR_DepartmentID;
-  EUR_Department;
-  EUR_Status;
-  EUR_CreatedBy;
-  EUR_CreatedDateTime;
-  EUR_ModifiedBy;
-  EUR_ModifiedDateTime;
-}
+import ReturnResponse from '../../publicmodels/ReturnResonse'
 
 export const addNewDepartment = async (formData) => {
 
-  let resw = new DepartmentDetail();
+  let resw = new ReturnResponse();
   const res = await fetch(apiUrl + 'Department/add_new_department', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

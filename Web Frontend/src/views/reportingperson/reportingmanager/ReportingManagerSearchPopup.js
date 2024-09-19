@@ -4,7 +4,7 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 
-import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
+import { Dropdowns_Employee } from '../../../apicalls/employee/dropdowns.js';
 
 const ReportingManagerSearchPopup = ({ visible, onClose, onOpen, ReportingManagerDetails }) => {
 
@@ -67,11 +67,11 @@ const ReportingManagerSearchPopup = ({ visible, onClose, onOpen, ReportingManage
       USR_EmployeeID: 'sedcx'
     }
 
-    const ReportingManagerDetails = await requestdata_Employee_DropDowns_All(formData)
+    const ReportingManagerDetails = await Dropdowns_UserRole(formData)
 
     setOptionsReportingManagerID(ReportingManagerDetails);
 
-    const EmployeeDetails = await requestdata_Employee_DropDowns_All(formData)
+    const EmployeeDetails = await Dropdowns_UserRole(formData)
 
     setOptionsEmployeeID(EmployeeDetails);
 

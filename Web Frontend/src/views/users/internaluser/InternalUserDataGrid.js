@@ -185,7 +185,7 @@ const InternalUserDataGrid = () => {
                     toggleEdit(item.UserID)
                   }}
                 >
-                  Edit
+                  {getLabelText('Edit', templatetype_base)}
                 </CButton>
               </td>
             )
@@ -201,7 +201,7 @@ const InternalUserDataGrid = () => {
                   toggleView(item.UserID)
                 }}
               >
-                View
+                {getLabelText('View', templatetype_base)}
               </CButton>
             </td>
           ),
@@ -217,7 +217,7 @@ const InternalUserDataGrid = () => {
                     toggleDelete(item.UserID)
                   }}
                 >
-                  Delete
+                  {getLabelText('Delete', templatetype_base)}
                 </CButton>
               }
             </td>

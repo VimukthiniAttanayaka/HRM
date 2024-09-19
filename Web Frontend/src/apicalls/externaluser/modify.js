@@ -1,12 +1,7 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 import { toast } from 'react-toastify';
 
-class ReturnResponse {
-  resp;
-  msg;
-  IsAuthenticated;
-  obj;
-}
+import ReturnResponse from '../../publicmodels/ReturnResonse'
 
 export const modifyExternalUser = async (formData) => {
   let resw = new ReturnResponse();

@@ -4,7 +4,7 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import LeaveTypePopup from './LeaveEntitlementPopup.js';
 // import loadDetails from './LeaveTypePopup.js';
-import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
+import { Dropdowns_Employee } from '../../../apicalls/employee/dropdowns.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import { getBadge } from '../../shared/gridviewconstants.js';
 import { columns, headers } from '../../controllers/leaveentitlement_controller.js';
@@ -138,7 +138,7 @@ const LeaveEntitlementDataGrid = () => {
       USR_EmployeeID: 'sedcx'
     }
 
-    const EmployeeDetails = await requestdata_Employee_DropDowns_All(formData)
+    const EmployeeDetails = await Dropdowns_Employee(formData)
 
     setOptionsEmployee(EmployeeDetails);
   }

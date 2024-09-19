@@ -1,7 +1,9 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export const addNewInternalUser = async (formData) => {
+import ReturnResponse from '../../publicmodels/ReturnResonse'
 
+export const addNewInternalUser = async (formData) => {
+  let resw = new ReturnResponse();
   // Submit the form data to your backend API/
   const response = await fetch(apiUrl + 'InternalUser/add_new_user', {
     method: 'POST',

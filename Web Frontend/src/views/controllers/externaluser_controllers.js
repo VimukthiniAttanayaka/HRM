@@ -22,7 +22,7 @@ export const columns = [
   {
     key: 'EmailAddress',
     _style: { width: '20%' },
-  }, 
+  },
   {
     key: 'MobileNumber',
     _style: { width: '20%' }
@@ -38,15 +38,28 @@ export const columns = [
     filter: false,
     sorter: false,
   },
-];
+  {
+    key: 'view',
+    label: '',
+    _style: { width: '1%' },
+    filter: false,
+    sorter: false,
+  },
+  {
+    key: 'delete',
+    label: '',
+    _style: { width: '1%' },
+    filter: false,
+    sorter: false,
+  },];
 
-export const headers = [["UserID", "FirstName", "LastName", "EmailAddress", 
+export const headers = [["UserID", "FirstName", "LastName", "EmailAddress",
   "MobileNumber", "PhoneNumber", "Remarks", "ActiveFrom", "ActiveTo", "Status"]];
 
 export const GetDataList = (data) => {
-  return data.map(elt => [elt.UserID,elt.FirstName, elt.LastName, elt.EmailAddress,
-    elt.MobileNumber, elt.PhoneNumber, elt.Remarks, elt.ActiveFrom, elt.ActiveTo,
-    elt.Status]);
+  return data.map(elt => [elt.UserID, elt.FirstName, elt.LastName, elt.EmailAddress,
+  elt.MobileNumber, elt.PhoneNumber, elt.Remarks, elt.ActiveFrom, elt.ActiveTo,
+  elt.Status]);
 }
 
 
