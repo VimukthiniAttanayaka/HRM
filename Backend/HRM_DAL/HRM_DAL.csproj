@@ -57,7 +57,6 @@
     <Compile Remove="Data\UserAccessGroup_Data_Old.cs" />
     <Compile Remove="Data\UserRoleAccessGroup_Data_Old.cs" />
     <Compile Remove="Data\UserGroupMaster_Data.cs" />
-    <Compile Remove="Data\user_Data - Copy.cs" />
     <Compile Remove="ReportModels\CourierExpensesModel.cs" />
     <Compile Remove="ReportModels\KioskActivityModel.cs" />
     <Compile Remove="ReportModels\MailbagSummaryMonthlyModel.cs" />

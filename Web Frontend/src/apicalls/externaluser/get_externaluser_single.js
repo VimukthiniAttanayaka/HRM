@@ -21,9 +21,6 @@ export const getExternalUserSingle = async (formData) => {
       let res1 = JSON.parse(JSON.stringify(json))
       resw = res1[0].User[0]
       // console.log(res2)
-      // console.log(res1[0].LeaveType[0])
-      // setExternalUserDetails(res1[0].User[0]);
-      // handleOpenPopup()
     })
 
   return resw;

@@ -12,7 +12,7 @@ import { addNewInternalUser } from '../../../apicalls/internaluser/add_new.js';
 import PopUpAlert from '../../shared/PopUpAlert.js'
 
 const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetails, popupStatus }) => {
-  let templatetype = 'translation_jobrole'
+  let templatetype = 'translation_internaluser'
   let templatetype_base = 'translation'
 
   // const handleSubmit = (event) => {

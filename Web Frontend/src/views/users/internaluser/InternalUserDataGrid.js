@@ -34,7 +34,7 @@ const InternalUserDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      UD_UserName: item
+      UE_UserID: item
     }
     const InternalUserDetails = await getInternalUserSingle(formData)
     setInternalUserDetails(InternalUserDetails);
@@ -182,7 +182,7 @@ const InternalUserDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleEdit(item.id)
+                    toggleEdit(item.UserID)
                   }}
                 >
                   Edit
@@ -198,7 +198,7 @@ const InternalUserDataGrid = () => {
                 shape="square"
                 size="sm"
                 onClick={() => {
-                  toggleView(item.id)
+                  toggleView(item.UserID)
                 }}
               >
                 View
@@ -214,7 +214,7 @@ const InternalUserDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDelete(item.id)
+                    toggleDelete(item.UserID)
                   }}
                 >
                   Delete
@@ -224,7 +224,7 @@ const InternalUserDataGrid = () => {
           ),
           details: (item) => {
             return (
-              <CCollapse visible={details.includes(item.id)}>
+              <CCollapse visible={details.includes(item.UserID)}>
                 <CCardBody className="p-3">
                   <h4>{item.username}</h4>
                   <p className="text-muted">User since: {item.registered}</p>

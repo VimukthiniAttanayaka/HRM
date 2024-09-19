@@ -41,7 +41,7 @@ namespace HRM_DAL.Models
     }
     public class ReturnInternalUserModelHead : ReturnResponse
     {
-        public List<ReturnInternalUserModel> user { get; set; }
+        public List<ReturnInternalUserModel> User { get; set; }
     }
     public class ReturnInternalUserModel
     {
@@ -67,6 +67,7 @@ namespace HRM_DAL.Models
         public string UE_Otp { get; set; }
         public string UE_Otp_Generate_On { get; set; }
         public string authorizationToken { get; set; }
+        public string UE_EmployeeID { get; set; }
     }
     public class InternalUserModel
     {
