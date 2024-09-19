@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { CTooltip, CFormSelect, CButton, CTabs,CTab, CTabList, CTabContent, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
-import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
+import { Dropdowns_UserRole } from '../../../apicalls/userrole/dropdowns.js';
 import InternalUserPopup_Details from './InternalUserPopup_Details.js';
 import InternalUserPopup_Access from './InternalUserPopup_Access.js';
 // import { CSelect } from '@coreui/react';
@@ -203,7 +203,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popu
       USR_EmployeeID: 'sedcx'
     }
 
-    const UserRoleDetails = await requestdata_UserRoles_DropDowns_All(formData)
+    const UserRoleDetails = await Dropdowns_UserRole(formData)
 
     setOptionsUserRole(UserRoleDetails);
 

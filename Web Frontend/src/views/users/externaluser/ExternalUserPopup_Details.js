@@ -3,7 +3,7 @@ import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CTabPanel, CCol, CI
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 // import data from './_data.js'
 // import { Modal } from '@coreui/coreui-pro';
-import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
+import { Dropdowns_UserRole } from '../../../apicalls/userrole/dropdowns.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import { modifyExternalUser } from '../../../apicalls/externaluser/modify.js';
 import { deleteExternalUser } from '../../../apicalls/externaluser/delete.js';
@@ -25,40 +25,22 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
   const [EmailAddress, setEmailAddress] = useState('')
   const [MobileNumber, setMobileNumber] = useState('')
   const [Remarks, setRemarks] = useState('')
-  const [ActiveFrom, setActiveFrom] = useState('')
-  const [ActiveTo, setActiveTo] = useState('')
+  const [ActiveFrom, setActiveFrom] = useState(null)
+  const [ActiveTo, setActiveTo] = useState(null)
   const [PhoneNumber, setPhoneNumber] = useState('')
   const [UserID, setUserID] = useState('')
   const [isActive, setIsActive] = useState(true)
 
   const handleChangeIsActive = (event) => { setIsActive(event.target.value) }
-  const handleChangeFirstName = (event) => {
-    setFirstName(event.target.value)
-  }
-  const handleChangeLastName = (event) => {
-    setLastName(event.target.value)
-  }
-  const handleChangeEmailAddress = (event) => {
-    setEmailAddress(event.target.value)
-  }
-  const handleChangeMobileNumber = (event) => {
-    setMobileNumber(event.target.value)
-  }
-  const handleChangeRemarks = (event) => {
-    setRemarks(event.target.value)
-  }
-  const handleChangePhoneNumber = (event) => {
-    setPhoneNumber(event.target.value)
-  }
-  const handleChangeUserID = (event) => {
-    setUserID(event.target.value)
-  }
-  const handleChangeActiveFrom = (event) => {
-    setActiveFrom(event.target.value)
-  }
-  const handleChangeActiveTo = (event) => {
-    setActiveTo(event.target.value)
-  }
+  const handleChangeFirstName = (event) => { setFirstName(event.target.value) }
+  const handleChangeLastName = (event) => { setLastName(event.target.value) }
+  const handleChangeEmailAddress = (event) => { setEmailAddress(event.target.value) }
+  const handleChangeMobileNumber = (event) => { setMobileNumber(event.target.value) }
+  const handleChangeRemarks = (event) => { setRemarks(event.target.value) }
+  const handleChangePhoneNumber = (event) => { setPhoneNumber(event.target.value) }
+  const handleChangeUserID = (event) => { setUserID(event.target.value) }
+  const handleChangeActiveFrom = (event) => { setActiveFrom(event.target.value) }
+  const handleChangeActiveTo = (event) => { setActiveTo(event.target.value) }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -82,14 +64,19 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
     }
     else if (popupStatus == 'delete') {
       const APIReturn = await deleteExternalUser(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
     }
     else {
       const APIReturn = await addNewExternalUser(formData)
-
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
     }
   }
-
-  const [selectedOptionEmployeeID, setSelectedOptionEmployeeID] = useState('');
 
   // console.log(ExternalUserDetails)
   const [optionsUserRole, setOptionsUserRole] = useState([]);
@@ -99,7 +86,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
       USR_EmployeeID: 'sedcx'
     }
 
-    const UserRoleDetails = await requestdata_UserRoles_DropDowns_All(formData)
+    const UserRoleDetails = await Dropdowns_UserRole(formData)
 
     setOptionsUserRole(UserRoleDetails);
 
