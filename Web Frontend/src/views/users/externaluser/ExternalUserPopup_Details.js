@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CTabPanel, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
-import { Modal } from '@coreui/coreui-pro';
-// import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
+// import data from './_data.js'
+// import { Modal } from '@coreui/coreui-pro';
+import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 import { modifyExternalUser } from '../../../apicalls/externaluser/modify.js';
 import { deleteExternalUser } from '../../../apicalls/externaluser/delete.js';
 import { addNewExternalUser } from '../../../apicalls/externaluser/add_new.js';
-import { CCalendar } from '@coreui/react-pro/dist/esm/components/calendar/CCalendar.js';
+
+import PopUpAlert from '../../shared/PopUpAlert.js'
 
 const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetails, popupStatus }) => {
   let templatetype = 'translation_jobrole'
@@ -73,13 +74,17 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
     }
 
     if (popupStatus == 'edit') {
-      const UserRoleDetails = await modifyExternalUser(formData)
+      const APIReturn = await modifyExternalUser(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
     }
     else if (popupStatus == 'delete') {
-      const UserRoleDetails = await deleteExternalUser(formData)
+      const APIReturn = await deleteExternalUser(formData)
     }
     else {
-      const UserRoleDetails = await addNewExternalUser(formData)
+      const APIReturn = await addNewExternalUser(formData)
 
     }
   }
@@ -94,9 +99,9 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
       USR_EmployeeID: 'sedcx'
     }
 
-    // const UserRoleDetails = await requestdata_UserRoles_DropDowns_All(formData)
+    const UserRoleDetails = await requestdata_UserRoles_DropDowns_All(formData)
 
-    // setOptionsUserRole(UserRoleDetails);
+    setOptionsUserRole(UserRoleDetails);
 
   }
 
@@ -114,11 +119,22 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
     setActiveTo(ExternalUserDetails.UE_ActiveTo)
     setIsActive(ExternalUserDetails.UE_status)
 
+    requestdata();
   }, [ExternalUserDetails]);
+
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const [DialogTitle, setDialogTitle] = useState('');
+  const [DialogContent, setDialogContent] = useState('');
 
   return (
     <>
       <CTabPanel className="p-3" itemKey="general">
+        <PopUpAlert open={open} handleClose={handleClose} dialogTitle={DialogTitle} dialogContent={DialogContent} />
         <CForm onSubmit={handleSubmit}>
           <CInputGroup className="mb-3">
             <CCol md={4}>
@@ -126,7 +142,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
                 <h6>UserID</h6>
               </CInputGroupText>
             </CCol>  <CFormInput placeholder="UserID" name="UserID" value={UserID} onChange={handleChangeUserID}
-            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+              disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false}
             />
 
           </CInputGroup>
@@ -196,8 +212,9 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               <CInputGroupText>
                 <h6>ActiveFrom</h6>
               </CInputGroupText>
-            </CCol>  <CDatePicker placeholder="ActiveFrom" name="ActiveFrom" value={ActiveFrom} onChange={handleChangeActiveFrom}
-            />
+            </CCol>
+            <CDatePicker placeholder="ActiveFrom" name="ActiveFrom" value={ActiveFrom} onChange={handleChangeActiveFrom}
+              disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false} />
 
           </CInputGroup>
           <CInputGroup className="mb-3">
@@ -205,8 +222,9 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               <CInputGroupText>
                 <h6>ActiveTo</h6>
               </CInputGroupText>
-            </CCol>  <CDatePicker placeholder="ActiveTo" name="ActiveTo" value={ActiveTo} onChange={handleChangeActiveTo}
-            />
+            </CCol>
+            <CDatePicker placeholder="ActiveTo" name="ActiveTo" value={ActiveTo} onChange={handleChangeActiveTo}
+              disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false} />
 
           </CInputGroup>
           <CInputGroup className="mb-3">
@@ -214,7 +232,8 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               <CInputGroupText>
                 <h6>Remarks</h6>
               </CInputGroupText>
-            </CCol>  <CFormInput placeholder="Remarks" name="Remarks" value={Remarks} onChange={handleChangeRemarks}
+            </CCol>
+            <CFormInput placeholder="Remarks" name="Remarks" value={Remarks} onChange={handleChangeRemarks}
             />
 
           </CInputGroup>

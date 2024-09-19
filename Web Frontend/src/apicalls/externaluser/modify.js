@@ -1,7 +1,6 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 import { toast } from 'react-toastify';
 
-
 class ReturnResponse {
   resp;
   msg;
@@ -24,13 +23,7 @@ export const modifyExternalUser = async (formData) => {
       resw = res1[0]
       console.log(resw)
 
-      alert(resw.msg)
-
-
-      // toast.success('Success message');
-      // toast.error('Error message');
-      // toast.warning('Warning message');
-      // toast.info('Info message');
+      // alert(resw.msg)
     })
 
   return resw;
