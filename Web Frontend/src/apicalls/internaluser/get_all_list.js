@@ -2,13 +2,13 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 export class InternalUserDetail {
   constructor(EmployeeID,
+    UserID,
     FirstName,
     LastName,
     EmailAddress,
     MobileNumber,
     PhoneNumber,
     Remarks,
-    UserName,
     Status) {
     this.EmployeeID = EmployeeID;
     this.FirstName = FirstName;
@@ -17,8 +17,8 @@ export class InternalUserDetail {
     this.MobileNumber = MobileNumber;
     this.PhoneNumber = PhoneNumber;
     this.Remarks = Remarks;
-    this.UserName = UserName;
-    console.log(UserName)
+    this.UserID = UserID;
+    // console.log(UserID)
     if (Status == true) { this.status = "Active"; }
     else { this.status = "Inactive"; }
   }
@@ -36,57 +36,17 @@ export const getInternalUserAll = async (formData) => {
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
 
-
-      // class InternalUserDetail {
-        // constructor(id, leavetype, status, Alotment) {
-        //   this.leavetype = leavetype;
-        //   this.id = id;
-        //   this.alotment = Alotment
-        //   if (status == true) { this.status = "Active"; }
-        //   else { this.status = "Inactive"; }
-        // }
-      // }
-
       for (let index = 0; index < res1[0].User.length; index++) {
         let element = res1[0].User[index];
         // console.log(element)
         InternalUserDetails[index] = new InternalUserDetail(
-          element.UD_EmployeeID,
-          element.UD_FirstName,
-          element.UD_LastName,
-          element.UD_EmailAddress,
-          element.UD_MobileNumber,
-          element.UD_PhoneNumber,
-          element.UD_Remarks,
-          element.UD_UserName,
-          element.UD_Status);
+          element.UE_EmployeeID,
+          element.UE_UserID, element.UE_FirstName, element.UE_LastName, element.UE_EmailAddress,
+          element.UE_MobileNumber, element.UE_PhoneNumber, element.UE_Remarks, element.UE_ActiveFrom,
+           element.UE_ActiveTo, element.UE_Status);
       }
       // console.log(InternalUserDetails)
     })
 
   return InternalUserDetails;
 };
-
-export const requestdata_LeaveTypes_DropDowns_All = async (formData) => {
-
-  const optionsLeaveType = [];
-  const res = await fetch(apiUrl + 'internaluser/get_user_all', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  })
-    .then(response => response.json())
-    .then(json => {
-      let res1 = JSON.parse(JSON.stringify(json))
-
-      for (let index = 0; index < res1[0].LeaveType.length; index++) {
-        const LeaveTypeData = {
-          key: res1[0].LeaveType[index].LVT_LeaveTypeID,
-          value: res1[0].LeaveType[index].LVT_LeaveType
-        };
-        optionsLeaveType[index] = LeaveTypeData
-      }
-      // console.log(optionsLeaveType)
-    })
-  return optionsLeaveType;
-}

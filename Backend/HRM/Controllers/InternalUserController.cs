@@ -92,7 +92,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, CUserall);
 
-                objCusUserHeadList = user_BL.sp_get_user_internal_all(CUserall);
+                objCusUserHeadList = user_BL.get_user_internal_all(CUserall);
                 return objCusUserHeadList;
             }
             catch (Exception ex)

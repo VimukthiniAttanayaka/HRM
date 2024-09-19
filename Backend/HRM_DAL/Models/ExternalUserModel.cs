@@ -16,12 +16,12 @@ namespace HRM_DAL.Models
         public string UE_MobileNumber { get; set; }
         public string UE_PhoneNumber { get; set; }
         public string UE_Remarks { get; set; }
-        public DateTime UE_ActiveFrom { get; set; }
-        public DateTime UE_ActiveTo { get; set; }
+        public DateTime? UE_ActiveFrom { get; set; }
+        public DateTime? UE_ActiveTo { get; set; }
         public bool UE_Status { get; set; }
         public string UE_Pwd { get; set; }
         public string UE_PwdSalt { get; set; }
-        public DateTime UE_PwdLastResetDateTime { get; set; }
+        public DateTime? UE_PwdLastResetDateTime { get; set; }
         public string UE_CreatedBy { get; set; }
         public string UE_CreatedDateTime { get; set; }
         public string UE_ModifiedBy { get; set; }
@@ -55,12 +55,12 @@ namespace HRM_DAL.Models
         public string UE_MobileNumber { get; set; }
         public string UE_PhoneNumber { get; set; }
         public string UE_Remarks { get; set; }
-        public DateTime UE_ActiveFrom { get; set; }
-        public DateTime UE_ActiveTo { get; set; }
+        public DateTime? UE_ActiveFrom { get; set; }
+        public DateTime? UE_ActiveTo { get; set; }
         public bool UE_Status { get; set; }
         public string UE_Pwd { get; set; }
         public string UE_PwdSalt { get; set; }
-        public DateTime UE_PwdLastResetDateTime { get; set; }
+        public DateTime? UE_PwdLastResetDateTime { get; set; }
         public string UE_CreatedBy { get; set; }
         public string UE_CreatedDateTime { get; set; }
         public string UE_ModifiedBy { get; set; }
@@ -81,18 +81,18 @@ namespace HRM_DAL.Models
         public string UE_MobileNumber { get; set; }
         public string UE_PhoneNumber { get; set; }
         public string UE_Remarks { get; set; }
-        public DateTime UE_ActiveFrom { get; set; }
-        public DateTime UE_ActiveTo { get; set; }
+        //public DateTime? UE_ActiveFrom { get; set; }
+        //public DateTime? UE_ActiveTo { get; set; }
         public bool UE_Status { get; set; }
-        public string UE_Pwd { get; set; }
-        public string UE_PwdSalt { get; set; }
-        public DateTime UE_PwdLastResetDateTime { get; set; }
-        public string UE_CreatedBy { get; set; }
-        public string UE_CreatedDateTime { get; set; }
+        //public string UE_Pwd { get; set; }
+        //public string UE_PwdSalt { get; set; }
+        //public DateTime? UE_PwdLastResetDateTime { get; set; }
+        //public string UE_CreatedBy { get; set; }
+        //public string UE_CreatedDateTime { get; set; }
         public string UE_ModifiedBy { get; set; }
         public string UE_ModifiedDateTime { get; set; }
-        public string UE_Otp { get; set; }
-        public string UE_Otp_Generate_On { get; set; }
-        public string authorizationToken { get; set; }
+        //public string UE_Otp { get; set; }
+        //public string UE_Otp_Generate_On { get; set; }
+        //public string authorizationToken { get; set; }
     }
 }

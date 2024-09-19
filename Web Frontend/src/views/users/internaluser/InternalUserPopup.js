@@ -1,227 +1,32 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CFormSelect, CButton, CTabs,CTab, CTabList, CTabContent, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CFormSelect, CButton, CTabs, CTabList, CTabContent,CTabPanel , CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CTab, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
-import { Dropdowns_UserRole } from '../../../apicalls/userrole/dropdowns.js';
+// import data from './_data.js'
+import { Modal } from '@coreui/coreui-pro';
+import { requestdata_UserRoles_DropDowns_All } from '../../../apicalls/userrole/get_all_list.js';
 import InternalUserPopup_Details from './InternalUserPopup_Details.js';
 import InternalUserPopup_Access from './InternalUserPopup_Access.js';
-// import { CSelect } from '@coreui/react';
-// import Select from 'react-select';
-// CSelect,
-const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popupStatus }) => {
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
-  const apiUrl = process.env.REACT_APP_API_URL;
-
-  const [selectedOptionEmployeeID, setSelectedOptionEmployeeID] = useState('');
-  const [selectedOptionUserRole, setSelectedOptionUserRole] = useState('');
-
-  const [FirstName, setFirstName] = useState('')
-  const [LastName, setLastName] = useState('')
-  const [EmailAddress, setEmailAddress] = useState('')
-  const [MobileNumber, setMobileNumber] = useState('')
-  const [Remarks, setRemarks] = useState('')
-  const [EmployeeID, setEmployeeID] = useState('')
-  const [PhoneNumber, setPhoneNumber] = useState('')
-  const [UserName, setUserName] = useState('')
-  const [isActive, setIsActive] = useState(true)
-
-  const handleChangeIsActive = (event) => { }
-  const handleChangeEmployeeID = (event) => {
-    setEmployeeID(event.target.value)
-  }
-  const handleChangeFirstName = (event) => {
-    setFirstName(event.target.value)
-  }
-  const handleChangeLastName = (event) => {
-    setLastName(event.target.value)
-  }
-  const handleChangeEmailAddress = (event) => {
-    setEmailAddress(event.target.value)
-  }
-  const handleChangeMobileNumber = (event) => {
-    setMobileNumber(event.target.value)
-  }
-  const handleChangeRemarks = (event) => {
-    setRemarks(event.target.value)
-  }
-  const handleChangePhoneNumber = (event) => {
-    setPhoneNumber(event.target.value)
-  }
-  const handleChangeUserName = (event) => {
-    setUserName(event.target.value)
-  }
-
-  const handleCreate = async (event) => {
-
-    const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
-      MDD_DepartmentID: DepartmentId,
-      MDD_Department: Department,
-      MDD_LocationID: "string",
-      MDD_Status: isActive
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'Department/add_new_Department', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      onClose()
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Department data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Department data:', response.statusText)
-    }
-  }
-  const handleEdit = async (event) => {
-    // Prepare form data
-    const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
-      MDD_DepartmentID: DepartmentId,
-      MDD_Department: Department,
-      MDD_LocationID: "string",
-      MDD_Status: isActive
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'Department/modify_department', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      onClose()
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Department data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Department data:', response.statusText)
-    }
-  }
-  const handleDelete = async (event) => {
-    console.log('Delete Department')
-    // Prepare form data
-    const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
-      MDD_DepartmentID: DepartmentId
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'Department/inactivate_department', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      onClose()
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Department data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Department data:', response.statusText)
-    }
-  }
-
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault()
-
-  //   if (popupStatus == 'create') {
-  //     handleCreate(event)
-  //   } else if (popupStatus == 'edit') {
-  //     handleEdit(event)
-  //   } else if (popupStatus == 'delete') {
-  //     handleDelete(event)
-  //   }
-  //   // Validation (optional)
-  //   // You can add validation logic here to check if all required fields are filled correctly
-
-  // }
+const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popupStatus  }) => {
+  let templatetype = 'translation_internaluser'
+  let templatetype_base = 'translation'
 
   const popupStatusSetup = (event) => {
-
     if (popupStatus == 'edit') {
-      return getLabelText('Edit Department', templatetype)
+      return getLabelText('Edit Internal User', templatetype)
     } else if (popupStatus == 'view') {
-      return getLabelText('View Department', templatetype)
+      return getLabelText('View Internal User', templatetype)
     } else if (popupStatus == 'delete') {
-      return getLabelText('Delete Department', templatetype)
+      return getLabelText('Delete Internal User', templatetype)
     } else {
-      return getLabelText('Create New Department', templatetype)
+      return getLabelText('Create New Internal User', templatetype)
     }
   }
-
   // useEffect(() => {
-  //   setDepartmentId(DepartmentDetails.MDD_DepartmentID)
-  //   setDepartment(DepartmentDetails.MDD_Department)
-  //   setIsActive(DepartmentDetails.MDD_Status)
-  // }, [DepartmentDetails]);
+  //   requestdata();
+  // }, []);
 
-
-
-
-
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-
-    const formData = {
-      LVT_InternalUserID: InternalUserId,
-      LVT_LeaveAlotment: leaveAlotmentId,
-      LVT_InternalUser: InternalUser,
-      LVT_Status: isActive,
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'InternalUser/add_new_InternalUser', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Leave Type data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Leave Type data:', response.statusText)
-    }
-  }
-
-  const [optionsEmployeeID, setOptionsEmployeeID] = useState([]);
-  const [optionsUserRole, setOptionsUserRole] = useState([]);
-
-  async function requestdata() {
-    const formData = {
-      USR_EmployeeID: 'sedcx'
-    }
-
-    const UserRoleDetails = await Dropdowns_UserRole(formData)
-
-    setOptionsUserRole(UserRoleDetails);
-
-    const EmployeeDetails = await requestdata_Employee_DropDowns_All(formData)
-
-    setOptionsEmployeeID(EmployeeDetails);
-
-  }
-  const options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    // ... more options
-  ];
-  useEffect(() => {
-    requestdata();
-  }, []);
-
-  // console.log(InternalUserDetails)
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New Internal User</CButton>
@@ -234,7 +39,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popu
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New Internal User</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">{popupStatusSetup()}</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CTabs activeItemKey="general">
@@ -243,6 +48,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popu
               <CTab itemKey="access">Access</CTab>
             </CTabList>
             <CTabContent>
+
               <InternalUserPopup_Details popupStatus={popupStatus} InternalUserDetails={InternalUserDetails} />
               <InternalUserPopup_Access popupStatus={popupStatus} InternalUserDetails={InternalUserDetails} />
 

@@ -25,13 +25,13 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
   const [EmailAddress, setEmailAddress] = useState('')
   const [MobileNumber, setMobileNumber] = useState('')
   const [Remarks, setRemarks] = useState('')
-  const [ActiveFrom, setActiveFrom] = useState(null)
-  const [ActiveTo, setActiveTo] = useState(null)
+  const [ActiveFrom, setActiveFrom] = useState(new Date())
+  const [ActiveTo, setActiveTo] = useState(new Date())
   const [PhoneNumber, setPhoneNumber] = useState('')
   const [UserID, setUserID] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeIsActive = (event) => { setIsActive(event.target.value) }
+  const handleChangeIsActive = (event) => { setIsActive(event.target.checked) }
   const handleChangeFirstName = (event) => { setFirstName(event.target.value) }
   const handleChangeLastName = (event) => { setLastName(event.target.value) }
   const handleChangeEmailAddress = (event) => { setEmailAddress(event.target.value) }
@@ -49,10 +49,13 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
     // You can add validation logic here to check if all required fields are filled correctly
 
     // Prepare form data
+    // console.log(isActive)
     const formData = {
       UE_UserID: UserID, UE_FirstName: FirstName, UE_LastName: LastName,
       UE_EmailAddress: EmailAddress, UE_MobileNumber: MobileNumber, UE_PhoneNumber: PhoneNumber, UE_Remarks: Remarks,
-      UE_ActiveFrom: ActiveFrom, UE_ActiveTo: ActiveTo, UE_Status: isActive
+      UE_UserRole:selectedOptionUserRole,
+      // UE_ActiveFrom: ActiveFrom, UE_ActiveTo: ActiveTo,
+      UE_Status: isActive
     }
 
     if (popupStatus == 'edit') {
@@ -105,7 +108,9 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
     setActiveFrom(ExternalUserDetails.UE_ActiveFrom)
     setActiveTo(ExternalUserDetails.UE_ActiveTo)
     setIsActive(ExternalUserDetails.UE_status)
-
+    // console.log(ActiveFrom)
+    // setActiveFrom(new Date('2023-12-25'))
+    // console.log(ActiveFrom)
     requestdata();
   }, [ExternalUserDetails]);
 
@@ -201,8 +206,12 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               </CInputGroupText>
             </CCol>
             <CDatePicker placeholder="ActiveFrom" name="ActiveFrom" value={ActiveFrom} onChange={handleChangeActiveFrom}
-              disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false} />
-
+              // disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false} 
+              />
+            <CDatePicker
+              value={ActiveFrom}
+              onChange={(date) => setSelectedDate(date)}
+            />
           </CInputGroup>
           <CInputGroup className="mb-3">
             <CCol md={4}>
@@ -211,7 +220,8 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               </CInputGroupText>
             </CCol>
             <CDatePicker placeholder="ActiveTo" name="ActiveTo" value={ActiveTo} onChange={handleChangeActiveTo}
-              disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false} />
+              // disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false}
+               />
 
           </CInputGroup>
           <CInputGroup className="mb-3">
@@ -230,7 +240,8 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
                 <h6>Status</h6>
               </CInputGroupText>
             </CCol>
-            <CFormCheck checked={isActive} onChange={handleChangeIsActive} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
+            <CFormCheck checked={isActive} onChange={handleChangeIsActive} label="Status"
+             disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
           </CInputGroup>
           <div className="d-grid">
             {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :

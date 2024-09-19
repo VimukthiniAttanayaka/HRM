@@ -8,11 +8,11 @@ class ReturnResponse {
   obj;
 }
 
-export const modifyExternalUser = async (formData) => {
+export const modifyInternalUser = async (formData) => {
   let resw = new ReturnResponse();
   console.log(formData)
   // Submit the form data to your backend API/
-  const response = await fetch(apiUrl + 'ExternalUser/modify_user', {
+  const response = await fetch(apiUrl + 'InternalUser/modify_user', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),

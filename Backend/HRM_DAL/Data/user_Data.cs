@@ -354,7 +354,7 @@ namespace HRM_DAL.Data
 
         }
 
-        public static List<ReturnExternalUserAllModelHead> sp_get_user_external_all(GetUserAllModel CUserall)//ok
+        public static List<ReturnExternalUserAllModelHead> get_user_external_all(GetUserAllModel CUserall)//ok
         {
             List<ReturnExternalUserAllModelHead> objCusUserHeadList = new List<ReturnExternalUserAllModelHead>();
             List<ReturnExternalUserAllModel> objCusUserSList = new List<ReturnExternalUserAllModel>();
@@ -378,18 +378,6 @@ namespace HRM_DAL.Data
 
                         //cmd.Parameters.AddWithValue("@PAGE_RECORDS_COUNT"= rdr["UD_UserID"].ToString(); CUserall.PAGE_RECORDS_COUNT);
                         //cmd.Parameters["@PAGE_RECORDS_COUNT"].Direction = ParameterDirection.Input;
-
-                        ////cmd.Parameters.AddWithValue("@UD_UserID"= rdr["UD_UserID"].ToString(); CUserall.UD_UserID);
-                        ////cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@UD_FirstName"= rdr["UD_UserID"].ToString(); CUserall.UD_FirstName);
-                        //cmd.Parameters["@UD_FirstName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@UD_LastName"= rdr["UD_UserID"].ToString(); CUserall.UD_LastName);
-                        //cmd.Parameters["@UD_LastName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@UD_Status"= rdr["UD_UserID"].ToString(); CUserall.UD_Status);
-                        //cmd.Parameters["@UD_Status"].Direction = ParameterDirection.Input;
 
                         string RC = "";
 
@@ -478,7 +466,8 @@ namespace HRM_DAL.Data
             return objCusUserHeadList;
 
         }
-        public static List<ReturnInternalUserAllModelHead> sp_get_user_internal_all(GetUserAllModel CUserall)//ok
+
+        public static List<ReturnInternalUserAllModelHead> get_user_internal_all(GetUserAllModel CUserall)//ok
         {
             List<ReturnInternalUserAllModelHead> objCusUserHeadList = new List<ReturnInternalUserAllModelHead>();
             List<ReturnInternalUserAllModel> objCusUserSList = new List<ReturnInternalUserAllModel>();
@@ -494,7 +483,7 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "sp_get_user_external_all";
+                        cmd.CommandText = "sp_get_user_internal_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         //cmd.Parameters.AddWithValue("@PAGE_NO", CUserall.PAGE_NO);
@@ -502,18 +491,6 @@ namespace HRM_DAL.Data
 
                         //cmd.Parameters.AddWithValue("@PAGE_RECORDS_COUNT", CUserall.PAGE_RECORDS_COUNT);
                         //cmd.Parameters["@PAGE_RECORDS_COUNT"].Direction = ParameterDirection.Input;
-
-                        ////cmd.Parameters.AddWithValue("@UD_UserID", CUserall.UD_UserID);
-                        ////cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@UD_FirstName", CUserall.UD_FirstName);
-                        //cmd.Parameters["@UD_FirstName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@UD_LastName", CUserall.UD_LastName);
-                        //cmd.Parameters["@UD_LastName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@UD_Status", CUserall.UD_Status);
-                        //cmd.Parameters["@UD_Status"].Direction = ParameterDirection.Input;
 
                         string RC = "";
 
@@ -531,17 +508,26 @@ namespace HRM_DAL.Data
                                 objCusUserHead.resp = true;
                                 objCusUserHead.msg = "Get External User";
 
-                                //objCusUserData.UD_UserID = rdr["UD_UserID"].ToString();
-                                //objCusUserData.UD_FirstName = rdr["UD_FirstName"].ToString();
-                                //objCusUserData.UD_LastName = rdr["UD_LastName"].ToString();
-                                //objCusUserData.UGM_Name = rdr["UGM_Name"].ToString();
-                                //objCusUserData.DPT_Name = rdr["DPT_Name"].ToString();
-                                //objCusUserData.CUS_CompanyName = rdr["CUS_CompanyName"].ToString();
-                                //objCusUserData.UD_Status = rdr["UD_Status"].ToString();
-
-                                //objCusUserData.RC = RC;
-
-                                //objUserData.UserGroup.Add(objUserHead);
+                                objCusUserData.UE_EmployeeID = rdr["UE_EmployeeID"].ToString();
+                                objCusUserData.UE_UserID = rdr["UE_UserID"].ToString();
+                                objCusUserData.UE_FirstName = rdr["UE_FirstName"].ToString();
+                                objCusUserData.UE_LastName = rdr["UE_LastName"].ToString();
+                                objCusUserData.UE_EmailAddress = rdr["UE_EmailAddress"].ToString();
+                                objCusUserData.UE_MobileNumber = rdr["UE_MobileNumber"].ToString();
+                                objCusUserData.UE_PhoneNumber = rdr["UE_PhoneNumber"].ToString();
+                                objCusUserData.UE_Remarks = rdr["UE_Remarks"].ToString();
+                                objCusUserData.UE_ActiveFrom = Convert.ToDateTime(rdr["UE_ActiveFrom"].ToString());
+                                objCusUserData.UE_ActiveTo = Convert.ToDateTime(rdr["UE_ActiveTo"].ToString());
+                                objCusUserData.UE_Status = Convert.ToBoolean(rdr["UE_Status"].ToString());
+                                objCusUserData.UE_Pwd = rdr["UE_Pwd"].ToString();
+                                objCusUserData.UE_PwdSalt = rdr["UE_PwdSalt"].ToString();
+                                objCusUserData.UE_PwdLastResetDateTime = Convert.ToDateTime(rdr["UE_PwdLastResetDateTime"].ToString());
+                                objCusUserData.UE_CreatedBy = rdr["UE_CreatedBy"].ToString();
+                                objCusUserData.UE_CreatedDateTime = rdr["UE_CreatedDateTime"].ToString();
+                                objCusUserData.UE_ModifiedBy = rdr["UE_ModifiedBy"].ToString();
+                                objCusUserData.UE_ModifiedDateTime = rdr["UE_ModifiedDateTime"].ToString();
+                                objCusUserData.UE_Otp = rdr["UE_Otp"].ToString();
+                                objCusUserData.UE_Otp_Generate_On = rdr["UE_Otp_Generate_On"].ToString();
 
                                 objCusUserSList.Add(objCusUserData);
 
@@ -909,7 +895,7 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "sp_modify_customer_user";
+                        cmd.CommandText = "sp_modify_user_external";
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.Parameters.AddWithValue("@UE_UserID", item.UE_UserID);
@@ -933,14 +919,11 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UE_Remarks", item.UE_Remarks);
                         cmd.Parameters["@UE_Remarks"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UE_ActiveFrom", item.UE_ActiveFrom);
-                        cmd.Parameters["@UE_ActiveFrom"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UE_ActiveTo", item.UE_ActiveTo);
-                        cmd.Parameters["@UE_ActiveTo"].Direction = ParameterDirection.Input;
-
                         cmd.Parameters.AddWithValue("@UE_Status", item.UE_Status);
                         cmd.Parameters["@UE_Status"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@ModifiedUser", item.UE_Status);
+                        cmd.Parameters["@ModifiedUser"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;

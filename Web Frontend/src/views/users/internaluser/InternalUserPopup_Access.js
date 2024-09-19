@@ -153,9 +153,9 @@ const InternalUserPopup_Access = ({ onClose, onOpen, InternalUserDetails, popupS
                   >
                     Download items as .csv
                   </CButton></CDropdownItem>
-                  <CDropdownItem><ExcelExport data={data} fileName="internaluseraccess" headers={headers} /></CDropdownItem>
+                  {/* <CDropdownItem><ExcelExport data={data} fileName="internaluseraccess" headers={headers} /></CDropdownItem> */}
                   <CDropdownItem>
-                    <CSmartGridPDF data={data} headers={headers} filename="internaluseraccess" title="internaluseraccess" />
+                    {/* <CSmartGridPDF data={data} headers={headers} filename="internaluseraccess" title="internaluseraccess" /> */}
                   </CDropdownItem>
                 </CDropdownMenu>
               </CDropdown>
@@ -167,7 +167,7 @@ const InternalUserPopup_Access = ({ onClose, onOpen, InternalUserDetails, popupS
           <CSmartTable
             cleaner
             clickableRows
-            columns={columns}
+            // columns={columns}
             columnFilter
             columnSorter
             // footer

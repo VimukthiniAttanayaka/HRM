@@ -1,199 +1,87 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CButton, CFormSelect, CModal, CModalBody, CTabPanel, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CTabPanel, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import { requestdata_Employee_DropDowns_All } from '../../../apicalls/employee/get_all_list.js';
+// import data from './_data.js'
+// import { Modal } from '@coreui/coreui-pro';
 import { Dropdowns_UserRole } from '../../../apicalls/userrole/dropdowns.js';
-// import { CSelect } from '@coreui/react';
-// import Select from 'react-select';
-// CSelect,
+import { getLabelText } from 'src/MultipleLanguageSheets'
+import { modifyInternalUser } from '../../../apicalls/internaluser/modify.js';
+import { deleteInternalUser } from '../../../apicalls/internaluser/delete.js';
+import { addNewInternalUser } from '../../../apicalls/internaluser/add_new.js';
+
+import PopUpAlert from '../../shared/PopUpAlert.js'
+
 const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetails, popupStatus }) => {
+  let templatetype = 'translation_jobrole'
+  let templatetype_base = 'translation'
 
-  const apiUrl = process.env.REACT_APP_API_URL;
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
 
-  const [selectedOptionEmployeeID, setSelectedOptionEmployeeID] = useState('');
+  // };
   const [selectedOptionUserRole, setSelectedOptionUserRole] = useState('');
-
   const [FirstName, setFirstName] = useState('')
   const [LastName, setLastName] = useState('')
   const [EmailAddress, setEmailAddress] = useState('')
   const [MobileNumber, setMobileNumber] = useState('')
   const [Remarks, setRemarks] = useState('')
-  const [EmployeeID, setEmployeeID] = useState('')
+  const [ActiveFrom, setActiveFrom] = useState(new Date())
+  const [ActiveTo, setActiveTo] = useState(new Date())
   const [PhoneNumber, setPhoneNumber] = useState('')
-  const [UserName, setUserName] = useState('')
+  const [UserID, setUserID] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeIsActive = (event) => { }
-  const handleChangeEmployeeID = (event) => {
-    setEmployeeID(event.target.value)
-  }
-  const handleChangeFirstName = (event) => {
-    setFirstName(event.target.value)
-  }
-  const handleChangeLastName = (event) => {
-    setLastName(event.target.value)
-  }
-  const handleChangeEmailAddress = (event) => {
-    setEmailAddress(event.target.value)
-  }
-  const handleChangeMobileNumber = (event) => {
-    setMobileNumber(event.target.value)
-  }
-  const handleChangeRemarks = (event) => {
-    setRemarks(event.target.value)
-  }
-  const handleChangePhoneNumber = (event) => {
-    setPhoneNumber(event.target.value)
-  }
-  const handleChangeUserName = (event) => {
-    setUserName(event.target.value)
-  }
-
-  const handleCreate = async (event) => {
-
-    const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
-      MDD_DepartmentID: DepartmentId,
-      MDD_Department: Department,
-      MDD_LocationID: "string",
-      MDD_Status: isActive
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'Department/add_new_Department', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      onClose()
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Department data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Department data:', response.statusText)
-    }
-  }
-  const handleEdit = async (event) => {
-    // Prepare form data
-    const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
-      MDD_DepartmentID: DepartmentId,
-      MDD_Department: Department,
-      MDD_LocationID: "string",
-      MDD_Status: isActive
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'Department/modify_department', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      onClose()
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Department data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Department data:', response.statusText)
-    }
-  }
-  const handleDelete = async (event) => {
-    console.log('Delete Department')
-    // Prepare form data
-    const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
-      MDD_DepartmentID: DepartmentId
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'Department/inactivate_department', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      onClose()
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Department data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Department data:', response.statusText)
-    }
-  }
-
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault()
-
-  //   if (popupStatus == 'create') {
-  //     handleCreate(event)
-  //   } else if (popupStatus == 'edit') {
-  //     handleEdit(event)
-  //   } else if (popupStatus == 'delete') {
-  //     handleDelete(event)
-  //   }
-  //   // Validation (optional)
-  //   // You can add validation logic here to check if all required fields are filled correctly
-
-  // }
-
-  const popupStatusSetup = (event) => {
-
-    if (popupStatus == 'edit') {
-      return getLabelText('Edit Department', templatetype)
-    } else if (popupStatus == 'view') {
-      return getLabelText('View Department', templatetype)
-    } else if (popupStatus == 'delete') {
-      return getLabelText('Delete Department', templatetype)
-    } else {
-      return getLabelText('Create New Department', templatetype)
-    }
-  }
-
-  // useEffect(() => {
-  //   setDepartmentId(DepartmentDetails.MDD_DepartmentID)
-  //   setDepartment(DepartmentDetails.MDD_Department)
-  //   setIsActive(DepartmentDetails.MDD_Status)
-  // }, [DepartmentDetails]);
-
-
-
-
+  const handleChangeIsActive = (event) => { setIsActive(event.target.checked) }
+  const handleChangeFirstName = (event) => { setFirstName(event.target.value) }
+  const handleChangeLastName = (event) => { setLastName(event.target.value) }
+  const handleChangeEmailAddress = (event) => { setEmailAddress(event.target.value) }
+  const handleChangeMobileNumber = (event) => { setMobileNumber(event.target.value) }
+  const handleChangeRemarks = (event) => { setRemarks(event.target.value) }
+  const handleChangePhoneNumber = (event) => { setPhoneNumber(event.target.value) }
+  const handleChangeUserID = (event) => { setUserID(event.target.value) }
+  const handleChangeActiveFrom = (event) => { setActiveFrom(event.target.value) }
+  const handleChangeActiveTo = (event) => { setActiveTo(event.target.value) }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const formData = {
-      LVT_InternalUserID: InternalUserId,
-      LVT_LeaveAlotment: leaveAlotmentId,
-      LVT_InternalUser: InternalUser,
-      LVT_Status: isActive,
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'InternalUser/add_new_InternalUser', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
+    // Validation (optional)
+    // You can add validation logic here to check if all required fields are filled correctly
 
-    if (response.ok) {
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Leave Type data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Leave Type data:', response.statusText)
+    // Prepare form data
+    // console.log(isActive)
+    const formData = {
+      UE_UserID: UserID, UE_FirstName: FirstName, UE_LastName: LastName,
+      UE_EmailAddress: EmailAddress, UE_MobileNumber: MobileNumber, UE_PhoneNumber: PhoneNumber, UE_Remarks: Remarks,
+      UE_UserRole:selectedOptionUserRole,
+      // UE_ActiveFrom: ActiveFrom, UE_ActiveTo: ActiveTo,
+      UE_Status: isActive
+    }
+
+    if (popupStatus == 'edit') {
+      const APIReturn = await modifyInternalUser(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else if (popupStatus == 'delete') {
+      const APIReturn = await deleteInternalUser(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else {
+      const APIReturn = await addNewInternalUser(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
     }
   }
 
-  const [optionsEmployeeID, setOptionsEmployeeID] = useState([]);
+  // console.log(InternalUserDetails)
   const [optionsUserRole, setOptionsUserRole] = useState([]);
 
   async function requestdata() {
@@ -205,44 +93,48 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
 
     setOptionsUserRole(UserRoleDetails);
 
-    const EmployeeDetails = await requestdata_Employee_DropDowns_All(formData)
-
-    setOptionsEmployeeID(EmployeeDetails);
-
   }
-  const options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    // ... more options
-  ];
-  useEffect(() => {
-    requestdata();
-  }, []);
 
-  // console.log(InternalUserDetails)
+  useEffect(() => {
+    console.log(InternalUserDetails)
+    setFirstName(InternalUserDetails.UE_FirstName)
+    setLastName(InternalUserDetails.UE_LastName)
+    setEmailAddress(InternalUserDetails.UE_EmailAddress)
+    setMobileNumber(InternalUserDetails.UE_MobileNumber)
+    setRemarks(InternalUserDetails.UE_Remarks)
+    // setEmployeeID(InternalUserDetails.UE_EmployeeID)
+    setPhoneNumber(InternalUserDetails.UE_PhoneNumber)
+    setUserID(InternalUserDetails.UE_UserID)
+    setActiveFrom(InternalUserDetails.UE_ActiveFrom)
+    setActiveTo(InternalUserDetails.UE_ActiveTo)
+    setIsActive(InternalUserDetails.UE_status)
+    // console.log(ActiveFrom)
+    // setActiveFrom(new Date('2023-12-25'))
+    // console.log(ActiveFrom)
+    requestdata();
+  }, [InternalUserDetails]);
+
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const [DialogTitle, setDialogTitle] = useState('');
+  const [DialogContent, setDialogContent] = useState('');
+
   return (
     <>
       <CTabPanel className="p-3" itemKey="general">
+        <PopUpAlert open={open} handleClose={handleClose} dialogTitle={DialogTitle} dialogContent={DialogContent} />
         <CForm onSubmit={handleSubmit}>
-          {/* <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>EmployeeID</h6>
-                    </CInputGroupText>
-                  </CCol>
-
-                  <CFormInput placeholder="EmployeeID" name="EmployeeID" value={InternalUserDetails.UD_EmployeeID ? InternalUserDetails.UD_EmployeeID:''} onChange={handleChangeEmployeeID}
-
-                  />
-
-                </CInputGroup> */}
           <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>
-                <h6>UserName</h6>
+                <h6>UserID</h6>
               </CInputGroupText>
-            </CCol>  <CFormInput placeholder="UserName" name="UserName" value={InternalUserDetails.UD_UserName ? InternalUserDetails.UD_UserName : ''} onChange={handleChangeUserName}
-            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+            </CCol>  <CFormInput placeholder="UserID" name="UserID" value={UserID} onChange={handleChangeUserID}
+              disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false}
             />
 
           </CInputGroup>
@@ -264,37 +156,9 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
           <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>
-                <h6>Employee ID</h6>
-              </CInputGroupText>
-            </CCol>
-
-            <CFormSelect value={selectedOptionEmployeeID} onChange={(e) => setSelectedOptionEmployeeID(e.target.value)}>
-              {optionsEmployeeID.map((option) => (
-                <option key={option.key} value={option.key}>
-                  {option.value}
-                </option>
-              ))}
-            </CFormSelect>
-            {/* <CSelect
-                    label="Dropdown with Filtering"
-                    options={options}
-                    components={{
-                      DropdownIndicator: (props) => (
-                        <Select.components.DropdownIndicator {...props}>
-                          <Select.components.DropdownIndicator {...props} />
-                          <Select.components.ClearIndicator {...props} />
-                        </Select.components.DropdownIndicator>
-                      ),
-                    }}
-                  /> */}
-
-          </CInputGroup>
-          <CInputGroup className="mb-3">
-            <CCol md={4}>
-              <CInputGroupText>
                 <h6>FirstName</h6>
               </CInputGroupText>
-            </CCol>  <CFormInput placeholder="FirstName" name="FirstName" value={InternalUserDetails.UD_FirstName ? InternalUserDetails.UD_FirstName : ''} onChange={handleChangeFirstName}
+            </CCol>  <CFormInput placeholder="FirstName" name="FirstName" value={FirstName} onChange={handleChangeFirstName}
             />
 
           </CInputGroup>
@@ -303,7 +167,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
               <CInputGroupText>
                 <h6>LastName</h6>
               </CInputGroupText>
-            </CCol>  <CFormInput placeholder="LastName" name="LastName" value={InternalUserDetails.UD_LastName ? InternalUserDetails.UD_LastName : ''} onChange={handleChangeLastName}
+            </CCol>  <CFormInput placeholder="LastName" name="LastName" value={LastName} onChange={handleChangeLastName}
             />
 
           </CInputGroup>
@@ -312,7 +176,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
               <CInputGroupText>
                 <h6>EmailAddress</h6>
               </CInputGroupText>
-            </CCol>  <CFormInput placeholder="EmailAddress" name="EmailAddress" value={InternalUserDetails.UD_EmailAddress ? InternalUserDetails.UD_EmailAddress : ''} onChange={handleChangeEmailAddress}
+            </CCol>  <CFormInput placeholder="EmailAddress" name="EmailAddress" value={EmailAddress} onChange={handleChangeEmailAddress}
             />
 
           </CInputGroup>
@@ -321,8 +185,8 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
               <CInputGroupText>
                 <h6>MobileNumber</h6>
               </CInputGroupText>
-            </CCol>  <CFormInput placeholder="MobileNumber" name="MobileNumber" value={InternalUserDetails.UD_MobileNumber ? InternalUserDetails.UD_MobileNumber : ''} onChange={handleChangeMobileNumber}
-            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+            </CCol>  <CFormInput placeholder="MobileNumber" name="MobileNumber" value={MobileNumber} onChange={handleChangeMobileNumber}
+
             />
 
           </CInputGroup>
@@ -331,9 +195,33 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
               <CInputGroupText>
                 <h6>PhoneNumber</h6>
               </CInputGroupText>
-            </CCol>  <CFormInput placeholder="PhoneNumber" name="PhoneNumber" value={InternalUserDetails.UD_PhoneNumber ? InternalUserDetails.UD_PhoneNumber : ''} onChange={handleChangePhoneNumber}
-            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+            </CCol>  <CFormInput placeholder="PhoneNumber" name="PhoneNumber" value={PhoneNumber} onChange={handleChangePhoneNumber}
             />
+
+          </CInputGroup>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>ActiveFrom</h6>
+              </CInputGroupText>
+            </CCol>
+            <CDatePicker placeholder="ActiveFrom" name="ActiveFrom" value={ActiveFrom} onChange={handleChangeActiveFrom}
+              // disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false} 
+              />
+            <CDatePicker
+              value={ActiveFrom}
+              onChange={(date) => setSelectedDate(date)}
+            />
+          </CInputGroup>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>ActiveTo</h6>
+              </CInputGroupText>
+            </CCol>
+            <CDatePicker placeholder="ActiveTo" name="ActiveTo" value={ActiveTo} onChange={handleChangeActiveTo}
+              // disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false}
+               />
 
           </CInputGroup>
           <CInputGroup className="mb-3">
@@ -341,8 +229,8 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
               <CInputGroupText>
                 <h6>Remarks</h6>
               </CInputGroupText>
-            </CCol>  <CFormInput placeholder="Remarks" name="Remarks" value={InternalUserDetails.UD_Remarks ? InternalUserDetails.UD_Remarks : ''} onChange={handleChangeRemarks}
-            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+            </CCol>
+            <CFormInput placeholder="Remarks" name="Remarks" value={Remarks} onChange={handleChangeRemarks}
             />
 
           </CInputGroup>
@@ -352,10 +240,12 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
                 <h6>Status</h6>
               </CInputGroupText>
             </CCol>
-            <CFormCheck label="Status" defaultChecked />
+            <CFormCheck checked={isActive} onChange={handleChangeIsActive} label="Status"
+             disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
           </CInputGroup>
           <div className="d-grid">
-            <CButton color="success" type='submit'>Submit</CButton>
+            {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :
+              <CButton color="success" type='submit'>{getLabelText('Submit', templatetype)}</CButton>)}
           </div>
         </CForm>
       </CTabPanel>

@@ -1,7 +1,7 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export class ExternalUserList {
-  constructor(UserID,FirstName, LastName, EmailAddress,
+  constructor(UserID, FirstName, LastName, EmailAddress,
     MobileNumber, PhoneNumber, Remarks, ActiveFrom, ActiveTo,
     Status) {
     this.UserID = UserID;
@@ -12,10 +12,10 @@ export class ExternalUserList {
     this.PhoneNumber = PhoneNumber;
     this.Remarks = Remarks;
     this.ActiveFrom = ActiveFrom;
-    this.ActiveTo =   ActiveTo;
-  
+    this.ActiveTo = ActiveTo;
+
     if (Status === true) { this.status = "Active"; }
-    else { this.status = "Inactive";  console.log(Status+1) }
+    else { this.status = "Inactive"; console.log(Status + 1) }
   }
 }
 
@@ -37,7 +37,8 @@ export const getExternalUserAll = async (formData) => {
         // console.log(element)
         ExternalUserDetails[index] = new ExternalUserList(
           element.UE_UserID, element.UE_FirstName, element.UE_LastName, element.UE_EmailAddress,
-          element.UE_MobileNumber, element.UE_PhoneNumber, element.UE_Remarks, element.UE_ActiveFrom, element.UE_ActiveTo,element.UE_Status);
+          element.UE_MobileNumber, element.UE_PhoneNumber, element.UE_Remarks, element.UE_ActiveFrom,
+          element.UE_ActiveTo, element.UE_Status);
       }
       // console.log(ExternalUserDetails)
     })

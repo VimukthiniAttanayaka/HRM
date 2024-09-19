@@ -21,14 +21,14 @@ namespace HRM_BL
         {
             return HRM_DAL.Data.User_Data.get_user_external_single(CUser);
         }
-        public static List<ReturnExternalUserAllModelHead> sp_get_user_external_all(GetUserAllModel CUserall)//ok
+        public static List<ReturnExternalUserAllModelHead> get_user_external_all(GetUserAllModel CUserall)//ok
         {
-            return HRM_DAL.Data.User_Data.sp_get_user_external_all(CUserall);
+            return HRM_DAL.Data.User_Data.get_user_external_all(CUserall);
         }
 
-        public static List<ReturnInternalUserAllModelHead> sp_get_user_internal_all(GetUserAllModel CUserall)//ok
+        public static List<ReturnInternalUserAllModelHead> get_user_internal_all(GetUserAllModel CUserall)//ok
         {
-            return HRM_DAL.Data.User_Data.sp_get_user_internal_all(CUserall);
+            return HRM_DAL.Data.User_Data.get_user_internal_all(CUserall);
         }
 
         public static List<ReturnResponse> inactivate_user(InactiveUserModel item)//ok
