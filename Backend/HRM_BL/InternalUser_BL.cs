@@ -28,7 +28,7 @@ namespace HRM_BL
             return HRM_DAL.Data.InternalUser_Data.inactivate_user_internal(item);
         }
 
-        public static List<ReturnResponse> add_new_user_internal(UserModel item)//ok
+        public static List<ReturnResponse> add_new_user_internal(InternalUserModel item)//ok
         {
             return HRM_DAL.Data.InternalUser_Data.add_new_user_internal(item);
         }

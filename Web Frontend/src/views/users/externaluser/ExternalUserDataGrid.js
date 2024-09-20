@@ -133,7 +133,9 @@ const ExternalUserDataGrid = () => {
 
   const handleClosePopup = () => {
     setVisible(false);
+    requestdata();
     setExternalUserDetails([]);
+    setPopupStatus('create')
   };
 
 

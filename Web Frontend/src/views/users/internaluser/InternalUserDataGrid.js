@@ -12,6 +12,7 @@ import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
 import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
 const InternalUserDataGrid = () => {
+  
   let templatetype = 'translation_internaluser'
   let templatetype_base = 'translation'
   const [details, setDetails] = useState([])
@@ -22,8 +23,9 @@ const InternalUserDataGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [columnFilter, setColumnFilter] = useState([])
   const [tableFilter, setTableFilter] = useState([])
- 
+
   const [InternalUserDetails, setInternalUserDetails] = useState([])
+  const [StatusInDB, setStatusInDB] = useState(true)
 
   async function loadDetails(item) {
 
@@ -38,6 +40,7 @@ const InternalUserDataGrid = () => {
     }
     const InternalUserDetails = await getInternalUserSingle(formData)
     setInternalUserDetails(InternalUserDetails);
+    setStatusInDB(InternalUserDetails.UE_Status)
     handleOpenPopup()
   }
   const handleItemsPerPageChange = (newItemsPerPage) => {
@@ -49,7 +52,7 @@ const InternalUserDataGrid = () => {
     setCurrentPage(page);
     // Fetch data for the new page
   };
-  
+
   const toggleEdit = (index) => {
     setPopupStatus('edit')
     toggleDetails(index)
@@ -113,6 +116,7 @@ const InternalUserDataGrid = () => {
 
   const handleClosePopup = () => {
     setVisible(false);
+    requestdata();
     setInternalUserDetails([]);
     setPopupStatus('create')
   };
@@ -121,7 +125,7 @@ const InternalUserDataGrid = () => {
     <CCardBody>
       <CRow>
         <CCol>
-        <CDropdown>
+          <CDropdown>
             <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
             <CDropdownMenu>
               <CDropdownItem><CButton
@@ -141,7 +145,7 @@ const InternalUserDataGrid = () => {
           </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <InternalUserPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} InternalUserDetails={InternalUserDetails} />
+          <InternalUserPopup popupStatus={popupStatus} StatusInDB={StatusInDB} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} InternalUserDetails={InternalUserDetails} />
         </CCol>
       </CRow>
       <CSmartTable

@@ -27,7 +27,7 @@ namespace HRM_BL
             return  HRM_DAL.Data.ExternalUser_Data.inactivate_user_external(item);
         }
 
-        public static List<ReturnResponse> add_new_user_external(UserModel item)//ok
+        public static List<ReturnResponse> add_new_user_external(ExternalUserModel item)//ok
         {
             return HRM_DAL.Data.ExternalUser_Data.add_new_user_external(item);
         }

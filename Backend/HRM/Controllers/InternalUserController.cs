@@ -161,7 +161,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnResponse> add_new_user(UserModel item)//ok
+        public List<ReturnResponse> add_new_user(InternalUserModel item)//ok
         {
             List<ReturnResponse> objCUserHeadList = new List<ReturnResponse>();
 
@@ -169,7 +169,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
 
-                objCUserHeadList = ExternalUser_BL.add_new_user_external(item);
+                objCUserHeadList = InternalUser_BL.add_new_user_internal(item);
                 return objCUserHeadList;
             }
             catch (Exception ex)
@@ -192,127 +192,6 @@ namespace HRM.Controllers
             }
             return objCUserHeadList;
         }
-
-        #region moved to ecelupload by V2
-        ////POST api/<userController>
-        //[HttpPost]
-        //[Route("[action]")]
-        ////[Authorize]
-        //[Obsolete]
-        //public ReturUserExcelUploadHead user_excelupload(UserExcelUploadModel model)//ok
-        //{
-        //    ReturUserExcelUploadHead objHeadList = new ReturUserExcelUploadHead();
-        //    //List<SPResponse> objResponseList = new List<SPResponse>();
-
-        //    try
-        //    {
-        //        LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
-
-        //        if (model == null)
-        //        {
-        //            objHeadList = new ReturUserExcelUploadHead
-        //            {
-        //                resp = false,
-        //                msg = "value cannot be null"
-        //            };
-        //            return objHeadList;
-        //        }
-
-        //        ReturUserExcelUploadHead tempObj = HRM_BL.user_BL.user_excelupload(model);
-
-        //        if (tempObj.resp == false)
-        //        {
-        //            objHeadList = new ReturUserExcelUploadHead
-        //            {
-        //                resp = false,
-        //                msg = tempObj.msg
-        //            };
-        //            return objHeadList;
-        //        }
-
-        //        List<ReturUserExcelUploadHead> retList = new List<ReturUserExcelUploadHead>();
-
-        //        if (tempObj.users != null)
-        //        {
-        //            if (model.IsCompleteList == true)
-        //            {
-        //                HRM_BL.user_BL.markall_users_excel_inactive(model);
-        //            }
-
-        //            foreach (var item in tempObj.users)
-        //            {
-        //                item.USER_ID = model.USER_ID;
-        //                item.UD_ID = model.DPT_ID;
-        //                item.UD_HRMAccessFlag = false;
-        //                //item.UD_MailBagCPCode = model.UD_MailBagCPCode;
-        //                //item.UD_OutgoingMailCPCode = model.UD_OutgoingMailCPCode;
-        //                //item.UD_OutgoingMailLocationCode = model.UD_OutgoingMailLocationCode;
-        //                //item.UD_PostageUsageReportFrequency = model.UD_PostageUsageReportFrequency;
-        //                item.TABLE = model.TABLE;
-        //                item.UD_Status = true;
-        //                //item.UAG_BusinessUnit = model.UAG_BusinessUnit;
-
-        //                retList.Add(HRM_BL.user_BL.add_update_user_excel(item).FirstOrDefault());
-        //            }
-
-        //            LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, retList);
-
-        //            var temp = retList.Where(a => !a.msg.Contains("kiosk")).Count(a => a.resp == true);
-
-        //            if (temp > 0)
-        //            {
-        //                objHeadList = new ReturUserExcelUploadHead
-        //                {
-        //                    resp = true,
-        //                    msg = "Success"
-        //                };
-        //            }
-        //            else
-        //            {
-        //                objHeadList = new ReturUserExcelUploadHead
-        //                {
-        //                    resp = false,
-        //                    msg = "Failed"
-        //                };
-
-        //            }
-
-        //            objHeadList.FileNameWithPath = tempObj.FileNameWithPath;
-        //            objHeadList.FileName = tempObj.FileName;
-
-        //            var tmeps = retList.Where(b => !b.msg.Contains("kiosk") && b.resp == true).Select(a => new userresponcemodel_return() { StaffID = a.users.FirstOrDefault().UD_StaffID, Message = a.msg }).ToList();
-        //            objHeadList.success_users = tmeps;
-
-        //            var tmepsC = retList.Where(b => !b.msg.Contains("kiosk") && b.resp == false).Select(a => new userresponcemodel_return() { StaffID = a.users.FirstOrDefault().UD_StaffID, Message = a.msg }).ToList();
-        //            objHeadList.failed_users = tmepsC;
-        //        }
-
-        //        LogExcelUploadTracer_Data.User(objHeadList, model);
-
-        //        LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, objHeadList);
-
-        //        return objHeadList;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        objHeadList = new ReturUserExcelUploadHead
-        //        {
-        //            resp = false,
-        //            msg = ex.Message.ToString()
-        //        };
-
-        //        objError.WriteLog(0, "userController", "user_excelupload", "Stack Track: " + ex.StackTrace);
-        //        objError.WriteLog(0, "userController", "user_excelupload", "Error Message: " + ex.Message);
-        //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-        //        {
-        //            objError.WriteLog(0, "userController", "user_excelupload", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-        //            objError.WriteLog(0, "userController", "user_excelupload", "Inner Exception Message: " + ex.InnerException.Message);
-        //        }
-
-        //    }
-        //    return objHeadList;
-        //}
-        #endregion moved to ecelupload by V2
 
         [HttpPost]
         [Route("[action]")]

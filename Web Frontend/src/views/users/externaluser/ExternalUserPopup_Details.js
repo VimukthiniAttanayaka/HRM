@@ -49,12 +49,18 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
 
     // Prepare form data
     // console.log(isActive)
+
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+
     const formData = {
       UE_UserID: UserID, UE_FirstName: FirstName, UE_LastName: LastName,
       UE_EmailAddress: EmailAddress, UE_MobileNumber: MobileNumber, UE_PhoneNumber: PhoneNumber, UE_Remarks: Remarks,
       UE_UserRole: selectedOptionUserRole,
       UE_ActiveFrom: ActiveFrom.toJSON(), UE_ActiveTo: ActiveTo.toJSON(),
-      UE_Status: isActive
+      UE_Status: isActive,
+      UD_UserID: staffId
     }
 
     if (popupStatus == 'edit') {
@@ -105,7 +111,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
     setUserID(ExternalUserDetails.UE_UserID)
     setActiveFrom(ExternalUserDetails.UE_ActiveFrom)
     setActiveTo(ExternalUserDetails.UE_ActiveTo)
-    setIsActive(ExternalUserDetails.UE_status)
+    // setIsActive(ExternalUserDetails.UE_status)
     // console.log(isActive)    
     setIsActive(StatusInDB)
     requestdata();
@@ -115,6 +121,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
 
   const handleClose = () => {
     setOpen(false);
+    onClose();
   };
 
   const [DialogTitle, setDialogTitle] = useState('');

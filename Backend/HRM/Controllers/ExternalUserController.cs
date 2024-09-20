@@ -161,7 +161,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnResponse> add_new_user(UserModel item)//ok
+        public List<ReturnResponse> add_new_user(ExternalUserModel item)//ok
         {
             List<ReturnResponse> objCUserHeadList = new List<ReturnResponse>();
 

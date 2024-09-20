@@ -13,7 +13,7 @@ import { addNewInternalUser } from '../../../apicalls/internaluser/add_new.js';
 import PopUpAlert from '../../shared/PopUpAlert.js'
 import { format, parse } from 'date-fns'
 
-const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetails, popupStatus }) => {
+const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetails, popupStatus, StatusInDB }) => {
   let templatetype = 'translation_internaluser'
   let templatetype_base = 'translation'
 
@@ -22,7 +22,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
 
   // };
   const [selectedOptionUserRole, setSelectedOptionUserRole] = useState('');
-  const [selectedOptionEmployee, setSelectedOptionEmployee] = useState(''); 
+  const [selectedOptionEmployee, setSelectedOptionEmployee] = useState('');
   const [FirstName, setFirstName] = useState('')
   const [LastName, setLastName] = useState('')
   const [EmailAddress, setEmailAddress] = useState('')
@@ -53,12 +53,17 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
 
     // Prepare form data
     // console.log(isActive)
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+
     const formData = {
       UE_UserID: UserID, UE_FirstName: FirstName, UE_LastName: LastName,
       UE_EmailAddress: EmailAddress, UE_MobileNumber: MobileNumber, UE_PhoneNumber: PhoneNumber, UE_Remarks: Remarks,
-      UE_UserRole:selectedOptionUserRole,
+      UE_UserRole: selectedOptionUserRole,
       UE_ActiveFrom: ActiveFrom.toJSON(), UE_ActiveTo: ActiveTo.toJSON(),
-      UE_Status: isActive
+      UE_Status: isActive,
+      UD_UserID: staffId
     }
 
     if (popupStatus == 'edit') {
@@ -95,8 +100,8 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
 
     const UserRoleDetails = await Dropdowns_UserRole(formData)
 
-    setOptionsUserRole(UserRoleDetails);  
-    
+    setOptionsUserRole(UserRoleDetails);
+
     const EmployeeDetails = await Dropdowns_Employee(formData)
     setOptionsEmployee(EmployeeDetails);
 
@@ -114,7 +119,8 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
     setUserID(InternalUserDetails.UE_UserID)
     setActiveFrom(InternalUserDetails.UE_ActiveFrom)
     setActiveTo(InternalUserDetails.UE_ActiveTo)
-    setIsActive(InternalUserDetails.UE_status)
+    // setIsActive(InternalUserDetails.UE_status)
+    setIsActive(StatusInDB)
     requestdata();
   }, [InternalUserDetails]);
 
@@ -122,6 +128,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
 
   const handleClose = () => {
     setOpen(false);
+    onClose();
   };
 
   const [DialogTitle, setDialogTitle] = useState('');
@@ -157,7 +164,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
               ))}
             </CFormSelect>
           </CInputGroup>
-            <CInputGroup className="mb-3">
+          <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>
                 <h6>User Role</h6>
@@ -260,9 +267,9 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
                 <h6>Status</h6>
               </CInputGroupText>
             </CCol>
-            <CFormCheck onChange={handleChangeIsActive} label="Status" checked={isActive === false}
-             disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
-             />
+            <CFormCheck checked={isActive} onChange={handleChangeIsActive} label="Status"
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+            />
           </CInputGroup>
           <div className="d-grid">
             {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :

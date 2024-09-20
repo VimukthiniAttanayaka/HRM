@@ -237,11 +237,11 @@ namespace HRM_DAL.Data
 
         }
 
-        public static List<ReturnResponse> add_new_user_internal(UserModel item)//ok
+        public static List<ReturnResponse> add_new_user_internal(InternalUserModel item)//ok
         {
             List<ReturnResponse> objCUserHeadList = new List<ReturnResponse>();
 
-            if (!string.IsNullOrEmpty(item.UD_EmailAddress) && !utility_handler.Utility.Misc.EmailValidator(item.UD_EmailAddress))
+            if (!string.IsNullOrEmpty(item.UE_EmailAddress) && !utility_handler.Utility.Misc.EmailValidator(item.UE_EmailAddress))
             {
                 objCUserHeadList.Add(new ReturnResponse
                 {
@@ -258,35 +258,6 @@ namespace HRM_DAL.Data
 
             try
             {
-                string encryptedPW = "";
-                string encryptedpin = "";
-                decimal Salt = 0;
-                string NotEncryptedPassword = "";
-
-                string CUS_PinOrPwd = "";
-                bool SMSOk = true;
-                bool EmailOk = true;
-
-                List<ReturnCustomerModelHead> cust = Customer_Data.get_customers_single(new Customer() { CUS_ID = item.UD_CustomerID });
-
-                if (cust != null && cust.Count > 0 && cust[0].Customer != null && cust[0].Customer.Count > 0)
-                {
-                    CUS_PinOrPwd = cust[0].Customer[0].CUS_PinOrPwd;
-                    SMSOk = cust[0].Customer[0].CUS_OTP_By_SMS;
-                    EmailOk = cust[0].Customer[0].CUS_OTP_By_Email;
-                }
-
-                if (CUS_PinOrPwd.ToUpper() == "PWD")
-                {
-                    NotEncryptedPassword = PasswordRelated.CreateRandomPassword();
-                    PasswordRelated.CreateEncryptedPassword(NotEncryptedPassword, ref encryptedPW, ref Salt);
-                }
-                else
-                {
-                    NotEncryptedPassword = PasswordRelated.CreateRandomPIN();
-                    PasswordRelated.CreateEncryptedPassword(NotEncryptedPassword, ref encryptedpin, ref Salt);
-                }
-
                 using (SqlConnection lconn = new SqlConnection(BaseClassDBCallerData.ConnectionString))
                 {
                     using (SqlCommand cmd = new SqlCommand())
@@ -294,74 +265,44 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "sp_insert_customer_user";
+                        cmd.CommandText = "sp_insert_user_internal";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@USER_ID", item.USER_ID);
-                        cmd.Parameters["@USER_ID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UE_UserID", item.UE_UserID);
+                        cmd.Parameters["@UE_UserID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_CustomerID", item.UD_CustomerID);
-                        cmd.Parameters["@UD_CustomerID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UE_FirstName", item.UE_FirstName);
+                        cmd.Parameters["@UE_FirstName"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_DepartmentID", item.UD_DepartmentID);
-                        cmd.Parameters["@UD_DepartmentID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UE_LastName", item.UE_LastName);
+                        cmd.Parameters["@UE_LastName"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
-                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UE_EmailAddress", item.UE_EmailAddress);
+                        cmd.Parameters["@UE_EmailAddress"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_FirstName", item.UD_FirstName);
-                        cmd.Parameters["@UD_FirstName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UE_MobileNumber", item.UE_MobileNumber);
+                        cmd.Parameters["@UE_MobileNumber"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_LastName", item.UD_LastName);
-                        cmd.Parameters["@UD_LastName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UE_PhoneNumber", item.UE_PhoneNumber);
+                        cmd.Parameters["@UE_PhoneNumber"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_PrefferedName", item.UD_PrefferedName);
-                        cmd.Parameters["@UD_PrefferedName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UE_Remarks", item.UE_Remarks);
+                        cmd.Parameters["@UE_Remarks"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_Address", item.UD_Address);
-                        cmd.Parameters["@UD_Address"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UE_ActiveFrom", item.UE_ActiveFrom);
+                        cmd.Parameters["@UE_ActiveFrom"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_EmailAddress", item.UD_EmailAddress);
-                        cmd.Parameters["@UD_EmailAddress"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UE_ActiveTo", item.UE_ActiveTo);
+                        cmd.Parameters["@UE_ActiveTo"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_MobileNumber", item.UD_MobileNumber);
-                        cmd.Parameters["@UD_MobileNumber"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UE_Status", item.UE_Status);
+                        cmd.Parameters["@UE_Status"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_PhoneNumber1", item.UD_PhoneNumber1);
-                        cmd.Parameters["@UD_PhoneNumber1"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@ModifiedUser", item.UD_UserID);
+                        cmd.Parameters["@ModifiedUser"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_PhoneNumber2", item.UD_PhoneNumber2);
-                        cmd.Parameters["@UD_PhoneNumber2"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UD_RankDescription", item.UD_RankDescription);
-                        cmd.Parameters["@UD_RankDescription"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UD_StaffLocation", item.UD_StaffLocation);
-                        cmd.Parameters["@UD_StaffLocation"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UD_Remarks", item.UD_Remarks);
-                        cmd.Parameters["@UD_Remarks"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UD_Pin", encryptedpin);
-                        cmd.Parameters["@UD_Pin"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UD_Pwd", encryptedPW);
-                        cmd.Parameters["@UD_Pwd"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UD_PwdSalt", Salt);
-                        cmd.Parameters["@UD_PwdSalt"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@UD_ActiveFrom", item.UD_ActiveFrom);
-                        //cmd.Parameters["@UD_ActiveFrom"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@UD_ActiveTo", item.UD_ActiveTo);
-                        //cmd.Parameters["@UD_ActiveTo"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UD_Status", item.UD_Status);
-                        cmd.Parameters["@UD_Status"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@UD_EmployeeID", item.UD_EmployeeID);
-                        cmd.Parameters["@UD_EmployeeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UE_EmployeeID", item.UE_EmployeeID);
+                        cmd.Parameters["@UE_EmployeeID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -420,7 +361,7 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "sp_modify_customer_user";
+                        cmd.CommandText = "sp_modify_user_internal";
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.Parameters.AddWithValue("@UE_UserID", item.UE_UserID);
@@ -452,6 +393,9 @@ namespace HRM_DAL.Data
 
                         cmd.Parameters.AddWithValue("@UE_Status", item.UE_Status);
                         cmd.Parameters["@UE_Status"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@ModifiedUser", item.UD_UserID);
+                        cmd.Parameters["@ModifiedUser"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;

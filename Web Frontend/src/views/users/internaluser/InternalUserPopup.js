@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CFormSelect, CButton, CTabs, CTabList, CTabContent,CTabPanel , CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CTab, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CFormSelect, CButton, CTabs, CTabList, CTabContent, CTabPanel, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CTab, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 // import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
@@ -8,7 +8,7 @@ import InternalUserPopup_Details from './InternalUserPopup_Details.js';
 import InternalUserPopup_Access from './InternalUserPopup_Access.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
-const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popupStatus  }) => {
+const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popupStatus, StatusInDB }) => {
   let templatetype = 'translation_internaluser'
   let templatetype_base = 'translation'
 
@@ -49,7 +49,7 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popu
             </CTabList>
             <CTabContent>
 
-              <InternalUserPopup_Details popupStatus={popupStatus} InternalUserDetails={InternalUserDetails} />
+              <InternalUserPopup_Details popupStatus={popupStatus} StatusInDB={StatusInDB} InternalUserDetails={InternalUserDetails} onClose={onClose} />
               <InternalUserPopup_Access popupStatus={popupStatus} InternalUserDetails={InternalUserDetails} />
 
             </CTabContent>

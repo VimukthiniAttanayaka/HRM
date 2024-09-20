@@ -72,7 +72,7 @@ namespace HRM_DAL.Models
         //public List<UserRoleAccessGroupModel> userroleaccesslist { get; set; }
         //public List<ReturnUserAccessModel> UserAccessList { get; set; }
     }
-    public class ExternalUserModel
+    public class ExternalUserModel:RequestBaseModel
     {
         public string UE_UserID { get; set; }
         public string UE_FirstName { get; set; }
@@ -81,8 +81,8 @@ namespace HRM_DAL.Models
         public string UE_MobileNumber { get; set; }
         public string UE_PhoneNumber { get; set; }
         public string UE_Remarks { get; set; }
-        //public DateTime? UE_ActiveFrom { get; set; }
-        //public DateTime? UE_ActiveTo { get; set; }
+        public DateTime UE_ActiveFrom { get; set; }
+        public DateTime UE_ActiveTo { get; set; }
         public bool UE_Status { get; set; }
         //public string UE_Pwd { get; set; }
         //public string UE_PwdSalt { get; set; }
