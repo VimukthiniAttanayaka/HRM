@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CTabPanel, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
+import { CTooltip, CFormSelect, CButton, CModal, CFormSwitch, CModalBody, CTabPanel, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 // import data from './_data.js'
 // import { Modal } from '@coreui/coreui-pro';
@@ -12,7 +12,7 @@ import { addNewExternalUser } from '../../../apicalls/externaluser/add_new.js';
 import PopUpAlert from '../../shared/PopUpAlert.js'
 import { format, parse } from 'date-fns'
 
-const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetails, popupStatus }) => {
+const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetails, popupStatus, StatusInDB }) => {
   let templatetype = 'translation_externaluser'
   let templatetype_base = 'translation'
 
@@ -32,7 +32,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
   const [UserID, setUserID] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeIsActive = (event) => { setIsActive(event.target.checked) }
+  const handleChangeIsActive = (event) => { StatusInDB = event.target.checked; setIsActive(event.target.checked) }
   const handleChangeFirstName = (event) => { setFirstName(event.target.value) }
   const handleChangeLastName = (event) => { setLastName(event.target.value) }
   const handleChangeEmailAddress = (event) => { setEmailAddress(event.target.value) }
@@ -106,6 +106,8 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
     setActiveFrom(ExternalUserDetails.UE_ActiveFrom)
     setActiveTo(ExternalUserDetails.UE_ActiveTo)
     setIsActive(ExternalUserDetails.UE_status)
+    // console.log(isActive)    
+    setIsActive(StatusInDB)
     requestdata();
   }, [ExternalUserDetails]);
 
@@ -206,7 +208,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               inputDateFormat={(date) => format(new Date(date), 'dd-MMM-yyyy')}
             // disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false} 
             />
-           
+
           </CInputGroup>
           <CInputGroup className="mb-3">
             <CCol md={4}>
@@ -239,9 +241,8 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               </CInputGroupText>
             </CCol>
             <CFormCheck checked={isActive} onChange={handleChangeIsActive} label="Status"
-              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} 
-
-              />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+            />
           </CInputGroup>
           <div className="d-grid">
             {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :

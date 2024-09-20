@@ -32,6 +32,7 @@ const ExternalUserDataGrid = () => {
     setExternalUserId(event.target.value)
   }
 
+  const [StatusInDB, setStatusInDB] = useState(true)
   async function loadDetails(item) {
 
     const token = getJWTToken();
@@ -53,6 +54,7 @@ const ExternalUserDataGrid = () => {
     // setExternalUserDetails(res1[0].ExternalUser[0]);
     // console.log(ExternalUserDetails)
     setExternalUserDetails(ExternalUserDetails);
+    setStatusInDB(ExternalUserDetails.UE_Status)
     handleOpenPopup()
   }
   const toggleEdit = (index) => {
@@ -159,7 +161,7 @@ const ExternalUserDataGrid = () => {
           </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <ExternalUserPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} ExternalUserDetails={ExternalUserDetails} />
+          <ExternalUserPopup popupStatus={popupStatus} StatusInDB={StatusInDB} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} ExternalUserDetails={ExternalUserDetails} />
         </CCol>
       </CRow>
       <CSmartTable

@@ -21,8 +21,8 @@ const EmployeePopupTab_JobDescriptionPopUp = ({ EmployeeDetails, popupStatus, vi
       USR_EmployeeID: 'sedcx'
     }
 
-    const JobDescriptionDetails = await requestdata_LeaveTypes_DropDowns_All(formData)
-    setOptionsJobDescription(JobDescriptionDetails);
+    // const JobDescriptionDetails = await requestdata_LeaveTypes_DropDowns_All(formData)
+    // setOptionsJobDescription(JobDescriptionDetails);
 
   }
 

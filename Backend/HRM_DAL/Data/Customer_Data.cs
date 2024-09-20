@@ -213,11 +213,9 @@ namespace HRM_DAL.Data
             }
             catch (Exception ex)
             {
-                objcustomerHead = new ReturnCustomerModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
+                objcustomerHead.resp = false;
+                objcustomerHead.msg = ex.Message.ToString();
+
                 objCustomerHeadList.Add(objcustomerHead);
 
                 objError.WriteLog(0, "Customer_Data", "get_customer_all", "Stack Track: " + ex.StackTrace);

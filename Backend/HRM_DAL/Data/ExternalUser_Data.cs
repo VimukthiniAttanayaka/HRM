@@ -225,11 +225,9 @@ namespace HRM_DAL.Data
             catch (Exception ex)
             {
 
-                ReturnExternalUserAllModelHead objCusUserHead = new ReturnExternalUserAllModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
+                objCusUserHead.resp = false;
+                objCusUserHead.msg = ex.Message.ToString();
+
                 objCusUserHeadList.Add(objCusUserHead);
 
                 objError.WriteLog(0, "User_Data", "sp_get_user_external_all", "Stack Track: " + ex.StackTrace);

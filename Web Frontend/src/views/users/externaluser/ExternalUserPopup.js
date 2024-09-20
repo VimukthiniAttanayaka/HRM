@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CFormSelect, CButton, CTabs, CTabList, CTabContent,CTabPanel , CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CTab, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CFormSelect, CButton, CTabs, CTabList, CTabContent, CTabPanel, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CTab, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 // import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
@@ -8,7 +8,7 @@ import ExternalUserPopup_Details from './ExternalUserPopup_Details.js';
 import ExternalUserPopup_Access from './ExternalUserPopup_Access.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
-const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails, popupStatus  }) => {
+const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails, popupStatus, StatusInDB }) => {
   let templatetype = 'translation_externaluser'
   let templatetype_base = 'translation'
 
@@ -49,7 +49,7 @@ const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails, popu
             </CTabList>
             <CTabContent>
 
-              <ExternalUserPopup_Details popupStatus={popupStatus} ExternalUserDetails={ExternalUserDetails} />
+              <ExternalUserPopup_Details popupStatus={popupStatus} visible={visible} StatusInDB={StatusInDB} ExternalUserDetails={ExternalUserDetails} />
               <ExternalUserPopup_Access popupStatus={popupStatus} ExternalUserDetails={ExternalUserDetails} />
 
             </CTabContent>

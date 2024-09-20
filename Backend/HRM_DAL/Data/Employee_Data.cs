@@ -510,11 +510,9 @@ namespace HRM_DAL.Data
             }
             catch (Exception ex)
             {
-                objCustHead = new ReturncustResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
+                objCustHead.resp = false;
+                objCustHead.msg = ex.Message.ToString();
+
                 objCustHeadList.Add(objCustHead);
 
                 objError.WriteLog(0, "Employee_Data", "add_new_employee", "Stack Track: " + ex.StackTrace);
