@@ -66,13 +66,13 @@ namespace HRM.Controllers
         public List<ReturnCustomerModelHead> get_customers_all(CustomerSearchModel model)//ok
         {
             List<ReturnCustomerModelHead> objcustomerHeadList = new List<ReturnCustomerModelHead>();
-            ReturnCustomerModelHead obj = new ReturnCustomerModelHead() { resp = false, msg = "sfsf" };
-            obj.Customer = new List<ReturnCustomerModel>();
-            obj.Customer.Add(new ReturnCustomerModel() { CUS_CompanyName = "test9", CUS_GroupCompany = "", CUS_ID = "test-group" });
-            obj.Customer.Add(new ReturnCustomerModel() { CUS_CompanyName = "test1", CUS_GroupCompany = "test-group", CUS_ID = "test1" });
-            obj.Customer.Add(new ReturnCustomerModel() { CUS_CompanyName = "test2", CUS_GroupCompany = "test-group", CUS_ID = "test2" });
-            objcustomerHeadList.Add(obj);
-            return objcustomerHeadList;
+            //ReturnCustomerModelHead obj = new ReturnCustomerModelHead() { resp = false, msg = "sfsf" };
+            //obj.Customer = new List<ReturnCustomerModel>();
+            //obj.Customer.Add(new ReturnCustomerModel() { CUS_CompanyName = "test9", CUS_GroupCompany = "", CUS_ID = "test-group" });
+            //obj.Customer.Add(new ReturnCustomerModel() { CUS_CompanyName = "test1", CUS_GroupCompany = "test-group", CUS_ID = "test1" });
+            //obj.Customer.Add(new ReturnCustomerModel() { CUS_CompanyName = "test2", CUS_GroupCompany = "test-group", CUS_ID = "test2" });
+            //objcustomerHeadList.Add(obj);
+            //return objcustomerHeadList;
 
             try
             {
