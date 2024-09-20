@@ -397,6 +397,9 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@ModifiedUser", item.UD_UserID);
                         cmd.Parameters["@ModifiedUser"].Direction = ParameterDirection.Input;
 
+                        cmd.Parameters.AddWithValue("@UE_EmployeeID", item.UE_EmployeeID);
+                        cmd.Parameters["@UE_EmployeeID"].Direction = ParameterDirection.Input;
+
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
                         DataSet Ds = new DataSet();

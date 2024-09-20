@@ -66,9 +66,10 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
       UE_UserRole: selectedOptionUserRole,
       UE_ActiveFrom: ActiveFrom.toJSON(), UE_ActiveTo: ActiveTo.toJSON(),
       UE_Status: isActive,
-      UD_UserID: staffId
+      UD_UserID: staffId,
+      UE_EmployeeID: EmployeeID
     }
-
+console.log(formData)
     if (popupStatus == 'edit') {
       const APIReturn = await modifyInternalUser(formData)
       if (APIReturn.resp === false) { setDialogTitle("Alert"); }
