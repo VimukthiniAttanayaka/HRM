@@ -239,7 +239,9 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               </CInputGroupText>
             </CCol>
             <CFormCheck checked={isActive} onChange={handleChangeIsActive} label="Status"
-              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} 
+
+              />
           </CInputGroup>
           <div className="d-grid">
             {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :
