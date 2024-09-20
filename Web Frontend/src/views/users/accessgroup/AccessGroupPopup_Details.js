@@ -4,7 +4,7 @@ import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js'
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
 
-const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails, checkMenuListItems }) => {
+const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails, checkMenuListItems, StatusInDB }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -14,9 +14,6 @@ const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails
   const [AccessGroup, setAccessGroup] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeAlotment = (event) => {
-    setLeaveAlotmentId(event.target.value)
-  }
   const handleChangeAccessGroup = (event) => {
     setAccessGroup(event.target.value)
   }
@@ -32,51 +29,59 @@ const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails
     // You can add validation logic here to check if all required fields are filled correctly
 
     // Prepare form data
-    const formData = {
-      UAG_AccessGroupID: AccessGroupId,
-      UAG_AccessGroup: AccessGroup,
-      UAG_Status: isActive,
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'AccessGroup/add_new_AccessGroup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
+    // console.log(isActive)
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
 
-    if (response.ok) {
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Leave Type data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Leave Type data:', response.statusText)
+    const formData = {
+      UUM_AccessGroupID: AccessGroupId,
+      UUM_AccessGroup: AccessGroup,
+      UUM_Status: isActive,
+      UD_UserID: staffId,
+    }
+    console.log(formData)
+    if (popupStatus == 'edit') {
+      const APIReturn = await modifyAccessGroup(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else if (popupStatus == 'delete') {
+      const APIReturn = await deleteAccessGroup(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else {
+      const APIReturn = await addNewAccessGroup(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
     }
   }
 
-  // console.log(UserRoleDetails)
-  const [checkedItems, setCheckedItems] = useState([]);
-  // const [checkMenuListItems, setcheckMenuListItems] = useState([]);
+  useEffect(() => {
+    // console.log(AccessGroupDetails)
+    setAccessGroupId(AccessGroupDetails.UUM_AccessGroupID)
+    setAccessGroup(AccessGroupDetails.UUM_AccessGroup)
+    setIsActive(StatusInDB)
+  }, [AccessGroupDetails]);
 
-  const handleCheckboxChange = (event) => {
-    const { checked, value } = event.target;
-    if (checked) {
-      setCheckedItems([...checkedItems, value]);
-    } else {
-      setCheckedItems(checkedItems.filter(item => item !== value));
-    }
+  const [open, setOpen] = useState(false);
+  const [openEmp_Popup, setOpenEmp_Popup] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    onClose();
   };
 
-  const options = [
-    { value: 'option1', label: 'Option 1', checked: true },
-    { value: 'option2', label: 'Option 2', checked: true },
-    { value: 'option3', label: 'Option 3', checked: true },
-  ];
-
-  useEffect(() => {
-  }, []);
-
-
+  const [DialogTitle, setDialogTitle] = useState('');
+  const [DialogContent, setDialogContent] = useState('');
+ 
   return (
     <>
       <CTabPanel className="p-3" itemKey="general">

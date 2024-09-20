@@ -49,3 +49,23 @@ export const headers = [["id", "usermenu", "status"]];
 export const GetDataList = (data) => {
   return data.map(elt => [elt.id, elt.usermenu, elt.status]);
 }
+
+export const columns_AccessGroup = [
+  {
+    key: 'UserMenu',
+    label: 'Menu Name',
+    _style: { width: '20%' },
+  },
+  {
+    key: 'status',
+    label: getLabelText('Status', templatetype),
+    _style: { width: '20%' }
+  },
+  {
+    key: 'show_details',
+    label: '',
+    _style: { width: '1%' },
+    filter: false,
+    sorter: false,
+  },
+];

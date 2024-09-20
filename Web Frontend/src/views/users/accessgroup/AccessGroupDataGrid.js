@@ -17,11 +17,14 @@ import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
 const AccessGroupDataGrid = () => {
 
+  let templatetype = 'translation_accessgroup'
+  let templatetype_base = 'translation'
+
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
 
   const [AccessGroupDetails, setAccessGroupDetails] = useState([])
-  // const [checkMenuListItems, setcheckMenuListItems] = useState([]);
+  const [StatusInDB, setStatusInDB] = useState(true)
 
   const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
   const [currentPage, setCurrentPage] = useState(1);
@@ -51,6 +54,7 @@ const AccessGroupDataGrid = () => {
 
     const AccessGroupDetails = await getAccessGroupSingle(formData)
     setAccessGroupDetails(AccessGroupDetails);
+    setStatusInDB(AccessGroupDetails.UAG_Status)
     handleOpenPopup()
   }
 
@@ -147,7 +151,7 @@ const AccessGroupDataGrid = () => {
           </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <AccessGroupPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} AccessGroupDetails={AccessGroupDetails} />
+          <AccessGroupPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} AccessGroupDetails={AccessGroupDetails} StatusInDB={StatusInDB} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -174,11 +178,6 @@ const AccessGroupDataGrid = () => {
           console.log(items)
         }}
         scopedColumns={{
-          // avatar: (item) => (
-          //   <td>
-          //     {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-          //   </td>
-          // ),
           status: (item) => (
             <td>
               <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
@@ -193,17 +192,49 @@ const AccessGroupDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDetails(item.id)
+                    toggleEdit(item.id)
                   }}
                 >
-                  {details.includes(item.id) ? 'Hide' : 'Show'}
+                  {getLabelText('Edit', templatetype_base)}
                 </CButton>
               </td>
             )
           },
+          view: (item) => (
+            <td>
+              <CButton
+                color="success"
+                variant="outline"
+                shape="square"
+                size="sm"
+                onClick={() => {
+                  toggleView(item.id)
+                }}
+              >
+                {getLabelText('View', templatetype_base)}
+              </CButton>
+            </td>
+          ),
+          delete: (item) => (
+            <td>
+              {item.status == 'Inactive' ? '' :
+                <CButton
+                  color="danger"
+                  variant="outline"
+                  shape="square"
+                  size="sm"
+                  onClick={() => {
+                    toggleDelete(item.id)
+                  }}
+                >
+                  {getLabelText('Delete', templatetype_base)}
+                </CButton>
+              }
+            </td>
+          ),
           details: (item) => {
             return (
-              <CCollapse visible={details.includes(item.id)}>
+              <CCollapse visible={details.includes(item.UserID)}>
                 <CCardBody className="p-3">
                   <h4>{item.username}</h4>
                   <p className="text-muted">User since: {item.registered}</p>
