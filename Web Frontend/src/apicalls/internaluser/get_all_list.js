@@ -41,14 +41,14 @@ export const getInternalUserAll = async (formData) => {
 
       for (let index = 0; index < res1[0].User.length; index++) {
         let element = res1[0].User[index];
-        console.log(element)
+        // console.log(element)
         InternalUserDetails[index] = new InternalUserDetail(
           element.UE_EmployeeID,
           element.UE_UserID, element.UE_FirstName, element.UE_LastName, element.UE_EmailAddress,
           element.UE_MobileNumber, element.UE_PhoneNumber, element.UE_Remarks, element.UE_ActiveFrom,
            element.UE_ActiveTo, element.UE_Status);
       }
-      console.log(InternalUserDetails)
+      // console.log(InternalUserDetails)
     })
 
   return InternalUserDetails;

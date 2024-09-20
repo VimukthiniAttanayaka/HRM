@@ -67,6 +67,44 @@ export const columns = [
   },
 ];
 
+
+export const columns_search = [
+  {
+    key: 'id',
+    label: 'ID',
+    filter: false,
+    sorter: false,
+  },
+  {
+    key: 'FirstName',
+    label: 'FirstName',
+    _style: { width: '20%' },
+  },  {
+    key: 'LastName',
+    label: 'LastName',
+    _style: { width: '20%' },
+  },
+  {
+    key: 'PrefferedName',
+    label: 'Preffered Name',
+    _style: { width: '25%' }
+  },
+  {
+    key: 'MobileNumber',
+    label: 'Mobile Number',
+    _style: { width: '25%' }
+  },
+  {
+    key: 'status',
+    _style: { width: '20%' }
+  }, 
+  {
+    key: 'select',
+    _style: { width: '20%' }
+  }, 
+];
+
+
 export const headers = [["id", "FirstName", "LastName", "EmployeeType", "PrefferedName", "ReportingManager", "MobileNumber", "status"]];
 
 export const GetDataList = (data) => {

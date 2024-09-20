@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CTabPanel, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
+import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CTabPanel, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker, CFormTextarea } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 // import data from './_data.js'
 // import { Modal } from '@coreui/coreui-pro';
@@ -9,6 +9,8 @@ import { getLabelText } from 'src/MultipleLanguageSheets'
 import { modifyInternalUser } from '../../../apicalls/internaluser/modify.js';
 import { deleteInternalUser } from '../../../apicalls/internaluser/delete.js';
 import { addNewInternalUser } from '../../../apicalls/internaluser/add_new.js';
+import EmployeeGridModel from '../../sharedgridselectables/EmployeeGridModel.js';
+import { getEmployeeSingle } from '../../../apicalls/employee/get_employee_single.js';
 
 import PopUpAlert from '../../shared/PopUpAlert.js'
 import { format, parse } from 'date-fns'
@@ -33,6 +35,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
   const [PhoneNumber, setPhoneNumber] = useState('')
   const [UserID, setUserID] = useState('')
   const [EmployeeID, setEmployeeID] = useState('')
+  const [EmployeeName, setEmployeeName] = useState('')
   const [isActive, setIsActive] = useState(true)
 
   const handleChangeIsActive = (event) => { setIsActive(event.target.checked) }
@@ -107,6 +110,24 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
 
   }
 
+  async function loadDetails_Employee(item) {
+
+    // console.log(item)
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+
+    const formData = {
+      // UD_StaffID: staffId,
+      // AUD_notificationToken: token,
+      EME_EmployeeID: item
+    }
+    const EmployeeDetails = await getEmployeeSingle(formData)
+    // console.log(EmployeeDetails)
+    setEmployeeID(EmployeeDetails.EME_EmployeeID)
+    setEmployeeName(EmployeeDetails.EME_PrefferedName)
+    handleCloseEmp_Popup();
+  }
   useEffect(() => {
     // console.log(InternalUserDetails)
     setFirstName(InternalUserDetails.UE_FirstName)
@@ -125,19 +146,37 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
   }, [InternalUserDetails]);
 
   const [open, setOpen] = useState(false);
+  const [openEmp_Popup, setOpenEmp_Popup] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
     onClose();
   };
+  const handleCloseEmp_Popup = () => {
+    setOpenEmp_Popup(false);
+  };
 
   const [DialogTitle, setDialogTitle] = useState('');
   const [DialogContent, setDialogContent] = useState('');
 
+
+  const EmployeeSearchOnClick = () => {
+    // console.log(true)
+    setOpenEmp_Popup(true);
+  };
+  // const handleClick = () => {
+  //   // Your JavaScript code here
+  //   console.log('Button clicked!');
+  // };
+
   return (
     <>
       <CTabPanel className="p-3" itemKey="general">
+
         <PopUpAlert open={open} handleClose={handleClose} dialogTitle={DialogTitle} dialogContent={DialogContent} />
+
+        <EmployeeGridModel open={openEmp_Popup} handleClose={handleCloseEmp_Popup} loadDetails={loadDetails_Employee}></EmployeeGridModel>
+
         <CForm onSubmit={handleSubmit}>
           <CInputGroup className="mb-3">
             <CCol md={4}>
@@ -156,13 +195,9 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
               </CInputGroupText>
             </CCol>
 
-            <CFormSelect value={selectedOptionEmployee} onChange={(e) => setSelectedOptionEmployee(e.target.value)}>
-              {optionsEmployee.map((option) => (
-                <option key={option.key} value={option.key}>
-                  {option.value}
-                </option>
-              ))}
-            </CFormSelect>
+            <CFormInput placeholder="EmployeeName" name="EmployeeName" value={EmployeeName} disabled />
+
+            <CButton color="success" onClick={EmployeeSearchOnClick}>{getLabelText('Search', templatetype)}</CButton>
           </CInputGroup>
           <CInputGroup className="mb-3">
             <CCol md={4}>
@@ -257,7 +292,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
                 <h6>Remarks</h6>
               </CInputGroupText>
             </CCol>
-            <CFormInput placeholder="Remarks" name="Remarks" value={Remarks} onChange={handleChangeRemarks}
+            <CFormTextarea placeholder="Remarks" name="Remarks" value={Remarks} onChange={handleChangeRemarks}
             />
 
           </CInputGroup>
