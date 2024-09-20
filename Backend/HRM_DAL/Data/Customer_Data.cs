@@ -130,6 +130,11 @@ namespace HRM_DAL.Data
             List<ReturnCustomerModelHead> objCustomerHeadList = new List<ReturnCustomerModelHead>();
             ReturnCustomerModelHead objcustomerHead = new ReturnCustomerModelHead();
 
+            if (objcustomerHead.Customer == null)
+            {
+                objcustomerHead.Customer = new List<ReturnCustomerModel>();
+            }
+
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
                 objcustomerHead.resp = false;
@@ -183,10 +188,6 @@ namespace HRM_DAL.Data
                                 objcustomer.CUS_Status = Convert.ToBoolean(rdr["CUS_Status"].ToString());
                                 objcustomer.RC = "1";
 
-                                if (objcustomerHead.Customer == null)
-                                {
-                                    objcustomerHead.Customer = new List<ReturnCustomerModel>();
-                                }
 
                                 objcustomerHead.Customer.Add(objcustomer);
 

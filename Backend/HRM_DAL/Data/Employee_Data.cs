@@ -39,7 +39,7 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_employees_single";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@EME_EmployeeID" , model.EME_EmployeeID);
+                        cmd.Parameters.AddWithValue("@EME_EmployeeID", model.EME_EmployeeID);
                         cmd.Parameters["@EME_EmployeeID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
@@ -73,13 +73,13 @@ namespace HRM_DAL.Data
                                 objemployee.EME_ReportingManager = rdr["EME_ReportingManager"].ToString();
                                 objemployee.EME_EmployeeType = rdr["EME_EmployeeType"].ToString();
                                 objemployee.EME_PayeeTaxNumber = rdr["EME_PayeeTaxNumber"].ToString();
-                                objemployee.EME_Salary = Convert.ToDecimal( rdr["EME_Salary"].ToString());
+                                objemployee.EME_Salary = Convert.ToDecimal(rdr["EME_Salary"].ToString());
                                 objemployee.EME_Address = rdr["EME_Address"].ToString();
                                 objemployee.EME_EmailAddress = rdr["EME_EmailAddress"].ToString();
                                 objemployee.EME_MobileNumber = rdr["EME_MobileNumber"].ToString();
                                 objemployee.EME_PhoneNumber1 = rdr["EME_PhoneNumber1"].ToString();
                                 objemployee.EME_PhoneNumber2 = rdr["EME_PhoneNumber2"].ToString();
-                                objemployee.EME_Status = Convert.ToBoolean( rdr["EME_Status"].ToString());
+                                objemployee.EME_Status = Convert.ToBoolean(rdr["EME_Status"].ToString());
                                 //objemployee.EME_DateOfBirth = Convert.ToDateTime(rdr["EME_DateOfBirth"].ToString());
                                 if (rdr["EME_DateOfBirth"] != DBNull.Value)
                                 {
@@ -143,7 +143,7 @@ namespace HRM_DAL.Data
                     objError.WriteLog(0, "Employee_Data", "get_employees_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
                     objError.WriteLog(0, "Employee_Data", "get_employees_single", "Inner Exception Message: " + ex.InnerException.Message);
                 }
-           }
+            }
 
             return objEmployeeHeadList;
 
@@ -153,6 +153,11 @@ namespace HRM_DAL.Data
         {
             List<ReturnEmployeeModelHead> objEmployeeHeadList = new List<ReturnEmployeeModelHead>();
             ReturnEmployeeModelHead objemployeeHead = new ReturnEmployeeModelHead();
+
+            if (objemployeeHead.Employee == null)
+            {
+                objemployeeHead.Employee = new List<ReturnEmployeeModel>();
+            }
 
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
@@ -206,7 +211,7 @@ namespace HRM_DAL.Data
                                 objemployee.EME_ReportingManager = rdr["EME_ReportingManager"].ToString();
                                 objemployee.EME_EmployeeType = rdr["EME_EmployeeType"].ToString();
                                 objemployee.EME_PayeeTaxNumber = rdr["EME_PayeeTaxNumber"].ToString();
-                                objemployee.EME_Salary = Convert.ToDecimal( rdr["EME_Salary"].ToString());
+                                objemployee.EME_Salary = Convert.ToDecimal(rdr["EME_Salary"].ToString());
                                 objemployee.EME_Address = rdr["EME_Address"].ToString();
                                 objemployee.EME_EmailAddress = rdr["EME_EmailAddress"].ToString();
                                 objemployee.EME_MobileNumber = rdr["EME_MobileNumber"].ToString();
@@ -233,10 +238,7 @@ namespace HRM_DAL.Data
                                     objemployee.EME_DateOfHire = DateTime.MinValue; // Or another default value
                                 }
 
-                                if (objemployeeHead.Employee == null)
-                                {
-                                    objemployeeHead.Employee = new List<ReturnEmployeeModel>();
-                                }
+
 
                                 objemployeeHead.Employee.Add(objemployee);
 

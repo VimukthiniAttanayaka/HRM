@@ -30,7 +30,7 @@ export class EmployeeDetail {
 }
 // console.log(apiUrl)
 export const getEmployeeSingle = async (formData) => {
-
+  console.log(formData)
   let resw=new EmployeeDetail();
   const res = await fetch(apiUrl + 'employee/get_employee_single', {
     method: 'POST',

@@ -72,13 +72,13 @@ namespace HRM.Controllers
         public List<ReturnEmployeeModelHead> get_employee_all(EmployeeSearchModel model)//ok
         {
             List<ReturnEmployeeModelHead> objemployeeHeadList = new List<ReturnEmployeeModelHead>();
-            ReturnEmployeeModelHead obj = new ReturnEmployeeModelHead() { resp = false, msg = "sfsf" };
-            obj.Employee = new List<ReturnEmployeeModel>();
-            obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test", EME_EmployeeID = "test" });
-            obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test1", EME_EmployeeID = "test1" });
-            obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test2", EME_EmployeeID = "test2" });
-            objemployeeHeadList.Add(obj);
-            return objemployeeHeadList;
+            //ReturnEmployeeModelHead obj = new ReturnEmployeeModelHead() { resp = false, msg = "sfsf" };
+            //obj.Employee = new List<ReturnEmployeeModel>();
+            //obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test", EME_EmployeeID = "test" });
+            //obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test1", EME_EmployeeID = "test1" });
+            //obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test2", EME_EmployeeID = "test2" });
+            //objemployeeHeadList.Add(obj);
+            //return objemployeeHeadList;
 
             try
             {
@@ -230,9 +230,9 @@ namespace HRM.Controllers
         }
 
 
-        public static ImageModel frncv {get; set;}
-        public static ImageModel frnnic { get; set;}
-        public static ImageModel frnprofileImage { get; set;}
+        public static ImageModel frncv { get; set; }
+        public static ImageModel frnnic { get; set; }
+        public static ImageModel frnprofileImage { get; set; }
         public static ImageModel frnpassport { get; set; }
         public static ImageModel frndrivingLicense { get; set; }
 
@@ -241,7 +241,7 @@ namespace HRM.Controllers
         [Route("[action]")]
         public async Task<IActionResult> PostImage(IFormFile cv, IFormFile nic, IFormFile profileImage, IFormFile passport, IFormFile drivingLicense)
         {
-            if (cv != null && cv.Length > 0 )
+            if (cv != null && cv.Length > 0)
             {
                 using (var memoryStream = new MemoryStream())
                 {
@@ -307,7 +307,7 @@ namespace HRM.Controllers
 
             // Convert image to byte array
             //using (var memoryStream = new MemoryStream()) { 
-            
+
 
             //    await image.CopyToAsync(memoryStream);
             //    var imageBytes = memoryStream.ToArray();
@@ -439,8 +439,9 @@ namespace HRM.Controllers
                 {
                     if (item.USRED_DocumentName == "cv")
                     {
-                        frncv = new ImageModel() {
-                            ImageData = item.USRED_DocumentDataByte 
+                        frncv = new ImageModel()
+                        {
+                            ImageData = item.USRED_DocumentDataByte
                         };
                     }
                     if (item.USRED_DocumentName == "nic")
