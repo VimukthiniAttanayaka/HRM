@@ -1,15 +1,5 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-// export class UserAccessGroupDetail {
-//   constructor(UserAccessGroupID, MenuAccessID, status, UserName) {
-//     this.UserAccessGroupID = UserAccessGroupID;
-//     this.MenuAccessID = MenuAccessID;
-//     this.UserName = UserName;
-//     if (status == true) { this.status = "Active"; }
-//     else { this.status = "Inactive"; }
-//   }
-// }
-// console.log(apiUrl)
 export const getUserAccessGroupAll = async (formData) => {
   const UserAccessGroupDetails = [];
 

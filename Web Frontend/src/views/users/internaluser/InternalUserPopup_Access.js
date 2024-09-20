@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CBadge, CDropdownItem, CDropdown, CDropdownMenu, CDropdownToggle, CRow, CCol, CSmartTable, CTabPanel, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CCollapse, CFormSelect, CButton, CModal, CModalBody, CBadge, CDropdownItem, CDropdown, CDropdownMenu, CDropdownToggle, CRow, CCol, CSmartTable, CTabPanel, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-// import data from './_data.js'
-import { Modal } from '@coreui/coreui-pro';
-import { Dropdowns_UserRole } from '../../../apicalls/userrole/dropdowns.js';
 import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
-import { columns_Access, headers } from '../../controllers/internaluser_controllers.js';
-import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
-import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
-import InternalUserPopup_AccessPopup from './InternalUserPopup_AccessPopup.js';
+import { columns_UserAccess, headers } from '../../controllers/accessgroup_controllers.js';
+import { getAccessGroupAll_ForUser } from '../../../apicalls/accessgroup/get_all_list.js';
 
 const InternalUserPopup_Access = ({ onClose, onOpen, InternalUserDetails, popupStatus }) => {
   const [details, setDetails] = useState([])
@@ -23,48 +18,6 @@ const InternalUserPopup_Access = ({ onClose, onOpen, InternalUserDetails, popupS
   const [userAccessDetails, setUserAccessDetails] = useState([])
 
   const [currentItems, setCurrentItems] = useState(data)
-
-  const csvContent = currentItems.map((item) => Object.values(item).join(',')).join('\n')
-
-  const csvCode = 'data:text/csv;charset=utf-8,SEP=,%0A' + encodeURIComponent(csvContent)
-
-  const [selectedOptionUserRole, setSelectedOptionUserRole] = useState('');
-  const [FirstName, setFirstName] = useState('')
-  const [LastName, setLastName] = useState('')
-  const [EmailAddress, setEmailAddress] = useState('')
-  const [MobileNumber, setMobileNumber] = useState('')
-  const [Remarks, setRemarks] = useState('')
-  const [EmployeeID, setEmployeeID] = useState('')
-  const [PhoneNumber, setPhoneNumber] = useState('')
-  const [UserName, setUserName] = useState('')
-  const [isActive, setIsActive] = useState(true)
-
-  const handleChangeIsActive = (event) => { }
-  const handleChangeEmployeeID = (event) => {
-    setEmployeeID(event.target.value)
-  }
-  const handleChangeFirstName = (event) => {
-    setFirstName(event.target.value)
-  }
-  const handleChangeLastName = (event) => {
-    setLastName(event.target.value)
-  }
-  const handleChangeEmailAddress = (event) => {
-    setEmailAddress(event.target.value)
-  }
-  const handleChangeMobileNumber = (event) => {
-    setMobileNumber(event.target.value)
-  }
-  const handleChangeRemarks = (event) => {
-    setRemarks(event.target.value)
-  }
-  const handleChangePhoneNumber = (event) => {
-    setPhoneNumber(event.target.value)
-  }
-  const handleChangeUserName = (event) => {
-    setUserName(event.target.value)
-  }
-
   const [visible, setVisible] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -97,20 +50,19 @@ const InternalUserPopup_Access = ({ onClose, onOpen, InternalUserDetails, popupS
     }
   }
 
-  const [selectedOptionEmployeeID, setSelectedOptionEmployeeID] = useState('');
-
-  // console.log(ExternalUserDetails)
-  const [optionsUserRole, setOptionsUserRole] = useState([]);
-
   async function requestdata() {
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+
     const formData = {
+      // UD_StaffID: staffId,
+      // AUD_notificationToken: token,
       USR_EmployeeID: 'sedcx'
     }
 
-    const UserRoleDetails = await Dropdowns_UserRole(formData)
-
-    setOptionsUserRole(UserRoleDetails);
-
+    const UserAccessGroup = await getAccessGroupAll_ForUser(formData)
+    setData(UserAccessGroup);
   }
 
   const handleItemsPerPageChange = (newItemsPerPage) => {
@@ -126,48 +78,14 @@ const InternalUserPopup_Access = ({ onClose, onOpen, InternalUserDetails, popupS
     requestdata();
   }, []);
 
-  const handleOpenPopup = () => {
-    setVisible(true);
-  };
-
-  const handleClosePopup = () => {
-    setVisible(false);
-    setCountryDetails([]);
-    setPopupStatus('create')
-  };
   return (
     <>
       <CTabPanel className="p-3" itemKey="access">
         <CCardBody>
-          <CRow>
-            <CCol md={6}>
-              <CDropdown>
-                <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
-                <CDropdownMenu>
-                  <CDropdownItem><CButton
-                    color="primary"
-                    className="mb-2"
-                    href={csvCode}
-                    download="internaluseraccess.csv"
-                    target="_blank"
-                  >
-                    Download items as .csv
-                  </CButton></CDropdownItem>
-                  {/* <CDropdownItem><ExcelExport data={data} fileName="internaluseraccess" headers={headers} /></CDropdownItem> */}
-                  <CDropdownItem>
-                    {/* <CSmartGridPDF data={data} headers={headers} filename="internaluseraccess" title="internaluseraccess" /> */}
-                  </CDropdownItem>
-                </CDropdownMenu>
-              </CDropdown>
-            </CCol>
-            <CCol className='d-flex justify-content-end'>
-              <InternalUserPopup_AccessPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} userAccessDetails={userAccessDetails} />
-            </CCol>
-          </CRow>
           <CSmartTable
             cleaner
             clickableRows
-            // columns={columns}
+            columns={columns_UserAccess}
             columnFilter
             columnSorter
             // footer
@@ -200,35 +118,32 @@ const InternalUserPopup_Access = ({ onClose, onOpen, InternalUserDetails, popupS
               ),
               show_details: (item) => {
                 return (
-                  <td className="py-2">
-                    <CButton
-                      color="primary"
+                  <td>
+                    {item.status == 'Inactive' ? <CButton
+                      color="success"
                       variant="outline"
                       shape="square"
                       size="sm"
                       onClick={() => {
-                        toggleDetails(item.id)
+                        toggleDelete(item.UserID)
                       }}
                     >
-                      {details.includes(item.id) ? 'Hide' : 'Show'}
+                      Grant
                     </CButton>
+                      :
+                      <CButton
+                        color="danger"
+                        variant="outline"
+                        shape="square"
+                        size="sm"
+                        onClick={() => {
+                          toggleDelete(item.UserID)
+                        }}
+                      >
+                        Remove
+                      </CButton>
+                    }
                   </td>
-                )
-              },
-              details: (item) => {
-                return (
-                  <CCollapse visible={details.includes(item.id)}>
-                    <CCardBody className="p-3">
-                      <h4>{item.username}</h4>
-                      {/* <p className="text-muted">User since: {item.registered}</p> */}
-                      <CButton size="sm" color="info">
-                        User Settings
-                      </CButton>
-                      <CButton size="sm" color="danger" className="ml-1">
-                        Delete
-                      </CButton>
-                    </CCardBody>
-                  </CCollapse>
                 )
               },
             }}

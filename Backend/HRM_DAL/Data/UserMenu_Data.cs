@@ -18,6 +18,11 @@ namespace HRM_DAL.Data
             List<ReturnUserMenuModelHead> objUserMenuHeadList = new List<ReturnUserMenuModelHead>();
             ReturnUserMenuModelHead objUserMenuHead = new ReturnUserMenuModelHead();
 
+            if (objUserMenuHead.UserMenu == null)
+            {
+                objUserMenuHead.UserMenu = new List<ReturnUserMenuModel>();
+            }
+
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
                 objUserMenuHead.resp = false;
@@ -56,15 +61,10 @@ namespace HRM_DAL.Data
                                 objUserMenuHead.resp = true;
                                 objUserMenuHead.msg = "Get UserMenu";
 
-                                //objUserMenu.UUM_UserMenuID = rdr["UUM_UserMenuID"].ToString();
-                                //objUserMenu.UUM_LeaveAlotment = Convert.ToInt16(rdr["UUM_LeaveAlotment"].ToString());
-                                //objUserMenu.UUM_UserMenu = rdr["UUM_UserMenu"].ToString();
-                                //objUserMenu.UUM_Status = Convert.ToBoolean(rdr["UUM_Status"].ToString());
+                                objUserMenu.UUM_UserMenuID = rdr["UUM_UserMenuID"].ToString();
+                                objUserMenu.UUM_UserMenu = rdr["UUM_UserMenu"].ToString();
+                                objUserMenu.UUM_Status = Convert.ToBoolean(rdr["UUM_Status"].ToString());
 
-                                if (objUserMenuHead.UserMenu == null)
-                                {
-                                    objUserMenuHead.UserMenu = new List<ReturnUserMenuModel>();
-                                }
 
                                 objUserMenuHead.UserMenu.Add(objUserMenu);
 
@@ -90,11 +90,9 @@ namespace HRM_DAL.Data
             }
             catch (Exception ex)
             {
-                objUserMenuHead = new ReturnUserMenuModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
+                objUserMenuHead.resp = false;
+                objUserMenuHead.msg = ex.Message.ToString();
+
                 objUserMenuHeadList.Add(objUserMenuHead);
 
                 objError.WriteLog(0, "UserMenu_Data", "get_UserMenus_single", "Stack Track: " + ex.StackTrace);
@@ -115,6 +113,11 @@ namespace HRM_DAL.Data
             List<ReturnUserMenuModelHead> objUserMenuHeadList = new List<ReturnUserMenuModelHead>();
             ReturnUserMenuModelHead objUserMenuHead = new ReturnUserMenuModelHead();
 
+            if (objUserMenuHead.UserMenu == null)
+            {
+                objUserMenuHead.UserMenu = new List<ReturnUserMenuModel>();
+            }
+
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
                 objUserMenuHead.resp = false;
@@ -133,11 +136,11 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "get_UserMenu_all";
+                        cmd.CommandText = "sp_get_UserMenu_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UUM_UserMenuID", model.UUM_UserMenuID);
-                        cmd.Parameters["@UUM_UserMenuID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UUM_UserMenuID", model.UUM_UserMenuID);
+                        //cmd.Parameters["@UUM_UserMenuID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -153,15 +156,9 @@ namespace HRM_DAL.Data
                                 objUserMenuHead.resp = true;
                                 objUserMenuHead.msg = "Get UserMenu";
 
-                                //objUserMenu.UUM_UserMenuID = rdr["UUM_UserMenuID"].ToString();
-                                //objUserMenu.UUM_LeaveAlotment = Convert.ToInt16(rdr["UUM_LeaveAlotment"].ToString());
-                                //objUserMenu.UUM_UserMenu = rdr["UUM_UserMenu"].ToString();
-                                //objUserMenu.UUM_Status = Convert.ToBoolean(rdr["UUM_Status"].ToString());
-
-                                if (objUserMenuHead.UserMenu == null)
-                                {
-                                    objUserMenuHead.UserMenu = new List<ReturnUserMenuModel>();
-                                }
+                                objUserMenu.UUM_UserMenuID = rdr["UUM_UserMenuID"].ToString();
+                                objUserMenu.UUM_UserMenu = rdr["UUM_UserMenu"].ToString();
+                                objUserMenu.UUM_Status = Convert.ToBoolean(rdr["UUM_Status"].ToString());
 
                                 objUserMenuHead.UserMenu.Add(objUserMenu);
 
@@ -187,11 +184,9 @@ namespace HRM_DAL.Data
             }
             catch (Exception ex)
             {
-                objUserMenuHead = new ReturnUserMenuModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
+                objUserMenuHead.resp = false;
+                objUserMenuHead.msg = ex.Message.ToString();
+
                 objUserMenuHeadList.Add(objUserMenuHead);
 
                 objError.WriteLog(0, "UserMenu_Data", "get_UserMenu_all", "Stack Track: " + ex.StackTrace);
@@ -236,49 +231,14 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
                         cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
+                        cmd.Parameters.AddWithValue("@UUM_UserMenu", item.UUM_UserMenu);
+                        cmd.Parameters["@UUM_UserMenu"].Direction = ParameterDirection.Input;
+
                         cmd.Parameters.AddWithValue("@UUM_UserMenuID", item.UUM_UserMenuID);
                         cmd.Parameters["@UUM_UserMenuID"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
-                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
-                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
-                        //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_UnitNumber", item.CUS_Adrs_UnitNumber);
-                        //cmd.Parameters["@CUS_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_StreetName", item.CUS_Adrs_StreetName);
-                        //cmd.Parameters["@CUS_Adrs_StreetName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_City", item.CUS_Adrs_City);
-                        //cmd.Parameters["@CUS_Adrs_City"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_CountryCode", item.CUS_Adrs_CountryCode);
-                        //cmd.Parameters["@CUS_Adrs_CountryCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_PostalCode", item.CUS_Adrs_PostalCode);
-                        //cmd.Parameters["@CUS_Adrs_PostalCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactPerson", item.CUS_ContactPerson);
-                        //cmd.Parameters["@CUS_ContactPerson"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
-                        //cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
-                        //cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_SMS", item.CUS_OTP_By_SMS);
-                        //cmd.Parameters["@CUS_OTP_By_SMS"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
-                        //cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
-
-                        string mailtypes = "";
+                        cmd.Parameters.AddWithValue("@UUM_Status", item.UUM_Status);
+                        cmd.Parameters["@UUM_Status"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -350,53 +310,18 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_modify_UserMenu";
                         cmd.CommandType = CommandType.StoredProcedure;
 
+
                         cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
                         cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@UUM_UserMenu", item.UUM_UserMenu);
+                        cmd.Parameters["@UUM_UserMenu"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UUM_UserMenuID", item.UUM_UserMenuID);
                         cmd.Parameters["@UUM_UserMenuID"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
-                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
-                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
-                        //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_UnitNumber", item.CUS_Adrs_UnitNumber);
-                        //cmd.Parameters["@CUS_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_StreetName", item.CUS_Adrs_StreetName);
-                        //cmd.Parameters["@CUS_Adrs_StreetName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_City", item.CUS_Adrs_City);
-                        //cmd.Parameters["@CUS_Adrs_City"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_CountryCode", item.CUS_Adrs_CountryCode);
-                        //cmd.Parameters["@CUS_Adrs_CountryCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_PostalCode", item.CUS_Adrs_PostalCode);
-                        //cmd.Parameters["@CUS_Adrs_PostalCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactPerson", item.CUS_ContactPerson);
-                        //cmd.Parameters["@CUS_ContactPerson"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
-                        //cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
-                        //cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_SMS", item.CUS_OTP_By_SMS);
-                        //cmd.Parameters["@CUS_OTP_By_SMS"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
-                        //cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Status", item.CUS_Status);
-                        //cmd.Parameters["@CUS_Status"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UUM_Status", item.UUM_Status);
+                        cmd.Parameters["@UUM_Status"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;

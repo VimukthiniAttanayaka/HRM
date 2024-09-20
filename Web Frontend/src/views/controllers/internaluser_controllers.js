@@ -65,24 +65,3 @@ export const GetDataList = (data) => {
     elt.MobileNumber, elt.PhoneNumber, elt.Remarks, elt.ActiveFrom, elt.ActiveTo,
     elt.Status]);
 }
-
-
-export const columns_Access = [
-  {
-    key: 'AccessGroupName',
-    label: 'Access Group Name',
-    _style: { width: '20%' },
-  },
-  {
-    key: 'status',
-    label: getLabelText('Status', templatetype),
-    _style: { width: '20%' }
-  },
-  {
-    key: 'show_details',
-    label: '',
-    _style: { width: '1%' },
-    filter: false,
-    sorter: false,
-  },
-];

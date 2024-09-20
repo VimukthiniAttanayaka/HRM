@@ -27,15 +27,15 @@ namespace HRM.Controllers
         public List<ReturnUserMenuModelHead> get_UserMenu_single(UserMenu model)//ok
         {
             List<ReturnUserMenuModelHead> objUserMenuHeadList = new List<ReturnUserMenuModelHead>();
-            ReturnUserMenuModelHead obj = new ReturnUserMenuModelHead() { resp = false, msg = "sfsf" };
-            obj.UserMenu = new List<ReturnUserMenuModel>();
-            if (model.UUM_UserMenuID == "CAS")
-                obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "CAS", UUM_UserMenu = "Casual", UUM_Status = true });
-            if (model.UUM_UserMenuID == "ANU") obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "ANU", UUM_UserMenu = "Annual", UUM_Status = true });
-            if (model.UUM_UserMenuID == "MED") obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "MED", UUM_UserMenu = "Medical", UUM_Status = true });
-            if (model.UUM_UserMenuID == "MAT") obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "MAT", UUM_UserMenu = "Matrinaty", UUM_Status = true });
-            objUserMenuHeadList.Add(obj);
-            return objUserMenuHeadList;
+            //ReturnUserMenuModelHead obj = new ReturnUserMenuModelHead() { resp = false, msg = "sfsf" };
+            //obj.UserMenu = new List<ReturnUserMenuModel>();
+            //if (model.UUM_UserMenuID == "CAS")
+            //    obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "CAS", UUM_UserMenu = "Casual", UUM_Status = true });
+            //if (model.UUM_UserMenuID == "ANU") obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "ANU", UUM_UserMenu = "Annual", UUM_Status = true });
+            //if (model.UUM_UserMenuID == "MED") obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "MED", UUM_UserMenu = "Medical", UUM_Status = true });
+            //if (model.UUM_UserMenuID == "MAT") obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "MAT", UUM_UserMenu = "Matrinaty", UUM_Status = true });
+            //objUserMenuHeadList.Add(obj);
+            //return objUserMenuHeadList;
 
             try
             {
@@ -75,14 +75,14 @@ namespace HRM.Controllers
         public List<ReturnUserMenuModelHead> get_UserMenu_all(UserMenuSearchModel model)//ok
         {
             List<ReturnUserMenuModelHead> objUserMenuHeadList = new List<ReturnUserMenuModelHead>();
-            ReturnUserMenuModelHead obj = new ReturnUserMenuModelHead() { resp = false, msg = "sfsf" };
-            obj.UserMenu = new List<ReturnUserMenuModel>();
-            obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "CAS", UUM_UserMenu = "Casual", UUM_Status = true });
-            obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "ANU", UUM_UserMenu = "Annual", UUM_Status = true });
-            obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "MED", UUM_UserMenu = "Medical", UUM_Status = true });
-            obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "MAT", UUM_UserMenu = "Matrinaty", UUM_Status = true });
-            objUserMenuHeadList.Add(obj);
-            return objUserMenuHeadList;
+            //ReturnUserMenuModelHead obj = new ReturnUserMenuModelHead() { resp = false, msg = "sfsf" };
+            //obj.UserMenu = new List<ReturnUserMenuModel>();
+            //obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "CAS", UUM_UserMenu = "Casual", UUM_Status = true });
+            //obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "ANU", UUM_UserMenu = "Annual", UUM_Status = true });
+            //obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "MED", UUM_UserMenu = "Medical", UUM_Status = true });
+            //obj.UserMenu.Add(new ReturnUserMenuModel() { UUM_UserMenuID = "MAT", UUM_UserMenu = "Matrinaty", UUM_Status = true });
+            //objUserMenuHeadList.Add(obj);
+            //return objUserMenuHeadList;
 
             try
             {

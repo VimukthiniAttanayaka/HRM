@@ -69,7 +69,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
       UD_UserID: staffId,
       UE_EmployeeID: EmployeeID
     }
-console.log(formData)
+    console.log(formData)
     if (popupStatus == 'edit') {
       const APIReturn = await modifyInternalUser(formData)
       if (APIReturn.resp === false) { setDialogTitle("Alert"); }
@@ -129,6 +129,7 @@ console.log(formData)
     setEmployeeName(EmployeeDetails.EME_PrefferedName)
     handleCloseEmp_Popup();
   }
+  
   useEffect(() => {
     // console.log(InternalUserDetails)
     setFirstName(InternalUserDetails.UE_FirstName)
@@ -142,6 +143,7 @@ console.log(formData)
     setActiveFrom(InternalUserDetails.UE_ActiveFrom)
     setActiveTo(InternalUserDetails.UE_ActiveTo)
     // setIsActive(InternalUserDetails.UE_status)
+    loadDetails_Employee(InternalUserDetails.UE_EmployeeID)
     setIsActive(StatusInDB)
     requestdata();
   }, [InternalUserDetails]);

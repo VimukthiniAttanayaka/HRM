@@ -125,3 +125,36 @@ export const requestdata_AccessGroup_SelectBox = async (formData) => {
     })
   return optionsaccessgroup;
 }
+
+export const getAccessGroupAll_ForUser = async (formData) => {
+  const AccessGroupDetails = [];
+
+  const res = await fetch(apiUrl + 'accessgroup/get_accessgroup_all_ForUser', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+  })
+    .then(response => response.json())
+    .then(json => {
+      let res1 = JSON.parse(JSON.stringify(json))
+
+
+      class AccessGroupDetail {
+        constructor(id, AccessGroup, status) {
+          this.id = id;
+          this.AccessGroup = AccessGroup;
+          if (status == true) { this.status = "Active"; }
+          else { this.status = "Inactive"; }
+        }
+      }
+
+      for (let index = 0; index < res1[0].AccessGroup.length; index++) {
+        let element = res1[0].AccessGroup[index];
+        // console.log(element)
+        AccessGroupDetails[index] = new AccessGroupDetail(element.UAG_AccessGroupID, element.UAG_AccessGroup, element.UAG_Status);
+      }
+      console.log(AccessGroupDetails)
+    })
+
+  return AccessGroupDetails;
+};

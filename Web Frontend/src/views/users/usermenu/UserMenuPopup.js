@@ -3,8 +3,13 @@ import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTit
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
+import { modifyUserMenu } from '../../../apicalls/usermenu/modify.js';
+import { deleteUserMenu } from '../../../apicalls/usermenu/delete.js';
+import { addNewUserMenu } from '../../../apicalls/usermenu/add_new.js';
 
-const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails }) => {
+import PopUpAlert from '../../shared/PopUpAlert.js'
+
+const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails, popupStatus, StatusInDB }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -29,29 +34,58 @@ const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails }) => {
     // You can add validation logic here to check if all required fields are filled correctly
 
     // Prepare form data
+    // console.log(isActive)
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+
     const formData = {
       UUM_UserMenuID: UserMenuId,
-      UUM_LeaveAlotment: leaveAlotmentId,
       UUM_UserMenu: UserMenu,
       UUM_Status: isActive,
+      UD_UserID: staffId,
     }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'UserMenu/add_new_UserMenu', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Leave Type data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Leave Type data:', response.statusText)
+    console.log(formData)
+    if (popupStatus == 'edit') {
+      const APIReturn = await modifyUserMenu(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else if (popupStatus == 'delete') {
+      const APIReturn = await deleteUserMenu(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else {
+      const APIReturn = await addNewUserMenu(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
     }
   }
 
+  useEffect(() => {
+    // console.log(UserMenuDetails)
+    setUserMenuId(UserMenuDetails.UUM_UserMenuID)
+    setUserMenu(UserMenuDetails.UUM_UserMenu)
+    setIsActive(StatusInDB)
+  }, [UserMenuDetails]);
+
+  const [open, setOpen] = useState(false);
+  const [openEmp_Popup, setOpenEmp_Popup] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    onClose();
+  };
+
+  const [DialogTitle, setDialogTitle] = useState('');
+  const [DialogContent, setDialogContent] = useState('');
   // console.log(UserMenuDetails)
   return (
     <>
@@ -70,13 +104,15 @@ const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails }) => {
         <CModalBody>
           <CCard className="mx-4">
             <CCardBody className="p-4">
+              <PopUpAlert open={open} handleClose={handleClose} dialogTitle={DialogTitle} dialogContent={DialogContent} />
+
               <CForm onSubmit={handleSubmit}>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>UserMenuID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="UserMenuID" name="UserMenuID" value={UserMenuDetails.UUM_UserMenuID} onChange={handleChangeId}
+                  </CCol>   <CFormInput placeholder="UserMenuID" name="UserMenuID" value={UserMenuId} onChange={handleChangeId}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -85,7 +121,7 @@ const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails }) => {
                     <CInputGroupText>
                       <h6>UserMenu</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="UserMenu" name="UserMenu" value={UserMenuDetails.UUM_UserMenu} onChange={handleChangeUserMenu}
+                  </CCol>    <CFormInput placeholder="UserMenu" name="UserMenu" value={UserMenu} onChange={handleChangeUserMenu}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>

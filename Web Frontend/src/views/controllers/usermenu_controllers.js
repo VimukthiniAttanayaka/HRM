@@ -28,6 +28,20 @@ const columns = [
     filter: false,
     sorter: false,
   },
+  {
+    key: 'view',
+    label: '',
+    _style: { width: '1%' },
+    filter: false,
+    sorter: false,
+  },
+  {
+    key: 'delete',
+    label: '',
+    _style: { width: '1%' },
+    filter: false,
+    sorter: false,
+  },
 ];
 
 export const headers = [["id", "usermenu", "status"]];

@@ -124,6 +124,128 @@ namespace HRM.Controllers
 
         }
 
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<ReturnAccessGroupModelHead> get_accessgroup_all_ForUser(AccessGroupSearchModel model)//ok
+        {
+            List<ReturnAccessGroupModelHead> objAccessGroupHeadList = new List<ReturnAccessGroupModelHead>();
+            ReturnAccessGroupModelHead obj = new ReturnAccessGroupModelHead() { resp = false, msg = "sfsf" };
+            obj.AccessGroup = new List<ReturnAccessGroupModel>();
+            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "CAS", UAG_AccessGroup = "Casual", UAG_Status = true });
+            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "ANU", UAG_AccessGroup = "Annual", UAG_Status = true });
+            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MED", UAG_AccessGroup = "Medical", UAG_Status = true });
+            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MAT", UAG_AccessGroup = "Matrinaty", UAG_Status = true });
+            objAccessGroupHeadList.Add(obj);
+            return objAccessGroupHeadList;
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
+
+                return HRM_BL.AccessGroup_BL.get_AccessGroup_all(model);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturnAccessGroupModelHead objAccessGroupHead = new ReturnAccessGroupModelHead
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objAccessGroupHeadList.Add(objAccessGroupHead);
+
+                objError.WriteLog(0, "AccessGroupController", "get_AccessGroup_single", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "AccessGroupController", "get_AccessGroup_single", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "AccessGroupController", "get_AccessGroup_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "AccessGroupController", "get_AccessGroup_single", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+
+            return objAccessGroupHeadList;
+
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<ReturnResponse> GrantAccess(GrantRemoveAccessModel model)
+        {
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
+
+                //return HRM_BL.AccessGroup_BL.add_new_AccessGroup(model);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturnResponse objAccessGroupHead = new ReturnResponse
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objCustHeadList.Add(objAccessGroupHead);
+
+                objError.WriteLog(0, "AccessGroupController", "GrantAccess", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "AccessGroupController", "GrantAccess", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "AccessGroupController", "GrantAccess", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "AccessGroupController", "GrantAccess", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+
+            return objCustHeadList;
+        }
+                  [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<ReturnResponse> RemoveAccess(GrantRemoveAccessModel model)
+        {
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
+
+                //return HRM_BL.AccessGroup_BL.add_new_AccessGroup(item);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturnResponse objAccessGroupHead = new ReturnResponse
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objCustHeadList.Add(objAccessGroupHead);
+
+                objError.WriteLog(0, "AccessGroupController", "RemoveAccess", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "AccessGroupController", "RemoveAccess", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "AccessGroupController", "RemoveAccess", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "AccessGroupController", "RemoveAccess", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+
+            return objCustHeadList;
+        }
+
         //POST api/<UserController>
         [HttpPost]
         [Route("[action]")]
