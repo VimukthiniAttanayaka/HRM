@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CBadge, CDropdown, CDropdownItem, CDropdownMenu, CDropdownToggle, CRow, CCol, CSmartTable, CTabPanel, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
-import { Modal } from '@coreui/coreui-pro';
+// import data from './_data.js'
+// import { Modal } from '@coreui/coreui-pro';
+import { modifyUserRole } from '../../../apicalls/userrole/modify.js';
+import { deleteUserRole } from '../../../apicalls/userrole/delete.js';
+import { addNewUserRole } from '../../../apicalls/userrole/add_new.js';
 
-const UserRolePopup_Details = ({ visible, onClose, onOpen, UserRoleDetails, checkMenuListItems }) => {
+import { getLabelText } from 'src/MultipleLanguageSheets'
+import PopUpAlert from '../../shared/PopUpAlert.js'
 
+const UserRolePopup_Details = ({ visible, onClose, onOpen, UserRoleDetails, popupStatus, StatusInDB }) => {
+  let templatetype = 'translation_userrole'
+  let templatetype_base = 'translation'
+  
   // const handleSubmit = (event) => {
   //   event.preventDefault();
 
@@ -14,13 +22,11 @@ const UserRolePopup_Details = ({ visible, onClose, onOpen, UserRoleDetails, chec
   const [UserRole, setUserRole] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeUserRole = (event) => {
-    setUserRole(event.target.value)
-  }
-  const handleChangeId = (event) => {
-    setUserRoleId(event.target.value)
-  }
-  const handleChangeIsActive = (event) => { }
+  const handleChangeUserRole = (event) => {    setUserRole(event.target.value)  }
+  const handleChangeId = (event) => {    setUserRoleId(event.target.value)  }
+  const handleChangeIsActive = (event) => { setIsActive(event.target.checked) }
+
+
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -29,104 +35,96 @@ const UserRolePopup_Details = ({ visible, onClose, onOpen, UserRoleDetails, chec
     // You can add validation logic here to check if all required fields are filled correctly
 
     // Prepare form data
-    const formData = {
-      UAG_AccessGroupID: AccessGroupId,
-      UAG_AccessGroup: AccessGroup,
-      UAG_Status: isActive,
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'AccessGroup/add_new_AccessGroup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
+    // console.log(isActive)
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
 
-    if (response.ok) {
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Leave Type data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Leave Type data:', response.statusText)
+    const formData = {
+      UUR_UserRoleID: UserRoleId,
+      UUR_UserRole: UserRole,
+      UUR_Status: isActive,
+      UD_UserID: staffId,
+    }
+    // console.log(formData)
+    if (popupStatus == 'edit') {
+      const APIReturn = await modifyUserRole(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else if (popupStatus == 'delete') {
+      const APIReturn = await deleteUserRole(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else {
+      const APIReturn = await addNewUserRole(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
     }
   }
+  
+  useEffect(() => {
+    // console.log(UserRoleDetails)
+    setUserRoleId(UserRoleDetails.UUR_UserRoleID)
+    setUserRole(UserRoleDetails.UUR_UserRole)
+    setIsActive(StatusInDB)
+  }, [UserRoleDetails]);
 
-  // console.log(UserRoleDetails)
-  const [checkedItems, setCheckedItems] = useState([]);
-  // const [checkMenuListItems, setcheckMenuListItems] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [openEmp_Popup, setOpenEmp_Popup] = useState(false);
 
-  const handleCheckboxChange = (event) => {
-    const { checked, value } = event.target;
-    if (checked) {
-      setCheckedItems([...checkedItems, value]);
-    } else {
-      setCheckedItems(checkedItems.filter(item => item !== value));
-    }
+  const handleClose = () => {
+    setOpen(false);
+    onClose();
   };
 
-  const options = [
-    { value: 'option1', label: 'Option 1', checked: true },
-    { value: 'option2', label: 'Option 2', checked: true },
-    { value: 'option3', label: 'Option 3', checked: true },
-  ];
-
-  useEffect(() => {
-  }, []);
-
+  const [DialogTitle, setDialogTitle] = useState('');
+  const [DialogContent, setDialogContent] = useState('');
+  // console.log(UserRoleDetails)
+  
 
   return (
     <>
       <CTabPanel className="p-3" itemKey="general">
         {/* <CButton color="primary" onClick={onOpen}>New Access Group</CButton> */}
-
+        <PopUpAlert open={open} handleClose={handleClose} dialogTitle={DialogTitle} dialogContent={DialogContent} />
         <CForm onSubmit={handleSubmit}>
           <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>
-                <h6>EUR_UserRoleID</h6>
+                <h6>UserRoleID</h6>
               </CInputGroupText>
-            </CCol>   <CFormInput placeholder="UserRoleID" name="UserRoleID" value={UserRoleDetails.EUR_UserRoleID} onChange={handleChangeId}
-            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+            </CCol>   <CFormInput placeholder="UserRoleID" name="UserRoleID" value={UserRoleId} onChange={handleChangeId}
             />
           </CInputGroup>
           <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>
-                <h6>EUR_UserRole</h6>
+                <h6>UserRole</h6>
               </CInputGroupText>
-            </CCol>    <CFormInput placeholder="UserRole" name="UserRole" value={UserRoleDetails.EUR_UserRole} onChange={handleChangeUserRole}
-            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+            </CCol>    <CFormInput placeholder="UserRole" name="UserRole" value={UserRole} onChange={handleChangeUserRole}
             />
           </CInputGroup>
-          {/* <CInputGroup className="mb-3"> */}
-          {/* <CCol md={4}>
-            <CInputGroupText>
-              <h6>Available Menus</h6>
-            </CInputGroupText>
-          </CCol> */}
-
-          {/* {checkMenuListItems.map((option) => (
-                    <CFormCheck
-                      key={option.value}
-                      type="checkbox"
-                      label={option.label}
-                      value={option.value}
-                      // checked={checkedItems.includes(option.value)}
-                      checked={option.Ischecked}
-                      onChange={handleCheckboxChange}
-                    />
-                  ))} */}
-          {/* </CInputGroup> */}
           <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>
                 <h6>Status</h6>
               </CInputGroupText>
             </CCol>
-            <CFormCheck label="Status" defaultChecked />
+            <CFormCheck checked={isActive} onChange={handleChangeIsActive} label="Status" defaultChecked
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+            />
           </CInputGroup>
           <div className="d-grid">
-            <CButton color="success" type='submit'>Submit</CButton>
+            {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :
+              <CButton color="success" type='submit'>{getLabelText('Submit', templatetype)}</CButton>)}
           </div>
         </CForm>
 

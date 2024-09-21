@@ -11,25 +11,25 @@ namespace HRM_DAL.Models
 
     public class UserRoleModel : RequestBaseModel
     {
-        public string EUR_UserRoleID { get; set; }
-        public string EUR_UserRole { get; set; }
-        public bool EUR_Status { get; set; }
-        public string EUR_CreatedBy { get; set; }
-        public DateTime EUR_CreatedDateTime { get; set; }
-        public string EUR_ModifiedBy { get; set; }
-        public DateTime EUR_ModifiedDateTime { get; set; }
+        public string UUR_UserRoleID { get; set; }
+        public string UUR_UserRole { get; set; }
+        public bool UUR_Status { get; set; }
+        public string UUR_CreatedBy { get; set; }
+        public DateTime UUR_CreatedDateTime { get; set; }
+        public string UUR_ModifiedBy { get; set; }
+        public DateTime UUR_ModifiedDateTime { get; set; }
     }
 
     public class ReturnUserRoleModel
     {
         [Key]
-        public string EUR_UserRoleID { get; set; }
-        public string EUR_UserRole { get; set; }
-        public bool EUR_Status { get; set; }
-        public string EUR_CreatedBy { get; set; }
-        public DateTime EUR_CreatedDateTime { get; set; }
-        public string EUR_ModifiedBy { get; set; }
-        public DateTime EUR_ModifiedDateTime { get; set; }
+        public string UUR_UserRoleID { get; set; }
+        public string UUR_UserRole { get; set; }
+        public bool UUR_Status { get; set; }
+        public string UUR_CreatedBy { get; set; }
+        public DateTime UUR_CreatedDateTime { get; set; }
+        public string UUR_ModifiedBy { get; set; }
+        public DateTime UUR_ModifiedDateTime { get; set; }
         public List<AccessGroupSelect> AccessGroups { get; set; }
     }
     public class AccessGroupSelect
@@ -43,14 +43,14 @@ namespace HRM_DAL.Models
     {
         [Key]
 
-        public string EUR_UserRoleID { get; set; }
+        public string UUR_UserRoleID { get; set; }
         public string RC { get; set; }
     }
 
 
     public class UserRole : RequestBaseModel
     {
-        public string EUR_UserRoleID { get; set; }
+        public string UUR_UserRoleID { get; set; }
 
 
     }
@@ -64,18 +64,26 @@ namespace HRM_DAL.Models
 
     public class UserRoleSearchModel : RequestBaseModel
     {
-        public string EUR_UserRoleID { get; set; }
+        public string UUR_UserRoleID { get; set; }
     }
 
     public class ReturnUserRoleSelectModel
     {
-        public string EUR_UserRoleID { get; set; }
+        public string UUR_UserRoleID { get; set; }
 
     }
 
-    public class InactiveEURModel : RequestBaseModel
+    public class InactiveUURModel : RequestBaseModel
     {
-        public string EUR_UserRoleID { get; set; }
+        public string UUR_UserRoleID { get; set; }
+
+    }
+
+
+    public class GrantRemoveAccessModel : RequestBaseModel
+    {
+        public string UURAG_AccessGroupID { get; set; }
+        public string UURAG_UserRoleID { get; set; }
 
     }
 }

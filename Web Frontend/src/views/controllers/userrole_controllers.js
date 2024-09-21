@@ -13,7 +13,8 @@ export const columns = [
     // sorter: false,
   },
   {
-    key: 'userrole', label: 'user role',
+    key: 'userrole',
+     label: 'user role',
     _style: { width: '20%' },
   },
   {
@@ -23,6 +24,20 @@ export const columns = [
 
   {
     key: 'show_details',
+    label: '',
+    _style: { width: '1%' },
+    filter: false,
+    sorter: false,
+  },
+  {
+    key: 'view',
+    label: '',
+    _style: { width: '1%' },
+    filter: false,
+    sorter: false,
+  },
+  {
+    key: 'delete',
     label: '',
     _style: { width: '1%' },
     filter: false,

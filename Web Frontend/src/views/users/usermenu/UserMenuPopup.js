@@ -10,6 +10,7 @@ import { getLabelText } from 'src/MultipleLanguageSheets'
 
 import PopUpAlert from '../../shared/PopUpAlert.js'
 
+
 const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails, popupStatus, StatusInDB }) => {
   let templatetype = 'translation_usermenu'
   let templatetype_base = 'translation'
@@ -21,13 +22,9 @@ const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails, popupStatus,
   const [UserMenu, setUserMenu] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeUserMenu = (event) => {
-    setUserMenu(event.target.value)
-  }
-  const handleChangeId = (event) => {
-    setUserMenuId(event.target.value)
-  }
-  const handleChangeIsActive = (event) => { }
+  const handleChangeUserMenu = (event) => { setUserMenu(event.target.value) }
+  const handleChangeId = (event) => { setUserMenuId(event.target.value) }
+  const handleChangeIsActive = (event) => { setIsActive(event.target.checked) }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -76,6 +73,8 @@ const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails, popupStatus,
     setUserMenuId(UserMenuDetails.UUM_UserMenuID)
     setUserMenu(UserMenuDetails.UUM_UserMenu)
     setIsActive(StatusInDB)
+    // console.log(StatusInDB)
+    // console.log(isActive)
   }, [UserMenuDetails]);
 
   const [open, setOpen] = useState(false);
@@ -89,7 +88,7 @@ const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails, popupStatus,
   const [DialogTitle, setDialogTitle] = useState('');
   const [DialogContent, setDialogContent] = useState('');
   // console.log(UserMenuDetails)
-  
+
   const popupStatusSetup = (event) => {
     if (popupStatus == 'edit') {
       return getLabelText('Edit UserMenu', templatetype)
@@ -101,7 +100,7 @@ const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails, popupStatus,
       return getLabelText('Create New UserMenu', templatetype)
     }
   }
-  
+
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New UserMenu</CButton>
@@ -147,10 +146,13 @@ const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails, popupStatus,
                       <h6>Status</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck label="Status" defaultChecked />
+                  <CFormCheck checked={isActive} onChange={handleChangeIsActive} label="Status"
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+                  />
                 </CInputGroup>
                 <div className="d-grid">
-                  <CButton color="success" type='submit'>Submit</CButton>
+                  {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :
+                    <CButton color="success" type='submit'>{getLabelText('Submit', templatetype)}</CButton>)}
                 </div>
               </CForm>
             </CCardBody>

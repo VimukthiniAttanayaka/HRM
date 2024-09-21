@@ -45,12 +45,12 @@ const ExternalUserPopup = ({ visible, onClose, onOpen, ExternalUserDetails, popu
           <CTabs activeItemKey="general">
             <CTabList variant="tabs">
               <CTab itemKey="general">General</CTab>
-              <CTab itemKey="access">Access</CTab>
+              {/* <CTab itemKey="access">Access</CTab> */}
             </CTabList>
             <CTabContent>
 
               <ExternalUserPopup_Details popupStatus={popupStatus} visible={visible} StatusInDB={StatusInDB} ExternalUserDetails={ExternalUserDetails} onClose={onClose} />
-              <ExternalUserPopup_Access popupStatus={popupStatus} ExternalUserDetails={ExternalUserDetails} />
+              {/* <ExternalUserPopup_Access popupStatus={popupStatus} ExternalUserDetails={ExternalUserDetails} /> */}
 
             </CTabContent>
           </CTabs>

@@ -8,8 +8,11 @@ import { deleteAccessGroup } from '../../../apicalls/accessgroup/delete.js';
 import { addNewAccessGroup } from '../../../apicalls/accessgroup/add_new.js';
 
 import PopUpAlert from '../../shared/PopUpAlert.js'
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails, popupStatus, StatusInDB }) => {
+  let templatetype = 'translation_accessgroup'
+  let templatetype_base = 'translation'
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -19,13 +22,9 @@ const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails
   const [AccessGroup, setAccessGroup] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeAccessGroup = (event) => {
-    setAccessGroup(event.target.value)
-  }
-  const handleChangeId = (event) => {
-    setAccessGroupId(event.target.value)
-  }
-  const handleChangeIsActive = (event) => { }
+  const handleChangeAccessGroup = (event) => { setAccessGroup(event.target.value) }
+  const handleChangeId = (event) => { setAccessGroupId(event.target.value) }
+  const handleChangeIsActive = (event) => { setIsActive(event.target.checked) }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -86,7 +85,7 @@ const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails
 
   const [DialogTitle, setDialogTitle] = useState('');
   const [DialogContent, setDialogContent] = useState('');
- 
+
   return (
     <>
       <CTabPanel className="p-3" itemKey="general">
@@ -116,10 +115,13 @@ const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails
                 <h6>Status</h6>
               </CInputGroupText>
             </CCol>
-            <CFormCheck label="Status" defaultChecked />
+            <CFormCheck checked={isActive} onChange={handleChangeIsActive} label="Status"
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+            />
           </CInputGroup>
           <div className="d-grid">
-            <CButton color="success" type='submit'>Submit</CButton>
+            {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :
+              <CButton color="success" type='submit'>{getLabelText('Submit', templatetype)}</CButton>)}
           </div>
         </CForm>
 

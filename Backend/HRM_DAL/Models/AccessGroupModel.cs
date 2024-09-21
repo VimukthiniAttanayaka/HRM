@@ -72,11 +72,4 @@ namespace HRM_DAL.Models
         public string UAG_AccessGroupID { get; set; }
 
     }
-
-    public class GrantRemoveAccessModel : RequestBaseModel
-    {
-        public string UAG_AccessGroupID { get; set; }
-        public string UAG_StaffID { get; set; }
-
-    }
 }

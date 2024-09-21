@@ -15,11 +15,13 @@ import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
 import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
 const UserRoleDataGrid = () => {
+  let templatetype = 'translation_userrole'
+  let templatetype_base = 'translation'
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
 
- 
+  const [popupStatus, setPopupStatus] = useState('create')
 
   const [UserRoleDetails, setUserRoleDetails] = useState([])
   const [checkAccessGroupListItems, setcheckAccessGroupListItems] = useState([]);
@@ -28,17 +30,19 @@ const UserRoleDataGrid = () => {
     setUserRoleId(event.target.value)
   }
 
-  // async function requestDefaultData() {
-  //   const formData = {
-  //     // UD_StaffID: staffId,
-  //     // AUD_notificationToken: token,
-  //     UAG_AccessGroupID: ""
-  //   }
-  //   const AccessGroupList = await requestdata_AccessGroup_SelectBox(formData)
-   
-  //   setcheckAccessGroupListItems(AccessGroupList);
+  const toggleEdit = (index) => {
+    setPopupStatus('edit')
+    toggleDetails(index)
+  }
+  const toggleDelete = (index) => {
+    setPopupStatus('delete')
+    toggleDetails(index)
+  }
+  const toggleView = (index) => {
+    setPopupStatus('view')
+    toggleDetails(index)
+  }
 
-  // }
   async function loadDetails(item) {
 
     const token = getJWTToken();
@@ -52,24 +56,11 @@ const UserRoleDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      EUR_UserRoleID: item
+      UUR_UserRoleID: item
     }
 
-    // const res = fetch(apiUrl + 'UserRole/get_UserRole_single', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setUserRoleDetails(res1[0].UserRole[0]);
-    //     handleOpenPopup()
-    //   })
     const UserRoleDetails = await getUserRoleSingle(formData)
-    // setUserRoleDetails(res1[0].UserRole[0]);
-    setcheckAccessGroupListItems(UserRoleDetails.AccessGroups);
-     setUserRoleDetails(UserRoleDetails);
+    setUserRoleDetails(UserRoleDetails);
     handleOpenPopup()
   }
   const toggleDetails = (index) => {
@@ -107,37 +98,6 @@ const UserRoleDataGrid = () => {
     const UserRoleDetails = await getUserRoleAll(formData)
     // console.log(UserRoleDetails)
     setData(UserRoleDetails);
-
-    // const res = await fetch(apiUrl + 'UserRole/get_UserRole_all', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-
-    //     const UserRoleDetails = [];
-    //     class UserRoleDetail {
-    //       constructor(id, UserRole, status, Alotment) {
-    //         this.UserRole = UserRole;
-    //         this.id = id;
-    //         this.alotment = Alotment
-    //         if (status == true) { this.status = "Active"; }
-    //         else { this.status = "Inactive"; }
-    //       }
-    //     }
-
-    //     for (let index = 0; index < res1[0].UserRole.length; index++) {
-    //       let element = res1[0].UserRole[index];
-    //       console.log(element)
-    //       UserRoleDetails[index] = new UserRoleDetail(element.LVT_UserRoleID, element.LVT_UserRole, element.LVT_Status, element.LVT_LeaveAlotment);
-    //     }
-
-    //     setData(UserRoleDetails);
-    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
-    //   })
-
   }
   useEffect(() => {
     requestdata();
@@ -154,7 +114,7 @@ const UserRoleDataGrid = () => {
 
   const handleOpenPopup = () => {
     setVisible(true);
-  
+
     // requestDefaultData();
   };
 
@@ -167,7 +127,7 @@ const UserRoleDataGrid = () => {
     <CCardBody>
       <CRow>
         <CCol>
-        <CDropdown>
+          <CDropdown>
             <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
             <CDropdownMenu>
               <CDropdownItem><CButton
@@ -187,7 +147,7 @@ const UserRoleDataGrid = () => {
           </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <UserRolePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} checkAccessGroupListItems={checkAccessGroupListItems}  UserRoleDetails={UserRoleDetails} />
+          <UserRolePopup onClose={handleClosePopup} popupStatus={popupStatus} visible={visible} onOpen={handleOpenPopup} UserRoleDetails={UserRoleDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -209,11 +169,6 @@ const UserRoleDataGrid = () => {
           console.log(items)
         }}
         scopedColumns={{
-          // avatar: (item) => (
-          //   <td>
-          //     {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-          //   </td>
-          // ),
           status: (item) => (
             <td>
               <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
@@ -228,17 +183,49 @@ const UserRoleDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDetails(item.id)
+                    toggleEdit(item.id)
                   }}
                 >
-                  {details.includes(item.id) ? 'Hide' : 'Show'}
+                  {getLabelText('Edit', templatetype_base)}
                 </CButton>
               </td>
             )
           },
+          view: (item) => (
+            <td>
+              <CButton
+                color="success"
+                variant="outline"
+                shape="square"
+                size="sm"
+                onClick={() => {
+                  toggleView(item.id)
+                }}
+              >
+                {getLabelText('View', templatetype_base)}
+              </CButton>
+            </td>
+          ),
+          delete: (item) => (
+            <td>
+              {item.status == 'Inactive' ? '' :
+                <CButton
+                  color="danger"
+                  variant="outline"
+                  shape="square"
+                  size="sm"
+                  onClick={() => {
+                    toggleDelete(item.id)
+                  }}
+                >
+                  {getLabelText('Delete', templatetype_base)}
+                </CButton>
+              }
+            </td>
+          ),
           details: (item) => {
             return (
-              <CCollapse visible={details.includes(item.id)}>
+              <CCollapse visible={details.includes(item.UserID)}>
                 <CCardBody className="p-3">
                   <h4>{item.username}</h4>
                   <p className="text-muted">User since: {item.registered}</p>

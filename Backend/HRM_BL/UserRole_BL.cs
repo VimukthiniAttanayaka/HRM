@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using utility_handler.Data;
+using System;
 
 namespace HRM_BL
 {
@@ -31,12 +32,25 @@ namespace HRM_BL
             return HRM_DAL.Data.UserRole_Data.modify_UserRole(item);
         }
 
-        public static List<ReturnResponse> inactivate_UserRole(InactiveEURModel item)//ok
+        public static List<ReturnResponse> inactivate_UserRole(InactiveUURModel item)//ok
         {
             return HRM_DAL.Data.UserRole_Data.inactivate_UserRole(item);
         }
 
+        public static List<ReturnAccessGroupModelHead> get_AccessGroup_all_ForUserRole(UserRoleSearchModel model)
+        {
+            return HRM_DAL.Data.UserRole_Data.get_AccessGroup_all_ForUserRole(model);
+        }
 
+        public static List<ReturnResponse> RemoveAccess(GrantRemoveAccessModel item)
+        {
+            return HRM_DAL.Data.UserRole_Data.RemoveAccess(item);
+        }
+
+        public static List<ReturnResponse> GrantAccess(GrantRemoveAccessModel item)
+        {
+            return HRM_DAL.Data.UserRole_Data.GrantAccess(item);
+        }
     }
 
 }

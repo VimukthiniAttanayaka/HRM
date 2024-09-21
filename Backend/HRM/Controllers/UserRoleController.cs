@@ -27,19 +27,19 @@ namespace HRM.Controllers
         public List<ReturnUserRoleModelHead> get_UserRole_single(UserRole model)//ok
         {
             List<ReturnUserRoleModelHead> objUserRoleHeadList = new List<ReturnUserRoleModelHead>();
-            ReturnUserRoleModelHead obj = new ReturnUserRoleModelHead() { resp = false, msg = "sfsf" };
-            obj.UserRole = new List<ReturnUserRoleModel>();
-            List<AccessGroupSelect> AccessGroups = new List<AccessGroupSelect>();
-            AccessGroups.Add(new AccessGroupSelect() { value = "CAS", label = "CAS", Ischecked = true });
-            AccessGroups.Add(new AccessGroupSelect() { value = "ANU", label = "ANU", Ischecked = true });
-            AccessGroups.Add(new AccessGroupSelect() { value = "MED", label = "MED", Ischecked = true });
-            if (model.EUR_UserRoleID == "CAS")
-                obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "CAS", EUR_UserRole = "Casual", EUR_Status = true, AccessGroups = AccessGroups });
-            if (model.EUR_UserRoleID == "ANU") obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "ANU", EUR_UserRole = "Annual", EUR_Status = true, AccessGroups = AccessGroups });
-            if (model.EUR_UserRoleID == "MED") obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "MED", EUR_UserRole = "Medical", EUR_Status = true, AccessGroups = AccessGroups });
-            if (model.EUR_UserRoleID == "MAT") obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "MAT", EUR_UserRole = "Matrinaty", EUR_Status = true, AccessGroups = AccessGroups });
-            objUserRoleHeadList.Add(obj);
-            return objUserRoleHeadList;
+            //ReturnUserRoleModelHead obj = new ReturnUserRoleModelHead() { resp = false, msg = "sfsf" };
+            //obj.UserRole = new List<ReturnUserRoleModel>();
+            //List<AccessGroupSelect> AccessGroups = new List<AccessGroupSelect>();
+            //AccessGroups.Add(new AccessGroupSelect() { value = "CAS", label = "CAS", Ischecked = true });
+            //AccessGroups.Add(new AccessGroupSelect() { value = "ANU", label = "ANU", Ischecked = true });
+            //AccessGroups.Add(new AccessGroupSelect() { value = "MED", label = "MED", Ischecked = true });
+            //if (model.EUR_UserRoleID == "CAS")
+            //    obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "CAS", EUR_UserRole = "Casual", EUR_Status = true, AccessGroups = AccessGroups });
+            //if (model.EUR_UserRoleID == "ANU") obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "ANU", EUR_UserRole = "Annual", EUR_Status = true, AccessGroups = AccessGroups });
+            //if (model.EUR_UserRoleID == "MED") obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "MED", EUR_UserRole = "Medical", EUR_Status = true, AccessGroups = AccessGroups });
+            //if (model.EUR_UserRoleID == "MAT") obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "MAT", EUR_UserRole = "Matrinaty", EUR_Status = true, AccessGroups = AccessGroups });
+            //objUserRoleHeadList.Add(obj);
+            //return objUserRoleHeadList;
 
             try
             {
@@ -79,14 +79,14 @@ namespace HRM.Controllers
         public List<ReturnUserRoleModelHead> get_UserRole_all(UserRoleSearchModel model)//ok
         {
             List<ReturnUserRoleModelHead> objUserRoleHeadList = new List<ReturnUserRoleModelHead>();
-            ReturnUserRoleModelHead obj = new ReturnUserRoleModelHead() { resp = false, msg = "sfsf" };
-            obj.UserRole = new List<ReturnUserRoleModel>();
-            obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "CAS", EUR_UserRole = "Casual", EUR_Status = true });
-            obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "ANU", EUR_UserRole = "Annual", EUR_Status = true });
-            obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "MED", EUR_UserRole = "Medical", EUR_Status = true });
-            obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "MAT", EUR_UserRole = "Matrinaty", EUR_Status = true });
-            objUserRoleHeadList.Add(obj);
-            return objUserRoleHeadList;
+            //ReturnUserRoleModelHead obj = new ReturnUserRoleModelHead() { resp = false, msg = "sfsf" };
+            //obj.UserRole = new List<ReturnUserRoleModel>();
+            //obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "CAS", EUR_UserRole = "Casual", EUR_Status = true });
+            //obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "ANU", EUR_UserRole = "Annual", EUR_Status = true });
+            //obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "MED", EUR_UserRole = "Medical", EUR_Status = true });
+            //obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "MAT", EUR_UserRole = "Matrinaty", EUR_Status = true });
+            //objUserRoleHeadList.Add(obj);
+            //return objUserRoleHeadList;
 
             try
             {
@@ -105,12 +105,59 @@ namespace HRM.Controllers
                 };
                 objUserRoleHeadList.Add(objUserRoleHead);
 
-                objError.WriteLog(0, "UserRoleController", "get_UserRole_single", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "UserRoleController", "get_UserRole_single", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "UserRoleController", "get_UserRole_all", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserRoleController", "get_UserRole_all", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "UserRoleController", "get_UserRole_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "UserRoleController", "get_UserRole_single", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "UserRoleController", "get_UserRole_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserRoleController", "get_UserRole_all", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+
+            return objUserRoleHeadList;
+
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<ReturnAccessGroupModelHead> get_AccessGroup_all_ForUserRole(UserRoleSearchModel model)//ok
+        {
+            List<ReturnAccessGroupModelHead> objUserRoleHeadList = new List<ReturnAccessGroupModelHead>();
+            //ReturnUserRoleModelHead obj = new ReturnUserRoleModelHead() { resp = false, msg = "sfsf" };
+            //obj.UserRole = new List<ReturnUserRoleModel>();
+            //obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "CAS", EUR_UserRole = "Casual", EUR_Status = true });
+            //obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "ANU", EUR_UserRole = "Annual", EUR_Status = true });
+            //obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "MED", EUR_UserRole = "Medical", EUR_Status = true });
+            //obj.UserRole.Add(new ReturnUserRoleModel() { EUR_UserRoleID = "MAT", EUR_UserRole = "Matrinaty", EUR_Status = true });
+            //objUserRoleHeadList.Add(obj);
+            //return objUserRoleHeadList;
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
+
+                return HRM_BL.UserRole_BL.get_AccessGroup_all_ForUserRole(model);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturnAccessGroupModelHead objUserRoleHead = new ReturnAccessGroupModelHead
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objUserRoleHeadList.Add(objUserRoleHead);
+
+                objError.WriteLog(0, "UserRoleController", "get_AccessGroup_all_ForUserRole", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserRoleController", "get_AccessGroup_all_ForUserRole", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "UserRoleController", "get_AccessGroup_all_ForUserRole", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserRoleController", "get_AccessGroup_all_ForUserRole", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -201,7 +248,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnResponse> inactivate_UserRole(InactiveEURModel item)//ok
+        public List<ReturnResponse> inactivate_UserRole(InactiveUURModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
             objUserHeadList.Add(new ReturnResponse() { resp = true, msg = "saved" });
@@ -236,6 +283,83 @@ namespace HRM.Controllers
             }
             return objUserHeadList;
         }
+
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<ReturnResponse> GrantAccess(GrantRemoveAccessModel model)
+        {
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
+
+                return HRM_BL.UserRole_BL.GrantAccess(model);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturnResponse objAccessGroupHead = new ReturnResponse
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objCustHeadList.Add(objAccessGroupHead);
+
+                objError.WriteLog(0, "UserMenuController", "GrantAccess", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserMenuController", "GrantAccess", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "UserMenuController", "GrantAccess", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserMenuController", "GrantAccess", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+
+            return objCustHeadList;
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<ReturnResponse> RemoveAccess(GrantRemoveAccessModel model)
+        {
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
+
+                return HRM_BL.UserRole_BL.RemoveAccess(model);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturnResponse objAccessGroupHead = new ReturnResponse
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objCustHeadList.Add(objAccessGroupHead);
+
+                objError.WriteLog(0, "UserMenuController", "RemoveAccess", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserMenuController", "RemoveAccess", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "UserMenuController", "RemoveAccess", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserMenuController", "RemoveAccess", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+
+            return objCustHeadList;
+        }
+
     }
 
 }

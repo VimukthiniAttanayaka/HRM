@@ -45,12 +45,12 @@ const InternalUserPopup = ({ visible, onClose, onOpen, InternalUserDetails, popu
           <CTabs activeItemKey="general">
             <CTabList variant="tabs">
               <CTab itemKey="general">General</CTab>
-              <CTab itemKey="access">Access</CTab>
+              {/* <CTab itemKey="access">Access</CTab> */}
             </CTabList>
             <CTabContent>
 
               <InternalUserPopup_Details popupStatus={popupStatus} StatusInDB={StatusInDB} InternalUserDetails={InternalUserDetails} onClose={onClose} />
-              <InternalUserPopup_Access popupStatus={popupStatus} InternalUserDetails={InternalUserDetails} />
+              {/* <InternalUserPopup_Access popupStatus={popupStatus} InternalUserDetails={InternalUserDetails} /> */}
 
             </CTabContent>
           </CTabs>
