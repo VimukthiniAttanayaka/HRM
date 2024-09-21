@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CFormSelect, CButton, CModal, CModalBody, CBadge, CDropdown, CDropdownItem, CDropdownMenu, CDropdownToggle, CRow, CCol, CSmartTable, CTabPanel, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
-import { Modal } from '@coreui/coreui-pro';
+// import data from './_data.js'
+// import { Modal } from '@coreui/coreui-pro';
+import { modifyAccessGroup } from '../../../apicalls/accessgroup/modify.js';
+import { deleteAccessGroup } from '../../../apicalls/accessgroup/delete.js';
+import { addNewAccessGroup } from '../../../apicalls/accessgroup/add_new.js';
 
-const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails, checkMenuListItems, StatusInDB }) => {
+const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails, popupStatus, StatusInDB }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -35,9 +38,9 @@ const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails
     const customerId = getCustomerID();
 
     const formData = {
-      UUM_AccessGroupID: AccessGroupId,
-      UUM_AccessGroup: AccessGroup,
-      UUM_Status: isActive,
+      UAG_AccessGroupID: AccessGroupId,
+      UAG_AccessGroup: AccessGroup,
+      UAG_Status: isActive,
       UD_UserID: staffId,
     }
     console.log(formData)
@@ -66,8 +69,8 @@ const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails
 
   useEffect(() => {
     // console.log(AccessGroupDetails)
-    setAccessGroupId(AccessGroupDetails.UUM_AccessGroupID)
-    setAccessGroup(AccessGroupDetails.UUM_AccessGroup)
+    setAccessGroupId(AccessGroupDetails.UAG_AccessGroupID)
+    setAccessGroup(AccessGroupDetails.UAG_AccessGroup)
     setIsActive(StatusInDB)
   }, [AccessGroupDetails]);
 
@@ -91,10 +94,9 @@ const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails
           <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>
-                <h6>AccessGroupID</h6>
+                <h6>AccessGroupId</h6>
               </CInputGroupText>
-            </CCol>   <CFormInput placeholder="AccessGroupID" name="AccessGroupID" value={AccessGroupDetails.UAG_AccessGroupID} onChange={handleChangeId}
-            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+            </CCol>   <CFormInput placeholder="AccessGroupId" name="AccessGroupId" value={AccessGroupId} onChange={handleChangeId}
             />
           </CInputGroup>
           <CInputGroup className="mb-3">
@@ -102,29 +104,9 @@ const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails
               <CInputGroupText>
                 <h6>AccessGroup</h6>
               </CInputGroupText>
-            </CCol>    <CFormInput placeholder="AccessGroup" name="AccessGroup" value={AccessGroupDetails.UAG_AccessGroup} onChange={handleChangeAccessGroup}
-            // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+            </CCol>    <CFormInput placeholder="AccessGroup" name="AccessGroup" value={AccessGroup} onChange={handleChangeAccessGroup}
             />
           </CInputGroup>
-          {/* <CInputGroup className="mb-3"> */}
-          {/* <CCol md={4}>
-            <CInputGroupText>
-              <h6>Available Menus</h6>
-            </CInputGroupText>
-          </CCol> */}
-
-          {/* {checkMenuListItems.map((option) => (
-                    <CFormCheck
-                      key={option.value}
-                      type="checkbox"
-                      label={option.label}
-                      value={option.value}
-                      // checked={checkedItems.includes(option.value)}
-                      checked={option.Ischecked}
-                      onChange={handleCheckboxChange}
-                    />
-                  ))} */}
-          {/* </CInputGroup> */}
           <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>

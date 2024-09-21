@@ -18,6 +18,11 @@ namespace HRM_DAL.Data
             List<ReturnAccessGroupModelHead> objAccessGroupHeadList = new List<ReturnAccessGroupModelHead>();
             ReturnAccessGroupModelHead objAccessGroupHead = new ReturnAccessGroupModelHead();
 
+            if (objAccessGroupHead.AccessGroup == null)
+            {
+                objAccessGroupHead.AccessGroup = new List<ReturnAccessGroupModel>();
+            }
+
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
                 objAccessGroupHead.resp = false;
@@ -36,7 +41,7 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "sp_get_AccessGroups_single";
+                        cmd.CommandText = "sp_get_AccessGroup_single";
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.Parameters.AddWithValue("@UAG_AccessGroupID", model.UAG_AccessGroupID);
@@ -56,15 +61,10 @@ namespace HRM_DAL.Data
                                 objAccessGroupHead.resp = true;
                                 objAccessGroupHead.msg = "Get AccessGroup";
 
-                                //objAccessGroup.UAG_AccessGroupID = rdr["UAG_AccessGroupID"].ToString();
-                                //objAccessGroup.EUG_LeaveAlotment = Convert.ToInt16(rdr["EUG_LeaveAlotment"].ToString());
-                                //objAccessGroup.UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
-                                //objAccessGroup.UAG_Status = Convert.ToBoolean(rdr["UAG_Status"].ToString());
+                                objAccessGroup.UAG_AccessGroupID = rdr["UAG_AccessGroupID"].ToString();
+                                objAccessGroup.UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
+                                objAccessGroup.UAG_Status = Convert.ToBoolean(rdr["UAG_Status"].ToString());
 
-                                if (objAccessGroupHead.AccessGroup == null)
-                                {
-                                    objAccessGroupHead.AccessGroup = new List<ReturnAccessGroupModel>();
-                                }
 
                                 objAccessGroupHead.AccessGroup.Add(objAccessGroup);
 
@@ -115,6 +115,11 @@ namespace HRM_DAL.Data
             List<ReturnAccessGroupModelHead> objAccessGroupHeadList = new List<ReturnAccessGroupModelHead>();
             ReturnAccessGroupModelHead objAccessGroupHead = new ReturnAccessGroupModelHead();
 
+            if (objAccessGroupHead.AccessGroup == null)
+            {
+                objAccessGroupHead.AccessGroup = new List<ReturnAccessGroupModel>();
+            }
+
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
                 objAccessGroupHead.resp = false;
@@ -133,11 +138,11 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "get_AccessGroup_all";
+                        cmd.CommandText = "sp_get_AccessGroup_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UAG_AccessGroupID", model.UAG_AccessGroupID);
-                        cmd.Parameters["@UAG_AccessGroupID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UAG_AccessGroupID", model.UAG_AccessGroupID);
+                        //cmd.Parameters["@UAG_AccessGroupID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -153,21 +158,15 @@ namespace HRM_DAL.Data
                                 objAccessGroupHead.resp = true;
                                 objAccessGroupHead.msg = "Get AccessGroup";
 
-                                //objAccessGroup.UAG_AccessGroupID = rdr["UAG_AccessGroupID"].ToString();
-                                //objAccessGroup.EUG_LeaveAlotment = Convert.ToInt16(rdr["EUG_LeaveAlotment"].ToString());
-                                //objAccessGroup.UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
-                                //objAccessGroup.UAG_Status = Convert.ToBoolean(rdr["UAG_Status"].ToString());
+                                objAccessGroup.UAG_AccessGroupID = rdr["UAG_AccessGroupID"].ToString();
+                                objAccessGroup.UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
+                                objAccessGroup.UAG_Status = Convert.ToBoolean(rdr["UAG_Status"].ToString());
 
-                                if (objAccessGroupHead.AccessGroup == null)
-                                {
-                                    objAccessGroupHead.AccessGroup = new List<ReturnAccessGroupModel>();
-                                }
 
                                 objAccessGroupHead.AccessGroup.Add(objAccessGroup);
 
                                 objAccessGroupHeadList.Add(objAccessGroupHead);
-                            }
-
+                            }            
                         }
                         else
                         {
@@ -175,23 +174,16 @@ namespace HRM_DAL.Data
                             objAccessGroupHead.resp = true;
                             objAccessGroupHead.msg = "";
                             objAccessGroupHeadList.Add(objAccessGroupHead);
-
-
                         }
-
-
                     }
                     return objAccessGroupHeadList;
-
                 }
             }
             catch (Exception ex)
             {
-                objAccessGroupHead = new ReturnAccessGroupModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
+                objAccessGroupHead.resp = false;
+                objAccessGroupHead.msg = ex.Message.ToString();
+
                 objAccessGroupHeadList.Add(objAccessGroupHead);
 
                 objError.WriteLog(0, "AccessGroup_Data", "get_AccessGroup_all", "Stack Track: " + ex.StackTrace);
@@ -207,10 +199,10 @@ namespace HRM_DAL.Data
 
         }
 
-        public static List<ReturncustResponse> add_new_AccessGroup(AccessGroupModel item)//ok
+        public static List<ReturnResponse> add_new_AccessGroup(AccessGroupModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
-            ReturncustResponse objCustHead = new ReturncustResponse();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+            ReturnResponse objCustHead = new ReturnResponse();
 
             if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
             {
@@ -239,46 +231,11 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UAG_AccessGroupID", item.UAG_AccessGroupID);
                         cmd.Parameters["@UAG_AccessGroupID"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
-                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@UAG_AccessGroup", item.UAG_AccessGroup);
+                        cmd.Parameters["@UAG_AccessGroup"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
-                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
-                        //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_UnitNumber", item.CUS_Adrs_UnitNumber);
-                        //cmd.Parameters["@CUS_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_StreetName", item.CUS_Adrs_StreetName);
-                        //cmd.Parameters["@CUS_Adrs_StreetName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_City", item.CUS_Adrs_City);
-                        //cmd.Parameters["@CUS_Adrs_City"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_CountryCode", item.CUS_Adrs_CountryCode);
-                        //cmd.Parameters["@CUS_Adrs_CountryCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_PostalCode", item.CUS_Adrs_PostalCode);
-                        //cmd.Parameters["@CUS_Adrs_PostalCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactPerson", item.CUS_ContactPerson);
-                        //cmd.Parameters["@CUS_ContactPerson"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
-                        //cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
-                        //cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_SMS", item.CUS_OTP_By_SMS);
-                        //cmd.Parameters["@CUS_OTP_By_SMS"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
-                        //cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
-
-                        string mailtypes = "";
+                        cmd.Parameters.AddWithValue("@UAG_Status", item.UAG_Status);
+                        cmd.Parameters["@UAG_Status"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -289,7 +246,7 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                objCustHead = new ReturncustResponse
+                                objCustHead = new ReturnResponse
                                 {
                                     resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
                                     msg = rdr["RTN_MSG"].ToString()
@@ -305,7 +262,7 @@ namespace HRM_DAL.Data
             }
             catch (Exception ex)
             {
-                objCustHead = new ReturncustResponse
+                objCustHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -324,10 +281,10 @@ namespace HRM_DAL.Data
             return objCustHeadList;
         }
 
-        public static List<ReturncustResponse> modify_AccessGroup(AccessGroupModel item)//ok
+        public static List<ReturnResponse> modify_AccessGroup(AccessGroupModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
-            ReturncustResponse objCustHead = new ReturncustResponse();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+            ReturnResponse objCustHead = new ReturnResponse();
 
             if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
             {
@@ -407,7 +364,7 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                objCustHead = new ReturncustResponse
+                                objCustHead = new ReturnResponse
                                 {
                                     resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
                                     msg = rdr["RTN_MSG"].ToString()
@@ -421,7 +378,7 @@ namespace HRM_DAL.Data
             }
             catch (Exception ex)
             {
-                objCustHead = new ReturncustResponse
+                objCustHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()

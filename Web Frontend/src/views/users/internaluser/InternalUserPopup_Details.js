@@ -24,7 +24,6 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
 
   // };
   const [selectedOptionUserRole, setSelectedOptionUserRole] = useState('');
-  const [selectedOptionEmployee, setSelectedOptionEmployee] = useState('');
   const [FirstName, setFirstName] = useState('')
   const [LastName, setLastName] = useState('')
   const [EmailAddress, setEmailAddress] = useState('')

@@ -125,7 +125,7 @@ const InternalUserPopup_Access = ({ onClose, onOpen, InternalUserDetails, popupS
                       shape="square"
                       size="sm"
                       onClick={() => {
-                        toggleDelete(item.UserID)
+                        toggleGrant(item.UserID)
                       }}
                     >
                       Grant
@@ -137,7 +137,7 @@ const InternalUserPopup_Access = ({ onClose, onOpen, InternalUserDetails, popupS
                         shape="square"
                         size="sm"
                         onClick={() => {
-                          toggleDelete(item.UserID)
+                          toggleRemove(item.UserID)
                         }}
                       >
                         Remove

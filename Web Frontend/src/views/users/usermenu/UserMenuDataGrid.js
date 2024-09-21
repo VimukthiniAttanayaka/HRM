@@ -22,6 +22,8 @@ const UserMenuDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
+  const [popupStatus, setPopupStatus] = useState('create')
+
 
 
   const [UserMenuDetails, setUserMenuDetails] = useState([])
@@ -45,11 +47,26 @@ const UserMenuDataGrid = () => {
       // AUD_notificationToken: token,
       UUM_UserMenuID: item
     }
+    console.log(formData)
     const UserMenuDetails = await getUserMenuSingle(formData)
     setUserMenuDetails(UserMenuDetails);    
-    setStatusInDB(InternalUserDetails.UE_Status)
+    setStatusInDB(UserMenuDetails.UUM_Status)
     handleOpenPopup()
   }
+ 
+  const toggleEdit = (index) => {
+    setPopupStatus('edit')
+    toggleDetails(index)
+  }
+  const toggleDelete = (index) => {
+    setPopupStatus('delete')
+    toggleDetails(index)
+  }
+  const toggleView = (index) => {
+    setPopupStatus('view')
+    toggleDetails(index)
+  }
+  
   const toggleDetails = (index) => {
 
 
@@ -133,7 +150,7 @@ const UserMenuDataGrid = () => {
           </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <UserMenuPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} StatusInDB={StatusInDB} UserMenuDetails={UserMenuDetails} />
+          <UserMenuPopup onClose={handleClosePopup} visible={visible} popupStatus={popupStatus} onOpen={handleOpenPopup} StatusInDB={StatusInDB} UserMenuDetails={UserMenuDetails} />
         </CCol>
       </CRow>
       <CSmartTable

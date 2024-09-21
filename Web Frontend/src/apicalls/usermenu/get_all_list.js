@@ -100,28 +100,28 @@ export const UserMenu_DropDowns_All_Selectable = async (formData) => {
 }
 
 
-export const requestdata_UserMenu_SelectBox = async (formData) => {
+// export const requestdata_UserMenu_SelectBox = async (formData) => {
 
-  const optionsUserMenu = [];
-  const res = await fetch(apiUrl + 'usermenu/get_usermenu_all', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  })
-    .then(response => response.json())
-    .then(json => {
-      let res1 = JSON.parse(JSON.stringify(json))
+//   const optionsUserMenu = [];
+//   const res = await fetch(apiUrl + 'usermenu/get_usermenu_all', {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(formData),
+//   })
+//     .then(response => response.json())
+//     .then(json => {
+//       let res1 = JSON.parse(JSON.stringify(json))
 
-      for (let index = 0; index < res1[0].UserMenu.length; index++) {
-        const UserMenuData = {
-          key: res1[0].UserMenu[index].UUM_UserMenuID,
-          value: res1[0].UserMenu[index].UUM_UserMenu,
-          label: res1[0].UserMenu[index].UUM_UserMenu,
-          Ischecked: false
-        };
-        optionsUserMenu[index] = UserMenuData
-      }
-      console.log(optionsUserMenu)
-    })
-  return optionsUserMenu;
-}
+//       for (let index = 0; index < res1[0].UserMenu.length; index++) {
+//         const UserMenuData = {
+//           key: res1[0].UserMenu[index].UUM_UserMenuID,
+//           value: res1[0].UserMenu[index].UUM_UserMenu,
+//           label: res1[0].UserMenu[index].UUM_UserMenu,
+//           Ischecked: false
+//         };
+//         optionsUserMenu[index] = UserMenuData
+//       }
+//       console.log(optionsUserMenu)
+//     })
+//   return optionsUserMenu;
+// }

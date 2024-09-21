@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
-import { Modal } from '@coreui/coreui-pro';
+// import data from './_data.js'
+// import { Modal } from '@coreui/coreui-pro';
 import { modifyUserMenu } from '../../../apicalls/usermenu/modify.js';
 import { deleteUserMenu } from '../../../apicalls/usermenu/delete.js';
 import { addNewUserMenu } from '../../../apicalls/usermenu/add_new.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 import PopUpAlert from '../../shared/PopUpAlert.js'
 
 const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails, popupStatus, StatusInDB }) => {
-
+  let templatetype = 'translation_usermenu'
+  let templatetype_base = 'translation'
   // const handleSubmit = (event) => {
   //   event.preventDefault();
 
@@ -45,7 +47,7 @@ const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails, popupStatus,
       UUM_Status: isActive,
       UD_UserID: staffId,
     }
-    console.log(formData)
+    // console.log(formData)
     if (popupStatus == 'edit') {
       const APIReturn = await modifyUserMenu(formData)
       if (APIReturn.resp === false) { setDialogTitle("Alert"); }
@@ -87,6 +89,19 @@ const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails, popupStatus,
   const [DialogTitle, setDialogTitle] = useState('');
   const [DialogContent, setDialogContent] = useState('');
   // console.log(UserMenuDetails)
+  
+  const popupStatusSetup = (event) => {
+    if (popupStatus == 'edit') {
+      return getLabelText('Edit UserMenu', templatetype)
+    } else if (popupStatus == 'view') {
+      return getLabelText('View UserMenu', templatetype)
+    } else if (popupStatus == 'delete') {
+      return getLabelText('Delete UserMenu', templatetype)
+    } else {
+      return getLabelText('Create New UserMenu', templatetype)
+    }
+  }
+  
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New UserMenu</CButton>
@@ -99,7 +114,8 @@ const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails, popupStatus,
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">Create New UserMenu</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">{popupStatusSetup()}</CModalTitle>
+          {/* <CModalTitle id="TooltipsAndPopoverExample">Create New UserMenu</CModalTitle> */}
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">

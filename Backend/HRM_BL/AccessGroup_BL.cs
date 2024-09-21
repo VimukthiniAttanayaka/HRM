@@ -21,12 +21,12 @@ namespace HRM_BL
         }
 
 
-        public static List<ReturncustResponse> add_new_AccessGroup(AccessGroupModel item)//ok
+        public static List<ReturnResponse> add_new_AccessGroup(AccessGroupModel item)//ok
         {
             return HRM_DAL.Data.AccessGroup_Data.add_new_AccessGroup(item);
         }
 
-        public static List<ReturncustResponse> modify_AccessGroup(AccessGroupModel item)//ok
+        public static List<ReturnResponse> modify_AccessGroup(AccessGroupModel item)//ok
         {
             return HRM_DAL.Data.AccessGroup_Data.modify_AccessGroup(item);
         }

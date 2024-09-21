@@ -22,6 +22,8 @@ const AccessGroupDataGrid = () => {
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
+  const [popupStatus, setPopupStatus] = useState('create')
+
 
   const [AccessGroupDetails, setAccessGroupDetails] = useState([])
   const [StatusInDB, setStatusInDB] = useState(true)
@@ -58,6 +60,20 @@ const AccessGroupDataGrid = () => {
     handleOpenPopup()
   }
 
+
+  const toggleEdit = (index) => {
+    setPopupStatus('edit')
+    toggleDetails(index)
+  }
+  const toggleDelete = (index) => {
+    setPopupStatus('delete')
+    toggleDetails(index)
+  }
+  const toggleView = (index) => {
+    setPopupStatus('view')
+    toggleDetails(index)
+  }
+  
   const toggleDetails = (index) => {
 
 
@@ -90,7 +106,7 @@ const AccessGroupDataGrid = () => {
     }
 
     const AccessGroupDetails = await getAccessGroupAll(formData)
-    // console.log(AccessGroupDetails)
+    console.log(AccessGroupDetails)
     setData(AccessGroupDetails);
   }
   useEffect(() => {
@@ -151,7 +167,7 @@ const AccessGroupDataGrid = () => {
           </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <AccessGroupPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} AccessGroupDetails={AccessGroupDetails} StatusInDB={StatusInDB} />
+          <AccessGroupPopup onClose={handleClosePopup} visible={visible} popupStatus={popupStatus} onOpen={handleOpenPopup} AccessGroupDetails={AccessGroupDetails} StatusInDB={StatusInDB} />
         </CCol>
       </CRow>
       <CSmartTable

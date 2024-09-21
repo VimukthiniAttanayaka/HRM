@@ -20,7 +20,7 @@ export const getAccessGroupAll = async (formData) => {
     .then(response => response.json())
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
-
+      console.log(res1)
 
       class AccessGroupDetail {
         constructor(id, AccessGroup, status) {

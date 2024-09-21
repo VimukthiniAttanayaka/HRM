@@ -27,23 +27,23 @@ namespace HRM.Controllers
         public List<ReturnAccessGroupModelHead> get_AccessGroup_single(AccessGroup model)//ok
         {
             List<ReturnAccessGroupModelHead> objAccessGroupHeadList = new List<ReturnAccessGroupModelHead>();
-            ReturnAccessGroupModelHead obj = new ReturnAccessGroupModelHead() { resp = false, msg = "sfsf" };
-            obj.AccessGroup = new List<ReturnAccessGroupModel>();
-            List<AccessGroupSelect> AccessGroups = new List<AccessGroupSelect>();
-            AccessGroups.Add(new AccessGroupSelect() { value = "CAS", label = "CAS", Ischecked = true });
-            AccessGroups.Add(new AccessGroupSelect() { value = "ANU", label = "ANU", Ischecked = true });
-            AccessGroups.Add(new AccessGroupSelect() { value = "MED", label = "MED", Ischecked = true });
+            //ReturnAccessGroupModelHead obj = new ReturnAccessGroupModelHead() { resp = false, msg = "sfsf" };
+            //obj.AccessGroup = new List<ReturnAccessGroupModel>();
+            //List<AccessGroupSelect> AccessGroups = new List<AccessGroupSelect>();
+            //AccessGroups.Add(new AccessGroupSelect() { value = "CAS", label = "CAS", Ischecked = true });
+            //AccessGroups.Add(new AccessGroupSelect() { value = "ANU", label = "ANU", Ischecked = true });
+            //AccessGroups.Add(new AccessGroupSelect() { value = "MED", label = "MED", Ischecked = true });
 
-            if (model.UAG_AccessGroupID == "CAS")
-                obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "CAS", UAG_AccessGroup = "Casual", UAG_Status = true, AccessGroups = AccessGroups });
-            else if (model.UAG_AccessGroupID == "ANU") obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "ANU", UAG_AccessGroup = "Annual", UAG_Status = true, AccessGroups = AccessGroups });
-            else if (model.UAG_AccessGroupID == "MED") obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MED", UAG_AccessGroup = "Medical", UAG_Status = true, AccessGroups = AccessGroups });
-            else if (model.UAG_AccessGroupID == "MAT") obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MAT", UAG_AccessGroup = "Matrinaty", UAG_Status = true, AccessGroups = AccessGroups });
+            //if (model.UAG_AccessGroupID == "CAS")
+            //    obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "CAS", UAG_AccessGroup = "Casual", UAG_Status = true, AccessGroups = AccessGroups });
+            //else if (model.UAG_AccessGroupID == "ANU") obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "ANU", UAG_AccessGroup = "Annual", UAG_Status = true, AccessGroups = AccessGroups });
+            //else if (model.UAG_AccessGroupID == "MED") obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MED", UAG_AccessGroup = "Medical", UAG_Status = true, AccessGroups = AccessGroups });
+            //else if (model.UAG_AccessGroupID == "MAT") obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MAT", UAG_AccessGroup = "Matrinaty", UAG_Status = true, AccessGroups = AccessGroups });
 
-            else obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MAT", UAG_AccessGroup = "Matrinaty", UAG_Status = true, AccessGroups = AccessGroups });
+            //else obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MAT", UAG_AccessGroup = "Matrinaty", UAG_Status = true, AccessGroups = AccessGroups });
 
-            objAccessGroupHeadList.Add(obj);
-            return objAccessGroupHeadList;
+            //objAccessGroupHeadList.Add(obj);
+            //return objAccessGroupHeadList;
 
             try
             {
@@ -83,14 +83,14 @@ namespace HRM.Controllers
         public List<ReturnAccessGroupModelHead> get_AccessGroup_all(AccessGroupSearchModel model)//ok
         {
             List<ReturnAccessGroupModelHead> objAccessGroupHeadList = new List<ReturnAccessGroupModelHead>();
-            ReturnAccessGroupModelHead obj = new ReturnAccessGroupModelHead() { resp = false, msg = "sfsf" };
-            obj.AccessGroup = new List<ReturnAccessGroupModel>();
-            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "CAS", UAG_AccessGroup = "Casual", UAG_Status = true });
-            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "ANU", UAG_AccessGroup = "Annual", UAG_Status = true });
-            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MED", UAG_AccessGroup = "Medical", UAG_Status = true });
-            obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MAT", UAG_AccessGroup = "Matrinaty", UAG_Status = true });
-            objAccessGroupHeadList.Add(obj);
-            return objAccessGroupHeadList;
+            //ReturnAccessGroupModelHead obj = new ReturnAccessGroupModelHead() { resp = false, msg = "sfsf" };
+            //obj.AccessGroup = new List<ReturnAccessGroupModel>();
+            //obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "CAS", UAG_AccessGroup = "Casual", UAG_Status = true });
+            //obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "ANU", UAG_AccessGroup = "Annual", UAG_Status = true });
+            //obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MED", UAG_AccessGroup = "Medical", UAG_Status = true });
+            //obj.AccessGroup.Add(new ReturnAccessGroupModel() { UAG_AccessGroupID = "MAT", UAG_AccessGroup = "Matrinaty", UAG_Status = true });
+            //objAccessGroupHeadList.Add(obj);
+            //return objAccessGroupHeadList;
 
             try
             {
@@ -250,9 +250,9 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturncustResponse> add_new_AccessGroup(AccessGroupModel item)//ok
+        public List<ReturnResponse> add_new_AccessGroup(AccessGroupModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
 
             try
             {
@@ -264,7 +264,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturncustResponse objAccessGroupHead = new ReturncustResponse
+                ReturnResponse objAccessGroupHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -289,9 +289,9 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturncustResponse> modify_AccessGroup(AccessGroupModel item)//ok
+        public List<ReturnResponse> modify_AccessGroup(AccessGroupModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
 
             try
             {
@@ -303,7 +303,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturncustResponse objAccessGroupHead = new ReturncustResponse
+                ReturnResponse objAccessGroupHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
