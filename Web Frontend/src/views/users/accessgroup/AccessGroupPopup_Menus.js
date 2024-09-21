@@ -30,21 +30,22 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
   const [AccessGroupId, setAccessGroupId] = useState('')
 
   useEffect(() => {
-    console.log(AccessGroupDetails.UAG_AccessGroupID)
+    // console.log(AccessGroupDetails.UAG_AccessGroupID)
     setAccessGroupId(AccessGroupDetails.UAG_AccessGroupID)
-    console.log(AccessGroupId)
+    // console.log(AccessGroupId)
     // setAccessGroup(AccessGroupDetails.UAG_AccessGroup)
     // setIsActive(StatusInDB)
+    requestMenuData(AccessGroupDetails.UAG_AccessGroupID) 
   }, [AccessGroupDetails]);
 
 
   const toggleRemove = (index) => {
     setPopupStatus('remove')
-    toggleDetails(index)
+    toggleDetails(index, 'remove')
   }
   const toggleGrant = (index) => {
     setPopupStatus('grant')
-    toggleDetails(index)
+    toggleDetails(index, 'grant')
   }
   const toggleDetails = (index, action) => {
     console.log(index)
@@ -55,12 +56,12 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
     } else {
       newDetails = [...details, index]
       // loadDetails(newDetails[0], action)
-      submitSelection(newDetails[0])
+      submitSelection(newDetails[0], action)
     }
     // setDetails(newDetails)
   }
 
-  async function submitSelection(menuid) {
+  async function submitSelection(menuid, action) {
 
     const token = getJWTToken();
     const staffId = getStaffID();
@@ -73,14 +74,14 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
     }
     // console.log(formData)
     // console.log(popupStatus)
-    if (popupStatus == 'remove') {
+    if (/*popupStatus*/action == 'remove') {
       const APIReturn = await RemoveAccessUserMenu(formData)
       if (APIReturn.resp === false) { setDialogTitle("Alert"); }
       else { setDialogTitle("Message"); }
       setDialogContent(APIReturn.msg);
       setOpen(true);
     }
-    else if (popupStatus == 'grant') {
+    else if (/*popupStatus*/action == 'grant') {
       const APIReturn = await GrantAccessUserMenu(formData)
       if (APIReturn.resp === false) { setDialogTitle("Alert"); }
       else { setDialogTitle("Message"); }
@@ -89,7 +90,7 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
     }
   }
 
-  async function requestdata() {
+  async function requestMenuData(AccessGroupId) {
     const token = getJWTToken();
     const staffId = getStaffID();
     const customerId = getCustomerID();
@@ -97,9 +98,9 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      UMA_AccessGroupID: AccessGroupDetails.UAG_AccessGroupID// AccessGroupId
+      UMA_AccessGroupID: AccessGroupId
     }
-    console.log(formData)
+    // console.log(formData)
     const MenuList = await getUserMenuListForAccessGroup(formData)
     setData(MenuList);
   }
@@ -113,15 +114,15 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
     setCurrentPage(page);
     // Fetch data for the new page
   };
-  useEffect(() => {
-    requestdata();
-  }, []);
+  // useEffect(() => {
+  //   requestdata();
+  // }, []);
 
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
-    requestdata();
+    requestMenuData(AccessGroupId);
   };
 
   const [DialogTitle, setDialogTitle] = useState('');

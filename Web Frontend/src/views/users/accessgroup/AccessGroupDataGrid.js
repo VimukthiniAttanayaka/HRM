@@ -106,7 +106,7 @@ const AccessGroupDataGrid = () => {
     }
 
     const AccessGroupDetails = await getAccessGroupAll(formData)
-    console.log(AccessGroupDetails)
+    // console.log(AccessGroupDetails)
     setData(AccessGroupDetails);
   }
   useEffect(() => {

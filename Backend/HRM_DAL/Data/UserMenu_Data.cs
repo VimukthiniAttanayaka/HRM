@@ -256,7 +256,13 @@ namespace HRM_DAL.Data
 
                             }
                         }
-
+                        else
+                        {
+                            objCustHead = new ReturnResponse();
+                            objCustHead.resp = true;
+                            objCustHead.msg = "";
+                            objCustHeadList.Add(objCustHead);
+                        }
 
                     }
                 }
@@ -335,7 +341,13 @@ namespace HRM_DAL.Data
 
                             }
                         }
-
+                        else
+                        {
+                            objCustHead = new ReturnResponse();
+                            objCustHead.resp = true;
+                            objCustHead.msg = "";
+                            objCustHeadList.Add(objCustHead);
+                        }
 
                     }
                 }
@@ -511,7 +523,13 @@ namespace HRM_DAL.Data
 
                             }
                         }
-
+                        else
+                        {
+                            objCustHead = new ReturnResponse();
+                            objCustHead.resp = true;
+                            objCustHead.msg = "";
+                            objCustHeadList.Add(objCustHead);
+                        }
 
                     }
                 }
@@ -593,6 +611,15 @@ namespace HRM_DAL.Data
                                 objCustHeadList.Add(objCustHead);
 
                             }
+                        }
+                        else
+                        {
+                            objCustHead = new ReturnResponse();
+                            objCustHead.resp = true;
+                            objCustHead.msg = "";
+                            objCustHeadList.Add(objCustHead);
+
+
                         }
                     }
                 }

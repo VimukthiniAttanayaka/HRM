@@ -20,7 +20,7 @@ export const getAccessGroupAll = async (formData) => {
     .then(response => response.json())
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
-      console.log(res1)
+      // console.log(res1)
 
       class AccessGroupDetail {
         constructor(id, AccessGroup, status) {
@@ -153,7 +153,7 @@ export const getAccessGroupAll_ForUser = async (formData) => {
         // console.log(element)
         AccessGroupDetails[index] = new AccessGroupDetail(element.UAG_AccessGroupID, element.UAG_AccessGroup, element.UAG_Status);
       }
-      console.log(AccessGroupDetails)
+      // console.log(AccessGroupDetails)
     })
 
   return AccessGroupDetails;
