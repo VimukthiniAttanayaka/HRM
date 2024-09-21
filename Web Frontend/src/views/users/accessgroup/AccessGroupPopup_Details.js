@@ -7,6 +7,8 @@ import { modifyAccessGroup } from '../../../apicalls/accessgroup/modify.js';
 import { deleteAccessGroup } from '../../../apicalls/accessgroup/delete.js';
 import { addNewAccessGroup } from '../../../apicalls/accessgroup/add_new.js';
 
+import PopUpAlert from '../../shared/PopUpAlert.js'
+
 const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails, popupStatus, StatusInDB }) => {
 
   // const handleSubmit = (event) => {
@@ -89,6 +91,7 @@ const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails
     <>
       <CTabPanel className="p-3" itemKey="general">
         {/* <CButton color="primary" onClick={onOpen}>New Access Group</CButton> */}
+        <PopUpAlert open={open} handleClose={handleClose} dialogTitle={DialogTitle} dialogContent={DialogContent} />
 
         <CForm onSubmit={handleSubmit}>
           <CInputGroup className="mb-3">

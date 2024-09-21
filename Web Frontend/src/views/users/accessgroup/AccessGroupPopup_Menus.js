@@ -9,10 +9,15 @@ import Pagination from '../../shared/Pagination.js'
 import { getBadge } from '../../shared/gridviewconstants.js';
 import { columnsMenu, headers } from '../../controllers/accessgroup_controllers.js';
 import { getUserMenuListForAccessGroup } from '../../../apicalls/usermenu/get_all_list.js';
+import { GrantAccessUserMenu, RemoveAccessUserMenu } from '../../../apicalls/usermenu/accessgrouprelated.js';
+
+import PopUpAlert from '../../shared/PopUpAlert.js'
 
 const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }) => {
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
+
+  const [popupStatus, setPopupStatus] = useState('create')
 
   const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,13 +27,23 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
   const [userAccessDetails, setUserAccessDetails] = useState([])
 
   const [currentItems, setCurrentItems] = useState(data)
+  const [AccessGroupId, setAccessGroupId] = useState('')
+
+  useEffect(() => {
+    console.log(AccessGroupDetails.UAG_AccessGroupID)
+    setAccessGroupId(AccessGroupDetails.UAG_AccessGroupID)
+    console.log(AccessGroupId)
+    // setAccessGroup(AccessGroupDetails.UAG_AccessGroup)
+    // setIsActive(StatusInDB)
+  }, [AccessGroupDetails]);
+
 
   const toggleRemove = (index) => {
-    setPopupStatus('delete')
+    setPopupStatus('remove')
     toggleDetails(index)
   }
   const toggleGrant = (index) => {
-    setPopupStatus('view')
+    setPopupStatus('grant')
     toggleDetails(index)
   }
   const toggleDetails = (index, action) => {
@@ -40,37 +55,37 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
     } else {
       newDetails = [...details, index]
       // loadDetails(newDetails[0], action)
-
+      submitSelection(newDetails[0])
     }
     // setDetails(newDetails)
   }
-  const handleSubmit = async (event) => {
-    event.preventDefault()
 
-    // Validation (optional)
-    // You can add validation logic here to check if all required fields are filled correctly
+  async function submitSelection(menuid) {
 
-    // Prepare form data
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+
     const formData = {
-      LVT_ExternalUserID: InternalUserId,
-      LVT_LeaveAlotment: leaveAlotmentId,
-      LVT_ExternalUser: InternalUser,
-      LVT_Status: isActive,
+      UMA_AccessGroupID: AccessGroupId,
+      UMA_UserMenuID: menuid,
+      UD_UserID: staffId,
     }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'ExternalUser/add_new_ExternalUser', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Leave Type data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Leave Type data:', response.statusText)
+    // console.log(formData)
+    // console.log(popupStatus)
+    if (popupStatus == 'remove') {
+      const APIReturn = await RemoveAccessUserMenu(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else if (popupStatus == 'grant') {
+      const APIReturn = await GrantAccessUserMenu(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
     }
   }
 
@@ -82,9 +97,9 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      USR_EmployeeID: 'sedcx'
+      UMA_AccessGroupID: AccessGroupDetails.UAG_AccessGroupID// AccessGroupId
     }
-
+    console.log(formData)
     const MenuList = await getUserMenuListForAccessGroup(formData)
     setData(MenuList);
   }
@@ -102,9 +117,19 @@ const AccessGroupPopup_Menus = ({ visible, onClose, onOpen, AccessGroupDetails }
     requestdata();
   }, []);
 
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    requestdata();
+  };
+
+  const [DialogTitle, setDialogTitle] = useState('');
+  const [DialogContent, setDialogContent] = useState('');
   return (
     <>
       <CTabPanel className="p-3" itemKey="menus">
+        <PopUpAlert open={open} handleClose={handleClose} dialogTitle={DialogTitle} dialogContent={DialogContent} />
         <CCardBody>
           <CSmartTable
             cleaner

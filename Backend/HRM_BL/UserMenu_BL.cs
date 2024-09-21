@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using utility_handler.Data;
+using System;
 
 namespace HRM_BL
 {
@@ -36,7 +37,20 @@ namespace HRM_BL
             return HRM_DAL.Data.UserMenu_Data.inactivate_UserMenu(item);
         }
 
+        public static List<ReturnResponse> RemoveAccess(GrantRemoveUserMenuModel item)
+        {
+            return HRM_DAL.Data.UserMenu_Data.RemoveAccess(item);
+        }
 
+        public static List<ReturnResponse> GrantAccess(GrantRemoveUserMenuModel item)
+        {
+            return HRM_DAL.Data.UserMenu_Data.GrantAccess(item);
+        }
+
+        public static List<ReturnUserMenuModelHead> get_UserMenu_all_ForAccessGroup(GrantRemoveUserMenuModel model)
+        {
+            return HRM_DAL.Data.UserMenu_Data.get_UserMenu_all_ForAccessGroup(model);
+        }
     }
 
 }

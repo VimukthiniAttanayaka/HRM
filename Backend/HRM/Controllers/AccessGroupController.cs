@@ -208,7 +208,8 @@ namespace HRM.Controllers
 
             return objCustHeadList;
         }
-                  [HttpPost]
+
+        [HttpPost]
         [Route("[action]")]
         //[Authorize]
         public List<ReturnResponse> RemoveAccess(GrantRemoveAccessModel model)

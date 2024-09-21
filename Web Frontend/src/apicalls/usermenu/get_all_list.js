@@ -45,7 +45,7 @@ export const getUserMenuAll = async (formData) => {
 export const getUserMenuListForAccessGroup = async (formData) => {
   const UserMenuDetails = [];
 
-  const res = await fetch(apiUrl + 'usermenu/get_usermenu_all', {
+  const res = await fetch(apiUrl + 'usermenu/get_UserMenu_all_ForAccessGroup', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),

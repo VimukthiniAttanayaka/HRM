@@ -71,4 +71,10 @@ namespace HRM_DAL.Models
         public string UUM_UserMenuID { get; set; }
 
     }
+    public class GrantRemoveUserMenuModel : RequestBaseModel
+    {
+        public string UMA_AccessGroupID { get; set; }
+        public string UMA_UserMenuID { get; set; }
+
+    }
 }

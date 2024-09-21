@@ -232,6 +232,121 @@ namespace HRM.Controllers
             }
             return objUserHeadList;
         }
+
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<ReturnResponse> GrantAccess(GrantRemoveUserMenuModel model)
+        {
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
+
+                return HRM_BL.UserMenu_BL.GrantAccess(model);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturnResponse objAccessGroupHead = new ReturnResponse
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objCustHeadList.Add(objAccessGroupHead);
+
+                objError.WriteLog(0, "UserMenuController", "GrantAccess", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserMenuController", "GrantAccess", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "UserMenuController", "GrantAccess", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserMenuController", "GrantAccess", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+
+            return objCustHeadList;
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<ReturnResponse> RemoveAccess(GrantRemoveUserMenuModel model)
+        {
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
+
+                return HRM_BL.UserMenu_BL.RemoveAccess(model);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturnResponse objAccessGroupHead = new ReturnResponse
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objCustHeadList.Add(objAccessGroupHead);
+
+                objError.WriteLog(0, "UserMenuController", "RemoveAccess", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserMenuController", "RemoveAccess", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "UserMenuController", "RemoveAccess", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserMenuController", "RemoveAccess", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+
+            return objCustHeadList;
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        //[Authorize]
+        public List<ReturnUserMenuModelHead> get_UserMenu_all_ForAccessGroup(GrantRemoveUserMenuModel model)//ok
+        {
+            List<ReturnUserMenuModelHead> objUserMenuHeadList = new List<ReturnUserMenuModelHead>();
+
+            try
+            {
+                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
+
+                return HRM_BL.UserMenu_BL.get_UserMenu_all_ForAccessGroup(model);
+
+            }
+            catch (Exception ex)
+            {
+
+                ReturnUserMenuModelHead objUserMenuHead = new ReturnUserMenuModelHead
+                {
+                    resp = false,
+                    msg = ex.Message.ToString()
+                };
+                objUserMenuHeadList.Add(objUserMenuHead);
+
+                objError.WriteLog(0, "UserMenuController", "get_UserMenu_single", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "UserMenuController", "get_UserMenu_single", "Error Message: " + ex.Message);
+                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+                {
+                    objError.WriteLog(0, "UserMenuController", "get_UserMenu_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "UserMenuController", "get_UserMenu_single", "Inner Exception Message: " + ex.InnerException.Message);
+                }
+
+
+            }
+
+            return objUserMenuHeadList;
+
+        }
     }
 
 }
