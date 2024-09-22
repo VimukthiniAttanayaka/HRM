@@ -9,7 +9,7 @@ import { getLabelText } from 'src/MultipleLanguageSheets'
 
 import PopUpAlert from '../../shared/PopUpAlert.js'
 
-const CountryPopup = ({ visible, onClose, onOpen, countryDetails, popupStatus }) => {
+const CountryPopup = ({ visible, onClose, onOpen, countryDetails, popupStatus, StatusInDB }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
   let templatetype = 'translation_country'
   let templatetype_base = 'translation'
@@ -40,9 +40,9 @@ const CountryPopup = ({ visible, onClose, onOpen, countryDetails, popupStatus })
     const customerId = getCustomerID();
 
     const formData = {
-      UUM_CountryID: CountryId,
-      UUM_Country: Country,
-      UUM_Status: isActive,
+      MDCTY_CountryID: countryId,
+      MDCTY_Country: country,
+      MDCTY_Status: isActive,
       UD_UserID: staffId,
     }
     // console.log(formData)
@@ -85,7 +85,7 @@ const CountryPopup = ({ visible, onClose, onOpen, countryDetails, popupStatus })
   useEffect(() => {
     setCountryId(countryDetails.MDCTY_CountryID)
     setCountry(countryDetails.MDCTY_Country)
-    setIsActive(countryDetails.MDCTY_Status)
+    setIsActive(StatusInDB)
   }, [countryDetails]);
 
   const [open, setOpen] = useState(false);

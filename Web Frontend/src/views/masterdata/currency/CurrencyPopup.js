@@ -11,7 +11,7 @@ import { getLabelText } from 'src/MultipleLanguageSheets'
 
 import PopUpAlert from '../../shared/PopUpAlert.js'
 
-const CurrencyPopup = ({ visible, onClose, onOpen, CurrencyDetails }) => {
+const CurrencyPopup = ({ visible, onClose, onOpen, CurrencyDetails, popupStatus, StatusInDB }) => {
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -77,7 +77,7 @@ const CurrencyPopup = ({ visible, onClose, onOpen, CurrencyDetails }) => {
   useEffect(() => {
     setCurrencyId(CurrencyDetails.MDCCY_CurrencyID)
     setCurrency(CurrencyDetails.MDCCY_Currency)
-    setIsActive(CurrencyDetails.MDCCY_Status)
+    setIsActive(StatusInDB)
   }, [CurrencyDetails]);
   // console.log(CurrencyDetails)
 

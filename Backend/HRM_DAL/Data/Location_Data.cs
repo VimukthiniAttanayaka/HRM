@@ -18,6 +18,11 @@ namespace HRM_DAL.Data
             List<ReturnLocationAllModel> objList = new List<ReturnLocationAllModel>();
             ReturnLocationAllModelHead objHead = new ReturnLocationAllModelHead();
 
+            if (objHead.Location == null)
+            {
+                objHead.Location = new List<ReturnLocationAllModel>();
+            }
+
             if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
             {
                 objHead.resp = false;
@@ -65,22 +70,11 @@ namespace HRM_DAL.Data
 
                                 objData.MDL_LocationID = rdr["MDL_LocationID"].ToString();
                                 objData.MDL_Location = rdr["MDL_Location"].ToString();
-                                objData.MDL_Status = Convert.ToBoolean( rdr["MDL_Status"].ToString());
+                                objData.MDL_Status = Convert.ToBoolean(rdr["MDL_Status"].ToString());
 
-                                //objUserData.UserGroup.Add(objUserHead);
-
-                                objList.Add(objData);
-
-                                if (objHead.location == null)
-                                {
-                                    objHead.location = new List<ReturnLocationAllModel>();
-                                }
-
-                                objHead.location.Add(objData);
-
-                                objList.Add(objData);
-
+                                objHead.Location.Add(objData);
                             }
+                            objHeadList.Add(objHead);
                         }
                         else
                         {
@@ -168,16 +162,16 @@ namespace HRM_DAL.Data
 
                                 objData.MDL_LocationID = rdr["MDL_LocationID"].ToString();
                                 objData.MDL_Location = rdr["MDL_Location"].ToString();
-                                objData.MDL_Status = Convert.ToBoolean( rdr["MDL_Status"].ToString());
+                                objData.MDL_Status = Convert.ToBoolean(rdr["MDL_Status"].ToString());
 
                                 objList.Add(objData);
 
-                                if (objHead.location == null)
+                                if (objHead.Location == null)
                                 {
-                                    objHead.location = new List<ReturnLocationModel>();
+                                    objHead.Location = new List<ReturnLocationModel>();
                                 }
 
-                                objHead.location.Add(objData);
+                                objHead.Location.Add(objData);
 
                                 objHeadList.Add(objHead);
                             }

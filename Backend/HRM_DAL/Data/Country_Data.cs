@@ -18,6 +18,11 @@ namespace HRM_DAL.Data
             List<ReturnCountryModelHead> objCountryHeadList = new List<ReturnCountryModelHead>();
             ReturnCountryModelHead objCountryHead = new ReturnCountryModelHead();
 
+            if (objCountryHead.Country == null)
+            {
+                objCountryHead.Country = new List<ReturnCountryModel>();
+            }
+
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
                 objCountryHead.resp = false;
@@ -57,14 +62,8 @@ namespace HRM_DAL.Data
                                 objCountryHead.msg = "Get Country";
 
                                 objCountry.MDCTY_CountryID = rdr["MDCTY_CountryID"].ToString();
-                                //objCountry.MDCTY_LeaveAlotment = Convert.ToInt16(rdr["MDCTY_LeaveAlotment"].ToString());
                                 objCountry.MDCTY_Country = rdr["MDCTY_Country"].ToString();
                                 objCountry.MDCTY_Status = Convert.ToBoolean(rdr["MDCTY_Status"].ToString());
-
-                                if (objCountryHead.Country == null)
-                                {
-                                    objCountryHead.Country = new List<ReturnCountryModel>();
-                                }
 
                                 objCountryHead.Country.Add(objCountry);
 
@@ -115,6 +114,11 @@ namespace HRM_DAL.Data
             List<ReturnCountryModelHead> objCountryHeadList = new List<ReturnCountryModelHead>();
             ReturnCountryModelHead objCountryHead = new ReturnCountryModelHead();
 
+            if (objCountryHead.Country == null)
+            {
+                objCountryHead.Country = new List<ReturnCountryModel>();
+            }
+
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
                 objCountryHead.resp = false;
@@ -154,14 +158,8 @@ namespace HRM_DAL.Data
                                 objCountryHead.msg = "Get Country";
 
                                 objCountry.MDCTY_CountryID = rdr["MDCTY_CountryID"].ToString();
-                                //objCountry.MDCTY_LeaveAlotment = Convert.ToInt16(rdr["MDCTY_LeaveAlotment"].ToString());
                                 objCountry.MDCTY_Country = rdr["MDCTY_Country"].ToString();
                                 objCountry.MDCTY_Status = Convert.ToBoolean(rdr["MDCTY_Status"].ToString());
-
-                                if (objCountryHead.Country == null)
-                                {
-                                    objCountryHead.Country = new List<ReturnCountryModel>();
-                                }
 
                                 objCountryHead.Country.Add(objCountry);
 
@@ -245,41 +243,6 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@MDCTY_Status", item.MDCTY_Status);
                         cmd.Parameters["@MDCTY_Status"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
-                        //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_UnitNumber", item.CUS_Adrs_UnitNumber);
-                        //cmd.Parameters["@CUS_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_StreetName", item.CUS_Adrs_StreetName);
-                        //cmd.Parameters["@CUS_Adrs_StreetName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_City", item.CUS_Adrs_City);
-                        //cmd.Parameters["@CUS_Adrs_City"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_CountryCode", item.CUS_Adrs_CountryCode);
-                        //cmd.Parameters["@CUS_Adrs_CountryCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_PostalCode", item.CUS_Adrs_PostalCode);
-                        //cmd.Parameters["@CUS_Adrs_PostalCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactPerson", item.CUS_ContactPerson);
-                        //cmd.Parameters["@CUS_ContactPerson"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
-                        //cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
-                        //cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_SMS", item.CUS_OTP_By_SMS);
-                        //cmd.Parameters["@CUS_OTP_By_SMS"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
-                        //cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
-
-                        string mailtypes = "";
-
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
                         DataSet Ds = new DataSet();
@@ -298,7 +261,15 @@ namespace HRM_DAL.Data
 
                             }
                         }
-
+                        else
+                        {
+                            objCustHead = new ReturnResponse
+                            {
+                                resp = true,
+                                msg = ""
+                            };
+                            objCustHeadList.Add(objCustHead);
+                        }
 
                     }
                 }
@@ -362,48 +333,6 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@MDCTY_Status", item.MDCTY_Status);
                         cmd.Parameters["@MDCTY_Status"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
-                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
-                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
-                        //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_UnitNumber", item.CUS_Adrs_UnitNumber);
-                        //cmd.Parameters["@CUS_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_StreetName", item.CUS_Adrs_StreetName);
-                        //cmd.Parameters["@CUS_Adrs_StreetName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_City", item.CUS_Adrs_City);
-                        //cmd.Parameters["@CUS_Adrs_City"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_CountryCode", item.CUS_Adrs_CountryCode);
-                        //cmd.Parameters["@CUS_Adrs_CountryCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_PostalCode", item.CUS_Adrs_PostalCode);
-                        //cmd.Parameters["@CUS_Adrs_PostalCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactPerson", item.CUS_ContactPerson);
-                        //cmd.Parameters["@CUS_ContactPerson"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
-                        //cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
-                        //cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_SMS", item.CUS_OTP_By_SMS);
-                        //cmd.Parameters["@CUS_OTP_By_SMS"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
-                        //cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Status", item.CUS_Status);
-                        //cmd.Parameters["@CUS_Status"].Direction = ParameterDirection.Input;
-
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
                         DataSet Ds = new DataSet();
@@ -421,6 +350,15 @@ namespace HRM_DAL.Data
                                 objCustHeadList.Add(objCustHead);
 
                             }
+                        }
+                        else
+                        {
+                            objCustHead = new ReturnResponse
+                            {
+                                resp = true,
+                                msg = ""
+                            };
+                            objCustHeadList.Add(objCustHead);
                         }
                     }
                 }

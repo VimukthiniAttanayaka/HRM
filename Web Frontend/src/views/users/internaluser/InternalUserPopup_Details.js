@@ -62,7 +62,6 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
     const formData = {
       UE_UserID: UserID, UE_FirstName: FirstName, UE_LastName: LastName,
       UE_EmailAddress: EmailAddress, UE_MobileNumber: MobileNumber, UE_PhoneNumber: PhoneNumber, UE_Remarks: Remarks,
-      UE_UserRole: selectedOptionUserRole,
       UE_ActiveFrom: ActiveFrom.toJSON(), UE_ActiveTo: ActiveTo.toJSON(),
       UE_Status: isActive,
       UD_UserID: staffId,

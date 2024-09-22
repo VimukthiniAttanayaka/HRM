@@ -77,6 +77,15 @@ namespace HRM_DAL.Data
                                 objHeadList.Add(objHead);
                             }
                         }
+                        else
+                        {
+                            objHead = new ReturnResponse
+                            {
+                                resp = true,
+                                msg = ""
+                            };
+                            objHeadList.Add(objHead);
+                        }
                     }
                 }
             }
@@ -163,6 +172,15 @@ namespace HRM_DAL.Data
 
 
                             }
+                        }
+                        else
+                        {
+                            objHead = new ReturnResponse
+                            {
+                                resp = true,
+                                msg = ""
+                            };
+                            objHeadList.Add(objHead);
                         }
                     }
                 }
@@ -269,6 +287,11 @@ namespace HRM_DAL.Data
             List<ReturDepartmentModelHead> objHeadList = new List<ReturDepartmentModelHead>();
             ReturDepartmentModelHead objHead = new ReturDepartmentModelHead();
 
+            if (objHead.Department == null)
+            {
+                objHead.Department = new List<ReturnDepartmentModel>();
+            }
+
             if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
             {
                 objHead.resp = false;
@@ -314,11 +337,6 @@ namespace HRM_DAL.Data
                                 objData.MDD_Department = rdr["MDD_Department"].ToString();
                                 objData.MDD_LocationID = rdr["MDD_LocationID"].ToString();
                                 objData.MDD_Status = Convert.ToBoolean(rdr["MDD_Status"].ToString());
-
-                                if (objHead.Department == null)
-                                {
-                                    objHead.Department = new List<ReturnDepartmentModel>();
-                                }
 
                                 objHead.Department.Add(objData);
 
@@ -368,6 +386,11 @@ namespace HRM_DAL.Data
             List<ReturDepartmentModelHead> objHeadList = new List<ReturDepartmentModelHead>();
             ReturDepartmentModelHead objHead = new ReturDepartmentModelHead();
 
+            if (objHead.Department == null)
+            {
+                objHead.Department = new List<ReturnDepartmentModel>();
+            }
+
             if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
             {
                 objHead.resp = false;
@@ -410,11 +433,6 @@ namespace HRM_DAL.Data
                                 objData.MDD_Department = rdr["MDD_Department"].ToString();
                                 objData.MDD_LocationID = rdr["MDD_LocationID"].ToString();
                                 objData.MDD_Status = Convert.ToBoolean(rdr["MDD_Status"].ToString());
-
-                                if (objHead.Department == null)
-                                {
-                                    objHead.Department = new List<ReturnDepartmentModel>();
-                                }
 
                                 objHead.Department.Add(objData);
                             }

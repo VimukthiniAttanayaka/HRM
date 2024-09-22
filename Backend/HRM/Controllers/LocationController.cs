@@ -30,15 +30,15 @@ namespace HRM.Controllers
         public List<ReturnLocationAllModelHead> get_location_all(GetLocationAllModel item)//ok
         {
             List<ReturnLocationAllModelHead> objHeadList = new List<ReturnLocationAllModelHead>();
-            ReturnLocationAllModelHead obj = new ReturnLocationAllModelHead() { resp = false, msg = "sfsf" };
-            obj.location = new List<ReturnLocationAllModel>();
-            obj.location.Add(new ReturnLocationAllModel() {MDL_LocationID  = "CAS",MDL_Location  = "Casual", MDL_Status = true });
-            obj.location.Add(new ReturnLocationAllModel() { MDL_LocationID = "ANU", MDL_Location = "Annual", MDL_Status = false });
-            obj.location.Add(new ReturnLocationAllModel() { MDL_LocationID = "MED", MDL_Location = "Medical", MDL_Status = true });
-            obj.location.Add(new ReturnLocationAllModel() { MDL_LocationID = "MAT", MDL_Location = "Matrinaty", MDL_Status = true });
-            obj.location.Add(new ReturnLocationAllModel() { MDL_LocationID = "CAS", MDL_Location = "Casual", MDL_Status = true });
-            objHeadList.Add(obj);
-            return objHeadList;
+            //ReturnLocationAllModelHead obj = new ReturnLocationAllModelHead() { resp = false, msg = "sfsf" };
+            //obj.location = new List<ReturnLocationAllModel>();
+            //obj.location.Add(new ReturnLocationAllModel() {MDL_LocationID  = "CAS",MDL_Location  = "Casual", MDL_Status = true });
+            //obj.location.Add(new ReturnLocationAllModel() { MDL_LocationID = "ANU", MDL_Location = "Annual", MDL_Status = false });
+            //obj.location.Add(new ReturnLocationAllModel() { MDL_LocationID = "MED", MDL_Location = "Medical", MDL_Status = true });
+            //obj.location.Add(new ReturnLocationAllModel() { MDL_LocationID = "MAT", MDL_Location = "Matrinaty", MDL_Status = true });
+            //obj.location.Add(new ReturnLocationAllModel() { MDL_LocationID = "CAS", MDL_Location = "Casual", MDL_Status = true });
+            //objHeadList.Add(obj);
+            //return objHeadList;
 
             try
             {

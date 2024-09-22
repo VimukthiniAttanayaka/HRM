@@ -135,14 +135,14 @@ namespace HRM.Controllers
         {
             List<ReturDepartmentModelHead> objHeadList = new List<ReturDepartmentModelHead>();
 
-            ReturDepartmentModelHead obj = new ReturDepartmentModelHead() { resp = false, msg = "sfsf" };
-            obj.Department = new List<ReturnDepartmentModel>();
-            obj.Department.Add(new ReturnDepartmentModel() { MDD_DepartmentID = "CAS", MDD_Department = "Casual", MDD_Status = true });
-            obj.Department.Add(new ReturnDepartmentModel() { MDD_DepartmentID = "ANU", MDD_Department = "Annual", MDD_Status = true });
-            obj.Department.Add(new ReturnDepartmentModel() { MDD_DepartmentID = "MED", MDD_Department = "Medical", MDD_Status = false });
-            obj.Department.Add(new ReturnDepartmentModel() { MDD_DepartmentID = "MAT", MDD_Department = "Matrinaty", MDD_Status = true });
-            objHeadList.Add(obj);
-            return objHeadList;
+            //ReturDepartmentModelHead obj = new ReturDepartmentModelHead() { resp = false, msg = "sfsf" };
+            //obj.Department = new List<ReturnDepartmentModel>();
+            //obj.Department.Add(new ReturnDepartmentModel() { MDD_DepartmentID = "CAS", MDD_Department = "Casual", MDD_Status = true });
+            //obj.Department.Add(new ReturnDepartmentModel() { MDD_DepartmentID = "ANU", MDD_Department = "Annual", MDD_Status = true });
+            //obj.Department.Add(new ReturnDepartmentModel() { MDD_DepartmentID = "MED", MDD_Department = "Medical", MDD_Status = false });
+            //obj.Department.Add(new ReturnDepartmentModel() { MDD_DepartmentID = "MAT", MDD_Department = "Matrinaty", MDD_Status = true });
+            //objHeadList.Add(obj);
+            //return objHeadList;
 
             try
             {

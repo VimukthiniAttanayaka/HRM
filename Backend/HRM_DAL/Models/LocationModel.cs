@@ -64,13 +64,13 @@ namespace HRM_DAL.Models
 
     public class ReturnLocationModelHead : ReturnResponse
     {
-        public List<ReturnLocationModel> location { get; set; }
+        public List<ReturnLocationModel> Location { get; set; }
 
 
     }
     public class ReturnLocationAllModelHead : ReturnResponse
     {
-        public List<ReturnLocationAllModel> location { get; set; }
+        public List<ReturnLocationAllModel> Location { get; set; }
     }
 
     public class InactiveMDLModel : RequestBaseModel

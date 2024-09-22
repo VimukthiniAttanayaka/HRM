@@ -30,8 +30,8 @@ export const getLocationAll = async (formData) => {
         }
       }
 
-      for (let index = 0; index < res1[0].location.length; index++) {
-        let element = res1[0].location[index];
+      for (let index = 0; index < res1[0].Location.length; index++) {
+        let element = res1[0].Location[index];
         // console.log(element)
         LocationDetails[index] = new LocationDetail(element.MDL_LocationID, element.MDL_Location, element.MDL_Status);
       }
