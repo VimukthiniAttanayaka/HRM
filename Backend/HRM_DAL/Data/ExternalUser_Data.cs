@@ -84,6 +84,7 @@ namespace HRM_DAL.Data
                                 objCusUserData.UE_ModifiedDateTime = rdr["UE_ModifiedDateTime"].ToString();
                                 objCusUserData.UE_Otp = rdr["UE_Otp"].ToString();
                                 objCusUserData.UE_Otp_Generate_On = rdr["UE_Otp_Generate_On"].ToString();
+                                objCusUserData.UE_UserRoleID = rdr["UE_UserRoleId"].ToString();
 
                                 if (objCusUserHead.User == null)
                                 {
@@ -198,6 +199,7 @@ namespace HRM_DAL.Data
                                 objCusUserData.UE_ModifiedDateTime = rdr["UE_ModifiedDateTime"].ToString();
                                 objCusUserData.UE_Otp = rdr["UE_Otp"].ToString();
                                 objCusUserData.UE_Otp_Generate_On = rdr["UE_Otp_Generate_On"].ToString();
+                                objCusUserData.UE_UserRoleID = rdr["UE_UserRoleId"].ToString();
 
                                 objCusUserSList.Add(objCusUserData);
 
@@ -309,6 +311,9 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@ModifiedUser", item.UD_UserID);
                         cmd.Parameters["@ModifiedUser"].Direction = ParameterDirection.Input;
 
+                        cmd.Parameters.AddWithValue("@UE_UserRoleID", item.UE_UserRoleID);
+                        cmd.Parameters["@UE_UserRoleID"].Direction = ParameterDirection.Input;
+
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
                         DataSet Ds = new DataSet();
@@ -401,6 +406,10 @@ namespace HRM_DAL.Data
 
                         cmd.Parameters.AddWithValue("@UE_ActiveTo", item.UE_ActiveTo);
                         cmd.Parameters["@UE_ActiveTo"].Direction = ParameterDirection.Input;
+
+
+                        cmd.Parameters.AddWithValue("@UE_UserRoleID", item.UE_UserRoleID);
+                        cmd.Parameters["@UE_UserRoleID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;

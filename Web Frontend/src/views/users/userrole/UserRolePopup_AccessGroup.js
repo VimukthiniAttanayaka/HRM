@@ -13,23 +13,21 @@ import { GrantAccessUserGroup, RemoveAccessUserGroup } from '../../../apicalls/u
 
 import PopUpAlert from '../../shared/PopUpAlert.js'
 
-const UserRolePopup_AccessGroup = ({ visible, onClose, onOpen, UserRoleDetails }) => {
+const UserRolePopup_AccessGroup = ({ visible, onClose, onOpen, UserRoleDetails, popupStatus }) => {
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
-
-  const [popupStatus, setPopupStatus] = useState('create')
 
   const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
   const [currentPage, setCurrentPage] = useState(1);
   const [columnFilter, setColumnFilter] = useState([])
   const [tableFilter, setTableFilter] = useState([])
 
-  const [currentItems, setCurrentItems] = useState(data)  
+  const [currentItems, setCurrentItems] = useState(data)
   const [UserRoleId, setUserRoleId] = useState('')
 
   useEffect(() => {
     setUserRoleId(UserRoleDetails.UUR_UserRoleID)
-    requestAccessGroupData(UserRoleDetails.UUR_UserRoleID) 
+    requestAccessGroupData(UserRoleDetails.UUR_UserRoleID)
   }, [UserRoleDetails]);
 
 
@@ -163,30 +161,33 @@ const UserRolePopup_AccessGroup = ({ visible, onClose, onOpen, UserRoleDetails }
               show_details: (item) => {
                 return (
                   <td>
-                    {item.status == 'Inactive' ? <CButton
-                      color="success"
-                      variant="outline"
-                      shape="square"
-                      size="sm"
-                      onClick={() => {
-                        toggleGrant(item.id)
-                      }}
-                    >
-                      Grant
-                    </CButton>
-                      :
-                      <CButton
-                        color="danger"
-                        variant="outline"
-                        shape="square"
-                        size="sm"
-                        onClick={() => {
-                          toggleRemove(item.id)
-                        }}
-                      >
-                        Remove
-                      </CButton>
-                    }
+                    {
+                      popupStatus == 'edit' ? (
+                        item.status == 'Inactive' ? <CButton
+                          color="success"
+                          variant="outline"
+                          shape="square"
+                          size="sm"
+                          onClick={() => {
+                            toggleGrant(item.id)
+                          }}
+                        >
+                          Grant
+                        </CButton>
+                          :
+                          <CButton
+                            color="danger"
+                            variant="outline"
+                            shape="square"
+                            size="sm"
+                            onClick={() => {
+                              toggleRemove(item.id)
+                            }}
+                          >
+                            Remove
+                          </CButton>
+                      ) : ''}
+
                   </td>
                 )
               },

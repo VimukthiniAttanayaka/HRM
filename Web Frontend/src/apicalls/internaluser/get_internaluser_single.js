@@ -8,7 +8,7 @@ export class InternalUserDetail {
 
 // console.log(apiUrl)
 export const getInternalUserSingle = async (formData) => {
-
+  console.log(formData)
   let resw = new InternalUserDetail();
   const res = await fetch(apiUrl + 'internaluser/get_user_single', {
     method: 'POST',

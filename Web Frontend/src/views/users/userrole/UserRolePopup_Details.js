@@ -13,7 +13,7 @@ import PopUpAlert from '../../shared/PopUpAlert.js'
 const UserRolePopup_Details = ({ visible, onClose, onOpen, UserRoleDetails, popupStatus, StatusInDB }) => {
   let templatetype = 'translation_userrole'
   let templatetype_base = 'translation'
-  
+
   // const handleSubmit = (event) => {
   //   event.preventDefault();
 
@@ -22,8 +22,8 @@ const UserRolePopup_Details = ({ visible, onClose, onOpen, UserRoleDetails, popu
   const [UserRole, setUserRole] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeUserRole = (event) => {    setUserRole(event.target.value)  }
-  const handleChangeId = (event) => {    setUserRoleId(event.target.value)  }
+  const handleChangeUserRole = (event) => { setUserRole(event.target.value) }
+  const handleChangeId = (event) => { setUserRoleId(event.target.value) }
   const handleChangeIsActive = (event) => { setIsActive(event.target.checked) }
 
 
@@ -69,7 +69,7 @@ const UserRolePopup_Details = ({ visible, onClose, onOpen, UserRoleDetails, popu
       setOpen(true);
     }
   }
-  
+
   useEffect(() => {
     // console.log(UserRoleDetails)
     setUserRoleId(UserRoleDetails.UUR_UserRoleID)
@@ -88,7 +88,7 @@ const UserRolePopup_Details = ({ visible, onClose, onOpen, UserRoleDetails, popu
   const [DialogTitle, setDialogTitle] = useState('');
   const [DialogContent, setDialogContent] = useState('');
   // console.log(UserRoleDetails)
-  
+
 
   return (
     <>
@@ -102,15 +102,16 @@ const UserRolePopup_Details = ({ visible, onClose, onOpen, UserRoleDetails, popu
                 <h6>UserRoleID</h6>
               </CInputGroupText>
             </CCol>   <CFormInput placeholder="UserRoleID" name="UserRoleID" value={UserRoleId} onChange={handleChangeId}
-            />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
           </CInputGroup>
           <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>
                 <h6>UserRole</h6>
               </CInputGroupText>
-            </CCol>    <CFormInput placeholder="UserRole" name="UserRole" value={UserRole} onChange={handleChangeUserRole}
-            />
+            </CCol>
+            <CFormInput placeholder="UserRole" name="UserRole" value={UserRole} onChange={handleChangeUserRole}
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
           </CInputGroup>
           <CInputGroup className="mb-3">
             <CCol md={4}>

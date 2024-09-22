@@ -28,6 +28,7 @@ namespace HRM_DAL.Models
         public string UE_ModifiedDateTime { get; set; }
         public string UE_Otp { get; set; }
         public string UE_Otp_Generate_On { get; set; }
+        public string UE_UserRoleID { get; internal set; }
     }
 
     public class ReturnExternalUserAllModelHead : ReturnResponse
@@ -68,6 +69,9 @@ namespace HRM_DAL.Models
         public string UE_Otp { get; set; }
         public string UE_Otp_Generate_On { get; set; }
         public string authorizationToken { get; set; }
+
+        public string UE_UserRoleID { get; set; }
+        
         //public List<MenuAccessModel> menuaccesslist { get; set; }
         //public List<UserRoleAccessGroupModel> userroleaccesslist { get; set; }
         //public List<ReturnUserAccessModel> UserAccessList { get; set; }
@@ -91,6 +95,9 @@ namespace HRM_DAL.Models
         //public string UE_CreatedDateTime { get; set; }
         public string UE_ModifiedBy { get; set; }
         public string UE_ModifiedDateTime { get; set; }
+
+        public string UE_UserRoleID { get; set; }
+        
         //public string UE_Otp { get; set; }
         //public string UE_Otp_Generate_On { get; set; }
         //public string authorizationToken { get; set; }

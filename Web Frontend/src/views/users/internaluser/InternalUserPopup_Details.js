@@ -66,11 +66,13 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
       UE_ActiveFrom: ActiveFrom.toJSON(), UE_ActiveTo: ActiveTo.toJSON(),
       UE_Status: isActive,
       UD_UserID: staffId,
-      UE_EmployeeID: EmployeeID
+      UE_EmployeeID: EmployeeID,
+      UE_UserRoleID: selectedOptionUserRole
     }
     console.log(formData)
     if (popupStatus == 'edit') {
       const APIReturn = await modifyInternalUser(formData)
+      console.log(APIReturn)
       if (APIReturn.resp === false) { setDialogTitle("Alert"); }
       else { setDialogTitle("Message"); }
       setDialogContent(APIReturn.msg);
@@ -111,24 +113,25 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
   }
 
   async function loadDetails_Employee(item) {
+    if (item !== undefined) {
+      // console.log(item)
+      const token = getJWTToken();
+      const staffId = getStaffID();
+      const customerId = getCustomerID();
 
-    // console.log(item)
-    const token = getJWTToken();
-    const staffId = getStaffID();
-    const customerId = getCustomerID();
-
-    const formData = {
-      // UD_StaffID: staffId,
-      // AUD_notificationToken: token,
-      EME_EmployeeID: item
+      const formData = {
+        // UD_StaffID: staffId,
+        // AUD_notificationToken: token,
+        EME_EmployeeID: item
+      }
+      const EmployeeDetails = await getEmployeeSingle(formData)
+      // console.log(EmployeeDetails)
+      setEmployeeID(EmployeeDetails.EME_EmployeeID)
+      setEmployeeName(EmployeeDetails.EME_PrefferedName)
+      handleCloseEmp_Popup();
     }
-    const EmployeeDetails = await getEmployeeSingle(formData)
-    // console.log(EmployeeDetails)
-    setEmployeeID(EmployeeDetails.EME_EmployeeID)
-    setEmployeeName(EmployeeDetails.EME_PrefferedName)
-    handleCloseEmp_Popup();
   }
-  
+
   useEffect(() => {
     // console.log(InternalUserDetails)
     setFirstName(InternalUserDetails.UE_FirstName)
@@ -143,6 +146,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
     setActiveTo(InternalUserDetails.UE_ActiveTo)
     // setIsActive(InternalUserDetails.UE_status)
     loadDetails_Employee(InternalUserDetails.UE_EmployeeID)
+    setSelectedOptionUserRole(InternalUserDetails.UE_UserRoleID)
     setIsActive(StatusInDB)
     requestdata();
   }, [InternalUserDetails]);
@@ -214,6 +218,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
                   {option.value}
                 </option>
               ))}
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
             </CFormSelect>
           </CInputGroup>
           <CInputGroup className="mb-3">
@@ -222,7 +227,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
                 <h6>FirstName</h6>
               </CInputGroupText>
             </CCol>  <CFormInput placeholder="FirstName" name="FirstName" value={FirstName} onChange={handleChangeFirstName}
-            />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
 
           </CInputGroup>
           <CInputGroup className="mb-3">
@@ -231,7 +236,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
                 <h6>LastName</h6>
               </CInputGroupText>
             </CCol>  <CFormInput placeholder="LastName" name="LastName" value={LastName} onChange={handleChangeLastName}
-            />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
 
           </CInputGroup>
           <CInputGroup className="mb-3">
@@ -240,7 +245,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
                 <h6>EmailAddress</h6>
               </CInputGroupText>
             </CCol>  <CFormInput placeholder="EmailAddress" name="EmailAddress" value={EmailAddress} onChange={handleChangeEmailAddress}
-            />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
 
           </CInputGroup>
           <CInputGroup className="mb-3">
@@ -249,7 +254,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
                 <h6>MobileNumber</h6>
               </CInputGroupText>
             </CCol>  <CFormInput placeholder="MobileNumber" name="MobileNumber" value={MobileNumber} onChange={handleChangeMobileNumber}
-
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
             />
 
           </CInputGroup>
@@ -259,7 +264,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
                 <h6>PhoneNumber</h6>
               </CInputGroupText>
             </CCol>  <CFormInput placeholder="PhoneNumber" name="PhoneNumber" value={PhoneNumber} onChange={handleChangePhoneNumber}
-            />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
 
           </CInputGroup>
           <CInputGroup className="mb-3">
@@ -268,25 +273,30 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
                 <h6>ActiveFrom</h6>
               </CInputGroupText>
             </CCol>
-            <CDatePicker placeholder="ActiveFrom" name="ActiveFrom" date={ActiveFrom}
-              onDateChange={(date) => { setActiveFrom(date) }}
-              inputDateParse={(date) => parse(date, 'dd-MMM-yyyy', new Date())}
-              inputDateFormat={(date) => format(new Date(date), 'dd-MMM-yyyy')}
-            // disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false} 
-            />
+            {(popupStatus == 'view' || popupStatus == 'delete') ?
+            <CFormInput placeholder="ActiveFrom" name="ActiveFrom" value={ActiveFrom}
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} /> :
+               <CDatePicker placeholder="ActiveFrom" name="ActiveFrom" date={ActiveFrom}
+                onDateChange={(date) => { setActiveFrom(date) }}
+                inputDateParse={(date) => parse(date, 'dd-MMM-yyyy', new Date())}
+                inputDateFormat={(date) => format(new Date(date), 'dd-MMM-yyyy')}
+            />}
           </CInputGroup>
+
           <CInputGroup className="mb-3">
             <CCol md={4}>
               <CInputGroupText>
                 <h6>ActiveTo</h6>
               </CInputGroupText>
             </CCol>
-            <CDatePicker placeholder="ActiveTo" name="ActiveTo" date={ActiveTo}
-              onDateChange={(date) => { setActiveTo(date) }}
-              inputDateParse={(date) => parse(date, 'dd-MMM-yyyy', new Date())}
-              inputDateFormat={(date) => format(new Date(date), 'dd-MMM-yyyy')}
-            // disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false}
-            />
+            {(popupStatus == 'view' || popupStatus == 'delete') ? 
+            <CFormInput placeholder="ActiveTo" name="ActiveTo" value={ActiveTo}
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} /> :
+               <CDatePicker placeholder="ActiveTo" name="ActiveTo" date={ActiveTo}
+                onDateChange={(date) => { setActiveTo(date) }}
+                inputDateParse={(date) => parse(date, 'dd-MMM-yyyy', new Date())}
+                inputDateFormat={(date) => format(new Date(date), 'dd-MMM-yyyy')}
+            />}
           </CInputGroup>
           <CInputGroup className="mb-3">
             <CCol md={4}>
@@ -295,7 +305,7 @@ const InternalUserPopup_Details = ({ visible, onClose, onOpen, InternalUserDetai
               </CInputGroupText>
             </CCol>
             <CFormTextarea placeholder="Remarks" name="Remarks" value={Remarks} onChange={handleChangeRemarks}
-            />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
 
           </CInputGroup>
           <CInputGroup className="mb-3">

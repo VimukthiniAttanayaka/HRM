@@ -69,6 +69,7 @@ namespace HRM_DAL.Data
                                 objCusUserData.UE_ModifiedDateTime = rdr["UE_ModifiedDateTime"].ToString();
                                 objCusUserData.UE_Otp = rdr["UE_Otp"].ToString();
                                 objCusUserData.UE_Otp_Generate_On = rdr["UE_Otp_Generate_On"].ToString();
+                                objCusUserData.UE_UserRoleID = rdr["UE_UserRoleId"].ToString();
 
                                 if (objCusUserHead.User == null)
                                 {
@@ -184,6 +185,7 @@ namespace HRM_DAL.Data
                                 objCusUserData.UE_ModifiedDateTime = rdr["UE_ModifiedDateTime"].ToString();
                                 objCusUserData.UE_Otp = rdr["UE_Otp"].ToString();
                                 objCusUserData.UE_Otp_Generate_On = rdr["UE_Otp_Generate_On"].ToString();
+                                objCusUserData.UE_UserRoleID = rdr["UE_UserRoleId"].ToString();
 
                                 objCusUserSList.Add(objCusUserData);
 
@@ -304,6 +306,9 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UE_EmployeeID", item.UE_EmployeeID);
                         cmd.Parameters["@UE_EmployeeID"].Direction = ParameterDirection.Input;
 
+                        cmd.Parameters.AddWithValue("@UE_UserRoleID", item.UE_UserRoleID);
+                        cmd.Parameters["@UE_UserRoleID"].Direction = ParameterDirection.Input;
+
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
                         DataSet Ds = new DataSet();
@@ -336,6 +341,7 @@ namespace HRM_DAL.Data
         public static List<ReturnResponse> modify_internal_user(InternalUserModel item)//ok
         {
             List<ReturnResponse> objCUserHeadList = new List<ReturnResponse>();
+            ReturnResponse objCusUserHead = new ReturnResponse();
 
             if (!string.IsNullOrEmpty(item.UE_EmailAddress) && !utility_handler.Utility.Misc.EmailValidator(item.UE_EmailAddress))
             {
@@ -400,6 +406,9 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UE_EmployeeID", item.UE_EmployeeID);
                         cmd.Parameters["@UE_EmployeeID"].Direction = ParameterDirection.Input;
 
+                        cmd.Parameters.AddWithValue("@UE_UserRoleID", item.UE_UserRoleID);
+                        cmd.Parameters["@UE_UserRoleID"].Direction = ParameterDirection.Input;
+
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
                         DataSet Ds = new DataSet();
@@ -409,13 +418,15 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                ReturnResponse objCusUserHead = new ReturnResponse
-                                {
-                                    resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
-                                    msg = rdr["RTN_MSG"].ToString()
-                                };
+                                objCusUserHead.resp = Boolean.Parse(rdr["RTN_RESP"].ToString());
+                                objCusUserHead.msg = rdr["RTN_MSG"].ToString();
                                 objCUserHeadList.Add(objCusUserHead);
                             }
+                        }
+                        else
+                        {
+                            objCusUserHead.resp = true;
+                            objCusUserHead.msg = "";
                         }
                     }
 
@@ -428,11 +439,9 @@ namespace HRM_DAL.Data
             }
             catch (Exception ex)
             {
-                ReturnResponse objCusUserHead = new ReturnResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
+                objCusUserHead.resp = false;
+                objCusUserHead.msg = ex.Message.ToString();
+
                 objCUserHeadList.Add(objCusUserHead);
 
                 objError.WriteLog(0, "User_Data", "modify_user", "Stack Track: " + ex.StackTrace);

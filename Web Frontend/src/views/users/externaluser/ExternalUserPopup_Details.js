@@ -58,13 +58,16 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
       UE_UserID: UserID, UE_FirstName: FirstName, UE_LastName: LastName,
       UE_EmailAddress: EmailAddress, UE_MobileNumber: MobileNumber, UE_PhoneNumber: PhoneNumber, UE_Remarks: Remarks,
       UE_UserRole: selectedOptionUserRole,
-      UE_ActiveFrom: ActiveFrom.toJSON(), UE_ActiveTo: ActiveTo.toJSON(),
+      UE_ActiveFrom: ActiveFrom.toJSON(),
+      UE_ActiveTo: ActiveTo.toJSON(),
       UE_Status: isActive,
-      UD_UserID: staffId
+      UD_UserID: staffId,
+      UE_UserRoleID: selectedOptionUserRole
     }
 
     if (popupStatus == 'edit') {
       const APIReturn = await modifyExternalUser(formData)
+
       if (APIReturn.resp === false) { setDialogTitle("Alert"); }
       else { setDialogTitle("Message"); }
       setDialogContent(APIReturn.msg);
@@ -97,7 +100,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
     const UserRoleDetails = await Dropdowns_UserRole(formData)
 
     setOptionsUserRole(UserRoleDetails);
-
+    console.log(UserRoleDetails)
   }
 
   useEffect(() => {
@@ -111,6 +114,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
     setUserID(ExternalUserDetails.UE_UserID)
     setActiveFrom(ExternalUserDetails.UE_ActiveFrom)
     setActiveTo(ExternalUserDetails.UE_ActiveTo)
+    setSelectedOptionUserRole(ExternalUserDetails.UE_UserRoleID)
     // setIsActive(ExternalUserDetails.UE_status)
     // console.log(isActive)    
     setIsActive(StatusInDB)
@@ -163,7 +167,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
                 <h6>FirstName</h6>
               </CInputGroupText>
             </CCol>  <CFormInput placeholder="FirstName" name="FirstName" value={FirstName} onChange={handleChangeFirstName}
-            />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
 
           </CInputGroup>
           <CInputGroup className="mb-3">
@@ -172,7 +176,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
                 <h6>LastName</h6>
               </CInputGroupText>
             </CCol>  <CFormInput placeholder="LastName" name="LastName" value={LastName} onChange={handleChangeLastName}
-            />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
 
           </CInputGroup>
           <CInputGroup className="mb-3">
@@ -181,7 +185,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
                 <h6>EmailAddress</h6>
               </CInputGroupText>
             </CCol>  <CFormInput placeholder="EmailAddress" name="EmailAddress" value={EmailAddress} onChange={handleChangeEmailAddress}
-            />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
 
           </CInputGroup>
           <CInputGroup className="mb-3">
@@ -190,7 +194,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
                 <h6>MobileNumber</h6>
               </CInputGroupText>
             </CCol>  <CFormInput placeholder="MobileNumber" name="MobileNumber" value={MobileNumber} onChange={handleChangeMobileNumber}
-
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
             />
 
           </CInputGroup>
@@ -200,7 +204,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
                 <h6>PhoneNumber</h6>
               </CInputGroupText>
             </CCol>  <CFormInput placeholder="PhoneNumber" name="PhoneNumber" value={PhoneNumber} onChange={handleChangePhoneNumber}
-            />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
 
           </CInputGroup>
           <CInputGroup className="mb-3">
@@ -209,13 +213,14 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
                 <h6>ActiveFrom</h6>
               </CInputGroupText>
             </CCol>
-            <CDatePicker placeholder="ActiveFrom" name="ActiveFrom" date={ActiveFrom}
-              onDateChange={(date) => { setActiveFrom(date) }}
-              inputDateParse={(date) => parse(date, 'dd-MMM-yyyy', new Date())}
-              inputDateFormat={(date) => format(new Date(date), 'dd-MMM-yyyy')}
-            // disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false} 
-            />
-
+            {(popupStatus == 'view' || popupStatus == 'delete') ?
+              <CFormInput placeholder="ActiveFrom" name="ActiveFrom" value={ActiveFrom}
+                disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} /> :
+              <CDatePicker placeholder="ActiveFrom" name="ActiveFrom" date={ActiveFrom}
+                onDateChange={(date) => { setActiveFrom(date) }}
+                inputDateParse={(date) => parse(date, 'dd-MMM-yyyy', new Date())}
+                inputDateFormat={(date) => format(new Date(date), 'dd-MMM-yyyy')}
+              />}
           </CInputGroup>
           <CInputGroup className="mb-3">
             <CCol md={4}>
@@ -223,13 +228,14 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
                 <h6>ActiveTo</h6>
               </CInputGroupText>
             </CCol>
-            <CDatePicker placeholder="ActiveTo" name="ActiveTo" date={ActiveTo}
-              onDateChange={(date) => { setActiveTo(date) }}
-              inputDateParse={(date) => parse(date, 'dd-MMM-yyyy', new Date())}
-              inputDateFormat={(date) => format(new Date(date), 'dd-MMM-yyyy')}
-            // disabled={(popupStatus == 'view' || popupStatus == 'delete' || popupStatus == 'edit') ? true : false}
-            />
-
+            {(popupStatus == 'view' || popupStatus == 'delete') ?
+              <CFormInput placeholder="ActiveTo" name="ActiveTo" value={ActiveTo}
+                disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} /> :
+              <CDatePicker placeholder="ActiveTo" name="ActiveTo" date={ActiveTo}
+                onDateChange={(date) => { setActiveTo(date) }}
+                inputDateParse={(date) => parse(date, 'dd-MMM-yyyy', new Date())}
+                inputDateFormat={(date) => format(new Date(date), 'dd-MMM-yyyy')}
+              />}
           </CInputGroup>
           <CInputGroup className="mb-3">
             <CCol md={4}>
@@ -238,7 +244,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               </CInputGroupText>
             </CCol>
             <CFormInput placeholder="Remarks" name="Remarks" value={Remarks} onChange={handleChangeRemarks}
-            />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
 
           </CInputGroup>
           <CInputGroup className="mb-3">

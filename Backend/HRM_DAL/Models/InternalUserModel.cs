@@ -28,6 +28,7 @@ namespace HRM_DAL.Models
         public string UE_Otp { get; set; }
         public string UE_Otp_Generate_On { get; set; }
         public string UE_EmployeeID { get; set; }
+        public string UE_UserRoleID { get; internal set; }
     }
 
     public class ReturnInternalUserAllModelHead : ReturnResponse
@@ -68,6 +69,7 @@ namespace HRM_DAL.Models
         public string UE_Otp_Generate_On { get; set; }
         public string authorizationToken { get; set; }
         public string UE_EmployeeID { get; set; }
+        public string UE_UserRoleID { get; set; }
     }
     public class InternalUserModel : RequestBaseModel
     {
@@ -91,6 +93,7 @@ namespace HRM_DAL.Models
         public string UE_Otp { get; set; }
         public string UE_Otp_Generate_On { get; set; }
         public string UE_EmployeeID { get; set; }
+        public string UE_UserRoleID { get; set; }
         public string authorizationToken { get; set; }
     }
 }

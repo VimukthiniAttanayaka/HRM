@@ -128,7 +128,7 @@ const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails, popupStatus,
                       <h6>UserMenuID</h6>
                     </CInputGroupText>
                   </CCol>   <CFormInput placeholder="UserMenuID" name="UserMenuID" value={UserMenuId} onChange={handleChangeId}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -137,7 +137,7 @@ const UserMenuPopup = ({ visible, onClose, onOpen, UserMenuDetails, popupStatus,
                       <h6>UserMenu</h6>
                     </CInputGroupText>
                   </CCol>    <CFormInput placeholder="UserMenu" name="UserMenu" value={UserMenu} onChange={handleChangeUserMenu}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">

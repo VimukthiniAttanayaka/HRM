@@ -99,7 +99,7 @@ const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails
                 <h6>AccessGroupId</h6>
               </CInputGroupText>
             </CCol>   <CFormInput placeholder="AccessGroupId" name="AccessGroupId" value={AccessGroupId} onChange={handleChangeId}
-            />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
           </CInputGroup>
           <CInputGroup className="mb-3">
             <CCol md={4}>
@@ -107,7 +107,7 @@ const AccessGroupPopup_Details = ({ visible, onClose, onOpen, AccessGroupDetails
                 <h6>AccessGroup</h6>
               </CInputGroupText>
             </CCol>    <CFormInput placeholder="AccessGroup" name="AccessGroup" value={AccessGroup} onChange={handleChangeAccessGroup}
-            />
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
           </CInputGroup>
           <CInputGroup className="mb-3">
             <CCol md={4}>
