@@ -23,13 +23,6 @@ namespace HRM_DAL.Models
         public bool CUS_Status { get; set; }
     }
 
-    public class ReturncustResponse : ReturnResponse
-    {
-        //public bool resp { get; set; }
-        //public string msg { get; set; }
-
-    }
-
     public class ReturnCustomerModel
     {
         [Key]

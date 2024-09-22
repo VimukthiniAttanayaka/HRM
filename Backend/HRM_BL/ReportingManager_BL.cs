@@ -21,12 +21,12 @@ namespace HRM_BL
         }
 
 
-        public static List<ReturncustResponse> add_new_ReportingManager(ReportingManagerModel item)//ok
+        public static List<ReturnResponse> add_new_ReportingManager(ReportingManagerModel item)//ok
         {
             return HRM_DAL.Data.ReportingManager_Data.add_new_ReportingManager(item);
         }
 
-        public static List<ReturncustResponse> modify_ReportingManager(ReportingManagerModel item)//ok
+        public static List<ReturnResponse> modify_ReportingManager(ReportingManagerModel item)//ok
         {
             return HRM_DAL.Data.ReportingManager_Data.modify_ReportingManager(item);
         }

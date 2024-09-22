@@ -128,7 +128,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturncustResponse objLocationHead = new ReturncustResponse
+                ReturnResponse objLocationHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -167,7 +167,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturncustResponse objLocationHead = new ReturncustResponse
+                ReturnResponse objLocationHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()

@@ -75,20 +75,20 @@ namespace HRM.Controllers
         public List<ReturnJobRoleModelHead> get_JobRole_all(JobRoleSearchModel model)//ok
         {
             List<ReturnJobRoleModelHead> objJobRoleHeadList = new List<ReturnJobRoleModelHead>();
-            ReturnJobRoleModelHead obj = new ReturnJobRoleModelHead() { resp = false, msg = "sfsf", RC = 100 };
-            obj.JobRole = new List<ReturnJobRoleModel>();
-            obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "CAS", MDJR_JobRole = "Casual", MDJR_Status = true });
-            obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "ANU", MDJR_JobRole = "Annual", MDJR_Status = false });
-            obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "MED", MDJR_JobRole = "Medical", MDJR_Status = true });
-            obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "MAT", MDJR_JobRole = "Matrinaty", MDJR_Status = true });
-            obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "CAS", MDJR_JobRole = "Casual", MDJR_Status = true });
+            //ReturnJobRoleModelHead obj = new ReturnJobRoleModelHead() { resp = false, msg = "sfsf", RC = 100 };
+            //obj.JobRole = new List<ReturnJobRoleModel>();
+            //obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "CAS", MDJR_JobRole = "Casual", MDJR_Status = true });
+            //obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "ANU", MDJR_JobRole = "Annual", MDJR_Status = false });
+            //obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "MED", MDJR_JobRole = "Medical", MDJR_Status = true });
+            //obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "MAT", MDJR_JobRole = "Matrinaty", MDJR_Status = true });
+            //obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "CAS", MDJR_JobRole = "Casual", MDJR_Status = true });
             //for (int i = 0; i < 100; i++)
             //{
             //    obj.JobRole.Add(new ReturnJobRoleModel() { MDJR_JobRoleID = "CAS", MDJR_JobRole = "Casual", MDJR_Status = true });
 
             //}
-            objJobRoleHeadList.Add(obj);
-            return objJobRoleHeadList;
+            //objJobRoleHeadList.Add(obj);
+            //return objJobRoleHeadList;
 
             try
             {
@@ -126,9 +126,9 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturncustResponse> add_new_JobRole(JobRoleModel item)//ok
+        public List<ReturnResponse> add_new_JobRole(JobRoleModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
 
             try
             {
@@ -140,7 +140,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturncustResponse objJobRoleHead = new ReturncustResponse
+                ReturnResponse objJobRoleHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -165,9 +165,9 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturncustResponse> modify_JobRole(JobRoleModel item)//ok
+        public List<ReturnResponse> modify_JobRole(JobRoleModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
 
             try
             {
@@ -179,7 +179,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturncustResponse objJobRoleHead = new ReturncustResponse
+                ReturnResponse objJobRoleHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()

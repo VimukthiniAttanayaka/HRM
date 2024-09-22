@@ -19,6 +19,8 @@ const CountryDataGrid = () => {
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
 
+  const [StatusInDB, setStatusInDB] = useState(true)
+
   const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
   const [currentPage, setCurrentPage] = useState(1);
   const [columnFilter, setColumnFilter] = useState([])
@@ -39,7 +41,8 @@ const CountryDataGrid = () => {
       MDCTY_CountryID: item
     }
     const CountryDetails = await getCountrySingle(formData)
-    setCountryDetails(CountryDetails);
+    setCountryDetails(CountryDetails);   
+    setStatusInDB(CountryDetails.UUM_Status)
     handleOpenPopup()
   }
   const handleItemsPerPageChange = (newItemsPerPage) => {
@@ -141,7 +144,7 @@ const CountryDataGrid = () => {
           </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <CountryPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} countryDetails={countryDetails} />
+          <CountryPopup popupStatus={popupStatus} onClose={handleClosePopup} StatusInDB={StatusInDB} visible={visible} onOpen={handleOpenPopup} countryDetails={countryDetails} />
         </CCol>
       </CRow>
       <CSmartTable

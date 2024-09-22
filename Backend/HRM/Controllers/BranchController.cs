@@ -76,13 +76,13 @@ namespace HRM.Controllers
         {
             List<ReturnBranchModelHead> objBranchHeadList = new List<ReturnBranchModelHead>();
             ReturnBranchModelHead obj = new ReturnBranchModelHead() { resp = false, msg = "sfsf" };
-            obj.Branch = new List<ReturnBranchModel>();
-            obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "CAS", MDB_Branch = "Casual", MDB_Status = true });
-            obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "ANU", MDB_Branch = "Annual", MDB_Status = true });
-            obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MED", MDB_Branch = "Medical", MDB_Status = true });
-            obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MAT", MDB_Branch = "Matrinaty", MDB_Status = true });
-            objBranchHeadList.Add(obj);
-            return objBranchHeadList;
+            //obj.Branch = new List<ReturnBranchModel>();
+            //obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "CAS", MDB_Branch = "Casual", MDB_Status = true });
+            //obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "ANU", MDB_Branch = "Annual", MDB_Status = true });
+            //obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MED", MDB_Branch = "Medical", MDB_Status = true });
+            //obj.Branch.Add(new ReturnBranchModel() { MDB_BranchID = "MAT", MDB_Branch = "Matrinaty", MDB_Status = true });
+            //objBranchHeadList.Add(obj);
+            //return objBranchHeadList;
 
             try
             {
@@ -120,9 +120,9 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturncustResponse> add_new_Branch(BranchModel item)//ok
+        public List<ReturnResponse> add_new_Branch(BranchModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
 
             try
             {
@@ -134,7 +134,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturncustResponse objBranchHead = new ReturncustResponse
+                ReturnResponse objBranchHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -159,9 +159,9 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturncustResponse> modify_Branch(BranchModel item)//ok
+        public List<ReturnResponse> modify_Branch(BranchModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
 
             try
             {
@@ -173,7 +173,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturncustResponse objBranchHead = new ReturncustResponse
+                ReturnResponse objBranchHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()

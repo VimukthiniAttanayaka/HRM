@@ -88,6 +88,19 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
     setIsActive(DepartmentDetails.MDD_Status)
   }, [DepartmentDetails]);
   // console.log(DepartmentDetails)
+
+  const [open, setOpen] = useState(false);
+  const [openEmp_Popup, setOpenEmp_Popup] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    onClose();
+  };
+
+  const [DialogTitle, setDialogTitle] = useState('');
+  const [DialogContent, setDialogContent] = useState('');
+  // console.log(UserMenuDetails)
+
   return (
     <>
       <CButton color="primary" onClick={onOpen}>  {getLabelText('New Department', templatetype)}
@@ -109,6 +122,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
         <CModalBody>
           <CCard className="mx-4">
             <CCardBody className="p-4">
+              <PopUpAlert open={open} handleClose={handleClose} dialogTitle={DialogTitle} dialogContent={DialogContent} />
               <CForm onSubmit={handleSubmit}>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
@@ -135,7 +149,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
                       <h6>{getLabelText('Status', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
+                  <CFormCheck checked={isActive} defaultChecked onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
                   {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :

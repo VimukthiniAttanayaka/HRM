@@ -117,9 +117,9 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturncustResponse> add_new_ReportingManager(ReportingManagerModel item)//ok
+        public List<ReturnResponse> add_new_ReportingManager(ReportingManagerModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
 
             try
             {
@@ -131,7 +131,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturncustResponse objReportingManagerHead = new ReturncustResponse
+                ReturnResponse objReportingManagerHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -156,9 +156,9 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturncustResponse> modify_ReportingManager(ReportingManagerModel item)//ok
+        public List<ReturnResponse> modify_ReportingManager(ReportingManagerModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
 
             try
             {
@@ -170,7 +170,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturncustResponse objReportingManagerHead = new ReturncustResponse
+                ReturnResponse objReportingManagerHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()

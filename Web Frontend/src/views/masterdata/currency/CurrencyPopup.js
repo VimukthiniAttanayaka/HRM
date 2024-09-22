@@ -79,7 +79,20 @@ const CurrencyPopup = ({ visible, onClose, onOpen, CurrencyDetails }) => {
     setCurrency(CurrencyDetails.MDCCY_Currency)
     setIsActive(CurrencyDetails.MDCCY_Status)
   }, [CurrencyDetails]);
-  console.log(CurrencyDetails)
+  // console.log(CurrencyDetails)
+
+
+  const [open, setOpen] = useState(false);
+  const [openEmp_Popup, setOpenEmp_Popup] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    onClose();
+  };
+
+  const [DialogTitle, setDialogTitle] = useState('');
+  const [DialogContent, setDialogContent] = useState('');
+  // console.log(UserMenuDetails)
   return (
     <>
       <CButton color="primary" onClick={onOpen}>{getLabelText('New Currency', templatetype)}</CButton>
@@ -97,6 +110,7 @@ const CurrencyPopup = ({ visible, onClose, onOpen, CurrencyDetails }) => {
         <CModalBody>
           <CCard className="mx-4">
             <CCardBody className="p-4">
+              <PopUpAlert open={open} handleClose={handleClose} dialogTitle={DialogTitle} dialogContent={DialogContent} />
               <CForm onSubmit={handleSubmit}>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>

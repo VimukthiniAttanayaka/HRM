@@ -25,6 +25,8 @@ const JobRoleDataGrid = () => {
   const [columnFilter, setColumnFilter] = useState([])
   const [tableFilter, setTableFilter] = useState([])
   
+  const [StatusInDB, setStatusInDB] = useState(true)
+
   const [JobRoleDetails, setJobRoleDetails] = useState([])
 
   async function loadDetails(item) {
@@ -39,7 +41,8 @@ const JobRoleDataGrid = () => {
       MDJR_JobRoleID: item
     }
     const JobRoleDetails = await getJobRoleSingle(formData)
-    setJobRoleDetails(JobRoleDetails);
+    setJobRoleDetails(JobRoleDetails);   
+    setStatusInDB(JobRoleDetails.UUM_Status)
     handleOpenPopup()
   }
   const toggleEdit = (index) => {
@@ -77,11 +80,13 @@ const JobRoleDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      USR_EmployeeID: 'sedcx', MDJR_JobRoleID: 'sedcx',
+      USR_EmployeeID: 'sedcx', 
+      MDJR_JobRoleID: 'sedcx',
       PAGE_NO: currentPage, PAGE_RECORDS_COUNT: itemsPerPage, ColumnSpecialFilter: JSON.stringify(columnFilter)
     }
-    console.log(tableFilter);
+    // console.log(tableFilter);
     const JobRoleDetails = await getJobRoleAll(formData)
+    // console.log(JobRoleDetails);
     setData(JobRoleDetails);
 
   }
@@ -122,7 +127,7 @@ const JobRoleDataGrid = () => {
   }, [tableFilter]);
 
   const handleItemsPerPageChange = (newItemsPerPage) => {
-    console.log(newItemsPerPage);
+    // console.log(newItemsPerPage);
     setItemsPerPage(newItemsPerPage);
   };
 
@@ -158,7 +163,7 @@ const JobRoleDataGrid = () => {
           </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <JobRolePopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} JobRoleDetails={JobRoleDetails} />
+          <JobRolePopup popupStatus={popupStatus} onClose={handleClosePopup} StatusInDB={StatusInDB} visible={visible} onOpen={handleOpenPopup} JobRoleDetails={JobRoleDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -169,7 +174,7 @@ const JobRoleDataGrid = () => {
         onColumnFilterChange={setColumnFilter}
         columnSorter
         // footer
-        items={data.Data}
+        items={data}
         itemsPerPageSelect
         // itemsPerPage={5}
         itemsPerPage={itemsPerPage}

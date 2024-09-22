@@ -9,7 +9,7 @@ import { getLabelText } from 'src/MultipleLanguageSheets'
 
 import PopUpAlert from '../../shared/PopUpAlert.js'
 
-const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus }) => {
+const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus, StatusInDB }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
   let templatetype = 'translation_branch'
   let templatetype_base = 'translation'
@@ -21,6 +21,7 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus }) =
   const handleChangeBranch = (event) => { setBranch(event.target.value) }
   const handleChangeId = (event) => { setBranchId(event.target.value) }
   const handleChangeStatus = (event) => { setIsActive(event.target.checked) }
+
   const handleSubmit = async (event) => {
     event.preventDefault()
 
@@ -34,9 +35,9 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus }) =
     const customerId = getCustomerID();
 
     const formData = {
-      UUM_BranchID: BranchId,
-      UUM_Branch: Branch,
-      UUM_Status: isActive,
+      MDB_BranchID: branchId,
+      MDB_Branch: branch,
+      MDB_Status: isActive,
       UD_UserID: staffId,
     }
     // console.log(formData)
@@ -79,9 +80,22 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus }) =
   useEffect(() => {
     setBranchId(branchDetails.MDB_BranchID)
     setBranch(branchDetails.MDB_Branch)
-    setIsActive(branchDetails.MDB_Status)
+    setIsActive(StatusInDB)
   }, [branchDetails]);
   // console.log(branchDetails)
+
+  const [open, setOpen] = useState(false);
+  const [openEmp_Popup, setOpenEmp_Popup] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    onClose();
+  };
+
+  const [DialogTitle, setDialogTitle] = useState('');
+  const [DialogContent, setDialogContent] = useState('');
+  // console.log(UserMenuDetails)
+
   return (
     <>
       <CButton color="primary" onClick={onOpen}>{getLabelText('New Branch', templatetype)}</CButton>
@@ -99,6 +113,7 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus }) =
         <CModalBody>
           <CCard className="mx-4">
             <CCardBody className="p-4">
+              <PopUpAlert open={open} handleClose={handleClose} dialogTitle={DialogTitle} dialogContent={DialogContent} />
               <CForm onSubmit={handleSubmit}>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
@@ -125,7 +140,7 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus }) =
                       <h6>{getLabelText('Status', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
+                  <CFormCheck checked={isActive} defaultChecked onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
                   {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :

@@ -19,12 +19,12 @@ namespace HRM_BL
         {
             return HRM_DAL.Data.Customer_Data.get_customer_all(model);
         }
-        public static List<ReturncustResponse> add_new_customer(CustomerModel item)//ok
+        public static List<ReturnResponse> add_new_customer(CustomerModel item)//ok
         {
             return HRM_DAL.Data.Customer_Data.add_new_customer(item);
         }
 
-        public static List<ReturncustResponse> modify_customer(CustomerModel item)//ok
+        public static List<ReturnResponse> modify_customer(CustomerModel item)//ok
         {
             return HRM_DAL.Data.Customer_Data.modify_customer(item);
         }

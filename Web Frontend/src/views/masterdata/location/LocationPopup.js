@@ -9,7 +9,7 @@ import { getLabelText } from 'src/MultipleLanguageSheets'
 
 import PopUpAlert from '../../shared/PopUpAlert.js'
 
-const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus }) => {
+const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus, StatusInDB }) => {
 
   let templatetype = 'translation_location'
   let templatetype_base = 'translation'
@@ -89,6 +89,19 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus 
     setIsActive(LocationDetails.MDL_Status)
   }, [LocationDetails]);
   // console.log(LocationDetails)
+
+  const [open, setOpen] = useState(false);
+  const [openEmp_Popup, setOpenEmp_Popup] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    onClose();
+  };
+
+  const [DialogTitle, setDialogTitle] = useState('');
+  const [DialogContent, setDialogContent] = useState('');
+  // console.log(UserMenuDetails)
+
   return (
     <>
       <CButton color="primary" onClick={onOpen}>{getLabelText('New Location', templatetype)}</CButton>
@@ -106,6 +119,7 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus 
         <CModalBody>
           <CCard className="mx-4">
             <CCardBody className="p-4">
+              <PopUpAlert open={open} handleClose={handleClose} dialogTitle={DialogTitle} dialogContent={DialogContent} />
               <CForm onSubmit={handleSubmit}>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
@@ -131,7 +145,7 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus 
                       <h6>{getLabelText('Status', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
+                  <CFormCheck checked={isActive} defaultChecked onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
                   {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :

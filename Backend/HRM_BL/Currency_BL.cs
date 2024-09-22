@@ -21,12 +21,12 @@ namespace HRM_BL
         }
 
 
-        public static List<ReturncustResponse> add_new_Currency(CurrencyModel item)//ok
+        public static List<ReturnResponse> add_new_Currency(CurrencyModel item)//ok
         {
             return HRM_DAL.Data.Currency_Data.add_new_Currency(item);
         }
 
-        public static List<ReturncustResponse> modify_Currency(CurrencyModel item)//ok
+        public static List<ReturnResponse> modify_Currency(CurrencyModel item)//ok
         {
             return HRM_DAL.Data.Currency_Data.modify_Currency(item);
         }

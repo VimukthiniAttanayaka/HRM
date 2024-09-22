@@ -21,12 +21,12 @@ namespace HRM_BL
         }
 
 
-        public static List<ReturncustResponse> add_new_LeaveType(LeaveTypeModel item)//ok
+        public static List<ReturnResponse> add_new_LeaveType(LeaveTypeModel item)//ok
         {
             return HRM_DAL.Data.LeaveType_Data.add_new_LeaveType(item);
         }
 
-        public static List<ReturncustResponse> modify_LeaveType(LeaveTypeModel item)//ok
+        public static List<ReturnResponse> modify_LeaveType(LeaveTypeModel item)//ok
         {
             return HRM_DAL.Data.LeaveType_Data.modify_LeaveType(item);
         }

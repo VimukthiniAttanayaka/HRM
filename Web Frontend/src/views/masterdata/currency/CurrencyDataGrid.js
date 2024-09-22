@@ -14,6 +14,8 @@ let templatetype_base = 'translation'
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
 
+  const [StatusInDB, setStatusInDB] = useState(true)
+
   const columns = [
     {
       key: 'id',
@@ -84,20 +86,9 @@ let templatetype_base = 'translation'
       MDCCY_CurrencyID: item
     }
 
-    // const res = fetch(apiUrl + 'Currency/get_Currency_single', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setCurrencyDetails(res1[0].Currency[0]);
-    //     handleOpenPopup()
-    //   })
     const CurrencyDetails = await getCurrencySingle(formData)
-    // setCurrencyDetails(res1[0].Currency[0]);
-    setCurrencyDetails(CurrencyDetails);
+     setCurrencyDetails(CurrencyDetails);   
+     setStatusInDB(CurrencyDetails.UUM_Status)
     handleOpenPopup()
   }
   const toggleDetails = (index) => {
@@ -115,7 +106,6 @@ let templatetype_base = 'translation'
     // setDetails(newDetails)
   }
 
-  // setCustomerId(res1[0].Customer[0].CUS_ID);}
   const apiUrl = process.env.REACT_APP_API_URL;
 
   async function requestdata() {
@@ -134,37 +124,6 @@ let templatetype_base = 'translation'
     const CurrencyDetails = await getCurrencyAll(formData)
     // console.log(CurrencyDetails)
     setData(CurrencyDetails);
-
-    // const res = await fetch(apiUrl + 'Currency/get_Currency_all', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-
-    //     const CurrencyDetails = [];
-    //     class CurrencyDetail {
-    //       constructor(id, Currency, status, Alotment) {
-    //         this.Currency = Currency;
-    //         this.id = id;
-    //         this.alotment = Alotment
-    //         if (status == true) { this.status = "Active"; }
-    //         else { this.status = "Inactive"; }
-    //       }
-    //     }
-
-    //     for (let index = 0; index < res1[0].Currency.length; index++) {
-    //       let element = res1[0].Currency[index];
-    //       console.log(element)
-    //       CurrencyDetails[index] = new CurrencyDetail(element.MDCCY_CurrencyID, element.MDCCY_Currency, element.MDCCY_Status, element.MDCCY_LeaveAlotment);
-    //     }
-
-    //     setData(CurrencyDetails);
-    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
-    //   })
-
   }
   useEffect(() => {
     requestdata();
@@ -203,7 +162,7 @@ let templatetype_base = 'translation'
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <CurrencyPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} CurrencyDetails={CurrencyDetails} />
+          <CurrencyPopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} StatusInDB={StatusInDB} CurrencyDetails={CurrencyDetails} />
         </CCol>
       </CRow>
       <CSmartTable

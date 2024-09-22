@@ -21,12 +21,12 @@ namespace HRM_BL
         }
 
 
-        public static List<ReturncustResponse> add_new_PerformanceAppriasalQuestions(PerformanceAppriasalQuestionsModel item)//ok
+        public static List<ReturnResponse> add_new_PerformanceAppriasalQuestions(PerformanceAppriasalQuestionsModel item)//ok
         {
             return HRM_DAL.Data.PerformanceAppriasalQuestions_Data.add_new_PerformanceAppriasalQuestions(item);
         }
 
-        public static List<ReturncustResponse> modify_PerformanceAppriasalQuestions(PerformanceAppriasalQuestionsModel item)//ok
+        public static List<ReturnResponse> modify_PerformanceAppriasalQuestions(PerformanceAppriasalQuestionsModel item)//ok
         {
             return HRM_DAL.Data.PerformanceAppriasalQuestions_Data.modify_PerformanceAppriasalQuestions(item);
         }

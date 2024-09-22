@@ -303,7 +303,7 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                objCustHead = new ReturncustResponse
+                                objCustHead = new ReturnResponse
                                 {
                                     resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
                                     msg = rdr["RTN_MSG"].ToString()
@@ -319,7 +319,7 @@ namespace HRM_DAL.Data
             }
             catch (Exception ex)
             {
-                objCustHead = new ReturncustResponse
+                objCustHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -427,7 +427,7 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                objCustHead = new ReturncustResponse
+                                objCustHead = new ReturnResponse
                                 {
                                     resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
                                     msg = rdr["RTN_MSG"].ToString()
@@ -441,7 +441,7 @@ namespace HRM_DAL.Data
             }
             catch (Exception ex)
             {
-                objCustHead = new ReturncustResponse
+                objCustHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()

@@ -10,15 +10,15 @@ export const addNewJobRole = async (formData) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
   })
-  .then(response => response.json())
-  .then(json => {
+    .then(response => response.json())
+    .then(json => {
 
-    let res1 = JSON.parse(JSON.stringify(json))
-    resw = res1[0]
-    console.log(resw)
+      let res1 = JSON.parse(JSON.stringify(json))
+      resw = res1[0]
+      console.log(resw)
 
-    // alert(resw.msg)
-  })
+      // alert(resw.msg)
+    })
 
-return resw;
+  return resw;
 };

@@ -21,12 +21,12 @@ namespace HRM_BL
         }
 
 
-        public static List<ReturncustResponse> add_new_EmployeeJobDescription(EmployeeJobDescriptionModel item)//ok
+        public static List<ReturnResponse> add_new_EmployeeJobDescription(EmployeeJobDescriptionModel item)//ok
         {
             return HRM_DAL.Data.EmployeeJobDescription_Data.add_new_EmployeeJobDescription(item);
         }
 
-        public static List<ReturncustResponse> modify_EmployeeJobDescription(EmployeeJobDescriptionModel item)//ok
+        public static List<ReturnResponse> modify_EmployeeJobDescription(EmployeeJobDescriptionModel item)//ok
         {
             return HRM_DAL.Data.EmployeeJobDescription_Data.modify_EmployeeJobDescription(item);
         }

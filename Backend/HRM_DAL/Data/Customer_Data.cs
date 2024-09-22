@@ -231,10 +231,10 @@ namespace HRM_DAL.Data
 
         }
 
-        public static List<ReturncustResponse> add_new_customer(CustomerModel item)//ok
+        public static List<ReturnResponse> add_new_customer(CustomerModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
-            ReturncustResponse objCustHead = new ReturncustResponse();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+            ReturnResponse objCustHead = new ReturnResponse();
 
             if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
             {
@@ -319,7 +319,7 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                objCustHead = new ReturncustResponse
+                                objCustHead = new ReturnResponse
                                 {
                                     resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
                                     msg = rdr["RTN_MSG"].ToString()
@@ -335,7 +335,7 @@ namespace HRM_DAL.Data
             }
             catch (Exception ex)
             {
-                objCustHead = new ReturncustResponse
+                objCustHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -354,10 +354,10 @@ namespace HRM_DAL.Data
             return objCustHeadList;
         }
 
-        public static List<ReturncustResponse> modify_customer(CustomerModel item)//ok
+        public static List<ReturnResponse> modify_customer(CustomerModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
-            ReturncustResponse objCustHead = new ReturncustResponse();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+            ReturnResponse objCustHead = new ReturnResponse();
 
             if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
             {
@@ -440,7 +440,7 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                objCustHead = new ReturncustResponse
+                                objCustHead = new ReturnResponse
                                 {
                                     resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
                                     msg = rdr["RTN_MSG"].ToString()
@@ -454,7 +454,7 @@ namespace HRM_DAL.Data
             }
             catch (Exception ex)
             {
-                objCustHead = new ReturncustResponse
+                objCustHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()

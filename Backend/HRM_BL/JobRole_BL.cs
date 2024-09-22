@@ -21,12 +21,12 @@ namespace HRM_BL
         }
 
 
-        public static List<ReturncustResponse> add_new_JobRole(JobRoleModel item)//ok
+        public static List<ReturnResponse> add_new_JobRole(JobRoleModel item)//ok
         {
             return HRM_DAL.Data.JobRole_Data.add_new_JobRole(item);
         }
 
-        public static List<ReturncustResponse> modify_JobRole(JobRoleModel item)//ok
+        public static List<ReturnResponse> modify_JobRole(JobRoleModel item)//ok
         {
             return HRM_DAL.Data.JobRole_Data.modify_JobRole(item);
         }

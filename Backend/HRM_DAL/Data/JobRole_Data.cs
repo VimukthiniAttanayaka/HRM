@@ -115,6 +115,11 @@ namespace HRM_DAL.Data
             List<ReturnJobRoleModelHead> objJobRoleHeadList = new List<ReturnJobRoleModelHead>();
             ReturnJobRoleModelHead objJobRoleHead = new ReturnJobRoleModelHead();
 
+            if (objJobRoleHead.JobRole == null)
+            {
+                objJobRoleHead.JobRole = new List<ReturnJobRoleModel>();
+            }
+
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
                 objJobRoleHead.resp = false;
@@ -153,15 +158,10 @@ namespace HRM_DAL.Data
                                 objJobRoleHead.resp = true;
                                 objJobRoleHead.msg = "Get JobRole";
 
-                                objJobRole.MDJR_JobRoleID = rdr["MDJR_JobRoleID"].ToString();
-                                
+                                objJobRole.MDJR_JobRoleID = rdr["MDJR_JobRoleID"].ToString();                                
                                 objJobRole.MDJR_JobRole = rdr["MDJR_JobRole"].ToString();
                                 objJobRole.MDJR_Status = Convert.ToBoolean(rdr["MDJR_Status"].ToString());
 
-                                if (objJobRoleHead.JobRole == null)
-                                {
-                                    objJobRoleHead.JobRole = new List<ReturnJobRoleModel>();
-                                }
 
                                 objJobRoleHead.JobRole.Add(objJobRole);
 
@@ -187,11 +187,9 @@ namespace HRM_DAL.Data
             }
             catch (Exception ex)
             {
-                objJobRoleHead = new ReturnJobRoleModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
+                objJobRoleHead.resp = false;
+                objJobRoleHead.msg = ex.Message.ToString();
+
                 objJobRoleHeadList.Add(objJobRoleHead);
 
                 objError.WriteLog(0, "JobRole_Data", "get_JobRole_all", "Stack Track: " + ex.StackTrace);
@@ -207,10 +205,10 @@ namespace HRM_DAL.Data
 
         }
 
-        public static List<ReturncustResponse> add_new_JobRole(JobRoleModel item)//ok
+        public static List<ReturnResponse> add_new_JobRole(JobRoleModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
-            ReturncustResponse objCustHead = new ReturncustResponse();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+            ReturnResponse objCustHead = new ReturnResponse();
 
             if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
             {
@@ -245,47 +243,6 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@MDJR_Status", item.MDJR_Status);
                         cmd.Parameters["@MDJR_Status"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
-                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
-                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
-                        //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_UnitNumber", item.CUS_Adrs_UnitNumber);
-                        //cmd.Parameters["@CUS_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_StreetName", item.CUS_Adrs_StreetName);
-                        //cmd.Parameters["@CUS_Adrs_StreetName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_City", item.CUS_Adrs_City);
-                        //cmd.Parameters["@CUS_Adrs_City"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_CountryCode", item.CUS_Adrs_CountryCode);
-                        //cmd.Parameters["@CUS_Adrs_CountryCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_PostalCode", item.CUS_Adrs_PostalCode);
-                        //cmd.Parameters["@CUS_Adrs_PostalCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactPerson", item.CUS_ContactPerson);
-                        //cmd.Parameters["@CUS_ContactPerson"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
-                        //cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
-                        //cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_SMS", item.CUS_OTP_By_SMS);
-                        //cmd.Parameters["@CUS_OTP_By_SMS"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
-                        //cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
-
-                        string mailtypes = "";
-
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
                         DataSet Ds = new DataSet();
@@ -295,7 +252,7 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                objCustHead = new ReturncustResponse
+                                objCustHead = new ReturnResponse
                                 {
                                     resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
                                     msg = rdr["RTN_MSG"].ToString()
@@ -304,14 +261,22 @@ namespace HRM_DAL.Data
 
                             }
                         }
-
+                        else
+                        {
+                            objCustHead = new ReturnResponse
+                            {
+                                resp = true,
+                                msg = ""
+                            };
+                            objCustHeadList.Add(objCustHead);
+                        }
 
                     }
                 }
             }
             catch (Exception ex)
             {
-                objCustHead = new ReturncustResponse
+                objCustHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -330,10 +295,10 @@ namespace HRM_DAL.Data
             return objCustHeadList;
         }
 
-        public static List<ReturncustResponse> modify_JobRole(JobRoleModel item)//ok
+        public static List<ReturnResponse> modify_JobRole(JobRoleModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
-            ReturncustResponse objCustHead = new ReturncustResponse();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+            ReturnResponse objCustHead = new ReturnResponse();
 
             if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
             {
@@ -368,42 +333,6 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@MDJR_Status", item.MDJR_Status);
                         cmd.Parameters["@MDJR_Status"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
-                        //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_UnitNumber", item.CUS_Adrs_UnitNumber);
-                        //cmd.Parameters["@CUS_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_StreetName", item.CUS_Adrs_StreetName);
-                        //cmd.Parameters["@CUS_Adrs_StreetName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_City", item.CUS_Adrs_City);
-                        //cmd.Parameters["@CUS_Adrs_City"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_CountryCode", item.CUS_Adrs_CountryCode);
-                        //cmd.Parameters["@CUS_Adrs_CountryCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_PostalCode", item.CUS_Adrs_PostalCode);
-                        //cmd.Parameters["@CUS_Adrs_PostalCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactPerson", item.CUS_ContactPerson);
-                        //cmd.Parameters["@CUS_ContactPerson"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
-                        //cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
-                        //cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_SMS", item.CUS_OTP_By_SMS);
-                        //cmd.Parameters["@CUS_OTP_By_SMS"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
-                        //cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Status", item.CUS_Status);
-                        //cmd.Parameters["@CUS_Status"].Direction = ParameterDirection.Input;
-
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
                         DataSet Ds = new DataSet();
@@ -413,7 +342,7 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                objCustHead = new ReturncustResponse
+                                objCustHead = new ReturnResponse
                                 {
                                     resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
                                     msg = rdr["RTN_MSG"].ToString()
@@ -422,12 +351,21 @@ namespace HRM_DAL.Data
 
                             }
                         }
+                        else
+                        {
+                            objCustHead = new ReturnResponse
+                            {
+                                resp = true,
+                                msg = ""
+                            };
+                            objCustHeadList.Add(objCustHead);
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                objCustHead = new ReturncustResponse
+                objCustHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()

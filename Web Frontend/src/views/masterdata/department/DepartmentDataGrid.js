@@ -22,6 +22,8 @@ const DepartmentDataGrid = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [columnFilter, setColumnFilter] = useState([])
   const [tableFilter, setTableFilter] = useState([])
+  const [StatusInDB, setStatusInDB] = useState(true)
+
   useEffect(() => {
     // console.log(columnFilter);
     requestdata();
@@ -57,7 +59,8 @@ const DepartmentDataGrid = () => {
       MDD_DepartmentID: item
     }
     const DepartmentDetails = await getDepartmentSingle(formData)
-    setDepartmentDetails(DepartmentDetails);
+    setDepartmentDetails(DepartmentDetails);   
+    setStatusInDB(DepartmentDetails.UUM_Status)
     handleOpenPopup()
   }
   const toggleEdit = (index) => {
@@ -150,7 +153,7 @@ const DepartmentDataGrid = () => {
           </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <DepartmentPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} DepartmentDetails={DepartmentDetails} />
+          <DepartmentPopup popupStatus={popupStatus} onClose={handleClosePopup} StatusInDB={StatusInDB} visible={visible} onOpen={handleOpenPopup} DepartmentDetails={DepartmentDetails} />
         </CCol>
       </CRow>
       <CSmartTable

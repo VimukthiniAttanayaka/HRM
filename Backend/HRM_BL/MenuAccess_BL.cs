@@ -21,12 +21,12 @@ namespace HRM_BL
         }
 
 
-        public static List<ReturncustResponse> add_new_MenuAccess(MenuAccessModel item)//ok
+        public static List<ReturnResponse> add_new_MenuAccess(MenuAccessModel item)//ok
         {
             return HRM_DAL.Data.MenuAccess_Data.add_new_MenuAccess(item);
         }
 
-        public static List<ReturncustResponse> modify_MenuAccess(MenuAccessModel item)//ok
+        public static List<ReturnResponse> modify_MenuAccess(MenuAccessModel item)//ok
         {
             return HRM_DAL.Data.MenuAccess_Data.modify_MenuAccess(item);
         }

@@ -18,6 +18,11 @@ namespace HRM_DAL.Data
             List<ReturnBranchModelHead> objBranchHeadList = new List<ReturnBranchModelHead>();
             ReturnBranchModelHead objBranchHead = new ReturnBranchModelHead();
 
+            if (objBranchHead.Branch == null)
+            {
+                objBranchHead.Branch = new List<ReturnBranchModel>();
+            }
+
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
                 objBranchHead.resp = false;
@@ -61,10 +66,6 @@ namespace HRM_DAL.Data
                                 objBranch.MDB_Branch = rdr["MDB_Branch"].ToString();
                                 objBranch.MDB_Status = Convert.ToBoolean(rdr["MDB_Status"].ToString());
 
-                                if (objBranchHead.Branch == null)
-                                {
-                                    objBranchHead.Branch = new List<ReturnBranchModel>();
-                                }
 
                                 objBranchHead.Branch.Add(objBranch);
 
@@ -115,6 +116,11 @@ namespace HRM_DAL.Data
             List<ReturnBranchModelHead> objBranchHeadList = new List<ReturnBranchModelHead>();
             ReturnBranchModelHead objBranchHead = new ReturnBranchModelHead();
 
+            if (objBranchHead.Branch == null)
+            {
+                objBranchHead.Branch = new List<ReturnBranchModel>();
+            }
+
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
                 objBranchHead.resp = false;
@@ -153,15 +159,9 @@ namespace HRM_DAL.Data
                                 objBranchHead.resp = true;
                                 objBranchHead.msg = "Get Branch";
 
-                                objBranch.MDB_BranchID = rdr["MDB_BranchID"].ToString();
-                                
+                                objBranch.MDB_BranchID = rdr["MDB_BranchID"].ToString();                                
                                 objBranch.MDB_Branch = rdr["MDB_Branch"].ToString();
                                 objBranch.MDB_Status = Convert.ToBoolean(rdr["MDB_Status"].ToString());
-
-                                if (objBranchHead.Branch == null)
-                                {
-                                    objBranchHead.Branch = new List<ReturnBranchModel>();
-                                }
 
                                 objBranchHead.Branch.Add(objBranch);
 
@@ -207,10 +207,10 @@ namespace HRM_DAL.Data
 
         }
 
-        public static List<ReturncustResponse> add_new_Branch(BranchModel item)//ok
+        public static List<ReturnResponse> add_new_Branch(BranchModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
-            ReturncustResponse objCustHead = new ReturncustResponse();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+            ReturnResponse objCustHead = new ReturnResponse();
 
             if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
             {
@@ -245,41 +245,6 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@MDB_Status", item.MDB_Status);
                         cmd.Parameters["@MDB_Status"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
-                        //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_UnitNumber", item.CUS_Adrs_UnitNumber);
-                        //cmd.Parameters["@CUS_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_StreetName", item.CUS_Adrs_StreetName);
-                        //cmd.Parameters["@CUS_Adrs_StreetName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_City", item.CUS_Adrs_City);
-                        //cmd.Parameters["@CUS_Adrs_City"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_CountryCode", item.CUS_Adrs_CountryCode);
-                        //cmd.Parameters["@CUS_Adrs_CountryCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_PostalCode", item.CUS_Adrs_PostalCode);
-                        //cmd.Parameters["@CUS_Adrs_PostalCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactPerson", item.CUS_ContactPerson);
-                        //cmd.Parameters["@CUS_ContactPerson"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
-                        //cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
-                        //cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_SMS", item.CUS_OTP_By_SMS);
-                        //cmd.Parameters["@CUS_OTP_By_SMS"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
-                        //cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
-
-                        string mailtypes = "";
-
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
                         DataSet Ds = new DataSet();
@@ -289,7 +254,7 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                objCustHead = new ReturncustResponse
+                                objCustHead = new ReturnResponse
                                 {
                                     resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
                                     msg = rdr["RTN_MSG"].ToString()
@@ -298,14 +263,22 @@ namespace HRM_DAL.Data
 
                             }
                         }
-
+                        else
+                        {
+                            objCustHead = new ReturnResponse
+                            {
+                                resp = true,
+                                msg = ""
+                            };
+                            objCustHeadList.Add(objCustHead);
+                        }
 
                     }
                 }
             }
             catch (Exception ex)
             {
-                objCustHead = new ReturncustResponse
+                objCustHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -324,10 +297,10 @@ namespace HRM_DAL.Data
             return objCustHeadList;
         }
 
-        public static List<ReturncustResponse> modify_Branch(BranchModel item)//ok
+        public static List<ReturnResponse> modify_Branch(BranchModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
-            ReturncustResponse objCustHead = new ReturncustResponse();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+            ReturnResponse objCustHead = new ReturnResponse();
 
             if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
             {
@@ -371,7 +344,7 @@ namespace HRM_DAL.Data
                         {
                             foreach (DataRow rdr in Ds.Tables[0].Rows)
                             {
-                                objCustHead = new ReturncustResponse
+                                objCustHead = new ReturnResponse
                                 {
                                     resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
                                     msg = rdr["RTN_MSG"].ToString()
@@ -380,12 +353,21 @@ namespace HRM_DAL.Data
 
                             }
                         }
+                        else
+                        {
+                            objCustHead = new ReturnResponse
+                            {
+                                resp = true,
+                                msg = ""
+                            };
+                            objCustHeadList.Add(objCustHead);
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                objCustHead = new ReturncustResponse
+                objCustHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()

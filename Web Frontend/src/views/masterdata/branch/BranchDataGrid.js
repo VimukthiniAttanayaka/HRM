@@ -18,6 +18,8 @@ const BranchDataGrid = () => {
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
 
+  const [StatusInDB, setStatusInDB] = useState(true)
+
   const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
   const [currentPage, setCurrentPage] = useState(1);
   const [columnFilter, setColumnFilter] = useState([])
@@ -38,7 +40,8 @@ const BranchDataGrid = () => {
     }
 
     const BranchDetails = await getBranchSingle(formData)
-    setBranchDetails(BranchDetails);
+    setBranchDetails(BranchDetails);   
+    setStatusInDB(BranchDetails.MDB_Status)
     handleOpenPopup()
   }
   const handleItemsPerPageChange = (newItemsPerPage) => {
@@ -140,7 +143,7 @@ const BranchDataGrid = () => {
           </CDropdown>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <BranchPopup popupStatus={popupStatus} onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} branchDetails={BranchDetails} />
+          <BranchPopup popupStatus={popupStatus} onClose={handleClosePopup}  StatusInDB={StatusInDB} visible={visible} onOpen={handleOpenPopup} branchDetails={BranchDetails} />
         </CCol>
       </CRow>
       <CSmartTable

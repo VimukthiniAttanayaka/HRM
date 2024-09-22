@@ -20,12 +20,12 @@ namespace HRM_BL
             return HRM_DAL.Data.PerformanceAppriasalApproval_Data.get_PerformanceAppriasalApproval_all(model);
         }
 
-        public static List<ReturncustResponse> add_new_PerformanceAppriasalApproval(PerformanceAppriasalApprovalModel item)//ok
+        public static List<ReturnResponse> add_new_PerformanceAppriasalApproval(PerformanceAppriasalApprovalModel item)//ok
         {
             return HRM_DAL.Data.PerformanceAppriasalApproval_Data.add_new_PerformanceAppriasalApproval(item);
         }
 
-        public static List<ReturncustResponse> modify_PerformanceAppriasalApproval(PerformanceAppriasalApprovalModel item)//ok
+        public static List<ReturnResponse> modify_PerformanceAppriasalApproval(PerformanceAppriasalApprovalModel item)//ok
         {
             return HRM_DAL.Data.PerformanceAppriasalApproval_Data.modify_PerformanceAppriasalApproval(item);
         }

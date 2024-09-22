@@ -110,9 +110,9 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturncustResponse> add_new_customer(CustomerModel item)//ok
+        public List<ReturnResponse> add_new_customer(CustomerModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
 
             try
             {
@@ -124,7 +124,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturncustResponse objcustomerHead = new ReturncustResponse
+                ReturnResponse objcustomerHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -149,9 +149,9 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturncustResponse> modify_customer(CustomerModel item)//ok
+        public List<ReturnResponse> modify_customer(CustomerModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
 
             try
             {
@@ -163,7 +163,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturncustResponse objcustomerHead = new ReturncustResponse
+                ReturnResponse objcustomerHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()

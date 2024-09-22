@@ -21,12 +21,12 @@ namespace HRM_BL
         }
 
 
-        public static List<ReturncustResponse> add_new_LeaveEntitlement(LeaveEntitlementModel item)//ok
+        public static List<ReturnResponse> add_new_LeaveEntitlement(LeaveEntitlementModel item)//ok
         {
             return HRM_DAL.Data.LeaveEntitlement_Data.add_new_LeaveEntitlement(item);
         }
 
-        public static List<ReturncustResponse> modify_LeaveEntitlement(LeaveEntitlementModel item)//ok
+        public static List<ReturnResponse> modify_LeaveEntitlement(LeaveEntitlementModel item)//ok
         {
             return HRM_DAL.Data.LeaveEntitlement_Data.modify_LeaveEntitlement(item);
         }

@@ -21,12 +21,12 @@ namespace HRM_BL
         }
 
 
-        public static List<ReturncustResponse> add_new_UserRoleAccessGroup(UserRoleAccessGroupModel item)//ok
+        public static List<ReturnResponse> add_new_UserRoleAccessGroup(UserRoleAccessGroupModel item)//ok
         {
             return HRM_DAL.Data.UserRoleAccessGroup_Data.add_new_UserRoleAccessGroup(item);
         }
 
-        public static List<ReturncustResponse> modify_UserRoleAccessGroup(UserRoleAccessGroupModel item)//ok
+        public static List<ReturnResponse> modify_UserRoleAccessGroup(UserRoleAccessGroupModel item)//ok
         {
             return HRM_DAL.Data.UserRoleAccessGroup_Data.modify_UserRoleAccessGroup(item);
         }

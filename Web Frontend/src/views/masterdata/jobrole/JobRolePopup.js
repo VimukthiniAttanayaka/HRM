@@ -9,7 +9,7 @@ import { getLabelText } from 'src/MultipleLanguageSheets'
 
 import PopUpAlert from '../../shared/PopUpAlert.js'
 
-const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus }) => {
+const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus, StatusInDB }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
   let templatetype = 'translation_jobrole'
   let templatetype_base = 'translation'
@@ -18,15 +18,10 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
   const [JobRole, setJobRole] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeJobRole = (event) => {
-    setJobRole(event.target.value)
-  }
-  const handleChangeId = (event) => {
-    setJobRoleId(event.target.value)
-  }
-  const handleChangeStatus = (event) => {
-    setIsActive(event.target.checked)
-  }
+  const handleChangeJobRole = (event) => { setJobRole(event.target.value) }
+  const handleChangeId = (event) => { setJobRoleId(event.target.value) }
+  const handleChangeStatus = (event) => { setIsActive(event.target.checked) }
+
   const handleSubmit = async (event) => {
     event.preventDefault()
 
@@ -45,7 +40,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
       MDJR_Status: isActive,
       UD_UserID: staffId,
     }
-    // console.log(formData)
+    console.log(formData)
     if (popupStatus == 'edit') {
       const APIReturn = await modifyJobRole(formData)
       if (APIReturn.resp === false) { setDialogTitle("Alert"); }
@@ -85,9 +80,22 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
   useEffect(() => {
     setJobRoleId(JobRoleDetails.MDJR_JobRoleID)
     setJobRole(JobRoleDetails.MDJR_JobRole)
-    setIsActive(JobRoleDetails.MDJR_Status)
+    setIsActive(StatusInDB)
   }, [JobRoleDetails]);
   // console.log(JobRoleDetails)
+
+  const [open, setOpen] = useState(false);
+  const [openEmp_Popup, setOpenEmp_Popup] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    onClose();
+  };
+
+  const [DialogTitle, setDialogTitle] = useState('');
+  const [DialogContent, setDialogContent] = useState('');
+  // console.log(UserMenuDetails)
+
   return (
     <>
       <CButton color="primary" onClick={onOpen}>{getLabelText('New JobRole', templatetype)}</CButton>
@@ -105,6 +113,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
         <CModalBody>
           <CCard className="mx-4">
             <CCardBody className="p-4">
+              <PopUpAlert open={open} handleClose={handleClose} dialogTitle={DialogTitle} dialogContent={DialogContent} />
               <CForm onSubmit={handleSubmit}>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
@@ -130,7 +139,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
                       <h6>{getLabelText('Status', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
+                  <CFormCheck checked={isActive} defaultChecked onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
                   {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :

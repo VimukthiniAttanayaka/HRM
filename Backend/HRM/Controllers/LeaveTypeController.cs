@@ -120,9 +120,9 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturncustResponse> add_new_leavetype(LeaveTypeModel item)//ok
+        public List<ReturnResponse> add_new_leavetype(LeaveTypeModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
 
             try
             {
@@ -134,7 +134,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturncustResponse objleavetypeHead = new ReturncustResponse
+                ReturnResponse objleavetypeHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -159,9 +159,9 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturncustResponse> modify_leavetype(LeaveTypeModel item)//ok
+        public List<ReturnResponse> modify_leavetype(LeaveTypeModel item)//ok
         {
-            List<ReturncustResponse> objCustHeadList = new List<ReturncustResponse>();
+            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
 
             try
             {
@@ -173,7 +173,7 @@ namespace HRM.Controllers
             catch (Exception ex)
             {
 
-                ReturncustResponse objleavetypeHead = new ReturncustResponse
+                ReturnResponse objleavetypeHead = new ReturnResponse
                 {
                     resp = false,
                     msg = ex.Message.ToString()

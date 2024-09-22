@@ -22,12 +22,12 @@ namespace HRM_BL
         }
 
 
-        public static List<ReturncustResponse> add_new_UserRole(UserRoleModel item)//ok
+        public static List<ReturnResponse> add_new_UserRole(UserRoleModel item)//ok
         {
             return HRM_DAL.Data.UserRole_Data.add_new_UserRole(item);
         }
 
-        public static List<ReturncustResponse> modify_UserRole(UserRoleModel item)//ok
+        public static List<ReturnResponse> modify_UserRole(UserRoleModel item)//ok
         {
             return HRM_DAL.Data.UserRole_Data.modify_UserRole(item);
         }

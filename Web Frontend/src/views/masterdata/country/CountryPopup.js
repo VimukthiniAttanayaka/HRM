@@ -88,6 +88,18 @@ const CountryPopup = ({ visible, onClose, onOpen, countryDetails, popupStatus })
     setIsActive(countryDetails.MDCTY_Status)
   }, [countryDetails]);
 
+  const [open, setOpen] = useState(false);
+  const [openEmp_Popup, setOpenEmp_Popup] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    onClose();
+  };
+
+  const [DialogTitle, setDialogTitle] = useState('');
+  const [DialogContent, setDialogContent] = useState('');
+  // console.log(UserMenuDetails)
+
   // console.log(countryDetails)
   return (
     <>
@@ -106,6 +118,7 @@ const CountryPopup = ({ visible, onClose, onOpen, countryDetails, popupStatus })
         <CModalBody>
           <CCard className="mx-4">
             <CCardBody className="p-4">
+              <PopUpAlert open={open} handleClose={handleClose} dialogTitle={DialogTitle} dialogContent={DialogContent} />
               <CForm onSubmit={handleSubmit}>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
@@ -113,7 +126,7 @@ const CountryPopup = ({ visible, onClose, onOpen, countryDetails, popupStatus })
                       <h6>{getLabelText('CountryID', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>   <CFormInput placeholder="CountryID" name="CountryID" value={countryId} onChange={handleChangeId}
-                   disabled={popupStatus == 'create' ? false : true}
+                    disabled={popupStatus == 'create' ? false : true}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -123,7 +136,7 @@ const CountryPopup = ({ visible, onClose, onOpen, countryDetails, popupStatus })
                       <h6>{getLabelText('Country', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>    <CFormInput placeholder="Country" name="Country" value={country} onChange={handleChangeCountry}
-                   disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -133,8 +146,8 @@ const CountryPopup = ({ visible, onClose, onOpen, countryDetails, popupStatus })
                       <h6>{getLabelText('Status', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status"
-                   disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
+                  <CFormCheck checked={isActive} defaultChecked onChange={handleChangeStatus} label="Status"
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
                   {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :

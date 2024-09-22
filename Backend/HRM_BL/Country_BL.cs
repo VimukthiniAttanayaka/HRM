@@ -21,12 +21,12 @@ namespace HRM_BL
         }
 
 
-        public static List<ReturncustResponse> add_new_Country(CountryModel item)//ok
+        public static List<ReturnResponse> add_new_Country(CountryModel item)//ok
         {
             return HRM_DAL.Data.Country_Data.add_new_Country(item);
         }
 
-        public static List<ReturncustResponse> modify_Country(CountryModel item)//ok
+        public static List<ReturnResponse> modify_Country(CountryModel item)//ok
         {
             return HRM_DAL.Data.Country_Data.modify_Country(item);
         }
