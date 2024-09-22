@@ -328,7 +328,7 @@ const EmployeePopupTab_Employment = ({ EmployeeDetails, popupStatus }) => {
               <CInputGroupText>
                 <h6>Additional Information</h6>
               </CInputGroupText>
-            </CCol> <CFormInput placeholder="JobTitle_Code" name="JobTitle_Code"
+            </CCol> <CFormInput placeholder="Additional Information" name="Additional Information"
               value={additionalInformation} onChange={handleChangeAdditionalInformation}
             />
           </CInputGroup>

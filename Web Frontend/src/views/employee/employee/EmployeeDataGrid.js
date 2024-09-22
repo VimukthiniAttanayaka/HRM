@@ -195,7 +195,7 @@ const EmployeeDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleEdit(item.EME_EmployeeID)
+                    toggleEdit(item.id)
                   }}
                 >
                   Edit
@@ -211,7 +211,7 @@ const EmployeeDataGrid = () => {
                 shape="square"
                 size="sm"
                 onClick={() => {
-                  toggleView(item.EME_EmployeeID)
+                  toggleView(item.id)
                 }}
               >
                 View
@@ -227,7 +227,7 @@ const EmployeeDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDelete(item.EME_EmployeeID)
+                    toggleDelete(item.id)
                   }}
                 >
                   Delete

@@ -1,13 +1,5 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export class CompanyDetail {
-  constructor(id, Company, status) {
-    this.Company = Company;
-    this.id = id;
-    if (status == true) { this.status = "Active"; }
-    else { this.status = "Inactive"; }
-  }
-}
 // console.log(apiUrl)
 export const getCompanyAll = async (formData) => {
   const CompanyDetails = [];

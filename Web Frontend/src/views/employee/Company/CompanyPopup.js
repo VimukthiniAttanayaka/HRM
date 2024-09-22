@@ -71,6 +71,7 @@ const CompanyPopup = ({ visible, onClose, onOpen, CompanyDetails, popupStatus })
       CUS_Status: isActive
     }
 
+    console.log(formData)
     if (popupStatus == 'edit') {
       const APIReturn = await modifyCustomer(formData)
       if (APIReturn.resp === false) { setDialogTitle("Alert"); }

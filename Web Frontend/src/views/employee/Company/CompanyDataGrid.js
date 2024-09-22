@@ -179,7 +179,7 @@ const CompanyDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleEdit(item.CUS_ID)
+                    toggleEdit(item.ID)
                   }}
                 >
                   {getLabelText('Edit', templatetype_base)}
@@ -195,7 +195,7 @@ const CompanyDataGrid = () => {
                 shape="square"
                 size="sm"
                 onClick={() => {
-                  toggleView(item.CUS_ID)
+                  toggleView(item.ID)
                 }}
               >
                 {getLabelText('View', templatetype_base)}
@@ -211,7 +211,7 @@ const CompanyDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDelete(item.CUS_ID)
+                    toggleDelete(item.ID)
                   }}
                 >
                   {getLabelText('Delete', templatetype_base)}
@@ -221,7 +221,7 @@ const CompanyDataGrid = () => {
           ),
           details: (item) => {
             return (
-              <CCollapse visible={details.includes(item.id)}>
+              <CCollapse visible={details.includes(item.ID)}>
                 <CCardBody className="p-3">
                   <h4>{item.username}</h4>
                   <p className="text-muted">User since: {item.registered}</p>
