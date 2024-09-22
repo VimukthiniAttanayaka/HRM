@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
+
+import { modifyJobRole } from '../../../apicalls/jobrole/modify.js';
+import { deleteJobRole } from '../../../apicalls/jobrole/delete.js';
+import { addNewJobRole } from '../../../apicalls/jobrole/add_new.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
+
+import PopUpAlert from '../../shared/PopUpAlert.js'
 
 const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -21,98 +27,48 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus })
   const handleChangeStatus = (event) => {
     setIsActive(event.target.checked)
   }
-  const handleCreate = async (event) => {
-
-    const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
-      MDJR_JobRoleID: JobRoleId,
-      MDJR_JobRole: JobRole,
-      MDJR_Status: isActive,
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'JobRole/add_new_JobRole', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      onClose()
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('JobRole data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting JobRole data:', response.statusText)
-    }
-  }
-  const handleEdit = async (event) => {
-    // Prepare form data
-    const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
-      MDJR_JobRoleID: JobRoleId,
-      MDJR_JobRole: JobRole,
-      MDJR_Status: isActive,
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'JobRole/modify_JobRole', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      onClose()
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('JobRole data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting JobRole data:', response.statusText)
-    }
-  }
-  const handleDelete = async (event) => {
-    console.log('Delete JobRole')
-    // Prepare form data
-    const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
-      MDJR_JobRoleID: JobRoleId,
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'JobRole/inactivate_JobRole', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      onClose()
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('JobRole data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting JobRole data:', response.statusText)
-    }
-  }
-
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    if (popupStatus == 'create') {
-      handleCreate(event)
-    } else if (popupStatus == 'edit') {
-      handleEdit(event)
-    } else if (popupStatus == 'delete') {
-      handleDelete(event)
-    }
     // Validation (optional)
     // You can add validation logic here to check if all required fields are filled correctly
 
+    // Prepare form data
+    // console.log(isActive)
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+
+    const formData = {
+      MDJR_JobRoleID: JobRoleId,
+      MDJR_JobRole: JobRole,
+      MDJR_Status: isActive,
+      UD_UserID: staffId,
+    }
+    // console.log(formData)
+    if (popupStatus == 'edit') {
+      const APIReturn = await modifyJobRole(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else if (popupStatus == 'delete') {
+      const APIReturn = await deleteJobRole(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else {
+      const APIReturn = await addNewJobRole(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
   }
+
 
   const popupStatusSetup = (event) => {
     if (popupStatus == 'edit') {

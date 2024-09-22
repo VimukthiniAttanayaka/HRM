@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
+
+import { modifyDepartment } from '../../../apicalls/department/modify.js';
+import { deleteDepartment } from '../../../apicalls/department/delete.js';
+import { addNewDepartment } from '../../../apicalls/department/add_new.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
+
+import PopUpAlert from '../../shared/PopUpAlert.js'
 
 const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupStatus }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -20,100 +26,48 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
   const handleChangeStatus = (event) => {
     setIsActive(event.target.checked)
   }
-  const handleCreate = async (event) => {
-
-    const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
-      MDD_DepartmentID: DepartmentId,
-      MDD_Department: Department,
-      MDD_LocationID: "string",
-      MDD_Status: isActive
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'Department/add_new_Department', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      onClose()
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Department data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Department data:', response.statusText)
-    }
-  }
-  const handleEdit = async (event) => {
-    // Prepare form data
-    const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
-      MDD_DepartmentID: DepartmentId,
-      MDD_Department: Department,
-      MDD_LocationID: "string",
-      MDD_Status: isActive
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'Department/modify_department', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      onClose()
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Department data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Department data:', response.statusText)
-    }
-  }
-  const handleDelete = async (event) => {
-    console.log('Delete Department')
-    // Prepare form data
-    const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
-      MDD_DepartmentID: DepartmentId
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'Department/inactivate_department', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      onClose()
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Department data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Department data:', response.statusText)
-    }
-  }
-
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    if (popupStatus == 'create') {
-      handleCreate(event)
-    } else if (popupStatus == 'edit') {
-      handleEdit(event)
-    } else if (popupStatus == 'delete') {
-      handleDelete(event)
-    }
     // Validation (optional)
     // You can add validation logic here to check if all required fields are filled correctly
 
+    // Prepare form data
+    // console.log(isActive)
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+
+    const formData = {
+      MDD_DepartmentID: DepartmentId,
+      MDD_Department: Department,
+      MDD_Status: isActive,
+      UD_UserID: staffId,
+    }
+    // console.log(formData)
+    if (popupStatus == 'edit') {
+      const APIReturn = await modifyDepartment(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else if (popupStatus == 'delete') {
+      const APIReturn = await deleteDepartment(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else {
+      const APIReturn = await addNewDepartment(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
   }
+
 
   const popupStatusSetup = (event) => {
 
@@ -161,7 +115,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
                     <CInputGroupText>
                       <h6>{getLabelText('DepartmentID', templatetype)}</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="DepartmentID" name="DepartmentID" value={DepartmentDetails.MDD_DepartmentID} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
+                  </CCol>   <CFormInput placeholder="DepartmentID" name="DepartmentID" value={DepartmentId} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>

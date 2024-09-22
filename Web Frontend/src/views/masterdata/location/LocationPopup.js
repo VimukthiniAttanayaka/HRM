@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
+
+import { modifyLocation } from '../../../apicalls/location/modify.js';
+import { deleteLocation } from '../../../apicalls/location/delete.js';
+import { addNewLocation } from '../../../apicalls/location/add_new.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
+
+import PopUpAlert from '../../shared/PopUpAlert.js'
 
 const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus }) => {
 
@@ -22,98 +28,48 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus 
   const handleChangeStatus = (event) => {
     setIsActive(event.target.checked)
   }
-  const handleCreate = async (event) => {
-
-    const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
-      MDL_LocationID: LocationId,
-      MDL_Location: Location,
-      MDL_Status: isActive,
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'location/add_new_Location', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      onClose()
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Location data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Location data:', response.statusText)
-    }
-  }
-  const handleEdit = async (event) => {
-
-    const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
-      MDL_LocationID: LocationId,
-      MDL_Location: Location,
-      MDL_Status: isActive,
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'location/modify_Location', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      onClose()
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Location data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Location data:', response.statusText)
-    }
-  }
-  const handleDelete = async (event) => {
-    console.log('Delete Location')
-    // Prepare form data
-    const formData = {
-      UD_UserID: "string",
-      AUD_notificationToken: "string",
-      MDL_LocationID: LocationId,
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'location/inactivate_Location', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      onClose()
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Location data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Location data:', response.statusText)
-    }
-  }
-
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    if (popupStatus == 'create') {
-      handleCreate(event)
-    } else if (popupStatus == 'edit') {
-      handleEdit(event)
-    } else if (popupStatus == 'delete') {
-      handleDelete(event)
-    }
     // Validation (optional)
     // You can add validation logic here to check if all required fields are filled correctly
 
+    // Prepare form data
+    // console.log(isActive)
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+
+    const formData = {
+      MDL_LocationID: LocationId,
+      MDL_Location: Location,
+      MDL_Status: isActive,
+      UD_UserID: staffId,
+    }
+    // console.log(formData)
+    if (popupStatus == 'edit') {
+      const APIReturn = await modifyLocation(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else if (popupStatus == 'delete') {
+      const APIReturn = await deleteLocation(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else {
+      const APIReturn = await addNewLocation(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
   }
+
 
   const popupStatusSetup = (event) => {
     if (popupStatus == 'edit') {

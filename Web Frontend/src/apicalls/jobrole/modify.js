@@ -3,11 +3,11 @@ import { toast } from 'react-toastify';
 
 import ReturnResponse from '../../publicmodels/ReturnResonse'
 
-export const modifyDepartment = async (formData) => {
+export const modifyJobRole = async (formData) => {
   let resw = new ReturnResponse();
   console.log(formData)
   // Submit the form data to your backend API/
-  const response = await fetch(apiUrl + 'Department/modify_Department', {
+  const response = await fetch(apiUrl + 'JobRole/modify_JobRole', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -23,12 +23,4 @@ export const modifyDepartment = async (formData) => {
     })
 
   return resw;
-  // if (response.ok) {
-  //   console.log(response);
-  //   // Handle successful submission (e.g., display a success message)
-  //   console.log('External User data submitted successfully!')
-  // } else {
-  //   // Handle submission errors
-  //   console.error('Error submitting External User data:', response.statusText)
-  // }
 };

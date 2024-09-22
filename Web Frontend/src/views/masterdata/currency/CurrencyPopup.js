@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
-import { Modal } from '@coreui/coreui-pro';
+// import data from './_data.js'
+// import { Modal } from '@coreui/coreui-pro';
+
+import { modifyCurrency } from '../../../apicalls/currency/modify.js';
+import { deleteCurrency } from '../../../apicalls/currency/delete.js';
+import { addNewCurrency } from '../../../apicalls/currency/add_new.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
+
+import PopUpAlert from '../../shared/PopUpAlert.js'
 
 const CurrencyPopup = ({ visible, onClose, onOpen, CurrencyDetails }) => {
 
@@ -32,29 +39,46 @@ const CurrencyPopup = ({ visible, onClose, onOpen, CurrencyDetails }) => {
     // You can add validation logic here to check if all required fields are filled correctly
 
     // Prepare form data
+    // console.log(isActive)
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+
     const formData = {
       MDCCY_CurrencyID: CurrencyId,
-      MDCCY_LeaveAlotment: leaveAlotmentId,
       MDCCY_Currency: Currency,
       MDCCY_Status: isActive,
+      UD_UserID: staffId,
     }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'Currency/add_new_Currency', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (response.ok) {
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Leave Type data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Leave Type data:', response.statusText)
+    // console.log(formData)
+    if (popupStatus == 'edit') {
+      const APIReturn = await modifyCurrency(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else if (popupStatus == 'delete') {
+      const APIReturn = await deleteCurrency(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else {
+      const APIReturn = await addNewCurrency(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
     }
   }
 
+  useEffect(() => {
+    setCurrencyId(CurrencyDetails.MDCCY_CurrencyID)
+    setCurrency(CurrencyDetails.MDCCY_Currency)
+    setIsActive(CurrencyDetails.MDCCY_Status)
+  }, [CurrencyDetails]);
   console.log(CurrencyDetails)
   return (
     <>
@@ -79,7 +103,7 @@ const CurrencyPopup = ({ visible, onClose, onOpen, CurrencyDetails }) => {
                     <CInputGroupText>
                       <h6>CurrencyID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="CurrencyID" name="CurrencyID" value={CurrencyDetails.MDCCY_CurrencyID} onChange={handleChangeId}
+                  </CCol>   <CFormInput placeholder="CurrencyID" name="CurrencyID" value={CurrencyId} onChange={handleChangeId}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>
@@ -88,19 +112,9 @@ const CurrencyPopup = ({ visible, onClose, onOpen, CurrencyDetails }) => {
                     <CInputGroupText>
                       <h6>Currency</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="Currency" name="Currency" value={CurrencyDetails.MDCCY_Currency} onChange={handleChangeCurrency}
+                  </CCol>    <CFormInput placeholder="Currency" name="Currency" value={Currency} onChange={handleChangeCurrency}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>LeaveAlotment</h6>
-                    </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={CurrencyDetails.MDCCY_LeaveAlotment} onChange={handleChangeAlotment}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
-                  />
-
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
