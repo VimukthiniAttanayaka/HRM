@@ -207,8 +207,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_insert_employeedocument";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
-                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        //cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@USRED_EmployeeID", item.USRED_EmployeeID);
                         cmd.Parameters["@USRED_EmployeeID"].Direction = ParameterDirection.Input;
@@ -222,8 +222,8 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@USRED_DocumentData", item.USRED_DocumentData);
                         cmd.Parameters["@USRED_DocumentData"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@USRED_EmployeeDocumentID", item.USRED_EmployeeDocumentID);
-                        cmd.Parameters["@USRED_EmployeeDocumentID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@USRED_EmployeeDocumentID", item.USRED_EmployeeDocumentID);
+                        //cmd.Parameters["@USRED_EmployeeDocumentID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@USRED_Status", item.USRED_Status);
                         cmd.Parameters["@USRED_Status"].Direction = ParameterDirection.Input;

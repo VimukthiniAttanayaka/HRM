@@ -39,7 +39,7 @@ export const getEmployeeDocumentsAll = async (formData) => {
       //   let element = res1[0].Employee[index]; 
       for (let index = 0; index < res1[0].EmployeeDocument.length; index++) {
         let element = res1[0].EmployeeDocument[index];
-        console.log(element)
+        // console.log(element)
         EmployeeDetails[index] = new EmployeeDetail(
           element.USRED_EmployeeID,
           element.USRED_EmployeeDocumentID,

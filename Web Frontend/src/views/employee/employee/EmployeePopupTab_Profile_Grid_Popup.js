@@ -12,7 +12,7 @@ import PopUpAlert from '../../shared/PopUpAlert.js'
 import ImageLoader from 'react-image-loader';
 import ImageDisplay from 'src/views/shared/ImageDisplay.js';
 
-const EmployeePopupTab_Profile_Grid_Popup = ({ visible, onClose, onOpen,toggleAdd, EmployeeDocumentDetails, popupStatus, StatusInDB, clearlink }) => {
+const EmployeePopupTab_Profile_Grid_Popup = ({ visible, onClose, USRED_EmployeeID, onOpen, toggleAdd, EmployeeDocumentDetails, popupStatus, StatusInDB, clearlink }) => {
   let templatetype = 'translation_employeedocument'
   let templatetype_base = 'translation'
   // const handleSubmit = (event) => {
@@ -45,12 +45,15 @@ const EmployeePopupTab_Profile_Grid_Popup = ({ visible, onClose, onOpen,toggleAd
     const customerId = getCustomerID();
 
     const formData = {
-      UUM_EmployeeDocumentID: EmployeeDocumentId,
-      UUM_EmployeeDocument: EmployeeDocument,
+      USRED_EmployeeDocumentID: Id,
+      USRED_EmployeeID: USRED_EmployeeID,
+      USRED_DocumentData: imageUrl,
+      USRED_DocumentType: doctype,
+      USRED_DocumentName: DocumentName,
       USRED_Status: isActive,
       UD_UserID: staffId,
     }
-    // console.log(formData)
+    console.log(formData)
     if (popupStatus == 'edit') {
       const APIReturn = await modifyEmployeeDocument(formData)
       if (APIReturn.resp === false) { setDialogTitle("Alert"); }
@@ -76,18 +79,19 @@ const EmployeePopupTab_Profile_Grid_Popup = ({ visible, onClose, onOpen,toggleAd
 
   useEffect(() => {
     setimageUrl('.')
-    console.log(clearlink)
+    // console.log(clearlink)
     clearlink = false
   }, [clearlink])
 
   useEffect(() => {
     setIsActive(StatusInDB)
 
-    var imageData = "data:image/png;base64,"
+    // var imageData = "data:image/png;base64,"
 
     if (EmployeeDocumentDetails.USRED_DocumentData != undefined) {
       // console.log(imageData + EmployeeDocumentDetails.USRED_DocumentData)
-      setimageUrl(imageData + EmployeeDocumentDetails.USRED_DocumentData)
+      // setimageUrl(imageData + EmployeeDocumentDetails.USRED_DocumentData)
+      setimageUrl(EmployeeDocumentDetails.USRED_DocumentData)
     }
 
     setId(EmployeeDocumentDetails.USRED_EmployeeDocumentID)
@@ -111,7 +115,7 @@ const EmployeePopupTab_Profile_Grid_Popup = ({ visible, onClose, onOpen,toggleAd
   // console.log(EmployeeDocumentDetails)
 
   const popupStatusSetup = (event) => {
-    console.log(popupStatus)
+    // console.log(popupStatus)
     if (popupStatus == 'edit') {
       return getLabelText('Edit Document', templatetype)
     } else if (popupStatus == 'view') {
@@ -142,7 +146,7 @@ const EmployeePopupTab_Profile_Grid_Popup = ({ visible, onClose, onOpen,toggleAd
 
   return (
     <>
-      <CButton color="primary" onClick={() => { toggleAdd(); /*onOpen();*/setimageUrl('') ;setRefresh(!refresh); }}>New Document</CButton>
+      <CButton color="primary" onClick={() => { toggleAdd(); /*onOpen();*/setimageUrl(''); setRefresh(!refresh); }}>New Document</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"

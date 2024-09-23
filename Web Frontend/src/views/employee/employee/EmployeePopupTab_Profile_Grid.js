@@ -122,7 +122,7 @@ const EmployeePopupTab_Profile_Grid = ({ onClose, onOpen, EmployeeDetails, popup
 
   const handleClosePopup = () => {
     setVisible(false);
-    setEmployeeDocumentDetails([]);
+    requestdata(EmployeeDetails.EME_EmployeeID) 
     setclearlink(false);
     setclearlink(true);
   };
@@ -149,7 +149,7 @@ const EmployeePopupTab_Profile_Grid = ({ onClose, onOpen, EmployeeDetails, popup
     <CTabPanel className="p-3" itemKey="profile"> <CCardBody>
       <CRow>
         <CCol className='d-flex justify-content-end'>
-          <EmployeePopupTab_Profile_Grid_Popup onClose={handleClosePopup} toggleAdd={toggleAdd} clearlink={clearlink} visible={visible} popupStatus={popupStatus1} onOpen={handleOpenPopup} StatusInDB={StatusInDB} EmployeeDocumentDetails={EmployeeDocumentDetails} />
+          <EmployeePopupTab_Profile_Grid_Popup onClose={handleClosePopup} USRED_EmployeeID={EmployeeDetails.EME_EmployeeID} toggleAdd={toggleAdd} clearlink={clearlink} visible={visible} popupStatus={popupStatus1} onOpen={handleOpenPopup} StatusInDB={StatusInDB} EmployeeDocumentDetails={EmployeeDocumentDetails} />
         </CCol>
       </CRow>
       <CSmartTable
