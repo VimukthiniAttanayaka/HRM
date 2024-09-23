@@ -12,7 +12,7 @@ import PopUpAlert from '../../shared/PopUpAlert.js'
 import ImageLoader from 'react-image-loader';
 import ImageDisplay from 'src/views/shared/ImageDisplay.js';
 
-const EmployeePopupTab_Profile_Grid_Popup = ({ visible, onClose, onOpen, EmployeeDocumentDetails, popupStatus, StatusInDB, clearlink }) => {
+const EmployeePopupTab_Profile_Grid_Popup = ({ visible, onClose, onOpen,toggleAdd, EmployeeDocumentDetails, popupStatus, StatusInDB, clearlink }) => {
   let templatetype = 'translation_employeedocument'
   let templatetype_base = 'translation'
   // const handleSubmit = (event) => {
@@ -111,6 +111,7 @@ const EmployeePopupTab_Profile_Grid_Popup = ({ visible, onClose, onOpen, Employe
   // console.log(EmployeeDocumentDetails)
 
   const popupStatusSetup = (event) => {
+    console.log(popupStatus)
     if (popupStatus == 'edit') {
       return getLabelText('Edit Document', templatetype)
     } else if (popupStatus == 'view') {
@@ -141,7 +142,7 @@ const EmployeePopupTab_Profile_Grid_Popup = ({ visible, onClose, onOpen, Employe
 
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>New Document</CButton>
+      <CButton color="primary" onClick={() => { toggleAdd(); /*onOpen();*/setimageUrl('') ;setRefresh(!refresh); }}>New Document</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"

@@ -32,6 +32,7 @@ const EmployeePopupTab_Profile_Grid = ({ onClose, onOpen, EmployeeDetails, popup
   }
 
   async function loadDetails(item) {
+    if (item == undefined) return;
 
     const token = getJWTToken();
     const staffId = getStaffID();
@@ -53,6 +54,10 @@ const EmployeePopupTab_Profile_Grid = ({ onClose, onOpen, EmployeeDetails, popup
     setStatusInDB(EmployeeDocumentDetails.USRED_Status)
   }
 
+  const toggleAdd = (index) => {
+    setPopupStatus1('add')
+    toggleDetails(index)
+  }
   const toggleEdit = (index) => {
     setPopupStatus1('edit')
     toggleDetails(index)
@@ -67,7 +72,6 @@ const EmployeePopupTab_Profile_Grid = ({ onClose, onOpen, EmployeeDetails, popup
   }
 
   const toggleDetails = (index) => {
-
 
     const position = details.indexOf(index)
     let newDetails = details.slice()
@@ -145,7 +149,7 @@ const EmployeePopupTab_Profile_Grid = ({ onClose, onOpen, EmployeeDetails, popup
     <CTabPanel className="p-3" itemKey="profile"> <CCardBody>
       <CRow>
         <CCol className='d-flex justify-content-end'>
-          <EmployeePopupTab_Profile_Grid_Popup onClose={handleClosePopup} clearlink={clearlink} visible={visible} popupStatus={popupStatus1} onOpen={handleOpenPopup} StatusInDB={StatusInDB} EmployeeDocumentDetails={EmployeeDocumentDetails} />
+          <EmployeePopupTab_Profile_Grid_Popup onClose={handleClosePopup} toggleAdd={toggleAdd} clearlink={clearlink} visible={visible} popupStatus={popupStatus1} onOpen={handleOpenPopup} StatusInDB={StatusInDB} EmployeeDocumentDetails={EmployeeDocumentDetails} />
         </CCol>
       </CRow>
       <CSmartTable
