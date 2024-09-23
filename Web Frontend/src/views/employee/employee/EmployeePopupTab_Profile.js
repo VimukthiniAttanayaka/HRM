@@ -6,16 +6,16 @@ import axios from 'axios';
 const EmployeePopupTab_Profile = ({ EmployeeDetails, popupStatus }) => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
-
+  const [employeeId, setEmployeeId] = useState()
   const [img, setImg] = useState('')
 
-  const handleGetAllDocument = async (event) => {
-    console.log('Delete Department')
+  const handleGetAllDocument = async (employeeid) => {
+    console.log(employeeid)
     // Prepare form data
     const formData = {
       UD_UserID: "string",
       AUD_notificationToken: "string",
-      EME_EmployeeID: "employeeId"
+      EME_EmployeeID: employeeid
     }
     // Submit the form data to your backend API
     const response = await fetch(apiUrl + 'Employee/get_employeeDocument_all', {
@@ -26,8 +26,10 @@ const EmployeePopupTab_Profile = ({ EmployeeDetails, popupStatus }) => {
       .then(response => response.json())
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
-        console.log(res1)
+        console.log(res1[0])
+        console.log(res1[0].USRED_DocumentDataByte)
         setImg(res1)
+        setSelectedFileProfileImage(res1[0].USRED_DocumentDataByte)
       })
   }
 
@@ -65,7 +67,7 @@ const EmployeePopupTab_Profile = ({ EmployeeDetails, popupStatus }) => {
     event.preventDefault();
 
     const data = {
-      EME_EmployeeID: 'employeeId',
+      EME_EmployeeID: employeeId,
     }
     const formData = new FormData();
     formData.append('cv', selectedFileCV);
@@ -93,6 +95,15 @@ const EmployeePopupTab_Profile = ({ EmployeeDetails, popupStatus }) => {
     }
 
   };
+
+
+  useEffect(() => {
+    // setUserRoleId(UserRoleDetails.UUR_UserRoleID)
+    setEmployeeId(EmployeeDetails.EME_EmployeeID)
+    handleGetAllDocument(EmployeeDetails.EME_EmployeeID);
+
+  }, [EmployeeDetails]);
+
 
   return (
     <>

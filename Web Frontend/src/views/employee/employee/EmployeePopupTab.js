@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { CTooltip, CRow, CButton, CModal, CTabs, CFormSelect, CTabList, CTab, CCol, CInputGroupText, CTabContent, CTabPanel, CModalBody, CModalTitle, CModalFooter, CFormCheck, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import EmployeePopupTab_General from './EmployeePopupTab_General.js';
+import EmployeePopupTab_Profile_Grid from './EmployeePopupTab_Profile_Grid.js';
 import EmployeePopupTab_Profile from './EmployeePopupTab_Profile.js';
 import EmployeePopupTab_Contact from './EmployeePopupTab_Contact.js';
 import EmployeePopupTab_Employment from './EmployeePopupTab_Employment.js';
@@ -60,19 +61,21 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
           <CTabs activeItemKey="general">
             <CTabList variant="tabs">
               <CTab itemKey="general">General</CTab>
-              <CTab itemKey="profile">Profile</CTab>
-              <CTab itemKey="contact">Contact</CTab>
-              <CTab itemKey="employment">Employment</CTab>
-              <CTab itemKey="jobDescription">Job Description</CTab>
-              <CTab itemKey="reportingmanager">Reporting Manager</CTab>
+              <CTab
+                disabled={(popupStatus == 'create') ? true : false}
+                itemKey="profile">Profile</CTab>
+              {/* <CTab itemKey="contact">Contact</CTab> */}
+              {/* <CTab itemKey="employment">Employment</CTab> */}
+              {/* <CTab itemKey="jobDescription">Job Description</CTab> */}
+              {/* <CTab itemKey="reportingmanager">Reporting Manager</CTab> */}
             </CTabList>
             <CTabContent>
               <EmployeePopupTab_General popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
-              <EmployeePopupTab_Profile popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
-              <EmployeePopupTab_Contact popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
-              <EmployeePopupTab_Employment popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
-              <EmployeePopupTab_JobDescriptionGrid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
-              <EmployeePopupTab_ReportingManager popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
+              <EmployeePopupTab_Profile_Grid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
+              {/* <EmployeePopupTab_Contact popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} /> */}
+              {/* <EmployeePopupTab_Employment popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} /> */}
+              {/* <EmployeePopupTab_JobDescriptionGrid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} /> */}
+              {/* <EmployeePopupTab_ReportingManager popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} /> */}
             </CTabContent>
           </CTabs>
         </CModalBody>

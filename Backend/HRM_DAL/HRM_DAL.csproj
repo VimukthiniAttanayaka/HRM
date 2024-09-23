@@ -79,6 +79,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Models\EmployeeDocumentModel.cs" />
     <Compile Include="Models\InternalUserModel.cs" />
     <Compile Include="Models\PerformanceAppriasalAnswersModel.cs" />
     <Compile Include="Models\PerformanceAppriasalApprovalModel.cs" />

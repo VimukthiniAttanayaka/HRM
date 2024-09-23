@@ -22,8 +22,9 @@ const Termination = () => {
               <CCol md={4}>
                 <CFormInput maxLength={20} placeholder="Employee ID" name="EmployeeID" />
               </CCol>
-              <CCol md={4}>  <CButton color="primary"
-                className="mb-2">Search</CButton>
+              <CCol md={4}>
+                <CButton color="primary"
+                  className="mb-2">Search</CButton>
               </CCol>   </CInputGroup>
           </CCol></CRow>
           <CRow><CCol>

@@ -23,28 +23,28 @@ namespace HRM.Controllers
     //[BasicAuthorization]
     //[Authorize]
 
-    public class EmployeeController : ControllerBase
+    public class EmployeeDocumentController : ControllerBase
     {
         private LogError objError = new LogError();
 
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnEmployeeModelHead> get_employee_single(Employee model)//ok
+        public List<ReturnEmployeeDocumentModelHead> get_employeedocument_single(EmployeeDocument model)//ok
         {
-            List<ReturnEmployeeModelHead> objemployeeHeadList = new List<ReturnEmployeeModelHead>();
+            List<ReturnEmployeeDocumentModelHead> objemployeeHeadList = new List<ReturnEmployeeDocumentModelHead>();
 
             try
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
 
-                return HRM_BL.Employee_BL.get_employees_single(model);
-
+                return HRM_BL.EmployeeDocument_BL.get_employeeDocument_single(model);
+                
             }
             catch (Exception ex)
             {
 
-                ReturnEmployeeModelHead objemployeeHead = new ReturnEmployeeModelHead
+                ReturnEmployeeDocumentModelHead objemployeeHead = new ReturnEmployeeDocumentModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -69,9 +69,9 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnEmployeeModelHead> get_employee_all(EmployeeSearchModel model)//ok
+        public List<ReturnEmployeeDocumentModelHead> get_employeedocument_all(EmployeeDocumentSearchModel model)//ok
         {
-            List<ReturnEmployeeModelHead> objemployeeHeadList = new List<ReturnEmployeeModelHead>();
+            List<ReturnEmployeeDocumentModelHead> objemployeeHeadList = new List<ReturnEmployeeDocumentModelHead>();
             //ReturnEmployeeModelHead obj = new ReturnEmployeeModelHead() { resp = false, msg = "sfsf" };
             //obj.Employee = new List<ReturnEmployeeModel>();
             //obj.Employee.Add(new ReturnEmployeeModel() { EME_PrefferedName = "test", EME_EmployeeID = "test" });
@@ -84,13 +84,13 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
 
-                return HRM_BL.Employee_BL.get_employee_all(model);
+                return HRM_BL.EmployeeDocument_BL.get_employeeDocument_all(model);
 
             }
             catch (Exception ex)
             {
 
-                ReturnEmployeeModelHead objemployeeHead = new ReturnEmployeeModelHead
+                ReturnEmployeeDocumentModelHead objemployeeHead = new ReturnEmployeeDocumentModelHead
                 {
                     resp = false,
                     msg = ex.Message.ToString()
@@ -116,7 +116,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnResponse> add_new_employee(EmployeeModel item)//ok
+        public List<ReturnResponse> add_new_employeedocument(EmployeeDocumentModel item)//ok
         {
             List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
 
@@ -124,7 +124,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
 
-                return HRM_BL.Employee_BL.add_new_employee(item);
+                return HRM_BL.EmployeeDocument_BL.add_new_employeedocument(item);
 
             }
             catch (Exception ex)
@@ -137,12 +137,12 @@ namespace HRM.Controllers
                 };
                 objCustHeadList.Add(objemployeeHead);
 
-                objError.WriteLog(0, "employeeController", "add_new_employee", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "employeeController", "add_new_employee", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "employeeController", "add_new_employeedocument", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "employeeController", "add_new_employeedocument", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "employeeController", "add_new_employee", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "employeeController", "add_new_employee", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "employeeController", "add_new_employeedocument", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "employeeController", "add_new_employeedocument", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
@@ -151,49 +151,49 @@ namespace HRM.Controllers
             return objCustHeadList;
         }
 
-        //POST api/<UserController>
+        ////POST api/<UserController>
+        //[HttpPost]
+        //[Route("[action]")]
+        ////[Authorize]
+        //public List<ReturnResponse> modify_employeedocument(EmployeeDocumentModel item)//ok
+        //{
+        //    List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
+
+        //    try
+        //    {
+        //        LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
+
+        //        return HRM_BL.EmployeeDocument_BL.modify_employeedocument(item);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        ReturnResponse objemployeeHead = new ReturnResponse
+        //        {
+        //            resp = false,
+        //            msg = ex.Message.ToString()
+        //        };
+        //        objCustHeadList.Add(objemployeeHead);
+
+        //        objError.WriteLog(0, "employeeController", "modify_employeedocument", "Stack Track: " + ex.StackTrace);
+        //        objError.WriteLog(0, "employeeController", "modify_employeedocument", "Error Message: " + ex.Message);
+        //        if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
+        //        {
+        //            objError.WriteLog(0, "employeeController", "modify_employeedocument", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+        //            objError.WriteLog(0, "employeeController", "modify_employeedocument", "Inner Exception Message: " + ex.InnerException.Message);
+        //        }
+
+
+        //    }
+
+        //    return objCustHeadList;
+        //}
+
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnResponse> modify_employee(EmployeeModel item)//ok
-        {
-            List<ReturnResponse> objCustHeadList = new List<ReturnResponse>();
-
-            try
-            {
-                LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
-
-                return HRM_BL.Employee_BL.modify_employee(item);
-
-            }
-            catch (Exception ex)
-            {
-
-                ReturnResponse objemployeeHead = new ReturnResponse
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
-                objCustHeadList.Add(objemployeeHead);
-
-                objError.WriteLog(0, "employeeController", "modify_employee", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "employeeController", "modify_employee", "Error Message: " + ex.Message);
-                if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
-                {
-                    objError.WriteLog(0, "employeeController", "modify_employee", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "employeeController", "modify_employee", "Inner Exception Message: " + ex.InnerException.Message);
-                }
-
-
-            }
-
-            return objCustHeadList;
-        }
-
-        [HttpPost]
-        [Route("[action]")]
-        //[Authorize]
-        public List<ReturnResponse> inactivate_employee(InactiveEmpModel item)//ok
+        public List<ReturnResponse> inactivate_employeedocument(InactiveUSREDModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
             //objUserHeadList.Add(new ReturnResponse() { resp = true, msg = "saved" });
@@ -203,7 +203,7 @@ namespace HRM.Controllers
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
 
-                return HRM_BL.Employee_BL.inactivate_employee(item);
+                return HRM_BL.EmployeeDocument_BL.inactivate_employeedocument(item);
 
             }
             catch (Exception ex)
@@ -216,19 +216,18 @@ namespace HRM.Controllers
                 };
                 objUserHeadList.Add(objemployeeHead);
 
-                objError.WriteLog(0, "employeeController", "inactivate_employee", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "employeeController", "inactivate_employee", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "employeeController", "inactivate_employeedocument", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "employeeController", "inactivate_employeedocument", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "employeeController", "inactivate_employee", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "employeeController", "inactivate_employee", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "employeeController", "inactivate_employeedocument", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "employeeController", "inactivate_employeedocument", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
 
             }
             return objUserHeadList;
         }
-
 
         public static ImageModel frncv { get; set; }
         public static ImageModel frnnic { get; set; }
@@ -434,7 +433,7 @@ namespace HRM.Controllers
         //    {
         //        LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
 
-        //        objemployeeHeadList = HRM_BL.Employee_BL.get_employeeDocument_all(model);
+        //        objemployeeHeadList = HRM_BL.EmployeeDocument_BL.get_employeeDocument_all(model);
         //        //foreach (var item in objemployeeHeadList)
         //        //{
         //        //    if (item.USRED_DocumentName == "cv")
@@ -512,7 +511,7 @@ namespace HRM.Controllers
         //    {
         //        LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, model);
 
-        //        objemployeeHeadList = HRM_BL.Employee_BL.get_employeeDocument_single(model);
+        //        objemployeeHeadList = HRM_BL.EmployeeDocument_BL.get_employeeDocument_single(model);
         //        //foreach (var item in objemployeeHeadList)
         //        //{
         //        //    if (item.USRED_DocumentName == "cv")
@@ -585,7 +584,6 @@ namespace HRM.Controllers
             public byte[] ImageData { get; set; }
             public string Type { get; set; }
         }
-
     }
 
 }

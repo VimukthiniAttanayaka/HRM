@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using utility_handler.Data;
+using System;
 
 namespace HRM_BL
 {
@@ -15,24 +16,17 @@ namespace HRM_BL
         {
             return HRM_DAL.Data.Employee_Data.get_employees_single(model);
         }
+
         public static List<ReturnEmployeeModelHead> get_employee_all(EmployeeSearchModel model)//ok
         {
             return HRM_DAL.Data.Employee_Data.get_employee_all(model);
         }
 
-
         public static List<ReturnResponse> add_new_employee(EmployeeModel item)//ok
         {
             return HRM_DAL.Data.Employee_Data.add_new_employee(item);
         }
-        public static List<ReturnResponse> upload_employee_documents(List<EmployeeAttachmentModel> item)//ok
-        {
-            return HRM_DAL.Data.Employee_Data.upload_employee_documents(item);
-        }
-        public static List<EmployeeAttachmentModel> get_employeeDocument_all(EmployeeSearchModel model)//ok
-        {
-            return HRM_DAL.Data.Employee_Data.get_employeeDocument_all(model);
-        }
+        
         public static List<ReturnResponse> modify_employee(EmployeeModel item)//ok
         {
             return HRM_DAL.Data.Employee_Data.modify_employee(item);
@@ -42,8 +36,6 @@ namespace HRM_BL
         {
             return HRM_DAL.Data.Employee_Data.inactivate_employee(item);
         }
-
-
     }
 
 }

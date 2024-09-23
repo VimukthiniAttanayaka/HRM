@@ -30,7 +30,7 @@ namespace HRM_DAL.Models
         public string EME_MobileNumber { get; set; }
         public string EME_PhoneNumber1 { get; set; }
         public string EME_PhoneNumber2 { get; set; }
-        public DateTime? EME_DateOfHire {  get; set; }
+        public DateTime? EME_DateOfHire { get; set; }
         public bool EME_Status { get; set; }
         //public string EME_CreatedBy { get; set; }
         //public DateTime EME_CreatedDateTime { get; set; }
@@ -121,6 +121,11 @@ namespace HRM_DAL.Models
         public string EME_EmployeeID { get; set; }
     }
 
+    public class EmployeeDocumentSearchModel : RequestBaseModel
+    {
+        public string EME_EmployeeID { get; set; }
+        public string USRED_EmployeeDocumentID { get; set; }
+    }
     public class InactiveEmpModel : RequestBaseModel
     {
 
@@ -132,14 +137,5 @@ namespace HRM_DAL.Models
         public string EME_EmployeeID { get; set; }
         public string CUS_CompanyName { get; set; }
 
-    }
-    public class EmployeeAttachmentModel : RequestBaseModel
-    {
-        public string USRED_EmployeeID { get; set; }
-        public string USRED_DocumentData { get; set; }
-        public string USRED_DocumentType { get; set; }
-        public string USRED_DocumentName { get; set; }
-        public bool USRED_Status { get; set; }
-        public byte[] USRED_DocumentDataByte { get; set; }
     }
 }
