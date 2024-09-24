@@ -8,7 +8,7 @@ import EmployeePopupTab_Contact from './EmployeePopupTab_Contact.js';
 import EmployeePopupTab_Employment from './EmployeePopupTab_Employment.js';
 import EmployeePopupTab_JobDescriptionGrid from './EmployeePopupTab_JobDescriptionGrid.js';
 import EmployeePopupTab_JobDescriptionPopUp from './EmployeePopupTab_JobDescriptionPopUp.js';
-import EmployeePopupTab_ReportingManager from './EmployeePopupTab_ReportingManager.js';
+import EmployeePopupTab_ReportingManager from './EmployeePopupTab_ReportingManagerGrid.js';
 
 const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStatus }) => {
 
@@ -64,18 +64,22 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
               <CTab
                 disabled={(popupStatus == 'create') ? true : false}
                 itemKey="profile">Profile</CTab>
-              {/* <CTab itemKey="contact">Contact</CTab> */}
-              {/* <CTab itemKey="employment">Employment</CTab> */}
-              {/* <CTab itemKey="jobDescription">Job Description</CTab> */}
-              {/* <CTab itemKey="reportingmanager">Reporting Manager</CTab> */}
+              <CTab disabled={(popupStatus == 'create') ? true : false}
+                itemKey="contact">Contact</CTab>
+              <CTab disabled={(popupStatus == 'create') ? true : false}
+                itemKey="employment">Employment</CTab>
+              <CTab disabled={(popupStatus == 'create') ? true : false}
+                itemKey="jobDescription">Job Description</CTab>
+              <CTab disabled={(popupStatus == 'create') ? true : false}
+                itemKey="reportingmanager">Reporting Manager</CTab>
             </CTabList>
             <CTabContent>
               <EmployeePopupTab_General popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
               <EmployeePopupTab_Profile_Grid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
-              {/* <EmployeePopupTab_Contact popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} /> */}
-              {/* <EmployeePopupTab_Employment popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} /> */}
-              {/* <EmployeePopupTab_JobDescriptionGrid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} /> */}
-              {/* <EmployeePopupTab_ReportingManager popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} /> */}
+              <EmployeePopupTab_Contact popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
+              <EmployeePopupTab_Employment popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
+              <EmployeePopupTab_JobDescriptionGrid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
+              <EmployeePopupTab_ReportingManager popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
             </CTabContent>
           </CTabs>
         </CModalBody>
