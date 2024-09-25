@@ -2,22 +2,21 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 export class EmployeeDetail {
   constructor(
-    USRED_EmployeeID,
-    USRED_EmployeeDocumentID,
-    USRED_DocumentType,
-    USRED_DocumentName,
-    USRED_Status,
-    USRED_DocumentData,
-    USRED_DocumentDataByte) {
+    EED_EmployeeID,
+    EED_EmployeeDocumentID,
+    EED_DocumentType,
+    EED_DocumentName,
+    EED_Status,
+    EED_DocumentData,
+    EED_DocumentDataByte) {
 
-      this.id = USRED_EmployeeDocumentID;
-        this.EmployeeID = USRED_EmployeeID;
-
-    this.DocumentType = USRED_DocumentType;
-    this.DocumentName = USRED_DocumentName;
-    this.DocumentData = USRED_DocumentData;
-    this.DocumentDataByte = USRED_DocumentDataByte;
-    if (USRED_Status == true) { this.status = "Active"; }
+    this.id = EED_EmployeeDocumentID;
+    this.EmployeeID = EED_EmployeeID;
+    this.DocumentType = EED_DocumentType;
+    this.DocumentName = EED_DocumentName;
+    this.DocumentData = EED_DocumentData;
+    this.DocumentDataByte = EED_DocumentDataByte;
+    if (EED_Status == true) { this.status = "Active"; }
     else { this.status = "Inactive"; }
   }
 }
@@ -41,13 +40,13 @@ export const getEmployeeDocumentsAll = async (formData) => {
         let element = res1[0].EmployeeDocument[index];
         // console.log(element)
         EmployeeDetails[index] = new EmployeeDetail(
-          element.USRED_EmployeeID,
-          element.USRED_EmployeeDocumentID,
-          element.USRED_DocumentType,
-          element.USRED_DocumentName,
-          element.USRED_Status,
-          element.USRED_DocumentData,
-          element.USRED_DocumentDataByte);
+          element.EED_EmployeeID,
+          element.EED_EmployeeDocumentID,
+          element.EED_DocumentType,
+          element.EED_DocumentName,
+          element.EED_Status,
+          element.EED_DocumentData,
+          element.EED_DocumentDataByte);
       }
       // console.log(EmployeeDetails)
     })

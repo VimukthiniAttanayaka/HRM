@@ -12,7 +12,7 @@ import PopUpAlert from '../../shared/PopUpAlert.js'
 import ImageLoader from 'react-image-loader';
 import ImageDisplay from 'src/views/shared/ImageDisplay.js';
 
-const EmployeePopupTab_Profile_Grid_Popup = ({ visible, onClose, USRED_EmployeeID, onOpen, toggleAdd, EmployeeDocumentDetails, popupStatus, StatusInDB, clearlink }) => {
+const EmployeePopupTab_Profile_Grid_Popup = ({ visible, onClose, EED_EmployeeID, onOpen, toggleAdd, EmployeeDocumentDetails, popupStatus, StatusInDB, clearlink }) => {
   let templatetype = 'translation_employeedocument'
   let templatetype_base = 'translation'
   // const handleSubmit = (event) => {
@@ -45,12 +45,12 @@ const EmployeePopupTab_Profile_Grid_Popup = ({ visible, onClose, USRED_EmployeeI
     const customerId = getCustomerID();
 
     const formData = {
-      USRED_EmployeeDocumentID: Id,
-      USRED_EmployeeID: USRED_EmployeeID,
-      USRED_DocumentData: imageUrl,
-      USRED_DocumentType: doctype,
-      USRED_DocumentName: DocumentName,
-      USRED_Status: isActive,
+      EED_EmployeeDocumentID: Id,
+      EED_EmployeeID: EED_EmployeeID,
+      EED_DocumentData: imageUrl,
+      EED_DocumentType: doctype,
+      EED_DocumentName: DocumentName,
+      EED_Status: isActive,
       UD_UserID: staffId,
     }
     console.log(formData)
@@ -88,15 +88,15 @@ const EmployeePopupTab_Profile_Grid_Popup = ({ visible, onClose, USRED_EmployeeI
 
     // var imageData = "data:image/png;base64,"
 
-    if (EmployeeDocumentDetails.USRED_DocumentData != undefined) {
-      // console.log(imageData + EmployeeDocumentDetails.USRED_DocumentData)
-      // setimageUrl(imageData + EmployeeDocumentDetails.USRED_DocumentData)
-      setimageUrl(EmployeeDocumentDetails.USRED_DocumentData)
+    if (EmployeeDocumentDetails.EED_DocumentData != undefined) {
+      // console.log(imageData + EmployeeDocumentDetails.EED_DocumentData)
+      // setimageUrl(imageData + EmployeeDocumentDetails.EED_DocumentData)
+      setimageUrl(EmployeeDocumentDetails.EED_DocumentData)
     }
 
-    setId(EmployeeDocumentDetails.USRED_EmployeeDocumentID)
-    setDocumentType(EmployeeDocumentDetails.USRED_DocumentType)
-    setDocumentName(EmployeeDocumentDetails.USRED_DocumentName)
+    setId(EmployeeDocumentDetails.EED_EmployeeDocumentID)
+    setDocumentType(EmployeeDocumentDetails.EED_DocumentType)
+    setDocumentName(EmployeeDocumentDetails.EED_DocumentName)
 
   }, [EmployeeDocumentDetails]);
 

@@ -124,7 +124,7 @@ namespace HRM_DAL.Models
     public class EmployeeDocumentSearchModel : RequestBaseModel
     {
         public string EME_EmployeeID { get; set; }
-        public string USRED_EmployeeDocumentID { get; set; }
+        public string EED_EmployeeDocumentID { get; set; }
     }
     public class InactiveEmpModel : RequestBaseModel
     {

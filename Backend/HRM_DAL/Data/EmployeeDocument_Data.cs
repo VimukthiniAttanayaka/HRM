@@ -13,7 +13,7 @@ namespace HRM_DAL.Data
     {
         private static LogError objError = new LogError();
 
-        public static List<ReturnResponse> inactivate_employeedocument(InactiveUSREDModel item)
+        public static List<ReturnResponse> inactivate_employeedocument(InactiveEEDModel item)
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
             ReturnResponse objUserHead = new ReturnResponse();
@@ -41,8 +41,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_del_employee";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@USRED_EmployeeDocumentID", item.USRED_EmployeeDocumentID);
-                        cmd.Parameters["@USRED_EmployeeDocumentID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EED_EmployeeDocumentID", item.EED_EmployeeDocumentID);
+                        cmd.Parameters["@EED_EmployeeDocumentID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
                         cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
@@ -121,23 +121,23 @@ namespace HRM_DAL.Data
         //                cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
         //                cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
-        //                cmd.Parameters.AddWithValue("@USRED_EmployeeID", item.USRED_EmployeeID);
-        //                cmd.Parameters["@USRED_EmployeeID"].Direction = ParameterDirection.Input;
+        //                cmd.Parameters.AddWithValue("@EED_EmployeeID", item.EED_EmployeeID);
+        //                cmd.Parameters["@EED_EmployeeID"].Direction = ParameterDirection.Input;
 
-        //                cmd.Parameters.AddWithValue("@USRED_DocumentType", item.USRED_DocumentType);
-        //                cmd.Parameters["@USRED_DocumentType"].Direction = ParameterDirection.Input;
+        //                cmd.Parameters.AddWithValue("@EED_DocumentType", item.EED_DocumentType);
+        //                cmd.Parameters["@EED_DocumentType"].Direction = ParameterDirection.Input;
 
-        //                cmd.Parameters.AddWithValue("@USRED_DocumentName", item.USRED_DocumentName);
-        //                cmd.Parameters["@USRED_DocumentName"].Direction = ParameterDirection.Input;
+        //                cmd.Parameters.AddWithValue("@EED_DocumentName", item.EED_DocumentName);
+        //                cmd.Parameters["@EED_DocumentName"].Direction = ParameterDirection.Input;
 
-        //                cmd.Parameters.AddWithValue("@USRED_DocumentData", item.USRED_DocumentData);
-        //                cmd.Parameters["@USRED_DocumentData"].Direction = ParameterDirection.Input;
+        //                cmd.Parameters.AddWithValue("@EED_DocumentData", item.EED_DocumentData);
+        //                cmd.Parameters["@EED_DocumentData"].Direction = ParameterDirection.Input;
 
-        //                cmd.Parameters.AddWithValue("@USRED_EmployeeDocumentID", item.USRED_EmployeeDocumentID);
-        //                cmd.Parameters["@USRED_EmployeeDocumentID"].Direction = ParameterDirection.Input;
+        //                cmd.Parameters.AddWithValue("@EED_EmployeeDocumentID", item.EED_EmployeeDocumentID);
+        //                cmd.Parameters["@EED_EmployeeDocumentID"].Direction = ParameterDirection.Input;
 
-        //                cmd.Parameters.AddWithValue("@USRED_Status", item.USRED_Status);
-        //                cmd.Parameters["@USRED_Status"].Direction = ParameterDirection.Input;
+        //                cmd.Parameters.AddWithValue("@EED_Status", item.EED_Status);
+        //                cmd.Parameters["@EED_Status"].Direction = ParameterDirection.Input;
 
         //                SqlDataAdapter dta = new SqlDataAdapter();
         //                dta.SelectCommand = cmd;
@@ -210,23 +210,23 @@ namespace HRM_DAL.Data
                         //cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
                         //cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@USRED_EmployeeID", item.USRED_EmployeeID);
-                        cmd.Parameters["@USRED_EmployeeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EED_EmployeeID", item.EED_EmployeeID);
+                        cmd.Parameters["@EED_EmployeeID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@USRED_DocumentType", item.USRED_DocumentType);
-                        cmd.Parameters["@USRED_DocumentType"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EED_DocumentType", item.EED_DocumentType);
+                        cmd.Parameters["@EED_DocumentType"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@USRED_DocumentName", item.USRED_DocumentName);
-                        cmd.Parameters["@USRED_DocumentName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EED_DocumentName", item.EED_DocumentName);
+                        cmd.Parameters["@EED_DocumentName"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@USRED_DocumentData", item.USRED_DocumentData);
-                        cmd.Parameters["@USRED_DocumentData"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EED_DocumentData", item.EED_DocumentData);
+                        cmd.Parameters["@EED_DocumentData"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@USRED_EmployeeDocumentID", item.USRED_EmployeeDocumentID);
-                        //cmd.Parameters["@USRED_EmployeeDocumentID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@EED_EmployeeDocumentID", item.EED_EmployeeDocumentID);
+                        //cmd.Parameters["@EED_EmployeeDocumentID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@USRED_Status", item.USRED_Status);
-                        cmd.Parameters["@USRED_Status"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EED_Status", item.EED_Status);
+                        cmd.Parameters["@EED_Status"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -301,20 +301,20 @@ namespace HRM_DAL.Data
                         foreach (EmployeeDocumentModel p in item)
                         {
 
-                            cmd.Parameters.AddWithValue("@USRED_EmployeeID", p.USRED_EmployeeID);
-                            cmd.Parameters["@USRED_EmployeeID"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@EED_EmployeeID", p.EED_EmployeeID);
+                            cmd.Parameters["@EED_EmployeeID"].Direction = ParameterDirection.Input;
 
-                            cmd.Parameters.AddWithValue("@USRED_DocumentData", p.USRED_DocumentData);
-                            cmd.Parameters["@USRED_DocumentData"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@EED_DocumentData", p.EED_DocumentData);
+                            cmd.Parameters["@EED_DocumentData"].Direction = ParameterDirection.Input;
 
-                            cmd.Parameters.AddWithValue("@USRED_DocumentType", p.USRED_DocumentType);
-                            cmd.Parameters["@USRED_DocumentType"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@EED_DocumentType", p.EED_DocumentType);
+                            cmd.Parameters["@EED_DocumentType"].Direction = ParameterDirection.Input;
 
-                            cmd.Parameters.AddWithValue("@USRED_DocumentName", p.USRED_DocumentName);
-                            cmd.Parameters["@USRED_DocumentName"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@EED_DocumentName", p.EED_DocumentName);
+                            cmd.Parameters["@EED_DocumentName"].Direction = ParameterDirection.Input;
 
-                            cmd.Parameters.AddWithValue("@USRED_Status", p.USRED_Status);
-                            cmd.Parameters["@USRED_Status"].Direction = ParameterDirection.Input;
+                            cmd.Parameters.AddWithValue("@EED_Status", p.EED_Status);
+                            cmd.Parameters["@EED_Status"].Direction = ParameterDirection.Input;
 
                             SqlDataAdapter dta = new SqlDataAdapter();
                             dta.SelectCommand = cmd;
@@ -391,8 +391,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_employeeDocument_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@USRED_EmployeeID", model.EME_EmployeeID);
-                        cmd.Parameters["@USRED_EmployeeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EED_EmployeeID", model.EME_EmployeeID);
+                        cmd.Parameters["@EED_EmployeeID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -407,13 +407,13 @@ namespace HRM_DAL.Data
 
                                 //objemployeeHead.resp = true;
                                 //objemployeeHead.msg = "Get Employee";
-                                objemployee.USRED_DocumentName = rdr["USRED_DocumentName"].ToString();
-                                objemployee.USRED_EmployeeDocumentID = rdr["USRED_EmployeeDocumentID"].ToString();
-                                objemployee.USRED_EmployeeID = rdr["USRED_EmployeeID"].ToString();
-                                objemployee.USRED_DocumentType = rdr["USRED_DocumentType"].ToString();
-                                objemployee.USRED_Status = Convert.ToBoolean(rdr["USRED_Status"].ToString());
-                                objemployee.USRED_DocumentData = rdr["USRED_DocumentData"].ToString();
-                                //objemployee.USRED_DocumentDataByte = Convert.FromBase64String(rdr["USRED_DocumentData"].ToString());
+                                objemployee.EED_DocumentName = rdr["EED_DocumentName"].ToString();
+                                objemployee.EED_EmployeeDocumentID = rdr["EED_EmployeeDocumentID"].ToString();
+                                objemployee.EED_EmployeeID = rdr["EED_EmployeeID"].ToString();
+                                objemployee.EED_DocumentType = rdr["EED_DocumentType"].ToString();
+                                objemployee.EED_Status = Convert.ToBoolean(rdr["EED_Status"].ToString());
+                                objemployee.EED_DocumentData = rdr["EED_DocumentData"].ToString();
+                                //objemployee.EED_DocumentDataByte = Convert.FromBase64String(rdr["EED_DocumentData"].ToString());
 
                                 objemployeeHead.EmployeeDocument.Add(objemployee);
 
@@ -488,8 +488,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_employeeDocument_single";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@USRED_EmployeeDocumentID", model.USRED_EmployeeDocumentID);
-                        cmd.Parameters["@USRED_EmployeeDocumentID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EED_EmployeeDocumentID", model.EED_EmployeeDocumentID);
+                        cmd.Parameters["@EED_EmployeeDocumentID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -504,13 +504,13 @@ namespace HRM_DAL.Data
 
                                 //objemployeeHead.resp = true;
                                 //objemployeeHead.msg = "Get Employee";
-                                objemployee.USRED_DocumentName = rdr["USRED_DocumentName"].ToString();
-                                objemployee.USRED_EmployeeDocumentID = rdr["USRED_EmployeeDocumentID"].ToString();
-                                objemployee.USRED_EmployeeID = rdr["USRED_EmployeeID"].ToString();
-                                objemployee.USRED_DocumentType = rdr["USRED_DocumentType"].ToString();
-                                objemployee.USRED_Status = Convert.ToBoolean(rdr["USRED_Status"].ToString());
-                                objemployee.USRED_DocumentData = rdr["USRED_DocumentData"].ToString();
-                                //objemployee.USRED_DocumentDataByte = Convert.FromBase64String(rdr["USRED_DocumentData"].ToString());
+                                objemployee.EED_DocumentName = rdr["EED_DocumentName"].ToString();
+                                objemployee.EED_EmployeeDocumentID = rdr["EED_EmployeeDocumentID"].ToString();
+                                objemployee.EED_EmployeeID = rdr["EED_EmployeeID"].ToString();
+                                objemployee.EED_DocumentType = rdr["EED_DocumentType"].ToString();
+                                objemployee.EED_Status = Convert.ToBoolean(rdr["EED_Status"].ToString());
+                                objemployee.EED_DocumentData = rdr["EED_DocumentData"].ToString();
+                                //objemployee.EED_DocumentDataByte = Convert.FromBase64String(rdr["EED_DocumentData"].ToString());
 
                                 objemployeeHead.EmployeeDocument.Add(objemployee);
 

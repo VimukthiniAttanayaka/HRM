@@ -9,6 +9,7 @@ import { getBadge } from '../../shared/gridviewconstants.js';
 import { columns, headers } from '../../controllers/employee_controllers.js';
 import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
 import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const EmployeeDataGrid = () => {
 

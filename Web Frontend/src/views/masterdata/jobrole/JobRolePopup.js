@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
+import { CTooltip, CButton, CModal, CFormTextarea, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 
 import { modifyJobRole } from '../../../apicalls/jobrole/modify.js';
@@ -16,9 +16,11 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus, S
 
   const [JobRoleId, setJobRoleId] = useState('')
   const [JobRole, setJobRole] = useState('')
+  const [Description, setDescription] = useState('')
   const [isActive, setIsActive] = useState(true)
 
   const handleChangeJobRole = (event) => { setJobRole(event.target.value) }
+  const handleChangeDescription = (event) => { setDescription(event.target.value) }
   const handleChangeId = (event) => { setJobRoleId(event.target.value) }
   const handleChangeStatus = (event) => { setIsActive(event.target.checked) }
 
@@ -37,6 +39,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus, S
     const formData = {
       MDJR_JobRoleID: JobRoleId,
       MDJR_JobRole: JobRole,
+      MDJR_Description: Description,
       MDJR_Status: isActive,
       UD_UserID: staffId,
     }
@@ -80,6 +83,7 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus, S
   useEffect(() => {
     setJobRoleId(JobRoleDetails.MDJR_JobRoleID)
     setJobRole(JobRoleDetails.MDJR_JobRole)
+    setDescription(JobRoleDetails.MDJR_Description)
     setIsActive(StatusInDB)
   }, [JobRoleDetails]);
   // console.log(JobRoleDetails)
@@ -130,6 +134,15 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus, S
                       <h6>{getLabelText('JobRole', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>    <CFormInput placeholder="JobRole" name="JobRole" value={JobRole} onChange={handleChangeJobRole} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  />
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>{getLabelText('Description', templatetype)}</h6>
+                    </CInputGroupText>
+                  </CCol>    <CFormTextarea placeholder="Description" name="Description" value={Description} onChange={handleChangeDescription} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
                   // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
                   />
                 </CInputGroup>

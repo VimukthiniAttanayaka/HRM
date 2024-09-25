@@ -37,7 +37,7 @@ namespace HRM_BL
         //    return HRM_DAL.Data.EmployeeDocument_Data.modify_employeedocument(item);
         //}
 
-        public static List<ReturnResponse> inactivate_employeedocument(InactiveUSREDModel item)
+        public static List<ReturnResponse> inactivate_employeedocument(InactiveEEDModel item)
         {
             return HRM_DAL.Data.EmployeeDocument_Data.inactivate_employeedocument(item);
         }

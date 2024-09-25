@@ -12,6 +12,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 export class JobRoleDetail {
   MDJR_JobRoleID;
   MDJR_JobRole;
+  MDJR_Description;
   MDJR_Status;
   MDJR_CreatedBy;
   MDJR_CreatedDateTime;

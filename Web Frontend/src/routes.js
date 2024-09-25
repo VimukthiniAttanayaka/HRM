@@ -5,7 +5,7 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Company = React.lazy(() => import('./views/employee/Company/Company'))
 const Employee = React.lazy(() => import('./views/employee/employee/Employee'))
 const Employee_ExcelUpload = React.lazy(() => import('./views/employee/employee_excelupload/Employee_ExcelUpload'))
-const EmployeeJobDescription = React.lazy(() => import('./views/employee/employeejobdescription/EmployeeJobDescription'))
+// const EmployeeJobDescription = React.lazy(() => import('./views/employee/employeejobdescription/EmployeeJobDescription'))
 
 const PerformanceAppriasalsQuestionsList_ExcelUpload = React.lazy(() => import('./views/performanceappriasals/questionslist_excelupload/QuestionsList_ExcelUpload'))
 const PerformanceAppriasalsAnswersList_ExcelUpload = React.lazy(() => import('./views/performanceappriasals/answerslist_excelupload/AnswersList_ExcelUpload'))
@@ -134,11 +134,12 @@ const routes = [
     name: <Translation>{(t) => t('Employee')}</Translation>,
     element: Employee,
   },
+  // {
+  //   path: '/employee/employeejobdescription',
+  //   name: <Translation>{(t) => t('Employee Job Description')}</Translation>,
+  //   element: EmployeeJobDescription,
+  // }, 
   {
-    path: '/employee/employeejobdescription',
-    name: <Translation>{(t) => t('Employee Job Description')}</Translation>,
-    element: EmployeeJobDescription,
-  }, {
     path: '/employee/employee_excelupload',
     name: <Translation>{(t) => t('Employee ExcelUpload')}</Translation>,
     element: Employee_ExcelUpload,

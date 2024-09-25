@@ -5,6 +5,7 @@ import axios from 'axios';
 import { modifyEmployee } from '../../../apicalls/employee/modify.js';
 import { deleteEmployee } from '../../../apicalls/employee/delete.js';
 import { addNewEmployee } from '../../../apicalls/employee/add_new.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const EmployeePopupTab_General = ({ EmployeeDetails, popupStatus }) => {
 

@@ -1,34 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CTabPanel, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
+import { CTooltip, CRow, CButton, CSmartTable, CBadge, CCollapse, CModal, CTabs, CFormSelect, CTabList, CTab, CCol, CInputGroupText, CTabContent, CTabPanel, CModalBody, CModalTitle, CModalFooter, CFormCheck, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
-// import EmployeeDocumentPopup from './EmployeeDocumentPopup.js';
-// // import loadDetails from './EmployeeDocumentPopup.js';
-import { getEmployeeDocumentsAll } from '../../../apicalls/employeedocument/get_all_list.js';
-import { getEmployeeDocumentSingle } from '../../../apicalls/employeedocument/get_employeedocuments_single.js';
-import EmployeePopupTab_Profile_Grid_Popup from './EmployeePopupTab_Profile_Grid_Popup'
+// import axios from 'axios';
+import { getEmployeeReportingManagerAll } from '../../../apicalls/employeereportingmanager/get_all_list.js';
+import { getEmployeeReportingManagerSingle } from '../../../apicalls/employeereportingmanager/get_employeereportingmanager_single.js';
+import EmployeePopupTab_ReportingManager_Grid_Popup from './EmployeePopupTab_ReportingManager_Grid_Popup.js';
+import { getBadge } from '../../shared/gridviewconstants.js';
+import { columns, headers } from '../../controllers/employeereportingmanager_controllers.js';
 
 import { getLabelText } from 'src/MultipleLanguageSheets'
-import Pagination from '../../shared/Pagination.js'
-import { getBadge } from '../../shared/gridviewconstants.js';
-import { columns, headers } from '../../controllers/employeedocument_controllers.js';
-import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
-import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
+const EmployeePopupTab_ReportingManager_Grid = ({ EmployeeDetails, popupStatus }) => {
 
-const EmployeePopupTab_Profile_Grid = ({ onClose, onOpen, EmployeeDetails, popupStatus }) => {
-
-  let templatetype = 'translation_employeedocument'
+  let templatetype = 'translation_employeereportingmanager'
   let templatetype_base = 'translation'
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
   const [popupStatus1, setPopupStatus1] = useState([])
 
-  const [EmployeeDocumentDetails, setEmployeeDocumentDetails] = useState([])
-  // const [EmployeeDocumentId, setEmployeeDocumentId] = useState('')
+  const [EmployeeReportingManagerDetails, setEmployeeReportingManagerDetails] = useState([])
+  // const [EmployeeReportingManagerId, setEmployeeReportingManagerId] = useState('')
   const handleChangeId = (event) => {
-    setEmployeeDocumentId(event.target.value)
+    setEmployeeReportingManagerId(event.target.value)
   }
 
   async function loadDetails(item) {
@@ -45,16 +39,16 @@ const EmployeePopupTab_Profile_Grid = ({ onClose, onOpen, EmployeeDetails, popup
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      EED_EmployeeDocumentID: item
+      EERM_ID: item
     }
-    // console.log(formData)
-    const EmployeeDocumentDetails = await getEmployeeDocumentSingle(formData)
-    // console.log(EmployeeDocumentDetails)
-    setEmployeeDocumentDetails(EmployeeDocumentDetails);
-    setStatusInDB(EmployeeDocumentDetails.EED_Status)
+    console.log(formData)
+    const EmployeeReportingManagerDetails = await getEmployeeReportingManagerSingle(formData)
+    console.log(EmployeeReportingManagerDetails)
+    setEmployeeReportingManagerDetails(EmployeeReportingManagerDetails);
+    setStatusInDB(EmployeeReportingManagerDetails.EERM_Status)
   }
 
-  const toggleAdd = (index) => {
+  const toggleCreate = (index) => {
     setPopupStatus1('add')
     toggleDetails(index)
   }
@@ -83,7 +77,7 @@ const EmployeePopupTab_Profile_Grid = ({ onClose, onOpen, EmployeeDetails, popup
       loadDetails(newDetails[0])
       console.log(newDetails[0])
 
-      handleOpenPopup()
+      handleOpenPopup1()
     }
     // setDetails(newDetails)
   }
@@ -104,9 +98,9 @@ const EmployeePopupTab_Profile_Grid = ({ onClose, onOpen, EmployeeDetails, popup
       EME_EmployeeID: employeeId
     }
 
-    const EmployeeDocumentDetails = await getEmployeeDocumentsAll(formData)
-    // console.log(EmployeeDocumentDetails)
-    setData(EmployeeDocumentDetails);
+    const EmployeeReportingManagerDetails = await getEmployeeReportingManagerAll(formData)
+    // console.log(EmployeeReportingManagerDetails)
+    setData(EmployeeReportingManagerDetails);
   }
   useEffect(() => {
     requestdata(EmployeeDetails.EME_EmployeeID);
@@ -114,42 +108,28 @@ const EmployeePopupTab_Profile_Grid = ({ onClose, onOpen, EmployeeDetails, popup
 
 
   const [currentItems, setCurrentItems] = useState(data)
-  const [visible, setVisible] = useState(false);
-
-  const handleOpenPopup = () => {
-    setVisible(true);
+  const [visible1, setVisible1] = useState(false);
+  
+  const handleOpenPopup1 = () => {
+    setVisible1(true);
+    requestdata(EmployeeDetails.EME_EmployeeID)
   };
 
-  const handleClosePopup = () => {
-    setVisible(false);
-    requestdata(EmployeeDetails.EME_EmployeeID) 
-    setclearlink(false);
-    setclearlink(true);
+  const handleClosePopup1 = () => {
+    setVisible1(false);
   };
+
   const [StatusInDB, setStatusInDB] = useState(true)
-  const [clearlink, setclearlink] = useState(true)
-
-  function downloadFileFromBase64(base64String, filename) {
-    const link = document.createElement('a');
-    link.href = `data:application/octet-stream;base64,${base64String}`;
-    link.download = filename;
-    link.click();
-  }
-
-  const handleDownload = (item) => {
-    loadDetails(item);
-    var base64Data = EmployeeDocumentDetails.EED_DocumentData
-    var filename = EmployeeDocumentDetails.EED_DocumentName + '.' + EmployeeDocumentDetails.EED_DocumentType
-    if (filename == undefined || base64Data == undefined)
-      return
-    downloadFileFromBase64(base64Data, filename);
-  };
 
   return (
-    <CTabPanel className="p-3" itemKey="profile"> <CCardBody>
+    <CTabPanel className="p-3" itemKey="reportingmanager"> <CCardBody>
       <CRow>
         <CCol className='d-flex justify-content-end'>
-          <EmployeePopupTab_Profile_Grid_Popup onClose={handleClosePopup} EED_EmployeeID={EmployeeDetails.EME_EmployeeID} toggleAdd={toggleAdd} clearlink={clearlink} visible={visible} popupStatus={popupStatus1} onOpen={handleOpenPopup} StatusInDB={StatusInDB} EmployeeDocumentDetails={EmployeeDocumentDetails} />
+          <EmployeePopupTab_ReportingManager_Grid_Popup 
+          employeeId={EmployeeDetails.EME_EmployeeID}
+          popupStatus={popupStatus1} onClose1={handleClosePopup1}
+          StatusInDB={StatusInDB} visible1={visible1} onOpen1={handleOpenPopup1} toggleCreate={toggleCreate} 
+          EmployeeDetails={EmployeeDetails} EmployeeReportingManagerDetails={EmployeeReportingManagerDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -179,7 +159,7 @@ const EmployeePopupTab_Profile_Grid = ({ onClose, onOpen, EmployeeDetails, popup
           show_details: (item) => {
             return (
               <td className="py-2">
-                {/* <CButton
+                <CButton
                   color="primary"
                   variant="outline"
                   shape="square"
@@ -189,25 +169,23 @@ const EmployeePopupTab_Profile_Grid = ({ onClose, onOpen, EmployeeDetails, popup
                   }}
                 >
                   {getLabelText('Edit', templatetype_base)}
-                </CButton> */}
+                </CButton>
               </td>
             )
           },
           view: (item) => (
             <td>
-              {item.DocumentType == 'jpg' ?
-                <CButton
-                  color="success"
-                  variant="outline"
-                  shape="square"
-                  size="sm"
-                  onClick={() => {
-                    toggleView(item.id)
-                  }}
-                >
-                  {getLabelText('View', templatetype_base)}
-                </CButton> : ''
-              }
+              <CButton
+                color="success"
+                variant="outline"
+                shape="square"
+                size="sm"
+                onClick={() => {
+                  toggleView(item.id)
+                }}
+              >
+                {getLabelText('View', templatetype_base)}
+              </CButton>
             </td>
           ),
           delete: (item) => (
@@ -232,8 +210,7 @@ const EmployeePopupTab_Profile_Grid = ({ onClose, onOpen, EmployeeDetails, popup
                 shape="square"
                 size="sm"
                 onClick={() => {
-                  // toggleView(item.id)
-                  handleDownload(item.id)
+                  toggleView(item.id)
                 }}
               >Download File
               </CButton>
@@ -272,4 +249,4 @@ const EmployeePopupTab_Profile_Grid = ({ onClose, onOpen, EmployeeDetails, popup
   )
 }
 
-export default EmployeePopupTab_Profile_Grid
+export default EmployeePopupTab_ReportingManager_Grid

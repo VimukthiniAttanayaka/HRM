@@ -193,7 +193,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnResponse> inactivate_employeedocument(InactiveUSREDModel item)//ok
+        public List<ReturnResponse> inactivate_employeedocument(InactiveEEDModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
             //objUserHeadList.Add(new ReturnResponse() { resp = true, msg = "saved" });
@@ -336,11 +336,11 @@ namespace HRM.Controllers
             {
                 attachmentModel = new EmployeeDocumentModel
                 {
-                    USRED_EmployeeID = model.EME_EmployeeID,
-                    USRED_DocumentData = Convert.ToBase64String(frncv.ImageData),
-                    USRED_DocumentType = "pdf",
-                    USRED_DocumentName = "cv",
-                    USRED_Status = true
+                    EED_EmployeeID = model.EME_EmployeeID,
+                    EED_DocumentData = Convert.ToBase64String(frncv.ImageData),
+                    EED_DocumentType = "pdf",
+                    EED_DocumentName = "cv",
+                    EED_Status = true
                 };
                 attachmentList.Add(attachmentModel);
             }
@@ -348,11 +348,11 @@ namespace HRM.Controllers
             {
                 attachmentModel = new EmployeeDocumentModel
                 {
-                    USRED_EmployeeID = model.EME_EmployeeID,
-                    USRED_DocumentData = Convert.ToBase64String(frnnic.ImageData),
-                    USRED_DocumentType = "jpg",
-                    USRED_DocumentName = "nic",
-                    USRED_Status = true
+                    EED_EmployeeID = model.EME_EmployeeID,
+                    EED_DocumentData = Convert.ToBase64String(frnnic.ImageData),
+                    EED_DocumentType = "jpg",
+                    EED_DocumentName = "nic",
+                    EED_Status = true
                 };
                 attachmentList.Add(attachmentModel);
             }
@@ -360,11 +360,11 @@ namespace HRM.Controllers
             {
                 attachmentModel = new EmployeeDocumentModel
                 {
-                    USRED_EmployeeID = model.EME_EmployeeID,
-                    USRED_DocumentData = Convert.ToBase64String(frnprofileImage.ImageData),
-                    USRED_DocumentType = "jpg",
-                    USRED_DocumentName = "profileImage",
-                    USRED_Status = true
+                    EED_EmployeeID = model.EME_EmployeeID,
+                    EED_DocumentData = Convert.ToBase64String(frnprofileImage.ImageData),
+                    EED_DocumentType = "jpg",
+                    EED_DocumentName = "profileImage",
+                    EED_Status = true
                 };
                 attachmentList.Add(attachmentModel);
             }
@@ -372,11 +372,11 @@ namespace HRM.Controllers
             {
                 attachmentModel = new EmployeeDocumentModel
                 {
-                    USRED_EmployeeID = model.EME_EmployeeID,
-                    USRED_DocumentData = Convert.ToBase64String(frnpassport.ImageData),
-                    USRED_DocumentType = "jpg",
-                    USRED_DocumentName = "passport",
-                    USRED_Status = true
+                    EED_EmployeeID = model.EME_EmployeeID,
+                    EED_DocumentData = Convert.ToBase64String(frnpassport.ImageData),
+                    EED_DocumentType = "jpg",
+                    EED_DocumentName = "passport",
+                    EED_Status = true
                 };
                 attachmentList.Add(attachmentModel);
             }
@@ -384,11 +384,11 @@ namespace HRM.Controllers
             {
                 attachmentModel = new EmployeeDocumentModel
                 {
-                    USRED_EmployeeID = model.EME_EmployeeID,
-                    USRED_DocumentData = Convert.ToBase64String(frndrivingLicense.ImageData),
-                    USRED_DocumentType = "jpg",
-                    USRED_DocumentName = "drivingLicense",
-                    USRED_Status = true
+                    EED_EmployeeID = model.EME_EmployeeID,
+                    EED_DocumentData = Convert.ToBase64String(frndrivingLicense.ImageData),
+                    EED_DocumentType = "jpg",
+                    EED_DocumentName = "drivingLicense",
+                    EED_Status = true
                 };
                 attachmentList.Add(attachmentModel);
             }
@@ -436,39 +436,39 @@ namespace HRM.Controllers
         //        objemployeeHeadList = HRM_BL.EmployeeDocument_BL.get_employeeDocument_all(model);
         //        //foreach (var item in objemployeeHeadList)
         //        //{
-        //        //    if (item.USRED_DocumentName == "cv")
+        //        //    if (item.EED_DocumentName == "cv")
         //        //    {
         //        //        frncv = new ImageModel()
         //        //        {
-        //        //            ImageData = item.USRED_DocumentDataByte
+        //        //            ImageData = item.EED_DocumentDataByte
         //        //        };
         //        //    }
-        //        //    if (item.USRED_DocumentName == "nic")
+        //        //    if (item.EED_DocumentName == "nic")
         //        //    {
         //        //        frnnic = new ImageModel()
         //        //        {
-        //        //            ImageData = item.USRED_DocumentDataByte
+        //        //            ImageData = item.EED_DocumentDataByte
         //        //        };
         //        //    }
-        //        //    if (item.USRED_DocumentName == "profileImage")
+        //        //    if (item.EED_DocumentName == "profileImage")
         //        //    {
         //        //        frnprofileImage = new ImageModel()
         //        //        {
-        //        //            ImageData = item.USRED_DocumentDataByte
+        //        //            ImageData = item.EED_DocumentDataByte
         //        //        };
         //        //    }
-        //        //    if (item.USRED_DocumentName == "passport")
+        //        //    if (item.EED_DocumentName == "passport")
         //        //    {
         //        //        frnpassport = new ImageModel()
         //        //        {
-        //        //            ImageData = item.USRED_DocumentDataByte
+        //        //            ImageData = item.EED_DocumentDataByte
         //        //        };
         //        //    }
-        //        //    if (item.USRED_DocumentName == "drivingLicense")
+        //        //    if (item.EED_DocumentName == "drivingLicense")
         //        //    {
         //        //        frndrivingLicense = new ImageModel()
         //        //        {
-        //        //            ImageData = item.USRED_DocumentDataByte
+        //        //            ImageData = item.EED_DocumentDataByte
         //        //        };
         //        //    }
         //        //}
@@ -514,39 +514,39 @@ namespace HRM.Controllers
         //        objemployeeHeadList = HRM_BL.EmployeeDocument_BL.get_employeeDocument_single(model);
         //        //foreach (var item in objemployeeHeadList)
         //        //{
-        //        //    if (item.USRED_DocumentName == "cv")
+        //        //    if (item.EED_DocumentName == "cv")
         //        //    {
         //        //        frncv = new ImageModel()
         //        //        {
-        //        //            ImageData = item.USRED_DocumentDataByte
+        //        //            ImageData = item.EED_DocumentDataByte
         //        //        };
         //        //    }
-        //        //    if (item.USRED_DocumentName == "nic")
+        //        //    if (item.EED_DocumentName == "nic")
         //        //    {
         //        //        frnnic = new ImageModel()
         //        //        {
-        //        //            ImageData = item.USRED_DocumentDataByte
+        //        //            ImageData = item.EED_DocumentDataByte
         //        //        };
         //        //    }
-        //        //    if (item.USRED_DocumentName == "profileImage")
+        //        //    if (item.EED_DocumentName == "profileImage")
         //        //    {
         //        //        frnprofileImage = new ImageModel()
         //        //        {
-        //        //            ImageData = item.USRED_DocumentDataByte
+        //        //            ImageData = item.EED_DocumentDataByte
         //        //        };
         //        //    }
-        //        //    if (item.USRED_DocumentName == "passport")
+        //        //    if (item.EED_DocumentName == "passport")
         //        //    {
         //        //        frnpassport = new ImageModel()
         //        //        {
-        //        //            ImageData = item.USRED_DocumentDataByte
+        //        //            ImageData = item.EED_DocumentDataByte
         //        //        };
         //        //    }
-        //        //    if (item.USRED_DocumentName == "drivingLicense")
+        //        //    if (item.EED_DocumentName == "drivingLicense")
         //        //    {
         //        //        frndrivingLicense = new ImageModel()
         //        //        {
-        //        //            ImageData = item.USRED_DocumentDataByte
+        //        //            ImageData = item.EED_DocumentDataByte
         //        //        };
         //        //    }
         //        //}

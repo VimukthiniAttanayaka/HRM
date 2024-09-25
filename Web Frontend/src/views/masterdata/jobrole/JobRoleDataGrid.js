@@ -42,7 +42,8 @@ const JobRoleDataGrid = () => {
     }
     const JobRoleDetails = await getJobRoleSingle(formData)
     setJobRoleDetails(JobRoleDetails);   
-    setStatusInDB(JobRoleDetails.UUM_Status)
+    setStatusInDB(JobRoleDetails.MDJR_Status)
+    // console.log(StatusInDB)
     handleOpenPopup()
   }
   const toggleEdit = (index) => {

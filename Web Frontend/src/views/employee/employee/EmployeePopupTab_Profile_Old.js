@@ -27,9 +27,9 @@ const EmployeePopupTab_Profile = ({ EmployeeDetails, popupStatus }) => {
       .then(json => {
         let res1 = JSON.parse(JSON.stringify(json))
         console.log(res1[0])
-        console.log(res1[0].USRED_DocumentDataByte)
+        console.log(res1[0].EED_DocumentDataByte)
         setImg(res1)
-        setSelectedFileProfileImage(res1[0].USRED_DocumentDataByte)
+        setSelectedFileProfileImage(res1[0].EED_DocumentDataByte)
       })
   }
 

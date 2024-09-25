@@ -57,7 +57,7 @@ namespace HRM_DAL.Data
                                 objJobRoleHead.msg = "Get JobRole";
 
                                 objJobRole.MDJR_JobRoleID = rdr["MDJR_JobRoleID"].ToString();
-                                
+                                objJobRole.MDJR_Description = rdr["MDJR_Description"].ToString();
                                 objJobRole.MDJR_JobRole = rdr["MDJR_JobRole"].ToString();
                                 objJobRole.MDJR_Status = Convert.ToBoolean(rdr["MDJR_Status"].ToString());
 
@@ -158,7 +158,7 @@ namespace HRM_DAL.Data
                                 objJobRoleHead.resp = true;
                                 objJobRoleHead.msg = "Get JobRole";
 
-                                objJobRole.MDJR_JobRoleID = rdr["MDJR_JobRoleID"].ToString();                                
+                                objJobRole.MDJR_JobRoleID = rdr["MDJR_JobRoleID"].ToString();
                                 objJobRole.MDJR_JobRole = rdr["MDJR_JobRole"].ToString();
                                 objJobRole.MDJR_Status = Convert.ToBoolean(rdr["MDJR_Status"].ToString());
 
@@ -242,6 +242,9 @@ namespace HRM_DAL.Data
 
                         cmd.Parameters.AddWithValue("@MDJR_Status", item.MDJR_Status);
                         cmd.Parameters["@MDJR_Status"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@MDJR_Description", item.MDJR_Description);
+                        cmd.Parameters["@MDJR_Description"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -332,6 +335,9 @@ namespace HRM_DAL.Data
 
                         cmd.Parameters.AddWithValue("@MDJR_Status", item.MDJR_Status);
                         cmd.Parameters["@MDJR_Status"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@MDJR_Description", item.MDJR_Description);
+                        cmd.Parameters["@MDJR_Description"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
