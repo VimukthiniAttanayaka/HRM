@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { CTooltip, CRow, CButton, CModal, CTabs, CFormSelect, CTabList, CTab, CCol, CInputGroupText, CTabContent, CTabPanel, CModalBody, CModalTitle, CModalFooter, CFormCheck, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 
-const EmployeePopupTab_Employment = ({ EmployeeDetails, popupStatus }) => {
+const EmployeePopupTab_Employment_Grid_Popup = ({ EmployeeDetails, popupStatus }) => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -219,98 +219,97 @@ const EmployeePopupTab_Employment = ({ EmployeeDetails, popupStatus }) => {
 
   return (
     <>
-      <CTabPanel className="p-3" itemKey="employment">
-        <CForm onSubmit={handleSubmitData}>
-          <CInputGroup className="mb-3">
-            <CCol md={4}>
-              <CInputGroupText>
-                <h6>Job title</h6>
-              </CInputGroupText>
-            </CCol>
-            <CFormSelect value={jobTitle} onChange={handleChangeJobTitle}>
-              <option value="manager">Manager</option>
-              <option value="directer">Directer</option>
-              <option value="developer">Developer</option>
-              <option value="techLead">Tech lead</option>
-              {/* <option value="PIN">B+</option>
+      <CForm onSubmit={handleSubmitData}>
+        <CInputGroup className="mb-3">
+          <CCol md={4}>
+            <CInputGroupText>
+              <h6>Job title</h6>
+            </CInputGroupText>
+          </CCol>
+          <CFormSelect value={jobTitle} onChange={handleChangeJobTitle}>
+            <option value="manager">Manager</option>
+            <option value="directer">Directer</option>
+            <option value="developer">Developer</option>
+            <option value="techLead">Tech lead</option>
+            {/* <option value="PIN">B+</option>
                     <option value="PWD">B-</option>
                     <option value="PIN">AB+</option>
                     <option value="PWD">AB-</option> */}
-            </CFormSelect>
-          </CInputGroup>
-          <CInputGroup className="mb-3">
-            <CCol md={4}>
-              <CInputGroupText>
-                <h6>Department</h6>
-              </CInputGroupText>
-            </CCol>
-            <CFormSelect value={department} onChange={handleChangeDepartment}>
-              <option value="management">Management</option>
-              <option value="hr">HR</option>
-              <option value="accounting">Accounting</option>
-              <option value="developer">Developer</option>
-              {/* <option value="PIN">B+</option>
+          </CFormSelect>
+        </CInputGroup>
+        <CInputGroup className="mb-3">
+          <CCol md={4}>
+            <CInputGroupText>
+              <h6>Department</h6>
+            </CInputGroupText>
+          </CCol>
+          <CFormSelect value={department} onChange={handleChangeDepartment}>
+            <option value="management">Management</option>
+            <option value="hr">HR</option>
+            <option value="accounting">Accounting</option>
+            <option value="developer">Developer</option>
+            {/* <option value="PIN">B+</option>
                     <option value="PWD">B-</option>
                     <option value="PIN">AB+</option>
                     <option value="PWD">AB-</option> */}
-            </CFormSelect>
-          </CInputGroup>
-          <CInputGroup className="mb-3">
-            <CCol md={4}>
-              <CInputGroupText>
-                <h6>Reporting manager</h6>
-              </CInputGroupText>
-            </CCol>
-            <CFormSelect value={reportingManager} onChange={handleChangeReportingManager}>
-              <option value="PIN1">O+</option>
-              <option value="PWD2">O-</option>
-              <option value="PIN3">A+</option>
-              <option value="PWD4">A-</option>
-              <option value="PIN5">B+</option>
-              <option value="PWD6">B-</option>
-              <option value="PIN7">AB+</option>
-              <option value="PWD8">AB-</option>
-            </CFormSelect>
-          </CInputGroup>
-          <CInputGroup className="mb-3">
-            <CCol md={4}>
-              <CInputGroupText>
-                <h6>Date of hire</h6>
-              </CInputGroupText>
-            </CCol>
-            <input
-              type="date"
-              id="dob"
-              name="dateOfHired"
-              value={dateOfHired}
-              onChange={handleChangeDateOfHired}
-            />
-            {/* <CDatePicker placeholder="Date of hired" name="dateOfHired"
+          </CFormSelect>
+        </CInputGroup>
+        <CInputGroup className="mb-3">
+          <CCol md={4}>
+            <CInputGroupText>
+              <h6>Reporting manager</h6>
+            </CInputGroupText>
+          </CCol>
+          <CFormSelect value={reportingManager} onChange={handleChangeReportingManager}>
+            <option value="PIN1">O+</option>
+            <option value="PWD2">O-</option>
+            <option value="PIN3">A+</option>
+            <option value="PWD4">A-</option>
+            <option value="PIN5">B+</option>
+            <option value="PWD6">B-</option>
+            <option value="PIN7">AB+</option>
+            <option value="PWD8">AB-</option>
+          </CFormSelect>
+        </CInputGroup>
+        <CInputGroup className="mb-3">
+          <CCol md={4}>
+            <CInputGroupText>
+              <h6>Date of hire</h6>
+            </CInputGroupText>
+          </CCol>
+          <input
+            type="date"
+            id="dob"
+            name="dateOfHired"
+            value={dateOfHired}
+            onChange={handleChangeDateOfHired}
+          />
+          {/* <CDatePicker placeholder="Date of hired" name="dateOfHired"
                   value={dateOfHired} onChange={handleChangeDateOfHired}
                   /> */}
-          </CInputGroup>
-          <CInputGroup className="mb-3">
-            <CCol md={4}>
-              <CInputGroupText>
-                <h6>Employment type</h6>
-              </CInputGroupText>
-            </CCol>
-            <CFormSelect value={employmentType} onChange={handleChangeEmploymentType}>
-              <option value="fullTime">full-time</option>
-              <option value="partTime">part-time</option>
-              <option value="contract">contract</option>
-            </CFormSelect>
-          </CInputGroup>
-          <CInputGroup className="mb-3">
-            <CCol md={4}>
-              <CInputGroupText>
-                <h6>Salary</h6>
-              </CInputGroupText>
-            </CCol> <CFormInput placeholder="Salary" name="salary" type='number'
-              value={salary} onChange={handleChangeSalary}
-            />
-          </CInputGroup>
-          {/* <CInputGroup className="mb-3">
+        </CInputGroup>
+        <CInputGroup className="mb-3">
+          <CCol md={4}>
+            <CInputGroupText>
+              <h6>Employment type</h6>
+            </CInputGroupText>
+          </CCol>
+          <CFormSelect value={employmentType} onChange={handleChangeEmploymentType}>
+            <option value="fullTime">full-time</option>
+            <option value="partTime">part-time</option>
+            <option value="contract">contract</option>
+          </CFormSelect>
+        </CInputGroup>
+        <CInputGroup className="mb-3">
+          <CCol md={4}>
+            <CInputGroupText>
+              <h6>Salary</h6>
+            </CInputGroupText>
+          </CCol> <CFormInput placeholder="Salary" name="salary" type='number'
+            value={salary} onChange={handleChangeSalary}
+          />
+        </CInputGroup>
+        {/* <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>Benefits eligibility</h6>
@@ -319,39 +318,38 @@ const EmployeePopupTab_Employment = ({ EmployeeDetails, popupStatus }) => {
                   // value={customerId} onChange={handleChangeId}
                   />
                 </CInputGroup> */}
-          <CInputGroup className="mb-3">
-            <CCol md={4}>
-              <CInputGroupText>
-                <h6>Additional Information</h6>
-              </CInputGroupText>
-            </CCol> <CFormInput placeholder="Additional Information" name="Additional Information"
-              value={additionalInformation} onChange={handleChangeAdditionalInformation}
-            />
-          </CInputGroup>
-          <CInputGroup className="mb-3">
-            <CCol md={4}>
-              <CInputGroupText>
-                <h6>Tax identification number(TIN)</h6>
-              </CInputGroupText>
-            </CCol> <CFormInput placeholder="TIN" name="tin"
-              value={tin} onChange={handleChangeTin}
-            />
-          </CInputGroup>
-          <CInputGroup className="mb-3">
-            <CCol md={4}>
-              <CInputGroupText>
-                <h6>Status</h6>
-              </CInputGroupText>
-            </CCol>
-            <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
-          </CInputGroup>
-          <div className="d-grid">
-            {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
-              <CButton color="success" type='submit'>Submit</CButton>)}
-          </div>
-        </CForm>
-      </CTabPanel>
+        <CInputGroup className="mb-3">
+          <CCol md={4}>
+            <CInputGroupText>
+              <h6>Additional Information</h6>
+            </CInputGroupText>
+          </CCol> <CFormInput placeholder="Additional Information" name="Additional Information"
+            value={additionalInformation} onChange={handleChangeAdditionalInformation}
+          />
+        </CInputGroup>
+        <CInputGroup className="mb-3">
+          <CCol md={4}>
+            <CInputGroupText>
+              <h6>Tax identification number(TIN)</h6>
+            </CInputGroupText>
+          </CCol> <CFormInput placeholder="TIN" name="tin"
+            value={tin} onChange={handleChangeTin}
+          />
+        </CInputGroup>
+        <CInputGroup className="mb-3">
+          <CCol md={4}>
+            <CInputGroupText>
+              <h6>Status</h6>
+            </CInputGroupText>
+          </CCol>
+          <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
+        </CInputGroup>
+        <div className="d-grid">
+          {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
+            <CButton color="success" type='submit'>Submit</CButton>)}
+        </div>
+      </CForm>
     </>
   )
 }
-export default EmployeePopupTab_Employment
+export default EmployeePopupTab_Employment_Grid_Popup
