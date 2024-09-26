@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CRow, CButton, CModal, CTabs, CFormSelect, CTabList, CTab, CCol, CInputGroupText, CTabContent, CTabPanel, CModalBody, CModalTitle, CModalFooter, CFormCheck, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
+import { CTooltip, CRow, CButton, CModal, CTabs, CFormSelect, CFormTextarea, CTabList, CTab, CCol, CInputGroupText, CTabContent, CTabPanel, CModalBody, CModalTitle, CModalFooter, CFormCheck, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import axios from 'axios';
 import { getLabelText } from 'src/MultipleLanguageSheets'
@@ -17,11 +17,14 @@ const EmployeePopupTab_Contact_Grid_Popup = ({ toggleCreate, EmployeeDetails, po
   const apiUrl = process.env.REACT_APP_API_URL;
 
   // const [employeeId, setEmployeeId] = useState()
+  const [id, setID] = useState(0);
   const [address, setAddress] = useState('')
   const [emailAddress, setEmailAddress] = useState('')
   const [mobileNumber, setMobileNumber] = useState('')
   const [phoneNumber1, setPhoneNumber1] = useState('')
   const [phoneNumber2, setPhoneNumber2] = useState('')
+  const [Remarks, setRemarks] = useState('')
+  const [isActive, setIsActive] = useState(true)
 
   const handleChangeAddress = (event) => {
     setAddress(event.target.value)
@@ -39,18 +42,27 @@ const EmployeePopupTab_Contact_Grid_Popup = ({ toggleCreate, EmployeeDetails, po
     setPhoneNumber2(event.target.value)
   }
 
+  const handleChangeRemarks = (event) => {
+    setRemarks(event.target.value)
+  }
+  const handleChangeIsActive = (event) => { StatusInDB = event.target.checked; setIsActive(event.target.checked) }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const formData = {
       UD_UserID: "string",
       AUD_notificationToken: "string",
-      EME_CustomerID: "string",
-      EME_Address: address,
-      EME_EmailAddress: emailAddress,
-      EME_MobileNumber: mobileNumber,
-      EME_PhoneNumber1: phoneNumber1,
-      EME_PhoneNumber2: phoneNumber2,
+      EEC_CustomerID: "string",
+      EEC_EmployeeID: employeeId,
+      EEC_ID: id,
+      EEC_Address: address,
+      EEC_EmailAddress: emailAddress,
+      EEC_MobileNumber: mobileNumber,
+      EEC_PhoneNumber1: phoneNumber1,
+      EEC_PhoneNumber2: phoneNumber2,
+      EEC_Remarks: Remarks,
+      EEC_Status: isActive,
     }
 
     console.log(formData)
@@ -87,25 +99,32 @@ const EmployeePopupTab_Contact_Grid_Popup = ({ toggleCreate, EmployeeDetails, po
     } else if (popupStatus == 'delete') {
       return getLabelText('Delete Contact', templatetype)
     } else {
-      return getLabelText('Assign New Contact', templatetype)
+      return getLabelText('Create New Contact', templatetype)
     }
   }
   useEffect(() => {
     if (popupStatus == 'create') {
+      setID(0)
       setAddress('')
       setEmailAddress('')
       setMobileNumber('')
       setPhoneNumber1('')
       setPhoneNumber2('')
+      setRemarks('')
+      setIsActive(true)
     }
     else {
-      setAddress(EmployeeDetails.EME_Address)
-      setEmailAddress(EmployeeDetails.EME_EmailAddress)
-      setMobileNumber(EmployeeDetails.EME_MobileNumber)
-      setPhoneNumber1(EmployeeDetails.EME_PhoneNumber1)
-      setPhoneNumber2(EmployeeDetails.EME_PhoneNumber2)
+      setID(EmployeeContactDetails.EEC_ID)
+      // console.log(EmployeeContactDetails)
+      setAddress(EmployeeContactDetails.EEC_Address)
+      setEmailAddress(EmployeeContactDetails.EEC_EmailAddress)
+      setMobileNumber(EmployeeContactDetails.EEC_MobileNumber)
+      setPhoneNumber1(EmployeeContactDetails.EEC_PhoneNumber1)
+      setPhoneNumber2(EmployeeContactDetails.EEC_PhoneNumber2)
+      setRemarks(EmployeeContactDetails.EEC_Remarks)
+      setIsActive(EmployeeContactDetails.EEJR_Status)
     }
-  }, [EmployeeDetails]);
+  }, [EmployeeContactDetails]);
 
   const [open, setOpen] = useState(false);
 
@@ -120,7 +139,7 @@ const EmployeePopupTab_Contact_Grid_Popup = ({ toggleCreate, EmployeeDetails, po
 
   return (
     <>
-      <CButton color="primary" onClick={() => { toggleCreate();/*onOpen1*/ }}>Assign Job Role</CButton>
+      <CButton color="primary" onClick={() => { toggleCreate();/*onOpen1*/ }}>Add New Contact</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -183,6 +202,28 @@ const EmployeePopupTab_Contact_Grid_Popup = ({ toggleCreate, EmployeeDetails, po
                     </CInputGroupText>
                   </CCol> <CFormInput placeholder="PhoneNumber2" name="phoneNumber2"
                     value={phoneNumber2} onChange={handleChangePhoneNumber2}
+                  />
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>Remarks</h6>
+                    </CInputGroupText>
+                  </CCol>
+                  <CFormTextarea placeholder="Remarks" name="Remarks" value={Remarks}
+                    onChange={handleChangeRemarks}
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+                    required>
+                  </CFormTextarea>
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>Status</h6>
+                    </CInputGroupText>
+                  </CCol>
+                  <CFormCheck checked={isActive} onChange={handleChangeIsActive} label="Status"
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
                   />
                 </CInputGroup>
                 <div className="d-grid">

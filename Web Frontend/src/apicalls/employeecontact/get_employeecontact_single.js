@@ -1,13 +1,19 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export class EmployeeContactDetail {
-  EEJR_ID; EEJR_EmployeeID; EEJR_ContactID; EEJR_ActiveFrom; EEJR_ActiveTo; 
-  EEJR_Status; EEJR_CreatedBy; EEJR_CreatedDateTime; EEJR_ModifiedBy; EEJR_ModifiedDateTime; EEJR_Remarks;
-
+  EEC_ID;
+  EEC_EmployeeID;
+  EEC_Address;
+  EEC_EmailAddress;
+  EEC_MobileNumber;
+  EEC_Status;
+  EEC_Remarks;
+  EEC_PhoneNumber1;
+  EEC_PhoneNumber2;
 }
 // console.log(apiUrl)
 export const getEmployeeContactSingle = async (formData) => {
-console.log(formData)
+  console.log(formData)
   let resw = new EmployeeContactDetail();
   const res = await fetch(apiUrl + 'Employeecontact/get_Employeecontact_single', {
     method: 'POST',

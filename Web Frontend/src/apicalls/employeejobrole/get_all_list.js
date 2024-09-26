@@ -38,26 +38,3 @@ export const getEmployeeJobRoleAll = async (formData) => {
 
   return EmployeeJobRoleDetails;
 };
-
-export const requestdata_EmployeeJobRoles_DropDowns_All = async (formData) => {
-
-  const optionsEmployeeJobRole = [];
-  const res = await fetch(apiUrl + 'EmployeeJobRole/get_EmployeeJobRole_all', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  })
-    .then(response => response.json())
-    .then(json => {
-      let res1 = JSON.parse(JSON.stringify(json))
-
-      // for (let index = 0; index < res1[0].EmployeeJobRole.length; index++) {
-      //   const EmployeeJobRoleData = {
-      //     key: res1[0].EmployeeJobRole[index].EEJ_EmployeeJobRoleID,
-      //     value: res1[0].EmployeeJobRole[index].EEJ_EmployeeJobRole
-      //   };
-      //   optionsEmployeeJobRole[index] = EmployeeJobRoleData
-      // }
-    })
-  return optionsEmployeeJobRole;
-}

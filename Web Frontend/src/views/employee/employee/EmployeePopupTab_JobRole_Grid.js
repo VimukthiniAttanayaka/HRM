@@ -51,7 +51,7 @@ const EmployeePopupTab_JobRole_Grid = ({ EmployeeDetails, popupStatus, employeeI
   }
   const apiUrl = process.env.REACT_APP_API_URL;
 
-  async function requestdata() {
+  async function requestdata(employeeId) {
     const token = getJWTToken();
     const staffId = getStaffID();
     const customerId = getCustomerID();
@@ -61,16 +61,17 @@ const EmployeePopupTab_JobRole_Grid = ({ EmployeeDetails, popupStatus, employeeI
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      USR_EmployeeID: 'sedcx'
+      EME_EmployeeID: employeeId
     }
     const EmployeeJobRoleDetails = await getEmployeeJobRoleAll(formData)
     // console.log(EmployeeJobRoleDetails)
     setData(EmployeeJobRoleDetails);
   }
 
+
   useEffect(() => {
-    requestdata();
-  }, []);
+    requestdata(EmployeeDetails.EME_EmployeeID);
+  }, [EmployeeDetails]);
 
 
   async function loadDetails(item, action) {
@@ -97,10 +98,12 @@ const EmployeePopupTab_JobRole_Grid = ({ EmployeeDetails, popupStatus, employeeI
 
   const handleOpenPopup1 = () => {
     setVisible1(true);
+    requestdata(EmployeeDetails.EME_EmployeeID)
   };
 
   const handleClosePopup1 = () => {
     setVisible1(false);
+    requestdata(EmployeeDetails.EME_EmployeeID)
   };
 
   return (
@@ -111,7 +114,8 @@ const EmployeePopupTab_JobRole_Grid = ({ EmployeeDetails, popupStatus, employeeI
             <CCol className='d-flex justify-content-end'>
               <EmployeePopupTab_JobRole_Grid_PopUp popupStatus={popupStatus1} onClose1={handleClosePopup1}
                 StatusInDB={StatusInDB} visible1={visible1} onOpen1={handleOpenPopup1} toggleCreate={toggleCreate}
-                EmployeeJobRoleDetails={EmployeeJobRoleDetails} employeeId={employeeId} />
+                EmployeeJobRoleDetails={EmployeeJobRoleDetails} 
+                employeeId={EmployeeDetails.EME_EmployeeID} />
             </CCol>
           </CRow>
           <CSmartTable

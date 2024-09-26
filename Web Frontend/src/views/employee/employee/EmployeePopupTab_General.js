@@ -28,6 +28,7 @@ const EmployeePopupTab_General = ({ EmployeeDetails, popupStatus }) => {
   const [MobileNumber, setMobileNumber] = useState('')
   const [PhoneNumber1, setPhoneNumber1] = useState('')
   const [PhoneNumber2, setPhoneNumber2] = useState('')
+  const [tin, setTin] = useState('')
 
   const handleChangeEmployeeId = (event) => {
     setEmployeeId(event.target.value)
@@ -80,6 +81,9 @@ const EmployeePopupTab_General = ({ EmployeeDetails, popupStatus }) => {
   const handleChangePhoneNumber2 = (event) => {
     setPhoneNumber2(event.target.value)
   }
+  const handleChangeTin = (event) => {
+    setTin(event.target.value)
+  }
 
   const handleSubmitData = async (event) => {
     event.preventDefault()
@@ -103,7 +107,8 @@ const EmployeePopupTab_General = ({ EmployeeDetails, popupStatus }) => {
       EME_EmailAddress: EmailAddress,
       EME_MobileNumber: MobileNumber,
       EME_PhoneNumber1: PhoneNumber1,
-      EME_PhoneNumber2: PhoneNumber2
+      EME_PhoneNumber2: PhoneNumber2,
+      EME_PayeeTaxNumber: tin,
 
     }
 
@@ -149,6 +154,7 @@ const EmployeePopupTab_General = ({ EmployeeDetails, popupStatus }) => {
       setMobileNumber('')
       setPhoneNumber1('')
       setPhoneNumber2('')
+      setTin('')
     }
     else {
       const createdDOB = EmployeeDetails.EME_DateOfBirth;
@@ -172,6 +178,7 @@ const EmployeePopupTab_General = ({ EmployeeDetails, popupStatus }) => {
       setMobileNumber(EmployeeDetails.EME_MobileNumber)
       setPhoneNumber1(EmployeeDetails.EME_PhoneNumber1)
       setPhoneNumber2(EmployeeDetails.EME_PhoneNumber2)
+      setTin(EmployeeDetails.EME_PayeeTaxNumber)
     }
   }, [EmployeeDetails]);
 
@@ -317,7 +324,15 @@ const EmployeePopupTab_General = ({ EmployeeDetails, popupStatus }) => {
                   value={drivingLicense} onChange={handleChangeDrivingLicenseNumber}
                   disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
               </CInputGroup>
-            </CCardBody>
+              <CInputGroup className="mb-3">
+                <CCol md={4}>
+                  <CInputGroupText>
+                    <h6>Tax identification number(TIN)</h6>
+                  </CInputGroupText>
+                </CCol> <CFormInput placeholder="TIN" name="tin"
+                  value={tin} onChange={handleChangeTin}
+                />
+              </CInputGroup>   </CCardBody>
           </CCard>
           <CCard>
             <CCardHeader>

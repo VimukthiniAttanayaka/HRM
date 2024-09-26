@@ -117,6 +117,7 @@ const EmployeePopupTab_ReportingManager_Grid = ({ EmployeeDetails, popupStatus }
 
   const handleClosePopup1 = () => {
     setVisible1(false);
+    requestdata(EmployeeDetails.EME_EmployeeID)
   };
 
   const [StatusInDB, setStatusInDB] = useState(true)

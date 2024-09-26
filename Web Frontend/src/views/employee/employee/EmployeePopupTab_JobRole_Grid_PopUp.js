@@ -168,18 +168,7 @@ const EmployeePopupTab_JobRole_Grid_PopUp = ({ toggleCreate, EmployeeDetails, po
                     ))}
                   </CFormSelect>
                 </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>Remarks</h6>
-                    </CInputGroupText>
-                  </CCol>
-                  <CFormTextarea placeholder="Remarks" name="Remarks" value={Remarks}
-                    onChange={(e) => setRemarks(e.target.value)}
-                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
-                    required>
-                  </CFormTextarea>
-                </CInputGroup>
+
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
@@ -212,7 +201,18 @@ const EmployeePopupTab_JobRole_Grid_PopUp = ({ toggleCreate, EmployeeDetails, po
                       inputDateFormat={(date) => format(new Date(date), 'dd-MMM-yyyy')}
                     />}
                 </CInputGroup>
-
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>Remarks</h6>
+                    </CInputGroupText>
+                  </CCol>
+                  <CFormTextarea placeholder="Remarks" name="Remarks" value={Remarks}
+                    onChange={(e) => setRemarks(e.target.value)}
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+                    required>
+                  </CFormTextarea>
+                </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>

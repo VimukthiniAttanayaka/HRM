@@ -80,6 +80,7 @@
 
   <ItemGroup>
     <Compile Include="Models\EmployeeDocumentModel.cs" />
+    <Compile Include="Models\EmployeeContactModel.cs" />
     <Compile Include="Models\EmployeeReportingManagerModel.cs" />
     <Compile Include="Models\InternalUserModel.cs" />
     <Compile Include="Models\PerformanceAppriasalAnswersModel.cs" />

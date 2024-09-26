@@ -17,21 +17,31 @@ export const columns = [
   //   isVisible:false,
   //   _style: { width: '20%' },
   // },
-    {
-    key: 'JobRoleID',
-    label: 'JobRoleID',
+  {
+    key: 'Address',
+    label: 'Address',
     _style: { width: '20%' },
   },
   {
-    key: 'ActiveFrom',
-    label: 'ActiveFrom',
+    key: 'EmailAddress',
+    label: 'EmailAddress',
     _style: { width: '25%' }
   },
   {
-    key: 'ActiveTo',
-    label: 'ActiveTo',
+    key: 'MobileNumber',
+    label: 'MobileNumber',
     _style: { width: '25%' }
   },
+  // {
+  //   key: 'PhoneNumber1',
+  //   label: 'PhoneNumber1',
+  //   _style: { width: '25%' }
+  // },
+  // {
+  //   key: 'PhoneNumber2',
+  //   label: 'PhoneNumber2',
+  //   _style: { width: '25%' }
+  // },
   {
     key: 'status',
     _style: { width: '20%' }
@@ -71,7 +81,7 @@ export const columns_search = [
     key: 'FirstName',
     label: 'FirstName',
     _style: { width: '20%' },
-  },  {
+  }, {
     key: 'LastName',
     label: 'LastName',
     _style: { width: '20%' },
@@ -89,11 +99,11 @@ export const columns_search = [
   {
     key: 'status',
     _style: { width: '20%' }
-  }, 
+  },
   {
     key: 'select',
     _style: { width: '20%' }
-  }, 
+  },
 ];
 
 
