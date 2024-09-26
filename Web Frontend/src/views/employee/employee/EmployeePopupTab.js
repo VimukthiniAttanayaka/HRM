@@ -3,7 +3,7 @@ import { CTooltip, CRow, CButton, CModal, CTabs, CFormSelect, CTabList, CTab, CC
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import EmployeePopupTab_General from './EmployeePopupTab_General.js';
 import EmployeePopupTab_Profile_Grid from './EmployeePopupTab_Profile_Grid.js';
-import EmployeePopupTab_Contact from './EmployeePopupTab_Contact.js';
+import EmployeePopupTab_Contact_Grid from './EmployeePopupTab_Contact_Grid.js';
 import EmployeePopupTab_Employment from './EmployeePopupTab_Employment.js';
 import EmployeePopupTab_JobRoleGrid from './EmployeePopupTab_JobRole_Grid.js';
 import EmployeePopupTab_ReportingManagerGrid from './EmployeePopupTab_ReportingManager_Grid.js';
@@ -80,7 +80,7 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
             <CTabContent>
               <EmployeePopupTab_General popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
               <EmployeePopupTab_Profile_Grid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
-              <EmployeePopupTab_Contact popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
+              <EmployeePopupTab_Contact_Grid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
               <EmployeePopupTab_Employment popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
               <EmployeePopupTab_JobRoleGrid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} employeeId={employeeId} />
               <EmployeePopupTab_ReportingManagerGrid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} employeeId={employeeId} />
