@@ -3,11 +3,11 @@ import { toast } from 'react-toastify';
 
 import ReturnResponse from '../../publicmodels/ReturnResonse'
 
-export const modifyJobRole = async (formData) => {
+export const modifyJobType = async (formData) => {
   let resw = new ReturnResponse();
   console.log(formData)
   // Submit the form data to your backend API/
-  const response = await fetch(apiUrl + 'JobRole/modify_JobRole', {
+  const response = await fetch(apiUrl + 'JobType/modify_JobType', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),

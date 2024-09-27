@@ -6,56 +6,32 @@ import JobTypePopup from './JobTypePopup.js';
 // import loadDetails from './JobTypePopup.js';
 import { getJobTypeAll } from '../../../apicalls/jobtype/get_all_list.js';
 import { getJobTypeSingle } from '../../../apicalls/jobtype/get_jobtype_single.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
+
+import Pagination from '../../shared/Pagination.js'
+import { getBadge } from '../../shared/gridviewconstants.js';
+import { columns, headers } from '../../controllers/jobtype_controllers.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
+import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
 const JobTypeDataGrid = () => {
 
+  let templatetype = 'translation_jobtype'
+  let templatetype_base = 'translation'
+
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
+  const [popupStatus, setPopupStatus] = useState('create')
 
-  const columns = [
-    {
-      key: 'id',
-      // label: '',
-      // filter: false,
-      // sorter: false,
-    },
-    {
-      key: 'jobtype',
-      _style: { width: '20%' },
-    },
+  const [StatusInDB, setStatusInDB] = useState(true)
 
-    {
-      key: 'alotment',
-      _style: { width: '20%' }
-    }, {
-      key: 'status',
-      _style: { width: '20%' }
-    },
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [columnFilter, setColumnFilter] = useState([])
+  const [tableFilter, setTableFilter] = useState([])
 
-    {
-      key: 'show_details',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-  ];
-  const getBadge = (status) => {
-    switch (status) {
-      case 'Active':
-        return 'success'
-      case 'Inactive':
-        return 'secondary'
-      case 'Pending':
-        return 'warning'
-      case 'Banned':
-        return 'danger'
-      default:
-        return 'primary'
-    }
-  }
+  const [JobTypeDetails, setJobTypeDetails] = useState([])
 
-  const [jobTypeDetails, setJobTypeDetails] = useState([])
   // const [jobTypeId, setJobTypeId] = useState('')
   const handleChangeId = (event) => {
     setJobTypeId(event.target.value)
@@ -74,38 +50,36 @@ const JobTypeDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_JobTypeID: item
+      MDJT_JobTypeID: item
     }
-
-    // const res = fetch(apiUrl + 'jobtype/get_jobtype_single', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setJobTypeDetails(res1[0].JobType[0]);
-    //     handleOpenPopup()
-    //   })
+    console.log(formData)
     const JobTypeDetails = await getJobTypeSingle(formData)
+    console.log(JobTypeDetails)
     // setJobTypeDetails(res1[0].JobType[0]);
     setJobTypeDetails(JobTypeDetails);
     handleOpenPopup()
   }
+  const toggleEdit = (index) => {
+    setPopupStatus('edit')
+    toggleDetails(index)
+  }
+  const toggleDelete = (index) => {
+    setPopupStatus('delete')
+    toggleDetails(index)
+  }
+  const toggleView = (index) => {
+    setPopupStatus('view')
+    toggleDetails(index)
+  }
   const toggleDetails = (index) => {
-
-
     const position = details.indexOf(index)
     let newDetails = details.slice()
     if (position !== -1) {
       newDetails.splice(position, 1)
     } else {
       newDetails = [...details, index]
-      // alert(newDetails[newDetails.length - 1])
       loadDetails(newDetails[0])
     }
-    // setDetails(newDetails)
   }
 
   // setCustomerId(res1[0].Customer[0].CUS_ID);}
@@ -127,37 +101,6 @@ const JobTypeDataGrid = () => {
     const JobTypeDetails = await getJobTypeAll(formData)
     // console.log(JobTypeDetails)
     setData(JobTypeDetails);
-
-    // const res = await fetch(apiUrl + 'jobtype/get_jobtype_all', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-
-    //     const JobTypeDetails = [];
-    //     class JobTypeDetail {
-    //       constructor(id, jobtype, status, Alotment) {
-    //         this.jobtype = jobtype;
-    //         this.id = id;
-    //         this.alotment = Alotment
-    //         if (status == true) { this.status = "Active"; }
-    //         else { this.status = "Inactive"; }
-    //       }
-    //     }
-
-    //     for (let index = 0; index < res1[0].JobType.length; index++) {
-    //       let element = res1[0].JobType[index];
-    //       console.log(element)
-    //       JobTypeDetails[index] = new JobTypeDetail(element.LVT_JobTypeID, element.LVT_JobType, element.LVT_Status, element.LVT_JobAlotment);
-    //     }
-
-    //     setData(JobTypeDetails);
-    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
-    //   })
-
   }
   useEffect(() => {
     requestdata();
@@ -178,7 +121,7 @@ const JobTypeDataGrid = () => {
 
   const handleClosePopup = () => {
     setVisible(false);
-    setJobTypeDetails([]);
+    requestdata();
   };
 
   return (
@@ -196,7 +139,7 @@ const JobTypeDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <JobTypePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} jobTypeDetails={jobTypeDetails} />
+          <JobTypePopup popupStatus={popupStatus} onClose={handleClosePopup} StatusInDB={StatusInDB} visible={visible} onOpen={handleOpenPopup} JobTypeDetails={JobTypeDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -205,7 +148,7 @@ const JobTypeDataGrid = () => {
         columns={columns}
         columnFilter
         columnSorter
-        footer
+        // footer
         items={data}
         itemsPerPageSelect
         itemsPerPage={5}
@@ -218,11 +161,6 @@ const JobTypeDataGrid = () => {
           console.log(items)
         }}
         scopedColumns={{
-          // avatar: (item) => (
-          //   <td>
-          //     {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-          //   </td>
-          // ),
           status: (item) => (
             <td>
               <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
@@ -237,14 +175,46 @@ const JobTypeDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDetails(item.id)
+                    toggleEdit(item.id)
                   }}
                 >
-                  {details.includes(item.id) ? 'Hide' : 'Show'}
+                  Edit
                 </CButton>
               </td>
             )
           },
+          view: (item) => (
+            <td>
+              <CButton
+                color="success"
+                variant="outline"
+                shape="square"
+                size="sm"
+                onClick={() => {
+                  toggleView(item.id)
+                }}
+              >
+                View
+              </CButton>
+            </td>
+          ),
+          delete: (item) => (
+            <td>
+              {item.status == 'Inactive' ? '' :
+                <CButton
+                  color="danger"
+                  variant="outline"
+                  shape="square"
+                  size="sm"
+                  onClick={() => {
+                    toggleDelete(item.id)
+                  }}
+                >
+                  Delete
+                </CButton>
+              }
+            </td>
+          ),
           details: (item) => {
             return (
               <CCollapse visible={details.includes(item.id)}>

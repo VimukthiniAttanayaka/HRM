@@ -2,10 +2,10 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 import ReturnResponse from '../../publicmodels/ReturnResonse'
 
-export const addNewJobRole = async (formData) => {
+export const addNewJobType = async (formData) => {
   let resw = new ReturnResponse();
   // Submit the form data to your backend API/
-  const response = await fetch(apiUrl + 'JobRole/add_new_JobRole', {
+  const response = await fetch(apiUrl + 'JobType/add_new_JobType', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),

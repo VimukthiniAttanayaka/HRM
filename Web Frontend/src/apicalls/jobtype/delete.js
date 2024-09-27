@@ -2,10 +2,10 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 import ReturnResponse from '../../publicmodels/ReturnResonse'
 
-export const deleteJobRole = async (formData) => {
+export const deleteJobType = async (formData) => {
   let resw = new ReturnResponse();
   // Submit the form data to your backend API/
-  const response = await fetch(apiUrl + 'JobRole/inactivate_JobRole', {
+  const response = await fetch(apiUrl + 'JobType/inactivate_JobType', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
