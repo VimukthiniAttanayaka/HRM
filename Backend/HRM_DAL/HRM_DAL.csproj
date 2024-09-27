@@ -79,10 +79,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Models\EmployeeSalaryModel.cs" />
     <Compile Include="Models\EmployeeDocumentModel.cs" />
     <Compile Include="Models\EmployeeContactModel.cs" />
     <Compile Include="Models\EmployeeReportingManagerModel.cs" />
     <Compile Include="Models\InternalUserModel.cs" />
+    <Compile Include="Models\SalaryTypeModel.cs" />
+    <Compile Include="Models\JobTypeModel.cs" />
     <Compile Include="Models\PerformanceAppriasalAnswersModel.cs" />
     <Compile Include="Models\PerformanceAppriasalApprovalModel.cs" />
     <Compile Include="Models\PerformanceAppriasalQuestionsModel.cs" />

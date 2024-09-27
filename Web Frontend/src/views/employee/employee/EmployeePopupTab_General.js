@@ -29,6 +29,7 @@ const EmployeePopupTab_General = ({ EmployeeDetails, popupStatus }) => {
   const [PhoneNumber1, setPhoneNumber1] = useState('')
   const [PhoneNumber2, setPhoneNumber2] = useState('')
   const [tin, setTin] = useState('')
+  const [isActive, setIsActive] = useState(true)
 
   const handleChangeEmployeeId = (event) => {
     setEmployeeId(event.target.value)
@@ -84,6 +85,10 @@ const EmployeePopupTab_General = ({ EmployeeDetails, popupStatus }) => {
   const handleChangeTin = (event) => {
     setTin(event.target.value)
   }
+  const handleChangeStatus = (event) => {
+    setIsActive(event.target.checked)
+  }
+
 
   const handleSubmitData = async (event) => {
     event.preventDefault()
@@ -109,6 +114,7 @@ const EmployeePopupTab_General = ({ EmployeeDetails, popupStatus }) => {
       EME_PhoneNumber1: PhoneNumber1,
       EME_PhoneNumber2: PhoneNumber2,
       EME_PayeeTaxNumber: tin,
+      EME_Status: isActive,
 
     }
 
@@ -155,6 +161,7 @@ const EmployeePopupTab_General = ({ EmployeeDetails, popupStatus }) => {
       setPhoneNumber1('')
       setPhoneNumber2('')
       setTin('')
+      setIsActive(true)
     }
     else {
       const createdDOB = EmployeeDetails.EME_DateOfBirth;
@@ -179,6 +186,7 @@ const EmployeePopupTab_General = ({ EmployeeDetails, popupStatus }) => {
       setPhoneNumber1(EmployeeDetails.EME_PhoneNumber1)
       setPhoneNumber2(EmployeeDetails.EME_PhoneNumber2)
       setTin(EmployeeDetails.EME_PayeeTaxNumber)
+      setIsActive(EmployeeDetails.EME_Status)
     }
   }, [EmployeeDetails]);
 
@@ -386,6 +394,14 @@ const EmployeePopupTab_General = ({ EmployeeDetails, popupStatus }) => {
               </CInputGroup>
             </CCardBody>
           </CCard>
+          <CInputGroup className="mb-3">
+            <CCol md={4}>
+              <CInputGroupText>
+                <h6>Status</h6>
+              </CInputGroupText>
+            </CCol>
+            <CFormCheck checked={isActive} onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
+          </CInputGroup>
           <div className="d-grid">
             {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>Delete</CButton> :
               <CButton color="success" type='submit'>Submit</CButton>)}

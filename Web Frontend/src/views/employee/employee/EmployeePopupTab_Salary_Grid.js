@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CRow, CButton, CSmartTable, CBadge, CCollapse, CModal, CTabs, CFormSelect, CTabList, CTab, CCol, CInputGroupText, CTabContent, CTabPanel, CModalBody, CModalTitle, CModalFooter, CFormCheck, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import { getEmployeeEmploymentAll } from '../../../apicalls/employeeemployment/get_all_list.js';
-import { getEmployeeEmploymentSingle } from '../../../apicalls/employeeemployment/get_employeeemployment_single.js';
-import EmployeePopupTab_Employment_Grid_Popup from './EmployeePopupTab_Employment_Grid_Popup.js';
+import { getEmployeeSalaryAll } from '../../../apicalls/employeesalary/get_all_list.js';
+import { getEmployeeSalarySingle } from '../../../apicalls/employeesalary/get_employeesalary_single.js';
+import EmployeePopupTab_Salary_Grid_Popup from './EmployeePopupTab_Salary_Grid_Popup.js';
 import { getBadge } from '../../shared/gridviewconstants.js';
 
-import { columns, headers } from '../../controllers/employeeemployment_controllers.js';
+import { columns, headers } from '../../controllers/employeesalary_controllers.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
-const EmployeePopupTab_Employment_Grid = ({ EmployeeDetails, popupStatus, employeeId }) => {
+const EmployeePopupTab_Salary_Grid = ({ EmployeeDetails, popupStatus, employeeId }) => {
 
-  let templatetype = 'translation_employeeemployment'
+  let templatetype = 'translation_employeesalary'
   let templatetype_base = 'translation'
 
   const [details, setDetails] = useState([])
@@ -63,9 +63,9 @@ const EmployeePopupTab_Employment_Grid = ({ EmployeeDetails, popupStatus, employ
       // AUD_notificationToken: token,
       EME_EmployeeID: employeeId
     }
-    const EmployeeEmploymentDetails = await getEmployeeEmploymentAll(formData)
-    // console.log(EmployeeEmploymentDetails)
-    setData(EmployeeEmploymentDetails);
+    const EmployeeSalaryDetails = await getEmployeeSalaryAll(formData)
+    // console.log(EmployeeSalaryDetails)
+    setData(EmployeeSalaryDetails);
   }
 
 
@@ -82,16 +82,16 @@ const EmployeePopupTab_Employment_Grid = ({ EmployeeDetails, popupStatus, employ
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      EEJR_ID: item
+      EES_ID: item
     }
 
     console.log(formData)
-    const EmployeeEmploymentDetails = await getEmployeeEmploymentSingle(formData)
-    setEmployeeEmploymentDetails(EmployeeEmploymentDetails);
+    const EmployeeSalaryDetails = await getEmployeeSalarySingle(formData)
+    setEmployeeSalaryDetails(EmployeeSalaryDetails);
     handleOpenPopup1()
   }
 
-  const [EmployeeEmploymentDetails, setEmployeeEmploymentDetails] = useState([])
+  const [EmployeeSalaryDetails, setEmployeeSalaryDetails] = useState([])
   const [currentItems, setCurrentItems] = useState(data)
 
   const [visible1, setVisible1] = useState(false);
@@ -108,13 +108,13 @@ const EmployeePopupTab_Employment_Grid = ({ EmployeeDetails, popupStatus, employ
 
   return (
     <>
-      <CTabPanel className="p-3" itemKey="employment">
+      <CTabPanel className="p-3" itemKey="salary">
         <CCardBody>
           <CRow>
             <CCol className='d-flex justify-content-end'>
-              <EmployeePopupTab_Employment_Grid_Popup popupStatus={popupStatus1} onClose1={handleClosePopup1}
+              <EmployeePopupTab_Salary_Grid_Popup popupStatus={popupStatus1} onClose1={handleClosePopup1}
                 StatusInDB={StatusInDB} visible1={visible1} onOpen1={handleOpenPopup1} toggleCreate={toggleCreate}
-                EmployeeEmploymentDetails={EmployeeEmploymentDetails} 
+                EmployeeSalaryDetails={EmployeeSalaryDetails} 
                 employeeId={EmployeeDetails.EME_EmployeeID} />
             </CCol>
           </CRow>
@@ -236,4 +236,4 @@ const EmployeePopupTab_Employment_Grid = ({ EmployeeDetails, popupStatus, employ
       </CTabPanel> </>
   )
 }
-export default EmployeePopupTab_Employment_Grid
+export default EmployeePopupTab_Salary_Grid

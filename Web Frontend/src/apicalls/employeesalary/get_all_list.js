@@ -1,10 +1,10 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
 // console.log(apiUrl)
-export const getEmployeeEmploymentAll = async (formData) => {
-  const EmployeeEmploymentDetails = [];
+export const getEmployeeSalaryAll = async (formData) => {
+  const EmployeeSalaryDetails = [];
 
-  const res = await fetch(apiUrl + 'EmployeeEmployment/get_EmployeeEmployment_all', {
+  const res = await fetch(apiUrl + 'EmployeeSalary/get_EmployeeSalary_all', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -14,7 +14,7 @@ export const getEmployeeEmploymentAll = async (formData) => {
       let res1 = JSON.parse(JSON.stringify(json))
 
 
-      class EmployeeEmploymentDetail {
+      class EmployeeSalaryDetail {
         constructor(id, EmployeeID,
           Address,
           EmailAddress,
@@ -35,10 +35,10 @@ export const getEmployeeEmploymentAll = async (formData) => {
         }
       }
 
-      for (let index = 0; index < res1[0].EmployeeEmployment.length; index++) {
-        let element = res1[0].EmployeeEmployment[index];
+      for (let index = 0; index < res1[0].EmployeeSalary.length; index++) {
+        let element = res1[0].EmployeeSalary[index];
         // console.log(element)
-        EmployeeEmploymentDetails[index] = new EmployeeEmploymentDetail(element.EEC_ID,
+        EmployeeSalaryDetails[index] = new EmployeeSalaryDetail(element.EEC_ID,
           element.EEC_EmployeeID,
           element.EEC_Address,
           element.EEC_EmailAddress,
@@ -47,8 +47,8 @@ export const getEmployeeEmploymentAll = async (formData) => {
           element.EEC_PhoneNumber2,
           element.EEC_Status);
       }
-      // console.log(EmployeeEmploymentDetails)
+      // console.log(EmployeeSalaryDetails)
     })
 
-  return EmployeeEmploymentDetails;
+  return EmployeeSalaryDetails;
 };

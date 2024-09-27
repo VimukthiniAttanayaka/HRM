@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { CTooltip, CRow, CButton, CModal, CTabs, CFormText, CFormSelect, CTabList, CTab, CCol, CInputGroupText, CTabContent, CTabPanel, CModalBody, CModalTitle, CModalFooter, CFormCheck, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker, CFormTextarea } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import { Dropdowns_JobRole } from '../../../apicalls/jobrole/dropdowns.js';
+import { Dropdowns_JobType } from '../../../apicalls/jobtype/dropdowns.js';
+import { Dropdowns_Department } from '../../../apicalls/department/dropdowns.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
 import { modifyEmployeeJobRole } from '../../../apicalls/employeejobrole/modify.js';
@@ -19,7 +21,11 @@ const EmployeePopupTab_JobRole_Grid_PopUp = ({ toggleCreate, EmployeeDetails, po
 
   const [selectedJobRole, setSelectedJobRole] = useState(null);
   const [optionsJobRole, setOptionsJobRole] = useState([]);
+  const [optionsJobType, setOptionsJobType] = useState([]);
+  const [optionsDepartment, setOptionsDepartment] = useState([]);
   const [selectedOptionJobRole, setSelectedOptionJobRole] = useState('');
+  const [selectedOptionJobType, setSelectedOptionJobType] = useState('');
+  const [selectedOptionDepartment, setSelectedOptionDepartment] = useState('');
   const [Remarks, setRemarks] = useState('');
   const [id, setID] = useState(0);
   const [ActiveFrom, setActiveFrom] = useState(new Date())
@@ -38,6 +44,8 @@ const EmployeePopupTab_JobRole_Grid_PopUp = ({ toggleCreate, EmployeeDetails, po
       EEJR_ID: id,
       EEJR_EmployeeID: employeeId,
       EEJR_JobRoleID: selectedOptionJobRole,
+      EEJR_JobType: selectedOptionJobType,
+      EEJR_Department: selectedOptionDepartment,
       EEJR_ActiveFrom: ActiveFrom.toJSON(),
       EEJR_ActiveTo: ActiveTo.toJSON(),
       EEJR_Status: isActive,
@@ -78,6 +86,13 @@ const EmployeePopupTab_JobRole_Grid_PopUp = ({ toggleCreate, EmployeeDetails, po
     const JobRoleDetails = await Dropdowns_JobRole(formData)
     setOptionsJobRole(JobRoleDetails);
 
+    const JobTypeDetails = await Dropdowns_JobType(formData)
+    setOptionsJobType(JobTypeDetails);
+    console.log(JobTypeDetails)
+
+    const DepartmentDetails = await Dropdowns_Department(formData)
+    setOptionsDepartment(DepartmentDetails);
+
   }
 
   const popupStatusSetup = (event) => {
@@ -97,15 +112,19 @@ const EmployeePopupTab_JobRole_Grid_PopUp = ({ toggleCreate, EmployeeDetails, po
     if (popupStatus == 'create') {
       setID(0)
       setSelectedOptionJobRole('')
+      setSelectedOptionJobType('')
+      setSelectedOptionDepartment('')
       setActiveFrom(new Date())
       setActiveTo(new Date())
       setIsActive(true)
       setRemarks('')
     }
     else {
-      console.log(EmployeeJobRoleDetails)
+      // console.log(EmployeeJobRoleDetails)
       setID(EmployeeJobRoleDetails.EEJR_ID)
       setSelectedOptionJobRole(EmployeeJobRoleDetails.EEJR_JobRoleID)
+      setSelectedOptionJobType(EmployeeJobRoleDetails.EEJR_JobType)
+      setSelectedOptionDepartment(EmployeeJobRoleDetails.EEJR_Department)
       setActiveFrom(EmployeeJobRoleDetails.EEJR_ActiveFrom)
       setActiveTo(EmployeeJobRoleDetails.EEJR_ActiveTo)
       setIsActive(EmployeeJobRoleDetails.EEJR_Status)
@@ -168,7 +187,37 @@ const EmployeePopupTab_JobRole_Grid_PopUp = ({ toggleCreate, EmployeeDetails, po
                     ))}
                   </CFormSelect>
                 </CInputGroup>
-
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>JobType</h6>
+                    </CInputGroupText>
+                  </CCol>
+                  <CFormSelect required
+                    disabled={(popupStatus == 'edit' || popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+                    value={selectedOptionJobType} onChange={(e) => setSelectedOptionJobType(e.target.value)}>
+                    {optionsJobType.map((option) => (
+                      <option key={option.key} value={option.key}>
+                        {option.value}
+                      </option>
+                    ))}
+                  </CFormSelect>
+                </CInputGroup> <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>Department</h6>
+                    </CInputGroupText>
+                  </CCol>
+                  <CFormSelect required
+                    disabled={(popupStatus == 'edit' || popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+                    value={selectedOptionDepartment} onChange={(e) => setSelectedOptionDepartment(e.target.value)}>
+                    {optionsDepartment.map((option) => (
+                      <option key={option.key} value={option.key}>
+                        {option.value}
+                      </option>
+                    ))}
+                  </CFormSelect>
+                </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>

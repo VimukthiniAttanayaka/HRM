@@ -1,6 +1,6 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export class EmployeeEmploymentDetail {
+export class EmployeeSalaryDetail {
   EEC_ID;
   EEC_EmployeeID;
   EEC_Address;
@@ -12,10 +12,10 @@ export class EmployeeEmploymentDetail {
   EEC_PhoneNumber2;
 }
 // console.log(apiUrl)
-export const getEmployeeEmploymentSingle = async (formData) => {
+export const getEmployeeSalarySingle = async (formData) => {
   console.log(formData)
-  let resw = new EmployeeEmploymentDetail();
-  const res = await fetch(apiUrl + 'Employeeemployment/get_Employeeemployment_single', {
+  let resw = new EmployeeSalaryDetail();
+  const res = await fetch(apiUrl + 'Employeesalary/get_Employeesalary_single', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -23,9 +23,9 @@ export const getEmployeeEmploymentSingle = async (formData) => {
     .then(response => response.json())
     .then(json => {
       let res1 = JSON.parse(JSON.stringify(json))
-      resw = res1[0].EmployeeEmployment[0]
+      resw = res1[0].EmployeeSalary[0]
       // console.log(res2)
-      console.log(res1[0].EmployeeEmployment[0])
+      console.log(res1[0].EmployeeSalary[0])
       // setUserRoleDetails(res1[0].UserRole[0]);
       // handleOpenPopup()
     })

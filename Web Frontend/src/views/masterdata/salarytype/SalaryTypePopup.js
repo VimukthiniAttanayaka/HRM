@@ -1,29 +1,34 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-
-import { modifyLocation } from '../../../apicalls/location/modify.js';
-import { deleteLocation } from '../../../apicalls/location/delete.js';
-import { addNewLocation } from '../../../apicalls/location/add_new.js';
+// import data from './_data.js'
+// import { Modal } from '@coreui/coreui-pro';
+import { modifySalaryType } from '../../../apicalls/salarytype/modify.js';
+import { deleteSalaryType } from '../../../apicalls/salarytype/delete.js';
+import { addNewSalaryType } from '../../../apicalls/salarytype/add_new.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
 import PopUpAlert from '../../shared/PopUpAlert.js'
 
-const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus, StatusInDB }) => {
+const SalaryTypePopup = ({ visible, onClose, onOpen, SalaryTypeDetails, popupStatus, StatusInDB }) => {
 
-  let templatetype = 'translation_location'
+  let templatetype = 'translation_salarytype'
   let templatetype_base = 'translation'
   const apiUrl = process.env.REACT_APP_API_URL;
 
-  const [LocationId, setLocationId] = useState('')
-  const [Location, setLocation] = useState('')
+  const [SalaryTypeId, setSalaryTypeId] = useState('')
+  const [SalaryType, setSalaryType] = useState('')
+  const [Description, setDescription] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeLocation = (event) => {
-    setLocation(event.target.value)
+  const handleChangeSalaryType = (event) => {
+    setSalaryType(event.target.value)
+  }
+  const handleChangeDescription = (event) => {
+    setDescription(event.target.value)
   }
   const handleChangeId = (event) => {
-    setLocationId(event.target.value)
+    setSalaryTypeId(event.target.value)
   }
   const handleChangeStatus = (event) => {
     setIsActive(event.target.checked)
@@ -41,28 +46,29 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus,
     const customerId = getCustomerID();
 
     const formData = {
-      MDL_LocationID: LocationId,
-      MDL_Location: Location,
-      MDL_Status: isActive,
+      MDST_SalaryTypeID: SalaryTypeId,
+      MDST_SalaryType: SalaryType,
+      MDST_Description: Description,
+      MDST_Status: isActive,
       UD_UserID: staffId,
     }
     // console.log(formData)
     if (popupStatus == 'edit') {
-      const APIReturn = await modifyLocation(formData)
+      const APIReturn = await modifySalaryType(formData)
       if (APIReturn.resp === false) { setDialogTitle("Alert"); }
       else { setDialogTitle("Message"); }
       setDialogContent(APIReturn.msg);
       setOpen(true);
     }
     else if (popupStatus == 'delete') {
-      const APIReturn = await deleteLocation(formData)
+      const APIReturn = await deleteSalaryType(formData)
       if (APIReturn.resp === false) { setDialogTitle("Alert"); }
       else { setDialogTitle("Message"); }
       setDialogContent(APIReturn.msg);
       setOpen(true);
     }
     else {
-      const APIReturn = await addNewLocation(formData)
+      const APIReturn = await addNewSalaryType(formData)
       if (APIReturn.resp === false) { setDialogTitle("Alert"); }
       else { setDialogTitle("Message"); }
       setDialogContent(APIReturn.msg);
@@ -73,25 +79,26 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus,
 
   const popupStatusSetup = (event) => {
     if (popupStatus == 'edit') {
-      return getLabelText('Edit Location', templatetype)
+      return getLabelText('Edit SalaryType', templatetype)
     } else if (popupStatus == 'view') {
-      return getLabelText('View Location', templatetype)
+      return getLabelText('View SalaryType', templatetype)
     } else if (popupStatus == 'delete') {
-      return getLabelText('Delete Location', templatetype)
+      return getLabelText('Delete SalaryType', templatetype)
     } else {
-      return getLabelText('Create New Location', templatetype)
+      return getLabelText('Create New SalaryType', templatetype)
     }
   }
 
   useEffect(() => {
-    setLocationId(LocationDetails.MDL_LocationID)
-    setLocation(LocationDetails.MDL_Location)
+    setSalaryTypeId(SalaryTypeDetails.MDST_SalaryTypeID)
+    setSalaryType(SalaryTypeDetails.MDST_SalaryType)
+    setDescription(SalaryTypeDetails.MDST_Description)
     setIsActive(StatusInDB)
-  }, [LocationDetails]);
-  // console.log(LocationDetails)
+  }, [SalaryTypeDetails]);
+  // console.log(SalaryTypeDetails)
 
   const [open, setOpen] = useState(false);
-  // const [openEmp_Popup, setOpenEmp_Popup] = useState(false);
+  const [openEmp_Popup, setOpenEmp_Popup] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
@@ -104,7 +111,7 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus,
 
   return (
     <>
-      <CButton color="primary" onClick={onOpen}>{getLabelText('New Location', templatetype)}</CButton>
+      <CButton color="primary" onClick={onOpen}>New SalaryType</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
@@ -114,7 +121,7 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus,
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">{popupStatusSetup()}</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">Create New SalaryType</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">
@@ -124,20 +131,32 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus,
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>{getLabelText('LocationID', templatetype)}</h6>
+                      <h6>SalaryTypeID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="LocationID" name="LocationID" value={LocationId} onChange={handleChangeId} disabled={popupStatus == 'create' ? false : true}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  </CCol>
+                  <CFormInput placeholder="SalaryTypeID" name="SalaryTypeID" value={SalaryTypeId} onChange={handleChangeId}
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>{getLabelText('Location', templatetype)}</h6>
+                      <h6>SalaryType</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="Location" name="Location" value={Location} onChange={handleChangeLocation} disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  </CCol>
+                  <CFormInput placeholder="SalaryType" name="SalaryType" value={SalaryType} onChange={handleChangeSalaryType}
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
                   />
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>Description</h6>
+                    </CInputGroupText>
+                  </CCol>  <CFormInput placeholder="Description" name="Description" value={Description} onChange={handleChangeDescription}
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+                  />
+
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
@@ -159,4 +178,4 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus,
     </>
   )
 }
-export default LocationPopup
+export default SalaryTypePopup

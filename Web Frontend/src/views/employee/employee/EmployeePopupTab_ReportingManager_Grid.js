@@ -41,9 +41,9 @@ const EmployeePopupTab_ReportingManager_Grid = ({ EmployeeDetails, popupStatus }
       // AUD_notificationToken: token,
       EERM_ID: item
     }
-    console.log(formData)
+    // console.log(formData)
     const EmployeeReportingManagerDetails = await getEmployeeReportingManagerSingle(formData)
-    console.log(EmployeeReportingManagerDetails)
+    // console.log(EmployeeReportingManagerDetails)
     setEmployeeReportingManagerDetails(EmployeeReportingManagerDetails);
     setStatusInDB(EmployeeReportingManagerDetails.EERM_Status)
   }
@@ -74,7 +74,7 @@ const EmployeePopupTab_ReportingManager_Grid = ({ EmployeeDetails, popupStatus }
     } else {
       newDetails = [...details, index]
       // alert(newDetails[newDetails.length - 1])
-      loadDetails(newDetails[0])
+      // loadDetails(newDetails[0])
       console.log(newDetails[0])
 
       handleOpenPopup1()

@@ -18,6 +18,8 @@ namespace HRM_DAL.Models
         public DateTime EEJR_CreatedDateTime { get; set; }
         public string EEJR_ModifiedBy { get; set; }
         public DateTime EEJR_ModifiedDateTime { get; set; }
+        public string EEJR_JobType { get; set; }
+        public string EEJR_Department { get; set; }
     }
 
     public class ReturnEmployeeJobRoleModel
@@ -35,6 +37,8 @@ namespace HRM_DAL.Models
         public DateTime EEJR_CreatedDateTime { get; set; }
         public string EEJR_ModifiedBy { get; set; }
         public DateTime EEJR_ModifiedDateTime { get; set; }
+        public string EEJR_JobType { get; set; }
+        public string EEJR_Department { get; set; }
 
     }
 

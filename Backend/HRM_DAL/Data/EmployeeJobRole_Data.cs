@@ -64,6 +64,8 @@ namespace HRM_DAL.Data
                                 objEmployeeJobRole.EEJR_ID = Convert.ToInt32(rdr["EEJR_ID"].ToString());
                                 objEmployeeJobRole.EEJR_EmployeeID = rdr["EEJR_EmployeeID"].ToString();
                                 objEmployeeJobRole.EEJR_JobRoleID = rdr["EEJR_JobRoleID"].ToString();
+                                objEmployeeJobRole.EEJR_JobType = rdr["EEJR_JobType"].ToString();
+                                objEmployeeJobRole.EEJR_Department = rdr["EEJR_Department"].ToString();
 
                                 if (!string.IsNullOrEmpty(rdr["EEJR_ActiveFrom"].ToString()))
                                     objEmployeeJobRole.EEJR_ActiveFrom = Convert.ToDateTime(rdr["EEJR_ActiveFrom"].ToString());
@@ -167,6 +169,9 @@ namespace HRM_DAL.Data
                                 objEmployeeJobRole.EEJR_EmployeeID = rdr["EEJR_EmployeeID"].ToString();
                                 objEmployeeJobRole.EEJR_JobRoleID = rdr["EEJR_JobRoleID"].ToString();
 
+                                objEmployeeJobRole.EEJR_JobType = rdr["EEJR_JobType"].ToString();
+                                objEmployeeJobRole.EEJR_Department = rdr["EEJR_Department"].ToString();
+
                                 if (!string.IsNullOrEmpty(rdr["EEJR_ActiveFrom"].ToString()))
                                     objEmployeeJobRole.EEJR_ActiveFrom = Convert.ToDateTime(rdr["EEJR_ActiveFrom"].ToString());
 
@@ -267,6 +272,12 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@EEJR_Remarks", item.EEJR_Remarks);
                         cmd.Parameters["@EEJR_Remarks"].Direction = ParameterDirection.Input;
 
+                        cmd.Parameters.AddWithValue("@EEJR_JobType", item.EEJR_JobType);
+                        cmd.Parameters["@EEJR_JobType"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EEJR_Department", item.EEJR_Department);
+                        cmd.Parameters["@EEJR_Department"].Direction = ParameterDirection.Input;
+
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
                         DataSet Ds = new DataSet();
@@ -361,6 +372,12 @@ namespace HRM_DAL.Data
 
                         cmd.Parameters.AddWithValue("@EEJR_Remarks", item.EEJR_Remarks);
                         cmd.Parameters["@EEJR_Remarks"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EEJR_JobType", item.EEJR_JobType);
+                        cmd.Parameters["@EEJR_JobType"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EEJR_Department", item.EEJR_Department);
+                        cmd.Parameters["@EEJR_Department"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;

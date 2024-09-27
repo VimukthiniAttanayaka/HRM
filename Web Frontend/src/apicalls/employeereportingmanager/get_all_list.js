@@ -33,7 +33,7 @@ export const getEmployeeReportingManagerAll = async (formData) => {
       //   let element = res1[0].Employee[index]; 
       for (let index = 0; index < res1[0].EmployeeReportingManager.length; index++) {
         let element = res1[0].EmployeeReportingManager[index];
-        console.log(element)
+        // console.log(element)
         EmployeeReportingManagerDetails[index] = new EmployeeReportingManagerDetail(
           element.EERM_ID,
           element.EERM_EmployeeID,
@@ -41,7 +41,7 @@ export const getEmployeeReportingManagerAll = async (formData) => {
           // element.EERM_AllocatedTeam,
           element.EERM_Status);
       }
-      console.log(EmployeeReportingManagerDetails)
+      // console.log(EmployeeReportingManagerDetails)
     })
 
   return EmployeeReportingManagerDetails;

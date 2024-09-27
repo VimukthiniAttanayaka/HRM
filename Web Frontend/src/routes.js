@@ -19,7 +19,6 @@ const Attendance_ExcelUpload = React.lazy(() => import('./views/attendance/atten
 const LeaveEntitlement_ExcelUpload = React.lazy(() => import('./views/leaves/leaveentitlement_excelupload/LeaveEntitlement_ExcelUpload'))
 
 const LeaveSchedule = React.lazy(() => import('./views/leaves/leaveshedule/LeaveSchedule'))
-const LeaveType = React.lazy(() => import('./views/leaves/leavetype/LeaveType'))
 const LeaveEntitlement = React.lazy(() => import('./views/leaves/leaveentitlement/LeaveEntitlement'))
 const LeaveToApprove = React.lazy(() => import('./views/leaves/leavetoapprove/LeaveToApprove'))
 const Attendance = React.lazy(() => import('./views/attendance/attendance/Attendance'))
@@ -35,12 +34,18 @@ const AccessGroup = React.lazy(() => import('./views/users/accessgroup/AccessGro
 const UserAccessGroup = React.lazy(() => import('./views/users/useraccessgroup/UserAccessGroup'))
 const UserMenu = React.lazy(() => import('./views/users/usermenu/UserMenu'))
 const MenuAccessGroup = React.lazy(() => import('./views/users/menuaccessgroup/MenuAccessGroup'))
+
+
+const SalaryType = React.lazy(() => import('./views/masterdata/salarytype/SalaryType'))
+const JobType = React.lazy(() => import('./views/masterdata/jobtype/JobType'))
+const LeaveType = React.lazy(() => import('./views/masterdata/leavetype/LeaveType'))
 const Branch = React.lazy(() => import('./views/masterdata/branch/Branch'))
 const Country = React.lazy(() => import('./views/masterdata/country/Country'))
 const Department = React.lazy(() => import('./views/masterdata/department/Department'))
 const JobRole = React.lazy(() => import('./views/masterdata/jobrole/JobRole'))
 const Location = React.lazy(() => import('./views/masterdata/location/Location'))
 const Profile = React.lazy(() => import('./views/profile/Profile'))
+
 const Reports = React.lazy(() => import('./views/Report/Report'))
 const BoldReports = React.lazy(() => import('./views/Report/boldreport'))
 const AttendanceReport = React.lazy(() => import('./views/Report/attendancereport/attendancereport'))
@@ -143,6 +148,14 @@ const routes = [
     path: '/employee/employee_excelupload',
     name: <Translation>{(t) => t('Employee ExcelUpload')}</Translation>,
     element: Employee_ExcelUpload,
+  },{
+    path: '/masterdata/jobtype',
+    name: <Translation>{(t) => t('Job Type')}</Translation>,
+    element: JobType,
+  },{
+    path: '/masterdata/salarytype',
+    name: <Translation>{(t) => t('Salary Type')}</Translation>,
+    element: SalaryType,
   }, {
     path: '/exitinterview/exitinterviewanswers_excelupload',
     name: <Translation>{(t) => t('Employee ExcelUpload')}</Translation>,
@@ -170,7 +183,7 @@ const routes = [
     element: LeaveEntitlement,
   },
   {
-    path: '/leaves/leavetype',
+    path: '/masterdata/leavetype',
     name: <Translation>{(t) => t('LeaveType')}</Translation>,
     element: LeaveType,
   },

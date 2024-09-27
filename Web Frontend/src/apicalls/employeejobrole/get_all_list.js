@@ -15,11 +15,13 @@ export const getEmployeeJobRoleAll = async (formData) => {
 
 
       class EmployeeJobRoleDetail {
-        constructor(id, Employeeid, JobRoleID, ActiveFrom, ActiveTo, status) {
+        constructor(id, Employeeid, JobRoleID, JobType, Department, ActiveFrom, ActiveTo, status) {
           // this.Employeeid = Employeeid;
           this.JobRoleID = JobRoleID;
           this.ActiveFrom = ActiveFrom;
           this.ActiveTo = ActiveTo;
+          this.Department = Department;
+          this.JobType = JobType;
           this.id = id;
           // console.log(status)
           if (status == true) { this.status = "Active"; }
@@ -30,8 +32,8 @@ export const getEmployeeJobRoleAll = async (formData) => {
       for (let index = 0; index < res1[0].EmployeeJobRole.length; index++) {
         let element = res1[0].EmployeeJobRole[index];
         // console.log(element)
-        EmployeeJobRoleDetails[index] = new EmployeeJobRoleDetail(element.EEJR_ID, element.EEJR_EmployeeID,element.EEJR_JobRoleID,
-          element.EEJR_JobRoleID, element.EEJR_ActiveFrom, element.EEJR_ActiveTo,element.EEJR_Status);
+        EmployeeJobRoleDetails[index] = new EmployeeJobRoleDetail(element.EEJR_ID, element.EEJR_EmployeeID, element.EEJR_JobRoleID,
+          element.EEJR_JobType, element.EEJR_Department, element.EEJR_ActiveFrom, element.EEJR_ActiveTo, element.EEJR_Status);
       }
       // console.log(EmployeeJobRoleDetails)
     })

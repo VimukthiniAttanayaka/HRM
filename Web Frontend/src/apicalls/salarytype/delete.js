@@ -2,10 +2,10 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 import ReturnResponse from '../../publicmodels/ReturnResonse'
 
-export const addNewEmployeeContact = async (formData) => {
+export const deleteSalaryType = async (formData) => {
   let resw = new ReturnResponse();
   // Submit the form data to your backend API/
-  const response = await fetch(apiUrl + 'employeeContact/add_new_employeeContact', {
+  const response = await fetch(apiUrl + 'SalaryType/inactivate_SalaryType', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
