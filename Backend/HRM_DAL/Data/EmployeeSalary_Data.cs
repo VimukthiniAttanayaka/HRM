@@ -63,13 +63,11 @@ namespace HRM_DAL.Data
 
                                 objEmployeeSalary.EES_ID = Convert.ToInt32(rdr["EES_ID"].ToString());
                                 objEmployeeSalary.EES_EmployeeID = rdr["EES_EmployeeID"].ToString();
-                                objEmployeeSalary.EES_Address = rdr["EES_Address"].ToString();
-                                objEmployeeSalary.EES_EmailAddress = rdr["EES_EmailAddress"].ToString();
-                                objEmployeeSalary.EES_MobileNumber = rdr["EES_MobileNumber"].ToString();
-                                objEmployeeSalary.EES_PhoneNumber1 = rdr["EES_PhoneNumber1"].ToString();
-                                objEmployeeSalary.EES_PhoneNumber2 = rdr["EES_PhoneNumber2"].ToString();
+                                objEmployeeSalary.EES_Salary = Convert.ToDecimal(rdr["EES_Salary"].ToString());
+                                objEmployeeSalary.EES_ActiveFrom = Convert.ToDateTime(rdr["EES_ActiveFrom"].ToString());
+                                objEmployeeSalary.EES_ActiveTo = Convert.ToDateTime(rdr["EES_ActiveTo"].ToString());
                                 objEmployeeSalary.EES_Remarks = rdr["EES_Remarks"].ToString();
-                                objEmployeeSalary.EES_Remarks = rdr["EES_Remarks"].ToString();
+                                objEmployeeSalary.EES_SalaryType = rdr["EES_SalaryType"].ToString();
 
                                 objEmployeeSalary.EES_Status = Convert.ToBoolean(rdr["EES_Status"].ToString());
 
@@ -165,11 +163,12 @@ namespace HRM_DAL.Data
 
                                 objEmployeeSalary.EES_ID = Convert.ToInt32(rdr["EES_ID"].ToString());
                                 objEmployeeSalary.EES_EmployeeID = rdr["EES_EmployeeID"].ToString();
-                                objEmployeeSalary.EES_Address = rdr["EES_Address"].ToString();
-                                objEmployeeSalary.EES_EmailAddress = rdr["EES_EmailAddress"].ToString();
-                                objEmployeeSalary.EES_MobileNumber = rdr["EES_MobileNumber"].ToString();
-                                objEmployeeSalary.EES_PhoneNumber1 = rdr["EES_PhoneNumber1"].ToString();
-                                objEmployeeSalary.EES_PhoneNumber2 = rdr["EES_PhoneNumber2"].ToString();
+                                objEmployeeSalary.EES_Salary = Convert.ToDecimal(rdr["EES_Salary"].ToString());
+                                objEmployeeSalary.EES_ActiveFrom = Convert.ToDateTime(rdr["EES_ActiveFrom"].ToString());
+                                objEmployeeSalary.EES_ActiveTo = Convert.ToDateTime(rdr["EES_ActiveTo"].ToString());
+                                objEmployeeSalary.EES_Remarks = rdr["EES_Remarks"].ToString();
+                                objEmployeeSalary.EES_SalaryType = rdr["EES_SalaryType"].ToString();
+
                                 objEmployeeSalary.EES_Status = Convert.ToBoolean(rdr["EES_Status"].ToString());
 
                                 objEmployeeSalaryHead.EmployeeSalary.Add(objEmployeeSalary);
@@ -249,26 +248,23 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@EES_EmployeeID", item.EES_EmployeeID);
                         cmd.Parameters["@EES_EmployeeID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@EES_Address", item.EES_Address);
-                        cmd.Parameters["@EES_Address"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EES_Salary", item.EES_Salary);
+                        cmd.Parameters["@EES_Salary"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@EES_EmailAddress", item.EES_EmailAddress);
-                        cmd.Parameters["@EES_EmailAddress"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EES_ActiveFrom", item.EES_ActiveFrom);
+                        cmd.Parameters["@EES_ActiveFrom"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@EES_MobileNumber", item.EES_MobileNumber);
-                        cmd.Parameters["@EES_MobileNumber"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@EES_Status", item.EES_Status);
-                        cmd.Parameters["@EES_Status"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@EES_PhoneNumber1", item.EES_PhoneNumber1);
-                        cmd.Parameters["@EES_PhoneNumber1"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@EES_PhoneNumber2", item.EES_PhoneNumber2);
-                        cmd.Parameters["@EES_PhoneNumber2"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EES_ActiveTo", item.EES_ActiveTo);
+                        cmd.Parameters["@EES_ActiveTo"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@EES_Remarks", item.EES_Remarks);
                         cmd.Parameters["@EES_Remarks"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EES_SalaryType", item.EES_SalaryType);
+                        cmd.Parameters["@EES_SalaryType"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EES_Status", item.EES_Status);
+                        cmd.Parameters["@EES_Status"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -349,26 +345,23 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@EES_EmployeeID", item.EES_EmployeeID);
                         cmd.Parameters["@EES_EmployeeID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@EES_Address", item.EES_Address);
-                        cmd.Parameters["@EES_Address"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EES_Salary", item.EES_Salary);
+                        cmd.Parameters["@EES_Salary"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@EES_EmailAddress", item.EES_EmailAddress);
-                        cmd.Parameters["@EES_EmailAddress"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EES_ActiveFrom", item.EES_ActiveFrom);
+                        cmd.Parameters["@EES_ActiveFrom"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@EES_MobileNumber", item.EES_MobileNumber);
-                        cmd.Parameters["@EES_MobileNumber"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@EES_Status", item.EES_Status);
-                        cmd.Parameters["@EES_Status"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@EES_PhoneNumber1", item.EES_PhoneNumber1);
-                        cmd.Parameters["@EES_PhoneNumber1"].Direction = ParameterDirection.Input;
-
-                        cmd.Parameters.AddWithValue("@EES_PhoneNumber2", item.EES_PhoneNumber2);
-                        cmd.Parameters["@EES_PhoneNumber2"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EES_ActiveTo", item.EES_ActiveTo);
+                        cmd.Parameters["@EES_ActiveTo"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@EES_Remarks", item.EES_Remarks);
                         cmd.Parameters["@EES_Remarks"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EES_SalaryType", item.EES_SalaryType);
+                        cmd.Parameters["@EES_SalaryType"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EES_Status", item.EES_Status);
+                        cmd.Parameters["@EES_Status"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;

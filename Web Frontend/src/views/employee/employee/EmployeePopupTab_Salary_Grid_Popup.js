@@ -58,9 +58,9 @@ const EmployeePopupTab_Salary_Grid_Popup = ({ toggleCreate, EmployeeDetails, pop
       EEC_CustomerID: "string",
       EES_EmployeeID: employeeId,
       EES_ID: id,
-      EES_Salary: salary,
+      EES_Salary: parseInt(salary),
       EES_ActiveFrom: activeFrom.toJSON(),
-      EES_ActiveTo: activeFromctiveTo.toJSON(),
+      EES_ActiveTo: activeTo.toJSON(),
       EES_SalaryType: selectedOptionSalaryType,
       EES_Remarks: remarks,
       EES_Status: isActive,
@@ -224,7 +224,8 @@ const EmployeePopupTab_Salary_Grid_Popup = ({ toggleCreate, EmployeeDetails, pop
                     <CInputGroupText>
                       <h6>Salary</h6>
                     </CInputGroupText>
-                  </CCol> <CFormInput placeholder="Salary" name="salary" type='number'
+                  </CCol>
+                  <CFormInput placeholder="Salary" name="salary" type='number'
                     value={salary} onChange={handleChangeSalary}
                   />
                 </CInputGroup>

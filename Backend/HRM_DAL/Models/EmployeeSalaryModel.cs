@@ -9,19 +9,17 @@ namespace HRM_DAL.Models
     {
         public int EES_ID { get; set; }
         public string EES_EmployeeID { get; set; }
-        public string EES_Address { get; set; }
-        public string EES_EmailAddress { get; set; }
-        public string EES_MobileNumber { get; set; }
-        public string EES_PhoneNumber1 { get; set; }
-        public string EES_PhoneNumber2 { get; set; }
+        public decimal EES_Salary { get; set; }
+        public DateTime EES_ActiveFrom { get; set; }
+        public DateTime EES_ActiveTo { get; set; }
         public bool EES_Status { get; set; }
         public string EES_CreatedBy { get; set; }
         public DateTime EES_CreatedDateTime { get; set; }
         public string EES_ModifiedBy { get; set; }
         public DateTime EES_ModifiedDateTime { get; set; }
-        public string EES_Remarks { get;  set; }
-        public string EEJR_JobType { get;  set; }
-        public string EEJR_Department        { get; set; }
+        public string EES_Remarks { get; set; }
+        public string EES_SalaryType { get; set; }
+
     }
 
     public class ReturnEmployeeSalaryModel
@@ -29,19 +27,17 @@ namespace HRM_DAL.Models
         [Key]
 
         public int EES_ID { get; set; }
-
         public string EES_EmployeeID { get; set; }
-        public string EES_Address { get; set; }
-        public string EES_EmailAddress { get; set; }
-        public string EES_MobileNumber { get; set; }
-        public string EES_PhoneNumber1 { get; set; }
-        public string EES_PhoneNumber2 { get; set; }
+        public decimal EES_Salary { get; set; }
+        public DateTime EES_ActiveFrom { get; set; }
+        public DateTime EES_ActiveTo { get; set; }
         public bool EES_Status { get; set; }
         public string EES_CreatedBy { get; set; }
         public DateTime EES_CreatedDateTime { get; set; }
         public string EES_ModifiedBy { get; set; }
         public DateTime EES_ModifiedDateTime { get; set; }
         public string EES_Remarks { get; set; }
+        public string EES_SalaryType { get; set; }
     }
 
 
