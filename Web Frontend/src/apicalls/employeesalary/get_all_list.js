@@ -16,18 +16,16 @@ export const getEmployeeSalaryAll = async (formData) => {
 
       class EmployeeSalaryDetail {
         constructor(id, EmployeeID,
-          Address,
-          EmailAddress,
-          MobileNumber,
-          PhoneNumber1,
-          PhoneNumber2,
+          Salary,
+          ActiveFrom,
+          ActiveTo,
+          SalaryType,
           status) {
           this.EmployeeID = EmployeeID;
-          this.Address = Address;
-          this.EmailAddress = EmailAddress;
-          this.MobileNumber = MobileNumber;
-          this.PhoneNumber1 = PhoneNumber1;
-          this.PhoneNumber2 = PhoneNumber2;
+          this.Salary = Salary;
+          this.ActiveFrom = ActiveFrom;
+          this.ActiveTo = ActiveTo;
+          this.SalaryType = SalaryType;
           this.id = id;
           // console.log(status)
           if (status == true) { this.status = "Active"; }
@@ -38,14 +36,13 @@ export const getEmployeeSalaryAll = async (formData) => {
       for (let index = 0; index < res1[0].EmployeeSalary.length; index++) {
         let element = res1[0].EmployeeSalary[index];
         // console.log(element)
-        EmployeeSalaryDetails[index] = new EmployeeSalaryDetail(element.EEC_ID,
-          element.EEC_EmployeeID,
-          element.EEC_Address,
-          element.EEC_EmailAddress,
-          element.EEC_MobileNumber,
-          element.EEC_PhoneNumber1,
-          element.EEC_PhoneNumber2,
-          element.EEC_Status);
+        EmployeeSalaryDetails[index] = new EmployeeSalaryDetail(element.EES_ID,
+          element.EES_EmployeeID,
+          element.EES_Salary,
+          element.EES_ActiveFrom,
+          element.EES_ActiveTo,
+          element.EES_SalaryType,
+          element.EES_Status);
       }
       // console.log(EmployeeSalaryDetails)
     })

@@ -11,37 +11,26 @@ export const columns = [
     filter: false,
     sorter: false,
   },
-  // {
-  //   key: 'Employeeid',
-  //   label: 'Employeeid',
-  //   isVisible:false,
-  //   _style: { width: '20%' },
-  // },
   {
-    key: 'Address',
-    label: 'Address',
+    key: 'Salary',
+    label: 'Salary',
     _style: { width: '20%' },
   },
   {
-    key: 'EmailAddress',
-    label: 'EmailAddress',
+    key: 'ActiveFrom',
+    label: 'ActiveFrom',
     _style: { width: '25%' }
   },
   {
-    key: 'MobileNumber',
-    label: 'MobileNumber',
+    key: 'ActiveTo',
+    label: 'ActiveTo',
     _style: { width: '25%' }
   },
-  // {
-  //   key: 'PhoneNumber1',
-  //   label: 'PhoneNumber1',
-  //   _style: { width: '25%' }
-  // },
-  // {
-  //   key: 'PhoneNumber2',
-  //   label: 'PhoneNumber2',
-  //   _style: { width: '25%' }
-  // },
+  {
+    key: 'SalaryType',
+    label: 'SalaryType',
+    _style: { width: '25%' }
+  },
   {
     key: 'status',
     _style: { width: '20%' }
@@ -92,8 +81,8 @@ export const columns_search = [
     _style: { width: '25%' }
   },
   {
-    key: 'MobileNumber',
-    label: 'Mobile Number',
+    key: 'SalaryType',
+    label: 'SalaryType',
     _style: { width: '25%' }
   },
   {
