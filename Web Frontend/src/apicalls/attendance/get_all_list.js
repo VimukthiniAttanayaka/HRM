@@ -3,8 +3,8 @@ const apiUrl = process.env.REACT_APP_API_URL;
 export class AttendanceDetail {
   constructor(id, AttendanceDate, InTime,
     OutTime,
-    Total,
-    Reason
+    Reason,
+    Total,status
   ) {
     this.id = id;
     this.InTime = InTime;
@@ -38,7 +38,8 @@ export const getAttendanceAll = async (formData) => {
           element.EAT_InTime,
           element.EAT_OutTime,
           element.EAT_Reason,
-          element.EAT_Total_TimeSpan);
+          element.EAT_Total_TimeSpan,
+          element.EAT_Status);
       }
       // console.log(AttendanceDetails)
     })

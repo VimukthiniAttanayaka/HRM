@@ -18,6 +18,7 @@ import { cilLockLocked, cilUser } from '@coreui/icons'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass';
 import GoogleMaps, { GoogleMapsComponent } from './GoogleMaps';
 import GPSLocation, { GPSLocationDetails } from '../../shared/GPSLocation.js';
+import { AttendancePunch_Marker } from '../../../apicalls/attendance/add_new';
 
 
 const MarkAttendance = () => {
