@@ -21,9 +21,9 @@ namespace HRM_BL
             return HRM_DAL.Data.Attendance_Data.get_Attendance_details(item);
         }
 
-        public static List<AttendanceGridViewHeaderModel> get_Attendance_grid_details(AttendanceGridRequestModel gridmodel)
+        public static List<AttendanceGridViewHeaderModel> get_Attendance_all(AttendanceGridRequestModel gridmodel)
         {
-            return HRM_DAL.Data.Attendance_Data.get_Attendance_grid_details(gridmodel);
+            return HRM_DAL.Data.Attendance_Data.get_Attendance_all(gridmodel);
         }
         public static List<AttendanceSubmitResponceModel> AttendancePunch_Marker(AttendancePunch_MarkerSubmitModel gridmodel)
         {

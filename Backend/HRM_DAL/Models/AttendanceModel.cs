@@ -7,23 +7,42 @@ namespace HRM_DAL.Models
 {
     public class AttendancePunch_MarkerSubmitModel : RequestBaseModel
     {
-        public DateTime AttendanceDate { get; set; }
-        public string Location { get; set; }
+        public DateTime EAT_AttendanceDate { get; set; }
+        public decimal EAT_Location_latitude { get; set; }
+        public decimal EAT_Location_longitude { get; set; }
+        public string EAT_EmployeeID { get; set; }
     }
     public class AttendancePunch_MobileSubmitModel : RequestBaseModel
     {
-        public DateTime AttendanceDate { get; set; }
-        public string Location { get; set; }
+        public DateTime EAT_AttendanceDate { get; set; }
+        public decimal EAT_Location_latitude { get; set; }
+        public decimal EAT_Location_longitude { get; set; }
+        public string EAT_EmployeeID { get; set; }
     }
     public class AttendanceGridSubmitModel : RequestBaseModel
     {
-        public TimeSpan InTime { get; set; }
-        public TimeSpan OutTime { get; set; }
-        public string Reason { get; set; }
-        public DateTime EndDate { get; set; }
-        public decimal Total { get; set; }
-        public DateTime AttendanceDate { get; set; }
-        public DateTime StartDate { get; set; }
+        public int EAT_ID { get; set; }
+        public string EAT_EmployeeID { get; set; }
+        public TimeSpan EAT_InTime { get; set; }
+        public TimeSpan EAT_OutTime { get; set; }
+        public string EAT_Reason { get; set; }
+        public decimal EAT_Total { get; set; }
+        public DateTime EAT_AttendanceDate { get; set; }
+        public bool EAT_Status { get; set; }
+        public string EAT_CreatedBy { get; set; }
+        public DateTime EAT_CreatedDateTime { get; set; }
+        public string EAT_ModifiedBy { get; set; }
+        public DateTime EAT_ModifiedDateTime { get; set; }
+        public string EAT_Remarks { get; set; }
+        public string EAT_ApprovedBy { get; set; }
+        public string EAT_RejectedBy { get; set; }
+        public DateTime EAT_ApprovedDateTime { get; set; }
+        public string EAT_ApprovedReason { get; set; }
+        public DateTime EAT_RejectedDateTime { get; set; }
+        public string EAT_RejectedReason { get; set; }
+        public string EAT_Location_latitude { get; set; }
+        public string EAT_Location_longitude { get; set; }
+
     }
     public class AttendanceRequestModel : RequestBaseModel
     {
@@ -49,15 +68,29 @@ namespace HRM_DAL.Models
 
     public class AttendanceGridViewModel : ReturnResponseGridViewBaseModel
     {
-        public TimeSpan InTime { get; set; }
-        public TimeSpan OutTime { get; set; }
-        public string Reason { get; set; }
-        public DateTime EndDate { get; set; }
-        public decimal Total { get; set; }
-        public string DateString { get; set; }
-        public DateTime AttendanceDate { get; set; }
-        public DateTime StartDate { get; set; }
+        public int EAT_ID { get; set; }
+        public string EAT_EmployeeID { get; set; }
+        public TimeSpan EAT_InTime { get; set; }
+        public TimeSpan EAT_OutTime { get; set; }
+        public string EAT_Reason { get; set; }
+        public decimal EAT_Total { get; set; }
+        public DateTime EAT_AttendanceDate { get; set; }
+        public bool EAT_Status { get; set; }
+        public string EAT_CreatedBy { get; set; }
+        public DateTime EAT_CreatedDateTime { get; set; }
+        public string EAT_ModifiedBy { get; set; }
+        public DateTime EAT_ModifiedDateTime { get; set; }
+        public string EAT_Remarks { get; set; }
+        public string EAT_ApprovedBy { get; set; }
+        public string EAT_RejectedBy { get; set; }
+        public DateTime EAT_ApprovedDateTime { get; set; }
+        public string EAT_ApprovedReason { get; set; }
+        public DateTime EAT_RejectedDateTime { get; set; }
+        public string EAT_RejectedReason { get; set; }
         public string SN { get; set; }
+        public TimeSpan EAT_Total_TimeSpan { get; internal set; }
+        public string EAT_Location_latitude { get; set; }
+        public string EAT_Location_longitude { get; set; }
     }
     #endregion Grid Sction
 }

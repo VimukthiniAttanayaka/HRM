@@ -95,19 +95,19 @@ namespace HRM.Controllers
         public List<AttendanceGridViewHeaderModel> get_Attendance_all(AttendanceGridRequestModel item)//ok
         {
             List<AttendanceGridViewHeaderModel> objCountryHeadList = new List<AttendanceGridViewHeaderModel>();
-            AttendanceGridViewHeaderModel obj = new AttendanceGridViewHeaderModel() { resp = false, msg = "sfsf" };
-            obj.Attendance = new List<AttendanceGridViewModel>();
-            obj.Attendance.Add(new AttendanceGridViewModel() { AttendanceDate = DateTime.Now, EndDate = DateTime.Now });
-            obj.Attendance.Add(new AttendanceGridViewModel() { AttendanceDate = DateTime.Now, EndDate = DateTime.Now });
-            obj.Attendance.Add(new AttendanceGridViewModel() { AttendanceDate = DateTime.Now, EndDate = DateTime.Now });
-            objCountryHeadList.Add(obj);
-            return objCountryHeadList;
+            //AttendanceGridViewHeaderModel obj = new AttendanceGridViewHeaderModel() { resp = false, msg = "sfsf" };
+            //obj.Attendance = new List<AttendanceGridViewModel>();
+            //obj.Attendance.Add(new AttendanceGridViewModel() { AttendanceDate = DateTime.Now, EndDate = DateTime.Now });
+            //obj.Attendance.Add(new AttendanceGridViewModel() { AttendanceDate = DateTime.Now, EndDate = DateTime.Now });
+            //obj.Attendance.Add(new AttendanceGridViewModel() { AttendanceDate = DateTime.Now, EndDate = DateTime.Now });
+            //objCountryHeadList.Add(obj);
+            //return objCountryHeadList;
 
             try
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, "");
 
-                return HRM_BL.Attendance_BL.get_Attendance_grid_details(item);
+                return HRM_BL.Attendance_BL.get_Attendance_all(item);
             }
             catch (Exception ex)
             {
@@ -118,12 +118,12 @@ namespace HRM.Controllers
                 };
                 objCountryHeadList.Add(objAttendanceHead);
 
-                objError.WriteLog(0, "AttendanceController", "get_Attendance_grid_details", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "AttendanceController", "get_Attendance_grid_details", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "AttendanceController", "get_Attendance_all", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "AttendanceController", "get_Attendance_all", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "AttendanceController", "get_Attendance_grid_details", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "AttendanceController", "get_Attendance_grid_details", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "AttendanceController", "get_Attendance_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "AttendanceController", "get_Attendance_all", "Inner Exception Message: " + ex.InnerException.Message);
                 }
             }
             return objCountryHeadList;

@@ -35,25 +35,25 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_upate_Attendance";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@InTime", item.InTime);
+                        cmd.Parameters.AddWithValue("@InTime", item.EAT_InTime);
                         cmd.Parameters["@InTime"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@OutTime", item.OutTime);
+                        cmd.Parameters.AddWithValue("@OutTime", item.EAT_OutTime);
                         cmd.Parameters["@OutTime"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@EndDate", item.EndDate);
-                        cmd.Parameters["@EndDate"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@EndDate", item.EAT_EndDate);
+                        //cmd.Parameters["@EndDate"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@AttendanceDate", item.AttendanceDate);
+                        cmd.Parameters.AddWithValue("@AttendanceDate", item.EAT_AttendanceDate);
                         cmd.Parameters["@AttendanceDate"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@StartDate", item.StartDate);
-                        cmd.Parameters["@StartDate"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@StartDate", item.EAT_StartDate);
+                        //cmd.Parameters["@StartDate"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@Total", item.Total);
+                        cmd.Parameters.AddWithValue("@Total", item.EAT_Total);
                         cmd.Parameters["@Total"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@Reason", item.Reason);
+                        cmd.Parameters.AddWithValue("@Reason", item.EAT_Reason);
                         cmd.Parameters["@Reason"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
@@ -101,6 +101,7 @@ namespace HRM_DAL.Data
             }
             return objAttendanceHeadList;
         }
+
         public static List<AttendanceSubmitResponceModel> AttendancePunch_Marker(AttendancePunch_MarkerSubmitModel item)
         {
             List<AttendanceSubmitResponceModel> objAttendanceHeadList = new List<AttendanceSubmitResponceModel>();
@@ -121,14 +122,20 @@ namespace HRM_DAL.Data
                     {
                         cmd.Connection = lconn;
 
-                        cmd.CommandText = "sp_upate_Attendance";
+                        cmd.CommandText = "sp_insert_Attendance";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@AttendanceDate", item.AttendanceDate);
-                        cmd.Parameters["@AttendanceDate"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@EAT_AttendanceDate", item.EAT_AttendanceDate);
+                        //cmd.Parameters["@EAT_AttendanceDate"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@Location", item.Location);
-                        cmd.Parameters["@Location"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EAT_EmployeeID", item.EAT_EmployeeID);
+                        cmd.Parameters["@EAT_EmployeeID"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EAT_Location_latitude", item.EAT_Location_latitude);
+                        cmd.Parameters["@EAT_Location_latitude"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EAT_Location_longitude", item.EAT_Location_longitude);
+                        cmd.Parameters["@EAT_Location_longitude"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
                         cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
@@ -178,6 +185,7 @@ namespace HRM_DAL.Data
             }
             return objAttendanceHeadList;
         }
+
         public static List<AttendanceSubmitResponceModel> AttendancePunch_Mobile(AttendancePunch_MobileSubmitModel item)
         {
             List<AttendanceSubmitResponceModel> objAttendanceHeadList = new List<AttendanceSubmitResponceModel>();
@@ -198,14 +206,17 @@ namespace HRM_DAL.Data
                     {
                         cmd.Connection = lconn;
 
-                        cmd.CommandText = "sp_upate_Attendance";
+                        cmd.CommandText = "sp_insert_Attendance";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@AttendanceDate", item.AttendanceDate);
+                        cmd.Parameters.AddWithValue("@AttendanceDate", item.EAT_AttendanceDate);
                         cmd.Parameters["@AttendanceDate"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@Location", item.Location);
-                        cmd.Parameters["@Location"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EAT_Location_latitude", item.EAT_Location_latitude);
+                        cmd.Parameters["@EAT_Location_latitude"].Direction = ParameterDirection.Input;
+
+                        cmd.Parameters.AddWithValue("@EAT_Location_longitude", item.EAT_Location_longitude);
+                        cmd.Parameters["@EAT_Location_longitude"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
                         cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
@@ -255,6 +266,7 @@ namespace HRM_DAL.Data
             }
             return objAttendanceHeadList;
         }
+
         public static List<AttendanceSubmitResponceModel> get_Attendance_details(AttendanceRequestModel item)
         {
             List<AttendanceSubmitResponceModel> objAttendanceHeadList = new List<AttendanceSubmitResponceModel>();
@@ -336,14 +348,14 @@ namespace HRM_DAL.Data
 
                                     AttendanceGridViewModel objAttendanceDetail = new AttendanceGridViewModel()
                                     {
-                                        InTime = InTime,
-                                        OutTime = OutTime,
-                                        Reason = rdr["Reason"].ToString(),
-                                        EndDate = EndDate,
-                                        Total = Total,
-                                        DateString = rdr["DateString"].ToString(),
-                                        AttendanceDate = AttendanceDate,
-                                        StartDate = StartDate
+                                        EAT_InTime = InTime,
+                                        EAT_OutTime = OutTime,
+                                        EAT_Reason = rdr["Reason"].ToString(),
+                                        //EAT_EndDate = EndDate,
+                                        EAT_Total = Total,
+                                        //EAT_DateString = rdr["DateString"].ToString(),
+                                        EAT_AttendanceDate = AttendanceDate,
+                                        //EAT_StartDate = StartDate
                                         //RC = RC,
                                     };
 
@@ -381,7 +393,7 @@ namespace HRM_DAL.Data
             return objAttendanceHeadList;
         }
 
-        public static List<AttendanceGridViewHeaderModel> get_Attendance_grid_details(AttendanceGridRequestModel item)
+        public static List<AttendanceGridViewHeaderModel> get_Attendance_all(AttendanceGridRequestModel item)
         {
             List<AttendanceGridViewHeaderModel> objAttendanceHeadList = new List<AttendanceGridViewHeaderModel>();
             AttendanceGridViewHeaderModel objAttendanceHead = new AttendanceGridViewHeaderModel();
@@ -401,25 +413,25 @@ namespace HRM_DAL.Data
                     {
                         cmd.Connection = lconn;
 
-                        cmd.CommandText = "sp_get_Attendance_grid_details";
+                        cmd.CommandText = "sp_get_Attendance_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
 
 
-                        cmd.Parameters.AddWithValue("@DateFrom", item.DateFrom);
-                        cmd.Parameters["@DateFrom"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@DateFrom", item.DateFrom);
+                        //cmd.Parameters["@DateFrom"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@DateTo", item.DateTo);
-                        cmd.Parameters["@DateTo"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@DateTo", item.DateTo);
+                        //cmd.Parameters["@DateTo"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@PAGE_NO", item.PAGE_NO);
-                        cmd.Parameters["@PAGE_NO"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@PAGE_NO", item.PAGE_NO);
+                        //cmd.Parameters["@PAGE_NO"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@PAGE_RECORDS_COUNT", item.PAGE_RECORDS_COUNT);
-                        cmd.Parameters["@PAGE_RECORDS_COUNT"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@PAGE_RECORDS_COUNT", item.PAGE_RECORDS_COUNT);
+                        //cmd.Parameters["@PAGE_RECORDS_COUNT"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
-                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        //cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
 
 
@@ -440,36 +452,39 @@ namespace HRM_DAL.Data
                                 else
                                 {
                                     TimeSpan OutTime = TimeSpan.MinValue;
-                                    TimeSpan.TryParse(rdr["OutTime"].ToString(), out OutTime);
+                                    TimeSpan.TryParse(rdr["EAT_OutTime"].ToString(), out OutTime);
 
                                     TimeSpan InTime = TimeSpan.MinValue;
-                                    TimeSpan.TryParse(rdr["InTime"].ToString(), out InTime);
+                                    TimeSpan.TryParse(rdr["EAT_InTime"].ToString(), out InTime);
 
                                     decimal Total = 0;
+                                    var temp = OutTime.Subtract(InTime);
 
                                     DateTime AttendanceDate = DateTime.MinValue;
-                                    DateTime.TryParse(rdr["AttendanceDate"].ToString(), out AttendanceDate);
+                                    DateTime.TryParse(rdr["EAT_AttendanceDate"].ToString(), out AttendanceDate);
 
-                                    DateTime StartDate = DateTime.MinValue;
-                                    DateTime.TryParse(rdr["StartDate"].ToString(), out StartDate);
+                                    //DateTime EAT_AttendanceDate = DateTime.MinValue;
+                                    //DateTime.TryParse(rdr["EAT_StartDate"].ToString(), out StartDate);
 
-                                    DateTime EndDate = DateTime.MinValue;
-                                    DateTime.TryParse(rdr["EndDate"].ToString(), out EndDate);
+                                    //DateTime EndDate = DateTime.MinValue;
+                                    //DateTime.TryParse(rdr["EAT_EndDate"].ToString(), out EndDate);
 
                                     objAttendanceHead.resp = true;
                                     objAttendanceHead.msg = "Attendance";
 
                                     AttendanceGridViewModel objAttendanceDetail = new AttendanceGridViewModel()
                                     {
-                                        InTime = InTime,
-                                        OutTime = OutTime,
-                                        Reason = rdr["Reason"].ToString(),
-                                        EndDate = EndDate,
-                                        Total = Total,
-                                        DateString = rdr["DateString"].ToString(),
-                                        AttendanceDate = AttendanceDate,
-                                        StartDate = StartDate
+                                        EAT_InTime = InTime,
+                                        EAT_OutTime = OutTime,
+                                        //EAT_Reason = rdr["EAT_Reason"].ToString(),
+                                        //EAT_EndDate = EndDate,
+                                        EAT_Total = Total,
+                                        EAT_Total_TimeSpan = temp,
+                                        //EAT_DateString = rdr["DateString"].ToString(),
+                                        EAT_AttendanceDate = AttendanceDate,
+                                        //EAT_StartDate = StartDate
                                         //RC = RC,
+                                        EAT_Status = Convert.ToBoolean(rdr["EAT_Status"].ToString())
                                     };
                                     objAttendanceHead.Attendance.Add(objAttendanceDetail);
                                 }
@@ -493,12 +508,12 @@ namespace HRM_DAL.Data
 
                 objAttendanceHeadList.Add(objAttendanceHead);
 
-                objError.WriteLog(0, "Attendance_Data", "get_Attendance_grid_details", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "Attendance_Data", "get_Attendance_grid_details", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "Attendance_Data", "get_Attendance_all", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "Attendance_Data", "get_Attendance_all", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "Attendance_Data", "get_Attendance_grid_details", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "Attendance_Data", "get_Attendance_grid_details", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "Attendance_Data", "get_Attendance_all", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "Attendance_Data", "get_Attendance_all", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }

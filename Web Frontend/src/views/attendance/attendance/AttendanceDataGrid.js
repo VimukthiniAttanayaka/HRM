@@ -10,7 +10,6 @@ import { getBadge } from '../../shared/gridviewconstants.js';
 import { columns, headers } from '../../controllers/attendance_controllers.js';
 import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
 import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
-
 const AttendanceDataGrid = () => {
 
   const [details, setDetails] = useState([])
@@ -72,7 +71,8 @@ const AttendanceDataGrid = () => {
 
   return (
     <CCardBody>
-      <CCol>  <CDropdown>
+      <CCol>  
+        <CDropdown>
         <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
         <CDropdownMenu>
           <CDropdownItem><CButton
@@ -113,16 +113,11 @@ const AttendanceDataGrid = () => {
           console.log(items)
         }}
         scopedColumns={{
-          // avatar: (item) => (
-          //   <td>
-          //     {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-          //   </td>
-          // ),
-          // status: (item) => (
-          //   <td>
-          //     {/* <CBadge color={getBadge(item.status)}>{item.status}</CBadge> */}
-          //   </td>
-          // ),
+          status: (item) => (
+            <td>
+              <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
+            </td>
+          ),
           show_details: (item) => {
             return (
               <td className="py-2">
@@ -132,14 +127,46 @@ const AttendanceDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDetails(item.id)
+                    toggleEdit(item.id)
                   }}
                 >
-                  {details.includes(item.id) ? 'Hide' : 'Show'}
+                  Edit
                 </CButton>
               </td>
             )
           },
+          view: (item) => (
+            <td>
+              <CButton
+                color="success"
+                variant="outline"
+                shape="square"
+                size="sm"
+                onClick={() => {
+                  toggleView(item.id)
+                }}
+              >
+                View
+              </CButton>
+            </td>
+          ),
+          delete: (item) => (
+            <td>
+              {item.status == 'Inactive' ? '' :
+                <CButton
+                  color="danger"
+                  variant="outline"
+                  shape="square"
+                  size="sm"
+                  onClick={() => {
+                    toggleDelete(item.id)
+                  }}
+                >
+                  Delete
+                </CButton>
+              }
+            </td>
+          ),
           details: (item) => {
             return (
               <CCollapse visible={details.includes(item.id)}>

@@ -9,43 +9,45 @@ const apiKey = 'AIzaSyASyYRBZmULmrmw_P9kgr7_266OhFNinPA'
 
 const defaultZoom = 11
 const defaultCenter = { lat: 37.431489, lng: -122.163719 }
-const locations = [
-  {
-    lat: 37.431489,
-    lng: -122.163719,
-    label: 'S',
-    draggable: false,
-    title: 'Stanford',
-    www: 'https://www.stanford.edu/',
-  },
-  {
-    lat: 37.394694,
-    lng: -122.150333,
-    label: 'T',
-    draggable: false,
-    title: 'Tesla',
-    www: 'https://www.tesla.com/',
-  },
-  {
-    lat: 37.331681,
-    lng: -122.0301,
-    label: 'A',
-    draggable: false,
-    title: 'Apple',
-    www: 'https://www.apple.com/',
-  },
-  {
-    lat: 37.484722,
-    lng: -122.148333,
-    label: 'F',
-    draggable: false,
-    title: 'Facebook',
-    www: 'https://www.facebook.com/',
-  },
-]
+// const locations = [
+//   {
+//     lat: 37.431489,
+//     lng: -122.163719,
+//     label: 'S',
+//     draggable: false,
+//     title: 'Stanford',
+//     www: 'https://www.stanford.edu/',
+//   },
+//   {
+//     lat: 37.394694,
+//     lng: -122.150333,
+//     label: 'T',
+//     draggable: false,
+//     title: 'Tesla',
+//     www: 'https://www.tesla.com/',
+//   },
+//   {
+//     lat: 37.331681,
+//     lng: -122.0301,
+//     label: 'A',
+//     draggable: false,
+//     title: 'Apple',
+//     www: 'https://www.apple.com/',
+//   },
+//   {
+//     lat: 37.484722,
+//     lng: -122.148333,
+//     label: 'F',
+//     draggable: false,
+//     title: 'Facebook',
+//     www: 'https://www.facebook.com/',
+//   },
+// ]
 
-const MarkerList = () => {
-  return locations.map((location, index) => {
+const MarkerList = (locations) => {
+  const locations1 = locations.locations.locations.locations;
+  // console.log(locations1)
+  return locations1.map((location, index) => {
     return <MarkerWithInfoWindow key={index.toString()} location={location} />
   })
 }
@@ -71,15 +73,15 @@ const MarkerWithInfoWindow = ({ location }) => {
   )
 }
 
-const GoogleMapsComponent = () => {
+const GoogleMapsComponent = (locations) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: apiKey,
   })
-
+  // console.log(locations)
   return (
     isLoaded && (
-      <GoogleMap mapContainerStyle={{ height: `400px` }} center={defaultCenter} zoom={defaultZoom}>
+      <GoogleMap mapContainerStyle={{ height: `400px` }} center={locations.locations.locations[0]/*defaultCenter*/} zoom={defaultZoom}>
         {<MarkerList locations={locations} />}
         <></>
       </GoogleMap>
@@ -87,14 +89,34 @@ const GoogleMapsComponent = () => {
   )
 }
 
-const GoogleMaps = () => {
+// const GoogleMaps = () => {
+//   return (
+//     <CCard>
+//       <CCardHeader>
+//         React Google Maps <ProBadge />
+//       </CCardHeader>
+//       <CCardBody>
+//         <GoogleMapsComponent />
+//       </CCardBody>
+//     </CCard>
+//   )
+// }
+
+// export default GoogleMaps
+
+const GoogleMaps = (locations) => {
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: apiKey,
+  })
+
   return (
     <CCard>
       <CCardHeader>
-        React Google Maps <ProBadge />
+        {/* React Google Maps <ProBadge /> */}
       </CCardHeader>
       <CCardBody>
-        <GoogleMapsComponent />
+        <GoogleMapsComponent locations={locations} />
       </CCardBody>
     </CCard>
   )
