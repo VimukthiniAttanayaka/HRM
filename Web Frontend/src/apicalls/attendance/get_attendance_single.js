@@ -1,42 +1,43 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-// export class LeaveScheduleDetail {
-//   constructor(id, leavetype, status, Alotment) {
-//     this.leavetype = leavetype;
-//     this.id = id;
-//     this.alotment = Alotment
-//     if (status == true) { this.status = "Active"; }
-//     else { this.status = "Inactive"; }
-//   }
-// }
-export class LeaveScheduleDetail  {
-  LVT_LeaveTypeID;
-  LVT_LeaveType;
-  LVT_LeaveAlotent;
-  LVT_Status;
-  LVT_CreatedBy;
-  LVT_CreatedDateTime;
-  LVT_ModifiedBy;
-  LVT_ModifiedDateTime;
+export class AttendanceDetail {
+  EAT_ID; EAT_EmployeeID;
+  EAT_Status; EAT_CreatedBy;
+  EAT_CreatedDateTime;
+  EAT_ModifiedBy;
+  EAT_ModifiedDateTime;
+  EAT_Remarks;
+  EAT_ApprovedBy;
+  EAT_RejectedBy;
+  EAT_ApprovedDateTime;
+  EAT_ApprovedReason;
+  EAT_RejectedDateTime;
+  EAT_RejectedReason;
+  EAT_AttendanceDate;
+  EAT_OutTime;
+  EAT_InTime;
+  EAT_Location_latitude;
+  EAT_Location_longitude;
+
 }
 // console.log(apiUrl)
-export const getLeaveTypeSingle = async (formData) => {
-   
-  let resw=new LeaveScheduleDetail();
-  const res = await fetch(apiUrl + 'leavetype/get_leavetype_single', {
+export const getAttendanceSingle = async (formData) => {
+
+  let resw = new AttendanceDetail();
+  const res = await fetch(apiUrl + 'Attendance/get_attendance_single', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
   })
-  .then(response => response.json())
-  .then(json => {
-    let res1 = JSON.parse(JSON.stringify(json))
-    resw=res1[0].LeaveType[0]
-    // console.log(res2)
-    // console.log(res1[0].LeaveType[0])
-    // setLeaveTypeDetails(res1[0].LeaveType[0]);
-    // handleOpenPopup()
-  })
-    
-    return resw;
+    .then(response => response.json())
+    .then(json => {
+      let res1 = JSON.parse(JSON.stringify(json))
+      resw = res1[0].Attendance[0]
+      console.log(res1)
+      // console.log(res1[0].Attendance[0])
+      // setAttendanceDetails(res1[0].Attendance[0]);
+      // handleOpenPopup()
+    })
+
+  return resw;
 };

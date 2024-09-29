@@ -59,14 +59,14 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<AttendanceSubmitResponceModel> get_Attendance_details(AttendanceRequestModel item)//ok
+        public List<AttendanceSubmitResponceModel> get_Attendance_single(AttendanceRequestModel item)//ok
         {
             List<AttendanceSubmitResponceModel> objAttendanceList = new List<AttendanceSubmitResponceModel>();
             try
             {
                 LogAuditData.AuditLogRequest(LogAuditData.ModuleNames.HRM_API, MethodBase.GetCurrentMethod().DeclaringType.Name, MethodBase.GetCurrentMethod().Name, item);
 
-                return HRM_BL.Attendance_BL.get_Attendance_details(item);
+                return HRM_BL.Attendance_BL.get_Attendance_single(item);
             }
             catch (Exception ex)
             {
@@ -77,12 +77,12 @@ namespace HRM.Controllers
                 };
                 objAttendanceList.Add(objAttendanceHead);
 
-                objError.WriteLog(0, "AttendanceController", "get_Attendance_details", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "AttendanceController", "get_Attendance_details", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "AttendanceController", "get_Attendance_single", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "AttendanceController", "get_Attendance_single", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "AttendanceController", "get_Attendance_details", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "AttendanceController", "get_Attendance_details", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "AttendanceController", "get_Attendance_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "AttendanceController", "get_Attendance_single", "Inner Exception Message: " + ex.InnerException.Message);
                 }
             }
             return objAttendanceList;

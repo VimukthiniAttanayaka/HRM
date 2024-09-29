@@ -14,6 +14,7 @@ import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 const BranchDataGrid = () => {
   let templatetype = 'translation_branch'
   let templatetype_base = 'translation'
+  
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')

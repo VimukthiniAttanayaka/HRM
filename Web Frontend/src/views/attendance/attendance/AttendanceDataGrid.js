@@ -10,26 +10,59 @@ import { getBadge } from '../../shared/gridviewconstants.js';
 import { columns, headers } from '../../controllers/attendance_controllers.js';
 import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
 import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
+
 const AttendanceDataGrid = () => {
+  let templatetype = 'translation_attendance'
+  let templatetype_base = 'translation'
 
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
+  const [AttendanceDetails, setAttendanceDetails] = useState([])
   const [popupStatus, setPopupStatus] = useState('create')
-  
-  const toggleDetails = (index) => {
+
+  const [StatusInDB, setStatusInDB] = useState(true)
+
+  const toggleEdit = (index) => {
+    setPopupStatus('edit')
+    toggleDetails(index)
+  }
+  const toggleDelete = (index) => {
+    setPopupStatus('delete')
+    toggleDetails(index)
+  }
+  const toggleView = (index) => {
+    setPopupStatus('view')
+    toggleDetails(index)
+  }
+  const toggleDetails = (index, action) => {
     const position = details.indexOf(index)
     let newDetails = details.slice()
     if (position !== -1) {
       newDetails.splice(position, 1)
     } else {
       newDetails = [...details, index]
-      // alert(newDetails[newDetails.length - 1])
-      console.log(newDetails)
-      handleOpenPopup()
+      loadDetails(newDetails[0], action)
     }
     // setDetails(newDetails)
   }
 
+  async function loadDetails(item) {
+
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
+
+    const formData = {
+      // UD_StaffID: staffId,
+      // AUD_notificationToken: token,
+      EAT_ID: item
+    }
+
+    const AttendanceDetails = await getAttendanceSingle(formData)
+    setAttendanceDetails(AttendanceDetails);
+    setStatusInDB(AttendanceDetails.EAT_Status)
+    handleOpenPopup()
+  }
   const handleOpenPopup = () => {
     setVisible(true);
   };
@@ -71,28 +104,28 @@ const AttendanceDataGrid = () => {
 
   return (
     <CCardBody>
-      <CCol>  
+      <CCol>
         <CDropdown>
-        <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
-        <CDropdownMenu>
-          <CDropdownItem><CButton
-            color="primary"
-            className="mb-2"
-            href={csvCode}
-            download="attendance.csv"
-            target="_blank"
-          >
-            Download items as .csv
-          </CButton></CDropdownItem>
-          <CDropdownItem><ExcelExport data={data} fileName="attendance" headers={headers} /></CDropdownItem>
-          <CDropdownItem>
-            <CSmartGridPDF data={data} headers={headers} filename="attendance" title="attendance" />
-          </CDropdownItem>
-        </CDropdownMenu>
-      </CDropdown>
+          <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
+          <CDropdownMenu>
+            <CDropdownItem><CButton
+              color="primary"
+              className="mb-2"
+              href={csvCode}
+              download="attendance.csv"
+              target="_blank"
+            >
+              Download items as .csv
+            </CButton></CDropdownItem>
+            <CDropdownItem><ExcelExport data={data} fileName="attendance" headers={headers} /></CDropdownItem>
+            <CDropdownItem>
+              <CSmartGridPDF data={data} headers={headers} filename="attendance" title="attendance" />
+            </CDropdownItem>
+          </CDropdownMenu>
+        </CDropdown>
       </CCol>
       <CCol className='d-flex justify-content-end'>
-        <AttendancePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} />
+        <AttendancePopup  popupStatus={popupStatus} onClose={handleClosePopup}  StatusInDB={StatusInDB} visible={visible} onOpen={handleOpenPopup} AttendanceDetails={AttendanceDetails} />
       </CCol>
       <CSmartTable
         cleaner

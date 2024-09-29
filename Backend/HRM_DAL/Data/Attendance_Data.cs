@@ -267,11 +267,11 @@ namespace HRM_DAL.Data
             return objAttendanceHeadList;
         }
 
-        public static List<AttendanceSubmitResponceModel> get_Attendance_details(AttendanceRequestModel item)
+        public static List<AttendanceSubmitResponceModel> get_Attendance_single(AttendanceRequestModel item)
         {
             List<AttendanceSubmitResponceModel> objAttendanceHeadList = new List<AttendanceSubmitResponceModel>();
             AttendanceSubmitResponceModel objAttendanceHead = new AttendanceSubmitResponceModel();
-            objAttendanceHead.AttendanceGridViewModelList = new List<AttendanceGridViewModel>();
+            objAttendanceHead.Attendance = new List<AttendanceGridViewModel>();
 
             if (login_Data.AuthenticationKeyValidateWithDB(item) == false)
             {
@@ -288,14 +288,14 @@ namespace HRM_DAL.Data
                     {
                         cmd.Connection = lconn;
 
-                        cmd.CommandText = "sp_get_Attendance_details";
+                        cmd.CommandText = "sp_get_Attendance_single";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
-                        cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
+                        //cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@AttendanceDate", item.AttendanceDate);
-                        cmd.Parameters["@AttendanceDate"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EAT_ID", item.EAT_ID);
+                        cmd.Parameters["@EAT_ID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -317,31 +317,23 @@ namespace HRM_DAL.Data
                                     objAttendanceHead.resp = true;
                                     objAttendanceHead.msg = "";
 
-                                    DateTime trdate = DateTime.MinValue;
-                                    DateTime.TryParse(rdr["TransactionDate"].ToString(), out trdate);
-
-                                    decimal decQty = 0;
-                                    decimal.TryParse(rdr["Quantity"].ToString(), out decQty);
-
-                                    decimal recQty = 0;
-                                    decimal.TryParse(rdr["PostageTotal"].ToString(), out recQty);
-
                                     TimeSpan OutTime = TimeSpan.MinValue;
-                                    TimeSpan.TryParse(rdr["OutTime"].ToString(), out OutTime);
+                                    TimeSpan.TryParse(rdr["EAT_OutTime"].ToString(), out OutTime);
 
                                     TimeSpan InTime = TimeSpan.MinValue;
-                                    TimeSpan.TryParse(rdr["InTime"].ToString(), out InTime);
+                                    TimeSpan.TryParse(rdr["EAT_InTime"].ToString(), out InTime);
 
                                     decimal Total = 0;
+                                    var temp = OutTime.Subtract(InTime);
 
                                     DateTime AttendanceDate = DateTime.MinValue;
-                                    DateTime.TryParse(rdr["AttendanceDate"].ToString(), out AttendanceDate);
+                                    DateTime.TryParse(rdr["EAT_AttendanceDate"].ToString(), out AttendanceDate);
 
-                                    DateTime StartDate = DateTime.MinValue;
-                                    DateTime.TryParse(rdr["StartDate"].ToString(), out StartDate);
+                                    //DateTime EAT_AttendanceDate = DateTime.MinValue;
+                                    //DateTime.TryParse(rdr["EAT_StartDate"].ToString(), out StartDate);
 
-                                    DateTime EndDate = DateTime.MinValue;
-                                    DateTime.TryParse(rdr["EndDate"].ToString(), out EndDate);
+                                    //DateTime EndDate = DateTime.MinValue;
+                                    //DateTime.TryParse(rdr["EAT_EndDate"].ToString(), out EndDate);
 
                                     objAttendanceHead.resp = true;
                                     objAttendanceHead.msg = "Attendance";
@@ -350,16 +342,20 @@ namespace HRM_DAL.Data
                                     {
                                         EAT_InTime = InTime,
                                         EAT_OutTime = OutTime,
-                                        EAT_Reason = rdr["Reason"].ToString(),
+                                        //EAT_Reason = rdr["EAT_Reason"].ToString(),
                                         //EAT_EndDate = EndDate,
                                         EAT_Total = Total,
+                                        EAT_Total_TimeSpan = temp,
                                         //EAT_DateString = rdr["DateString"].ToString(),
                                         EAT_AttendanceDate = AttendanceDate,
                                         //EAT_StartDate = StartDate
                                         //RC = RC,
+                                        EAT_Status = Convert.ToBoolean(rdr["EAT_Status"].ToString()),
+                                        EAT_ID = Convert.ToInt32(rdr["EAT_ID"].ToString()),
+                                        EAT_EmployeeID = rdr["EAT_EmployeeID"].ToString()
                                     };
 
-                                    objAttendanceHead.AttendanceGridViewModelList.Add(objAttendanceDetail);
+                                    objAttendanceHead.Attendance.Add(objAttendanceDetail);
                                 }
 
                             }
@@ -381,12 +377,12 @@ namespace HRM_DAL.Data
 
                 objAttendanceHeadList.Add(objAttendanceHead);
 
-                objError.WriteLog(0, "Attendance_Data", "get_Attendance_details", "Stack Track: " + ex.StackTrace);
-                objError.WriteLog(0, "Attendance_Data", "get_Attendance_details", "Error Message: " + ex.Message);
+                objError.WriteLog(0, "Attendance_Data", "get_Attendance_single", "Stack Track: " + ex.StackTrace);
+                objError.WriteLog(0, "Attendance_Data", "get_Attendance_single", "Error Message: " + ex.Message);
                 if (ex.InnerException != null && ex.InnerException.Message != string.Empty)
                 {
-                    objError.WriteLog(0, "Attendance_Data", "get_Attendance_details", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
-                    objError.WriteLog(0, "Attendance_Data", "get_Attendance_details", "Inner Exception Message: " + ex.InnerException.Message);
+                    objError.WriteLog(0, "Attendance_Data", "get_Attendance_single", "Inner Exception Stack Track: " + ex.InnerException.StackTrace);
+                    objError.WriteLog(0, "Attendance_Data", "get_Attendance_single", "Inner Exception Message: " + ex.InnerException.Message);
                 }
 
             }
@@ -484,7 +480,9 @@ namespace HRM_DAL.Data
                                         EAT_AttendanceDate = AttendanceDate,
                                         //EAT_StartDate = StartDate
                                         //RC = RC,
-                                        EAT_Status = Convert.ToBoolean(rdr["EAT_Status"].ToString())
+                                        EAT_Status = Convert.ToBoolean(rdr["EAT_Status"].ToString()),
+                                        EAT_ID = Convert.ToInt32(rdr["EAT_ID"].ToString()),
+                                        EAT_EmployeeID = rdr["EAT_EmployeeID"].ToString()
                                     };
                                     objAttendanceHead.Attendance.Add(objAttendanceDetail);
                                 }

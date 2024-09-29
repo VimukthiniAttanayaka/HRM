@@ -46,11 +46,11 @@ namespace HRM_DAL.Models
     }
     public class AttendanceRequestModel : RequestBaseModel
     {
-        public DateTime AttendanceDate { get; set; }
+        public int EAT_ID { get; set; }
     }
     public class AttendanceSubmitResponceModel : ReturnResponse
     {
-        public List<AttendanceGridViewModel> AttendanceGridViewModelList { get; set; } = new List<AttendanceGridViewModel>();
+        public List<AttendanceGridViewModel> Attendance { get; set; } = new List<AttendanceGridViewModel>();
     }
 
     #region Grid Sction
