@@ -79,6 +79,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Models\EmployeeTerminationModel.cs" />
     <Compile Include="Models\EmployeeSalaryModel.cs" />
     <Compile Include="Models\EmployeeDocumentModel.cs" />
     <Compile Include="Models\EmployeeContactModel.cs" />
