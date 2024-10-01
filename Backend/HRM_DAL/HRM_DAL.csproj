@@ -100,7 +100,6 @@
     <Compile Include="Models\ExternalUserModel.cs" />
     <Compile Include="Models\UserRoleAccessGroupModel.cs" />
     <Compile Include="Models\UserMenuModel.cs" />
-    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AuthenticateModel.cs" />
     <Compile Include="Models\AccessGroupModel.cs" />
     <Compile Include="Models\BranchModel.cs" />
