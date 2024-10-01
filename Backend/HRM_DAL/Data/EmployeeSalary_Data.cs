@@ -144,8 +144,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_EmployeeSalary_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        //cmd.Parameters.AddWithValue("@EES_ID", model.EES_ID);
-                        //cmd.Parameters["@EES_ID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EES_EmployeeID", model.EES_EmployeeID);
+                        cmd.Parameters["@EES_EmployeeID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;

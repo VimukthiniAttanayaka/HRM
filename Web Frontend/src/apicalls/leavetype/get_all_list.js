@@ -1,14 +1,5 @@
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export class LeaveScheduleDetail {
-  constructor(id, leavetype, status, Alotment) {
-    this.leavetype = leavetype;
-    this.id = id;
-    this.alotment = Alotment
-    if (status == true) { this.status = "Active"; }
-    else { this.status = "Inactive"; }
-  }
-}
 // console.log(apiUrl)
 export const getLeaveTypeAll = async (formData) => {
   const LeaveTypeDetails = [];
@@ -24,10 +15,11 @@ export const getLeaveTypeAll = async (formData) => {
 
 
       class LeaveTypeDetail {
-        constructor(id, leavetype, status, Alotment) {
+        constructor(id, leavetype, status, Alotment,Duration) {
           this.leavetype = leavetype;
           this.id = id;
-          this.alotment = Alotment
+          this.alotment = Alotment,
+          this.duration = Duration
           if (status == true) { this.status = "Active"; }
           else { this.status = "Inactive"; }
         }
@@ -36,34 +28,10 @@ export const getLeaveTypeAll = async (formData) => {
       for (let index = 0; index < res1[0].LeaveType.length; index++) {
         let element = res1[0].LeaveType[index];
         // console.log(element)
-        LeaveTypeDetails[index] = new LeaveTypeDetail(element.LVT_LeaveTypeID, element.LVT_LeaveType, element.LVT_Status, element.LVT_LeaveAlotment);
+        LeaveTypeDetails[index] = new LeaveTypeDetail(element.MDLT_LeaveTypeID, element.MDLT_LeaveType, element.MDLT_Status, element.MDLT_LeaveAlotment, element.MDLT_Duration);
       }
       // console.log(LeaveTypeDetails)
     })
 
   return LeaveTypeDetails;
 };
-
-export const requestdata_LeaveTypes_DropDowns_All = async (formData) => {
-
-  const optionsLeaveType = [];
-  const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData),
-  })
-    .then(response => response.json())
-    .then(json => {
-      let res1 = JSON.parse(JSON.stringify(json))
-
-      for (let index = 0; index < res1[0].LeaveType.length; index++) {
-        const LeaveTypeData = {
-          key: res1[0].LeaveType[index].LVT_LeaveTypeID,
-          value: res1[0].LeaveType[index].LVT_LeaveType
-        };
-        optionsLeaveType[index] = LeaveTypeData
-      }
-      // console.log(optionsLeaveType)
-    })
-  return optionsLeaveType;
-}

@@ -1,31 +1,46 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
-import { Modal } from '@coreui/coreui-pro';
+// import data from './_data.js'
+// import { Modal } from '@coreui/coreui-pro';
+import { modifyLeaveType } from '../../../apicalls/leavetype/modify.js';
+import { deleteLeaveType } from '../../../apicalls/leavetype/delete.js';
+import { addNewLeaveType } from '../../../apicalls/leavetype/add_new.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
 
-const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
+import PopUpAlert from '../../shared/PopUpAlert.js'
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
+const LeaveTypePopup = ({ visible, onClose, onOpen, LeaveTypeDetails, popupStatus, StatusInDB }) => {
 
-  // };
-  const [leaveTypeId, setLeaveTypeId] = useState('')
-  const [leaveAlotmentId, setLeaveAlotmentId] = useState('')
-  const [leaveType, setLeaveType] = useState('')
+  let templatetype = 'translation_leavetype'
+  let templatetype_base = 'translation'
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  const [LeaveTypeId, setLeaveTypeId] = useState('')
+  const [LeaveType, setLeaveType] = useState('')
+  const [LeaveAlotment, setLeaveAlotment] = useState(0)
+  const [Duration, setDuration] = useState(0)
+  const [Description, setDescription] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeAlotment = (event) => {
-    setLeaveAlotmentId(event.target.value)
-  }
   const handleChangeLeaveType = (event) => {
     setLeaveType(event.target.value)
+  }
+  const handleChangeDuration = (event) => {
+    setDuration(event.target.value)
+  }
+  const handleChangeLeaveAlotment = (event) => {
+    setLeaveAlotment(event.target.value)
+  }
+  const handleChangeDescription = (event) => {
+    setDescription(event.target.value)
   }
   const handleChangeId = (event) => {
     setLeaveTypeId(event.target.value)
   }
-  const handleChangeIsActive = (event) => { }
-
+  const handleChangeStatus = (event) => {
+    setIsActive(event.target.checked)
+  }
   const handleSubmit = async (event) => {
     event.preventDefault()
 
@@ -33,30 +48,79 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
     // You can add validation logic here to check if all required fields are filled correctly
 
     // Prepare form data
-    const formData = {
-      LVT_LeaveTypeID: leaveTypeId,
-      LVT_LeaveAlotment: leaveAlotmentId,
-      LVT_LeaveType: leaveType,
-      LVT_Status: isActive,
-    }
-    // Submit the form data to your backend API
-    const response = await fetch(apiUrl + 'leavetype/add_new_leavetype', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
+    // console.log(isActive)
+    const token = getJWTToken();
+    const staffId = getStaffID();
+    const customerId = getCustomerID();
 
-    if (response.ok) {
-      console.log(response);
-      // Handle successful submission (e.g., display a success message)
-      console.log('Leave Type data submitted successfully!')
-    } else {
-      // Handle submission errors
-      console.error('Error submitting Leave Type data:', response.statusText)
+    const formData = {
+      MDLT_LeaveTypeID: LeaveTypeId,
+      MDLT_LeaveType: LeaveType,
+      MDLT_Description: Description,
+      MDLT_Duration: parseInt(Duration),
+      MDLT_LeaveAlotment:parseInt(LeaveAlotment),
+      MDLT_Status: isActive,
+      UD_UserID: staffId,
+    }
+    // console.log(formData)
+    if (popupStatus == 'edit') {
+      const APIReturn = await modifyLeaveType(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else if (popupStatus == 'delete') {
+      const APIReturn = await deleteLeaveType(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
+    }
+    else {
+      const APIReturn = await addNewLeaveType(formData)
+      if (APIReturn.resp === false) { setDialogTitle("Alert"); }
+      else { setDialogTitle("Message"); }
+      setDialogContent(APIReturn.msg);
+      setOpen(true);
     }
   }
 
-  console.log(leaveTypeDetails)
+
+  const popupStatusSetup = (event) => {
+    if (popupStatus == 'edit') {
+      return getLabelText('Edit LeaveType', templatetype)
+    } else if (popupStatus == 'view') {
+      return getLabelText('View LeaveType', templatetype)
+    } else if (popupStatus == 'delete') {
+      return getLabelText('Delete LeaveType', templatetype)
+    } else {
+      return getLabelText('Create New LeaveType', templatetype)
+    }
+  }
+
+  useEffect(() => {
+    setLeaveTypeId(LeaveTypeDetails.MDLT_LeaveTypeID)
+    setLeaveType(LeaveTypeDetails.MDLT_LeaveType)
+    setDescription(LeaveTypeDetails.MDLT_Description)
+    setDuration(LeaveTypeDetails.MDLT_Duration)
+    setLeaveAlotment(LeaveTypeDetails.MDLT_LeaveAlotment)
+    setIsActive(StatusInDB)
+  }, [LeaveTypeDetails]);
+  // console.log(LeaveTypeDetails)
+
+  const [open, setOpen] = useState(false);
+  const [openEmp_Popup, setOpenEmp_Popup] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+    onClose();
+  };
+
+  const [DialogTitle, setDialogTitle] = useState('');
+  const [DialogContent, setDialogContent] = useState('');
+  // console.log(UserMenuDetails)
+
   return (
     <>
       <CButton color="primary" onClick={onOpen}>New LeaveType</CButton>
@@ -74,14 +138,16 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
         <CModalBody>
           <CCard className="mx-4">
             <CCardBody className="p-4">
+              <PopUpAlert open={open} handleClose={handleClose} dialogTitle={DialogTitle} dialogContent={DialogContent} />
               <CForm onSubmit={handleSubmit}>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>LeaveTypeID</h6>
                     </CInputGroupText>
-                  </CCol>   <CFormInput placeholder="LeaveTypeID" name="LeaveTypeID" value={leaveTypeDetails.LVT_LeaveTypeID} onChange={handleChangeId}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  </CCol>
+                  <CFormInput placeholder="LeaveTypeID" name="LeaveTypeID" value={LeaveTypeId} onChange={handleChangeId}
+                    disabled={(popupStatus == 'edit' || popupStatus == 'view' || popupStatus == 'delete') ? true : false}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -89,30 +155,52 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, leaveTypeDetails }) => {
                     <CInputGroupText>
                       <h6>LeaveType</h6>
                     </CInputGroupText>
-                  </CCol>    <CFormInput placeholder="LeaveType" name="LeaveType" value={leaveTypeDetails.LVT_LeaveType} onChange={handleChangeLeaveType}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  </CCol>
+                  <CFormInput placeholder="LeaveType" name="LeaveType" value={LeaveType} onChange={handleChangeLeaveType}
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>LeaveAlotment</h6>
+                      <h6>Description</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={leaveTypeDetails.LVT_LeaveAlotment} onChange={handleChangeAlotment}
-                  // value={addressBuildingName} onChange={handleChangeAddressBuildingName}
+                  </CCol>  <CFormInput placeholder="Description" name="Description" value={Description} onChange={handleChangeDescription}
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
                   />
 
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>Status</h6>
+                      <h6>LeaveAlotment</h6>
+                    </CInputGroupText>
+                  </CCol>  <CFormInput placeholder="LeaveAlotment" name="LeaveAlotment" value={LeaveAlotment} onChange={handleChangeLeaveAlotment} type='number'
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+                  />
+
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>Duration</h6>
+                    </CInputGroupText>
+                  </CCol>  <CFormInput placeholder="Duration" name="Duration" value={Duration} onChange={handleChangeDuration} type='number'
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}
+                  />
+
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>{getLabelText('Status', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>
-                  <CFormCheck label="Status" defaultChecked />
+                  <CFormCheck checked={isActive} defaultChecked onChange={handleChangeStatus} label="Status" disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <div className="d-grid">
-                  <CButton color="success" type='submit'>Submit</CButton>
+                  {popupStatus == 'view' ? '' : (popupStatus == 'delete' ? <CButton color="danger" type='submit'>{getLabelText('Delete', templatetype)}</CButton> :
+                    <CButton color="success" type='submit'>{getLabelText('Submit', templatetype)}</CButton>)}
                 </div>
               </CForm>
             </CCardBody>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CFormSelect } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
+// import data from './_data.js'
 import LeaveTypePopup from './LeaveEntitlementPopup.js';
 // import loadDetails from './LeaveTypePopup.js';
 import { Dropdowns_Employee } from '../../../apicalls/employee/dropdowns.js';
@@ -207,7 +207,7 @@ const LeaveEntitlementDataGrid = () => {
         columns={columns}
         columnFilter
         columnSorter
-        footer
+        // footer
         items={data}
         itemsPerPageSelect
         itemsPerPage={5}

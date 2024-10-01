@@ -107,7 +107,7 @@
     <Compile Include="Models\JobRoleModel.cs" />
     <Compile Include="Models\UserRoleModel.cs" />
     <Compile Include="Models\ReportingManagerModel.cs" />
-    <Compile Include="Models\LeaveEntitlementModel.cs" />
+    <Compile Include="Models\EmployeeLeaveEntitlementModel.cs" />
     <Compile Include="Models\LeaveTypeModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />

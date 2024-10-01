@@ -11,41 +11,45 @@ namespace HRM_DAL.Models
 
     public class LeaveTypeModel : RequestBaseModel
     {
-        public string LVT_LeaveTypeID { get; set; }
-        public string LVT_LeaveType { get; set; }
-        public int LVT_LeaveAlotment { get; set; }
-        public bool LVT_Status { get; set; }
-        public string LVT_CreatedBy { get; set; }
-        public DateTime LVT_CreatedDateTime { get; set; }
-        public string LVT_ModifiedBy { get; set; }
-        public DateTime LVT_ModifiedDateTime { get; set; }
+        public string MDLT_LeaveTypeID { get; set; }
+        public string MDLT_LeaveType { get; set; }
+        public int MDLT_LeaveAlotment { get; set; }
+        public bool MDLT_Status { get; set; }
+        public string MDLT_CreatedBy { get; set; }
+        public DateTime MDLT_CreatedDateTime { get; set; }
+        public string MDLT_ModifiedBy { get; set; }
+        public DateTime MDLT_ModifiedDateTime { get; set; }
+        public string MDLT_Description { get;  set; }
+        public int MDLT_Duration { get; set; }
     }
 
     public class ReturnLeaveTypeModel
     {
         [Key]
-        public string LVT_LeaveTypeID { get; set; }
-        public string LVT_LeaveType { get; set; }
-        public int LVT_LeaveAlotment { get; set; }
-        public bool LVT_Status { get; set; }
-        public string LVT_CreatedBy { get; set; }
-        public DateTime LVT_CreatedDateTime { get; set; }
-        public string LVT_ModifiedBy { get; set; }
-        public DateTime LVT_ModifiedDateTime { get; set; }
+        public string MDLT_LeaveTypeID { get; set; }
+        public string MDLT_LeaveType { get; set; }
+        public int MDLT_LeaveAlotment { get; set; }
+        public bool MDLT_Status { get; set; }
+        public string MDLT_CreatedBy { get; set; }
+        public DateTime MDLT_CreatedDateTime { get; set; }
+        public string MDLT_ModifiedBy { get; set; }
+        public DateTime MDLT_ModifiedDateTime { get; set; }
+        public string MDLT_Description { get; set; }
+        public short MDLT_Duration { get;  set; }
     }
 
     public class ReturnLeaveTypeAllModel
     {
         [Key]
 
-        public string LVT_LeaveTypeID { get; set; }
+        public string MDLT_LeaveTypeID { get; set; }
         public string RC { get; set; }
     }
 
 
     public class LeaveType : RequestBaseModel
     {
-        public string LVT_LeaveTypeID { get; set; }
+        public string MDLT_LeaveTypeID { get; set; }
 
 
     }
@@ -59,18 +63,18 @@ namespace HRM_DAL.Models
 
     public class LeaveTypeSearchModel : RequestBaseModel
     {
-        public string LVT_LeaveTypeID { get; set; }
+        public string MDLT_LeaveTypeID { get; set; }
     }
 
     public class ReturnLeaveTypeSelectModel
     {
-        public string LVT_LeaveTypeID { get; set; }
+        public string MDLT_LeaveTypeID { get; set; }
 
     }
 
-    public class InactiveLVTModel : RequestBaseModel
+    public class InactiveMDLTModel : RequestBaseModel
     {
-        public string LVT_LeaveTypeID { get; set; }
+        public string MDLT_LeaveTypeID { get; set; }
 
     }
 }

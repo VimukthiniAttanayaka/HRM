@@ -27,15 +27,15 @@ namespace HRM.Controllers
         public List<ReturnLeaveTypeModelHead> get_leavetype_single(LeaveType model)//ok
         {
             List<ReturnLeaveTypeModelHead> objleavetypeHeadList = new List<ReturnLeaveTypeModelHead>();
-            ReturnLeaveTypeModelHead obj = new ReturnLeaveTypeModelHead() { resp = false, msg = "sfsf" };
-            obj.LeaveType = new List<ReturnLeaveTypeModel>();
-            if (model.LVT_LeaveTypeID == "CAS")
-                obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "CAS", LVT_LeaveType = "Casual", LVT_Status = true });
-            if (model.LVT_LeaveTypeID == "ANU") obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "ANU", LVT_LeaveType = "Annual", LVT_Status = true, LVT_LeaveAlotment = 10 });
-            if (model.LVT_LeaveTypeID == "MED") obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "MED", LVT_LeaveType = "Medical", LVT_Status = true, LVT_LeaveAlotment = 10 });
-            if (model.LVT_LeaveTypeID == "MAT") obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "MAT", LVT_LeaveType = "Matrinaty", LVT_Status = true, LVT_LeaveAlotment = 10 });
-            objleavetypeHeadList.Add(obj);
-            return objleavetypeHeadList;
+            //ReturnLeaveTypeModelHead obj = new ReturnLeaveTypeModelHead() { resp = false, msg = "sfsf" };
+            //obj.LeaveType = new List<ReturnLeaveTypeModel>();
+            //if (model.LVT_LeaveTypeID == "CAS")
+            //    obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "CAS", LVT_LeaveType = "Casual", LVT_Status = true });
+            //if (model.LVT_LeaveTypeID == "ANU") obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "ANU", LVT_LeaveType = "Annual", LVT_Status = true, LVT_LeaveAlotment = 10 });
+            //if (model.LVT_LeaveTypeID == "MED") obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "MED", LVT_LeaveType = "Medical", LVT_Status = true, LVT_LeaveAlotment = 10 });
+            //if (model.LVT_LeaveTypeID == "MAT") obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "MAT", LVT_LeaveType = "Matrinaty", LVT_Status = true, LVT_LeaveAlotment = 10 });
+            //objleavetypeHeadList.Add(obj);
+            //return objleavetypeHeadList;
 
             try
             {
@@ -75,14 +75,14 @@ namespace HRM.Controllers
         public List<ReturnLeaveTypeModelHead> get_leavetype_all(LeaveTypeSearchModel model)//ok
         {
             List<ReturnLeaveTypeModelHead> objleavetypeHeadList = new List<ReturnLeaveTypeModelHead>();
-            ReturnLeaveTypeModelHead obj = new ReturnLeaveTypeModelHead() { resp = false, msg = "sfsf" };
-            obj.LeaveType = new List<ReturnLeaveTypeModel>();
-            obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "CAS", LVT_LeaveType = "Casual", LVT_Status = true, LVT_LeaveAlotment = 10 });
-            obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "ANU", LVT_LeaveType = "Annual", LVT_Status = true, LVT_LeaveAlotment = 10 });
-            obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "MED", LVT_LeaveType = "Medical", LVT_Status = true, LVT_LeaveAlotment = 10 });
-            obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "MAT", LVT_LeaveType = "Matrinaty", LVT_Status = true, LVT_LeaveAlotment = 10 });
-            objleavetypeHeadList.Add(obj);
-            return objleavetypeHeadList;
+            //ReturnLeaveTypeModelHead obj = new ReturnLeaveTypeModelHead() { resp = false, msg = "sfsf" };
+            //obj.LeaveType = new List<ReturnLeaveTypeModel>();
+            //obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "CAS", LVT_LeaveType = "Casual", LVT_Status = true, LVT_LeaveAlotment = 10 });
+            //obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "ANU", LVT_LeaveType = "Annual", LVT_Status = true, LVT_LeaveAlotment = 10 });
+            //obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "MED", LVT_LeaveType = "Medical", LVT_Status = true, LVT_LeaveAlotment = 10 });
+            //obj.LeaveType.Add(new ReturnLeaveTypeModel() { LVT_LeaveTypeID = "MAT", LVT_LeaveType = "Matrinaty", LVT_Status = true, LVT_LeaveAlotment = 10 });
+            //objleavetypeHeadList.Add(obj);
+            //return objleavetypeHeadList;
 
             try
             {
@@ -197,7 +197,7 @@ namespace HRM.Controllers
         [HttpPost]
         [Route("[action]")]
         //[Authorize]
-        public List<ReturnResponse> inactivate_leavetype(InactiveLVTModel item)//ok
+        public List<ReturnResponse> inactivate_leavetype(InactiveMDLTModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
             objUserHeadList.Add(new ReturnResponse() { resp = true, msg = "saved" });

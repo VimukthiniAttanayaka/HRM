@@ -57,6 +57,7 @@ namespace HRM_DAL.Models
 
     public class AttendanceGridRequestModel : RequestGridBaseModel
     {
+        public string EAT_EmployeeID { get; set; }
         public string DateFrom { get; set; }
         public string DateTo { get; set; }
     }

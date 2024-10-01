@@ -95,7 +95,7 @@ const EmployeePopupTab_ReportingManager_Grid = ({ EmployeeDetails, popupStatus }
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      EME_EmployeeID: employeeId
+      EERM_EmployeeID: employeeId
     }
 
     const EmployeeReportingManagerDetails = await getEmployeeReportingManagerAll(formData)

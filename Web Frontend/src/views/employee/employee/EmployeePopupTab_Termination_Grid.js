@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CRow, CButton, CSmartTable, CBadge, CCollapse, CModal, CTabs, CFormSelect, CTabList, CTab, CCol, CInputGroupText, CTabContent, CTabPanel, CModalBody, CModalTitle, CModalFooter, CFormCheck, CModalHeader, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import { getEmployeeContactAll } from '../../../apicalls/employeecontact/get_all_list.js';
-import { getEmployeeContactSingle } from '../../../apicalls/employeecontact/get_employeecontact_single.js';
-import EmployeePopupTab_Contact_Grid_PopUp from './EmployeePopupTab_Contact_Grid_Popup.js';
+import { getEmployeeTerminationAll } from '../../../apicalls/employeetermination/get_all_list.js';
+import { getEmployeeTerminationSingle } from '../../../apicalls/employeetermination/get_employeetermination_single.js';
+import EmployeePopupTab_Termination_Grid_Popup from './EmployeePopupTab_Termination_Grid_Popup.js';
 import { getBadge } from '../../shared/gridviewconstants.js';
 
-import { columns, headers } from '../../controllers/employeecontact_controllers.js';
+import { columns, headers } from '../../controllers/employeetermination_controllers.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
-const EmployeePopupTab_Contact_Grid = ({ EmployeeDetails, popupStatus, employeeId }) => {
+const EmployeePopupTab_Termination_Grid = ({ EmployeeDetails, popupStatus, employeeId }) => {
 
-  let templatetype = 'translation_employeecontact'
+  let templatetype = 'translation_employeetermination'
   let templatetype_base = 'translation'
 
   const [details, setDetails] = useState([])
@@ -61,18 +61,17 @@ const EmployeePopupTab_Contact_Grid = ({ EmployeeDetails, popupStatus, employeeI
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      EEC_EmployeeID: employeeId
+      EES_EmployeeID: employeeId
     }
-    const EmployeeContactDetails = await getEmployeeContactAll(formData)
-    // console.log(EmployeeContactDetails)
-    setData(EmployeeContactDetails);
+    const EmployeeTerminationDetails = await getEmployeeTerminationAll(formData)
+    // console.log(EmployeeTerminationDetails)
+    setData(EmployeeTerminationDetails);
   }
 
 
   useEffect(() => {
     requestdata(EmployeeDetails.EME_EmployeeID);
   }, [EmployeeDetails]);
-
 
 
   async function loadDetails(item, action) {
@@ -83,16 +82,16 @@ const EmployeePopupTab_Contact_Grid = ({ EmployeeDetails, popupStatus, employeeI
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      EEC_ID: item
+      EES_ID: item
     }
 
     console.log(formData)
-    const EmployeeContactDetails = await getEmployeeContactSingle(formData)
-    setEmployeeContactDetails(EmployeeContactDetails);
+    const EmployeeTerminationDetails = await getEmployeeTerminationSingle(formData)
+    setEmployeeTerminationDetails(EmployeeTerminationDetails);
     handleOpenPopup1()
   }
 
-  const [EmployeeContactDetails, setEmployeeContactDetails] = useState([])
+  const [EmployeeTerminationDetails, setEmployeeTerminationDetails] = useState([])
   const [currentItems, setCurrentItems] = useState(data)
 
   const [visible1, setVisible1] = useState(false);
@@ -109,13 +108,13 @@ const EmployeePopupTab_Contact_Grid = ({ EmployeeDetails, popupStatus, employeeI
 
   return (
     <>
-      <CTabPanel className="p-3" itemKey="contact">
+      <CTabPanel className="p-3" itemKey="termination">
         <CCardBody>
           <CRow>
             <CCol className='d-flex justify-content-end'>
-              <EmployeePopupTab_Contact_Grid_PopUp popupStatus={popupStatus1} onClose1={handleClosePopup1}
+              <EmployeePopupTab_Termination_Grid_Popup popupStatus={popupStatus1} onClose1={handleClosePopup1}
                 StatusInDB={StatusInDB} visible1={visible1} onOpen1={handleOpenPopup1} toggleCreate={toggleCreate}
-                EmployeeContactDetails={EmployeeContactDetails} 
+                EmployeeTerminationDetails={EmployeeTerminationDetails} 
                 employeeId={EmployeeDetails.EME_EmployeeID} />
             </CCol>
           </CRow>
@@ -237,4 +236,4 @@ const EmployeePopupTab_Contact_Grid = ({ EmployeeDetails, popupStatus, employeeI
       </CTabPanel> </>
   )
 }
-export default EmployeePopupTab_Contact_Grid
+export default EmployeePopupTab_Termination_Grid

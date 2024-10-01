@@ -61,8 +61,8 @@ namespace HRM_DAL.Models
     }
 
     public class EmployeeContactSearchModel : RequestBaseModel
-    {
-        public int EEC_ID { get; set; }
+    {      
+        public string EEC_EmployeeID { get;  set; }
     }
 
     public class InactiveEECModel : RequestBaseModel

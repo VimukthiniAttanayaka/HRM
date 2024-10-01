@@ -56,7 +56,7 @@ namespace HRM_DAL.Models
 
     public class EmployeeTerminationSearchModel : RequestBaseModel
     {
-        public int EET_ID { get; set; }
+        public string EET_EmployeeID { get; set; }
     }
 
     public class InactiveEETModel : RequestBaseModel

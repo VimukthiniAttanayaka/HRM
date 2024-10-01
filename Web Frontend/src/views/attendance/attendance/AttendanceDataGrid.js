@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
+import { CCardBody, CButton, CSmartTable, CCollapse, CInputGroupText, CDatePicker, CInputGroup, CFormInput, CRow, CCol, CBadge, CDropdownToggle, CDropdown, CDropdownMenu, CDropdownItem } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import AttendancePopup from './AttendancePopup'
@@ -10,6 +10,9 @@ import { getBadge } from '../../shared/gridviewconstants.js';
 import { columns, headers } from '../../controllers/attendance_controllers.js';
 import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
 import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
+import EmployeeGridModel from '../../sharedgridselectables/EmployeeGridModel.js';
+import { getEmployeeSingle } from '../../../apicalls/employee/get_employee_single.js';
+import { format, parse } from 'date-fns'
 
 const AttendanceDataGrid = () => {
   let templatetype = 'translation_attendance'
@@ -21,6 +24,12 @@ const AttendanceDataGrid = () => {
   const [popupStatus, setPopupStatus] = useState('create')
 
   const [StatusInDB, setStatusInDB] = useState(true)
+
+  const [EmployeeID, setEmployeeID] = useState('')
+  const [EmployeeName, setEmployeeName] = useState('')
+
+  const [DateFrom, setDateFrom] = useState(new Date())
+  const [DateTo, setDateTo] = useState(new Date())
 
   const toggleEdit = (index) => {
     setPopupStatus('edit')
@@ -86,11 +95,52 @@ const AttendanceDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      USR_EmployeeID: 'sedcx'
+      EAT_EmployeeID: EmployeeID,
+      DateFrom: DateFrom.toJSON(),
+      DateTo: DateTo.toJSON(),
     }
     const AttendanceDetails = await getAttendanceAll(formData)
+    console.log(AttendanceDetails)
     setData(AttendanceDetails);
   }
+
+  async function loadDetails_Employee(item) {
+    if (item !== undefined) {
+      // console.log(item)
+      const token = getJWTToken();
+      const staffId = getStaffID();
+      const customerId = getCustomerID();
+
+      const formData = {
+        // UD_StaffID: staffId,
+        // AUD_notificationToken: token,
+        EME_EmployeeID: item
+      }
+      const EmployeeDetails = await getEmployeeSingle(formData)
+      // console.log(EmployeeDetails)
+      setEmployeeID(EmployeeDetails.EME_EmployeeID)
+      setEmployeeName(EmployeeDetails.EME_PrefferedName)
+      handleCloseEmp_Popup();
+    }
+  }
+  const [openEmp_Popup, setOpenEmp_Popup] = useState(false);
+
+  const handleCloseEmp_Popup = () => {
+    setOpenEmp_Popup(false);
+  };
+
+  const EmployeeSearchOnClick = () => {
+    // console.log(true)
+    setOpenEmp_Popup(true);
+  };
+
+  const ClearOnClick = () => {
+    setEmployeeID('')
+    setEmployeeName('')
+  };
+  const SearchOnClick = () => {
+    requestdata();
+  };
   useEffect(() => {
     requestdata();
   }, []);
@@ -105,7 +155,45 @@ const AttendanceDataGrid = () => {
   return (
     <CCardBody>
       <CCol>
-        <CDropdown>
+        <CInputGroup>
+          <CInputGroupText>
+            <h6>Employee</h6>
+          </CInputGroupText>
+          <CFormInput placeholder="EmployeeName" name="EmployeeName" value={EmployeeName} disabled />
+          <CButton color="success" onClick={EmployeeSearchOnClick}>{getLabelText('Search', templatetype)}</CButton>
+        </CInputGroup>
+        <CInputGroup className="mb-3">
+          <CCol md={2}>
+            <CInputGroupText>
+              <h6>DateFrom</h6>
+            </CInputGroupText>
+          </CCol>
+
+          <CCol md={3}>  {(popupStatus == 'view' || popupStatus == 'delete') ?
+            <CFormInput placeholder="DateFrom" name="DateFrom" value={DateFrom}
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} /> :
+            <CDatePicker placeholder="DateFrom" name="DateFrom" date={DateFrom}
+              onDateChange={(date) => { setDateFrom(date) }}
+              inputDateParse={(date) => parse(date, 'dd-MMM-yyyy', new Date())}
+              inputDateFormat={(date) => format(new Date(date), 'dd-MMM-yyyy')}
+            />}</CCol>  <CCol md={2}>
+            <CInputGroupText>
+              <h6>DateTo</h6>
+            </CInputGroupText>
+          </CCol>
+          <CCol md={3}>   {(popupStatus == 'view' || popupStatus == 'delete') ?
+            <CFormInput placeholder="DateTo" name="DateTo" value={DateTo}
+              disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} /> :
+            <CDatePicker placeholder="DateTo" name="DateTo" date={DateTo}
+              onDateChange={(date) => { setDateTo(date) }}
+              inputDateParse={(date) => parse(date, 'dd-MMM-yyyy', new Date())}
+              inputDateFormat={(date) => format(new Date(date), 'dd-MMM-yyyy')}
+            />}</CCol>
+        </CInputGroup>
+        <EmployeeGridModel open={openEmp_Popup} handleClose={handleCloseEmp_Popup} loadDetails={loadDetails_Employee}></EmployeeGridModel>
+      </CCol>
+      <CCol>
+        <CInputGroup>  <CDropdown>
           <CDropdownToggle color="secondary">Export Data</CDropdownToggle>
           <CDropdownMenu>
             <CDropdownItem><CButton
@@ -123,9 +211,12 @@ const AttendanceDataGrid = () => {
             </CDropdownItem>
           </CDropdownMenu>
         </CDropdown>
+          <CButton color="success" onClick={ClearOnClick}>{getLabelText('Clear', templatetype)}</CButton>
+          <CButton color="success" onClick={SearchOnClick}>{getLabelText('Search', templatetype)}</CButton>
+        </CInputGroup>
       </CCol>
       <CCol className='d-flex justify-content-end'>
-        <AttendancePopup  popupStatus={popupStatus} onClose={handleClosePopup}  StatusInDB={StatusInDB} visible={visible} onOpen={handleOpenPopup} AttendanceDetails={AttendanceDetails} />
+        <AttendancePopup popupStatus={popupStatus} onClose={handleClosePopup} StatusInDB={StatusInDB} visible={visible} onOpen={handleOpenPopup} AttendanceDetails={AttendanceDetails} />
       </CCol>
       <CSmartTable
         cleaner

@@ -148,8 +148,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_EmployeeJobRole_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        //cmd.Parameters.AddWithValue("@EEJR_ID", model.EEJR_ID);
-                        //cmd.Parameters["@EEJR_ID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EEJR_EmployeeID", model.EEJR_EmployeeID);
+                        cmd.Parameters["@EEJR_EmployeeID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;

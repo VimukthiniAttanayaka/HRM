@@ -61,7 +61,7 @@ const EmployeePopupTab_JobRole_Grid = ({ EmployeeDetails, popupStatus, employeeI
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      EME_EmployeeID: employeeId
+      EEJR_EmployeeID: employeeId
     }
     const EmployeeJobRoleDetails = await getEmployeeJobRoleAll(formData)
     // console.log(EmployeeJobRoleDetails)

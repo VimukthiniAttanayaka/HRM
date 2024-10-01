@@ -3,59 +3,34 @@ import { CCardBody, CButton, CSmartTable, CCollapse, CRow, CCol, CBadge } from '
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import LeaveTypePopup from './LeaveTypePopup.js';
-// import loadDetails from './LeaveTypePopup.js';
 import { getLeaveTypeAll } from '../../../apicalls/leavetype/get_all_list.js';
 import { getLeaveTypeSingle } from '../../../apicalls/leavetype/get_leavetype_single.js';
+import { getLabelText } from 'src/MultipleLanguageSheets'
+
+import Pagination from '../../shared/Pagination.js'
+import { getBadge } from '../../shared/gridviewconstants.js';
+import { columns, headers } from '../../controllers/leavetype_controllers.js';
+import ExcelExport from '../../shared/ExcelRelated/ExcelExport.js';
+import CSmartGridPDF from '../../shared/PDFRelated/CSmartGridPDF.js';
 
 const LeaveTypeDataGrid = () => {
 
+  let templatetype = 'translation_leavetype'
+  let templatetype_base = 'translation'
+
   const [details, setDetails] = useState([])
   const [data, setData] = useState([])
+  const [popupStatus, setPopupStatus] = useState('create')
 
-  const columns = [
-    {
-      key: 'id',
-      // label: '',
-      // filter: false,
-      // sorter: false,
-    },
-    {
-      key: 'leavetype',
-      _style: { width: '20%' },
-    },
+  const [StatusInDB, setStatusInDB] = useState(true)
 
-    {
-      key: 'alotment',
-      _style: { width: '20%' }
-    }, {
-      key: 'status',
-      _style: { width: '20%' }
-    },
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Default items per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [columnFilter, setColumnFilter] = useState([])
+  const [tableFilter, setTableFilter] = useState([])
 
-    {
-      key: 'show_details',
-      label: '',
-      _style: { width: '1%' },
-      filter: false,
-      sorter: false,
-    },
-  ];
-  const getBadge = (status) => {
-    switch (status) {
-      case 'Active':
-        return 'success'
-      case 'Inactive':
-        return 'secondary'
-      case 'Pending':
-        return 'warning'
-      case 'Banned':
-        return 'danger'
-      default:
-        return 'primary'
-    }
-  }
+  const [LeaveTypeDetails, setLeaveTypeDetails] = useState([])
 
-  const [leaveTypeDetails, setLeaveTypeDetails] = useState([])
   // const [leaveTypeId, setLeaveTypeId] = useState('')
   const handleChangeId = (event) => {
     setLeaveTypeId(event.target.value)
@@ -74,38 +49,36 @@ const LeaveTypeDataGrid = () => {
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      LVT_LeaveTypeID: item
+      MDLT_LeaveTypeID: item
     }
-
-    // const res = fetch(apiUrl + 'leavetype/get_leavetype_single', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-    //     setLeaveTypeDetails(res1[0].LeaveType[0]);
-    //     handleOpenPopup()
-    //   })
+    // console.log(formData)
     const LeaveTypeDetails = await getLeaveTypeSingle(formData)
+    // console.log(LeaveTypeDetails)
     // setLeaveTypeDetails(res1[0].LeaveType[0]);
     setLeaveTypeDetails(LeaveTypeDetails);
     handleOpenPopup()
   }
+  const toggleEdit = (index) => {
+    setPopupStatus('edit')
+    toggleDetails(index)
+  }
+  const toggleDelete = (index) => {
+    setPopupStatus('delete')
+    toggleDetails(index)
+  }
+  const toggleView = (index) => {
+    setPopupStatus('view')
+    toggleDetails(index)
+  }
   const toggleDetails = (index) => {
-
-
     const position = details.indexOf(index)
     let newDetails = details.slice()
     if (position !== -1) {
       newDetails.splice(position, 1)
     } else {
       newDetails = [...details, index]
-      // alert(newDetails[newDetails.length - 1])
       loadDetails(newDetails[0])
     }
-    // setDetails(newDetails)
   }
 
   // setCustomerId(res1[0].Customer[0].CUS_ID);}
@@ -127,37 +100,6 @@ const LeaveTypeDataGrid = () => {
     const LeaveTypeDetails = await getLeaveTypeAll(formData)
     // console.log(LeaveTypeDetails)
     setData(LeaveTypeDetails);
-
-    // const res = await fetch(apiUrl + 'leavetype/get_leavetype_all', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData),
-    // })
-    //   .then(response => response.json())
-    //   .then(json => {
-    //     let res1 = JSON.parse(JSON.stringify(json))
-
-    //     const LeaveTypeDetails = [];
-    //     class LeaveTypeDetail {
-    //       constructor(id, leavetype, status, Alotment) {
-    //         this.leavetype = leavetype;
-    //         this.id = id;
-    //         this.alotment = Alotment
-    //         if (status == true) { this.status = "Active"; }
-    //         else { this.status = "Inactive"; }
-    //       }
-    //     }
-
-    //     for (let index = 0; index < res1[0].LeaveType.length; index++) {
-    //       let element = res1[0].LeaveType[index];
-    //       console.log(element)
-    //       LeaveTypeDetails[index] = new LeaveTypeDetail(element.LVT_LeaveTypeID, element.LVT_LeaveType, element.LVT_Status, element.LVT_LeaveAlotment);
-    //     }
-
-    //     setData(LeaveTypeDetails);
-    //     // setCustomerId(  res1[0].Customer[0].CUS_ID);
-    //   })
-
   }
   useEffect(() => {
     requestdata();
@@ -178,7 +120,7 @@ const LeaveTypeDataGrid = () => {
 
   const handleClosePopup = () => {
     setVisible(false);
-    setLeaveTypeDetails([]);
+    requestdata();
   };
 
   return (
@@ -196,7 +138,7 @@ const LeaveTypeDataGrid = () => {
           </CButton>
         </CCol>
         <CCol className='d-flex justify-content-end'>
-          <LeaveTypePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveTypeDetails={leaveTypeDetails} />
+          <LeaveTypePopup popupStatus={popupStatus} onClose={handleClosePopup} StatusInDB={StatusInDB} visible={visible} onOpen={handleOpenPopup} LeaveTypeDetails={LeaveTypeDetails} />
         </CCol>
       </CRow>
       <CSmartTable
@@ -205,7 +147,7 @@ const LeaveTypeDataGrid = () => {
         columns={columns}
         columnFilter
         columnSorter
-        footer
+        // footer
         items={data}
         itemsPerPageSelect
         itemsPerPage={5}
@@ -218,11 +160,6 @@ const LeaveTypeDataGrid = () => {
           console.log(items)
         }}
         scopedColumns={{
-          // avatar: (item) => (
-          //   <td>
-          //     {/* <CAvatar src={`/images/avatars/${item.avatar}`} /> */}
-          //   </td>
-          // ),
           status: (item) => (
             <td>
               <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
@@ -237,14 +174,46 @@ const LeaveTypeDataGrid = () => {
                   shape="square"
                   size="sm"
                   onClick={() => {
-                    toggleDetails(item.id)
+                    toggleEdit(item.id)
                   }}
                 >
-                  {details.includes(item.id) ? 'Hide' : 'Show'}
+                  Edit
                 </CButton>
               </td>
             )
           },
+          view: (item) => (
+            <td>
+              <CButton
+                color="success"
+                variant="outline"
+                shape="square"
+                size="sm"
+                onClick={() => {
+                  toggleView(item.id)
+                }}
+              >
+                View
+              </CButton>
+            </td>
+          ),
+          delete: (item) => (
+            <td>
+              {item.status == 'Inactive' ? '' :
+                <CButton
+                  color="danger"
+                  variant="outline"
+                  shape="square"
+                  size="sm"
+                  onClick={() => {
+                    toggleDelete(item.id)
+                  }}
+                >
+                  Delete
+                </CButton>
+              }
+            </td>
+          ),
           details: (item) => {
             return (
               <CCollapse visible={details.includes(item.id)}>

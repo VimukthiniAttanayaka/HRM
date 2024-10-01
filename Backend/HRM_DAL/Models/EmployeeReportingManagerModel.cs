@@ -58,7 +58,7 @@ namespace HRM_DAL.Models
 
     public class EmployeeReportingManagerSearchModel : RequestBaseModel
     {
-        public int EERM_ID { get; set; }
+        public string EERM_EmployeeID { get; set; }
     }
 
     public class InactiveEERMModel : RequestBaseModel

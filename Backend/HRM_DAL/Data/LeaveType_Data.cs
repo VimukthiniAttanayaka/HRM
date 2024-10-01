@@ -18,6 +18,11 @@ namespace HRM_DAL.Data
             List<ReturnLeaveTypeModelHead> objLeaveTypeHeadList = new List<ReturnLeaveTypeModelHead>();
             ReturnLeaveTypeModelHead objLeaveTypeHead = new ReturnLeaveTypeModelHead();
 
+            if (objLeaveTypeHead.LeaveType == null)
+            {
+                objLeaveTypeHead.LeaveType = new List<ReturnLeaveTypeModel>();
+            }
+
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
                 objLeaveTypeHead.resp = false;
@@ -36,11 +41,11 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "sp_get_LeaveTypes_single";
+                        cmd.CommandText = "sp_get_LeaveType_single";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@LVT_LeaveTypeID", model.LVT_LeaveTypeID);
-                        cmd.Parameters["@LVT_LeaveTypeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDLT_LeaveTypeID", model.MDLT_LeaveTypeID);
+                        cmd.Parameters["@MDLT_LeaveTypeID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -56,15 +61,12 @@ namespace HRM_DAL.Data
                                 objLeaveTypeHead.resp = true;
                                 objLeaveTypeHead.msg = "Get LeaveType";
 
-                                objLeaveType.LVT_LeaveTypeID = rdr["LVT_LeaveTypeID"].ToString();
-                                objLeaveType.LVT_LeaveAlotment = Convert.ToInt16(rdr["LVT_LeaveAlotment"].ToString());
-                                objLeaveType.LVT_LeaveType = rdr["LVT_LeaveType"].ToString();
-                                objLeaveType.LVT_Status = Convert.ToBoolean(rdr["LVT_Status"].ToString());
-
-                                if (objLeaveTypeHead.LeaveType == null)
-                                {
-                                    objLeaveTypeHead.LeaveType = new List<ReturnLeaveTypeModel>();
-                                }
+                                objLeaveType.MDLT_LeaveTypeID = rdr["MDLT_LeaveTypeID"].ToString();
+                                objLeaveType.MDLT_Description = rdr["MDLT_Description"].ToString();
+                                objLeaveType.MDLT_LeaveType = rdr["MDLT_LeaveType"].ToString();
+                                objLeaveType.MDLT_Status = Convert.ToBoolean(rdr["MDLT_Status"].ToString());
+                                objLeaveType.MDLT_LeaveAlotment = Convert.ToInt16(rdr["MDLT_LeaveAlotment"].ToString());
+                                objLeaveType.MDLT_Duration = Convert.ToInt16(rdr["MDLT_Duration"].ToString());
 
                                 objLeaveTypeHead.LeaveType.Add(objLeaveType);
 
@@ -115,6 +117,11 @@ namespace HRM_DAL.Data
             List<ReturnLeaveTypeModelHead> objLeaveTypeHeadList = new List<ReturnLeaveTypeModelHead>();
             ReturnLeaveTypeModelHead objLeaveTypeHead = new ReturnLeaveTypeModelHead();
 
+            if (objLeaveTypeHead.LeaveType == null)
+            {
+                objLeaveTypeHead.LeaveType = new List<ReturnLeaveTypeModel>();
+            }
+
             if (login_Data.AuthenticationKeyValidateWithDB(model) == false)
             {
                 objLeaveTypeHead.resp = false;
@@ -133,11 +140,11 @@ namespace HRM_DAL.Data
                         cmd.Connection = lconn;
                         lconn.Open();
 
-                        cmd.CommandText = "get_LeaveType_all";
+                        cmd.CommandText = "sp_get_LeaveType_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@LVT_LeaveTypeID", model.LVT_LeaveTypeID);
-                        cmd.Parameters["@LVT_LeaveTypeID"].Direction = ParameterDirection.Input;
+                        //cmd.Parameters.AddWithValue("@MDLT_LeaveTypeID", model.MDLT_LeaveTypeID);
+                        //cmd.Parameters["@MDLT_LeaveTypeID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -153,15 +160,12 @@ namespace HRM_DAL.Data
                                 objLeaveTypeHead.resp = true;
                                 objLeaveTypeHead.msg = "Get LeaveType";
 
-                                objLeaveType.LVT_LeaveTypeID = rdr["LVT_LeaveTypeID"].ToString();
-                                objLeaveType.LVT_LeaveAlotment = Convert.ToInt16(rdr["LVT_LeaveAlotment"].ToString());
-                                objLeaveType.LVT_LeaveType = rdr["LVT_LeaveType"].ToString();
-                                objLeaveType.LVT_Status = Convert.ToBoolean(rdr["LVT_Status"].ToString());
+                                objLeaveType.MDLT_LeaveTypeID = rdr["MDLT_LeaveTypeID"].ToString();
+                                objLeaveType.MDLT_LeaveType = rdr["MDLT_LeaveType"].ToString();
+                                objLeaveType.MDLT_Status = Convert.ToBoolean(rdr["MDLT_Status"].ToString());
+                                objLeaveType.MDLT_LeaveAlotment = Convert.ToInt16(rdr["MDLT_LeaveAlotment"].ToString());
+                                objLeaveType.MDLT_Duration = Convert.ToInt16(rdr["MDLT_Duration"].ToString());
 
-                                if (objLeaveTypeHead.LeaveType == null)
-                                {
-                                    objLeaveTypeHead.LeaveType = new List<ReturnLeaveTypeModel>();
-                                }
 
                                 objLeaveTypeHead.LeaveType.Add(objLeaveType);
 
@@ -187,11 +191,9 @@ namespace HRM_DAL.Data
             }
             catch (Exception ex)
             {
-                objLeaveTypeHead = new ReturnLeaveTypeModelHead
-                {
-                    resp = false,
-                    msg = ex.Message.ToString()
-                };
+                objLeaveTypeHead.resp = false;
+                objLeaveTypeHead.msg = ex.Message.ToString();
+
                 objLeaveTypeHeadList.Add(objLeaveTypeHead);
 
                 objError.WriteLog(0, "LeaveType_Data", "get_LeaveType_all", "Stack Track: " + ex.StackTrace);
@@ -236,49 +238,23 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
                         cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@LVT_LeaveTypeID", item.LVT_LeaveTypeID);
-                        cmd.Parameters["@LVT_LeaveTypeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDLT_LeaveTypeID", item.MDLT_LeaveTypeID);
+                        cmd.Parameters["@MDLT_LeaveTypeID"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
-                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDLT_LeaveType", item.MDLT_LeaveType);
+                        cmd.Parameters["@MDLT_LeaveType"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
-                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDLT_Status", item.MDLT_Status);
+                        cmd.Parameters["@MDLT_Status"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
-                        //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDLT_Description", item.MDLT_Description);
+                        cmd.Parameters["@MDLT_Description"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_UnitNumber", item.CUS_Adrs_UnitNumber);
-                        //cmd.Parameters["@CUS_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDLT_LeaveAlotment", item.MDLT_LeaveAlotment);
+                        cmd.Parameters["@MDLT_LeaveAlotment"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_StreetName", item.CUS_Adrs_StreetName);
-                        //cmd.Parameters["@CUS_Adrs_StreetName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_City", item.CUS_Adrs_City);
-                        //cmd.Parameters["@CUS_Adrs_City"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_CountryCode", item.CUS_Adrs_CountryCode);
-                        //cmd.Parameters["@CUS_Adrs_CountryCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_PostalCode", item.CUS_Adrs_PostalCode);
-                        //cmd.Parameters["@CUS_Adrs_PostalCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactPerson", item.CUS_ContactPerson);
-                        //cmd.Parameters["@CUS_ContactPerson"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
-                        //cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
-                        //cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_SMS", item.CUS_OTP_By_SMS);
-                        //cmd.Parameters["@CUS_OTP_By_SMS"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
-                        //cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
-
-                        string mailtypes = "";
+                        cmd.Parameters.AddWithValue("@MDLT_Duration", item.MDLT_Duration);
+                        cmd.Parameters["@MDLT_Duration"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -298,7 +274,15 @@ namespace HRM_DAL.Data
 
                             }
                         }
-
+                        else
+                        {
+                            objCustHead = new ReturnResponse
+                            {
+                                resp = true,
+                                msg = ""
+                            };
+                            objCustHeadList.Add(objCustHead);
+                        }
 
                     }
                 }
@@ -353,50 +337,23 @@ namespace HRM_DAL.Data
                         cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
                         cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@LVT_LeaveTypeID", item.LVT_LeaveTypeID);
-                        cmd.Parameters["@LVT_LeaveTypeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDLT_LeaveTypeID", item.MDLT_LeaveTypeID);
+                        cmd.Parameters["@MDLT_LeaveTypeID"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_CompanyName", item.CUS_CompanyName);
-                        //cmd.Parameters["@CUS_CompanyName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDLT_LeaveType", item.MDLT_LeaveType);
+                        cmd.Parameters["@MDLT_LeaveType"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BlockBuildingNo", item.CUS_Adrs_BlockBuildingNo);
-                        //cmd.Parameters["@CUS_Adrs_BlockBuildingNo"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDLT_Status", item.MDLT_Status);
+                        cmd.Parameters["@MDLT_Status"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_BuildingName", item.CUS_Adrs_BuildingName);
-                        //cmd.Parameters["@CUS_Adrs_BuildingName"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDLT_Description", item.MDLT_Description);
+                        cmd.Parameters["@MDLT_Description"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_UnitNumber", item.CUS_Adrs_UnitNumber);
-                        //cmd.Parameters["@CUS_Adrs_UnitNumber"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDLT_LeaveAlotment", item.MDLT_LeaveAlotment);
+                        cmd.Parameters["@MDLT_LeaveAlotment"].Direction = ParameterDirection.Input;
 
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_StreetName", item.CUS_Adrs_StreetName);
-                        //cmd.Parameters["@CUS_Adrs_StreetName"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_City", item.CUS_Adrs_City);
-                        //cmd.Parameters["@CUS_Adrs_City"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_CountryCode", item.CUS_Adrs_CountryCode);
-                        //cmd.Parameters["@CUS_Adrs_CountryCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Adrs_PostalCode", item.CUS_Adrs_PostalCode);
-                        //cmd.Parameters["@CUS_Adrs_PostalCode"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactPerson", item.CUS_ContactPerson);
-                        //cmd.Parameters["@CUS_ContactPerson"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_ContactNumber", item.CUS_ContactNumber);
-                        //cmd.Parameters["@CUS_ContactNumber"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_PinOrPwd", item.CUS_PinOrPwd);
-                        //cmd.Parameters["@CUS_PinOrPwd"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_SMS", item.CUS_OTP_By_SMS);
-                        //cmd.Parameters["@CUS_OTP_By_SMS"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_OTP_By_Email", item.CUS_OTP_By_Email);
-                        //cmd.Parameters["@CUS_OTP_By_Email"].Direction = ParameterDirection.Input;
-
-                        //cmd.Parameters.AddWithValue("@CUS_Status", item.CUS_Status);
-                        //cmd.Parameters["@CUS_Status"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDLT_Duration", item.MDLT_Duration);
+                        cmd.Parameters["@MDLT_Duration"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;
@@ -415,6 +372,15 @@ namespace HRM_DAL.Data
                                 objCustHeadList.Add(objCustHead);
 
                             }
+                        }
+                        else
+                        {
+                            objCustHead = new ReturnResponse
+                            {
+                                resp = true,
+                                msg = ""
+                            };
+                            objCustHeadList.Add(objCustHead);
                         }
                     }
                 }
@@ -440,7 +406,7 @@ namespace HRM_DAL.Data
             return objCustHeadList;
         }
 
-        public static List<ReturnResponse> inactivate_LeaveType(InactiveLVTModel item)//ok
+        public static List<ReturnResponse> inactivate_LeaveType(InactiveMDLTModel item)//ok
         {
             List<ReturnResponse> objUserHeadList = new List<ReturnResponse>();
             ReturnResponse objUserHead = new ReturnResponse();
@@ -468,8 +434,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_del_LeaveType";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@LVT_LeaveTypeID", item.LVT_LeaveTypeID);
-                        cmd.Parameters["@LVT_LeaveTypeID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@MDLT_LeaveTypeID", item.MDLT_LeaveTypeID);
+                        cmd.Parameters["@MDLT_LeaveTypeID"].Direction = ParameterDirection.Input;
 
                         cmd.Parameters.AddWithValue("@UD_UserID", item.UD_UserID);
                         cmd.Parameters["@UD_UserID"].Direction = ParameterDirection.Input;

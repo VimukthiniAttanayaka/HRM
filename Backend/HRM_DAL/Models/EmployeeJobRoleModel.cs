@@ -61,8 +61,8 @@ namespace HRM_DAL.Models
     }
 
     public class EmployeeJobRoleSearchModel : RequestBaseModel
-    {
-        public int EEJR_ID { get; set; }
+    {     
+        public string EEJR_EmployeeID { get;  set; }
     }
 
     public class InactiveEEJRModel : RequestBaseModel

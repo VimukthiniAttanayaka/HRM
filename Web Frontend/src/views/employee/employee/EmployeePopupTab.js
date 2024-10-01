@@ -7,6 +7,8 @@ import EmployeePopupTab_Contact_Grid from './EmployeePopupTab_Contact_Grid.js';
 import EmployeePopupTab_Salary_Grid from './EmployeePopupTab_Salary_Grid.js';
 import EmployeePopupTab_JobRoleGrid from './EmployeePopupTab_JobRole_Grid.js';
 import EmployeePopupTab_ReportingManagerGrid from './EmployeePopupTab_ReportingManager_Grid.js';
+import EmployeePopupTab_LeaveEntitlement_Grid from './EmployeePopupTab_LeaveEntitlement_Grid.js';
+import EmployeePopupTab_Termination_Grid from './EmployeePopupTab_Termination_Grid.js';
 import { getLabelText } from 'src/MultipleLanguageSheets'
 
 const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStatus }) => {
@@ -76,6 +78,13 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
               <CTab disabled={(popupStatus == 'create') ? true : false}
                 itemKey="reportingmanager">Reporting Manager</CTab>
 
+              <CTab disabled={(popupStatus == 'create') ? true : false}
+                itemKey="leaveentitlement">Leave Entitlement</CTab>
+
+              <CTab disabled={(popupStatus == 'create') ? true : false}
+                itemKey="termination">Termination</CTab>
+
+
             </CTabList>
             <CTabContent>
               <EmployeePopupTab_General popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
@@ -84,6 +93,8 @@ const EmployeePopupTab = ({ visible, onClose, onOpen, EmployeeDetails, popupStat
               <EmployeePopupTab_Salary_Grid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} />
               <EmployeePopupTab_JobRoleGrid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} employeeId={employeeId} />
               <EmployeePopupTab_ReportingManagerGrid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} employeeId={employeeId} />
+              <EmployeePopupTab_LeaveEntitlement_Grid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} employeeId={employeeId} />
+              <EmployeePopupTab_Termination_Grid popupStatus={popupStatus} EmployeeDetails={EmployeeDetails} employeeId={employeeId} />
             </CTabContent>
           </CTabs>
         </CModalBody>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { CTooltip, CButton, CModal, CModalBody, CCol, CInputGroupText, CFormSelect, CModalTitle, CDropdown, CDropdownItem, CDropdownMenu, CDropdownToggle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
-import data from './_data.js'
-import { Modal } from '@coreui/coreui-pro';
-import { requestdata_LeaveTypes_DropDowns_All } from '../../../apicalls/leavetype/get_all_list.js';
+// import data from './_data.js'
+// import { Modal } from '@coreui/coreui-pro';
+import { Dropdowns_LeaveType } from '../../../apicalls/leavetype/dropdowns.js';
 import { Dropdowns_Employee } from '../../../apicalls/employee/dropdowns.js';
 
 const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetails }) => {
@@ -82,7 +82,7 @@ const LeaveEntitlementPopup = ({ visible, onClose, onOpen, leaveEntitlementDetai
       USR_EmployeeID: 'sedcx'
     }
 
-    const LeaveTypeDetails = await requestdata_LeaveTypes_DropDowns_All(formData)
+    const LeaveTypeDetails = await Dropdowns_LeaveType(formData)
     
     setOptionsLeaveType(LeaveTypeDetails);
 

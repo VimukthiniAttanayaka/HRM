@@ -145,8 +145,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_EmployeeReportingManager_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        //cmd.Parameters.AddWithValue("@EERM_ID", model.EERM_ID);
-                        //cmd.Parameters["@EERM_ID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EERM_EmployeeID", model.EERM_EmployeeID);
+                        cmd.Parameters["@EERM_EmployeeID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;

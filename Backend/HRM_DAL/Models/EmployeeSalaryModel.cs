@@ -60,7 +60,7 @@ namespace HRM_DAL.Models
 
     public class EmployeeSalarySearchModel : RequestBaseModel
     {
-        public int EES_ID { get; set; }
+        public string EES_EmployeeID { get;  set; }
     }
 
     public class InactiveEESModel : RequestBaseModel

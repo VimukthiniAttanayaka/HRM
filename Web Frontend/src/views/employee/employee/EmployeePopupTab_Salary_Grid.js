@@ -61,7 +61,7 @@ const EmployeePopupTab_Salary_Grid = ({ EmployeeDetails, popupStatus, employeeId
     const formData = {
       // UD_StaffID: staffId,
       // AUD_notificationToken: token,
-      EME_EmployeeID: employeeId
+      EES_EmployeeID: employeeId
     }
     const EmployeeSalaryDetails = await getEmployeeSalaryAll(formData)
     // console.log(EmployeeSalaryDetails)

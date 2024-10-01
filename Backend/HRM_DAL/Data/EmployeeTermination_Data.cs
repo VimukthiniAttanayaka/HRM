@@ -141,8 +141,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_EmployeeTermination_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        //cmd.Parameters.AddWithValue("@EET_ID", model.EET_ID);
-                        //cmd.Parameters["@EET_ID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EET_EmployeeID", model.EET_EmployeeID);
+                        cmd.Parameters["@EET_EmployeeID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;

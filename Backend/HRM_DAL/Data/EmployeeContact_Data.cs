@@ -145,8 +145,8 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_get_EmployeeContact_all";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        //cmd.Parameters.AddWithValue("@EEC_ID", model.EEC_ID);
-                        //cmd.Parameters["@EEC_ID"].Direction = ParameterDirection.Input;
+                        cmd.Parameters.AddWithValue("@EEC_EmployeeID", model.EEC_EmployeeID);
+                        cmd.Parameters["@EEC_EmployeeID"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
                         dta.SelectCommand = cmd;

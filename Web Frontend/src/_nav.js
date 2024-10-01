@@ -190,14 +190,15 @@ const _nav = [
         to: '/leaves/leavetoapprove',
         disabled: !LLeaveToApprove,
         // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-      }, {
-        component: CNavItem,
-        // name: <Translation>{(t) => t('Leave Entitlement')}</Translation>,
-        name: getLabelText('Leave Entitlement', templatetype),
-        to: '/leaves/leaveentitlement',
-        disabled: !LLeaveEntitlement,
-        // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-      },
+      }, 
+      // {
+      //   component: CNavItem,
+      //   // name: <Translation>{(t) => t('Leave Entitlement')}</Translation>,
+      //   name: getLabelText('Leave Entitlement', templatetype),
+      //   to: '/leaves/leaveentitlement',
+      //   disabled: !LLeaveEntitlement,
+      //   // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      // },
 
       // {
       //   component: CNavItem,
@@ -279,49 +280,49 @@ const _nav = [
   //   component: CNavTitle,
   //   name: <Translation>{(t) => t('New Joinee Management')}</Translation>,
   // },
-  {
-    component: CNavGroup,
-    name: getLabelText('Exit Interview', templatetype),
-    // name: <Translation>{(t) => t('Exit Interview')}</Translation>,
-    items: [
-      //   {
-      //   component: CNavItem,
-      //   // name: <Translation>{(t) => t('User Access Group')}</Translation>,
-      //   name: getLabelText('Exit Interview Questions', templatetype),
-      //   to: '/exitinterview/exitinterviewquestions',
-      //   // disabled: !UMUserAccessGroup,
-      //   // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-      // }, {
-      //   component: CNavItem,
-      //   // name: <Translation>{(t) => t('User Access Group')}</Translation>,
-      //   name: getLabelText('Exit Interview Answers', templatetype),
-      //   to: '/exitinterview/exitinterviewanswers',
-      //   // disabled: !UMUserAccessGroup,
-      //   // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-      // }, {
-      //   component: CNavItem,
-      //   // name: <Translation>{(t) => t('Employee')}</Translation>,
-      //   name: getLabelText('Exit Interview Answers Excel Upload', templatetype),
-      //   to: '/exitinterview/exitinterviewanswers_excelupload',
-      //   // disabled: !EEmployee,
-      //   // isVisible:{getAttendance}
-      // }, {
-      //   component: CNavItem,
-      //   // name: <Translation>{(t) => t('Employee')}</Translation>,
-      //   name: getLabelText('Exit Interview Questions Excel Upload', templatetype),
-      //   to: '/exitinterview/exitinterviewquestions_excelupload',
-      //   // disabled: !EEmployee,
-      //   // isVisible:{getAttendance}
-      // },
-      {
-        component: CNavItem,
-        // name: <Translation>{(t) => t('User Access Group')}</Translation>,
-        name: getLabelText('Termination', templatetype),
-        to: '/exitinterview/termination',
-        // disabled: !UMUserAccessGroup,
-        // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-      }]
-  },
+  // {
+  //   component: CNavGroup,
+  //   name: getLabelText('Exit Interview', templatetype),
+  //   // name: <Translation>{(t) => t('Exit Interview')}</Translation>,
+  //   items: [
+  //     //   {
+  //     //   component: CNavItem,
+  //     //   // name: <Translation>{(t) => t('User Access Group')}</Translation>,
+  //     //   name: getLabelText('Exit Interview Questions', templatetype),
+  //     //   to: '/exitinterview/exitinterviewquestions',
+  //     //   // disabled: !UMUserAccessGroup,
+  //     //   // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+  //     // }, {
+  //     //   component: CNavItem,
+  //     //   // name: <Translation>{(t) => t('User Access Group')}</Translation>,
+  //     //   name: getLabelText('Exit Interview Answers', templatetype),
+  //     //   to: '/exitinterview/exitinterviewanswers',
+  //     //   // disabled: !UMUserAccessGroup,
+  //     //   // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+  //     // }, {
+  //     //   component: CNavItem,
+  //     //   // name: <Translation>{(t) => t('Employee')}</Translation>,
+  //     //   name: getLabelText('Exit Interview Answers Excel Upload', templatetype),
+  //     //   to: '/exitinterview/exitinterviewanswers_excelupload',
+  //     //   // disabled: !EEmployee,
+  //     //   // isVisible:{getAttendance}
+  //     // }, {
+  //     //   component: CNavItem,
+  //     //   // name: <Translation>{(t) => t('Employee')}</Translation>,
+  //     //   name: getLabelText('Exit Interview Questions Excel Upload', templatetype),
+  //     //   to: '/exitinterview/exitinterviewquestions_excelupload',
+  //     //   // disabled: !EEmployee,
+  //     //   // isVisible:{getAttendance}
+  //     // },
+  //     {
+  //       component: CNavItem,
+  //       // name: <Translation>{(t) => t('User Access Group')}</Translation>,
+  //       name: getLabelText('Termination', templatetype),
+  //       to: '/exitinterview/termination',
+  //       // disabled: !UMUserAccessGroup,
+  //       // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+  //     }]
+  // },
   {
     component: CNavGroup,
     // name: <Translation>{(t) => t('Reports')}</Translation>,

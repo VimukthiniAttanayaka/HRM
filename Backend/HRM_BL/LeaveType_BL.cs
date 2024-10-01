@@ -31,7 +31,7 @@ namespace HRM_BL
             return HRM_DAL.Data.LeaveType_Data.modify_LeaveType(item);
         }
 
-        public static List<ReturnResponse> inactivate_LeaveType(InactiveLVTModel item)//ok
+        public static List<ReturnResponse> inactivate_LeaveType(InactiveMDLTModel item)//ok
         {
             return HRM_DAL.Data.LeaveType_Data.inactivate_LeaveType(item);
         }

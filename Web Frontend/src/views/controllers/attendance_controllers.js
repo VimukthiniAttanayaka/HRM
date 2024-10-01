@@ -14,8 +14,8 @@ export
     }, {
       key: 'AttendanceDate',
       label: 'AttendanceDate',
-      filter: false,
-      sorter: false,
+      filter: true,
+      sorter: true,
     }, {
       key: 'InTime',
       label: 'InTime',
