@@ -19,7 +19,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
   const [isActive, setIsActive] = useState(true)
   const [selectedOptionLocation, setSelectedOptionLocation] = useState('');
   const [optionsLocation, setOptionsLocation] = useState([]);
-  
+
   const handleChangeDepartment = (event) => { setDepartment(event.target.value) }
   const handleChangeId = (event) => { setDepartmentId(event.target.value) }
   const handleChangeStatus = (event) => { setIsActive(event.target.checked) }
@@ -67,7 +67,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
     }
   }
 
-  
+
   async function requestdata() {
     const formData = {
       USR_EmployeeID: 'sedcx'
@@ -92,10 +92,17 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
   }
 
   useEffect(() => {
-    setDepartmentId(DepartmentDetails.MDD_DepartmentID)
-    setDepartment(DepartmentDetails.MDD_Department)
-    setDepartment(DepartmentDetails.MDD_LocationID)
-    setIsActive(StatusInDB)
+    if (popupStatus == 'create') {
+      setDepartmentId('')
+      setDepartment('')
+      setDepartment('')
+      setIsActive(true)
+    } else {
+      setDepartmentId(DepartmentDetails.MDD_DepartmentID)
+      setDepartment(DepartmentDetails.MDD_Department)
+      setDepartment(DepartmentDetails.MDD_LocationID)
+      setIsActive(StatusInDB)
+    }
     requestdata();
   }, [DepartmentDetails]);
   // console.log(DepartmentDetails)
@@ -165,7 +172,7 @@ const DepartmentPopup = ({ visible, onClose, onOpen, DepartmentDetails, popupSta
                       <h6>{getLabelText('Department', templatetype)}</h6>
                     </CInputGroupText>
                   </CCol>    <CFormInput placeholder="Department" name="Department" value={Department} onChange={handleChangeDepartment}
-                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false}                 />
+                    disabled={(popupStatus == 'view' || popupStatus == 'delete') ? true : false} />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>

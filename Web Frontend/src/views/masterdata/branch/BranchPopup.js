@@ -78,9 +78,15 @@ const BranchPopup = ({ visible, onClose, onOpen, branchDetails, popupStatus, Sta
   }
 
   useEffect(() => {
-    setBranchId(branchDetails.MDB_BranchID)
-    setBranch(branchDetails.MDB_Branch)
-    setIsActive(StatusInDB)
+    if (popupStatus == 'create') {
+      setBranchId('')
+      setBranch('')
+      setIsActive(true)
+    } else {
+      setBranchId(branchDetails.MDB_BranchID)
+      setBranch(branchDetails.MDB_Branch)
+      setIsActive(StatusInDB)
+    }
   }, [branchDetails]);
   // console.log(branchDetails)
 

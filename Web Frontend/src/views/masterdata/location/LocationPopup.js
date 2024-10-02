@@ -84,9 +84,15 @@ const LocationPopup = ({ visible, onClose, onOpen, LocationDetails, popupStatus,
   }
 
   useEffect(() => {
-    setLocationId(LocationDetails.MDL_LocationID)
-    setLocation(LocationDetails.MDL_Location)
-    setIsActive(StatusInDB)
+    if (popupStatus == 'create') {
+      setLocationId('')
+      setLocation('')
+      setIsActive(true)
+    } else {
+      setLocationId(LocationDetails.MDL_LocationID)
+      setLocation(LocationDetails.MDL_Location)
+      setIsActive(StatusInDB)
+    }
   }, [LocationDetails]);
   // console.log(LocationDetails)
 

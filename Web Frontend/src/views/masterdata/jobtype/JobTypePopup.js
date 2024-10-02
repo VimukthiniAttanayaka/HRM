@@ -90,10 +90,17 @@ const JobTypePopup = ({ visible, onClose, onOpen, JobTypeDetails, popupStatus, S
   }
 
   useEffect(() => {
-    setJobTypeId(JobTypeDetails.MDJT_JobTypeID)
-    setJobType(JobTypeDetails.MDJT_JobType)
-    setDescription(JobTypeDetails.MDJT_Description)
-    setIsActive(StatusInDB)
+    if (popupStatus == 'create') {
+      setJobTypeId('')
+      setJobType('')
+      setDescription('')
+      setIsActive(true)
+    } else {
+      setJobTypeId(JobTypeDetails.MDJT_JobTypeID)
+      setJobType(JobTypeDetails.MDJT_JobType)
+      setDescription(JobTypeDetails.MDJT_Description)
+      setIsActive(StatusInDB)
+    }
   }, [JobTypeDetails]);
   // console.log(JobTypeDetails)
 

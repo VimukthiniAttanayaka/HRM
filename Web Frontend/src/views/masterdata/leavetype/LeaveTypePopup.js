@@ -58,7 +58,7 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, LeaveTypeDetails, popupStatu
       MDLT_LeaveType: LeaveType,
       MDLT_Description: Description,
       MDLT_Duration: parseInt(Duration),
-      MDLT_LeaveAlotment:parseInt(LeaveAlotment),
+      MDLT_LeaveAlotment: parseInt(LeaveAlotment),
       MDLT_Status: isActive,
       UD_UserID: staffId,
     }
@@ -100,12 +100,21 @@ const LeaveTypePopup = ({ visible, onClose, onOpen, LeaveTypeDetails, popupStatu
   }
 
   useEffect(() => {
-    setLeaveTypeId(LeaveTypeDetails.MDLT_LeaveTypeID)
-    setLeaveType(LeaveTypeDetails.MDLT_LeaveType)
-    setDescription(LeaveTypeDetails.MDLT_Description)
-    setDuration(LeaveTypeDetails.MDLT_Duration)
-    setLeaveAlotment(LeaveTypeDetails.MDLT_LeaveAlotment)
-    setIsActive(StatusInDB)
+    if (popupStatus == 'create') {
+      setLeaveTypeId('')
+      setLeaveType('')
+      setDescription('')
+      setDuration('')
+      setLeaveAlotment('')
+      setIsActive(true)
+    } else {
+      setLeaveTypeId(LeaveTypeDetails.MDLT_LeaveTypeID)
+      setLeaveType(LeaveTypeDetails.MDLT_LeaveType)
+      setDescription(LeaveTypeDetails.MDLT_Description)
+      setDuration(LeaveTypeDetails.MDLT_Duration)
+      setLeaveAlotment(LeaveTypeDetails.MDLT_LeaveAlotment)
+      setIsActive(StatusInDB)
+    }
   }, [LeaveTypeDetails]);
   // console.log(LeaveTypeDetails)
 

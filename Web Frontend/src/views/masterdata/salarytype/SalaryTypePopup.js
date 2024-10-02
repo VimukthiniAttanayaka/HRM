@@ -90,10 +90,17 @@ const SalaryTypePopup = ({ visible, onClose, onOpen, SalaryTypeDetails, popupSta
   }
 
   useEffect(() => {
-    setSalaryTypeId(SalaryTypeDetails.MDST_SalaryTypeID)
-    setSalaryType(SalaryTypeDetails.MDST_SalaryType)
-    setDescription(SalaryTypeDetails.MDST_Description)
-    setIsActive(StatusInDB)
+    if (popupStatus == 'create') {
+      setSalaryTypeId('')
+      setSalaryType('')
+      setDescription('')
+      setIsActive(true)
+    } else {
+      setSalaryTypeId(SalaryTypeDetails.MDST_SalaryTypeID)
+      setSalaryType(SalaryTypeDetails.MDST_SalaryType)
+      setDescription(SalaryTypeDetails.MDST_Description)
+      setIsActive(StatusInDB)
+    }
   }, [SalaryTypeDetails]);
   // console.log(SalaryTypeDetails)
 

@@ -81,10 +81,17 @@ const JobRolePopup = ({ visible, onClose, onOpen, JobRoleDetails, popupStatus, S
   }
 
   useEffect(() => {
-    setJobRoleId(JobRoleDetails.MDJR_JobRoleID)
-    setJobRole(JobRoleDetails.MDJR_JobRole)
-    setDescription(JobRoleDetails.MDJR_Description)
-    setIsActive(StatusInDB)
+    if (popupStatus == 'create') {
+      setJobRoleId('')
+      setJobRole('')
+      setDescription('')
+      setIsActive(true)
+    } else {
+      setJobRoleId(JobRoleDetails.MDJR_JobRoleID)
+      setJobRole(JobRoleDetails.MDJR_JobRole)
+      setDescription(JobRoleDetails.MDJR_Description)
+      setIsActive(StatusInDB)
+    }
   }, [JobRoleDetails]);
   // console.log(JobRoleDetails)
 

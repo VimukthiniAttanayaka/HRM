@@ -83,9 +83,15 @@ const CountryPopup = ({ visible, onClose, onOpen, countryDetails, popupStatus, S
   }
 
   useEffect(() => {
-    setCountryId(countryDetails.MDCTY_CountryID)
-    setCountry(countryDetails.MDCTY_Country)
-    setIsActive(StatusInDB)
+    if (popupStatus == 'create') {
+      setCountryId('')
+      setCountry('')
+      setIsActive(true)
+    } else {
+      setCountryId(countryDetails.MDCTY_CountryID)
+      setCountry(countryDetails.MDCTY_Country)
+      setIsActive(StatusInDB)
+    }
   }, [countryDetails]);
 
   const [open, setOpen] = useState(false);
