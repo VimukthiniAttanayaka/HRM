@@ -199,7 +199,8 @@ const EmployeePopupTab_General = ({ EmployeeDetails, popupStatus }) => {
               <CInputGroupText>
                 <h6>Employee Id</h6>
               </CInputGroupText>
-            </CCol>   <CFormInput placeholder="Employee ID" name="Employee ID" value={employeeId} onChange={handleChangeEmployeeId}
+            </CCol>  
+             <CFormInput placeholder="Employee ID" name="Employee ID" value={employeeId} onChange={handleChangeEmployeeId}
               disabled={popupStatus == 'create' ? false : true}
             />
           </CInputGroup>

@@ -8,11 +8,13 @@ import { deleteEmployeeReportingManager } from '../../../apicalls/employeereport
 import { addNewEmployeeReportingManager } from '../../../apicalls/employeereportingmanager/add_new.js';
 
 import { getEmployeeSingle } from '../../../apicalls/employee/get_employee_single.js';
+import { Dropdowns_Employee } from '../../../apicalls/employee/dropdowns.js';
 
 import EmployeeGridModel from '../../sharedgridselectables/EmployeeGridModel.js';
 
 import PopUpAlert from '../../shared/PopUpAlert.js'
 import { format, parse } from 'date-fns'
+import CollapseDropdownList from 'src/views/shared/CollapseDropdownList.js';
 
 const EmployeePopupTab_ReportingManager_Grid_Popup = ({ toggleCreate, EmployeeDetails, popupStatus, visible1, onClose1,
   onOpen1, StatusInDB, EmployeeReportingManagerDetails, employeeId }) => {
@@ -28,6 +30,8 @@ const EmployeePopupTab_ReportingManager_Grid_Popup = ({ toggleCreate, EmployeeDe
   const [isActive, setIsActive] = useState(true)
   const [EmployeeID, setEmployeeID] = useState('')
   const [EmployeeName, setEmployeeName] = useState('')
+
+  const [optionsEmployee, setOptionsEmployee] = useState([]);
 
   const handleChangeIsActive = (event) => { StatusInDB = event.target.checked; setIsActive(event.target.checked) }
 
@@ -113,6 +117,7 @@ const EmployeePopupTab_ReportingManager_Grid_Popup = ({ toggleCreate, EmployeeDe
       setIsActive(EmployeeReportingManagerDetails.EERM_Status)
       setRemarks(EmployeeReportingManagerDetails.EERM_Remarks)
     }
+    requestdata()
   }, [EmployeeReportingManagerDetails]);
 
   useEffect(() => {
@@ -161,6 +166,16 @@ const EmployeePopupTab_ReportingManager_Grid_Popup = ({ toggleCreate, EmployeeDe
     }
   }
 
+  async function requestdata() {
+    const formData = {
+      USR_EmployeeID: 'sedcx',
+      // MDBB_BankID: BankID
+    }
+
+    const EmployeeDetails = await Dropdowns_Employee(formData)
+
+    setOptionsEmployee(EmployeeDetails);
+  }
   return (
     <>
 
@@ -202,9 +217,16 @@ const EmployeePopupTab_ReportingManager_Grid_Popup = ({ toggleCreate, EmployeeDe
                     ))}
                   </CFormSelect> */}
 
-                  <CFormInput placeholder="EmployeeName" name="EmployeeName" value={EmployeeName} disabled />
+                  <CollapseDropdownList optionsList={optionsEmployee}
+                    setSelectedOption={setEmployeeID} setSelectedValue={setEmployeeID}
+                    selectedOption={EmployeeID} SelectedValue={EmployeeID}
+                    disabled={(popupStatus == 'edit' || popupStatus == 'view' || popupStatus == 'delete') ? true : false}></CollapseDropdownList>
 
-                  <CButton color="success" onClick={EmployeeSearchOnClick}>{getLabelText('Search', templatetype)}</CButton>
+
+
+                  {/* <CFormInput placeholder="EmployeeName" name="EmployeeName" value={EmployeeName} disabled />
+
+                  <CButton color="success" onClick={EmployeeSearchOnClick}>{getLabelText('Search', templatetype)}</CButton> */}
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
