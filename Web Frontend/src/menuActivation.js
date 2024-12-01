@@ -149,28 +149,10 @@ export const getMenu_HRM_MDJobRole = () => {
   let item1 = convertStringToBoolean(localStorage.getItem("HRM_MasterData_JobRole"));
   return item1;
 };
-// export const gettutorial1 = () => {
-//   return localStorage.getItem('tutorial1');
-// };
-
-// export const getMenu_HRM_employee = () => {
-//   let item1 = convertStringToBoolean(localStorage.getItem('HRM_employee'));
-//   return item1;
-// };
-// export const getMenu_HRM_customer = () => {
-//   let item1 = convertStringToBoolean(localStorage.getItem('HRM_Customer'));
-//   return item1;
-// };
-// export const getMenu_HRM_user = () => {
-//   return localStorage.getItem('HRM_user');
-// };
-// export const getMenu_Attendance = () => {
-//   return localStorage.getItem('Attendance');
-// };
 
 
 export const convertStringToBoolean = (item) => {
-
+// console.log(item)
   if (item === 'true') {
     return true;
   } else {

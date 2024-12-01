@@ -5,7 +5,7 @@ namespace HRM_DAL.Models
 {
     public class ReturnUserModelHead : ReturnResponse
     {
-        public List<ReturnUserModel> user { get; set; }
+        public List<ReturnUserModel> user { get; set; } = new List<ReturnUserModel>();
     }
     public class LogDataRequestModel
     {
@@ -15,17 +15,17 @@ namespace HRM_DAL.Models
 
     public class ReturnUserModel
     {
-        public object UD_UserID { get; set; }
-        public object UD_AuthorizationToken { get; set; }
-        public string UD_FirstName { get; set; }
-        public string UD_LastName { get; set; }
-        public string UD_EmailAddress { get; set; }
-        public string UD_MobileNumber { get; set; }
-        public string UD_PhoneNumber { get; set; }
-        public string UD_Remarks { get; set; }
-        public List<MenuAccessModel> menuaccesslist { get; set; }
-        public List<UserRoleAccessGroupModel> userroleaccesslist { get; set; }
-        public List<ReturnUserAccessModel> UserAccessList { get; set; }
+        public string UE_UserID { get; set; }
+        public string UE_AuthorizationToken { get; set; }
+        public string UE_FirstName { get; set; }
+        public string UE_LastName { get; set; }
+        public string UE_EmailAddress { get; set; }
+        public string UE_MobileNumber { get; set; }
+        public string UE_PhoneNumber { get; set; }
+        public string UE_Remarks { get; set; }
+        public List<MenuAccessModel> menuaccesslist { get; set; } = new List<MenuAccessModel>();
+        public List<UserRoleAccessGroupModel> userroleaccesslist { get; set; } = new List<UserRoleAccessGroupModel>();
+        public List<ReturnUserAccessModel> UserAccessList { get; set; } = new List<ReturnUserAccessModel>();
     }
 
     public class InactiveUserModel { }

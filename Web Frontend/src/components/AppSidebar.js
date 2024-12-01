@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -18,6 +18,7 @@ import { sygnet } from 'src/assets/brand/sygnet'
 
 // sidebar nav config
 import navigation from '../_nav'
+
 
 const AppSidebar = () => {
   const dispatch = useDispatch()
@@ -42,10 +43,10 @@ const AppSidebar = () => {
         <CCloseButton
           className="d-lg-none"
           dark
-          onClick={() => dispatch({ type: 'set', sidebarShow: false })}
+          onClick={() => { dispatch({ type: 'set', sidebarShow: false }); this.forceUpdate() }}
         />
         <CSidebarToggler
-          onClick={() => dispatch({ type: 'set', sidebarUnfoldable: !unfoldable })}
+          onClick={() => { dispatch({ type: 'set', sidebarUnfoldable: !unfoldable }); this.forceUpdate() }}
         />
       </CSidebarHeader>
       <AppSidebarNav items={navigation} />

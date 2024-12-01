@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -6,6 +6,7 @@ import SimpleBar from 'simplebar-react'
 import 'simplebar-react/dist/simplebar.min.css'
 
 import { CBadge, CNavLink, CSidebarNav } from '@coreui/react-pro'
+import {GetDisabled} from '../GetDisabled.js'
 
 export const AppSidebarNav = ({ items }) => {
   const navLink = (name, icon, badge, indent = false) => {
@@ -31,33 +32,49 @@ export const AppSidebarNav = ({ items }) => {
   const navItem = (item, index, indent = false) => {
     const { component, name, badge, icon, ...rest } = item
     const Component = component
+
+    let isdisabled = GetDisabled(item.keyname)
+    // console.log(isdisabled)
+
     return (
-      <Component as="div" key={index}>
-        {rest.to || rest.href ? (
-          <CNavLink {...(rest.to && { as: NavLink })} {...rest}>
-            {navLink(name, icon, badge, indent)}
-          </CNavLink>
-        ) : (
-          navLink(name, icon, badge, indent)
-        )}
-      </Component>
+      // item.disabled ? null 
+      !isdisabled ? null :
+        (<Component as="div" key={index}>
+          {
+            rest.to || rest.href ? (
+              <CNavLink {...(rest.to && { as: NavLink })} {...rest}>
+                {navLink(name, icon, badge, indent)}
+              </CNavLink>
+            ) : (
+              navLink(name, icon, badge, indent)
+            )
+          }
+        </Component>
+        )
     )
   }
 
   const navGroup = (item, index) => {
     const { component, name, icon, items, to, ...rest } = item
     const Component = component
+
+    // console.log(item.keyname)
+    let isdisabled = GetDisabled(item.keyname)
+    // console.log(isdisabled)
     return (
-      item.disabled?null:
-      <Component compact as="div" key={index} toggler={navLink(name, icon)} {...rest}>
-        {item.items?.map((item, index) =>
-          item.items ? navGroup(item, index) : navItem(item, index, true),
-        )}
-      </Component>
+      // item.disabled ? null :
+      !isdisabled ? null :
+        <Component compact as="div" key={index} toggler={navLink(name, icon)} {...rest}>
+          {item.items?.map((item, index) =>
+            item.items ? navGroup(item, index) : navItem(item, index, true),
+          )}
+        </Component>
     )
   }
 
+  // console.log(items)
   return (
+
     <CSidebarNav as={SimpleBar}>
       {items &&
         items.map((item, index) => (item.items ? navGroup(item, index) : navItem(item, index)))}

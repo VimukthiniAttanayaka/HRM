@@ -27,6 +27,7 @@ const Login = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
 
   const [userName, setUserName] = useState("");
+  const [ErrorMessage, setErrorMessage] = useState("");
   const [password, setPassword] = useState("");
   const [menuList, setMenuList] = useState([]);
 
@@ -54,26 +55,30 @@ const Login = () => {
         let res1 = JSON.parse(JSON.stringify(json))
         // let menuList = [];
         console.log(res1);
-        for (let index = 0; index < res1.user[0].UserAccessList.length; index++) {
-          let element = res1.user[0].UserAccessList[index];
-          // console.log(element)
-          menuList[index] = new UserMenuDetail(element.MNU_Active, element.MNU_MenuName);
+        setErrorMessage(res1.msg)
+        if (res1.user.length > 0) {
+
+          for (let index = 0; index < res1.user[0].UserAccessList.length; index++) {
+            let element = res1.user[0].UserAccessList[index];
+            // console.log(element)
+            menuList[index] = new UserMenuDetail(element.MNU_Active, element.MNU_MenuName);
+          }
+
+          localStorage.setItem('token', res1.user[0].UE_AuthorizationToken)
+          localStorage.setItem('staff_id', res1.user[0].UE_UserID)
+          localStorage.setItem('customer_id', 'cus1')
+
+          const courses = [
+            { name: "HRM_employee", active: true },
+            { name: "HRM_customer", active: true },
+            { name: "HRM_user", active: false },
+            { name: "Attendance", active: true },
+          ];
+          setMenu([]);
+          setMenu(menuList);
+          // console.log(menuList);
+          navigate('/dashboard');
         }
-
-        localStorage.setItem('token', res1.user[0].UD_AuthorizationToken)
-        localStorage.setItem('staff_id', res1.user[0].UD_UserID)
-        localStorage.setItem('customer_id', 'cus1')
-
-        const courses = [
-          { name: "HRM_employee", active: true },
-          { name: "HRM_customer", active: true },
-          { name: "HRM_user", active: false },
-          { name: "Attendance", active: true },
-        ];
-        setMenu([]);
-        setMenu(menuList);
-        // console.log(menuList);
-        navigate('/dashboard');
       })
 
     // if (response.ok) {
@@ -125,6 +130,14 @@ const Login = () => {
                         <CButton color="link" className="px-0" href="#/forgetpassword">
                           Forgot password?
                         </CButton>
+                      </CCol>
+                    </CRow>
+                    <CRow>
+                      <CCol xs={6}>
+                        <h6 color="warning">{ErrorMessage}</h6>
+                      </CCol>
+                      <CCol xs={6} className="text-right">
+
                       </CCol>
                     </CRow>
                   </CForm>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { CTooltip, CFormSelect, CButton, CModal, CFormSwitch, CModalBody, CTabPanel, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
+import { CTooltip, CFormSelect, CButton, CModal, CFormSwitch, CCollapse, CCardFooter, CModalBody, CTabPanel, CCol, CInputGroupText, CModalTitle, CModalFooter, CModalHeader, CFormCheck, CPopover, CLink, CCard, CCardBody, CForm, CFormInput, CInputGroup, CDatePicker } from '@coreui/react-pro'
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 // import data from './_data.js'
 // import { Modal } from '@coreui/coreui-pro';
@@ -11,6 +11,8 @@ import { addNewExternalUser } from '../../../apicalls/externaluser/add_new.js';
 
 import PopUpAlert from '../../shared/PopUpAlert.js'
 import { format, parse } from 'date-fns'
+import CollapseDropdownList from 'src/views/shared/CollapseDropdownList.js';
+
 
 const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetails, popupStatus, StatusInDB }) => {
   let templatetype = 'translation_externaluser'
@@ -20,7 +22,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
   //   event.preventDefault();
 
   // };
-  const [selectedOptionUserRole, setSelectedOptionUserRole] = useState('');
+  // const [selectedOptionUserRole, setSelectedOptionUserRole] = useState('');
   const [FirstName, setFirstName] = useState('')
   const [LastName, setLastName] = useState('')
   const [EmailAddress, setEmailAddress] = useState('')
@@ -30,9 +32,12 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
   const [ActiveTo, setActiveTo] = useState(new Date())
   const [PhoneNumber, setPhoneNumber] = useState('')
   const [UserID, setUserID] = useState('')
+  const [UserRole, setUserRole] = useState('')
+  const [UserRoleID, setUserRoleID] = useState('')
   const [isActive, setIsActive] = useState(true)
 
-  const handleChangeIsActive = (event) => { StatusInDB = event.target.checked; setIsActive(event.target.checked) }
+  const handleChangeIsActive = (event) => { StatusInDB = event.target.checked; 
+    setIsActive(event.target.checked) }
   const handleChangeFirstName = (event) => { setFirstName(event.target.value) }
   const handleChangeLastName = (event) => { setLastName(event.target.value) }
   const handleChangeEmailAddress = (event) => { setEmailAddress(event.target.value) }
@@ -54,15 +59,25 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
     const staffId = getStaffID();
     const customerId = getCustomerID();
 
+    if (UserRoleID === '__') {
+      setDialogTitle("Alert");
+      setDialogContent("Invalid UserRole");
+      setOpen(true);
+      return
+    }
     const formData = {
-      UE_UserID: UserID, UE_FirstName: FirstName, UE_LastName: LastName,
-      UE_EmailAddress: EmailAddress, UE_MobileNumber: MobileNumber, UE_PhoneNumber: PhoneNumber, UE_Remarks: Remarks,
-      UE_UserRole: selectedOptionUserRole,
+      UE_UserID: UserID,
+      UE_FirstName: FirstName,
+      UE_LastName: LastName,
+      UE_EmailAddress: EmailAddress,
+      UE_MobileNumber: MobileNumber,
+      UE_PhoneNumber: PhoneNumber,
+      UE_Remarks: Remarks,
       UE_ActiveFrom: ActiveFrom.toJSON(),
       UE_ActiveTo: ActiveTo.toJSON(),
       UE_Status: isActive,
       UD_UserID: staffId,
-      UE_UserRoleID: selectedOptionUserRole
+      UE_UserRoleID: UserRoleID
     }
 
     if (popupStatus == 'edit') {
@@ -104,7 +119,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
   }
 
   useEffect(() => {
-    // console.log(ExternalUserDetails)
+    console.log(ExternalUserDetails)
     setFirstName(ExternalUserDetails.UE_FirstName)
     setLastName(ExternalUserDetails.UE_LastName)
     setEmailAddress(ExternalUserDetails.UE_EmailAddress)
@@ -114,7 +129,8 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
     setUserID(ExternalUserDetails.UE_UserID)
     setActiveFrom(ExternalUserDetails.UE_ActiveFrom)
     setActiveTo(ExternalUserDetails.UE_ActiveTo)
-    setSelectedOptionUserRole(ExternalUserDetails.UE_UserRoleID)
+    setUserRole(ExternalUserDetails.UserRole)
+    setUserRoleID(ExternalUserDetails.UE_UserRoleID)
     // setIsActive(ExternalUserDetails.UE_status)
     // console.log(isActive)    
     setIsActive(StatusInDB)
@@ -125,7 +141,7 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
 
   const handleClose = () => {
     setOpen(false);
-    onClose();
+    if (DialogTitle === "Alert") { } else { onClose(); }
   };
 
   const [DialogTitle, setDialogTitle] = useState('');
@@ -153,13 +169,30 @@ const ExternalUserPopup_Details = ({ visible, onClose, onOpen, ExternalUserDetai
               </CInputGroupText>
             </CCol>
 
-            <CFormSelect value={selectedOptionUserRole} onChange={(e) => setSelectedOptionUserRole(e.target.value)}>
+            {/* <CFormInput
+        label="Filter"
+        value={filterValue}
+        onChange={setFilterValue}
+      />
+          <CFormSelect 
+          // value={selectedOptionUserRole}
+          value={selectedOption}
+              // onChange={(e) => setSelectedOptionUserRole(e.target.value)}
+              onChange={setSelectedOption}
+              filterOptions={filterOptions}>
               {optionsUserRole.map((option) => (
                 <option key={option.key} value={option.key}>
                   {option.value}
                 </option>
               ))}
-            </CFormSelect>
+            </CFormSelect> */}
+            {popupStatus == 'create' ?
+                <CollapseDropdownList optionsList={optionsUserRole}
+                setSelectedOption={setUserRoleID} setSelectedValue={setUserRole}
+                selectedOption={UserRoleID} SelectedValue={UserRole}
+                disabled={(popupStatus == 'edit' || popupStatus == 'view' || popupStatus == 'delete') ? true : false}></CollapseDropdownList>
+              : <CFormInput placeholder="UserRole" name="UserRole" value={UserRole} 
+                disabled={true} />}
           </CInputGroup>
           <CInputGroup className="mb-3">
             <CCol md={4}>

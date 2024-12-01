@@ -50,26 +50,27 @@ namespace HRM_DAL.Data
                         objUserHead.resp = true;
                         objUserHead.msg = "Login";
 
-                        //if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
-                        //{
-                        //    foreach (DataRow rdr in Ds.Tables[0].Rows)
-                        //    {
-                        //        if (Ds.Tables[0].Columns.Contains("RTN_RESP"))//echeck for error path
-                        //        {
-                        //            objUserHead = new ReturnUserModelHead
-                        //            {
-                        //                resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
-                        //                msg = rdr["RTN_MSG"].ToString()
-                        //            };
-                        //            if (objUserHead.user == null)
-                        //            {
-                        //                objUserHead.user = new List<ReturnUserModel>();
-                        //            }
-                        //            objUserHeadList.Add(objUserHead);
-                        //            //return objUserHeadList;
-                        //        }
-                        //    }
-                        //}
+                        if (objUserHead.user == null)
+                        {
+                            objUserHead.user = new List<ReturnUserModel>();
+                        }
+
+                        if (Ds != null && Ds.Tables.Count > 0 && Ds.Tables[0].Rows.Count > 0)
+                        {
+                            foreach (DataRow rdr in Ds.Tables[0].Rows)
+                            {
+                                if (Ds.Tables[0].Columns.Contains("RTN_RESP"))//echeck for error path
+                                {
+                                    objUserHead = new ReturnUserModelHead
+                                    {
+                                        resp = Boolean.Parse(rdr["RTN_RESP"].ToString()),
+                                        msg = rdr["RTN_MSG"].ToString()
+                                    };
+                                    //objUserHeadList.Add(objUserHead);
+                                    return objUserHead;
+                                }
+                            }
+                        }
                         //if (Ds != null && Ds.Tables.Count > 1 && Ds.Tables[1].Rows.Count > 0)
                         //{
                         ReturnUserModel objUser = new ReturnUserModel();
@@ -99,66 +100,83 @@ namespace HRM_DAL.Data
                                 msg = "Welcome to HRM"
                             };
 
-                            var tok = rdr["UD_UserID"].ToString();
+                            var tok = rdr["UE_UserID"].ToString();
                             string token = JwToken.Authenticate(tok);
-                            //string token = JwToken.Authenticate(Convert.ToInt32(rdr["UD_UserID"]));
-                            objUser.UD_UserID = rdr["UD_UserID"].ToString();
-                            objUser.UD_FirstName = rdr["UD_FirstName"].ToString();
-                            objUser.UD_LastName = rdr["UD_LastName"].ToString();
-                            objUser.UD_EmailAddress = rdr["UD_EmailAddress"].ToString();
-                            objUser.UD_MobileNumber = rdr["UD_MobileNumber"].ToString();
-                            objUser.UD_PhoneNumber = rdr["UD_PhoneNumber"].ToString();
-                            objUser.UD_Remarks = rdr["UD_Remarks"].ToString();
+                            //string token = JwToken.Authenticate(Convert.ToInt32(rdr["UE_UserID"]));
+                            objUser.UE_UserID = rdr["UE_UserID"].ToString();
+                            objUser.UE_FirstName = rdr["UE_FirstName"].ToString();
+                            objUser.UE_LastName = rdr["UE_LastName"].ToString();
+                            objUser.UE_EmailAddress = rdr["UE_EmailAddress"].ToString();
+                            objUser.UE_MobileNumber = rdr["UE_MobileNumber"].ToString();
+                            //objUser.UE_PhoneNumber = rdr["UE_PhoneNumber"].ToString();
+                            //objUser.UE_Remarks = rdr["UE_Remarks"].ToString();
 
-                            objUser.UD_AuthorizationToken = token;
+                            objUser.UE_AuthorizationToken = token;
 
                             AuthenticationKeySetupWithDB(objUser);
 
                         }
 
-                        List<UserRoleAccessGroupModel> userroleaccesslist = new List<UserRoleAccessGroupModel>();
-                        UserRoleAccessGroupModel userroleaccessobj = new UserRoleAccessGroupModel();
-                        foreach (DataRow rdr in Ds.Tables[1].Rows)
-                        {
-                            userroleaccessobj = new UserRoleAccessGroupModel();
-                            userroleaccessobj.UURAG_AccessGroupID = rdr["UURAG_AccessGroupID"].ToString();
-                            userroleaccessobj.UURAG_UserRoleID = rdr["UURAG_UserRoleID"].ToString();
-                            userroleaccessobj.UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
-                            userroleaccessobj.UUR_UserRole = rdr["UUR_UserRole"].ToString();
+                        //List<UserRoleAccessGroupModel> userroleaccesslist = new List<UserRoleAccessGroupModel>();
+                        //UserRoleAccessGroupModel userroleaccessobj = new UserRoleAccessGroupModel();
+                        //foreach (DataRow rdr in Ds.Tables[1].Rows)
+                        //{
+                        //    userroleaccessobj = new UserRoleAccessGroupModel();
+                        //    userroleaccessobj.UURAG_AccessGroupID = rdr["UURAG_AccessGroupID"].ToString();
+                        //    userroleaccessobj.UURAG_UserRoleID = rdr["UURAG_UserRoleID"].ToString();
+                        //    userroleaccessobj.UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
+                        //    userroleaccessobj.UUR_UserRole = rdr["UUR_UserRole"].ToString();
 
-                            userroleaccesslist.Add(userroleaccessobj);
-                        }
-                        List<MenuAccessModel> menuaccesslist = new List<MenuAccessModel>();
-                        MenuAccessModel menuaccessobj = new MenuAccessModel();
-                        foreach (DataRow rdr in Ds.Tables[2].Rows)
-                        {
-                            menuaccessobj = new MenuAccessModel();
-                            menuaccessobj.UMA_AccessGroupID = rdr["UMA_AccessGroupID"].ToString();
-                            menuaccessobj.UMA_UserMenuID = rdr["UMA_UserMenuID"].ToString();
-                            menuaccessobj.UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
-                            menuaccessobj.UUM_UserMenu = rdr["UUM_UserMenu"].ToString();
-                            menuaccessobj.UMA_Status = Convert.ToBoolean(rdr["UUM_Status"].ToString());
+                        //    userroleaccesslist.Add(userroleaccessobj);
+                        //}
+                        //List<MenuAccessModel> menuaccesslist = new List<MenuAccessModel>();
+                        //MenuAccessModel menuaccessobj = new MenuAccessModel();
+                        //foreach (DataRow rdr in Ds.Tables[2].Rows)
+                        //{
+                        //    menuaccessobj = new MenuAccessModel();
+                        //    menuaccessobj.UMA_AccessGroupID = rdr["UMA_AccessGroupID"].ToString();
+                        //    menuaccessobj.UMA_UserMenuID = rdr["UMA_UserMenuID"].ToString();
+                        //    menuaccessobj.UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
+                        //    menuaccessobj.UUM_UserMenu = rdr["UUM_UserMenu"].ToString();
+                        //    menuaccessobj.UMA_Status = Convert.ToBoolean(rdr["UUM_Status"].ToString());
 
-                            menuaccesslist.Add(menuaccessobj);
-                        }
+                        //    menuaccesslist.Add(menuaccessobj);
+                        //}
 
 
-                        if (objUserHead.user == null)
-                        {
-                            objUserHead.user = new List<ReturnUserModel>();
-                        }
-                        objUser.menuaccesslist = menuaccesslist;
-                        objUser.userroleaccesslist = userroleaccesslist;
+                        //if (objUserHead.user == null)
+                        //{
+                        //    objUserHead.user = new List<ReturnUserModel>();
+                        //}
+                        //objUser.menuaccesslist = menuaccesslist;
+                        //objUser.userroleaccesslist = userroleaccesslist;
                         objUser.UserAccessList = new List<ReturnUserAccessModel>();
 
-                        objUser.menuaccesslist.ForEach(item =>
+                        foreach (DataRow rdr in Ds.Tables[1].Rows)
                         {
                             objUser.UserAccessList.Add(new ReturnUserAccessModel()
                             {
-                                MNU_Active = item.UMA_Status,
-                                MNU_MenuName = item.UUM_UserMenu.ToString(),
+                                MNU_Active = Convert.ToBoolean(rdr["UUM_Status"].ToString()),
+                                MNU_MenuName = rdr["UUM_UserMenu"].ToString(),
                             });
-                        });
+
+                            //userroleaccessobj = new UserRoleAccessGroupModel();
+                            //userroleaccessobj.UURAG_AccessGroupID = rdr["UURAG_AccessGroupID"].ToString();
+                            //userroleaccessobj.UURAG_UserRoleID = rdr["UURAG_UserRoleID"].ToString();
+                            //userroleaccessobj.UAG_AccessGroup = rdr["UAG_AccessGroup"].ToString();
+                            //userroleaccessobj.UUR_UserRole = rdr["UUR_UserRole"].ToString();
+
+                            //userroleaccesslist.Add(userroleaccessobj);
+                        }
+
+                        //objUser.menuaccesslist.ForEach(item =>
+                        //{
+                        //    objUser.UserAccessList.Add(new ReturnUserAccessModel()
+                        //    {
+                        //        MNU_Active = item.UMA_Status,
+                        //        MNU_MenuName = item.UUM_UserMenu.ToString(),
+                        //    });
+                        //});
                         objUserHead.user.Add(objUser);
                         ////objUserHeadList.Add(objUserHead);
 
@@ -212,10 +230,10 @@ namespace HRM_DAL.Data
                         cmd.CommandText = "sp_set_AuthenticationKeySetupWithDB";
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@UD_USERID", objUser.UD_UserID);
+                        cmd.Parameters.AddWithValue("@UD_USERID", objUser.UE_UserID);
                         cmd.Parameters["@UD_USERID"].Direction = ParameterDirection.Input;
 
-                        cmd.Parameters.AddWithValue("@NOTIFICATIONTOKEN", objUser.UD_AuthorizationToken);
+                        cmd.Parameters.AddWithValue("@NOTIFICATIONTOKEN", objUser.UE_AuthorizationToken);
                         cmd.Parameters["@NOTIFICATIONTOKEN"].Direction = ParameterDirection.Input;
 
                         SqlDataAdapter dta = new SqlDataAdapter();
