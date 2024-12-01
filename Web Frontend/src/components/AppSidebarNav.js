@@ -6,7 +6,7 @@ import SimpleBar from 'simplebar-react'
 import 'simplebar-react/dist/simplebar.min.css'
 
 import { CBadge, CNavLink, CSidebarNav } from '@coreui/react-pro'
-import {GetDisabled} from '../GetDisabled.js'
+import {GetDisabled} from '../MenuActivator.js'
 
 export const AppSidebarNav = ({ items }) => {
   const navLink = (name, icon, badge, indent = false) => {
