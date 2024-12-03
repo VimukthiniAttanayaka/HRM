@@ -52,21 +52,22 @@ const LeaveSchedulePopup = ({ visible, onClose, onOpen, leaveScheduleDetails }) 
             <CCardBody className="p-4">
               <CForm onSubmit={handleSubmit}>
                 <CInputGroup className="mb-3">
-                <CCol md={4}>
-                  <CInputGroupText>
-                    <h6>Leave Type</h6>
-                  </CInputGroupText>
-                </CCol>   
-                {/* <CTimePicker placeholder="StartTime" name="StartTime"
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>Leave Type</h6>
+                    </CInputGroupText>
+                  </CCol>
+                  {/* <CTimePicker placeholder="StartTime" name="StartTime"
                   time={leaveScheduleDetails.LV_LeaveStartTime} onChange={handleChangeStartTime}
                 /> */}
-              </CInputGroup>
+                </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>InTime</h6>
                     </CInputGroupText>
-                  </CCol>   <CTimePicker placeholder="StartTime" name="StartTime"
+                  </CCol>
+                  <CTimePicker placeholder="StartTime" name="StartTime"
                     time={leaveScheduleDetails.LV_LeaveStartTime} onChange={handleChangeStartTime}
                   />
                 </CInputGroup>

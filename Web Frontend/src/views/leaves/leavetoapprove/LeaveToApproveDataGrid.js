@@ -179,7 +179,7 @@ const LeaveToApproveDataGrid = () => {
   return (
     <CCardBody>
       <CRow>
-        <CCol>
+        {/* <CCol>
           <CButton
             color="primary"
             className="mb-2"
@@ -189,7 +189,7 @@ const LeaveToApproveDataGrid = () => {
           >
             Download current items (.csv)
           </CButton>
-        </CCol>
+        </CCol> */}
         <CCol className='d-flex justify-content-end'>
           <LeaveToApprovePopup onClose={handleClosePopup} visible={visible} onOpen={handleOpenPopup} leaveScheduleDetails={leaveScheduleDetails} />
         </CCol>

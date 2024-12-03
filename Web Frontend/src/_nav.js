@@ -26,14 +26,6 @@ import { getLabelText } from 'src/MultipleLanguageSheets'
 let templatetype_base = 'translation'
 let templatetype = 'translation_navbar'
 
-// useEffect(() => {
-//   // Simulate a delay or asynchronous operation to trigger the initial disabled state
-//   setTimeout(() => {
-//       // setIsNavGroupDisabled(true);
-// console.log('hi')
-//   }, 1000);
-// }, []);
-
 const _nav = [
   {
     component: CNavItem,
@@ -50,16 +42,19 @@ const _nav = [
   {
     component: CNavGroup,
     name: getLabelText('Employee Information', templatetype),
+    keyname: "getMenu_HRM_EGroup",
     items: [
       {
         component: CNavItem,
         name: getLabelText('Company', templatetype),
         to: '/employee/Company',
+        keyname: "getMenu_HRM_ECustomer",
       },
       {
         component: CNavItem,
         name: getLabelText('Employee', templatetype),
         to: '/employee/employee',
+        keyname: "getMenu_HRM_EEmployee",
       },
       // {
       //   component: CNavItem,
@@ -89,10 +84,12 @@ const _nav = [
         name: getLabelText('Attendance Search', templatetype),
         to: '/attendance/attendance',
         keyname: "getMenu_HRM_AAttendanceSearch",
-      }, {
+      },
+      {
         component: CNavItem,
         name: getLabelText('Mark Attendance', templatetype),
         to: '/attendance/markattendance',
+        keyname: "getMenu_HRM_AMarkAttendance",
       },
       //  {
       //   component: CNavItem,
@@ -108,15 +105,19 @@ const _nav = [
     component: CNavGroup,
     name: getLabelText('Leave Management', templatetype),
     to: '/attendance/markattendance',
+    keyname: "getMenu_HRM_LGroup",
     items: [
       {
         component: CNavItem,
         name: getLabelText('Leave Schedule', templatetype),
         to: '/leaves/leaveshedule',
-      }, {
+        keyname: "getMenu_HRM_LLeaveSchedule",
+      },
+      {
         component: CNavItem,
         name: getLabelText('Leave To Approve', templatetype),
         to: '/leaves/leavetoapprove',
+        keyname: "getMenu_HRM_LLeaveToApprove",
       },
       // {
       //   component: CNavItem,
@@ -347,57 +348,57 @@ const _nav = [
     component: CNavGroup,
     // name: <Translation>{(t) => t('Master Data')}</Translation>,
     name: getLabelText('Master Data', templatetype),
-    items: [{
+    keyname: "getMenu_HRM_MDGroup",
+      items: [{
       component: CNavItem,
       // name: <Translation>{(t) => t('Branch')}</Translation>,
       name: getLabelText('Branch', templatetype),
       to: '/masterdata/branch',
-      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      keyname: "getMenu_HRM_MDBranch",
     }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('Country')}</Translation>,
       name: getLabelText('Country', templatetype),
       to: '/masterdata/country',
-      // disabled: !MCountry,
-      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      keyname: "getMenu_HRM_MDCountry",
     }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('Department')}</Translation>,
       name: getLabelText('Department', templatetype),
       to: '/masterdata/department',
-      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      keyname: "getMenu_HRM_MDDepartment",
     }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('Job Role')}</Translation>,
       name: getLabelText('Job Role', templatetype),
       to: '/masterdata/jobrole',
-      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      keyname: "getMenu_HRM_MDJobRole",
     }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('Location (Address)')}</Translation>,
       name: getLabelText('Location (Address)', templatetype),
       to: '/masterdata/location',
-      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      keyname: "getMenu_HRM_MDLocation",
     }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('Leave Type')}</Translation>,
       name: getLabelText('Leave Type', templatetype),
       to: '/masterdata/leavetype',
-      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      keyname: "getMenu_HRM_MDLeaveType",
     }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('Leave Type')}</Translation>,
       name: getLabelText('Job Type', templatetype),
       to: '/masterdata/jobtype',
       keyname: "jobtype",
-      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      keyname: "getMenu_HRM_MDJobType",
     }, {
       component: CNavItem,
       // name: <Translation>{(t) => t('Leave Type')}</Translation>,
       name: getLabelText('Salary Type', templatetype),
       to: '/masterdata/salarytype',
       keyname: "salarytype",
-      // icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
+      keyname: "getMenu_HRM_MDSalaryType",
     },],
   },
   {

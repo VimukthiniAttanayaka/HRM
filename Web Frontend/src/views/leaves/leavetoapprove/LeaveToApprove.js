@@ -9,7 +9,7 @@ const LeaveToApprove = () => {
     <>
       <CCard className="mb-4">
         <CCardHeader>
-          <strong>LeaveToApprove List</strong>
+          <strong>Leaves To Approve</strong>
         </CCardHeader>
         <CCardBody>
   {/* <LeaveToApprovePopup/> */}

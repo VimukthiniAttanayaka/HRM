@@ -3,6 +3,7 @@ import { CTooltip, CButton, CModal, CModalBody, CModalTitle, CModalFooter, CCol,
 import { getJWTToken, getCustomerID, getStaffID } from '../../../staticClass.js';
 import data from './_data.js'
 import { Modal } from '@coreui/coreui-pro';
+
 const LeaveToApprovePopup = ({ visible, onClose, onOpen, leaveScheduleDetails }) => {
   const now = new Date();
   const [customerId, setCustomerId] = useState('')
@@ -26,10 +27,10 @@ const LeaveToApprovePopup = ({ visible, onClose, onOpen, leaveScheduleDetails })
   const handleChangeStartDate = (event) => {
     setStartDate(event.target.value)
   }
-  const handleChangeStartTime= (event) => {
+  const handleChangeStartTime = (event) => {
     setStartTime(event.target.value)
   }
-  const handleChangeEndTime= (event) => {
+  const handleChangeEndTime = (event) => {
     setEndTime(event.target.value)
   }
   // console.log(leaveScheduleDetails.LV_LeaveEndDate)
@@ -45,7 +46,7 @@ const LeaveToApprovePopup = ({ visible, onClose, onOpen, leaveScheduleDetails })
         backdrop="static"
       >
         <CModalHeader>
-          <CModalTitle id="TooltipsAndPopoverExample">{customerId ? "Edit" : "Apply New Leave"}</CModalTitle>
+          <CModalTitle id="TooltipsAndPopoverExample">Approve/Reject Leave</CModalTitle>
         </CModalHeader>
         <CModalBody>
           <CCard className="mx-4">
@@ -54,19 +55,31 @@ const LeaveToApprovePopup = ({ visible, onClose, onOpen, leaveScheduleDetails })
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>InTime</h6>
+                      <h6>StartDate</h6>
                     </CInputGroupText>
-                  </CCol>   <CTimePicker placeholder="StartTime" name="StartTime"
-                  time={leaveScheduleDetails.LV_LeaveStartTime} onChange={handleChangeStartTime}
+                  </CCol>
+                  <CDatePicker placeholder="StartDate" name="StartDate"
+                    date={StartDate} onChange={handleChangeStartDate}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
-                      <h6>OutTime</h6>
+                      <h6>In Time</h6>
                     </CInputGroupText>
-                  </CCol>    <CTimePicker placeholder="EndTime" name="EndTime"
-                  time={leaveScheduleDetails.LV_LeaveEndTime} onChange={handleChangeEndTime}
+                  </CCol>
+                  <CTimePicker placeholder="StartTime" name="StartTime"
+                    time={StartTime} onChange={handleChangeStartTime}
+                  />
+                </CInputGroup>
+                <CInputGroup className="mb-3">
+                  <CCol md={4}>
+                    <CInputGroupText>
+                      <h6>Out Time</h6>
+                    </CInputGroupText>
+                  </CCol>
+                  <CTimePicker placeholder="EndTime" name="EndTime"
+                    time={EndTime} onChange={handleChangeEndTime}
                   />
                 </CInputGroup>
 
@@ -75,43 +88,30 @@ const LeaveToApprovePopup = ({ visible, onClose, onOpen, leaveScheduleDetails })
                     <CInputGroupText>
                       <h6>EndDate</h6>
                     </CInputGroupText>
-                  </CCol>  <CDatePicker placeholder="EndDate" name="EndDate"
-                    date={leaveScheduleDetails.LV_LeaveEndDate} onChange={handleChangeEndDate}
+                  </CCol>
+                  <CDatePicker placeholder="EndDate" name="EndDate"
+                    date={EndDate} onChange={handleChangeEndDate}
                   />
                 </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>StartDate</h6>
-                    </CInputGroupText>
-                  </CCol>  <CDatePicker placeholder="StartDate" name="StartDate"
-                    date={leaveScheduleDetails.LV_LeaveStartDate} onChange={handleChangeStartDate}
-                  />
-                </CInputGroup>
+
                 <CInputGroup className="mb-3">
                   <CCol md={4}>
                     <CInputGroupText>
                       <h6>Reason</h6>
                     </CInputGroupText>
-                  </CCol>  <CFormInput placeholder="Reason" name="Reason"
-                    value={leaveScheduleDetails.LV_Reason} onChange={handleChangeReason}
+                  </CCol>
+                  <CFormInput placeholder="Reason" name="Reason"
+                    value={Reason} onChange={handleChangeReason}
                   />
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CCol md={4}>
-                    <CInputGroupText>
-                      <h6>Status</h6>
-                    </CInputGroupText>
-                  </CCol><CFormCheck label="Status" defaultChecked />
                 </CInputGroup>
                 <div className="d-grid">
                   <CRow>
-                  <CCol md={6}>
-                  <CButton color="success" type='submit'>Submit</CButton>
-                  </CCol>
-                  <CCol md={6}>
-                  <CButton color="success" type='submit'>Submit</CButton>
-                  </CCol>
+                    <CCol md={6}>
+                      <CButton color="success">Approve</CButton>
+                    </CCol>
+                    <CCol md={6}>
+                      <CButton color="success">Reject</CButton>
+                    </CCol>
                   </CRow>
                 </div>
               </CForm>

@@ -151,7 +151,7 @@ const EmployeePopupTab_Termination_Grid_Popup = ({ toggleCreate, EmployeeDetails
 
   return (
     <>
-      <CButton color="primary" onClick={() => { toggleCreate();/*onOpen1*/ }}>Assign Termination</CButton>
+      <CButton color="primary" onClick={() => { toggleCreate();/*onOpen1*/ }}>Termination</CButton>
       <CModal size='lg'
         scrollable
         alignment="center"
